@@ -40,7 +40,7 @@ gem 'net-http'
 gem 'rest-client'
 gem "stripe", "~> 7.0"
 gem 'activeadmin'
-gem 'sassc'
+gem 'sass-rails'
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
