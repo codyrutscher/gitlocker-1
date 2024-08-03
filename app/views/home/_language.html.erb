@@ -1,6 +1,6 @@
-<%= link_to marketplace_language_path(language.slug), class: "relative h-40 w-40 border border-black rounded hover:shadow-lg" do %>
-  <%= image_tag "languages/#{language.image_name}", class: "h-40 w-40 object-cover object-center" %>
-  <div class="absolute rounded-b bottom-0 flex items-center right-0 left-0 bg-gradient-to-b from-transparent to-gray-300 ">
-    <p class="p-3 w-full text-center text-sm font-bold text-black"><%= language.name.titleize %></p>
+<%= link_to marketplace_language_path(language.slug), class: "relative h-full w-full aspect-square border border-black rounded hover:shadow-lg" do %>
+  <%= image_tag "languages/#{language.image_name}", class: "rounded aspect-square h-full w-full object-cover object-center" %>
+  <div class="absolute rounded-b bottom-0 flex items-center right-0 left-0 bg-gradient-to-b from-transparent to-gray-900 ">
+    <p class="p-3 w-full text-center text-sm font-bold text-white"><%= language.name.titleize %></p>
   </div>
 <% end %>
