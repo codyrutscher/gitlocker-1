@@ -83,7 +83,51 @@ class ProductsController < ApplicationController
   end
 
   def create
-  
+
+
+    boost_price = product_params[:boost_price].to_d
+    unit_amount = (boost_price * 100).to_i
+    
+    line_items = [{
+      price_data: {
+        currency: 'usd',
+        product_data: {
+          name: 'Boost Price',
+        },
+        unit_amount: unit_amount,
+      },
+      quantity: 1,
+    }]
+
+    session = Stripe::Checkout::Session.create(
+      payment_method_types: ['card'],
+      line_items: line_items,
+      mode: 'payment',
+      automatic_tax: { enabled: true },
+      success_url: marketplace_product_boost_success_payment_url(product_id:  current_user.id),
+      cancel_url: marketplace_cancel_payment_url,
+    )
+
+    payment = Payment.create!(user: current_user, total_cents: 5000, stripe_session_id: session.id)
+    binding.pry
+    redirect_to session.url, allow_other_host: true
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     uploaded_file = product_params[:upload_file]
     file_path = ""
@@ -149,7 +193,7 @@ class ProductsController < ApplicationController
 
   def product_params
     params.require(:product).permit(
-      :name, :description, :price, :active, :published, :category_ids,:preview_video_url, :video_file,:upload_file, :features, :instructions, :requirements, :demo_url,
+      :name, :description, :price,:boost_price, :active, :published, :category_ids,:preview_video_url, :video_file,:upload_file, :features, :instructions, :requirements, :demo_url,
       covers: [],
       product_categories_attributes: [:id, :active],
       covers_attributes: [:id, :image]

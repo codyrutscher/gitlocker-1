@@ -19,6 +19,11 @@ class CheckoutController < ApplicationController
     redirect_to marketplace_cart_path
   end
 
+  def product_boost_success_payment
+    product_id= params[:product_id]
+    binding.pry
+  end
+
   def success_payment
     ActiveRecord::Base.transaction do
       total_cents = params[:total_cents].to_i
