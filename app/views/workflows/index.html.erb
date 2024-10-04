@@ -23,7 +23,7 @@
           </p>
           <% @folders.each do |folder| %>
             <p class="text-base leading-relaxed">
-              <%= link_to folder, workflows_path(current_user, folder_name: folder), class: "text-black font-medium", local: true %>
+              <%= link_to folder, workflows_path(current_user, folder_name: folder), class: "text-black font-medium", id: "open-folder-link" , local: false %>
             </p>
           <% end %>
         <% end %>
@@ -62,7 +62,7 @@
   </div>
 </div>
 
-<div class="flex justify-between container mx-auto mt-1 mb-1">
+<div class="flex justify-between container mx-auto">
   <div class="inline-flex">
     <ul class="flex flex-row font-medium bg-white">
       <li>
@@ -74,9 +74,13 @@
     </ul>
   </div>
   <div class="inline-flex">
-    <ul class="flex flex-row font-medium bg-white">
+    <ul class="flex flex-row font-medium bg-white text-center">
       <li>
-        <a href="javascript:void(0);" class="block py-1 px-1 text-black" id="file_name" disabled></a>
+        <a href="javascript:void(0);" class="block px-1 text-black" id="file_name" disabled></a>
+        <div class="git-file-name">
+          <a href="javascript:void(0);" class="block font-small text-black" id="breadcrumb" disabled>
+          </a>
+        </div>
       </li>
     </ul>
   </div>
@@ -86,13 +90,10 @@
         <a href="javascript:void(0);" class="block py-2 px-3 text-black" id="save_file">Save File</a>
       </li>
       <li>
-        <a href="javascript:void(0);" class="block py-2 px-3 text-black" id="download_zip">Download ZIP</a>
+        <a href="<%= download_zip_path(current_user, folder_name: @folder_name) %>" class="block py-2 px-3 text-black">Download ZIP</a>
       </li>
     </ul>
   </div>
-</div>
-<div class="flex container mx-auto" style="justify-content: space-around;">
-  <a href="javascript:void(0);" class="block font-small text-black" id="breadcrumb" disabled></a>
 </div>
 
 
@@ -110,12 +111,72 @@
   $(document).ready(function() {
     var editor = ace.edit("editor");
     editor.setTheme("ace/theme/monokai");
-    editor.session.setMode("ace/mode/text");
     editor.session.setTabSize(2);
     editor.setFontSize("18px");
+    editor.session.setMode("ace/mode/text");
     editor.setValue("", -1);
     const fileEdit = "<%= open_file_path(current_user) %>";
     var data = <%= @directory_tree_json %>;
+    const extensionToMode = {
+      '.js': 'ace/mode/javascript',
+      '.ts': 'ace/mode/typescript',
+      '.py': 'ace/mode/python',
+      '.php': 'ace/mode/php',
+      '.rb': 'ace/mode/ruby',
+      '.java': 'ace/mode/java',
+      '.cpp': 'ace/mode/c_cpp',
+      '.go': 'ace/mode/golang',
+      '.rs': 'ace/mode/rust',
+      '.swift': 'ace/mode/swift',
+      '.kt': 'ace/mode/kotlin',
+      '.scala': 'ace/mode/scala',
+      '.hs': 'ace/mode/haskell',
+      '.fs': 'ace/mode/fsharp',
+      '.lua': 'ace/mode/lua',
+      '.pl': 'ace/mode/perl',
+      '.h': 'ace/mode/objectivec',
+      '.cs': 'ace/mode/csharp',
+      '.vb': 'ace/mode/vbnet',
+      '.html': 'ace/mode/html',
+      '.xml': 'ace/mode/xml',
+      '.css': 'ace/mode/css',
+      '.less': 'ace/mode/less',
+      '.sass': 'ace/mode/sass',
+      '.scss': 'ace/mode/scss',
+      '.styl': 'ace/mode/stylus',
+      '.haml': 'ace/mode/haml',
+      '.pug': 'ace/mode/pug',
+      '.ejs': 'ace/mode/ejs',
+      '.coffee': 'ace/mode/coffeescript',
+      '.ls': 'ace/mode/livescript',
+      '.dart': 'ace/mode/dart',
+      '.hx': 'ace/mode/haxe',
+      '.jl': 'ace/mode/julia',
+      '.erl': 'ace/mode/erlang',
+      '.ml': 'ace/mode/ocaml',
+      '.vala': 'ace/mode/vala',
+      '.d': 'ace/mode/d',
+      '.json': 'ace/mode/json',
+      '.yaml': 'ace/mode/yaml',
+      '.sql': 'ace/mode/sql',
+      '.md': 'ace/mode/markdown',
+      '.tex': 'ace/mode/latex',
+      '.glsl': 'ace/mode/glsl',
+      '.hbs': 'ace/mode/handlebars',
+      '.mustache': 'ace/mode/mustache',
+      '.djhtml': 'ace/mode/django',
+      '.smarty': 'ace/mode/smarty',
+      '.txt': 'ace/mode/text',
+      '.diff': 'ace/mode/diff',
+      '.adoc': 'ace/mode/asciidoc',
+      '.ini': 'ace/mode/ini',
+      '.conf': 'ace/mode/apache_conf',
+      '.logiql': 'ace/mode/logiql',
+      '.rdoc': 'ace/mode/rdoc',
+      '.snippet': 'ace/mode/snippet',
+      '.feature': 'ace/mode/gherkin',
+      '.frontmatter': 'ace/mode/yaml-front-matter',
+    };
 
     function buildLinks(node, path = '') {
       const currentPath = path ? `${path}/${node.text}` : node.text;
@@ -144,11 +205,11 @@
 
     $.ajaxSetup({
       headers: {
-          'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+        'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
       }
     });
 
-    $(document).on('click', '.js-tree-node', function (event) {
+    $(document).off('click', '.js-tree-node').on('click', '.js-tree-node', function (event) {
       event.preventDefault();
       var href = $(this).attr('href');
       var file_path = href.split('?')[1].replace('file_path=','');
@@ -158,13 +219,16 @@
         dataType: 'json',
         success: function(data) {
           if (data.file_data !== null) {
+            var file_ext = data.file_ext;
+            if (file_ext in extensionToMode) {
+              editor.session.setMode(extensionToMode[file_ext]);
+            } else {
+              editor.session.setMode('ace/mode/text');
+            }
             editor.setValue(data.file_data, -1);
             $("#save_file").attr("href", "<%= save_file_path(current_user) %>?file_path=" + encodeURIComponent(file_path));
             $("#file_name").text(file_path.replace('file_path=','').split('/').slice(-1)[0]);
             $("#breadcrumb").text(file_path.replace('file_path=',''));
-          }
-          else {
-            alert("Please select a File. Not Folder.");
           }
         },
         error: function(jqXHR, textStatus, errorThrown) {
@@ -175,19 +239,17 @@
         }
       });
     });
-
-    $(document).on('click', '#save_file', function (event) {
+  
+    $(document).off('click', '#save_file').on('click', '#save_file', function (event) {
       event.preventDefault();
-      console.log('clicked save file!!');
       var href = $(this).attr('href');
       var file_path = href.split('?')[1];
-      console.log(href);
-      console.log(file_path);
+      updated_file_data = editor.getValue();
       $.ajax({
         url: href,
         method: 'POST',
         dataType: 'json',
-        data: { updated_file_data: editor.getValue() },
+        data: { updated_file_data: updated_file_data },
         success: function(data) {
           editor.setValue("", -1);
           $("#save_file").attr("href", "javascript:void(0);");
@@ -219,6 +281,11 @@
 
     $(document).on('click', '#close-upload-zip-modal-svg, #close-upload-zip-modal-btn', function (event) {
       $('#upload-zip-modal').addClass('hidden');
+    });
+
+    $(document).on('click', '#open-folder-link', function (event) {
+      editor.destroy();
+      editor.container.remove();
     });
   });
 </script>

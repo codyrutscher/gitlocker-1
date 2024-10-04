@@ -14,6 +14,7 @@ class WorkflowsController < ApplicationController
     if folder_name_params[:folder_name]
       path = "#{folder_path}/#{folder_name_params[:folder_name]}"
       @directory_tree_json = [folder_structure_for_js_tree(path)].to_json.html_safe
+      @folder_name = folder_name_params[:folder_name]
     end
   end
 
@@ -22,12 +23,17 @@ class WorkflowsController < ApplicationController
       head :ok
       return
     end
-
     path = Rails.root.join("workflows", params[:id], params[:file_path])
     if File.exist?(path)
-      file_data = File.file?(path) ? File.read(path) : nil
+      if File.file?(path)
+        file_data = File.read(path)
+        file_ext = File.extname(path).downcase
+      else
+        file_data = nil
+        file_ext = nil
+      end
       respond_to do |format|
-        format.json { render json: { file_data: file_data }, status: :ok }
+        format.json { render json: { file_data: file_data, file_ext: file_ext }, status: :ok }
       end
     else
       respond_to do |format|
@@ -94,6 +100,18 @@ class WorkflowsController < ApplicationController
   end
 
   def download_zip
+    if folder_name_params
+      folder_path = Rails.root.join("workflows", params[:id], folder_name_params[:folder_name].to_s)
+      zipfile_name = Rails.root.join('tmp',  "#{params[:id]}-#{folder_name_params[:folder_name]}.zip")
+      File.delete(zipfile_name) if File.exist?(zipfile_name)
+      Zip::File.open(zipfile_name, Zip::File::CREATE) do |zipfile|
+        Dir[File.join(folder_path, '**', '**')].each do |file|
+          zipfile.add(file.sub(folder_path.to_s + '/', ''), file)
+        end
+      end
+      send_file zipfile_name, type: 'application/zip', disposition: 'attachment'
+      File.delete(zipfile_name) if File.exist?(zipfile_name)
+    end
   end
 
   private
