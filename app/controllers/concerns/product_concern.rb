@@ -40,6 +40,34 @@ module ProductConcern
     end
     convert_to_js_tree_format(structure)
   end
+
+  def folder_structure_for_js_tree(folder_path)
+    structure = {}
+    Dir.glob(File.join(folder_path, '**', '*')).each do |path|
+      relative_path = path.sub("#{folder_path}/", '')
+      parts = relative_path.split('/')
+      current_level = structure
+  
+      parts.each_with_index do |part, index|
+        if index == parts.size - 1
+          if File.directory?(path)
+            current_level[part] ||= {}
+          else
+            current_level[part] = 'file'
+          end
+        else
+          current_level[part] ||= {}
+          current_level = current_level[part]
+        end
+      end
+    end
+    sorted_structure = sort_structure(structure)
+    { text: File.basename(folder_path), children: convert_to_js_tree_format(sorted_structure), icon: 'jstree-folder' }
+  end
+
+  def sort_structure(structure)
+    structure.sort_by { |key, value| [value.is_a?(Hash) ? 0 : 1, key] }.to_h
+  end
   
   def convert_to_js_tree_format(structure)
     structure.map do |key, value|

@@ -2,6 +2,11 @@ Rails.application.routes.draw do
   require 'sidekiq/web'
   mount Sidekiq::Web => '/sidekiq'
   resources :follows
+  get '/workflows/:id', to: 'workflows#index', as: "workflows"
+  get '/workflows/:id/open_file', to: 'workflows#open_file', as: "open_file"
+  post '/workflows/:id/save_file', to: 'workflows#save_file', as: "save_file"
+  get '/workflows/:id/download_zip', to: 'workflows#download_zip', as: "download_zip"
+  post '/workflows/:id/upload_zip', to: 'workflows#upload_zip', as: "upload_zip"
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   if Rails.env.production?
