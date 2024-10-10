@@ -62,7 +62,7 @@ module ProductConcern
       end
     end
     sorted_structure = sort_structure(structure)
-    { text: File.basename(folder_path), children: convert_to_js_tree_format(sorted_structure), icon: 'jstree-folder' }
+    { text: File.basename(folder_path), children: convert_to_js_tree_format(sorted_structure), icon: 'jstree-folder', type: 'folder' }
   end
 
   def sort_structure(structure)
@@ -72,9 +72,9 @@ module ProductConcern
   def convert_to_js_tree_format(structure)
     structure.map do |key, value|
       if value.is_a?(Hash)
-        { text: key, children: convert_to_js_tree_format(value) }
+        { text: key, children: convert_to_js_tree_format(value), type: 'folder' }
       else
-        { text: key, icon: 'jstree-file' }
+        { text: key, icon: 'jstree-file', type: 'file' }
       end
     end
   end

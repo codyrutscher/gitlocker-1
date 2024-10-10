@@ -7,6 +7,14 @@ Rails.application.routes.draw do
   post '/workflows/:id/save_file', to: 'workflows#save_file', as: "save_file"
   get '/workflows/:id/download_zip', to: 'workflows#download_zip', as: "download_zip"
   post '/workflows/:id/upload_zip', to: 'workflows#upload_zip', as: "upload_zip"
+  get '/workflows/:id/download_repo', to: 'workflows#download_repo', as: "download_repo"
+  get '/workflows/:id/push_to_git', to: 'workflows#push_to_git', as: "push_to_git"
+
+  get '/workflows/:id/create_file', to: 'workflows#create_file', as: "create_file"
+  get '/workflows/:id/rename_file', to: 'workflows#rename_file', as: "rename_file"
+  get '/workflows/:id/rename_folder', to: 'workflows#rename_folder', as: "rename_folder"
+  get '/workflows/:id/delete_file', to: 'workflows#delete_file', as: "delete_file"
+  get '/workflows/:id/create_project', to: 'workflows#create_project', as: "create_project"
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   if Rails.env.production?
