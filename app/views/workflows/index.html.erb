@@ -1,3 +1,75 @@
+<nav id='menu'>
+  <input type='checkbox' id='responsive-menu' onclick='updatemenu()'><label></label>
+  <ul>
+    <li><a href='javascript:void(0);' disabled>New Project</a></li>
+    <li><a class='dropdown-arrow' href='javascript:void(0);' disabled>File</a>
+      <ul class='sub-menus'>
+        <li><a href='javascript:void(0);' disabled>New File</a></li>
+        <li><a href='javascript:void(0);' disabled>New Folder</a></li>
+      </ul>
+    </li>
+    <li><a class='dropdown-arrow' href='javascript:void(0);'>Import Project</a>
+      <ul class='sub-menus'>
+        <li><a href='javascript:void(0);' id="open-github-modal">From GitHub</a></li>
+        <li><a href="javascript:void(0);" id="open-upload-zip-modal">From Local</a></li>
+        <li><a href="javascript:void(0);" id="open-workflow-modal">Saved Projects</a></li>
+      </ul>
+    </li>
+    <li><a class='dropdown-arrow' href='javascript:void(0);'>Export Project</a>
+      <ul class='sub-menus'>
+        <li><a href='javascript:void(0);' disabled>Save Project</a></li>
+        <li><a href="<%= download_zip_path(current_user, folder_name: @folder_name) %>" id="download-zip">Download Zip</a></li>
+        <li><a href='javascript:void(0);' id="push-to-git">Push To GitHub</a></li>
+      </ul>
+    </li>
+    <li><a href='javascript:void(0);' disabled>Editor Settings</a></li>
+    <li><a href='javascript:void(0);' id="save_file">Save File</a></li>
+    <li>
+      <a href="javascript:void(0);" class="block ps-auto px-2 text-black" id="file_name" disabled></a>
+    </li>
+    <li>
+      <p class="block font-small text-white" id="file-breadcrumb"></p>
+    </li>
+  </ul>
+</nav>
+
+<div id="github-modal" data-modal-backdrop="static" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+  <div class="relative p-4 w-full max-w-2xl max-h-full">
+    <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+      <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+        <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+          Select Project From Github
+        </h3>
+        <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" id="close-github-modal-svg">
+          <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+          </svg>
+          <span class="sr-only">Close</span>
+        </button>
+      </div>
+      <div class="p-4 md:p-5 space-y-4">
+        <% if @repos.size == 0 %>
+          <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+            Currently you do not have any repositories in Github.
+          </p>
+        <% else %>
+          <p class="text-black font-bold leading-relaxed">
+            Repositories
+          </p>
+          <% @repos.each do |repo| %>
+            <p class="text-base leading-relaxed">
+              <%= link_to repo, download_repo_path(current_user, repo_name: repo, username: @username), class: "text-black font-medium", id: "open-repo-link" , local: false %>            
+            </p>
+          <% end %>
+        <% end %>
+      </div>
+      <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+        <button id="close-github-modal-btn" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div id="workflow-modal" data-modal-backdrop="static" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
   <div class="relative p-4 w-full max-w-2xl max-h-full">
     <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
@@ -243,6 +315,9 @@
     $(document).off('click', '#save_file').on('click', '#save_file', function (event) {
       event.preventDefault();
       var href = $(this).attr('href');
+      if (href === 'javascript:void(0);') {
+        return
+      }
       var file_path = href.split('?')[1];
       updated_file_data = editor.getValue();
       $.ajax({
@@ -253,8 +328,9 @@
         success: function(data) {
           editor.setValue("", -1);
           $("#save_file").attr("href", "javascript:void(0);");
+          $("#push-to-git").attr("href", "javascript:void(0);");
           $("#file_name").text("");
-          $("#breadcrumb").text("");
+          $("#file-breadcrumb").text("");
         },
         error: function(jqXHR, textStatus, errorThrown) {
           if (jqXHR.responseJSON && jqXHR.responseJSON.error) {
@@ -263,6 +339,13 @@
           }
         }
       });
+    });
+
+    $(document).on('click', '#download-zip', function (event) {
+      var href = $(this).attr('href');
+      if (href && !href.includes('folder_name')) {
+        event.preventDefault();
+      }
     });
 
     $(document).on('click', '#open-workflow-modal', function (event) {
@@ -275,6 +358,11 @@
       $('#upload-zip-modal').addClass('flex');
     });
 
+    $(document).on('click', '#open-github-modal', function (event) {
+      $('#github-modal').removeClass('hidden');
+      $('#github-modal').addClass('flex');
+    });
+
     $(document).on('click', '#close-workflow-modal-svg, #close-workflow-modal-btn', function (event) {
       $('#workflow-modal').addClass('hidden');
     });
@@ -283,9 +371,22 @@
       $('#upload-zip-modal').addClass('hidden');
     });
 
+    $(document).on('click', '#close-github-modal-svg, #close-github-modal-btn', function (event) {
+      $('#github-modal').addClass('hidden');
+    });
+
     $(document).on('click', '#open-folder-link', function (event) {
       editor.destroy();
       editor.container.remove();
     });
+
+    function updatemenu() {
+      if (document.getElementById('responsive-menu').checked == true) {
+        document.getElementById('menu').style.borderBottomRightRadius = '0';
+        document.getElementById('menu').style.borderBottomLeftRadius = '0';
+      }else{
+        document.getElementById('menu').style.borderRadius = '10px';
+      }
+    }
   });
 </script>
