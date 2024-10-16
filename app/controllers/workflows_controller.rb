@@ -17,6 +17,11 @@ class WorkflowsController < ApplicationController
       path = "#{folder_path}/#{folder_name_params[:folder_name]}"
       @directory_tree_json = [folder_structure_for_js_tree(path)].to_json.html_safe
       @folder_name = folder_name_params[:folder_name]
+      if !(Dir.exist?(path))
+        FileUtils.mkdir_p(path)
+      end
+      @directory_tree_json = [folder_structure_for_js_tree(path)].to_json.html_safe
+      @folder_name = folder_name_params[:folder_name]
     end
   end
 
@@ -100,7 +105,7 @@ class WorkflowsController < ApplicationController
 
   def push_to_git
     if git_file_params
-      @octokit_client = Octokit::Client.new(access_token: "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")
+      @octokit_client = Octokit::Client.new(access_token: current_user.token)
       workflow_folder_path = Rails.root.join("workflows", current_user.friendly_id, git_file_params[:folder_name].to_s)
       folder_name = git_file_params[:folder_name].gsub("-main","")
       file_path = git_file_params[:file_path].gsub("#{git_file_params[:folder_name]}/","")
@@ -142,8 +147,8 @@ class WorkflowsController < ApplicationController
 
   def download_zip
     if folder_name_params
-      folder_path = Rails.root.join("workflows", params[:id], folder_name_params[:folder_name].to_s)
-      zipfile_name = Rails.root.join('tmp',  "#{params[:id]}-#{folder_name_params[:folder_name]}.zip")
+      folder_path = Rails.root.join("workflows", current_user.friendly_id, folder_name_params[:folder_name].to_s)
+      zipfile_name = Rails.root.join('tmp',  "#{current_user.friendly_id}-#{folder_name_params[:folder_name]}.zip")
       File.delete(zipfile_name) if File.exist?(zipfile_name)
       Zip::File.open(zipfile_name, Zip::File::CREATE) do |zipfile|
         Dir[File.join(folder_path, '**', '**')].each do |file|
@@ -151,7 +156,6 @@ class WorkflowsController < ApplicationController
         end
       end
       send_file zipfile_name, type: 'application/zip', disposition: 'attachment'
-      File.delete(zipfile_name) if File.exist?(zipfile_name)
     end
   end
 
@@ -212,7 +216,7 @@ class WorkflowsController < ApplicationController
           Dir.mkdir(directory_path) unless Dir.exist?(directory_path)
           unless File.exist?(create_file_path)
             File.open(create_file_path,'w') do |file|
-              file.puts "New File Created"
+              file.puts "# New File Created"
             end
           end
           respond_to do |format|
@@ -238,32 +242,34 @@ class WorkflowsController < ApplicationController
       return
     end
     if rename_file_params
+      workflow_path = Rails.root.join("workflows", current_user.friendly_id)
+      dir_path = File.dirname(rename_file_params[:old_file_path])
+      folder_name = dir_path.split('/')[0]
+      old_file_path = Rails.root.join("workflows", current_user.friendly_id, dir_path, rename_file_params[:old_file_name])
+      new_file_path = Rails.root.join("workflows", current_user.friendly_id, dir_path, rename_file_params[:new_file_name])
+      path = "#{workflow_path}/#{folder_name}"
       begin
-        workflow_path = Rails.root.join("workflows", current_user.friendly_id)
-        dir_path = File.dirname(rename_file_params[:old_file_path])
-        folder_name = dir_path.split('/')[0]
-        old_file_path = Rails.root.join("workflows", current_user.friendly_id, dir_path, rename_file_params[:old_file_name])
-        new_file_path = Rails.root.join("workflows", current_user.friendly_id, dir_path, rename_file_params[:new_file_name])
+        if old_file_path == new_file_path
+          respond_to do |format|
+            format.json { render json: { file_href: open_file_path(current_user, file_path: new_file_path), success: "File Renamed" }, status: :ok }
+          end
+          return
+        end
         if File.exist?(old_file_path)
           FileUtils.mv(old_file_path, new_file_path)
-          path = "#{workflow_path}/#{folder_name}"
           directory_tree_json = [folder_structure_for_js_tree(path)].to_json.html_safe
           respond_to do |format|
-            format.json { render json: { directory_tree_json: directory_tree_json, success: "File Renamed" }, status: :ok }
+            format.json { render json: { directory_tree_json: directory_tree_json, success: "Folder Renamed" }, status: :ok }
           end
+          return
         else
-          path = "#{workflow_path}/#{folder_name}"
-          directory_tree_json = [folder_structure_for_js_tree(path)].to_json.html_safe
+          directory_tree_json = [folder_structure_for_js_tree(path)].to_json
           respond_to do |format|
-            format.json { render json: { directory_tree_json: directory_tree_json, error: "File / Folder does not exist. Please try again!" }, status: :not_found }
+            format.json { render json: { directory_tree_json: directory_tree_json, error: "Folder does not exist. Please try again!" }, status: :not_found }
           end
         end
       rescue
-        workflow_path = Rails.root.join("workflows", current_user.friendly_id)
-        dir_path = File.dirname(rename_file_params[:old_file_path])
-        folder_name = dir_path.split('/')[0]
-        path = "#{workflow_path}/#{folder_name}"
-        directory_tree_json = [folder_structure_for_js_tree(path)].to_json.html_safe
+        directory_tree_json = [folder_structure_for_js_tree(path)].to_json
         respond_to do |format|
           format.json { render json: { directory_tree_json: directory_tree_json, error: "Not able to rename. Please try again!" }, status: :not_found }
         end
@@ -277,17 +283,25 @@ class WorkflowsController < ApplicationController
       return
     end
     if rename_file_params
+      workflow_path = Rails.root.join("workflows", current_user.friendly_id)
+      dir_path = File.dirname(rename_file_params[:old_file_path])
+      folder_name = dir_path.split('/')[0]
+      old_file_path = workflow_path.join(dir_path, rename_file_params[:old_file_name])
+      new_file_path = workflow_path.join(dir_path, rename_file_params[:new_file_name])
+      path_to_share = dir_path + "/" + rename_file_params[:new_file_name]
       begin
-        workflow_path = Rails.root.join("workflows", current_user.friendly_id)
-        dir_path = File.dirname(rename_file_params[:old_file_path])
-        folder_name = dir_path.split('/')[0]
-        old_file_path = Rails.root.join("workflows", current_user.friendly_id, dir_path, rename_file_params[:old_file_name])
-        new_file_path = Rails.root.join("workflows", current_user.friendly_id, dir_path, rename_file_params[:new_file_name])
+        if old_file_path == new_file_path
+          respond_to do |format|
+            format.json { render json: { file_href: open_file_path(current_user, file_path: path_to_share), success: "File Renamed" }, status: :ok }
+          end
+          return
+        end
         if File.exist?(old_file_path)
           FileUtils.mv(old_file_path, new_file_path)
           respond_to do |format|
-            format.json { render json: { file_href: open_file_path(current_user, file_path: new_file_path), success: "File Renamed" }, status: :ok }
+            format.json { render json: { file_href: open_file_path(current_user, file_path: path_to_share), success: "File Renamed" }, status: :ok }
           end
+          return
         else
           respond_to do |format|
             format.json { render json: { file_href: open_file_path(current_user, file_path: old_file_path), error: "File / Folder does not exist. Please try again!" }, status: :not_found }
@@ -306,59 +320,147 @@ class WorkflowsController < ApplicationController
       head :ok
       return
     end
+    if removed_file_params
+      workflow_path = Rails.root.join("workflows", current_user.friendly_id)
+      removed_file_path = removed_file_params[:removed_file_path]
+      folder_name = removed_file_path.split('/')[0]
+      final_path = workflow_path.join(removed_file_path)
+      begin
+        if File.exist?(final_path)
+          if File.directory?(final_path)
+            FileUtils.remove_dir(final_path, true)
+          else
+            File.delete(final_path)
+          end
+          respond_to do |format|
+            format.json { render json: { success: "File / Folder Deleted" }, status: :ok }
+          end
+        else
+          raise "File or directory does not exist. Please try again!"
+        end
+      rescue => e
+        path = workflow_path.join(folder_name)
+        directory_tree_json = [folder_structure_for_js_tree(path)].to_json
+        respond_to do |format|
+          format.json { render json: { directory_tree_json: directory_tree_json , error: "#{e}" }, status: :not_found }
+        end
+      end
+    end
   end
 
-  def create_new_project
+  def new_project
+    begin
+      workflows_path = Rails.root.join('workflows', current_user.friendly_id)
+      if Dir.exist?(workflows_path)
+        folders = Dir.glob("#{workflows_path}/*").select { |f| File.directory?(f) }.map { |f| File.basename(f) }
+      else
+        folders = []
+        FileUtils.mkdir_p(workflows_path)
+      end
+      if folder_name_params[:folder_name]
+        counter = 1
+        unique_name = folder_name_params[:folder_name]
+        siblings = folders
+
+        while siblings.include?(unique_name)
+          unique_name = "#{base_name}_#{counter}"
+          counter += 1
+        end
+        new_folder_path = workflows_path.join(unique_name)
+      end
+      FileUtils.mkdir_p(new_folder_path)
+      redirect_to workflows_path(current_user, folder_name: unique_name), notice: "Created new project successfully!"
+    rescue
+      redirect_to workflows_path(current_user), alert: "Not able to create project! Please try again."
+    end
+  end
+
+  def delete_project
+    if request.format.html?
+      head :ok
+      return
+    end
+    begin
+      if folder_name_params
+        workflow_path = Rails.root.join("workflows", current_user.friendly_id)
+        folder_path = workflow_path.join(folder_name_params[:folder_name])
+        if Dir.exist?(folder_path)
+          FileUtils.remove_dir(folder_path, true)
+        end
+        respond_to do |format|
+          format.json { render json: { success: 'Deleted Project Successfully!' }, status: :ok }
+        end
+      else
+        respond_to do |format|
+          format.json { render json: { error: 'Not able to delete. Please try again!' }, status: :not_found }
+        end
+      end
+    rescue
+      respond_to do |format|
+        format.json { render json: { error: 'Not able to delete. Please try again!' }, status: :not_found }
+      end
+    end
   end
 
   private
 
   def folder_name_params
-    params.permit(:folder_name)
+    params.permit(:id, :folder_name)
   end
 
   def repo_params
-    params.permit(:username, :repo_name)
+    params.permit(:id, :username, :repo_name)
   end
 
   def git_file_params
-    params.permit(:folder_name, :file_path)
+    params.permit(:id, :folder_name, :file_path)
   end
 
   def create_file_params
-    params.permit(:file_path, :type)
+    params.permit(:id, :file_path, :type)
   end
 
   def rename_file_params
-    params.permit(:old_file_name, :new_file_name, :old_file_path, :type)
+    params.permit(:id, :old_file_name, :new_file_name, :old_file_path, :type)
+  end
+
+  def removed_file_params
+    params.permit(:id, :removed_file_path);
+  end
+
+  def download_zip_params
+    params.permit(:download_zip);
   end
 
   def retreive_github_repo_info
-    @octokit_client = Octokit::Client.new(access_token: current_user.token)
-    @username = @octokit_client.user.login
-    @repos = @octokit_client.repos.pluck(:name)
-    @repo_branch_hash = begin
+    begin
+      @octokit_client = Octokit::Client.new(access_token: current_user.token)
+      @username = @octokit_client.user.login
+      @repos = @octokit_client.repos.pluck(:name)
       repos = @octokit_client.repos
       repo_branch_hash = {}
       repos.each do |repo|
-        repo_name = repo.full_name
-        branches = @octokit_client.branches(repo_name)
+        repo_name = repo.name
+        repo_full_name = repo.full_name
+        branches = @octokit_client.branches(repo_full_name)
         branch_hash = {}
         branches.each do |branch|
           branch_hash[branch.name] = { sha: branch.commit.sha }
         end
-        repo_branch_hash[repo_name] = branch_hash
+        if branch_hash.key?('main')
+          repo_branch_hash[repo_name] = branch_hash
+        end
       end
-      repo_branch_hash
+      @repo_branch_hash = repo_branch_hash
     rescue Octokit::NotFound
       puts "User or repository not found."
-      {}
+      @repo_branch_hash = {}
     rescue Octokit::Unauthorized
       puts "Unauthorized access. Please check your access token."
-      {}
+      @repo_branch_hash = {}
     rescue => e
       puts "Error fetching repositories or branches: #{e.message}"
-      {}
+      @repo_branch_hash = {}
     end
   end
 end

@@ -14,7 +14,8 @@ Rails.application.routes.draw do
   get '/workflows/:id/rename_file', to: 'workflows#rename_file', as: "rename_file"
   get '/workflows/:id/rename_folder', to: 'workflows#rename_folder', as: "rename_folder"
   get '/workflows/:id/delete_file', to: 'workflows#delete_file', as: "delete_file"
-  get '/workflows/:id/create_project', to: 'workflows#create_project', as: "create_project"
+  post '/workflows/:id/new_project', to: 'workflows#new_project', as: "new_project"
+  delete '/workflows/:id/delete_project', to: 'workflows#delete_project', as: "delete_project"
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   if Rails.env.production?

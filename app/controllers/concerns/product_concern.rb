@@ -62,7 +62,7 @@ module ProductConcern
       end
     end
     sorted_structure = sort_structure(structure)
-    { text: File.basename(folder_path), children: convert_to_js_tree_format(sorted_structure), icon: 'jstree-folder', type: 'folder' }
+    { text: File.basename(folder_path), children: convert_to_js_tree_format(sorted_structure), icon: 'jstree-folder', type: 'root_folder' }
   end
 
   def sort_structure(structure)
