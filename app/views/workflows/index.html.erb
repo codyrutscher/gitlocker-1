@@ -13,6 +13,8 @@
       <ul class='sub-menus'>
         <li><a href="<%= download_zip_path(current_user, folder_name: @folder_name) %>" id="download-zip">Download Zip</a></li>
         <li><a href='javascript:void(0);' id="push-to-git">Push To GitHub</a></li>
+        <% save_project_url = save_project_url(current_user, folder_name: @folder_name) %>
+        <li><a href="<%= save_project_url %>" id="save-project">Save Project</a></li>
       </ul>
     </li>
     <li><a href='javascript:void(0);' id="open-editor-setting-modal">Editor Settings</a></li>
@@ -153,7 +155,7 @@
         </button>
       </div>
       <div class="p-4 md:p-5 space-y-4">
-        <% if @repos.size == 0 %>
+        <% if @repo_branch_hash == {} %>
           <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
             Currently you do not have any repositories in Github.
           </p>
@@ -161,7 +163,7 @@
           <p class="text-black font-bold leading-relaxed">
             Repositories
           </p>
-          <% @repos.each do |repo| %>
+          <% @repo_branch_hash.each do |repo, branches| %>
             <p class="text-base leading-relaxed">
               <%= link_to repo, download_repo_path(current_user, repo_name: repo, username: @username), class: "text-black font-medium", id: "open-repo-link" , local: false %>            
             </p>
@@ -199,10 +201,10 @@
             Saved Projects
           </p>
           <% @folders.each do |folder| %>
-            <p class="text-base leading-relaxed">
+            <div class="flex text-base leading-relaxed">
               <%= link_to folder, workflows_path(current_user, folder_name: folder), class: "py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 text-black font-medium", id: "open-folder-link" , local: false %>
-              <%= link_to "Delete", delete_project_path(current_user, folder_name: folder), class: "focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 ml-4 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900 bg-red-600", id: "delete-folder-link" , local: true %>
-            </p>
+              <%= button_to 'Delete', delete_project_path(current_user, folder_name: folder), method: :delete, data: { confirm: 'Are you sure?' }, class: 'focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 ml-4 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900 bg-red-600', local: false %>
+            </div>
           <% end %>
         <% end %>
       </div>
@@ -690,29 +692,6 @@
       }
     });
 
-    $(document).on('click', '#delete-folder-link', function (event) {
-      event.preventDefault();
-      var href = $(this).attr('href');
-      var delete_project_path = href.split('?')[1].split('=')[1];
-      const parentElement = this.parentElement;
-      $.ajax({
-        url: deleteProjectPath,
-        method: 'DELETE',
-        dataType: 'json',
-        data: { folder_name: delete_project_path },
-        success: function(data) {
-          if (parentElement !== null) {
-            parentElement.style.display = 'none';
-          }
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-          if (jqXHR.responseJSON && jqXHR.responseJSON.error) {
-            errorMessage = jqXHR.responseJSON.error;
-            alert(errorMessage);
-          }
-        }
-      });
-    });
 
     $(document).on('click', '#open-workflow-modal', function (event) {
       $('#workflow-modal').removeClass('hidden');

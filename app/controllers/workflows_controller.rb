@@ -18,7 +18,8 @@ class WorkflowsController < ApplicationController
       @directory_tree_json = [folder_structure_for_js_tree(path)].to_json.html_safe
       @folder_name = folder_name_params[:folder_name]
       if !(Dir.exist?(path))
-        FileUtils.mkdir_p(path)
+        redirect_to workflows_path(current_user)
+        return
       end
       @directory_tree_json = [folder_structure_for_js_tree(path)].to_json.html_safe
       @folder_name = folder_name_params[:folder_name]
@@ -94,6 +95,13 @@ class WorkflowsController < ApplicationController
               entry.extract(target_file_path)
             end
           end
+          new_project_name = "#{folder_name}.zip"
+          delete_project_from_aws(new_project_name)
+          current_user.projects.attach(
+            io: File.open(temp_file.path),
+            filename: new_project_name,
+            content_type: 'application/zip'
+          )
           redirect_to workflows_path(current_user, folder_name: folder_name), notice: "Zip Uploaded successfully."
           return
         rescue
@@ -170,8 +178,15 @@ class WorkflowsController < ApplicationController
       
       if status.success?
         if File.exist?(file.path)
+          new_project_name = "#{repo_params[:repo_name]}.zip"
+          delete_project_from_aws(new_project_name)
+          current_user.projects.attach(
+            io: File.open(file.path),
+            filename: new_project_name,
+            content_type: 'application/zip'
+          )
           Zip::File.open(file.path) do |zip_file|
-            @folder_name = zip_file.first.name.remove("/","")
+            @folder_name_with_repo = zip_file.first.name.remove("/","")
             zip_file.each do |entry|
               target_file_path = File.join(workflow_folder, entry.name)
               FileUtils.mkdir_p(workflow_folder) unless Dir.exist?(workflow_folder)
@@ -185,7 +200,12 @@ class WorkflowsController < ApplicationController
               entry.extract(target_file_path)
             end
           end
-          redirect_to workflows_path(current_user, folder_name: @folder_name), notice: "Successfully Imported From Git."
+          old_folder_path = File.join(workflow_folder, @folder_name_with_repo)
+          folder_name = @folder_name_with_repo.sub("-main","")
+          new_folder_path = File.join(workflow_folder, folder_name)
+
+          FileUtils.mv old_folder_path, new_folder_path
+          redirect_to workflows_path(current_user, folder_name: folder_name), notice: "Successfully Imported From Git."
         else
           puts "Failed to Import From Git : #{stderr}"
           redirect_to workflows_path(current_user), alert: "Failed to import from Git. Please try again!"
@@ -376,29 +396,51 @@ class WorkflowsController < ApplicationController
   end
 
   def delete_project
-    if request.format.html?
-      head :ok
-      return
-    end
     begin
       if folder_name_params
         workflow_path = Rails.root.join("workflows", current_user.friendly_id)
         folder_path = workflow_path.join(folder_name_params[:folder_name])
+        folder_name = folder_name_params[:folder_name]
+        new_project_name = "#{folder_name}.zip"
+        delete_project_from_aws(new_project_name)
         if Dir.exist?(folder_path)
           FileUtils.remove_dir(folder_path, true)
         end
         respond_to do |format|
-          format.json { render json: { success: 'Deleted Project Successfully!' }, status: :ok }
+          format.html { redirect_to workflows_path(current_user), notice: "Project deleted successfully!" }
         end
       else
         respond_to do |format|
-          format.json { render json: { error: 'Not able to delete. Please try again!' }, status: :not_found }
+          redirect_to workflows_path(current_user), alert: "Not able to delete project. Please try again!"
         end
       end
     rescue
       respond_to do |format|
-        format.json { render json: { error: 'Not able to delete. Please try again!' }, status: :not_found }
+        redirect_to workflows_path(current_user), alert: "Not able to delete project. Please try again!"
       end
+    end
+  end
+
+  def save_project
+    if folder_name_params && folder_name_params[:folder_name]
+      folder_path = Rails.root.join("workflows", current_user.friendly_id, folder_name_params[:folder_name].to_s)
+      zipfile_path = Rails.root.join('tmp',  "#{current_user.friendly_id}-#{folder_name_params[:folder_name]}.zip")
+      File.delete(zipfile_path) if File.exist?(zipfile_path)
+      Zip::File.open(zipfile_path, Zip::File::CREATE) do |zipfile|
+        Dir[File.join(folder_path, '**', '**')].each do |file|
+          zipfile.add(file.sub(folder_path.to_s + '/', ''), file)
+        end
+      end
+      new_project_name = "#{folder_name_params[:folder_name]}.zip"
+      delete_project_from_aws(new_project_name)
+      current_user.projects.attach(
+        io: File.open(zipfile_path),
+        filename: new_project_name,
+        content_type: 'application/zip'
+      )
+      redirect_to workflows_path(current_user, folder_name: folder_name_params[:folder_name].to_s), notice: 'Project Saved!'
+    else
+      redirect_to workflows_path(current_user), alert: 'Not able to find project to save! Please try again!'
     end
   end
 
@@ -461,6 +503,14 @@ class WorkflowsController < ApplicationController
     rescue => e
       puts "Error fetching repositories or branches: #{e.message}"
       @repo_branch_hash = {}
+    end
+  end
+
+  def delete_project_from_aws(project_name)
+    projects = current_user.projects.map { |project| project.filename.to_s }
+    if projects.include?(project_name)
+      project_to_delete = current_user.projects.select { |project| project.filename.to_s == project_name }
+      project_to_delete.each(&:purge)
     end
   end
 end

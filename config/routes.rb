@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   get '/workflows/:id/delete_file', to: 'workflows#delete_file', as: "delete_file"
   post '/workflows/:id/new_project', to: 'workflows#new_project', as: "new_project"
   delete '/workflows/:id/delete_project', to: 'workflows#delete_project', as: "delete_project"
+  get '/workflows/:id/save_project', to: 'workflows#save_project', as: "save_project"
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   if Rails.env.production?
