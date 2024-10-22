@@ -189,4 +189,9 @@ class Product < ApplicationRecord
        .distinct
        .limit(5)
   end
+
+  def more_from_this_creators
+    user = self.user 
+    products = user.products.order(created_at: :desc).limit(5)
+  end
 end
