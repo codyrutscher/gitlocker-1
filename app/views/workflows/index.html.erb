@@ -11,7 +11,7 @@
     </li>
     <li><a class='dropdown-arrow' href='javascript:void(0);'>Export Project</a>
       <ul class='sub-menus'>
-        <li><a href="<%= download_zip_path(current_user, folder_name: @folder_name) %>" id="download-zip">Download Zip</a></li>
+        <li><%= link_to 'Download ZIP', download_zip_path(current_user, folder_name: @folder_name), id: 'download-zip' %></li>
         <li><a href='javascript:void(0);' id="push-to-git">Push To GitHub</a></li>
         <% save_project_url = save_project_url(current_user, folder_name: @folder_name) %>
         <li><a href="<%= save_project_url %>" id="save-project">Save Project</a></li>

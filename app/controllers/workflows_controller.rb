@@ -16,8 +16,6 @@ class WorkflowsController < ApplicationController
     @folders = current_user.projects.flat_map { |project| project.filename.to_s.sub(".zip", "") }
     if folder_name_params && folder_name_params[:folder_name]
       path = File.join(folder_path,folder_name_params[:folder_name])
-      @directory_tree_json = [folder_structure_for_js_tree(path)].to_json.html_safe
-      @folder_name = folder_name_params[:folder_name]
       if !(Dir.exist?(path))
         redirect_to workflows_path(current_user)
         return
@@ -144,20 +142,29 @@ class WorkflowsController < ApplicationController
   end
 
   def download_zip
-    if folder_name_params
+    if folder_name_params && folder_name_params[:folder_name]
       folder_path = Rails.root.join("workflows", current_user.friendly_id, folder_name_params[:folder_name].to_s)
       zipfile_name = Rails.root.join('tmp',  "#{current_user.friendly_id}-#{folder_name_params[:folder_name]}.zip")
       File.delete(zipfile_name) if File.exist?(zipfile_name)
       begin
+        main_folder_name = folder_name_params[:folder_name].to_s
         Zip::File.open(zipfile_name, Zip::File::CREATE) do |zipfile|
           Dir[File.join(folder_path, '**', '**')].each do |file|
-            zipfile.add(file.sub(folder_path.to_s + '/', ''), file)
+            zipfile.add(File.join(main_folder_name, file.sub(folder_path.to_s + '/', '')), file)
           end
         end
+        new_project_name = "#{folder_name_params[:folder_name]}.zip"
+        delete_project_from_s3(new_project_name)
+        current_user.projects.attach(
+          io: File.open(zipfile_name),
+          filename: new_project_name,
+          content_type: 'application/zip'
+        )
         send_file zipfile_name, type: 'application/zip', disposition: 'attachment'
-      ensure
-        File.delete(zipfile_name) if File.exist?(zipfile_name)
+        return
       end
+    else
+      render plain: "Project not found. Please try again.", status: :not_found
     end
   end
 
@@ -376,7 +383,7 @@ class WorkflowsController < ApplicationController
 
   def delete_project
     begin
-      if folder_name_params
+      if folder_name_params && folder_name_params[:folder_name]
         workflow_path = Rails.root.join("workflows", current_user.friendly_id)
         folder_path = workflow_path.join(folder_name_params[:folder_name])
         folder_name = folder_name_params[:folder_name]
@@ -406,9 +413,10 @@ class WorkflowsController < ApplicationController
       zipfile_path = Rails.root.join('tmp',  "#{current_user.friendly_id}-#{folder_name_params[:folder_name]}.zip")
       File.delete(zipfile_path) if File.exist?(zipfile_path)
       begin
+        main_folder_name = folder_name_params[:folder_name].to_s
         Zip::File.open(zipfile_path, Zip::File::CREATE) do |zipfile|
           Dir[File.join(folder_path, '**', '**')].each do |file|
-            zipfile.add(file.sub(folder_path.to_s + '/', ''), file)
+            zipfile.add(File.join(main_folder_name,file.sub(folder_path.to_s + '/', '')), file)
           end
         end
         new_project_name = "#{folder_name_params[:folder_name]}.zip"
@@ -422,7 +430,7 @@ class WorkflowsController < ApplicationController
         File.delete(zipfile_path) if File.exist?(zipfile_path)
         FileUtils.remove_dir(folder_path, true)
       end
-      redirect_to workflows_path(current_user, folder_name: folder_name_params[:folder_name].to_s), notice: 'Project Saved!'
+      redirect_to workflows_path(current_user), notice: 'Project Saved!'
     else
       redirect_to workflows_path(current_user), alert: 'Not able to find project to save! Please try again!'
     end
@@ -433,7 +441,13 @@ class WorkflowsController < ApplicationController
       begin
         folder_name = "#{folder_name_params[:folder_name]}.zip"
         workflow_folder = Rails.root.join('workflows', "#{current_user.friendly_id}").to_s
-        zip_url = current_user.projects.flat_map { |project| project.url if project.filename.to_s == folder_name }.first
+        zip_url = nil
+        current_user.projects.each do |project| 
+          if project.filename.to_s == folder_name
+            zip_url = project.url
+            break
+          end
+        end
         temp_zip_path = download_temp_zip(folder_name, zip_url, nil)
         if temp_zip_path != ""
           extract_zip(temp_zip_path, workflow_folder)
