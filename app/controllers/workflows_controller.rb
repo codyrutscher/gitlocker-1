@@ -1,4 +1,7 @@
 require 'octokit'
+require 'open-uri'
+require 'zip'
+
 class WorkflowsController < ApplicationController
   before_action :retreive_github_repo_info, only: :index
   before_action :authenticate_user!
@@ -6,15 +9,13 @@ class WorkflowsController < ApplicationController
 
   def index
     folder_path = Rails.root.join('workflows', current_user.friendly_id)
-    if Dir.exist?(folder_path)
-      @folders = Dir.glob("#{folder_path}/*").select { |f| File.directory?(f) }.map { |f| File.basename(f) }
-    else
-      @folders = []
+    if !(Dir.exist?(folder_path))
       FileUtils.mkdir_p(folder_path)
     end
     @directory_tree_json = "{}"
-    if folder_name_params[:folder_name]
-      path = "#{folder_path}/#{folder_name_params[:folder_name]}"
+    @folders = current_user.projects.flat_map { |project| project.filename.to_s.sub(".zip", "") }
+    if folder_name_params && folder_name_params[:folder_name]
+      path = File.join(folder_path,folder_name_params[:folder_name])
       @directory_tree_json = [folder_structure_for_js_tree(path)].to_json.html_safe
       @folder_name = folder_name_params[:folder_name]
       if !(Dir.exist?(path))
@@ -81,22 +82,9 @@ class WorkflowsController < ApplicationController
         temp_file.flush
         temp_file.close
         begin
-          Zip::File.open(temp_file.path) do |zip_file|
-            zip_file.each do |entry|
-              target_file_path = File.join(workflow_folder, entry.name)
-              FileUtils.mkdir_p(workflow_folder) unless Dir.exist?(workflow_folder)
-              if File.exist?(target_file_path)
-                if File.directory?(target_file_path)
-                  FileUtils.remove_dir(target_file_path, true)
-                else
-                  FileUtils.rm(target_file_path)
-                end
-              end
-              entry.extract(target_file_path)
-            end
-          end
+          extract_zip(temp_file.path, workflow_folder)
           new_project_name = "#{folder_name}.zip"
-          delete_project_from_aws(new_project_name)
+          delete_project_from_s3(new_project_name)
           current_user.projects.attach(
             io: File.open(temp_file.path),
             filename: new_project_name,
@@ -106,6 +94,8 @@ class WorkflowsController < ApplicationController
           return
         rescue
           redirect_to workflows_path(current_user), alert: "File upload failed. Please try again!"
+        ensure
+          File.delete(temp_file.path) if File.exist?(temp_file.path)
         end
       end
     end
@@ -158,12 +148,16 @@ class WorkflowsController < ApplicationController
       folder_path = Rails.root.join("workflows", current_user.friendly_id, folder_name_params[:folder_name].to_s)
       zipfile_name = Rails.root.join('tmp',  "#{current_user.friendly_id}-#{folder_name_params[:folder_name]}.zip")
       File.delete(zipfile_name) if File.exist?(zipfile_name)
-      Zip::File.open(zipfile_name, Zip::File::CREATE) do |zipfile|
-        Dir[File.join(folder_path, '**', '**')].each do |file|
-          zipfile.add(file.sub(folder_path.to_s + '/', ''), file)
+      begin
+        Zip::File.open(zipfile_name, Zip::File::CREATE) do |zipfile|
+          Dir[File.join(folder_path, '**', '**')].each do |file|
+            zipfile.add(file.sub(folder_path.to_s + '/', ''), file)
+          end
         end
+        send_file zipfile_name, type: 'application/zip', disposition: 'attachment'
+      ensure
+        File.delete(zipfile_name) if File.exist?(zipfile_name)
       end
-      send_file zipfile_name, type: 'application/zip', disposition: 'attachment'
     end
   end
 
@@ -179,33 +173,18 @@ class WorkflowsController < ApplicationController
       if status.success?
         if File.exist?(file.path)
           new_project_name = "#{repo_params[:repo_name]}.zip"
-          delete_project_from_aws(new_project_name)
+          delete_project_from_s3(new_project_name)
           current_user.projects.attach(
             io: File.open(file.path),
             filename: new_project_name,
             content_type: 'application/zip'
           )
-          Zip::File.open(file.path) do |zip_file|
-            @folder_name_with_repo = zip_file.first.name.remove("/","")
-            zip_file.each do |entry|
-              target_file_path = File.join(workflow_folder, entry.name)
-              FileUtils.mkdir_p(workflow_folder) unless Dir.exist?(workflow_folder)
-              if File.exist?(target_file_path)
-                if File.directory?(target_file_path)
-                  FileUtils.remove_dir(target_file_path, true)
-                else
-                  FileUtils.rm(target_file_path)
-                end
-              end
-              entry.extract(target_file_path)
-            end
-          end
-          old_folder_path = File.join(workflow_folder, @folder_name_with_repo)
-          folder_name = @folder_name_with_repo.sub("-main","")
-          new_folder_path = File.join(workflow_folder, folder_name)
-
+          extract_zip(file.path, workflow_folder)
+          old_folder_path = File.join(workflow_folder, "#{repo_params[:repo_name]}-main")
+          new_folder_path = File.join(workflow_folder, "#{repo_params[:repo_name]}")
           FileUtils.mv old_folder_path, new_folder_path
-          redirect_to workflows_path(current_user, folder_name: folder_name), notice: "Successfully Imported From Git."
+          File.delete(file.to_s) if File.exist?(file.to_s)
+          redirect_to workflows_path(current_user, folder_name: repo_params[:repo_name]), notice: "Successfully Imported From Git."
         else
           puts "Failed to Import From Git : #{stderr}"
           redirect_to workflows_path(current_user), alert: "Failed to import from Git. Please try again!"
@@ -402,7 +381,7 @@ class WorkflowsController < ApplicationController
         folder_path = workflow_path.join(folder_name_params[:folder_name])
         folder_name = folder_name_params[:folder_name]
         new_project_name = "#{folder_name}.zip"
-        delete_project_from_aws(new_project_name)
+        delete_project_from_s3(new_project_name)
         if Dir.exist?(folder_path)
           FileUtils.remove_dir(folder_path, true)
         end
@@ -426,21 +405,48 @@ class WorkflowsController < ApplicationController
       folder_path = Rails.root.join("workflows", current_user.friendly_id, folder_name_params[:folder_name].to_s)
       zipfile_path = Rails.root.join('tmp',  "#{current_user.friendly_id}-#{folder_name_params[:folder_name]}.zip")
       File.delete(zipfile_path) if File.exist?(zipfile_path)
-      Zip::File.open(zipfile_path, Zip::File::CREATE) do |zipfile|
-        Dir[File.join(folder_path, '**', '**')].each do |file|
-          zipfile.add(file.sub(folder_path.to_s + '/', ''), file)
+      begin
+        Zip::File.open(zipfile_path, Zip::File::CREATE) do |zipfile|
+          Dir[File.join(folder_path, '**', '**')].each do |file|
+            zipfile.add(file.sub(folder_path.to_s + '/', ''), file)
+          end
         end
+        new_project_name = "#{folder_name_params[:folder_name]}.zip"
+        delete_project_from_s3(new_project_name)
+        current_user.projects.attach(
+          io: File.open(zipfile_path),
+          filename: new_project_name,
+          content_type: 'application/zip'
+        )
+      ensure
+        File.delete(zipfile_path) if File.exist?(zipfile_path)
+        FileUtils.remove_dir(folder_path, true)
       end
-      new_project_name = "#{folder_name_params[:folder_name]}.zip"
-      delete_project_from_aws(new_project_name)
-      current_user.projects.attach(
-        io: File.open(zipfile_path),
-        filename: new_project_name,
-        content_type: 'application/zip'
-      )
       redirect_to workflows_path(current_user, folder_name: folder_name_params[:folder_name].to_s), notice: 'Project Saved!'
     else
       redirect_to workflows_path(current_user), alert: 'Not able to find project to save! Please try again!'
+    end
+  end
+
+  def project_from_s3
+    if folder_name_params && folder_name_params[:folder_name]
+      begin
+        folder_name = "#{folder_name_params[:folder_name]}.zip"
+        workflow_folder = Rails.root.join('workflows', "#{current_user.friendly_id}").to_s
+        zip_url = current_user.projects.flat_map { |project| project.url if project.filename.to_s == folder_name }.first
+        temp_zip_path = download_temp_zip(folder_name, zip_url, nil)
+        if temp_zip_path != ""
+          extract_zip(temp_zip_path, workflow_folder)
+          File.delete(temp_zip_path) if File.exist?(temp_zip_path)
+          redirect_to workflows_path(current_user, folder_name: folder_name_params[:folder_name]), notice: "Project loaded successfully!"
+        else
+          redirect_to workflows_path(current_user), alert: "Not able to load project! Please try again!"
+        end
+      rescue
+        redirect_to workflows_path(current_user), alert: 'Not able to find saved project! Please try again!'
+      end
+    else
+      redirect_to workflows_path(current_user), alert: 'Not able to find saved project! Please try again!'
     end
   end
 
@@ -506,7 +512,38 @@ class WorkflowsController < ApplicationController
     end
   end
 
-  def delete_project_from_aws(project_name)
+  def download_temp_zip(temp_zip_name, zip_url = nil, folder_path = nil)
+    temp_zip_path = Rails.root.join('tmp', "#{temp_zip_name}")
+    if zip_url 
+      File.open(temp_zip_path, 'wb') do |file|
+        file.write(URI.open(zip_url).read)
+      end
+      temp_zip_path
+    elsif folder_path
+      ""
+    else
+      ""    
+    end
+  end
+
+  def extract_zip(zip_path, destination_folder)
+    FileUtils.mkdir_p(destination_folder) unless Dir.exist?(destination_folder)
+    Zip::File.open(zip_path) do |zip_file|
+      zip_file.each do |entry|
+        target_file_path = File.join(destination_folder, entry.name)
+        if File.exist?(target_file_path)
+          if File.directory?(target_file_path)
+            FileUtils.remove_dir(target_file_path, true)
+          else
+            FileUtils.rm(target_file_path)
+          end
+        end
+        entry.extract(target_file_path)
+      end
+    end
+  end
+
+  def delete_project_from_s3(project_name)
     projects = current_user.projects.map { |project| project.filename.to_s }
     if projects.include?(project_name)
       project_to_delete = current_user.projects.select { |project| project.filename.to_s == project_name }
