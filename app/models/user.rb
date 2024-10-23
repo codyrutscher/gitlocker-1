@@ -75,6 +75,7 @@ class User < ApplicationRecord
   end
 
   has_one_attached :profile_picture
+  has_many_attached :projects
 
   validates :username, presence: true, uniqueness: { case_sensitive: false }
 
