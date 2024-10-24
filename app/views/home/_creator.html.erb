@@ -1,4 +1,4 @@
-<%= link_to marketplace_creator_path(creator.id), class: "relative flex h-48 flex-col overflow-hidden rounded-lg p-6 hover:opacity-75 md:w-56 lg:w-64 xl:w-auto" do %>
+<%= link_to marketplace_creator_path(creator.id), class: "relative flex h-48 flex-col overflow-hidden hover:shadow-[0px_20px_20px_15px_#1a202c] hover:scale-105 border-black border-4 rounded-lg p-6 hover:opacity-75 md:w-56 lg:w-64 xl:w-auto" do %>
   <span aria-hidden="true" class="absolute inset-0">
     <% if creator.profile_picture.attached? %>
       <%= image_tag creator.profile_picture, class: "h-full w-full object-cover object-center", style: "object-fit: contain;" %>

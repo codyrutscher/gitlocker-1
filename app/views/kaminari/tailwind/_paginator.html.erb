@@ -3,7 +3,7 @@
     <ul class="pagination flex space-x-2">
       <% if paginator.current_page > 1 %>
         <li>
-          <%= link_to raw('&lsaquo; Previous'), url_for(request.params.merge(page: paginator.current_page - 1)), class: "text-white hover:text-black bg-orange-500 hover:bg-orange-700 font-semibold px-2 py-1 rounded border border-black" %>
+          <%= link_to raw('&lsaquo; Previous'), url_for(request.params.merge(page: paginator.current_page - 1)), class: "text-white hover:text-black bg-orange-500 hover:bg-orange-700 font-semibold px-2 py-1 rounded border border-black", rel: "prev" %>
         </li>
       <% else %>
         <li class="disabled">
@@ -44,7 +44,7 @@
 
       <% if paginator.current_page < paginator.total_pages %>
         <li>
-          <%= link_to raw('Next &rsaquo;'), url_for(request.params.merge(page: paginator.current_page + 1)), class: "text-white hover:text-black hover:bg-orange-700 bg-orange-500 font-semibold px-2 py-1 rounded border border-black" %>
+          <%= link_to raw('Next &rsaquo;'), url_for(request.params.merge(page: paginator.current_page + 1)), class: "text-white hover:text-black hover:bg-orange-700 bg-orange-500 font-semibold px-2 py-1 rounded border border-black", rel: "next" %>
         </li>
       <% else %>
         <li class="disabled">

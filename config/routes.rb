@@ -2,6 +2,23 @@ Rails.application.routes.draw do
   require 'sidekiq/web'
   mount Sidekiq::Web => '/sidekiq'
   resources :follows
+  get '/workflows/:id', to: 'workflows#index', as: "workflows"
+  get '/workflows/:id/open_file', to: 'workflows#open_file', as: "open_file"
+  post '/workflows/:id/save_file', to: 'workflows#save_file', as: "save_file"
+  get '/workflows/:id/create_file', to: 'workflows#create_file', as: "create_file"
+  get '/workflows/:id/rename_file', to: 'workflows#rename_file', as: "rename_file"
+  get '/workflows/:id/rename_folder', to: 'workflows#rename_folder', as: "rename_folder"
+  get '/workflows/:id/delete_file', to: 'workflows#delete_file', as: "delete_file"
+
+  get '/workflows/:id/download_zip', to: 'workflows#download_zip', as: "download_zip"
+  post '/workflows/:id/upload_zip', to: 'workflows#upload_zip', as: "upload_zip"
+  get '/workflows/:id/download_repo', to: 'workflows#download_repo', as: "download_repo"
+  get '/workflows/:id/push_to_git', to: 'workflows#push_to_git', as: "push_to_git"
+
+  post '/workflows/:id/new_project', to: 'workflows#new_project', as: "new_project"
+  delete '/workflows/:id/delete_project', to: 'workflows#delete_project', as: "delete_project"
+  get '/workflows/:id/save_project', to: 'workflows#save_project', as: "save_project"
+  get '/workflows/:id/project_from_s3', to: 'workflows#project_from_s3', as: "project_from_s3"
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   if Rails.env.production?

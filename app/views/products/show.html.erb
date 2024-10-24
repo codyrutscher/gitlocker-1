@@ -143,7 +143,7 @@
             <% if @in_cart %>
               <%= link_to "Remove from Cart", marketplace_cart_item_path(@cart_item), data: { "turbo-method": :delete }, class: "hover:scale-110 flex w-full items-center justify-center rounded-md border-black border-2 bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50" %>
             <% else %>
-              <%= link_to "Add to Cart", marketplace_cart_items_path(product_id: @product.id), data: { "turbo-method": :post }, class: "hover:scale-110 flex w-full items-center justify-center rounded-md border-black border-2 bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50" %>
+              <%= link_to "Add to Cart", marketplace_cart_items_path(product_id: @product.id), data: { "turbo-method": :post }, class: "hover:scale-110 flex w-full items-center justify-center rounded-md border-black border-2 bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50", rel: "canonical" %>
             <% end %>
           <% elsif policy(@product).download_able? %>
               <%= link_to "Download", @product.folder.url, class: "hover:scale-110 flex w-full items-center justify-center rounded-md border-black border-2 bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50" %>
@@ -165,7 +165,7 @@
         <% end %>
 
         <% if @product.description.present? %>
-          <%= content_for :meta_description, @product.description&.first(1000)&.humanize %>
+          <%= content_for :meta_description, ActionView::Base.full_sanitizer.sanitize(@product.description)&.humanize&.first(1000) %>
           <div class="flex flex-col gap-4">
             <h1 class="text-2xl text-bold underline text-gray-900 font-mono">Description:</h1>
             <p class="text-sm text-gray-500 font-mono"><%= sanitize @product.description %></p>
@@ -349,7 +349,7 @@
       </div>
     </div>
     <% if @related_products.present? %>
-      <div class="mt-12 divide-y divide-black space-y-6">
+      <div class="mt-12 divide-y-4 divide-black space-y-6">
         <h2 class="text-3xl font-bold text-gray-900 mb-6 ">Related Products</h2>
         <div class="mt-6 flow-root space-y-6 pt-8">
           <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 gap-4 lg:gap-8">
