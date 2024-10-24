@@ -30,7 +30,7 @@
               <p class="text-center text-black">No products available for this category.</p>
             <% end %>
           </div>
-          <div class="">
+          <div class="<%= 'mt-12' if @products.count > 50 %>">
           <%= render 'kaminari/tailwind/paginator', paginator: @products, params: { sort_by: params[:sort_by] } %>
           </div>
         </div>
