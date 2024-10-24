@@ -30,7 +30,7 @@
               <p class="text-center text-black">No products available for this category.</p>
             <% end %>
           </div>
-          <div class="mt-4 px-4 sm:px-6 lg:px-8 space-y-8">
+          <div class="">
           <%= render 'kaminari/tailwind/paginator', paginator: @products, params: { sort_by: params[:sort_by] } %>
           </div>
         </div>
