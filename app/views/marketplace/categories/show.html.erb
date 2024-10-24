@@ -21,7 +21,7 @@
               <div class="pb-6">
               <%= render partial: 'shared/productFilter' %>
               </div>
-              <div class="absolute flex flex-wrap justify-center gap-4 px-4 sm:px-6 sm:grid-cols-2 lg:px-8 xl:relative xl:grid xl:grid-cols-5 xl:gap-x-8 xl:space-x-0 xl:px-0">
+              <div class="mt-4 gap-4 sm:grid-cols-2 grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 xl:gap-x-8">
                 <% @products.each do |product| %>
                   <%= render partial: "home/product", locals: { product: product } %>
                 <% end %>
