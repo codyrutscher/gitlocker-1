@@ -352,8 +352,8 @@
       <div class="mt-12 divide-y-4 divide-black space-y-6">
         <h2 class="text-3xl font-bold text-gray-900 mb-6 ">Related Products</h2>
         <div class="mt-6 flow-root space-y-6 pt-8">
-          <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 gap-4 lg:gap-8">
-            <%= render partial: "home/product", collection: @related_products, as: :product %>
+          <div class="">
+            <%= render ProductCarouselComponent.new(@related_products) %>
           </div>
         </div>
       </div>
@@ -363,8 +363,8 @@
       <div class="mt-12 divide-y divide-black space-y-6">
         <h2 class="text-3xl font-bold text-gray-900 mb-6 ">More From This Creator</h2>
         <div class="mt-6 flow-root space-y-6 pt-8">
-          <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 gap-4 lg:gap-8">
-            <%= render partial: "home/product", collection: @more_from_this_creators, as: :product %>
+          <div class="">
+            <%= render ProductCarouselComponent.new(@more_from_this_creators) %>
           </div>
         </div>
       </div>
@@ -469,4 +469,47 @@
 			'data' : <%= @directory_tree_json %>
 		}
 	});
+</script>
+
+ <script>
+    $(".slickSlider").slick({
+      infinite: false,
+          speed: 300,
+          touchMove: true,
+          initialSlide: 0,
+          slidesToShow: 3.5,
+          slidesToScroll: 1,
+          variableWidth: true,
+          dots: false,
+          arrows: true,
+          adaptiveHeight: true,
+          prevArrow:`<button type="button" class="carousel-control prev absolute top-1/2 left-0 transform -translate-y-1/2 z-30 flex items-center justify-center h-10 w-10 cursor-pointer group focus:outline-none">
+            <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-slate-800 dark:bg-slate-800 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+              <svg class="w-4 h-4 text-white dark:text-gray-400 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
+              </svg>
+              <span class="sr-only">Previous</span>
+            </span>
+          </button>`,
+            nextArrow:`<button type="button" class="carousel-control next absolute top-1/2 right-[45px] transform -translate-y-1/2 z-30 flex items-center justify-center h-10 w-10 cursor-pointer group focus:outline-none" style="right: 46px">
+            <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-slate-800 dark:bg-slate-800 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+              <svg class="w-4 h-4 text-white dark:text-gray-400 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+              </svg>
+              <span class="sr-only">Next</span>
+            </span>
+          </button>`,
+          responsive: [{
+              breakpoint: 1024,
+              settings: {
+                  slidesToShow: 3.5
+              }
+          }, {
+              breakpoint: 650,
+              settings: {
+                  initialSlide: 2,
+                  slidesToShow: 2
+              }
+          }]
+      });
 </script>

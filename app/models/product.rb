@@ -187,11 +187,11 @@ class Product < ApplicationRecord
        .where.not(id: self.id)
        .where('categories.id IN (?) OR languages.id IN (?)', self.category_ids, self.language_ids)
        .distinct
-       .limit(5)
+       .limit(20)
   end
 
   def more_from_this_creators
     user = self.user 
-    products = user.products.order(created_at: :desc).limit(5)
+    products = user.products.order(created_at: :desc).limit(20)
   end
 end
