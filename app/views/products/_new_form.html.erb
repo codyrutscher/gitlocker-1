@@ -10,19 +10,19 @@
 
       <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
 
-        <div class="sm:col-span-4" id= "url-field">
+        <div class="sm:col-span-4 border-t-4 border-black" id= "url-field">
           <%= f.label :url,"GitHub Private Repository URL:", class: "block text-xl font-medium leading-6 text-gray-900 font-mono" %>
           <div class="mt-2">
             <%= f.text_field :url, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", maxlength: "70", placeholder: "Paste Repository URL" %>
           </div>
         </div>
         <div class="upload_repo_zip sm:col-span-4">
-      <div class="sm:col-span-4 text-center">
-        <span class="text-gray-500 font-medium">OR</span>
+      <div class="sm:col-span-4 text-center pt-8 pb-8">
+        <span class="text-black text-3xl font-mono">OR</span>
       </div>
         <!-- New Upload ZIP File Field -->
       <!-- New Upload ZIP File Field -->
-  <div class="sm:col-span-4" id="zip-upload-field">
+  <div class="sm:col-span-4 border-t-4 border-black" id="zip-upload-field">
     <%= f.label :upload_file, "Upload ZIP File:", class: "block text-xl font-medium leading-6 text-gray-900 font-mono" %>
     <div class="mt-0">
       <%= f.file_field :upload_file, class: "form-control w-full", id: "upload_file", accept: ".zip" %>
@@ -35,14 +35,14 @@
   
   </div>
 
-        <div class="sm:col-span-4">
+        <div class="sm:col-span-4 border-t-4 border-black">
           <%= f.label :name, class: "block text-xl font-medium leading-6 text-gray-900 font-mono" %>
           <div class="mt-2">
             <%= f.text_field :name, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", maxlength: "70", required: true %>
           </div>
         </div>
 
-        <div class="sm:col-span-4">
+        <div class="sm:col-span-4 border-t-4 border-black">
           <%= f.label :description, "Description", class: "block text-xl font-medium leading-6 text-gray-900 font-mono" %>
           <div class="mt-2">
             <%= f.text_area :description, id: "descriptionTextArea", class: "ckEditor block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", required: true %>
@@ -52,7 +52,7 @@
           </div>
         </div>
 
-        <div class="sm:col-span-4">
+        <div class="sm:col-span-4 border-t-4 border-black">
           <%= f.label :features, "Features", class: "block text-xl font-medium leading-6 text-gray-900 font-mono" %>
           <div class="mt-2">
             <%= f.text_area :features, id: "featuresTextArea", class: "ckEditor block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"%>
@@ -62,7 +62,7 @@
           </div>
         </div>
 
-         <div class="sm:col-span-4">
+         <div class="sm:col-span-4 border-t-4 border-black">
           <%= f.label :requirements, "Requirements", class: "block text-xl font-medium leading-6 text-gray-900 font-mono" %>
           <div class="mt-2">
             <%= f.text_area :requirements, id: "requirementsTextArea", class: "ckEditor block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"%>
@@ -72,7 +72,7 @@
           </div>
         </div>
 
-         <div class="sm:col-span-4">
+         <div class="sm:col-span-4 border-t-4 border-black">
           <%= f.label :instructions, "Instructions", class: "block text-xl font-medium leading-6 text-gray-900 font-mono" %>
           <div class="mt-2">
             <%= f.text_area :instructions, id: "instructionsTextArea", class: "ckEditor block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"%>
@@ -82,14 +82,14 @@
           </div>
         </div>
 
-        <div class="sm:col-span-4">
+        <div class="sm:col-span-4 border-t-4 border-black">
           <%= f.label :price, class: "block text-xl font-medium leading-6 text-gray-900 font-mono" %>
           <div class="mt-2">
             <%= f.number_field :price, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", required: true %>
           </div>
         </div>
 
-        <div class="sm:col-span-4">
+        <div class="sm:col-span-4 border-t-4 border-black">
           <%= f.label :covers, class: "block text-xl font-medium leading-6 text-gray-900 font-mono" do %>
             Cover Images or GIFs (Limit of 10 and max file size of 100mb each)
           <% end %>
@@ -101,7 +101,7 @@
         </div>
 
 
-        <div class="sm:col-span-4">
+        <div class="sm:col-span-4 border-t-4 border-black">
           <label for="product_video_source" class="block text-xl font-medium leading-6 text-gray-900 font-mono">Video Source</label>
           <div class="mt-2">
             <select id="product_video_source" class="form-control" onchange="toggleVideoFields()">
@@ -114,14 +114,14 @@
           <h1 class="font-bold font-mono">It is highly recommended to include a video preview to show users how your product works. Doing this will increase the chances of selling your product.</h1>
         </div>
 
-        <div class="sm:col-span-4" id="preview_video_url_field" style="display: none;">
+        <div class="sm:col-span-4 border-t-4 border-black" id="preview_video_url_field" style="display: none;">
           <%= f.label :preview_video_url, class: "block text-xl font-medium leading-6 text-gray-900 font-mono" %>
           <div class="mt-2">
             <%= f.text_field :preview_video_url, class: "form-control", id: "product_preview_video_url" %>
           </div>
         </div>
 
-        <div class="sm:col-span-4" id="video_file_field" style="display: none;">
+        <div class="sm:col-span-4 border-t-4 border-black" id="video_file_field" style="display: none;">
           <%= f.label :video_file, class: "block text-xl font-medium leading-6 text-gray-900 font-mono" do %>
             Preview Video Source (file size limit of 1 GB)
           <% end %>
@@ -130,44 +130,42 @@
           </div>
         </div>
 
-        <div class="sm:col-span-4">
+        <div class="sm:col-span-4 border-t-4 border-black">
           <%= f.label :categories, class: "block text-xl font-medium leading-6 text-gray-900 font-mono" %>
           <div class="mt-2">
-            <select  class="js-example-basic-multiple w-40 sm:w-50 mt-1 block rounded-md shadow-sm border-gray-300 focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" id="categoriesSelect"  multiple="multiple">
-              <% Category.all.each do |category| %>
-                <option value="<%= category.id %>"><%= category.name %></option>
-              <% end %>
-            </select>
+            <%= f.select :category_ids, options_for_select(Category.pluck(:name, :id)), {}, 
+            class: "js-example-basic-multiple w-40 sm:w-50 mt-1 block rounded-md shadow-sm border-gray-300 focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50", 
+            multiple: true, 
+            id: "categoriesSelect" %>
           </div>
         </div>
 
-        <div class="sm:col-span-4">
+        <div class="sm:col-span-4 border-t-4 border-black">
           <%= f.label :language_ids, "Languages", class: "block text-xl font-medium leading-6 text-gray-900 font-mono" %>
           <div class="mt-2">
-            <select class="js-example-basic-multiple w-40 sm:w-50 mt-1 block rounded-md shadow-sm border-gray-300 focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" id="languagesSelect" multiple="multiple">
-              <% Language.all.each do |language| %>
-                <option value="<%= language.id %>"><%= language.name %></option>
-              <% end %>
-            </select>
+            <%= f.select :language_ids, options_for_select(Language.pluck(:name, :id)), {}, 
+              class: "js-example-basic-multiple w-40 sm:w-50 mt-1 block rounded-md shadow-sm border-gray-300 focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50", 
+              multiple: true, 
+              id: "languagesSelect" %>
           </div>
         </div>
 
-        <div class="sm:col-span-4">
+        <div class="sm:col-span-4 border-t-4 border-black">
           <%= f.label :featured, "Feature This Product", class: "block text-xl font-medium leading-6 text-gray-900 font-mono" %>
-          <h2 class="font-mono text-lg font-bold">(For $25 you can permanently feature your repository so that it becomes searchable in the featured section.)</h2>
+          <h2 class="font-mono text-lg font-bold">(For $10 you can permanently feature your repository so that it becomes searchable in the featured section.)</h2>
           <div class="mt-2">
             <%= f.check_box :featured, id:"featured", :style => "width: 20px; height: 20px;" %>
           </div>
         </div>
 
-        <div class="sm:col-span-4">
+        <div class="sm:col-span-4 border-t-4 border-black">
           <%= f.label :demo_url, class: "block text-xl font-medium leading-6 text-gray-900 font-mono" %>
           <div class="mt-2">
             <%= f.text_field :demo_url, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", maxlength: "70", required: false, placeholder: "https://demo_url.com" %>
           </div>
         </div>
 
-        <div class="sm:col-span-4">
+        <div class="sm:col-span-4 border-t-4 border-black">
             <div id="upload-status" class="mt-2"></div>
         </div>
          <div class="font-bold sm:col-span-4">
@@ -453,6 +451,44 @@ document.addEventListener('turbo:load', () => {
       }
     });
   });
+});
+$(document).ready(function() {
+
+  function enforceSelectionLimit(selectElement) {
+    selectElement.on('select2:select', function(e) {
+      var selectedItems = $(this).val();
+
+      if (selectedItems.length > 5) {
+        
+        var lastSelected = e.params.data.id; 
+        var options = $(this).find('option:selected');
+        options.each(function() {
+          if ($(this).val() == lastSelected) {
+            $(this).prop('selected', false); 
+            selectElement.trigger('change');
+          }
+        });
+      }
+    });
+  }
+
+  var categoriesSelect = $('#categoriesSelect').select2({
+    tags: true,
+    placeholder: 'Select or enter categories',
+    tokenSeparators: [',', ' '],
+    allowClear: true
+  })
+
+  var languagesSelect = $('#languagesSelect').select2({
+    tags: true,
+    placeholder: 'Select or enter language',
+    tokenSeparators: [',', ' '],
+    allowClear: true
+  })
+
+  enforceSelectionLimit(categoriesSelect);
+  enforceSelectionLimit(languagesSelect);
+
 });
 
 </script>

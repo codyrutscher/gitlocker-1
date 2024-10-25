@@ -1,4 +1,4 @@
-<div data-controller="home-nav" class="border-t-8 border-black">
+<div data-controller="home-nav" class="border-t-12 border-black">
   <%= render "layouts/home_mobile_menu" %>
   <!-- Hero section -->
   <div class="relative bg-orange-400">
@@ -55,7 +55,7 @@
                   <path d="M 25 1.0507812 C 24.7825 1.0507812 24.565859 1.1197656 24.380859 1.2597656 L 1.3808594 19.210938 C 0.95085938 19.550938 0.8709375 20.179141 1.2109375 20.619141 C 1.5509375 21.049141 2.1791406 21.129062 2.6191406 20.789062 L 4 19.710938 L 4 46 C 4 46.55 4.45 47 5 47 L 19 47 L 19 29 L 31 29 L 31 47 L 45 47 C 45.55 47 46 46.55 46 46 L 46 19.710938 L 47.380859 20.789062 C 47.570859 20.929063 47.78 21 48 21 C 48.3 21 48.589063 20.869141 48.789062 20.619141 C 49.129063 20.179141 49.049141 19.550938 48.619141 19.210938 L 25.619141 1.2597656 C 25.434141 1.1197656 25.2175 1.0507812 25 1.0507812 z M 35 5 L 35 6.0507812 L 41 10.730469 L 41 5 L 35 5 z"/>
                 </svg>
                 <% end %>
-               <%= link_to marketplace_root_path do %>
+                <%= link_to current_user ? workflows_path(current_user) : marketplace_root_path do %>
                   <svg class="h-6 w-6 flex-shrink-0 text-black fill-black hover:fill-white hover:text-white" fill="none" viewBox="0 0 100 100" width="50px" height="50px" aria-hidden="true">
                   <path d="M83.333,13.333H16.667C13.001,13.333,10,16.335,10,20v60c0,3.665,3.001,6.667,6.667,6.667h66.666	C86.999,86.667,90,83.665,90,80V20C90,16.335,86.999,13.333,83.333,13.333z M36.667,26.667h20v6.666h-20V26.667z M36.667,53.333	h26.666V60H36.667V53.333z M30,73.333h-6.667v-6.666H30V73.333z M30,60h-6.667v-6.667H30V60z M30,46.667h-6.667V40H30V46.667z M30,33.333h-6.667v-6.666H30V33.333z M70,73.333H36.667v-6.666H70V73.333z M76.667,46.667h-40V40h40V46.667z"/>
                 </svg>
@@ -88,14 +88,14 @@
 
                 <div id="notifications-dropdown" class="hidden absolute right-0 mt-2 w-96 bg-white shadow-lg rounded-lg ring-1 ring-black ring-opacity-5">
                   <div class="p-4">
-                    <h3 class="text-lg font-medium text-gray-900">Notifications</h3>
+                    <h3 class="text-lg font-medium font-mono text-gray-900">Notifications</h3>
                   </div>
                   <ul class="divide-y divide-gray-200">
                     <% if @notifications_index.length > 0 %>
                       <% @notifications_index.each do |notification| %>
                         <li class="p-4 hover:bg-gray-100">
                           <% if notification&.params && notification.params["message"] %>
-                            <p class="text-sm text-gray-700"><%= notification&.params["message"] %></p>
+                            <p class="text-sm font-mono text-gray-700"><%= notification&.params["message"] %></p>
                             <% unless notification.read_at %>
                               <%= link_to "Mark as Read", mark_as_read_marketplace_notification_path(notification), method: :post, class: "text-sm text-blue-500 hover:text-blue-700 ml-2 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded px-2 py-1 bg-blue-100 hover:bg-blue-200" %>
                             <% end %>
@@ -125,7 +125,7 @@
                     <%= link_to "Edit Profile", edit_marketplace_user_path(current_user), class: "text-sm inline-block text-black px-4 py-2 hover:bg-blue-500 hover:text-white font-mono" %>
                     <%= link_to "My Products", products_path, class: "text-sm inline-block text-black px-4 py-2 hover:bg-blue-500 hover:text-white font-mono" %>
                     <%= link_to "Add Product", new_product_path, class: "text-sm inline-block text-black px-4 py-2 hover:bg-blue-500 hover:text-white font-mono" %>
-                    <%= link_to "Write Code", workflows_path(current_user), class: "text-sm inline-block text-black px-4 py-2 hover:bg-blue-500 hover:text-white font-mono", target: "_blank" %>
+                    <%= link_to "Write Code", workflows_path(current_user), class: "text-sm inline-block text-black px-4 py-2 hover:bg-blue-500 hover:text-white font-mono" %>
                     <%= link_to "Coding Resources", resources_path, class: "text-sm inline-block text-black px-4 py-2 hover:bg-blue-500 hover:text-white font-mono", target: :blank %>
                     <%= link_to "Purchased Products", marketplace_purchases_path, class: "text-sm inline-block text-black px-4 py-2 hover:bg-blue-500 hover:text-white font-mono" %>
                     <%= link_to "Get Paid", seller_dashboard_path, class: "text-sm inline-block text-black px-4 py-2 hover:bg-blue-500 hover:text-white font-mono" %>

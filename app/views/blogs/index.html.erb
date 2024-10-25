@@ -6,7 +6,7 @@
 
     <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
       <% @blogs.each do |blog| %>
-        <div class="bg-white hover:shadow-[0px_20px_20px_15px_#1a202c] rounded-lg overflow-hidden">
+        <div class="bg-white hover:shadow-[0px_20px_20px_15px_#1a202c] border-4 border-black rounded-lg overflow-hidden">
           <%= link_to blog_path(blog), class: "block" do %>
             <% if blog.image.attached? %>
               <%= image_tag url_for(blog.image), class: "w-full h-48 object-cover" %>
@@ -19,7 +19,7 @@
                     "<a href='#{url}' class='text-blue-500 underline' target='_blank'>#{url}</a>"
                   end
                 %>
-                <%= raw(linked_content.truncate(300, separator: ' ')) %>
+                <%= sanitize(linked_content.truncate(300, separator: ' ')) %>
               </p>
               <p class="text-sm text-gray-500">Posted on <%= blog.created_at.strftime("%B %d, %Y") %></p>
             </div>

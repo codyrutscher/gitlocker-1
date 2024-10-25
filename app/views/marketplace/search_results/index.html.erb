@@ -1,3 +1,4 @@
+<%= render BreadcrumbComponent.new(current_user, [{ text: "Search", url: marketplace_search_path }]) %>
 <div class="bg-gradient-to-r from-blue-700 to-orange-500">
   <main>
     <div class="px-8 py-4">
@@ -30,7 +31,7 @@
           </div>
         </div>
         <div class="mt-4 px-4 sm:px-6 lg:px-8">
-          <%= render 'kaminari/tailwind/paginator', paginator: @product_results %>
+          <%= render 'kaminari/tailwind/paginator', paginator: @product_results if @product_results.present?%>
         </div>
       </section>
     <% end %>
@@ -59,7 +60,7 @@
           </div>
         </div>
         <div class="mt-4 px-4 sm:px-6 lg:px-8">
-          <%= render 'kaminari/tailwind/paginator', paginator: @marketplace_creator_results %>
+          <%= render 'kaminari/tailwind/paginator', paginator: @marketplace_creator_results if @marketplace_creator_results.present? %>
         </div>
       </section>
     <% end %>
@@ -89,7 +90,7 @@
           </div>
         </div>
         <div class="mt-4 px-4 sm:px-6 lg:px-8">
-          <%= render 'kaminari/tailwind/paginator', paginator: @category_results %>
+          <%= render 'kaminari/tailwind/paginator', paginator: @category_results if @category_results.present? %>
         </div>
       </section>
     <% end %>
@@ -119,7 +120,7 @@
           </div>
         </div>
         <div class="mt-4 px-4 sm:px-6 lg:px-8">
-          <%= render 'kaminari/tailwind/paginator', paginator: @language_results %>
+          <%= render 'kaminari/tailwind/paginator', paginator: @language_results if @category_results.present? %>
         </div>
       </section>
     <% end %>

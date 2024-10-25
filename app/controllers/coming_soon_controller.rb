@@ -12,6 +12,5 @@ class ComingSoonController < ApplicationController
   end
 
   def landing_page
-    redirect_to marketplace_root_path if user_signed_in?
   end
 end

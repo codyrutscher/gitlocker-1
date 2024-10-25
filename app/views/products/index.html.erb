@@ -7,11 +7,16 @@
   <div class="space-y-16 xl:space-y-20">
     <div class="mx-auto px-4 sm:px-6 lg:px-8">
       <div class="mx-auto max-w-2xl lg:mx-0 lg:max-w-none">
+        <!-- app/views/products/index.html.erb -->
         <div class="flex items-center justify-between">
           <h1 class="font-semibold text-3xl underline font-mono leading-7 text-black">My Products</h2>
         </div>
-        <ul role="list" class="mt-6 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 gap-4 lg:gap-8 px-0 sm:px-6 lg:px-8 xl:px-0 ">
-          <%= render @products %>
+        <div data-controller="search" class="mt-2">
+
+          <input type="text" placeholder="Search Products" data-search-target="input" data-action="input->search#query" class="mt-8 mb-8 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+
+        <ul id="search-results" role="list" class="mt-6 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 gap-4 lg:gap-8 px-0 sm:px-6 lg:px-8 xl:px-0 ">
+            <%= render @products %>
         </ul>
       </div>
     </div>

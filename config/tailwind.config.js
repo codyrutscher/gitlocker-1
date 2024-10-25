@@ -9,6 +9,17 @@ module.exports = {
     './app/components/**/*.{erb,haml,html,slim}'
   ],
   theme: {
+    borderWidth: {
+      DEFAULT: '1px',
+      '0': '0',
+      '2': '2px',
+      '3': '3px',
+      '4': '4px',
+      '6': '6px',
+      '8': '8px',
+      '10': '10px',
+      '12': '12px',
+    },
     screens: {
       'sm': '640px',
       // => @media (min-width: 640px) { ... }

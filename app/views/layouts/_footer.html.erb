@@ -2,6 +2,12 @@
   <div class="mx-auto max-w-7xl overflow-hidden px-6 py-20 sm:py-24 lg:px-8">
     <nav class="-mb-6 columns-2 flex justify-center flex-wrap sm:space-x-12 space-x-7" aria-label="Footer">
       <div class="pb-6">
+        <%= link_to "About Us", landing_page_path, data: { turbo: false }, class: "text-sm leading-6 text-gray-500 hover:text-gray-400" %>
+      </div>
+      <div class="pb-6">
+        <%= link_to "Resources", resources_path, data: { turbo: false }, class: "text-sm leading-6 text-gray-500 hover:text-gray-400" %>
+      </div>
+      <div class="pb-6">
         <%= link_to "FAQ", faq_path, data: { turbo: false }, class: "text-sm leading-6 text-gray-500 hover:text-gray-400" %>
       </div>
       <div class="pb-6">

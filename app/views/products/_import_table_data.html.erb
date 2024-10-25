@@ -1,0 +1,31 @@
+<% if filtered_repos.count <= 0 %>
+    <tr class="even:bg-gray-50">
+        <td colspan="3" class="min-w-[256px] w-[256px] px-6 py-4 text-sm text-black border-r border-gray-200">
+            No Repository found
+        </td>
+    </tr>
+<% else %>
+    <% filtered_repos.each do |repo| %>
+        <tr class="even:bg-gray-50">
+            <td class="min-w-[256px] w-[256px] border-l-2 whitespace-nowrap px-6 py-4 pl-4 pr-3 text-sm font-medium text-black sm:pl-6 border-r border-gray-200 flex items-center space-x-2">
+                <img src="<%= repo[:avatar_url] %>" alt="<%= repo[:name] %> Avatar" class="w-10 h-10 rounded-full">
+                <a href="<%= repo[:url] %>" class="text-black-500 hover:underline" target="_blank">
+                <%= repo[:name] %>
+                </a>
+            </td>
+            <td class="min-w-[256px] w-[256px] px-6 py-4 text-sm text-black border-r border-gray-200">
+                <a href="<%= repo[:url] %>" class="text-black-500 hover:underline" target="_blank">
+                <%= repo[:url] %>
+                </a>
+            </td>
+            <td class="min-w-[130px] w-[130px] whitespace-nowrap px-6 py-4 text-sm text-black border-r border-gray-200">
+                <button type="button" class="bg-blue-500 text-white px-4 py-2 rounded-md import-repo-btn"
+                        data-repo-name="<%= repo[:name] %>"
+                        data-repo-url="<%= repo[:url] %>"
+                        data-repo-description="<%= repo[:description] %>">
+                Import
+                </button>
+            </td>
+        </tr>
+    <% end %>
+<% end %>

@@ -1,3 +1,5 @@
+<% content_for :meta_title,  @language&.name&.titleize %>
+<% content_for :meta_description,  "Find your #{@language&.name&.titleize} class in Gitlocker" %>
 <div class="bg-gradient-to-r from-blue-700 to-orange-500">
   <%=
     render BreadcrumbComponent.new(current_user,[
@@ -19,7 +21,7 @@
               <div class="pb-6">
               <%= render partial: 'shared/productFilter' %>
               </div>
-              <div class="mt-4 gap-4 sm:grid-cols-2 grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 xl:gap-x-8 ">
+              <div class="mt-4 gap-4 sm:grid-cols-2 grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 xl:gap-x-8">
                 <% @products.each do |product| %>
                   <%= render partial: "home/product", locals: { product: product } %>
                 <% end %>

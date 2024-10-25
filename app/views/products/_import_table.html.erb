@@ -3,6 +3,10 @@
   <div class="overflow-x-auto w-full">
     <div class="inline-block min-w-full align-middle">
       <div class="shadow ring-1 ring-black border-b-[4px]">
+        <div class="flex justify-start gap-8 mb-4">
+          <input type="text" id="search_repo_input" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Please enter full repo name"/>
+          <button type="button" class="bg-blue-500 text-white px-4 py-2 rounded-md import-repo-btn" onclick="searchImportedRepo()" >Search</button>
+        </div>
         <table class="min-w-full divide-gray-300">
           <thead class="bg-gray-50">
             <tr>
@@ -11,30 +15,8 @@
               <th scope="col" class="md:min-w-[130px] whitespace-nowrap w-[130px] bg-gray-200 px-6 py-3.5 text-left text-sm font-semibold text-gray-700">Actions</th>
             </tr>
           </thead>
-          <tbody class="divide-y divide-gray-200 bg-white !border-t-0">
-            <% @filtered_repos.each do |repo| %>
-              <tr class="even:bg-gray-50">
-               <td class="min-w-[256px] w-[256px] border-l-2 whitespace-nowrap px-6 py-4 pl-4 pr-3 text-sm font-medium text-black sm:pl-6 border-r border-gray-200 flex items-center space-x-2">
-                  <img src="<%= repo[:avatar_url] %>" alt="<%= repo[:name] %> Avatar" class="w-10 h-10 rounded-full">
-                  <a href="<%= repo[:url] %>" class="text-black-500 hover:underline" target="_blank">
-                    <%= repo[:name] %>
-                  </a>
-                </td>
-                <td class="min-w-[256px] w-[256px] px-6 py-4 text-sm text-black border-r border-gray-200">
-                  <a href="<%= repo[:url] %>" class="text-black-500 hover:underline" target="_blank">
-                    <%= repo[:url] %>
-                  </a>
-                </td>
-                <td class="min-w-[130px] w-[130px] whitespace-nowrap px-6 py-4 text-sm text-black border-r border-gray-200">
-                  <button type="button" class="bg-blue-500 text-white px-4 py-2 rounded-md import-repo-btn"
-                          data-repo-name="<%= repo[:name] %>"
-                          data-repo-url="<%= repo[:url] %>"
-                          data-repo-description="<%= repo[:description] %>">
-                    Import
-                  </button>
-                </td>
-              </tr>
-            <% end %>
+          <tbody class="divide-y divide-gray-200 bg-white !border-t-0" id="private_repos">
+            <%= render 'import_table_data', filtered_repos: @filtered_repos %>
           </tbody>
         </table>
         <div class="mt-4">
@@ -44,3 +26,11 @@
     </div>
   </div>
 </div>
+<script>
+function searchImportedRepo() {
+  $.ajax({
+    url: `/search_repositories/${$("#search_repo_input").val() || ''}`,
+    method: "get"
+  })
+}
+</script>

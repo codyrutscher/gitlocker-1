@@ -1,4 +1,4 @@
-<section class="relative py-16 bg-blueGray-200" style="min-height: 30.46rem;">
+<section class="relative py-16 bg-gradient-to-r from-blue-700 to-orange-500" style="min-height: 30.46rem;">
   <div class="container mx-auto px-4">
     <div class="max-w-3xl mx-auto mt-8">
       <h1 class="text-2xl font-bold mb-4">Followers of <%= @user.username %></h1>
@@ -11,9 +11,9 @@
           <div>
             <% if follower.id != current_user.id %>
               <% if current_user.followees.include?(follower) %>
-                <%= button_to "Unfollow", marketplace_unfollow_user_path(follower), method: :post, class: "bg-pink-500 active:bg-pink-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150" %>
+                <%= button_to "Unfollow", marketplace_unfollow_user_path(follower), method: :post, class: "bg-pink-500 hover:bg-pink-700 active:bg-pink-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150" %>
               <% else %>
-                <%= button_to "Follow", marketplace_follow_user_path(follower), method: :post, class: "bg-pink-500 active:bg-pink-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150" %>
+                <%= button_to "Follow", marketplace_follow_user_path(follower), method: :post, class: "bg-pink-500 hover:bg-pink-700 active:bg-pink-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150" %>
               <% end %>
             <% end %>
           </div>

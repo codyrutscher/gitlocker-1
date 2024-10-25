@@ -17,10 +17,13 @@
           </h3>
 
           <%# Languages %>
-          <% if product.languages.present? && product.languages.count > 0 && product.languages[0]&.name != 'not_specified' %>
+          <% if product.languages.present? && product.languages.count > 0 && product.languages[0]&.name != 'not_specified' || product.more_languages_from_createor.present? %>
             <div class="flex flex-row flex-wrap items-center justify-start gap-2">
-              <% product.languages.take(3).each do |language| %>
+              <% product.languages&.take(3).each do |language| %>
                 <p class="text-xs border border-gray-900 rounded px-2 py-1.5 text-gray-700"><%= language.name %></p>
+              <% end %>
+              <% product.more_languages_from_createor&.take(2).each do |lang| %>
+                <p class="text-xs border border-gray-900 rounded px-2 py-1.5 text-gray-700"><%= lang %></p>
               <% end %>
             </div>
           <% end %>

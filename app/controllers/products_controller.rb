@@ -54,7 +54,7 @@ class ProductsController < ApplicationController
 
     @product = current_user.products.friendly.find(params[:id])
     featured =  product_params_without_file[:featured]
-    @product.featured = false
+    product_params_without_file[:featured] = false
     @product.update(product_params_without_file)
 
 
@@ -72,12 +72,12 @@ class ProductsController < ApplicationController
       end
     end
 
-    @product.categories.destroy_all
-    if params[:product][:category_ids].present?
-      category_ids = params[:product][:category_ids][0].split(",").map(&:to_i)
-      categories = Category.find(category_ids)
-      @product.categories << categories
-    end
+    # @product.categories.destroy_all
+    # if params[:product][:category_ids].present?
+    #   category_ids = params[:product][:category_ids][0].split(",").map(&:to_i)
+    #   categories = Category.find(category_ids)
+    #   @product.categories << categories
+    # end
     params[:user_id]=current_user.id
     params[:product_id] = @product.id
     params[:file_path] = file_path
@@ -212,6 +212,37 @@ class ProductsController < ApplicationController
     redirect_to products_path, notice: 'Product was successfully deleted.'
   end
 
+  def search_repositories
+    if params[:query].present?
+      search_query = "#{params[:query]}"
+      @user_repos = octokit_client.search_repositories(search_query, {per_page: repositories_count, type: 'private'})[:items]
+    else
+      @user_repos ||= octokit_client.repositories(nil, type: 'private', per_page: repositories_count)
+    end
+    import_table
+    respond_to do |format|
+      format.js
+    end
+  end 
+  
+  def search 
+    query = params[:q]
+    if query.present?
+      
+      @products = current_user.products.where('name ILIKE ?', "%#{query}%").page(params[:page]).per(50)  
+    else
+      @products = current_user.products.page(params[:page]).per(50)
+    end
+    
+    respond_to do |format|
+      if @products.empty?
+        format.html { render plain: "No Data Found", status: :not_found }
+      else
+      format.html { render partial: 'products/product', collection: @products, as: :product }
+      end
+    end
+  end
+
   private
 
   def import_table
@@ -230,7 +261,8 @@ class ProductsController < ApplicationController
     @filtered_repos = repo_hash.reject do |repo|
       product_urls.include?(repo[:url])
     end
-    @filtered_repos = Kaminari.paginate_array(@filtered_repos).page(params[:page]).per(5)
+
+    @filtered_repos = Kaminari.paginate_array(@filtered_repos).page(params[:page]).per(5)    
   end
 
   def product_params
@@ -284,7 +316,7 @@ class ProductsController < ApplicationController
   end
 
   def set_user_repos
-    @user_repos ||= octokit_client.repositories(nil, per_page: repositories_count)
+    @user_repos ||= octokit_client.repositories(nil, type: 'private', per_page: repositories_count)
   end
 
   def download_repository_as_zip(owner, repo, ref, token)
