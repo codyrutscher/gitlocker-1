@@ -19,7 +19,7 @@
                     "<a href='#{url}' class='text-blue-500 underline' target='_blank'>#{url}</a>"
                   end
                 %>
-                <%= raw(linked_content.truncate(300, separator: ' ')) %>
+                <%= sanitize(linked_content.truncate(300, separator: ' ')) %>
               </p>
               <p class="text-sm text-gray-500">Posted on <%= blog.created_at.strftime("%B %d, %Y") %></p>
             </div>
