@@ -1,0 +1,112 @@
+<style type="text/css">
+.product-carousel {
+    position: relative;
+    max-width: 570%; /* Adjust this value as needed */
+    margin: 0 auto; /* Center the carousel */
+    overflow: hidden; /* Hide overflow */
+  }
+
+.carousel-inner {
+    display: flex;
+    gap: 28px; /* Space between items */
+    flex-wrap: nowrap; /* Ensure items do not wrap to the next line */
+    width: max-content; /* Make sure the inner container expands to fit all items */
+    overflow-x: hidden; /* Enable horizontal scrolling if needed */
+    scroll-behavior: smooth; /* Smooth scrolling */
+    
+    /* Hide scrollbar */
+    -ms-overflow-style: none; /* Hides the scrollbar in Internet Explorer and Edge */
+    scrollbar-width: none; /* Hides the scrollbar in Firefox */
+  }
+
+.carousel-inner::-webkit-scrollbar {
+    display: none; /* Hides the scrollbar in WebKit browsers */
+  }
+
+.carousel-page {
+    flex-shrink: 0;
+    flex-grow: 0;
+    width: calc(100% / 5 - 28px); /* Adjust this if you need different item widths */
+  }
+
+.carousel-control {
+    background-color: rgba(255, 255, 255, 0.2); /* Adjust based on theme */
+    border-radius: 50%;
+    transition: background-color 0.3s;
+  }
+
+.carousel-control:hover {
+    background-color: rgba(255, 255, 255, 0.5); /* Adjust based on theme */
+  }
+
+.carousel-control.prev {
+    left: 10px; /* Position the previous button */
+  }
+
+.carousel-control.next {
+    right: -4px; /* Adjust this value to move the button further to the right */
+  }
+
+
+</style>
+
+<div class="w-full">
+  <div class="slickSlider">
+    <% @creators.each_with_index do |creator, index| %>
+      <div class="" style="width: 280px; margin-right: 28px" data-page="<%= index + 1 %>">
+        <%= render partial: 'home/creator', locals: { creator: creator } %>
+      </div>
+    <% end %>
+  </div>
+
+</div>
+
+<script type="text/javascript">
+
+ document.addEventListener('turbo:load', () => {
+  const prevButton = document.querySelector('[data-carousel-prev]');
+  const nextButton = document.querySelector('[data-carousel-next]');
+  const carouselInner = document.querySelector('.carousel-inner');
+  const carouselPages = document.querySelectorAll('.carousel-page');
+  const itemsPerPage = 5; // Show 5 items per page
+  let currentIndex = 0;
+
+  const updateControlsVisibility = () => {
+    prevButton.style.display = currentIndex === 0 ? 'none' : 'block';
+    nextButton.style.display = (currentIndex + itemsPerPage) >= carouselPages.length ? 'none' : 'block';
+  };
+
+  const scrollToIndex = (index) => {
+    const targetPage = carouselPages[index];
+    if (targetPage) {
+      carouselInner.scrollTo({
+        left: targetPage.offsetLeft,
+        behavior: 'smooth',
+      });
+      currentIndex = index;
+      updateControlsVisibility();
+    }
+  };
+
+  const handleScroll = (direction) => {
+    let newIndex = currentIndex + direction; // Scroll by one product at a time
+
+    // Ensure the new index is within bounds
+    if (newIndex < 0) {
+      newIndex = 0;
+    } else if (newIndex >= carouselPages.length) {
+      newIndex = carouselPages.length - 1; // Ensure we don't go beyond the last product
+    }
+
+    scrollToIndex(newIndex);
+  };
+
+  prevButton.addEventListener('click', () => handleScroll(-1)); // Scroll left by one
+  nextButton.addEventListener('click', () => handleScroll(1)); // Scroll right by one
+
+  // Initialize control visibility on page load
+  updateControlsVisibility();
+});
+
+
+</script>
