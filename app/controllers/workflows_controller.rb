@@ -14,6 +14,16 @@ class WorkflowsController < ApplicationController
     end
     @directory_tree_json = "{}"
     @folders = current_user.projects.flat_map { |project| project.filename.to_s.sub(".zip", "") }
+    open_projects = Dir.glob("#{folder_path}/*").select { |f| File.directory?(f) }.map { |f| File.basename(f) }
+    if open_projects.size == 0
+      @open_project = nil  
+    elsif open_projects.size == 1
+      @open_projects = check_for_unnecessary_folders(folder_path, @folders, open_projects)  
+      @open_project = @open_projects.first
+    else
+      @open_projects = check_for_unnecessary_folders(folder_path, @folders, open_projects)
+      @open_project = @open_projects.first
+    end
     if folder_name_params && folder_name_params[:folder_name]
       path = File.join(folder_path,folder_name_params[:folder_name])
       if !(Dir.exist?(path))
@@ -455,6 +465,20 @@ class WorkflowsController < ApplicationController
     end
   end
 
+  def remove_existing_project
+    if folder_name_params && folder_name_params[:folder_name]
+      begin
+        path = Rails.root.join('workflows', current_user.friendly_id, folder_name_params[:folder_name].to_s)
+        FileUtils.remove_dir(path, true) if File.exist?(path) && File.directory?(path)
+        redirect_to workflows_path, notice: 'Changes removed successfully!'
+      rescue
+        redirect_to request.referrer, alert: 'Project not found. Please try again!'  
+      end
+    else
+      redirect_to request.referrer, alert: 'Project not found. Please try again!'
+    end
+  end
+
   private
 
   def folder_name_params
@@ -561,6 +585,23 @@ class WorkflowsController < ApplicationController
     if projects.include?(project_name)
       project_to_delete = current_user.projects.select { |project| project.filename.to_s == project_name }
       project_to_delete.each(&:purge)
+    end
+  end
+
+  def check_for_unnecessary_folders(workflow_path, folders, open_projects)
+    begin
+      projects = []
+      open_projects&.each do |open_project|
+        if folders.include?(open_project)
+          projects.push(open_project)
+        else
+          delete_folder_path = File.join(workflow_path, open_project)
+          FileUtils.remove_dir(delete_folder_path, true) if File.exist?(delete_folder_path) && File.directory?(delete_folder_path)
+        end
+      end
+      projects
+    rescue
+      []
     end
   end
 end
