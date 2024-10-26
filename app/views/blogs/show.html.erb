@@ -1,5 +1,5 @@
 <%= content_for :meta_title, @blog.title %>
-<%= content_for :meta_description, ActionView::Base.full_sanitizer.sanitize(@blog.content)&.humanize&.first(1000) %>
+<%= content_for :meta_description, ActionView::Base.full_sanitizer.sanitize(@blog.content)&.humanize&.first(160) %>
 <div class="bg-white">
 <div class="container mx-auto px-4 py-6">
   <h1 class="text-3xl text-black font-bold mb-4"><%= @blog.title %></h1>
