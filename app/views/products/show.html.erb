@@ -165,7 +165,7 @@
         <% end %>
 
         <% if @product.description.present? %>
-          <%= content_for :meta_description, ActionView::Base.full_sanitizer.sanitize(@product.description)&.humanize&.first(1000) %>
+          <%= content_for :meta_description, ActionView::Base.full_sanitizer.sanitize(@product.description)&.humanize&.first(160) %>
           <div class="flex flex-col gap-4">
             <h2 class="text-2xl text-bold underline text-gray-900 font-mono">Description:</h2>
             <p class="text-sm text-gray-500 font-mono"><%= sanitize @product.description %></p>
