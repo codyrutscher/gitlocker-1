@@ -95,7 +95,7 @@
               <ul>
                 <% @product.covers.each do |cover| %>
                   <li>
-                    <%= image_tag cover.variant(resize_to_limit: [100, 100]) %>
+                    <%= image_tag cover.variant(resize_to_limit: [100, 100]), alt: "#{@product.name} Cover" %>
                   </li>
                 <% end %>
               </ul>

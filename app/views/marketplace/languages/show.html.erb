@@ -11,7 +11,7 @@
     <section aria-labelledby="category-heading" class="py-16 sm:py-16 xl:mx-auto xl:px-8 px-4">
       <h1 class="text-3xl font-semibold mb-4 text-center underline font-mono"><span class="italic text-orange-500"><%= @language.products.count %></span> <%= @language.name %> Language Products</h1>
       <div class="bg-gradient-to-r from-blue-700 to-orange-500">
-      <%= image_tag("languages/#{@language.image_name}", class: "h-32 w-48 object-cover object-center mx-auto") %>
+      <%= image_tag("languages/#{@language.image_name}", class: "h-32 w-48 object-cover object-center mx-auto", alt: "#{@language.image_name} Images") %>
     </div>
       <div class="mt-4 flow-root">
         <div class="-my-2">
