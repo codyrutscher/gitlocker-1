@@ -4,9 +4,9 @@
 >
   <div class="flex items-center gap-x-4 border-b border-gray-900/5 bg-gray-50 p-6">
     <% if product.covers.exists? %>
-      <%= image_tag product.covers.first, class: "h-12 w-12 flex-none rounded-lg bg-white object-cover ring-1 ring-gray-900/10" %>
+      <%= image_tag product.covers.first, class: "h-12 w-12 flex-none rounded-lg bg-white object-cover ring-1 ring-gray-900/10", alt: "#{product.name} Images" %>
     <% else %>
-      <%= image_tag "default-cover.png", class: "h-12 w-12 flex-none rounded-lg bg-white object-cover ring-1 ring-gray-900/10" %>
+      <%= image_tag "default-cover.png", class: "h-12 w-12 flex-none rounded-lg bg-white object-cover ring-1 ring-gray-900/10", alt: "Default Cover" %>
     <% end %>
 
     <div class="text-sm font-medium leading-6 text-gray-900"><%= product.name %></div>

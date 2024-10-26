@@ -1,9 +1,9 @@
   <%= link_to marketplace_language_path(language), class: "relative flex h-80 w-56 flex-col overflow-hidden rounded-lg p-6 hover:opacity-75 xl:w-auto" do %>
     <span aria-hidden="true" class="absolute inset-0">
       <% if language.image_name.present? %>
-        <%= image_tag asset_path("languages/#{language.image_name}"), class: "h-full w-full object-cover object-center" %>
+        <%= image_tag asset_path("languages/#{language.image_name}"), class: "h-full w-full object-cover object-center", alt: "#{language.image_name} Image" %>
       <% else %>
-        <%= image_tag "default-cover.png", class: "h-full w-full object-cover object-center" %>
+        <%= image_tag "default-cover.png", class: "h-full w-full object-cover object-center", alt: "Default Cover" %>
       <% end %>
     </span>
     <span aria-hidden="true" class="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-gray-800 opacity-50"></span>

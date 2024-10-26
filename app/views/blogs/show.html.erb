@@ -15,7 +15,7 @@
 
   <% if @blog.image.attached? %>
     <div class="mb-6">
-      <%= image_tag url_for(@blog.image), class: "w-full h-auto rounded-lg shadow-md" %>
+      <%= image_tag url_for(@blog.image), class: "w-full h-auto rounded-lg shadow-md", alt: "#{@blog.title} Images" %>
     </div>
   <% end %>
 

@@ -64,10 +64,10 @@
             <%# <%= render CarouselComponent.new(@product.covers) %> %>
             -->
             <figure class="block md:h-[384px] sm:h-[300px]  h-[250px] w-full">
-              <%= image_tag @product.covers.first.url, id:"main-image", class:"block object-contain w-full h-full" %>
+              <%= image_tag @product.covers.first.url, id:"main-image", class:"block object-contain w-full h-full", alt: "#{@product.name} Image" %>
             </figure>
           <% else %>
-            <%= image_tag "default-cover.png", class: "object-cover object-center relative w-full" %>
+            <%= image_tag "default-cover.png", class: "object-cover object-center relative w-full", alt: "Default Cover" %>
           <% end %>
         </div>
         <div class=" rounded-lg border-6">

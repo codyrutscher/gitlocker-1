@@ -1,9 +1,9 @@
 <li class="flex px-4 py-6 sm:px-6">
   <div class="flex-shrink-0">
     <% if cart_item.product.covers.exists? %>
-      <%= image_tag cart_item.product.covers.last, class: "w-20 rounded-md" %>
+      <%= image_tag cart_item.product.covers.last, class: "w-20 rounded-md", alt: "#{cart_item.product.name} Images" %>
     <% else %>
-      <%= image_tag "default-cover.png", class: "w-20 rounded-md" %>
+      <%= image_tag "default-cover.png", class: "w-20 rounded-md, alt: "Default Cover" %>
     <% end %>
   </div>
 
