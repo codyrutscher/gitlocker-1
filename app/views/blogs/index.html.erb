@@ -1,5 +1,10 @@
-<%= content_for :title, "Blogs" %>
-
+<% if params[:page].present? %>
+  <%= content_for :meta_title, "GitLocker Blogs Page #{params[:page]}" %>
+  <%= content_for :meta_description, "Discover the latest trends in software engineering with GitLocker's insightful blog posts. Stay ahead in the coding world with expert tips and tutorials Page #{params[:page]}" %>
+<% else %>
+  <%= content_for :meta_title, "GitLocker Blogs" %>
+  <%= content_for :meta_description, "Discover the latest trends in software engineering with GitLocker's insightful blog posts. Stay ahead in the coding world with expert tips and tutorials" %>
+<% end %>
 <div class="w-full mx-auto bg-gradient-to-r from-blue-700 to-orange-500">
   <div class="container mx-auto px-4 py-6">
     <h1 class="text-2xl font-bold font-mono mb-6">All Blogs</h1>
