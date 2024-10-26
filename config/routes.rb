@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   delete '/workflows/:id/delete_project', to: 'workflows#delete_project', as: "delete_project"
   get '/workflows/:id/save_project', to: 'workflows#save_project', as: "save_project"
   get '/workflows/:id/project_from_s3', to: 'workflows#project_from_s3', as: "project_from_s3"
+  delete '/workflows/:id/remove_existing_project', to: 'workflows#remove_existing_project', as: "remove_existing_project"
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   if Rails.env.production?
