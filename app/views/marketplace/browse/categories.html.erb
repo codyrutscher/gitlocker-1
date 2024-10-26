@@ -1,3 +1,11 @@
+<% if params[:page].present? %>
+  <%= content_for :meta_title, "GitLocker Categories Page #{params[:page]}" %>
+  <%= content_for :meta_description, "Browse GitLocker's marketplace for free and premium resources. Find everything you need to elevate your coding projects Pages-#{params[:page]}">
+<% else %>
+  <%= content_for :meta_title, "GitLocker Categories" %>
+  <%= content_for :meta_description, "Browse GitLocker's marketplace for free and premium resources. Find everything you need to elevate your coding projects">
+<% end %>
+
 <%= content_for :meta_title, "GitLocker Categories" %>
 <%= content_for :meta_description, "Browse GitLocker's marketplace for free and premium resources. Find everything you need to elevate your coding projects">
 
