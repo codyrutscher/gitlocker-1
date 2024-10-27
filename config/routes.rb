@@ -57,6 +57,7 @@ Rails.application.routes.draw do
   get "explore", to: "home#explore"
   get "terms", to: "home#terms"
   get "refund_policy", to: "home#refund_policy"
+  get "deployment_options", to: "home#deployment_options"
   get "contact", to: "home#contact"
   get "robots.txt", to: "home#robots"
 
