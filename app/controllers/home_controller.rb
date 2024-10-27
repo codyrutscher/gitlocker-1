@@ -11,6 +11,9 @@ class HomeController < ApplicationController
   def contact
   end
 
+  def deployment_options
+  end
+
   def explore
     current_user.update(state: User.states[:buyer])
     redirect_to marketplace_root_path
