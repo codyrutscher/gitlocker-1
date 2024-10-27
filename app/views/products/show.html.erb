@@ -107,7 +107,7 @@
               <h2 class="font-semibold text-gray-700">Languages</h2>
               <div class="flex flex-row flex-wrap items-center justify-start gap-2">
                 <% @languages.take(3).each do |language| %>
-                  <%= link_to language.name, marketplace_language_path(language), class: "hover:scale-110 text-white font-medium rounded-lg text-sm px-5 py-2.5 border-black border-2 text-center me-2 mb-2", style: get_color_code(language.name).present? ? "background-color: #{get_color_code(language.name)}; color: white;" : "background-color: text-white bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600; color: white;"  %>
+                  <%= link_to language.name, marketplace_language_path(language), class: "hover:scale-110 text-white font-medium rounded-lg text-sm px-5 py-2.5 border-black border-2 text-center me-2 mb-2", style: get_color_code(language.name).present? ? "background-color: #{get_color_code(language.name)}; color: white;" : ''  %>
                 <% end %>
 
                 <% @product.more_languages_from_createor.take(2).each do |language| %>
