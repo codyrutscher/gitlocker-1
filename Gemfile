@@ -85,5 +85,4 @@ end
 
 group :production do
   gem 'scout_apm'
-  gem 'heroku-deflater'
 end
