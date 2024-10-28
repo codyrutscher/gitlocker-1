@@ -12,7 +12,7 @@
         <% if user.languages.present? && user.languages.size > 0 && user.languages[0]&.name != 'not_specified' %>
             <div class="flex flex-row flex-wrap mt-2 items-center justify-start gap-2">
               <% user.languages.take(3).each do |language| %>
-                <p class="text-xs border border-gray-900 rounded px-2 py-1.5 text-gray-700"><%= language.name %></p>
+                <p class="text-xs border border-gray-900 rounded px-2 py-1.5 text-gray-700" style="<%= get_color_code(language.name).present? ? "background-color: #{get_color_code(language.name)}; color: white;" : '' %>"><%= language.name %></p>
               <% end %>
             </div>
           <% end %>
