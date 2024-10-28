@@ -131,9 +131,8 @@
           <% if @languages.present? %>
             <h2 class="text-xl font-semibold mb-2 mr-2 font-mono">Languages I Know: </h2>
             <div class="flex flex-wrap mb-4">
-              <% @languages.each do |language| %>
-                <%= link_to language.name, marketplace_language_path(language), class: "bg-blue-500 text-white px-2 py-1 rounded mr-2 mb-2 hover:text-black" %>
-              <% end %>
+              <% @languages.take(5).each do |language| %>
+                  <%= link_to language.name, marketplace_language_path(language), class: "hover:scale-110 text-white font-medium rounded-lg text-sm px-5 py-2.5 border-black border-2 text-center me-2 mb-2", style: get_color_code(language.name).present? ? "background-color: #{get_color_code(language.name)}; color: white;" : ''  %>
             </div>
           <% end %>
         </div>
