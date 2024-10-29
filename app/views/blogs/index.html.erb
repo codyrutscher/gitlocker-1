@@ -14,7 +14,7 @@
         <div class="bg-white hover:shadow-[0px_20px_20px_15px_#1a202c] border-4 border-black rounded-lg overflow-hidden">
           <%= link_to blog_path(blog), class: "block" do %>
             <% if blog.image.attached? %>
-              <%= image_tag url_for(blog.image), class: "w-full h-48 object-cover", alt: "#{blog.title} Images" %>
+              <%= image_tag "https://gitlocker.com/cdn-cgi/image/compression=fast,format=auto/#{url_for(blog.image)}", class: "w-full h-48 object-cover", alt: "#{blog.title} Images" %>
             <% end %>
             <div class="p-4">
               <h2 class="text-xl font-semibold mb-2"><%= blog.title %></h2>
