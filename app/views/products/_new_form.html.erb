@@ -295,7 +295,7 @@
         if (selectedLanguages && selectedLanguages.length > 0) {
             formData.set('product[language_ids][]', selectedLanguages);
         }
-        $('#upload-status').html('<img class="w-10 h-10" src="<%= asset_path('loading.gif') %>" alt="Loading"> Uploading');
+        $('#upload-status').html('<img class="w-10 h-10" src="https://gitlocker.com/cdn-cgi/image/compression=fast,format=auto/<%= asset_path('loading.gif') %>" alt="Loading"> Uploading');
 
         $.ajax({
             type: 'POST',

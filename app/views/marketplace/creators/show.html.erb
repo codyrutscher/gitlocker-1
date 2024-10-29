@@ -22,9 +22,9 @@
           <div class="w-full lg:w-3/12 px-4 lg:order-2 flex justify-center">
             <div class="relative">
               <% if @user.profile_picture.present? %>
-                <img alt="<%= @user.username %> profile picture" src="<%= @user.profile_picture.url %>" class="shadow-xl rounded-full align-middle border-2 border-black mt-8 max-h-40 max-w-40">
+                <img alt="<%= @user.username %> profile picture" src="https://gitlocker.com/cdn-cgi/image/compression=fast,format=auto/<%= @user.profile_picture.url %>" class="shadow-xl rounded-full align-middle border-2 border-black mt-8 max-h-40 max-w-40">
               <% else %>
-                <img class="shadow-xl rounded-full align-middle border-black border-2 mt-8 max-h-40 max-w-40" src="https://gitlocker.s3.us-east-2.amazonaws.com/man-standing-holding-laptop-while-showing-programming-language-software.png" alt="no profile picture">
+                <img class="shadow-xl rounded-full align-middle border-black border-2 mt-8 max-h-40 max-w-40" src="https://gitlocker.com/cdn-cgi/image/compression=fast,format=auto/https://gitlocker.s3.us-east-2.amazonaws.com/man-standing-holding-laptop-while-showing-programming-language-software.png" alt="no profile picture">
               <% end %>
             </div>
           </div>

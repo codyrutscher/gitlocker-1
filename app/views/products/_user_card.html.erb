@@ -3,7 +3,7 @@
     <% if user.profile_picture.attached? %>
       <%= image_tag user.profile_picture, class: "mx-auto h-32 w-32 flex-shrink-0 rounded-full", alt: "#{user.name} Pictures" %>
     <% else %>
-      <img class="mx-auto h-32 w-32 flex-shrink-0 rounded-full" src="https://gitlocker.s3.us-east-2.amazonaws.com/man-standing-holding-laptop-while-showing-programming-language-software.png" alt="no profile picture">
+      <img class="mx-auto h-32 w-32 flex-shrink-0 rounded-full" src="https://gitlocker.com/cdn-cgi/image/compression=fast,format=auto/https://gitlocker.s3.us-east-2.amazonaws.com/man-standing-holding-laptop-while-showing-programming-language-software.png" alt="no profile picture">
     <% end %>
     <h1 class="mt-6 text-sm font-medium text-gray-900 font-mono"><%= user.name %></h3>
     <dl class="mt-1 flex flex-grow flex-col justify-between">

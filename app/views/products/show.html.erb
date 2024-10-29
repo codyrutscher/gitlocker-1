@@ -81,7 +81,7 @@
               <%# Cover Image %>
                 <% @product.covers.each do |thumbnail| %>
                   <div class="bg-gray-100 overflow-hidden rounded block border border-black hover:scale-105 hover:shadow-2xl">
-                        <img src="<%= thumbnail.url %>" alt="<%= @product.name %> Images"  class="block object-cover object-center h-full w-full cursor-pointer" onclick="changeImage(this.src)">
+                        <img src="https://gitlocker.com/cdn-cgi/image/compression=fast,format=auto/<%= thumbnail.url %>" alt="<%= @product.name %> Images"  class="block object-cover object-center h-full w-full cursor-pointer" onclick="changeImage(this.src)">
                   </div>
                 <% end %>
             </div>
@@ -376,7 +376,7 @@
     <% end %>
   </div>
 </div>
-<script src="https://www.youtube.com/iframe_api"></script>
+<script src="https://gitlocker.com/cdn-cgi/image/compression=fast,format=auto/https://www.youtube.com/iframe_api"></script>
 <script type="text/javascript">
   $(document).ready(function() {
     $('.preview-button').click(function() {
@@ -386,7 +386,7 @@
 
       if (videoFileAttached) {
         var videoFileUrl = '<%= url_for(@product.video_file)  if @product.video_file.attached? %>';
-        var videoElement = $('<video controls style="height: auto;"><source src="' + videoFileUrl + '" type="video/mp4"></video>');
+        var videoElement = $('<video controls style="height: auto;"><source src="https://gitlocker.com/cdn-cgi/image/compression=fast,format=auto/' + videoFileUrl + '" type="video/mp4"></video>');
 
         $('#video-container').html(videoElement);
       } else {

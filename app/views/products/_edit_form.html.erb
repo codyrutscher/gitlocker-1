@@ -131,7 +131,7 @@
             <div class="mt-2">
               <% if @product.video_file.attached? %>
                 <video width="400" controls>
-                  <source src="<%= url_for(@product.video_file) %>" type="video/mp4">
+                  <source src="https://gitlocker.com/cdn-cgi/image/compression=fast,format=auto/<%= url_for(@product.video_file) %>" type="video/mp4">
                   Your browser does not support HTML5 video.
                 </video>
               <% end %>
@@ -329,7 +329,7 @@
           xhr: function() {
               var xhr = new window.XMLHttpRequest();
               xhr.upload.addEventListener('progress', function(evt) {
-                $('#upload-status').html('<img class="w-10 h-10" src="<%= asset_path('loading.gif') %>" alt="Loading"> Uploading');
+                $('#upload-status').html('<img class="w-10 h-10" src="https://gitlocker.com/cdn-cgi/image/compression=fast,format=auto/<%= asset_path('loading.gif') %>" alt="Loading"> Uploading');
               }, false);
               return xhr;
           },
@@ -338,7 +338,7 @@
             if (data.url) {
                 window.location.href = data.url;
               } else {  
-                $('#upload-status').html('<img class="w-10 h-10" src="<%= asset_path('tick.png') %>" alt="Tick"> Upload complete');
+                $('#upload-status').html('<img class="w-10 h-10" src="https://gitlocker.com/cdn-cgi/image/compression=fast,format=auto/<%= asset_path('tick.png') %>" alt="Tick"> Upload complete');
                 $(".add_product_form").hide();
                 $(".save_buttons").remove();
                 $(".mssg_saved_successfully").show()   
