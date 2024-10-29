@@ -81,7 +81,7 @@
               <%# Cover Image %>
                 <% @product.covers.each do |thumbnail| %>
                   <div class="bg-gray-100 overflow-hidden rounded block border border-black hover:scale-105 hover:shadow-2xl">
-                        <img src="<%= thumbnail.url %>" alt="<%= @product.name %> Images"  class="block object-cover object-center h-full w-full cursor-pointer" onclick="changeImage(this.src)">
+                        <img src="https://gitlocker.com/cdn-cgi/image/compression=fast,format=auto/<%= thumbnail.url %>" alt="<%= @product.name %> Images"  class="block object-cover object-center h-full w-full cursor-pointer" onclick="changeImage(this.src)">
                   </div>
                 <% end %>
             </div>
