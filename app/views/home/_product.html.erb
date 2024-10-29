@@ -5,9 +5,9 @@
         <%# Cover Image %>
         <div class="bg-gray-100 aspect-w-1 aspect-h-1 overflow-hidden rounded-t">
           <% if product.covers.first.present? %>
-            <img src="<%= product.thumb_image_url %>" alt="<%= product.name %> Images" class="h-full w-full object-cover object-center">
+            <img src="https://gitlocker.com/cdn-cgi/image/compression=fast,format=auto/<%= product.thumb_image_url %>" alt="<%= product.name %> Images" class="h-full w-full object-cover object-center">
           <% else %>
-            <img src="<%= asset_path('default-cover.png') %>" alt="No Image Available" class="h-full w-full object-cover object-center">
+            <img src="https://gitlocker.com/cdn-cgi/image/compression=fast,format=auto/<%= asset_path('default-cover.png') %>" alt="No Image Available" class="h-full w-full object-cover object-center">
           <% end %>
         </div>
 
