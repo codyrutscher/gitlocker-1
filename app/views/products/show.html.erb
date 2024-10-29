@@ -1,4 +1,9 @@
-<% content_for :meta_title, @product&.name&.titleize %>
+<% if @product.name.length < 30 %>
+  <% content_for :meta_title, "#{@product&.name&.titleize&.first(65)} | GitLocker.com Product " %>
+<% else %>
+  <% content_for :meta_title, @product&.name&.titleize&.first(65) %>
+<% end %>
+
 <div class="bg-gradient-to-r from-blue-700 to-orange-500">
   <%=
     render BreadcrumbComponent.new(current_user,[
@@ -64,10 +69,10 @@
             <%# <%= render CarouselComponent.new(@product.covers) %> %>
             -->
             <figure class="block md:h-[384px] sm:h-[300px]  h-[250px] w-full">
-              <%= image_tag @product.covers.first.url, id:"main-image", class:"block object-contain w-full h-full" %>
+              <%= image_tag @product.covers.first.url, id:"main-image", class:"block object-contain w-full h-full", alt: "#{@product.name} Image" %>
             </figure>
           <% else %>
-            <%= image_tag "default-cover.png", class: "object-cover object-center relative w-full" %>
+            <%= image_tag "default-cover.png", class: "object-cover object-center relative w-full", alt: "Default Cover" %>
           <% end %>
         </div>
         <div class=" rounded-lg border-6">
@@ -76,7 +81,7 @@
               <%# Cover Image %>
                 <% @product.covers.each do |thumbnail| %>
                   <div class="bg-gray-100 overflow-hidden rounded block border border-black hover:scale-105 hover:shadow-2xl">
-                        <img src="<%= thumbnail.url %>" alt="TODO" class="block object-cover object-center h-full w-full cursor-pointer" onclick="changeImage(this.src)">
+                        <img src="https://gitlocker.com/cdn-cgi/image/compression=fast,format=auto/<%= thumbnail.url %>" alt="<%= @product.name %> Images"  class="block object-cover object-center h-full w-full cursor-pointer" onclick="changeImage(this.src)">
                   </div>
                 <% end %>
             </div>
@@ -106,8 +111,8 @@
             <div class="flex flex-col gap-1">
               <h2 class="font-semibold text-gray-700">Languages</h2>
               <div class="flex flex-row flex-wrap items-center justify-start gap-2">
-                <% @languages.take(3).each do |language| %>
-                  <%= link_to language.name, marketplace_language_path(language), class: "hover:scale-110 text-white bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 border-black border-2 text-center me-2 mb-2" %>
+                <% @languages.take(5).each do |language| %>
+                  <%= link_to language.name, marketplace_language_path(language), class: "hover:scale-110 text-white font-medium rounded-lg text-sm px-5 py-2.5 border-black border-2 text-center me-2 mb-2", style: get_color_code(language.name).present? ? "background-color: #{get_color_code(language.name)}; color: white;" : ''  %>
                 <% end %>
 
                 <% @product.more_languages_from_createor.take(2).each do |language| %>
@@ -122,7 +127,7 @@
             <div class="flex flex-col gap-1">
               <h2 class="font-semibold text-gray-700">Categories</h2>
               <div class="flex flex-row flex-wrap items-center justify-start gap-2">
-                <% @categories.take(3).each do |category| %>
+                <% @categories.take(5).each do |category| %>
                   <%= link_to category.name, marketplace_category_path(category), class: "hover:scale-110 text-white border-black border-2 bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" %>
                 <% end %>
 
@@ -165,9 +170,9 @@
         <% end %>
 
         <% if @product.description.present? %>
-          <%= content_for :meta_description, ActionView::Base.full_sanitizer.sanitize(@product.description)&.humanize&.first(1000) %>
+          <%= content_for :meta_description, ActionView::Base.full_sanitizer.sanitize(@product.description)&.humanize&.first(160) %>
           <div class="flex flex-col gap-4">
-            <h1 class="text-2xl text-bold underline text-gray-900 font-mono">Description:</h1>
+            <h2 class="text-2xl text-bold underline text-gray-900 font-mono">Description:</h2>
             <p class="text-sm text-gray-500 font-mono"><%= sanitize @product.description %></p>
           </div>
           <div class="w-full border-t-4 border-black"></div>
@@ -175,7 +180,7 @@
 
         <% if @product.features.present? %>
           <div class="flex flex-col gap-4">
-            <h1 class="text-2xl text-bold underline text-gray-900 font-mono">Features:</h1>
+            <h2 class="text-2xl text-bold underline text-gray-900 font-mono">Features:</h2>
             <p class="text-sm text-gray-500"><%= sanitize @product.features %></p>
           </div>
           <div class="w-full border-t-4 border-black"></div>
@@ -183,7 +188,7 @@
 
         <% if @product.requirements.present? %>
           <div class="flex flex-col gap-4">
-            <h1 class="text-2xl text-bold underline text-gray-900 font-mono">Requirements:</h1>
+            <h2 class="text-2xl text-bold underline text-gray-900 font-mono">Requirements:</h2>
             <p class="text-sm text-gray-500"><%= sanitize @product.requirements %></p>
           </div>
           <div class="w-full border-t-4 border-black"></div>
@@ -191,7 +196,7 @@
 
         <% if @product.instructions.present? %>
           <div class="flex flex-col gap-4">
-            <h1 class="text-2xl text-bold underline text-gray-900 font-mono">Instructions:</h1>
+            <h2 class="text-2xl text-bold underline text-gray-900 font-mono">Instructions:</h2>
             <p class="text-sm text-gray-500"><%= sanitize @product.instructions %></p>
           </div>
           <div class="w-full border-t-4 border-black"></div>
@@ -238,7 +243,7 @@
 
       <div class="mx-auto mt-16 w-full max-w-2xl lg:col-span-4 lg:mt-0 lg:max-w-none">
         <% if @directory_tree_json != "[]"  %>
-          <h1 class="text-2xl text-bold text-gray-900 font-mono mb-4 underline">Files In This Product:</h1>
+          <h2 class="text-2xl text-bold text-gray-900 font-mono mb-4 underline">Files In This Product:</h2>
           <div id="directory-tree-data" class="js-directory-tree mb-4 bg-gray-400"></div>
         <% end %>
 
@@ -360,7 +365,7 @@
     <% end %>
 
     <% if @more_from_this_creators.present? %>
-      <div class="mt-12 divide-y divide-black space-y-6">
+      <div class="mt-12 divide-y-4 divide-black space-y-6">
         <h2 class="text-3xl font-bold text-gray-900 mb-6 ">More From This Creator</h2>
         <div class="mt-6 flow-root space-y-6 pt-8">
           <div class="">

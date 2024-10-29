@@ -1,3 +1,11 @@
+<% if params[:page].present? %>
+  <%= content_for :meta_title, "GitLocker Categories Page #{params[:page]}" %>
+  <%= content_for :meta_description, "Browse GitLocker's marketplace for free and premium resources. Find everything you need to elevate your coding projects Pages-#{params[:page]}" %>
+<% else %>
+  <%= content_for :meta_title, "GitLocker Categories" %>
+  <%= content_for :meta_description, "Browse GitLocker's marketplace for free and premium resources. Find everything you need to elevate your coding projects" %>
+<% end %>
+
 <%=
   render BreadcrumbComponent.new(current_user,[
     { text: "Categories", url: marketplace_browse_categories_path }
@@ -7,7 +15,7 @@
 <section aria-labelledby="category-heading" class="pt-16 pb-24 sm:pt-16 bg-gradient-to-r from-blue-700 to-orange-500">
   <div class="xl:mx-auto xl:px-8">
     <div class="px-8 py-4 ">
-      <h2 class="text-3xl font-semibold mb-4 text-center font-mono underline">Categories</h2>
+      <h1 class="text-3xl font-semibold mb-4 text-center font-mono underline">Categories</h1>
     </div>
     <div class="py-4 xl:px-0 lg:px-8 sm:px-6 px-4 mb-4 ">
       <!-- Filter Form -->

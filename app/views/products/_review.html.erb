@@ -3,11 +3,11 @@
     <div class="flex-none py-10">
     <% if review.user.profile_picture.attached? %>
       <%= link_to marketplace_creator_path(review.user) do %>
-        <%= image_tag review.user.profile_picture, class: "h-10 w-10 rounded-full bg-gray-100" %>
+        <%= image_tag review.user.profile_picture, class: "h-10 w-10 rounded-full bg-gray-100", alt: "#{review.user.name} Images" %>
       <% end %>
     <% else %>
       <%= link_to marketplace_creator_path(review.user) do %>
-        <%= image_tag "profile_placeholder.png", class: "h-10 w-10 rounded-full bg-gray-100" %>
+        <%= image_tag "profile_placeholder.png", class: "h-10 w-10 rounded-full bg-gray-100", alt: "Profile Placeholder" %>
       <% end %>
     <% end %>
     </div>

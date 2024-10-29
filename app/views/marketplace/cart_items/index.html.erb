@@ -1,6 +1,13 @@
+<% if params[:product_id].present? %>
+  <%= content_for :meta_title, "GitLocker Cart Item | #{params[:product_id]}" %>
+  <%= content_for :meta_description, "Review and manage your GitLocker cart items. Ensure you have everything you need before completing your purchase for seamless access to premium code repositories and tools. | #{params[:product_id]}" %>
+<% else %>
+  <%= content_for :meta_title, "GitLocker Cart Item" %>
+  <%= content_for :meta_description, "Review and manage your GitLocker cart items. Ensure you have everything you need before completing your purchase for seamless access to premium code repositories and tools." %>
+<% end %>
 <main class="mx-auto w-full bg-gradient-to-r from-blue-700 to-orange-500">
   <div class="mx-auto px-4 pb-24 pt-16 sm:px-6 lg:px-8">
-    <h1 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl font-mono">Cart</h1>
+    <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl font-mono">Cart</h2>
 
     <form class="mt-12 lg:grid lg:grid-cols-12 lg:items-start lg:gap-x-12 xl:gap-x-16">
       <section aria-labelledby="cart-heading" class="lg:col-span-7">

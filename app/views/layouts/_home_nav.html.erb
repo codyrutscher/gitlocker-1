@@ -18,10 +18,10 @@
                 <%= link_to marketplace_root_path do %>
                   <div class="flex items-center">
                     <div>
-                      <%= image_tag "logo.png", class: "h-12 w-auto", alt: "" %>
+                      <%= image_tag "logo.png", class: "h-12 w-auto", alt: "GitLocker Logo" %>
                     </div>
                     <div class="hidden lg:flex lg:items-center">
-                      <%= image_tag "logo-text.png", class: "h-6 w-auto ml-2", alt: "" %>
+                      <%= image_tag "logo-text.png", class: "h-6 w-auto ml-2", alt: "GitLocker Logo" %>
                     </div>
                   </div>
                 <% end %>
@@ -116,7 +116,7 @@
                   <% if current_user.profile_picture.attached? %>
                     <%= image_tag current_user.profile_picture, class: "h-8 w-8 rounded-full bg-gray-800" %>
                   <% else %>
-                    <%= image_tag "profile_placeholder.png", class: "h-8 w-8 rounded-full bg-gray-800" %>
+                    <%= image_tag "profile_placeholder.png", class: "h-8 w-8 rounded-full bg-gray-800", alt: "Profile Placeholder" %>
                   <% end %>
                 </button>
                 <div id="profile-dropdown" class="hidden z-10 min-w-32 absolute right-0 top-10 bg-white shadow-lg rounded-md ring-1 ring-black ring-opacity-5">
@@ -127,6 +127,7 @@
                     <%= link_to "Add Product", new_product_path, class: "text-sm inline-block text-black px-4 py-2 hover:bg-blue-500 hover:text-white font-mono" %>
                     <%= link_to "Write Code", workflows_path(current_user), class: "text-sm inline-block text-black px-4 py-2 hover:bg-blue-500 hover:text-white font-mono" %>
                     <%= link_to "Coding Resources", resources_path, class: "text-sm inline-block text-black px-4 py-2 hover:bg-blue-500 hover:text-white font-mono", target: :blank %>
+                    <%= link_to "Deployment Options", deployment_options_path, class: "text-sm inline-block text-black px-4 py-2 hover:bg-blue-500 hover:text-white font-mono", target: :blank %>
                     <%= link_to "Purchased Products", marketplace_purchases_path, class: "text-sm inline-block text-black px-4 py-2 hover:bg-blue-500 hover:text-white font-mono" %>
                     <%= link_to "Get Paid", seller_dashboard_path, class: "text-sm inline-block text-black px-4 py-2 hover:bg-blue-500 hover:text-white font-mono" %>
                     <%= link_to "Log out", destroy_user_session_path, data: { "turbo-method": :delete }, class: "text-sm inline-block text-black px-4 py-2 hover:bg-blue-500 hover:text-white font-mono" %>

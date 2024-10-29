@@ -95,7 +95,7 @@
                     <% if current_user.profile_picture.attached? %>
                       <%= image_tag current_user.profile_picture, class: "h-8 w-8 rounded-full bg-gray-800" %>
                     <% else %>
-                      <%= image_tag "profile_placeholder.png", class: "h-8 w-8 rounded-full bg-gray-800" %>
+                      <%= image_tag "profile_placeholder.png", class: "h-8 w-8 rounded-full bg-gray-800", alt: "Profile Picture Placeholder" %>
                     <% end %>
                   <% end %>
                 <% end %>

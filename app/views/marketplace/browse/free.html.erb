@@ -1,9 +1,12 @@
+<%= content_for :meta_title, "GitLocker Free Categories" %>
+<%= content_for :meta_description, "Access a vast collection of free code repositories on GitLocker. Find quality projects to contribute to or use as the foundation for your own development" %>
+
 <div class="bg-gradient-to-r from-blue-700 to-orange-500">
   <%= render BreadcrumbComponent.new(current_user, [{ text: "Free", url: marketplace_browse_free_path }]) %>
   <main>
     <section aria-labelledby="category-heading" class="py-8 sm:py-8 xl:py-8 xl:mx-auto xl:px-8">
       <div class="px-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8 xl:px-0 mb-4">
-        <h2 id="category-heading" class="text-xl sm:text-2xl font-bold font-mono tracking-tight text-gray-900 underline">Browse By Free Repositories</h2>
+        <h1 id="category-heading" class="text-xl sm:text-2xl font-bold font-mono tracking-tight text-gray-900 underline">Browse By Free Repositories</h1>
       </div>
       
       

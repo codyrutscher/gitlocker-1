@@ -5,7 +5,7 @@
         <%# Cover Image %>
         <div class="bg-gray-100 aspect-w-1 aspect-h-1 overflow-hidden rounded-t">
           <% if product.covers.first.present? %>
-            <img src="<%= product.thumb_image_url %>" alt="TODO" class="h-full w-full object-cover object-center">
+            <img src="https://gitlocker.com/cdn-cgi/image/compression=fast,format=auto/<%= product.thumb_image_url %>" alt="<%= product.name %> Images" class="h-full w-full object-cover object-center">
           <% else %>
             <img src="<%= asset_path('default-cover.png') %>" alt="No Image Available" class="h-full w-full object-cover object-center">
           <% end %>
@@ -17,10 +17,14 @@
           </h3>
 
           <%# Languages %>
-          <% if product.languages.present? && product.languages.size > 0 && product.languages[0]&.name != 'not_specified' %>
+          <% if product.languages.present? && product.languages.size > 0 && product.languages[0]&.name != 'not_specified' || product.more_languages_from_createor.present? %>
             <div class="flex flex-row flex-wrap items-center justify-start gap-2">
-              <% product.languages.take(3).each do |language| %>
-                <p class="text-xs border border-gray-900 rounded px-2 py-1.5 text-gray-700"><%= language.name %></p>
+              <% product.languages&.take(3).each do |language| %>
+                <p class="text-xs border border-gray-900 rounded px-2 py-1.5 text-gray-700" style="<%= get_color_code(language.name).present? ? "background-color: #{get_color_code(language.name)}; color: white;" : '' %>"><%= language.name %></p>
+              <% end %>
+              
+              <% product.more_languages_from_createor&.take(2).each do |lang| %>
+                <p class="text-xs border border-gray-900 rounded px-2 py-1.5 text-gray-700"><%= lang %></p>
               <% end %>
             </div>
           <% end %>
@@ -30,7 +34,7 @@
         <%# Reviews + Price %>
         <div class="flex flex-row items-center divide-x divide-black p-0 m-0">
           <%# Reviews %>
-          <div class="p-3 grow">
+          <div class="p-3 grid grid-cols-2 grow">
             <% if product.reviews.size > 0 %> 
               <div class="flex items-center gap-1">
                 <svg class="text-gray-700 h-4 w-4 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -43,6 +47,11 @@
                 <p class="px-1 py-1 rounded text-sm font-medium bg-green-500 text-black">New</p>
               </div>
             <% end %>
+            <% if product.featured %>
+	      <div class="flex justify-center items-center">
+                <p class="px-1 py-1 rounded text-sm font-medium bg-indigo-300 text-black">Featured</p>
+              </div>
+	    <% end %>
           </div>
           <%# Price %>
           <div class="p-3">

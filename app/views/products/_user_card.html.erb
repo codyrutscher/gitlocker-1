@@ -1,7 +1,7 @@
 <li class="col-span-1 flex flex-col divide-y divide-gray-200 rounded-lg bg-white text-center shadow border border-black border-4 rounded-2xl hover:shadow-[0px_20px_20px_15px_#1a202c] hover:scale-105">
   <div class="flex flex-1 flex-col p-8 border border-blue-500">
     <% if user.profile_picture.attached? %>
-      <%= image_tag user.profile_picture, class: "mx-auto h-32 w-32 flex-shrink-0 rounded-full" %>
+      <%= image_tag user.profile_picture, class: "mx-auto h-32 w-32 flex-shrink-0 rounded-full", alt: "#{user.name} Pictures" %>
     <% else %>
       <img class="mx-auto h-32 w-32 flex-shrink-0 rounded-full" src="https://gitlocker.s3.us-east-2.amazonaws.com/man-standing-holding-laptop-while-showing-programming-language-software.png" alt="no profile picture">
     <% end %>

@@ -46,5 +46,15 @@ module Gitlocker
 
     config.stripe.secret_key = ENV["STRIPE_SECRET_KEY"]
     config.stripe.publishable_key = ENV["STRIPE_PUBLISHABLE_KEY"]
+
+    config.middleware.use Rack::Deflater
+    require 'rack/brotli'
+    config.middleware.use Rack::Brotli
+    config.action_controller.asset_host = Proc.new { |source|
+      if source =~ /\b(.png|.jpg|.gif|.jpeg)\b/i
+        "https://gitlocker.com/cdn-cgi/image/compression=fast,format=auto/"
+      end
+    }
+
   end
 end
