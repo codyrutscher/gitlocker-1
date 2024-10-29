@@ -7,7 +7,7 @@
           <% if product.covers.first.present? %>
             <img src="https://gitlocker.com/cdn-cgi/image/compression=fast,format=auto/<%= product.covers.first.url %>" alt="<%= product.name %> Images" class="h-full w-full object-cover object-center">
           <% else %>
-            <img src="https://gitlocker.com/cdn-cgi/image/compression=fast,format=auto/<%= asset_path('default-cover.png') %>" alt="No Image Available" class="h-full w-full object-cover object-center">
+            <img src="<%= asset_path('default-cover.png') %>" alt="No Image Available" class="h-full w-full object-cover object-center">
           <% end %>
         </div>
 
