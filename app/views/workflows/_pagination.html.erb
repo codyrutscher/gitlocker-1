@@ -1,0 +1,60 @@
+<% page_name = "#{page_name}" %>
+<% if paginator.total_pages > 1 %>
+  <div class="flex items-center justify-center mt-2">
+    <%= link_to "Page #{paginator.current_page}", '#', class: "text-black hover:text-black font-semibold px-2 py-1 rounded border border-black disabled", rel: "current", disabled: true %>
+  </div>
+  <nav class="flex items-center justify-center mt-2">
+    <ul class="pagination flex flex-wrap space-x-1 sm:space-x-2">
+      <% if paginator.current_page > 1 %>
+        <li>
+          <%= button_to raw('&lsaquo; Previous'), url_for(request.params.merge(page_name => paginator.current_page - 1)), form: { method: :post, local: true, data: { turbo: true }, class: "text-black hover:text-black   font-semibold px-2 py-1 rounded border border-black"}, rel: "prev" %>
+        </li>
+      <% else %>
+        <li class="disabled">
+          <%= button_to raw('&lsaquo; Previous'), '#', form: { class: 'text-black font-semibold px-2 py-1 rounded border border-black hover:text-black cursor-not-allowed' } %>
+        </li>
+      <% end %>
+
+      <% if paginator.total_pages <= 7 %>
+        <% (1..paginator.total_pages).each do |page| %>
+          <li>
+            <%= button_to page, url_for(request.params.merge(page_name => page)), form: { method: :post, local: true, data: { turbo: true }, class: "px-2 py-1 rounded-full border border-black  text-black hover:text-black #{'font-semibold text-gray-800' if paginator.current_page == page}" } %>
+          </li>
+        <% end %>
+      <% else %>
+        <% if paginator.current_page > 3 %>
+          <li class=" sm:inline">
+            <%= button_to 1, url_for(request.params.merge(page_name => 1)), form: { method: :post, local: true, data: { turbo: true }, class: "px-2 py-1 rounded-full border border-black  text-black hover:text-black #{'font-semibold text-gray-800' if paginator.current_page == 1}" } %>
+          </li>
+          <li class="disabled  sm:inline"><span class="px-2 py-1">...</span></li>
+        <% end %>
+
+        <% (-2..2).each do |i| %>
+          <% page = paginator.current_page + i %>
+          <% if page > 1 && page < paginator.total_pages %>
+            <li>
+              <%= button_to page, url_for(request.params.merge(page_name => page)), form: { method: :post, local: true, data: { turbo: true }, class: "px-2 py-1 rounded-full border border-black  text-black hover:text-black #{'font-semibold text-gray-800' if paginator.current_page == page}" } %>
+            </li>
+          <% end %>
+        <% end %>
+
+        <% if paginator.current_page < paginator.total_pages - 2 %>
+          <li class="disabled sm:inline"><span class="px-2 py-1">...</span></li>
+          <li class=" sm:inline">
+            <%= button_to paginator.total_pages, url_for(request.params.merge(page_name => paginator.total_pages)), form: { method: :post, local: true, data: { turbo: true }, class: "px-2 py-1 rounded-full border border-black text-black hover:text-black #{'font-semibold text-gray-800' if paginator.current_page == paginator.total_pages}" } %>
+          </li>
+        <% end %>
+      <% end %>
+
+      <% if paginator.current_page < paginator.total_pages %>
+        <li>
+          <%= button_to raw('Next &rsaquo;'), url_for(request.params.merge(page_name => paginator.current_page + 1)), form: { method: :post, local: true, data: { turbo: true }, class: "text-black hover:text-black font-semibold px-2 py-1 rounded border border-black" }, rel: "next" %>
+        </li>
+      <% else %>
+        <li class="disabled">
+          <%= button_to raw('Next &rsaquo;'), '#', form: { class: 'text-black hover:text-black font-semibold px-2 py-1 rounded border border-black cursor-not-allowed' } %>
+        </li>
+      <% end %>
+    </ul>
+  </nav>
+<% end %>

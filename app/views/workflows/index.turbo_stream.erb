@@ -1,0 +1,5 @@
+<%= turbo_stream.replace "github_repos" do %>
+  <div class="pb-4" id="github_repos">
+    <%= render 'workflows/github_repo_list', paginated_repositories: @paginated_repositories, page_name: 'github_page' %>
+  </div>
+<% end %>
