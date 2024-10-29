@@ -382,6 +382,16 @@ class WorkflowsController < ApplicationController
         new_folder_path = workflows_path.join(unique_name)
       end
       FileUtils.mkdir_p(new_folder_path)
+      new_project_name = "#{unique_name}.zip"
+      delete_project_from_s3(new_project_name)
+      temp_zip_name = "#{unique_name}.zip"
+      temp_zip_path = download_temp_zip(temp_zip_name, zip_url = nil, new_folder_path)
+      current_user.projects.attach(
+        io: File.open(temp_zip_path),
+        filename: new_project_name,
+        content_type: 'application/zip'
+      )
+      File.delete(temp_zip_path) if File.exist?(temp_zip_path)
       redirect_to workflows_path(current_user, folder_name: unique_name), notice: "Created new project successfully!"
     rescue
       redirect_to workflows_path(current_user), alert: "Not able to create project! Please try again."
