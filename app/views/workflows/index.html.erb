@@ -189,13 +189,13 @@
         </button>
       </div>
       <div class="p-4 md:p-5 space-y-4">
-        <% if @repo_branch_array == [] %>
+        <% if @paginated_repositories == [] %>
           <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
             Currently you do not have any repositories in Github.
           </p>
         <% else %>
           <div class="flex flex-col pb-4" id="github_repos">
-            <%= render 'github_repo_list', paginated_repositories: @paginated_repositories, page_name: 'github_page' %>
+            <%= render 'github_repo_list', paginated_repositories: @paginated_repositories, page_name: 'github_page', data: @repo_branch_array.to_s %>
           </div>
         <% end %>
       </div>
@@ -221,20 +221,14 @@
         </button>
       </div>
       <div class="p-4 md:p-5 space-y-4">
-        <% if @folders.size == 0 %>
+        <% if @paginated_saved_projects.size == 0 %>
           <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
             Currently you do not have any projects saved.
           </p>
         <% else %>
-          <p class="text-black font-bold leading-relaxed">
-            Saved Projects
-          </p>
-          <% @folders.each do |folder| %>
-            <div class="flex text-base leading-relaxed">
-              <%= link_to folder, project_from_s3_path(current_user, folder_name: folder), class: "py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 text-black font-medium", id: "open-folder-link" , local: false %>
-              <%= button_to 'Delete', delete_project_path(current_user, folder_name: folder), method: :delete, local: false, form: { local: false, data: { turbo: false } }, class: 'focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 ml-4 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900 bg-red-600' %>
-            </div>
-          <% end %>
+          <div class="flex flex-col pb-4" id="saved_projects">
+            <%= render 'saved_project_list', paginated_saved_projects: @paginated_saved_projects, page_name: 'project_page', data: @saved_projects.to_s %>
+          </div>
         <% end %>
       </div>
       <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">

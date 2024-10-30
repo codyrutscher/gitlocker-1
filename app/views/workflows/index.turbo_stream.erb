@@ -1,5 +1,15 @@
-<%= turbo_stream.replace "github_repos" do %>
-  <div class="pb-4" id="github_repos">
-    <%= render 'workflows/github_repo_list', paginated_repositories: @paginated_repositories, page_name: 'github_page' %>
-  </div>
+<% if @github_list_open %>
+  <%= turbo_stream.replace "github_repos" do %>
+    <div class="flex flex-col pb-4" id="github_repos">
+      <%= render 'github_repo_list', paginated_repositories: @paginated_repositories, page_name: 'github_page', data: @repo_branch_array.to_s %>
+    </div>
+  <% end %>
+<% end %>
+
+<% if @saved_projects_open %>
+  <%= turbo_stream.replace "saved_projects" do %>
+    <div class="flex flex-col pb-4" id="saved_projects">
+      <%= render 'saved_project_list', paginated_saved_projects: @paginated_saved_projects, page_name: 'project_page', data: @saved_projects.to_s %>
+    </div>
+  <% end %>
 <% end %>
