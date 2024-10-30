@@ -3,35 +3,61 @@ require 'open-uri'
 require 'zip'
 
 class WorkflowsController < ApplicationController
-  before_action :retreive_github_repo_info, only: :index
   before_action :authenticate_user!
   include ProductConcern
 
   def index
     if request.format.turbo_stream? && request.format.symbol == :turbo_stream
+      @github_list_open = false
+      @saved_projects_open = false
       if github_list_params && github_list_params[:github_page]
+        @github_list_open = true
+        begin
+          if github_list_params[:data]
+            @repo_branch_array = eval(github_list_params[:data])
+          else
+            retreive_github_repo_info  
+          end
+        rescue 
+          retreive_github_repo_info
+        end
         @paginated_repositories = Kaminari.paginate_array(@repo_branch_array).page(github_list_params[:github_page]).per(10)
+      end
+      if saved_projects_params && saved_projects_params[:project_page]
+        @saved_projects_open = true
+        begin 
+          if saved_projects_params[:data]
+            @saved_projects = eval(saved_projects_params[:data])
+          else 
+            @saved_projects = current_user.projects.flat_map { |project| project.filename.to_s.sub(".zip", "") }
+          end            
+        rescue 
+          @saved_projects = current_user.projects.flat_map { |project| project.filename.to_s.sub(".zip", "") }
+        end
+        @paginated_saved_projects = Kaminari.paginate_array(@saved_projects).page(saved_projects_params[:project_page]).per(5)
       end
       respond_to do |format|
         format.turbo_stream
       end
       return
     end
-    @paginated_repositories = Kaminari.paginate_array(@repo_branch_array).page(params[:page]).per(10)
+    retreive_github_repo_info
+    @paginated_repositories = Kaminari.paginate_array(@repo_branch_array).page(1).per(10)
     folder_path = Rails.root.join('workflows', current_user.friendly_id)
     if !(Dir.exist?(folder_path))
       FileUtils.mkdir_p(folder_path)
     end
     @directory_tree_json = "{}"
-    @folders = current_user.projects.flat_map { |project| project.filename.to_s.sub(".zip", "") }
+    @saved_projects = current_user.projects.flat_map { |project| project.filename.to_s.sub(".zip", "") }
+    @paginated_saved_projects = Kaminari.paginate_array(@saved_projects).page(1).per(5)
     open_projects = Dir.glob("#{folder_path}/*").select { |f| File.directory?(f) }.map { |f| File.basename(f) }
     if open_projects.size == 0
       @open_project = nil  
     elsif open_projects.size == 1
-      @open_projects = check_for_unnecessary_folders(folder_path, @folders, open_projects)  
+      @open_projects = check_for_unnecessary_folders(folder_path, @saved_projects, open_projects)  
       @open_project = @open_projects.first
     else
-      @open_projects = check_for_unnecessary_folders(folder_path, @folders, open_projects)
+      @open_projects = check_for_unnecessary_folders(folder_path, @saved_projects, open_projects)
       @open_project = @open_projects.first
     end
     if folder_name_params && folder_name_params[:folder_name]
@@ -532,7 +558,11 @@ class WorkflowsController < ApplicationController
   end
 
   def github_list_params
-    params.permit(:github_page)
+    params.permit(:id, :github_page, :data)
+  end
+
+  def saved_projects_params
+    params.permit(:id, :project_page, :data)
   end
 
   def retreive_github_repo_info
