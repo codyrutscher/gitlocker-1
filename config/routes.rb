@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   mount Sidekiq::Web => '/sidekiq'
   resources :follows
   get '/workflows/:id', to: 'workflows#index', as: "workflows"
+  post '/workflows/:id', to: 'workflows#index'
   get '/workflows/:id/open_file', to: 'workflows#open_file', as: "open_file"
   post '/workflows/:id/save_file', to: 'workflows#save_file', as: "save_file"
   get '/workflows/:id/create_file', to: 'workflows#create_file', as: "create_file"

@@ -8,6 +8,16 @@ class WorkflowsController < ApplicationController
   include ProductConcern
 
   def index
+    if request.format.turbo_stream? && request.format.symbol == :turbo_stream
+      if github_list_params && github_list_params[:github_page]
+        @paginated_repositories = Kaminari.paginate_array(@repo_branch_array).page(github_list_params[:github_page]).per(10)
+      end
+      respond_to do |format|
+        format.turbo_stream
+      end
+      return
+    end
+    @paginated_repositories = Kaminari.paginate_array(@repo_branch_array).page(params[:page]).per(10)
     folder_path = Rails.root.join('workflows', current_user.friendly_id)
     if !(Dir.exist?(folder_path))
       FileUtils.mkdir_p(folder_path)
@@ -123,6 +133,9 @@ class WorkflowsController < ApplicationController
           begin
             file_content = File.read(local_file_path)
             repo = @octokit_client.login + "/" + folder_name
+            repository = @octokit_client.repository(repo)
+            branch_name = repository.default_branch
+            ref = "heads/" + branch_name
             blob = @octokit_client.create_blob(repo, file_content)
             latest_commit = @octokit_client.commits(repo).first
             latest_tree_sha = latest_commit.commit.tree.sha
@@ -136,7 +149,6 @@ class WorkflowsController < ApplicationController
             ], base_tree: latest_tree_sha)
             commit_message = "Changed #{file_path}"
             new_commit = @octokit_client.create_commit(repo, commit_message, new_tree.sha, [latest_commit.sha])
-            ref = "heads/main"
             @octokit_client.update_ref(repo, ref, new_commit.sha)
             redirect_to workflows_path(current_user, folder_name: git_file_params[:folder_name].to_s), notice: "Pushed updated file to Github Successfully!!"
           rescue
@@ -176,7 +188,7 @@ class WorkflowsController < ApplicationController
     workflow_folder = Rails.root.join('workflows', "#{current_user.friendly_id}").to_s
     begin
       tmp_directory = Rails.root.join('tmp')
-      zip_link = "https://github.com/#{repo_params[:username]}/#{repo_params[:repo_name]}/archive/refs/heads/main.zip"
+      zip_link = "https://github.com/#{repo_params[:username]}/#{repo_params[:repo_name]}/archive/refs/heads/#{repo_params[:branch_name]}.zip"
       file = Tempfile.new(["#{repo_params[:username]}-#{repo_params[:repo_name]}", '.zip'], tmp_directory)
       curl_command = "curl -L -H 'Authorization: token #{current_user.token}' -o #{file.path} #{zip_link}"
       stdout, stderr, status = Open3.capture3(curl_command)
@@ -186,7 +198,7 @@ class WorkflowsController < ApplicationController
           new_project_name = "#{repo_params[:repo_name]}.zip"
           delete_project_from_s3(new_project_name)
           extract_zip(file.path, workflow_folder)
-          old_folder_path = File.join(workflow_folder, "#{repo_params[:repo_name]}-main")
+          old_folder_path = File.join(workflow_folder, "#{repo_params[:repo_name]}-#{repo_params[:branch_name]}")
           new_folder_path = File.join(workflow_folder, "#{repo_params[:repo_name]}")
           FileUtils.mv old_folder_path, new_folder_path
           File.delete(file.path) if File.exist?(file.path)
@@ -382,6 +394,16 @@ class WorkflowsController < ApplicationController
         new_folder_path = workflows_path.join(unique_name)
       end
       FileUtils.mkdir_p(new_folder_path)
+      new_project_name = "#{unique_name}.zip"
+      delete_project_from_s3(new_project_name)
+      temp_zip_name = "#{unique_name}.zip"
+      temp_zip_path = download_temp_zip(temp_zip_name, zip_url = nil, new_folder_path)
+      current_user.projects.attach(
+        io: File.open(temp_zip_path),
+        filename: new_project_name,
+        content_type: 'application/zip'
+      )
+      File.delete(temp_zip_path) if File.exist?(temp_zip_path)
       redirect_to workflows_path(current_user, folder_name: unique_name), notice: "Created new project successfully!"
     rescue
       redirect_to workflows_path(current_user), alert: "Not able to create project! Please try again."
@@ -486,7 +508,7 @@ class WorkflowsController < ApplicationController
   end
 
   def repo_params
-    params.permit(:id, :username, :repo_name)
+    params.permit(:id, :username, :repo_name, :branch_name)
   end
 
   def git_file_params
@@ -509,35 +531,39 @@ class WorkflowsController < ApplicationController
     params.permit(:download_zip);
   end
 
+  def github_list_params
+    params.permit(:github_page)
+  end
+
   def retreive_github_repo_info
     begin
       @octokit_client = Octokit::Client.new(access_token: current_user.token)
       @username = @octokit_client.user.login
-      @repos = @octokit_client.repos.pluck(:name)
-      repos = @octokit_client.repos
-      repo_branch_hash = {}
-      repos.each do |repo|
-        repo_name = repo.name
-        repo_full_name = repo.full_name
-        branches = @octokit_client.branches(repo_full_name)
-        branch_hash = {}
-        branches.each do |branch|
-          branch_hash[branch.name] = { sha: branch.commit.sha }
+      page = 1
+      per_page = 30
+      @repo_branch_array = []
+      loop do
+        repos = @octokit_client.repositories(nil, page: page, per_page: per_page)
+        break if repos.empty?
+        repos.each do |repo|
+          repo_hash = {}
+          repo_hash[:name] = repo.name
+          repo_hash[:type] = repo.private ? 'Private' : 'Public'
+          repo_hash[:branch] = repo.default_branch
+          @repo_branch_array.push(repo_hash)
         end
-        if branch_hash.key?('main')
-          repo_branch_hash[repo_name] = branch_hash
-        end
+        page += 1
       end
-      @repo_branch_hash = repo_branch_hash
+      @repo_branch_array
     rescue Octokit::NotFound
       puts "User or repository not found."
-      @repo_branch_hash = {}
+      @repo_branch_array = []
     rescue Octokit::Unauthorized
       puts "Unauthorized access. Please check your access token."
-      @repo_branch_hash = {}
+      @repo_branch_array = []
     rescue => e
       puts "Error fetching repositories or branches: #{e.message}"
-      @repo_branch_hash = {}
+      @repo_branch_array = []
     end
   end
 

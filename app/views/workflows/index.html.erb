@@ -190,19 +190,14 @@
         </button>
       </div>
       <div class="p-4 md:p-5 space-y-4">
-        <% if @repo_branch_hash == {} %>
+        <% if @repo_branch_array == [] %>
           <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
             Currently you do not have any repositories in Github.
           </p>
         <% else %>
-          <p class="text-black font-bold leading-relaxed">
-            Repositories
-          </p>
-          <% @repo_branch_hash.each do |repo, branches| %>
-            <p class="text-base leading-relaxed">
-              <%= link_to repo, download_repo_path(current_user, repo_name: repo, username: @username), class: "text-black font-medium", id: "open-repo-link" , local: false %>            
-            </p>
-          <% end %>
+          <div class="flex flex-col pb-4" id="github_repos">
+            <%= render 'github_repo_list', paginated_repositories: @paginated_repositories, page_name: 'github_page' %>
+          </div>
         <% end %>
       </div>
       <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
@@ -281,7 +276,7 @@
 
 <div style="display: flex; flex: 1 width: 100%; height: 700px; max-height: 700px; border:1px solid silver;" class="flex">
   <div style="width: 35%; overflow:auto; background-color: #272822; color: #f8f8f2;">
-    <div id="file-tree" class="text-white"></div>
+    <div id="file-tree"></div>
   </div>
   <div style="width: 65%; background-color: #272822; color: #f8f8f2;">
     <div id="editor" style="height: 100%; width: 100%;">
