@@ -7,7 +7,7 @@
   <!-- Section Content -->
   <div class="relative container mx-auto px-4 text-center text-white py-16 rounded-3xl">
         <h1 class="text-white text-5xl font-mono max-w-4xl mx-auto text-balance">
-          Browse <span class="font-bold">GitLocker's</span> selection of <span id="count" data-target="100000" class="font-bold italic text-orange-500 underline underline-offset-3 decoration-6 decoration-orange-500">0</span> free and premium code products from <span class="font-bold italic text-orange-500 underline underline-offset-3 decoration-6 decoration-orange-500"><%= User.count %></span> creators or sign up to start <span class="font-bold">buying, writing, and selling</span>! 
+          Browse <span class="font-bold">GitLocker's</span> selection of <span id="count" data-target="100000" class="font-bold italic text-orange-500 underline underline-offset-3 decoration-6 decoration-orange-500">100,000</span> free and premium code products from <span class="font-bold italic text-orange-500 underline underline-offset-3 decoration-6 decoration-orange-500"><%= User.count %></span> creators or sign up to start <span class="font-bold">buying, writing, and selling</span>! 
         </h1>
    
 
@@ -57,21 +57,4 @@
       </div>
   </div>
 </section>
-<script>
-  const counters = document.querySelectorAll("#count");
-  const speed = 100;
-  counters.forEach((counter) => {
-    const updateCount = () => {
-      const target = parseInt(counter.getAttribute("data-target"));
-      const count = parseInt(counter.innerText);
-      const increment = Math.max(1, Math.trunc(target / speed));
-      if (count < target) {
-        counter.innerText = count + increment;
-        setTimeout(updateCount, 1);
-      } else {
-        counter.innerText = target;
-      }
-    };
-    updateCount();
-  });
-</script>
+
