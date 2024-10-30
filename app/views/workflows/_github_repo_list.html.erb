@@ -13,8 +13,8 @@
         <% paginated_repositories&.each do |repo| %>
           <tr>
             <td class="px-6 py-1"><%= link_to repo[:name], download_repo_path(current_user, repo_name: repo[:name], branch_name: repo[:branch], username: @username), class: "text-black font-medium", id: "open-repo-link" , local: false %></td>
-            <td><div class="px-3 py-1 border-2 border-black-500 rounded-lg"><%= repo[:type] %></div></td>
-            <td><div class="px-3 py-1 border-2 border-black-500 rounded-lg"><%= repo[:branch] %></div></td>
+            <td><div class="px-3 py-1 border-2 bg-orange-500 hover:bg-orange-400 text-black hover:text-white border-black-500 rounded-lg"><%= repo[:type] %></div></td>
+            <td><div class="px-3 py-1 border-2 bg-orange-500 hover:bg-orange-400 text-black hover:text-white border-black-500 rounded-lg"><%= repo[:branch] %></div></td>
           </tr>
         <% end %>
       </tbody>
