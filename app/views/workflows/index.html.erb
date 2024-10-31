@@ -277,7 +277,7 @@
   </div>
 </div>
 
-<script>
+<%= javascript_tag do %>
   var open_project = "<%= @open_project %>";
   var editor = ace.edit("editor");
   var fontSize = '18px';
@@ -741,4 +741,4 @@
     });
     refreshTree(data);
   });
-</script>
+<% end %>
