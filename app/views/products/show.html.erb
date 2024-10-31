@@ -357,9 +357,9 @@
       <div class="mt-12 divide-y-4 divide-black space-y-6">
         <h2 class="text-3xl font-bold text-gray-900 mb-6 ">Related Products</h2>
         <div class="mt-6 flow-root space-y-6 pt-8">
-          <div class="">
-            <%= render ProductCarouselComponent.new(@related_products) %>
-          </div>
+          <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 gap-4 lg:gap-8 px-4 sm:px-6 lg:px-8 xl:px-0 ">
+              <%= render partial: "home/product", collection: @related_products %>
+            </div>
         </div>
       </div>
     <% end %>
@@ -368,9 +368,9 @@
       <div class="mt-12 divide-y-4 divide-black space-y-6">
         <h2 class="text-3xl font-bold text-gray-900 mb-6 ">More From This Creator</h2>
         <div class="mt-6 flow-root space-y-6 pt-8">
-          <div class="">
-            <%= render ProductCarouselComponent.new(@more_from_this_creators) %>
-          </div>
+          <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 gap-4 lg:gap-8 px-4 sm:px-6 lg:px-8 xl:px-0 ">
+              <%= render partial: "home/product", collection: @more_from_this_creators %>
+            </div>
         </div>
       </div>
     <% end %>
