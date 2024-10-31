@@ -55,9 +55,9 @@
     <hr class="h-px my-8 bg-black border-2 border-black">
 
      <div class="mt-6 overflow-hidden">
-          <div class="flex space-x-4 lg:space-x-8 px-4 sm:px-6 lg:px-8 xl:px-0">
-            <%= render ProductCarouselComponent.new(@recent_products) %>
-          </div>
+          <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 gap-4 lg:gap-8 px-4 sm:px-6 lg:px-8 xl:px-0 ">
+              <%= render partial: "home/product", collection: @recent_products %>
+            </div>
         </div>
 
         </section>
@@ -81,9 +81,9 @@
           
 
          <div class="mt-6 overflow-hidden">
-              <div class="flex space-x-4 lg:space-x-8 px-4 sm:px-6 lg:px-8 xl:px-0">
-                <%= render PopularProductCarouselComponent.new(@popular_products) %>
-              </div>
+             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 gap-4 lg:gap-8 px-4 sm:px-6 lg:px-8 xl:px-0 ">
+              <%= render partial: "home/product", collection: @popular_products %>
+            </div>
               </div>
       
         </section>
@@ -108,9 +108,9 @@
           
 
          <div class="mt-6 overflow-hidden">
-              <div class="flex space-x-4 lg:space-x-8 px-4 sm:px-6 lg:px-8 xl:px-0">
-                <%= render PopularProductCarouselComponent.new(@premium_products) %>
-              </div>
+              <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 gap-4 lg:gap-8 px-4 sm:px-6 lg:px-8 xl:px-0 ">
+              <%= render partial: "home/product", collection: @premium_products %>
+            </div>
               </div>
 
         </section>
@@ -133,9 +133,9 @@
           
 
          <div class="mt-6 overflow-hidden">
-              <div class="flex space-x-4 lg:space-x-8 px-4 sm:px-6 lg:px-8 xl:px-0">
-                <%= render PopularProductCarouselComponent.new(@free_products) %>
-              </div>
+              <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 gap-4 lg:gap-8 px-4 sm:px-6 lg:px-8 xl:px-0 ">
+              <%= render partial: "home/product", collection: @free_products %>
+            </div>
               </div>
 
         </section>
@@ -155,9 +155,9 @@
           </div>
           <hr class="h-px my-8 bg-black border-2 border-black">
           <div class="mt-6 overflow-hidden">
-              <div class="flex space-x-4 lg:space-x-8 px-4 sm:px-6 lg:px-8 xl:px-0">
-                <%= render CreatorCarouselComponent.new(@creators) %>
-              </div>
+             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 gap-4 lg:gap-8 px-4 sm:px-6 lg:px-8 xl:px-0 ">
+              <%= render partial: "marketplace/creators/creator", collection: @creators %>
+            </div>
               </div>
         </section>
       <% end %>
