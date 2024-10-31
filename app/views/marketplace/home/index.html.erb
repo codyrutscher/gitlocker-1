@@ -30,9 +30,9 @@
     <hr class="h-px my-8 bg-black border-2 border-black">
 
      <div class="mt-6 overflow-hidden">
-          <div class="flex space-x-4 lg:space-x-8 px-4 sm:px-6 lg:px-8 xl:px-0">
-            <%= render ProductCarouselComponent.new(@featured_products) %>
-          </div>
+          <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 gap-4 lg:gap-8 px-4 sm:px-6 lg:px-8 xl:px-0 ">
+              <%= render partial: "home/product", collection: @featured_products %>
+            </div>
         </div>
 
         </section>
