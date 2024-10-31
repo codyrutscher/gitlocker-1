@@ -8,12 +8,12 @@ module Marketplace
       @languag_count = Language.count 
       @languages = Language.order(:name).limit(20)
       @categories = Category.order(:name).limit(20)
-      @creators = User.order(created_at: :desc).limit(20)
-      @recent_products = Product.with_attached_covers.published.includes([:languages]).recent.exclude_purchased(current_user).first(5)
-      @popular_products = Product.with_attached_covers.includes([:languages]).ordered_by_purchase_count.first(15)
-      @free_products = Product.with_attached_covers.includes([:languages]).where("price_cents <= 0").order(created_at: :desc).first(15)
-      @premium_products = Product.with_attached_covers.includes([:languages]).where("price_cents > 0").order(created_at: :desc).first(15)
-      @featured_products = Product.with_attached_covers.includes([:languages]).where(featured: true)
+      @creators = User.order(created_at: :desc).limit(10)
+      @recent_products = Product.with_attached_covers.published.includes([:languages]).recent.exclude_purchased(current_user).first(10)
+      @popular_products = Product.with_attached_covers.includes([:languages]).exclude_purchased(current_user).ordered_by_purchase_count.first(10)
+      @free_products = Product.with_attached_covers.includes([:languages]).where("price_cents <= 0").exclude_purchased(current_user).order(created_at: :desc).first(10)
+      @premium_products = Product.with_attached_covers.includes([:languages]).where("price_cents > 0").exclude_purchased(current_user).order(created_at: :desc).first(10)
+      @featured_products = Product.with_attached_covers.includes([:languages]).where(featured: true).exclude_purchased(current_user).first(10)
 
     end
     def resources
