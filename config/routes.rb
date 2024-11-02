@@ -108,6 +108,7 @@ Rails.application.routes.draw do
     get "browse/recent", to: "browse#recent"
     get "browse/languages", to: "browse#languages"
     get "browse/categories", to: "browse#categories"
+    get "creators/show", to: "creators#show"
     resources :creators, only: [:index, :show]
     resources :languages, only: :show, param: :slug
     resources :categories, only: [:show, :create], param: :slug
