@@ -2,11 +2,11 @@
 <% content_for :meta_description,  "Find your #{@user&.name&.titleize} class in Gitlocker" %>
 
 <%=
-    render BreadcrumbComponent.new(current_user,[
-      { text: "Creators", url: current_user&.buyer? ? creators_path : creators_path },
-      { text: user.name, url: request.original_url.include?("/l/") ? creators_path(@user) : creators_path(@user) }
-    ])
-  %>
+  render BreadcrumbComponent.new(current_user, [
+    { text: "Creators", url: marketplace_creators_path },
+    { text: user.name, url: marketplace_creators_path },
+  ])
+%>
 
 <main class="profile-page">
   <section class="relative block h-500-px">
