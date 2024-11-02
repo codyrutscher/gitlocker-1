@@ -88,14 +88,14 @@
 
                 <div id="notifications-dropdown" class="hidden absolute right-0 mt-2 w-96 bg-white shadow-lg rounded-lg ring-1 ring-black ring-opacity-5">
                   <div class="p-4">
-                    <h3 class="text-lg font-medium font-mono text-gray-900">Notifications</h3>
+                    <h3 class="text-lg font-medium  text-gray-900">Notifications</h3>
                   </div>
                   <ul class="divide-y divide-gray-200">
                     <% if @notifications_index.length > 0 %>
                       <% @notifications_index.each do |notification| %>
                         <li class="p-4 hover:bg-gray-100">
                           <% if notification&.params && notification.params["message"] %>
-                            <p class="text-sm font-mono text-gray-700"><%= notification&.params["message"] %></p>
+                            <p class="text-sm  text-gray-700"><%= notification&.params["message"] %></p>
                             <% unless notification.read_at %>
                               <%= link_to "Mark as Read", mark_as_read_marketplace_notification_path(notification), method: :post, class: "text-sm text-blue-500 hover:text-blue-700 ml-2 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded px-2 py-1 bg-blue-100 hover:bg-blue-200" %>
                             <% end %>
@@ -121,16 +121,16 @@
                 </button>
                 <div id="profile-dropdown" class="hidden z-10 min-w-32 absolute right-0 top-10 bg-white shadow-lg rounded-md ring-1 ring-black ring-opacity-5">
                   <div class="flex flex-col divide-y">
-                    <%= link_to "View Profile", marketplace_user_path(current_user), class: "text-sm inline-block text-black px-4 py-2 hover:bg-blue-500 hover:text-white font-mono" %>
-                    <%= link_to "Edit Profile", edit_marketplace_user_path(current_user), class: "text-sm inline-block text-black px-4 py-2 hover:bg-blue-500 hover:text-white font-mono" %>
-                    <%= link_to "My Products", products_path, class: "text-sm inline-block text-black px-4 py-2 hover:bg-blue-500 hover:text-white font-mono" %>
-                    <%= link_to "Add Product", new_product_path, class: "text-sm inline-block text-black px-4 py-2 hover:bg-blue-500 hover:text-white font-mono" %>
-                    <%= link_to "Write Code", workflows_path(current_user), class: "text-sm inline-block text-black px-4 py-2 hover:bg-blue-500 hover:text-white font-mono" %>
-                    <%= link_to "Coding Resources", resources_path, class: "text-sm inline-block text-black px-4 py-2 hover:bg-blue-500 hover:text-white font-mono", target: :blank %>
-                    <%= link_to "Deployment Options", deployment_options_path, class: "text-sm inline-block text-black px-4 py-2 hover:bg-blue-500 hover:text-white font-mono", target: :blank %>
-                    <%= link_to "Purchased Products", marketplace_purchases_path, class: "text-sm inline-block text-black px-4 py-2 hover:bg-blue-500 hover:text-white font-mono" %>
-                    <%= link_to "Get Paid", seller_dashboard_path, class: "text-sm inline-block text-black px-4 py-2 hover:bg-blue-500 hover:text-white font-mono" %>
-                    <%= link_to "Log out", destroy_user_session_path, data: { "turbo-method": :delete }, class: "text-sm inline-block text-black px-4 py-2 hover:bg-blue-500 hover:text-white font-mono" %>
+                    <%= link_to "View Profile", marketplace_user_path(current_user), class: "text-sm inline-block text-black px-4 py-2 hover:bg-blue-500 hover:text-white " %>
+                    <%= link_to "Edit Profile", edit_marketplace_user_path(current_user), class: "text-sm inline-block text-black px-4 py-2 hover:bg-blue-500 hover:text-white " %>
+                    <%= link_to "My Products", products_path, class: "text-sm inline-block text-black px-4 py-2 hover:bg-blue-500 hover:text-white " %>
+                    <%= link_to "Add Product", new_product_path, class: "text-sm inline-block text-black px-4 py-2 hover:bg-blue-500 hover:text-white " %>
+                    <%= link_to "Write Code", workflows_path(current_user), class: "text-sm inline-block text-black px-4 py-2 hover:bg-blue-500 hover:text-white " %>
+                    <%= link_to "Coding Resources", resources_path, class: "text-sm inline-block text-black px-4 py-2 hover:bg-blue-500 hover:text-white ", target: :blank %>
+                    <%= link_to "Deployment Options", deployment_options_path, class: "text-sm inline-block text-black px-4 py-2 hover:bg-blue-500 hover:text-white ", target: :blank %>
+                    <%= link_to "Purchased Products", marketplace_purchases_path, class: "text-sm inline-block text-black px-4 py-2 hover:bg-blue-500 hover:text-white " %>
+                    <%= link_to "Get Paid", seller_dashboard_path, class: "text-sm inline-block text-black px-4 py-2 hover:bg-blue-500 hover:text-white " %>
+                    <%= link_to "Log out", destroy_user_session_path, data: { "turbo-method": :delete }, class: "text-sm inline-block text-black px-4 py-2 hover:bg-blue-500 hover:text-white " %>
                   </div>
                 </div>
               </div>
