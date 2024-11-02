@@ -4,7 +4,7 @@
 <%=
   render BreadcrumbComponent.new(current_user, [
     { text: "Creators", url: marketplace_creators_path },
-    { text: user.name, url: show_path },
+    { text: "#{@user}", url: show_path }
   ])
 %>
 
