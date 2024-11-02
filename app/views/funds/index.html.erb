@@ -83,8 +83,8 @@
     <h1 class="text-xl font-mono underline font-bold text-gray-900 p-4 m-4">Transactions:</h1>
     <div class="mt-4">
       <div class="flex items-center justify-center mt-4">
-        <table class="table-auto m-8 p-8 font-mono border-black border-2">
-          <thead>
+        <table class="table-auto m-8 p-8 font-mono text-gray-500 border-black border-2">
+          <thead class="text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
               <th class="px-6 py-3 border-black border-2">Buyer:</th>
               <th class="px-6 py-3 border-black border-2">Product:</th>
@@ -93,7 +93,7 @@
           </thead>
           <tbody>
             <% @sales.each do |sale| %>
-              <tr>
+              <tr class="bg-white text-gray-900 hover:bg-gray-50">
                 <td class="px-6 py-3 border-black border-2"><%= sale.user&.name %></td>
                 <td class="px-6 py-3 border-black border-2"><%= sale.product&.name %></td>
                 <td class="px-6 py-3 border-black border-2"><%= number_to_currency(sale.price_cents.to_f/100, unit: '$') %></td>
