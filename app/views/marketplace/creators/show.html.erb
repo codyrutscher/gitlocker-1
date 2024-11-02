@@ -105,10 +105,10 @@
             </div>
         </div>
         <div class="text-center mt-12">
-          <h3 class="text-4xl font-semibold underline decoration-orange-500 leading-normal mb-2 text-blueGray-700 mb-2 font-mono">
+          <h3 class="text-4xl font-semibold underline decoration-orange-500 leading-normal mb-2 text-blueGray-700 mb-2 ">
             <%= @user.name %>
           </h3>
-          <div class="text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold font-mono uppercase">
+          <div class="text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold  uppercase">
             <i class="fas fa-map-marker-alt mr-2 text-lg text-blueGray-400"></i>
             <% unless @user.location.blank? %>
                     <%= @user.location %>
@@ -116,7 +116,7 @@
                     No location specified
                   <% end %>
           </div>
-          <div class="mb-2 text-blueGray-600 font-mono">
+          <div class="mb-2 text-blueGray-600 ">
             <i class="fas fa-university mr-2 text-lg text-blueGray-400"></i>
             <% unless @user.company.blank? %>
                     <%= @user.company %>
@@ -125,7 +125,7 @@
                   <% end %>
           </div>
         </div>
-        <div class="mt-10 py-10 border-t-4 border-black text-center font-mono text-balance">
+        <div class="mt-10 py-10 border-t-4 border-black text-center  text-balance">
           <div class="flex flex-wrap justify-center">
             <div class="w-full lg:w-9/12 px-4">
               <p class="mb-4 text-lg leading-relaxed text-blueGray-700">
@@ -136,7 +136,7 @@
         </div>
         <div class="flex flex-wrap justify-center">
           <% if @languages.present? %>
-            <h2 class="text-xl font-semibold mb-2 mr-2 font-mono">Languages I Know: </h2>
+            <h2 class="text-xl font-semibold mb-2 mr-2 ">Languages I Know: </h2>
             <div class="flex flex-wrap mb-4">
               <% @languages.each do |language| %>
                   <%= link_to language.name, marketplace_language_path(language), class: "hover:scale-110 text-white font-medium rounded-lg text-sm px-5 py-2.5 border-black border-2 text-center me-2 mb-2", style: get_color_code(language.name).present? ? "background-color: #{get_color_code(language.name)}; color: white;" : ''  %>
@@ -147,7 +147,7 @@
         <div class="flex flex-wrap justify-center">
 
           <% if @categories.present? %>
-              <h2 class="text-xl font-semibold mb-2 mr-2 font-mono">Skills:</h2>
+              <h2 class="text-xl font-semibold mb-2 mr-2 ">Skills:</h2>
               <div class="flex flex-wrap">
                 <% @categories.each do |category| %>
                   <%= link_to category.name, marketplace_category_path(category), class: "bg-blue-500 text-white px-2 py-1 rounded mr-2 mb-2 hover:text-black" %>
@@ -175,7 +175,7 @@
     <!-- Creators list-->
     <div class="mx-auto px-4 sm:px-6 lg:px-8">
       <div class="mx-auto max-w-2xl lg:mx-0 lg:max-w-none">
-        <h1 class="font-bold underline font-mono text-3xl mb-8"><%= @user.name %> Listed Products:</h1>
+        <h1 class="font-bold underline  text-3xl mb-8"><%= @user.name %> Listed Products:</h1>
         <% if @products.empty? %>
           <p class="font-medium leading-7 text-gray-900 text-xl">The user has no listed products for sale.</p>
         <% else %>
