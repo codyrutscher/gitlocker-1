@@ -12,7 +12,7 @@
         <div class="flex items-center justify-between mb-6 sm:mb-10">
           <%= render partial: 'shared/creator_filters' %>
         </div>
-        <h2 class="text-2xl sm:text-xl font-semibold leading-6 sm:leading-7 text-gray-900 underline mb-4 font-mono">List of <span class="text-orange-500 italic"><%= User.count %></span> Creators</h2>
+        <h2 class="text-2xl sm:text-xl font-semibold leading-6 sm:leading-7 text-gray-900 underline mb-4 ">List of <span class="text-orange-500 italic"><%= User.count %></span> Creators</h2>
         <ul role="list" class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           <%= render partial: "marketplace/creators/creator", collection: @users, as: :user %>
         </ul>
