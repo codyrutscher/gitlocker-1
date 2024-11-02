@@ -93,7 +93,7 @@
           </thead>
           <tbody>
             <% @sales.each do |sale| %>
-              <tr class="bg-white text-gray-900 hover:bg-gray-50">
+              <tr class="bg-white text-gray-900 hover:bg-gray-200">
                 <td class="px-6 py-3 border-black border-2"><%= sale.user&.name %></td>
                 <td class="px-6 py-3 border-black border-2"><%= sale.product&.name %></td>
                 <td class="px-6 py-3 border-black border-2"><%= number_to_currency(sale.price_cents.to_f/100, unit: '$') %></td>
