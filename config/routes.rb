@@ -105,7 +105,7 @@ Rails.application.routes.draw do
      get "browse/free", to: "browse#free"
       get "browse/premium", to: "browse#premium"
     get "browse/featured", to: "browse#featured"
-
+    get "show", to "marketplace/creators#show"
     get "browse/recent", to: "browse#recent"
     get "browse/languages", to: "browse#languages"
     get "browse/categories", to: "browse#categories"
