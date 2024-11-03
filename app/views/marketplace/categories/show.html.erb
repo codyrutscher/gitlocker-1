@@ -1,6 +1,6 @@
 <% content_for :meta_title, "GitLocker | #{@category&.name&.titleize} Category" %>
 <% content_for :meta_description,  "Find your #{@category&.name&.titleize} class in Gitlocker" %>
-<div class="bg-gradient-to-r from-blue-700 to-orange-500">
+<div class="bg-white">
   <%=
     render BreadcrumbComponent.new(current_user,[
       { text: "Categories", url: marketplace_browse_categories_path },
