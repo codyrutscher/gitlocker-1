@@ -1,5 +1,5 @@
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
-<div class="add_product_form bg-gradient-to-r from-blue-700 to-orange-500 min-h-screen min-w-full md:p-8 py-8 px-4">
+<div class="add_product_form bg-white min-h-screen min-w-full md:p-8 py-8 px-4">
   <%= form_for @product, url: product_path(@product), method: :patch, data: { turbo: false, remote: true }, html: { id: "product-form" } do |f| %>
     <div class="space-y-12">
       <div class="border-b border-gray-900/10 md:pb-12 pb-5">
