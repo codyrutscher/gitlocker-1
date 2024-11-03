@@ -1,6 +1,6 @@
 <% content_for :meta_title, "GitLocker | #{@language&.name&.titleize} Language" %>
 <% content_for :meta_description,  "Find your #{@language&.name&.titleize} class in Gitlocker" %>
-<div class="bg-gradient-to-r from-blue-700 to-orange-500">
+<div class="bg-white">
   <%=
     render BreadcrumbComponent.new(current_user,[
       { text: "Languages", url: marketplace_browse_languages_path },
