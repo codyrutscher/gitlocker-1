@@ -89,12 +89,11 @@
               </div>
       
       <% end %>
-      <hr class="h-px my-8 bg-black border-8 border-black">
+      <hr class="h-px mt-8 bg-black border-8 border-black">
     <%= render 'middleTwo' %>
-      <hr class="h-px my-8 bg-black border-8 border-black">
       <% if @premium_products.size > 0 %>
         <!-- Premium Section -->
-        <section aria-labelledby="popular-heading" class="xl:mx-auto xl:px-8 mb-16">
+        <section aria-labelledby="popular-heading" class="bg-orange-400">
           <div class="px-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8 xl:px-0">
             <h2 id="popular-heading" class="text-3xl font-bold tracking-tight text-black underline">Premium Products:</h2>
             <button class="bg-white hover:shadow-[inset_22rem_0_0_0] hover:shadow-blue-400 duration-[400ms,700ms] transition-[color,box-shadow] text-black hover:text-white border-black border-4 font-bold py-2 px-4 rounded-full">
@@ -104,7 +103,8 @@
             <% end %>
              </button>
           </div>
-        <hr class="h-px my-8 bg-black border-2 border-black">
+       </section>
+        <hr class="h-px bg-black border-2 border-black">
 
           
 
@@ -114,12 +114,12 @@
             </div>
               </div>
 
-        </section>
+        
       <% end %>
-    <hr class="h-px my-8 bg-black border-8 border-black">
+    <hr class="h-px mt-8 bg-black border-8 border-black">
       <% if @free_products.size > 0 %>
         <!-- Free Section -->
-        <section aria-labelledby="popular-heading" class="xl:mx-auto xl:px-8 mb-16">
+        <section aria-labelledby="popular-heading" class="bg-orange-400">
           <div class="px-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8 xl:px-0">
             <h2 id="popular-heading" class="text-3xl font-bold tracking-tight text-black underline">Free Products:</h2>
             <button class="bg-white hover:shadow-[inset_22rem_0_0_0] hover:shadow-blue-400 duration-[400ms,700ms] transition-[color,box-shadow] text-black hover:text-white border-black border-4 font-bold py-2 px-4 rounded-full">
@@ -129,8 +129,8 @@
             <% end %>
              </button>
           </div>
-        <hr class="h-px my-8 bg-black border-2 border-black">
-
+        <hr class="h-px bg-black border-2 border-black">
+        </section>
           
 
          <div class="mt-6 overflow-hidden">
@@ -139,12 +139,12 @@
             </div>
               </div>
 
-        </section>
+        
       <% end %>
-    <hr class="h-px my-8 bg-black border-8 border-black">
+    <hr class="h-px mt-8 bg-black border-8 border-black">
  <% if @creators.size > 0 %>
         <!-- Creators Section -->
-        <section aria-labelledby="creators-heading" class="xl:mx-auto xl:px-8">
+        <section aria-labelledby="creators-heading" class="bg-orange-400">
           <div class="px-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8 xl:px-0">
             <h2 id="creators-heading" class="text-3xl font-bold tracking-tight text-black underline">Creators:</h2>
             <button class="bg-white hover:shadow-[inset_22rem_0_0_0] hover:shadow-blue-400 duration-[400ms,700ms] transition-[color,box-shadow] text-black hover:text-white border-black border-4 font-bold py-2 px-4 rounded-full ">
@@ -154,19 +154,20 @@
             <% end %>
             </button>
           </div>
-          <hr class="h-px my-8 bg-black border-2 border-black">
+           </section>
+          <hr class="h-px bg-black border-2 border-black">
           <div class="mt-6 overflow-hidden">
              <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 gap-4 lg:gap-8 px-4 sm:px-6 lg:px-8 xl:px-0 ">
               <%= render partial: "home/creator", collection: @creators %>
             </div>
               </div>
-        </section>
+       
       <% end %>
-    <hr class="h-px my-8 bg-black border-8 border-black">
+    <hr class="h-px mt-8 bg-black border-8 border-black">
       <%= render 'middle' %>
       <% if @languages.size > 0 %>
         <!-- Languages Section -->
-        <section aria-labelledby="languages-heading" class="xl:mx-auto xl:px-8">
+        <section aria-labelledby="languages-heading" class="bg-orange-400">
           <div class="px-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8 xl:px-0">
             <h2 id="languages-heading" class="text-3xl font-bold tracking-tight text-black underline ">Programming Languages:</h2>
             <button class="bg-white hover:shadow-[inset_22rem_0_0_0] hover:shadow-blue-400 duration-[400ms,700ms] transition-[color,box-shadow] text-black hover:text-white border-black border-4 font-bold py-2 px-4 rounded-full ">
@@ -176,18 +177,19 @@
             <% end %>
             </button>
           </div>
-          <hr class="h-px my-8 bg-black border-2 border-black">
+          </section>
+          <hr class="h-px bg-black border-2 border-black">
           <div class="mt-6 flow-root">
             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 gap-4 lg:gap-8 px-4 sm:px-6 lg:px-8 xl:px-0 ">
               <%= render partial: "home/language", collection: @languages, as: :language %>
             </div>
           </div>
-        </section>
+        
       <% end %>
-      <hr class="h-px my-8 bg-black border-8 border-black">
+      <hr class="h-px mt-8 bg-black border-8 border-black">
       <% if @categories.size > 0 %>
         <!-- Categories Section -->
-        <section aria-labelledby="categories-heading" class="xl:mx-auto xl:px-8">
+        <section aria-labelledby="categories-heading" class="bg-orange-400">
           <div class="px-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8 xl:px-0">
             <h2 id="categories-heading" class="text-3xl font-bold tracking-tight text-black underline ">Programming Categories:</h2>
             <button class="bg-white hover:shadow-[inset_22rem_0_0_0] hover:shadow-blue-400 duration-[400ms,700ms] transition-[color,box-shadow] text-black hover:text-white border-black border-4 font-bold py-2 px-4 rounded-full ">
@@ -197,15 +199,16 @@
             <% end %>
             </button>
           </div>
-          <hr class="h-px my-8 bg-black border-2 border-black">
+          </section>
+          <hr class="h-px bg-black border-2 border-black">
           <div class="mt-6 flow-root">
             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 gap-4 lg:gap-8 px-4 sm:px-6 lg:px-8 xl:px-0 ">
               <%= render partial: "home/category", collection: @categories, as: :category %>
             </div>
           </div>
-        </section>
+      
       <% end %>
-    <hr class="h-px my-8 bg-black border-8 border-black">
+    <hr class="h-px mt-8 bg-black border-8 border-black">
     <%= render 'footer' %>
     </main>
   </div>
