@@ -4,7 +4,7 @@
   <% content_for :meta_title, @product&.name&.titleize&.first(65) %>
 <% end %>
 
-<div class="bg-gradient-to-r from-blue-700 to-orange-500">
+<div class="bg-white">
   <%=
     render BreadcrumbComponent.new(current_user,[
       { text: "Products", url: current_user&.buyer? ? marketplace_browse_path : marketplace_browse_path },
