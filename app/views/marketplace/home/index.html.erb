@@ -17,7 +17,7 @@
       <% if @featured_products.size > 0 %>
         <!-- Recent Section -->
         <section aria-labelledby="recent-heading" class="xl:mx-auto xl:px-8 mb-16">
-          <div class="bg-orange-500 px-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8 xl:px-0">
+          <div class=" px-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8 xl:px-0">
             <h2 id="recent-heading" class="text-3xl font-bold tracking-tight text-black underline">Featured Products:</h2>
             <button class="bg-white text-black hover:text-white border-black border-4 font-bold py-2 px-4 rounded-full hover:shadow-[inset_24rem_0_0_0] hover:shadow-blue-400 duration-[400ms,700ms] transition-[color,box-shadow]">
             <%= link_to marketplace_browse_featured_path, class: "link" do %>
@@ -28,7 +28,7 @@
           </div>
     <hr class="h-px my-8 bg-black border-2 border-black">
 
-     <div class="mt-6 overflow-hidden">
+     <div class="mt-6overflow-hidden">
           <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 gap-4 lg:gap-8 px-4 sm:px-6 lg:px-8 xl:px-0 ">
               <%= render partial: "home/product", collection: @featured_products %>
             </div>
