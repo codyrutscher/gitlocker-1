@@ -51,7 +51,11 @@
           </div>
           <p class="sr-only"><%= @product.average_rating.to_i %> out of 5 stars</p>
         <% end %>
+	<% if @product.purchase_count = 1 %>
+	<p class="text-2xl ">1 purchase</p>
+	<% else %>
 	<p class="text-2xl "><%= @product.purchase_count %> purchases</p>
+	<% end %>
 	<% if @product.featured %>
 	<div class="flex inline-flex bg-indigo-500 rounded-2xl p-2"><p class="text-2xl font-bold text-gray-900  underline sm:text-4xl">Featured</p></div>
 	<% end %>
