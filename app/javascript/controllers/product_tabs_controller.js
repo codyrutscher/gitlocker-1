@@ -1,7 +1,7 @@
 import { Controller } from '@hotwired/stimulus';
 
 const buttonClasses = {
-  'active': ['!border-white', '!text-white'],
+  'active': ['border-black', 'text-black'],
   'inactive': ['border-transparent', 'text-black', 'hover:border-black', '!hover:text-black']
 };
 
