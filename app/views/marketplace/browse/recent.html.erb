@@ -2,7 +2,7 @@
 <%= content_for :meta_description, "Stay updated with the latest additions on GitLocker. Browse through the most recent repositories and projects to find fresh and innovative code ready for exploration and collaboration." %>
 
 
-<div class="bg-gradient-to-r from-blue-700 to-orange-500">
+<div class="bg-white">
   <%= render BreadcrumbComponent.new(current_user, [{ text: "Recent", url: marketplace_browse_recent_path }]) %>
   <main>
     <section aria-labelledby="category-heading" class="py-8 sm:py-8 xl:py-8 xl:mx-auto xl:px-8">
