@@ -204,7 +204,7 @@
         
         <% if @product.demo_url.present? %>
           <div class="flex flex-col gap-4">
-            <%= link_to "Demo URL", @product.demo_url, class: "hover:scale-105 flex w-full items-center justify-center rounded-md border-black border-2 bg-indigo-600 px-8 py-3 text-base font-medium hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50 text-xl mt-1 text-black hover:text-white hover:underline", target: "_blank" %>
+            <%= link_to "Demo URL", @product.demo_url, class: "hover:scale-105 flex w-full items-center justify-center rounded-md border-black border-2 bg-indigo-600 px-8 py-3 text-base font-medium hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50 text-xl mt-1 text-black hover:text-gray-500 hover:underline", target: "_blank" %>
           </div>
           <div class="w-full border-t-4 border-black"></div>
         <% end %>
@@ -220,7 +220,7 @@
           <h3 class="text-sm font-medium text-gray-900">Share</h3>
           <ul role="list" class="flex items-center space-x-6">
             <li>
-              <a href="<%= "https://www.facebook.com/sharer/sharer.php?u=#{product_url(@product)}" %>" target="_blank" rel="noopener noreferrer" class="flex h-6 w-6 items-center justify-center text-black hover:text-white">
+              <a href="<%= "https://www.facebook.com/sharer/sharer.php?u=#{product_url(@product)}" %>" target="_blank" rel="noopener noreferrer" class="flex h-6 w-6 items-center justify-center text-black hover:text-gray-500">
                 <span class="sr-only">Share on Facebook</span>
                 <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
                   <path fill-rule="evenodd" d="M20 10c0-5.523-4.477-10-10-10S0 4.477 0 10c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V10h2.54V7.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V10h2.773l-.443 2.89h-2.33v6.988C16.343 19.128 20 14.991 20 10z" clip-rule="evenodd" />
@@ -228,7 +228,7 @@
               </a>
             </li>
             <li>
-              <a href="<%= "https://twitter.com/intent/tweet?url=#{product_url(@product)}" %>" target="_blank" rel="noopener noreferrer" class="flex h-6 w-6 items-center justify-center text-black hover:text-white">
+              <a href="<%= "https://twitter.com/intent/tweet?url=#{product_url(@product)}" %>" target="_blank" rel="noopener noreferrer" class="flex h-6 w-6 items-center justify-center text-black hover:text-gray-500">
                 <span class="sr-only">Share on Twitter</span>
                 <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
                   <path d="M11.4678 8.77491L17.2961 2H15.915L10.8543 7.88256L6.81232 2H2.15039L8.26263 10.8955L2.15039 18H3.53159L8.87581 11.7878L13.1444 18H17.8063L11.4675 8.77491H11.4678ZM9.57608 10.9738L8.95678 10.0881L4.02925 3.03974H6.15068L10.1273 8.72795L10.7466 9.61374L15.9156 17.0075H13.7942L9.57608 10.9742V10.9738Z" />
@@ -255,7 +255,7 @@
                 id="tab-reviews"
                 data-product-tabs-target="button"
                 data-action="click->product-tabs#toggleTab"
-                class="border-transparent text-black whitespace-nowrap border-b-4 py-6 text-sm font-medium hover:text-white hover:border-white"
+                class="border-transparent text-black whitespace-nowrap border-b-4 py-6 text-sm font-medium hover:text-gray-500 hover:border-white"
                 aria-controls="tab-panel-reviews"
                 role="tab"
                 type="button"
@@ -264,7 +264,7 @@
                 id="tab-license"
                 data-product-tabs-target="button"
                 data-action="click->product-tabs#toggleTab"
-                class="border-transparent text-black whitespace-nowrap border-b-4 py-6 text-sm font-medium hover:text-white hover:border-white"
+                class="border-transparent text-black whitespace-nowrap border-b-4 py-6 text-sm font-medium hover:text-gray-500 hover:border-white"
                 aria-controls="tab-panel-license"
                 role="tab"
                 type="button"
@@ -301,7 +301,7 @@
               <p class="text-sm text-center">There are no reviews.</p>
               <% if policy(@product).reviewable? %>
                 <div class="text-center mt-6">
-                  <%= link_to new_marketplace_library_review_path(@product), class: "inline-flex hover:scale-110 hover:text-black hover:bg-gray-400 items-center gap-x-2 rounded-md bg-black px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-gray focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black" do %>
+                  <%= link_to new_marketplace_library_review_path(@product), class: "inline-flex hover:scale-110 hover:text-black hover:bg-gray-400 items-center gap-x-2 rounded-md bg-black px-3.5 py-2.5 text-sm font-semibold text-whit shadow-sm hover:bg-gray focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black" do %>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="-ml-0.5 h-5 w-5">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                     </svg>
