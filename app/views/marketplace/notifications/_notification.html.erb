@@ -3,7 +3,7 @@
   <h2 class="text-lg font-semibold mb-2"><%= notification.type %></h2>
         <% if notification&.params && notification.params["message"] %>
   
-  <p class="text-gray-600"><%= notification.params['message'] %></p>
+  <p class="text-black"><%= notification.params['message'] %></p>
   <% end %>
-  <p class="text-sm text-gray-500 mt-2"><%= notification.created_at.strftime('%b %d, %Y %H:%M') %></p>
+  <p class="text-sm text-black mt-2"><%= notification.created_at.strftime('%b %d, %Y %H:%M') %></p>
 </div>
