@@ -15,8 +15,8 @@
     <!-- Product -->
     <div class="flex flex-col md:flex-row md:items-center gap-4">
       <div class="grow">
-        <h1 class="text-2xl font-bold tracking-tight text-white  underline sm:text-4xl"><%= @product.name %></h1>
-        <%= link_to marketplace_creator_path(@product.user), class: "mt-1 text-lg  text-black hover:text-white hover:underline" do %>
+        <h1 class="text-2xl font-bold tracking-tight text-black  underline sm:text-4xl"><%= @product.name %></h1>
+        <%= link_to marketplace_creator_path(@product.user), class: "mt-1 text-lg  text-black hover:text-black hover:underline" do %>
           Creator: <%= @product.user.username %>
         <% end %>
 	<p class="text-lg  text-black">
@@ -29,7 +29,7 @@
       <div class="flex gap-4 items-center">
         <%# Like %>
         <div id="like-section" class="flex items-center">
-          <%= button_tag id: "like-button", class: "flex items-center gap-2 justify-center rounded border border-black border-4 bg-indigo-600 px-3 py-2 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50" do %>
+          <%= button_tag id: "like-button", class: "flex items-center gap-2 justify-center rounded border border-black border-4 bg-indigo-600 px-3 py-2 text-base font-medium text-black hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50" do %>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
               <path stroke-linecap="round" stroke-linejoin="round" d="M6.633 10.25c.806 0 1.533-.446 2.031-1.08a9.041 9.041 0 0 1 2.861-2.4c.723-.384 1.35-.956 1.653-1.715a4.498 4.498 0 0 0 .322-1.672V2.75a.75.75 0 0 1 .75-.75 2.25 2.25 0 0 1 2.25 2.25c0 1.152-.26 2.243-.723 3.218-.266.558.107 1.282.725 1.282m0 0h3.126c1.026 0 1.945.694 2.054 1.715.045.422.068.85.068 1.285a11.95 11.95 0 0 1-2.649 7.521c-.388.482-.987.729-1.605.729H13.48c-.483 0-.964-.078-1.423-.23l-3.114-1.04a4.501 4.501 0 0 0-1.423-.23H5.904m10.598-9.75H14.25M5.904 18.5c.083.205.173.405.27.602.197.4-.078.898-.523.898h-.908c-.889 0-1.713-.518-1.972-1.368a12 12 0 0 1-.521-3.507c0-1.553.295-3.036.831-4.398C3.387 9.953 4.167 9.5 5 9.5h1.053c.472 0 .745.556.5.96a8.958 8.958 0 0 0-1.302 4.665c0 1.194.232 2.333.654 3.375Z" />
             </svg>
@@ -95,14 +95,14 @@
           <%# Price %>
           <div>
             <% if @product.price.to_f.round(2) > 0.00 %> 
-              <p class="text-3xl font-bold p-2 rounded-xl bg-white text-black text-center  underline"><%= @product.price.currency.symbol %><%= @product.price %></p>
+              <p class="text-3xl font-bold p-2 rounded-xl bg-indigo-500 text-black text-center  underline"><%= @product.price.currency.symbol %><%= @product.price %></p>
             <% else %>
-              <p class="text-3xl font-bold p-2 rounded-xl bg-white text-black  text-center underline">Free</p>
+              <p class="text-3xl font-bold p-2 rounded-xl bg-indigo-500 text-black  text-center underline">Free</p>
             <% end %>
             <% if @product.price.to_f.round(2) > 0.00 %> 
               <div></div>
             <% else %>
-              <%= link_to "Donate to Compassion International", "https://www.compassion.com", class: "hover:scale-110 flex items-center justify-center mt-4 rounded-md border border-black border-2 bg-indigo-600 px-8 py-3 text-base w-96 h-10 font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50", target: :blank %>
+              <%= link_to "Donate to Compassion International", "https://www.compassion.com", class: "hover:scale-110 flex items-center justify-center mt-4 rounded-md border border-black border-2 bg-indigo-600 px-8 py-3 text-base w-96 h-10 font-medium text-black hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50", target: :blank %>
             <% end %>
           </div>
 
@@ -132,7 +132,7 @@
                 <% end %>
 
                 <% @product.more_categories_from_createor.take(2).each do |category| %>
-                  <span class="hover:scale-110 text-white border-black border-2 bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 disable"><%= category %></span>
+                  <span class="hover:scale-110 text-black border-black border-2 bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 disable"><%= category %></span>
                 <% end %>
               </div>
             </div>
@@ -287,7 +287,7 @@
             <% if @reviews.exists? %>
               <% if policy(@product).reviewable? %>
                 <div class="mt-6">
-                  <%= link_to new_marketplace_library_review_path(@product), class: "inline-flex hover:scale-110 hover:text-black hover:bg-white items-center gap-x-2 rounded-md bg-black px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black" do %>
+                  <%= link_to new_marketplace_library_review_path(@product), class: "inline-flex hover:scale-110 hover:text-black hover:bg-gray items-center gap-x-2 rounded-md bg-black px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black" do %>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="-ml-0.5 h-5 w-5">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                     </svg>
@@ -301,7 +301,7 @@
               <p class="text-sm text-center">There are no reviews.</p>
               <% if policy(@product).reviewable? %>
                 <div class="text-center mt-6">
-                  <%= link_to new_marketplace_library_review_path(@product), class: "inline-flex hover:scale-110 hover:text-black hover:bg-white items-center gap-x-2 rounded-md bg-black px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black" do %>
+                  <%= link_to new_marketplace_library_review_path(@product), class: "inline-flex hover:scale-110 hover:text-black hover:bg-gray items-center gap-x-2 rounded-md bg-black px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black" do %>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="-ml-0.5 h-5 w-5">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                     </svg>
