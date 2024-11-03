@@ -287,7 +287,7 @@
             <% if @reviews.exists? %>
               <% if policy(@product).reviewable? %>
                 <div class="mt-6">
-                  <%= link_to new_marketplace_library_review_path(@product), class: "inline-flex hover:scale-110 hover:text-black hover:bg-gray items-center gap-x-2 rounded-md bg-black px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black" do %>
+                  <%= link_to new_marketplace_library_review_path(@product), class: "inline-flex hover:scale-110 hover:text-black hover:bg-gray items-center gap-x-2 rounded-md bg-black px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-gray focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black" do %>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="-ml-0.5 h-5 w-5">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                     </svg>
@@ -301,7 +301,7 @@
               <p class="text-sm text-center">There are no reviews.</p>
               <% if policy(@product).reviewable? %>
                 <div class="text-center mt-6">
-                  <%= link_to new_marketplace_library_review_path(@product), class: "inline-flex hover:scale-110 hover:text-black hover:bg-gray items-center gap-x-2 rounded-md bg-black px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black" do %>
+                  <%= link_to new_marketplace_library_review_path(@product), class: "inline-flex hover:scale-110 hover:text-black hover:bg-gray items-center gap-x-2 rounded-md bg-black px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-gray focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black" do %>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="-ml-0.5 h-5 w-5">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                     </svg>
