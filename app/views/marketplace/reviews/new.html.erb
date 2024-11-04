@@ -7,20 +7,6 @@
     ])
   %>
   <div class="mx-auto px-4 py-16 sm:px-6 sm:py-24 lg:max-w-2xl lg:px-8">
-    <!--
-      This example requires some changes to your config:
-
-      ```
-      // tailwind.config.js
-      module.exports = {
-        // ...
-        plugins: [
-          // ...
-          require('@tailwindcss/forms'),
-        ],
-      }
-      ```
-    -->
     <%= form_with model: Review.new, url: marketplace_library_reviews_path(@product), data: { turbo: false } do |f| %>
       <div class="space-y-12">
         <div class="border-b border-gray-900/10 pb-12">
