@@ -119,6 +119,8 @@ GEM
       msgpack (~> 1.2)
     brotli (0.6.0)
     builder (3.3.0)
+    canonical-rails (0.2.16)
+      actionview (>= 4.1, < 7.3)
     cgi (0.4.1)
     charlock_holmes (0.7.9)
     childprocess (5.0.0)
@@ -562,6 +564,7 @@ DEPENDENCIES
   activerecord-import
   aws-sdk-s3
   bootsnap
+  canonical-rails (~> 0.2.16)
   debug
   devise (~> 4.9)
   dotenv-rails

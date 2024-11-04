@@ -1,4 +1,4 @@
-<div class="bg-gradient-to-r from-blue-700 to-orange-500">
+<div class="bg-white">
   <main>
     <div class="px-8 py-4">
       <!-- Filter Form -->
@@ -9,7 +9,7 @@
     <% if params[:filter_by_type].blank? || params[:filter_by_type] == 'products' %>
       <section aria-labelledby="products-heading" class="py-8 sm:py-16 xl:mx-auto xl:px-8">
         <div class="px-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8 xl:px-0 mb-4">
-          <h2 id="products-heading" class="text-2xl font-bold tracking-tight text-gray-900 underline font-mono">
+          <h2 id="products-heading" class="text-2xl font-bold tracking-tight text-gray-900 underline ">
             Product Search Results: <%= params[:search] %>
           </h2>
         </div>
@@ -39,7 +39,7 @@
     <% if params[:filter_by_type] == 'creators' %>
       <section aria-labelledby="creators-heading" class="py-8 sm:py-16 xl:mx-auto xl:px-8">
         <div class="px-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8 xl:px-0 mb-4">
-          <h2 id="creators-heading" class="text-2xl font-bold tracking-tight text-gray-900 underline mt-2 font-mono">
+          <h2 id="creators-heading" class="text-2xl font-bold tracking-tight text-gray-900 underline mt-2 ">
             Creator Search Results: <%= params[:search] %>
           </h2>
         </div>
@@ -68,7 +68,7 @@
     <% if params[:filter_by_type] == 'categories' %>
       <section aria-labelledby="categories-heading" class="py-8 sm:py-16 xl:mx-auto xl:px-8 mt-2">
         <div class="px-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8 xl:px-0 mb-4">
-          <h2 id="categories-heading" class="text-2xl font-bold tracking-tight text-gray-900 underline font-mono">
+          <h2 id="categories-heading" class="text-2xl font-bold tracking-tight text-gray-900 underline ">
             Category Search Results: <%= params[:search] %>
           </h2>
         </div>
@@ -98,7 +98,7 @@
     <% if params[:filter_by_type] == 'languages' %>
       <section aria-labelledby="languages-heading" class="py-8 sm:py-16 xl:mx-auto xl:px-8 mt-2">
         <div class="px-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8 xl:px-0 mb-4">
-          <h2 id="languages-heading" class="text-2xl font-bold tracking-tight text-gray-900 underline font-mono">
+          <h2 id="languages-heading" class="text-2xl font-bold tracking-tight text-gray-900 underline ">
             Language Search Results: <%= params[:search] %>
           </h2>
         </div>

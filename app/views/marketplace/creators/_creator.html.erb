@@ -1,25 +1,25 @@
-<li class="col-span-1 flex flex-col divide-y divide-gray-200 rounded-lg bg-white text-center hover:border-white border-black border-4 rounded-2xl hover:shadow-[0px_20px_20px_15px_#1a202c] hover:scale-105">
+<li class="col-span-1 flex flex-col divide-y divide-gray-200 rounded-lg bg-gray-300 text-center hover:border-white border-black border-4 rounded-2xl hover:shadow-[0px_20px_20px_15px_#1a202c] hover:scale-105">
   <div class="flex flex-1 flex-col p-8 border-2 border-black">
     <% if user.profile_picture.attached? %>
       <%= image_tag user.profile_picture, class: "mx-auto h-32 w-32 flex-shrink-0 rounded-full" %>
     <% else %>
       <img class="mx-auto h-32 w-32 flex-shrink-0 rounded-full" src="https://gitlocker.s3.us-east-2.amazonaws.com/man-standing-holding-laptop-while-showing-programming-language-software.png" alt="no profile picture">
     <% end %>
-    <h1 class="mt-6 text-sm font-medium text-gray-900 font-mono"><%= user.name %></h3>
+    <h1 class="mt-6 text-sm font-medium text-gray-900 "><%= user.name %></h3>
     <dl class="mt-1 flex flex-grow flex-col justify-between">
       <dt class="sr-only">Title</dt>
       <dd class="text-sm text-gray-500">@<%= user.username %></dd>
         <% if user.languages.present? && user.languages.size > 0 && user.languages[0]&.name != 'not_specified' %>
             <div class="flex flex-row flex-wrap mt-2 items-center justify-start gap-2">
               <% user.languages.take(3).each do |language| %>
-                <p class="text-xs border border-gray-900 rounded px-2 py-1.5 text-gray-700" style="<%= get_color_code(language.name).present? ? "background-color: #{get_color_code(language.name)}; color: white;" : '' %>"><%= language.name %></p>
+                <p class="text-xs border border-gray-900 rounded px-2 py-1.5 text-black" style="<%= get_color_code(language.name).present? ? "background-color: #{get_color_code(language.name)}; color: black;" : '' %>"><%= language.name %></p>
               <% end %>
             </div>
           <% end %>
          <% if user.categories.present? && user.categories.size > 0 && user.categories[0]&.name != 'not_specified' %>
             <div class="flex flex-row flex-wrap mt-2 items-center justify-start gap-2">
               <% user.categories.take(3).each do |category| %>
-                <p class="text-xs border border-gray-900 rounded px-2 py-1.5 text-gray-700"><%= category.name %></p>
+                <p class="text-xs border border-gray-900 rounded px-2 py-1.5 text-black"><%= category.name %></p>
               <% end %>
             </div>
           <% end %>

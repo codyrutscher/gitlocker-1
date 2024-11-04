@@ -1,8 +1,8 @@
 import { Controller } from '@hotwired/stimulus';
 
 const buttonClasses = {
-  'active': ['!border-white', '!text-white'],
-  'inactive': ['border-transparent', 'text-black', 'hover:border-white', 'hover:text-white']
+  'active': ['border-black', 'text-black'],
+  'inactive': ['border-transparent', 'text-black', 'hover:border-black', '!hover:text-black']
 };
 
 // Connects to data-controller="product-tabs"

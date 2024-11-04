@@ -1,12 +1,12 @@
 <%= content_for :meta_title, "GitLocker Popular Categories" %>
 <%= content_for :meta_description, "Discover the most popular repositories on GitLocker. Browse trending projects and top-rated code, all curated based on community feedback and usage to help you find the best resources quickly" %>
 
-<div class="bg-gradient-to-r from-blue-700 to-orange-500">
+<div class="bg-white">
   <%= render BreadcrumbComponent.new(current_user, [{ text: "Popular", url: marketplace_browse_popular_path }]) %>
   <main>
     <section aria-labelledby="category-heading" class="py-8 sm:py-8 xl:py-8 xl:mx-auto xl:px-8">
       <div class="px-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8 xl:px-0 mb-4">
-        <h1 id="category-heading" class="text-xl sm:text-2xl font-bold font-mono tracking-tight text-gray-900 underline">Browse By Popular Repositories</h1>
+        <h1 id="category-heading" class="text-xl sm:text-2xl font-bold  tracking-tight text-gray-900 underline">Browse By Popular Repositories</h1>
       </div>
       
       

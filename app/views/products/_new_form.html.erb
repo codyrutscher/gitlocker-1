@@ -1,32 +1,32 @@
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
 <div class="">
-<%= form_for @product, url: products_path, class: "bg-gradient-to-r from-blue-700 to-orange-500", data: {turbo: false, remote: true }, html: { id: "product-form",multipart: true } do |f| %>
+<%= form_for @product, url: products_path, class: "bg-white", data: {turbo: false, remote: true }, html: { id: "product-form",multipart: true } do |f| %>
   <div class="space-y-12">
-    <div class="add_product_form bg-gradient-to-r from-blue-700 to-orange-500 min-h-screen min-w-full md:p-8 py-8 px-4">
-      <h1 class="font-semibold leading-7 text-gray-900 text-3xl underline font-mono">Add a Product</h1>
-      <h2 class="mt-1 text-lg leading-6 text-black font-mono">Below is your basic product information.</h2>
+    <div class="add_product_form bg-white min-h-screen min-w-full md:p-8 py-8 px-4">
+      <h1 class="font-semibold leading-7 text-gray-900 text-3xl underline ">Add a Product</h1>
+      <h2 class="mt-1 text-lg leading-6 text-black ">Below is your basic product information.</h2>
 
       <%= render partial: 'products/import_table', locals: { filtered_repos: @filtered_repos } %>
 
       <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
 
         <div class="sm:col-span-4 border-t-4 border-black" id= "url-field">
-          <%= f.label :url,"GitHub Private Repository URL:", class: "block text-xl font-medium leading-6 text-gray-900 font-mono" %>
+          <%= f.label :url,"GitHub Private Repository URL:", class: "block text-xl font-medium leading-6 text-gray-900 " %>
           <div class="mt-2">
             <%= f.text_field :url, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", maxlength: "70", placeholder: "Paste Repository URL" %>
           </div>
         </div>
         <div class="upload_repo_zip sm:col-span-4">
       <div class="sm:col-span-4 text-center pt-8 pb-8">
-        <span class="text-black text-3xl font-mono">OR</span>
+        <span class="text-black text-3xl ">OR</span>
       </div>
         <!-- New Upload ZIP File Field -->
       <!-- New Upload ZIP File Field -->
   <div class="sm:col-span-4 border-t-4 border-black" id="zip-upload-field">
-    <%= f.label :upload_file, "Upload ZIP File:", class: "block text-xl font-medium leading-6 text-gray-900 font-mono" %>
+    <%= f.label :upload_file, "Upload ZIP File:", class: "block text-xl font-medium leading-6 text-gray-900 " %>
     <div class="mt-0">
       <%= f.file_field :upload_file, class: "form-control w-full", id: "upload_file", accept: ".zip" %>
-      <h6 class="text-sm font-mono">(Only .zip files are allowed)</h6>
+      <h6 class="text-sm ">(Only .zip files are allowed)</h6>
       <button id="clear_file" type="button" class="text-gray-500 hover:text-gray-700 focus:outline-none">
         Clear
       </button>
@@ -36,14 +36,14 @@
   </div>
 
         <div class="sm:col-span-4 border-t-4 border-black">
-          <%= f.label :name, class: "block text-xl font-medium leading-6 text-gray-900 font-mono" %>
+          <%= f.label :name, class: "block text-xl font-medium leading-6 text-gray-900 " %>
           <div class="mt-2">
             <%= f.text_field :name, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", maxlength: "70", required: true %>
           </div>
         </div>
 
         <div class="sm:col-span-4 border-t-4 border-black">
-          <%= f.label :description, "Description", class: "block text-xl font-medium leading-6 text-gray-900 font-mono" %>
+          <%= f.label :description, "Description", class: "block text-xl font-medium leading-6 text-gray-900 " %>
           <div class="mt-2">
             <%= f.text_area :description, id: "descriptionTextArea", class: "ckEditor block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", required: true %>
             <span class="d-block question_modal_input_subtext" id="descriptionTextAreaCount">
@@ -53,7 +53,7 @@
         </div>
 
         <div class="sm:col-span-4 border-t-4 border-black">
-          <%= f.label :features, "Features", class: "block text-xl font-medium leading-6 text-gray-900 font-mono" %>
+          <%= f.label :features, "Features", class: "block text-xl font-medium leading-6 text-gray-900 " %>
           <div class="mt-2">
             <%= f.text_area :features, id: "featuresTextArea", class: "ckEditor block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"%>
             <span class="d-block question_modal_input_subtext" id="featuresTextAreaCount">
@@ -63,7 +63,7 @@
         </div>
 
          <div class="sm:col-span-4 border-t-4 border-black">
-          <%= f.label :requirements, "Requirements", class: "block text-xl font-medium leading-6 text-gray-900 font-mono" %>
+          <%= f.label :requirements, "Requirements", class: "block text-xl font-medium leading-6 text-gray-900 " %>
           <div class="mt-2">
             <%= f.text_area :requirements, id: "requirementsTextArea", class: "ckEditor block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"%>
             <span class="d-block question_modal_input_subtext" id="requirementsTextAreaCount">
@@ -73,7 +73,7 @@
         </div>
 
          <div class="sm:col-span-4 border-t-4 border-black">
-          <%= f.label :instructions, "Instructions", class: "block text-xl font-medium leading-6 text-gray-900 font-mono" %>
+          <%= f.label :instructions, "Instructions", class: "block text-xl font-medium leading-6 text-gray-900 " %>
           <div class="mt-2">
             <%= f.text_area :instructions, id: "instructionsTextArea", class: "ckEditor block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"%>
             <span class="d-block question_modal_input_subtext" id="instructionsTextAreaCount">
@@ -83,26 +83,26 @@
         </div>
 
         <div class="sm:col-span-4 border-t-4 border-black">
-          <%= f.label :price, class: "block text-xl font-medium leading-6 text-gray-900 font-mono" %>
+          <%= f.label :price, class: "block text-xl font-medium leading-6 text-gray-900 " %>
           <div class="mt-2">
             <%= f.number_field :price, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", required: true %>
           </div>
         </div>
 
         <div class="sm:col-span-4 border-t-4 border-black">
-          <%= f.label :covers, class: "block text-xl font-medium leading-6 text-gray-900 font-mono" do %>
+          <%= f.label :covers, class: "block text-xl font-medium leading-6 text-gray-900 " do %>
             Cover Images or GIFs (Limit of 10 and max file size of 100mb each)
           <% end %>
           <div class="mt-2">
             <%= f.file_field :covers, multiple: true, class: "form-control w-full", id: "covers" %>
           </div>
           <br/>
-          <h1 class="font-mono">(To select multiple images please use CTRL on Windows or command on Mac)</h1>
+          <h1 class="">(To select multiple images please use CTRL on Windows or command on Mac)</h1>
         </div>
 
 
         <div class="sm:col-span-4 border-t-4 border-black">
-          <label for="product_video_source" class="block text-xl font-medium leading-6 text-gray-900 font-mono">Video Source</label>
+          <label for="product_video_source" class="block text-xl font-medium leading-6 text-gray-900 ">Video Source</label>
           <div class="mt-2">
             <select id="product_video_source" class="form-control" onchange="toggleVideoFields()">
               <option value="">Select Video Source</option>
@@ -111,18 +111,18 @@
             </select>
           </div>
           <br/>
-          <h1 class="font-bold font-mono">It is highly recommended to include a video preview to show users how your product works. Doing this will increase the chances of selling your product.</h1>
+          <h1 class="font-bold ">It is highly recommended to include a video preview to show users how your product works. Doing this will increase the chances of selling your product.</h1>
         </div>
 
         <div class="sm:col-span-4 border-t-4 border-black" id="preview_video_url_field" style="display: none;">
-          <%= f.label :preview_video_url, class: "block text-xl font-medium leading-6 text-gray-900 font-mono" %>
+          <%= f.label :preview_video_url, class: "block text-xl font-medium leading-6 text-gray-900 " %>
           <div class="mt-2">
             <%= f.text_field :preview_video_url, class: "form-control", id: "product_preview_video_url" %>
           </div>
         </div>
 
         <div class="sm:col-span-4 border-t-4 border-black" id="video_file_field" style="display: none;">
-          <%= f.label :video_file, class: "block text-xl font-medium leading-6 text-gray-900 font-mono" do %>
+          <%= f.label :video_file, class: "block text-xl font-medium leading-6 text-gray-900 " do %>
             Preview Video Source (file size limit of 1 GB)
           <% end %>
           <div class="mt-2">
@@ -131,7 +131,7 @@
         </div>
 
         <div class="sm:col-span-4 border-t-4 border-black">
-          <%= f.label :categories, class: "block text-xl font-medium leading-6 text-gray-900 font-mono" %>
+          <%= f.label :categories, class: "block text-xl font-medium leading-6 text-gray-900 " %>
           <div class="mt-2">
             <%= f.select :category_ids, options_for_select(Category.pluck(:name, :id)), {}, 
             class: "js-example-basic-multiple w-40 sm:w-50 mt-1 block rounded-md shadow-sm border-gray-300 focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50", 
@@ -141,7 +141,7 @@
         </div>
 
         <div class="sm:col-span-4 border-t-4 border-black">
-          <%= f.label :language_ids, "Languages", class: "block text-xl font-medium leading-6 text-gray-900 font-mono" %>
+          <%= f.label :language_ids, "Languages", class: "block text-xl font-medium leading-6 text-gray-900 " %>
           <div class="mt-2">
             <%= f.select :language_ids, options_for_select(Language.pluck(:name, :id)), {}, 
               class: "js-example-basic-multiple w-40 sm:w-50 mt-1 block rounded-md shadow-sm border-gray-300 focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50", 
@@ -151,15 +151,15 @@
         </div>
 
         <div class="sm:col-span-4 border-t-4 border-black">
-          <%= f.label :featured, "Feature This Product", class: "block text-xl font-medium leading-6 text-gray-900 font-mono" %>
-          <h2 class="font-mono text-lg font-bold">(For $10 you can permanently feature your repository so that it becomes searchable in the featured section.)</h2>
+          <%= f.label :featured, "Feature This Product", class: "block text-xl font-medium leading-6 text-gray-900 " %>
+          <h2 class=" text-lg font-bold">(For $10 you can permanently feature your repository so that it becomes searchable in the featured section.)</h2>
           <div class="mt-2">
             <%= f.check_box :featured, id:"featured", :style => "width: 20px; height: 20px;" %>
           </div>
         </div>
 
         <div class="sm:col-span-4 border-t-4 border-black">
-          <%= f.label :demo_url, class: "block text-xl font-medium leading-6 text-gray-900 font-mono" %>
+          <%= f.label :demo_url, class: "block text-xl font-medium leading-6 text-gray-900 " %>
           <div class="mt-2">
             <%= f.text_field :demo_url, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", maxlength: "70", required: false, placeholder: "https://demo_url.com" %>
           </div>
@@ -169,14 +169,14 @@
             <div id="upload-status" class="mt-2"></div>
         </div>
          <div class="font-bold sm:col-span-4">
-          <h1 class="font-mono">All products are subject to review and removal if they appear to be fraudulent or don't provide real value to the customer. Additionally, customers will be able to review and report products so be aware of this when posting a product.</h1>
+          <h1 class="">All products are subject to review and removal if they appear to be fraudulent or don't provide real value to the customer. Additionally, customers will be able to review and report products so be aware of this when posting a product.</h1>
         </div>
       </div>
     </div>
   </div>
-  <div class="save_buttons mt-6 flex items-center justify-end gap-x-6">
-    <%= link_to "Cancel", :back, class: "text-sm font-semibold leading-6 text-gray-900" %>
-    <%= f.submit "Save", class: "rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" %>
+  <div class="save_buttons mt-6 flex items-center ml-4 mb-4 gap-x-6">
+      <%= f.submit "Save", class: "rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" %>
+      <%= link_to "Cancel", :back, class: "text-sm font-semibold leading-6 text-gray-900" %>
   </div>
 <% end %>
 </div>

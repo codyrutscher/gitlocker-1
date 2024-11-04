@@ -4,22 +4,22 @@
   <% content_for :meta_title, @product&.name&.titleize&.first(65) %>
 <% end %>
 
-<div class="bg-gradient-to-r from-blue-700 to-orange-500">
+<div class="bg-gray-300">
   <%=
     render BreadcrumbComponent.new(current_user,[
       { text: "Products", url: current_user&.buyer? ? marketplace_browse_path : marketplace_browse_path },
       { text: @product.name, url: request.original_url.include?("/l/") ? marketplace_library_path(@product) : product_path(@product) }
     ])
-  %>
-  <div class="mx-auto px-4 py-8 sm:px-6 lg:px-8">
+  %> 
+<div class="mx-auto px-4 py-8 sm:px-6 lg:px-8">
     <!-- Product -->
     <div class="flex flex-col md:flex-row md:items-center gap-4">
       <div class="grow">
-        <h1 class="text-2xl font-bold tracking-tight text-white font-mono underline sm:text-4xl"><%= @product.name %></h1>
-        <%= link_to marketplace_creator_path(@product.user), class: "mt-1 text-lg font-mono text-black hover:text-white hover:underline" do %>
+        <h1 class="text-2xl font-bold tracking-tight text-black  underline sm:text-4xl"><%= @product.name %></h1>
+        <%= link_to marketplace_creator_path(@product.user), class: "mt-1 text-lg  text-black hover:text-black hover:underline" do %>
           Creator: <%= @product.user.username %>
         <% end %>
-	<p class="text-lg font-mono text-black">
+	<p class="text-lg text-black">
           Last updated:
           <time datetime="<%= @product.updated_at.strftime("%Y-%m-%d") %>">
             <%= @product.updated_at.strftime("%B %-d, %Y") %>
@@ -29,7 +29,7 @@
       <div class="flex gap-4 items-center">
         <%# Like %>
         <div id="like-section" class="flex items-center">
-          <%= button_tag id: "like-button", class: "flex items-center gap-2 justify-center rounded border border-black border-4 bg-indigo-600 px-3 py-2 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50" do %>
+          <%= button_tag id: "like-button", class: "flex items-center gap-2 justify-center rounded border border-black border-2 bg-indigo-400 px-3 py-2 text-base font-medium text-black hover:text-white hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50" do %>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
               <path stroke-linecap="round" stroke-linejoin="round" d="M6.633 10.25c.806 0 1.533-.446 2.031-1.08a9.041 9.041 0 0 1 2.861-2.4c.723-.384 1.35-.956 1.653-1.715a4.498 4.498 0 0 0 .322-1.672V2.75a.75.75 0 0 1 .75-.75 2.25 2.25 0 0 1 2.25 2.25c0 1.152-.26 2.243-.723 3.218-.266.558.107 1.282.725 1.282m0 0h3.126c1.026 0 1.945.694 2.054 1.715.045.422.068.85.068 1.285a11.95 11.95 0 0 1-2.649 7.521c-.388.482-.987.729-1.605.729H13.48c-.483 0-.964-.078-1.423-.23l-3.114-1.04a4.501 4.501 0 0 0-1.423-.23H5.904m10.598-9.75H14.25M5.904 18.5c.083.205.173.405.27.602.197.4-.078.898-.523.898h-.908c-.889 0-1.713-.518-1.972-1.368a12 12 0 0 1-.521-3.507c0-1.553.295-3.036.831-4.398C3.387 9.953 4.167 9.5 5 9.5h1.053c.472 0 .745.556.5.96a8.958 8.958 0 0 0-1.302 4.665c0 1.194.232 2.333.654 3.375Z" />
             </svg>
@@ -51,9 +51,13 @@
           </div>
           <p class="sr-only"><%= @product.average_rating.to_i %> out of 5 stars</p>
         <% end %>
-	<p class="text-2xl font-mono"><%= @product.purchase_count %> purchases</p>
+	<% if @product.purchase_count == 1 %>
+	<p class="text-2xl ">1 purchase</p>
+	<% else %>
+	<p class="text-2xl "><%= @product.purchase_count %> purchases</p>
+	<% end %>
 	<% if @product.featured %>
-	<div class="flex inline-flex bg-indigo-500 rounded-2xl p-2"><p class="text-2xl font-bold text-gray-900 font-mono underline sm:text-4xl">Featured</p></div>
+	<div class="flex inline-flex bg-indigo-500 rounded-2xl p-2"><p class="text-2xl font-bold text-gray-900  underline sm:text-4xl">Featured</p></div>
 	<% end %>
       </div>
     </div>
@@ -75,7 +79,7 @@
             <%= image_tag "default-cover.png", class: "object-cover object-center relative w-full", alt: "Default Cover" %>
           <% end %>
         </div>
-        <div class=" rounded-lg border-6">
+        <div class="border-black rounded-lg border-6">
           <div class="rounded-lg flex flex-col">
             <div class="grow gap-3 grid md:grid-cols-5 sm:grid-cols-4 grid-cols-3">
               <%# Cover Image %>
@@ -95,14 +99,14 @@
           <%# Price %>
           <div>
             <% if @product.price.to_f.round(2) > 0.00 %> 
-              <p class="text-3xl font-bold p-2 rounded-xl bg-white text-black text-center font-mono underline"><%= @product.price.currency.symbol %><%= @product.price %></p>
+              <p class="text-3xl font-bold p-2 rounded-xl bg-indigo-500 text-black text-center  underline"><%= @product.price.currency.symbol %><%= @product.price %></p>
             <% else %>
-              <p class="text-3xl font-bold p-2 rounded-xl bg-white text-black font-mono text-center underline">Free</p>
+              <p class="text-3xl font-bold p-2 rounded-xl bg-indigo-500 text-black  text-center underline">Free</p>
             <% end %>
             <% if @product.price.to_f.round(2) > 0.00 %> 
               <div></div>
             <% else %>
-              <%= link_to "Donate to Compassion International", "https://www.compassion.com", class: "hover:scale-110 flex items-center justify-center mt-4 rounded-md border border-black border-2 bg-indigo-600 px-8 py-3 text-base w-96 h-10 font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50", target: :blank %>
+              <%= link_to "Donate to Compassion International", "https://www.compassion.com", class: "hover:scale-110 flex items-center justify-center mt-4 rounded-md border border-black border-2 bg-indigo-600 px-8 py-3 text-base w-96 h-10 font-medium text-black hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50", target: :blank %>
             <% end %>
           </div>
 
@@ -112,11 +116,11 @@
               <h2 class="font-semibold text-gray-700">Languages</h2>
               <div class="flex flex-row flex-wrap items-center justify-start gap-2">
                 <% @languages.take(5).each do |language| %>
-                  <%= link_to language.name, marketplace_language_path(language), class: "hover:scale-110 text-white font-medium rounded-lg text-sm px-5 py-2.5 border-black border-2 text-center me-2 mb-2", style: get_color_code(language.name).present? ? "background-color: #{get_color_code(language.name)}; color: white;" : ''  %>
+                  <%= link_to language.name, marketplace_language_path(language), class: "hover:scale-110 text-black font-medium rounded-lg text-sm px-5 py-2.5 border-black border-2 text-center me-2 mb-2", style: get_color_code(language.name).present? ? "background-color: #{get_color_code(language.name)}; color: black;" : ''  %>
                 <% end %>
 
                 <% @product.more_languages_from_createor.take(2).each do |language| %>
-                  <span class="text-white bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 border-black border-2 text-center me-2 mb-2 disabled"><%= language %></span>
+                  <span class="text-black bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 border-black border-2 text-center me-2 mb-2 disabled"><%= language %></span>
                 <% end %>
               </div>
             </div>
@@ -128,11 +132,11 @@
               <h2 class="font-semibold text-gray-700">Categories</h2>
               <div class="flex flex-row flex-wrap items-center justify-start gap-2">
                 <% @categories.take(5).each do |category| %>
-                  <%= link_to category.name, marketplace_category_path(category), class: "hover:scale-110 text-white border-black border-2 bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" %>
+                  <%= link_to category.name, marketplace_category_path(category), class: "hover:scale-110 text-black border-black border-2 bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" %>
                 <% end %>
 
                 <% @product.more_categories_from_createor.take(2).each do |category| %>
-                  <span class="hover:scale-110 text-white border-black border-2 bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 disable"><%= category %></span>
+                  <span class="hover:scale-110 text-black border-black border-2 bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 disable"><%= category %></span>
                 <% end %>
               </div>
             </div>
@@ -172,15 +176,15 @@
         <% if @product.description.present? %>
           <%= content_for :meta_description, ActionView::Base.full_sanitizer.sanitize(@product.description)&.humanize&.first(160) %>
           <div class="flex flex-col gap-4">
-            <h2 class="text-2xl text-bold underline text-gray-900 font-mono">Description:</h2>
-            <p class="text-sm text-gray-500 font-mono"><%= sanitize @product.description %></p>
+            <h2 class="text-2xl text-bold underline text-gray-900 ">Description:</h2>
+            <p class="text-sm text-gray-500 "><%= sanitize @product.description %></p>
           </div>
           <div class="w-full border-t-4 border-black"></div>
         <% end %>
 
         <% if @product.features.present? %>
           <div class="flex flex-col gap-4">
-            <h2 class="text-2xl text-bold underline text-gray-900 font-mono">Features:</h2>
+            <h2 class="text-2xl text-bold underline text-gray-900 ">Features:</h2>
             <p class="text-sm text-gray-500"><%= sanitize @product.features %></p>
           </div>
           <div class="w-full border-t-4 border-black"></div>
@@ -188,7 +192,7 @@
 
         <% if @product.requirements.present? %>
           <div class="flex flex-col gap-4">
-            <h2 class="text-2xl text-bold underline text-gray-900 font-mono">Requirements:</h2>
+            <h2 class="text-2xl text-bold underline text-gray-900 ">Requirements:</h2>
             <p class="text-sm text-gray-500"><%= sanitize @product.requirements %></p>
           </div>
           <div class="w-full border-t-4 border-black"></div>
@@ -196,7 +200,7 @@
 
         <% if @product.instructions.present? %>
           <div class="flex flex-col gap-4">
-            <h2 class="text-2xl text-bold underline text-gray-900 font-mono">Instructions:</h2>
+            <h2 class="text-2xl text-bold underline text-gray-900 ">Instructions:</h2>
             <p class="text-sm text-gray-500"><%= sanitize @product.instructions %></p>
           </div>
           <div class="w-full border-t-4 border-black"></div>
@@ -204,7 +208,7 @@
         
         <% if @product.demo_url.present? %>
           <div class="flex flex-col gap-4">
-            <%= link_to "Demo URL", @product.demo_url, class: "hover:scale-105 flex w-full items-center justify-center rounded-md border-black border-2 bg-indigo-600 px-8 py-3 text-base font-medium hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50 text-xl mt-1 text-black hover:text-white hover:underline", target: "_blank" %>
+            <%= link_to "Demo URL", @product.demo_url, class: "hover:scale-105 flex w-full items-center justify-center rounded-md border-black border-2 bg-indigo-600 px-8 py-3 text-base font-medium hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50 text-xl mt-1 text-black hover:text-gray-500 hover:underline", target: "_blank" %>
           </div>
           <div class="w-full border-t-4 border-black"></div>
         <% end %>
@@ -220,7 +224,7 @@
           <h3 class="text-sm font-medium text-gray-900">Share</h3>
           <ul role="list" class="flex items-center space-x-6">
             <li>
-              <a href="<%= "https://www.facebook.com/sharer/sharer.php?u=#{product_url(@product)}" %>" target="_blank" rel="noopener noreferrer" class="flex h-6 w-6 items-center justify-center text-black hover:text-white">
+              <a href="<%= "https://www.facebook.com/sharer/sharer.php?u=#{product_url(@product)}" %>" target="_blank" rel="noopener noreferrer" class="flex h-6 w-6 items-center justify-center text-black hover:text-gray-500">
                 <span class="sr-only">Share on Facebook</span>
                 <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
                   <path fill-rule="evenodd" d="M20 10c0-5.523-4.477-10-10-10S0 4.477 0 10c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V10h2.54V7.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V10h2.773l-.443 2.89h-2.33v6.988C16.343 19.128 20 14.991 20 10z" clip-rule="evenodd" />
@@ -228,7 +232,7 @@
               </a>
             </li>
             <li>
-              <a href="<%= "https://twitter.com/intent/tweet?url=#{product_url(@product)}" %>" target="_blank" rel="noopener noreferrer" class="flex h-6 w-6 items-center justify-center text-black hover:text-white">
+              <a href="<%= "https://twitter.com/intent/tweet?url=#{product_url(@product)}" %>" target="_blank" rel="noopener noreferrer" class="flex h-6 w-6 items-center justify-center text-black hover:text-gray-500">
                 <span class="sr-only">Share on Twitter</span>
                 <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
                   <path d="M11.4678 8.77491L17.2961 2H15.915L10.8543 7.88256L6.81232 2H2.15039L8.26263 10.8955L2.15039 18H3.53159L8.87581 11.7878L13.1444 18H17.8063L11.4675 8.77491H11.4678ZM9.57608 10.9738L8.95678 10.0881L4.02925 3.03974H6.15068L10.1273 8.72795L10.7466 9.61374L15.9156 17.0075H13.7942L9.57608 10.9742V10.9738Z" />
@@ -243,19 +247,19 @@
 
       <div class="mx-auto mt-16 w-full max-w-2xl lg:col-span-4 lg:mt-0 lg:max-w-none">
         <% if @directory_tree_json != "[]"  %>
-          <h2 class="text-2xl text-bold text-gray-900 font-mono mb-4 underline">Files In This Product:</h2>
+          <h2 class="text-2xl text-bold text-gray-900  mb-4 underline">Files In This Product:</h2>
           <div id="directory-tree-data" class="js-directory-tree mb-4 bg-gray-400"></div>
         <% end %>
 
         <div data-controller="product-tabs">
           <div class="border-b-4 border-black">
             <div class="-mb-px flex space-x-8" aria-orientation="horizontal" role="tablist">
-              <!-- Selected: "border-black text-black", Not Selected: "border-transparent text-gray-900 hover:border-gray-300 hover:text-black" -->
+              <!-- Selected: "border-black text-black", Not Selected: "border-transparent text-gray-900 hover:border-gray-500 hover:text-black" -->
               <button
                 id="tab-reviews"
                 data-product-tabs-target="button"
                 data-action="click->product-tabs#toggleTab"
-                class="border-transparent text-black whitespace-nowrap border-b-4 py-6 text-sm font-medium hover:text-white hover:border-white"
+                class="text-black whitespace-nowrap border-b-4 py-6 text-sm font-medium hover:text-gray-500 hover:border-gray-500"
                 aria-controls="tab-panel-reviews"
                 role="tab"
                 type="button"
@@ -264,7 +268,7 @@
                 id="tab-license"
                 data-product-tabs-target="button"
                 data-action="click->product-tabs#toggleTab"
-                class="border-transparent text-black whitespace-nowrap border-b-4 py-6 text-sm font-medium hover:text-white hover:border-white"
+                class="text-black whitespace-nowrap border-b-4 py-6 text-sm font-medium hover:text-gray-500 hover:border-gray-500"
                 aria-controls="tab-panel-license"
                 role="tab"
                 type="button"
@@ -287,10 +291,7 @@
             <% if @reviews.exists? %>
               <% if policy(@product).reviewable? %>
                 <div class="mt-6">
-                  <%= link_to new_marketplace_library_review_path(@product), class: "inline-flex hover:scale-110 hover:text-black hover:bg-white items-center gap-x-2 rounded-md bg-black px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black" do %>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="-ml-0.5 h-5 w-5">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                    </svg>
+                  <%= link_to new_marketplace_library_review_path(@product), class: "inline-flex hover:scale-110 hover:text-black hover:bg-gray-500 items-center gap-x-2 rounded-md bg-gray-400 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm" do %>
                     Add a Review
                   <% end %>
                 </div>
@@ -301,10 +302,7 @@
               <p class="text-sm text-center">There are no reviews.</p>
               <% if policy(@product).reviewable? %>
                 <div class="text-center mt-6">
-                  <%= link_to new_marketplace_library_review_path(@product), class: "inline-flex hover:scale-110 hover:text-black hover:bg-white items-center gap-x-2 rounded-md bg-black px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black" do %>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="-ml-0.5 h-5 w-5">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                    </svg>
+                  <%= link_to new_marketplace_library_review_path(@product), class: "inline-flex hover:scale-110 hover:text-black hover:bg-gray-500 items-center gap-x-2 rounded-md bg-gray-400 px-3.5 py-2.5 text-sm font-semibold text-whit shadow-sm" do %>
                     Add a Review
                   <% end %>
                 </div>
@@ -357,9 +355,9 @@
       <div class="mt-12 divide-y-4 divide-black space-y-6">
         <h2 class="text-3xl font-bold text-gray-900 mb-6 ">Related Products</h2>
         <div class="mt-6 flow-root space-y-6 pt-8">
-          <div class="">
-            <%= render ProductCarouselComponent.new(@related_products) %>
-          </div>
+          <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 gap-4 lg:gap-8 px-4 sm:px-6 lg:px-8 xl:px-0 ">
+              <%= render partial: "home/product", collection: @related_products %>
+            </div>
         </div>
       </div>
     <% end %>
@@ -368,9 +366,9 @@
       <div class="mt-12 divide-y-4 divide-black space-y-6">
         <h2 class="text-3xl font-bold text-gray-900 mb-6 ">More From This Creator</h2>
         <div class="mt-6 flow-root space-y-6 pt-8">
-          <div class="">
-            <%= render ProductCarouselComponent.new(@more_from_this_creators) %>
-          </div>
+          <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 gap-4 lg:gap-8 px-4 sm:px-6 lg:px-8 xl:px-0 ">
+              <%= render partial: "home/product", collection: @more_from_this_creators %>
+            </div>
         </div>
       </div>
     <% end %>
@@ -476,7 +474,7 @@
 	});
 </script>
 
- <script>
+ <%# <script>
     $(".slickSlider").slick({
       infinite: false,
           speed: 300,
@@ -517,4 +515,4 @@
               }
           }]
       });
-</script>
+</script> %>
