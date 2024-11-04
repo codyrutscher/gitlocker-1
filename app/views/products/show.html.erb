@@ -4,14 +4,13 @@
   <% content_for :meta_title, @product&.name&.titleize&.first(65) %>
 <% end %>
 
-<div class="bg-white">
+<div class="bg-gray-300">
   <%=
     render BreadcrumbComponent.new(current_user,[
       { text: "Products", url: current_user&.buyer? ? marketplace_browse_path : marketplace_browse_path },
       { text: @product.name, url: request.original_url.include?("/l/") ? marketplace_library_path(@product) : product_path(@product) }
     ])
-  %>
-<div class="bg-gray-300">  
+  %> 
 <div class="mx-auto px-4 py-8 sm:px-6 lg:px-8">
     <!-- Product -->
     <div class="flex flex-col md:flex-row md:items-center gap-4">
@@ -62,7 +61,7 @@
 	<% end %>
       </div>
     </div>
-</div>
+
     <div class="my-8 w-full border-t-4 border-black"></div>
 
     <div class="lg:grid lg:grid-cols-7 lg:grid-rows-1 lg:gap-x-8 lg:gap-y-10 xl:gap-x-12">
@@ -292,7 +291,7 @@
             <% if @reviews.exists? %>
               <% if policy(@product).reviewable? %>
                 <div class="mt-6">
-                  <%= link_to new_marketplace_library_review_path(@product), class: "inline-flex hover:scale-110 hover:text-black hover:bg-gray-500 items-center gap-x-2 rounded-md bg-gray-300 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm" do %>
+                  <%= link_to new_marketplace_library_review_path(@product), class: "inline-flex hover:scale-110 hover:text-black hover:bg-gray-500 items-center gap-x-2 rounded-md bg-gray-400 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm" do %>
                     Add a Review
                   <% end %>
                 </div>
@@ -303,7 +302,7 @@
               <p class="text-sm text-center">There are no reviews.</p>
               <% if policy(@product).reviewable? %>
                 <div class="text-center mt-6">
-                  <%= link_to new_marketplace_library_review_path(@product), class: "inline-flex hover:scale-110 hover:text-black hover:bg-gray-500 items-center gap-x-2 rounded-md bg-gray-300 px-3.5 py-2.5 text-sm font-semibold text-whit shadow-sm" do %>
+                  <%= link_to new_marketplace_library_review_path(@product), class: "inline-flex hover:scale-110 hover:text-black hover:bg-gray-500 items-center gap-x-2 rounded-md bg-gray-400 px-3.5 py-2.5 text-sm font-semibold text-whit shadow-sm" do %>
                     Add a Review
                   <% end %>
                 </div>
