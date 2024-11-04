@@ -43,7 +43,8 @@ module ProductConcern
 
   def folder_structure_for_js_tree(folder_path)
     structure = {}
-    Dir.glob(File.join(folder_path, '**', '*')).each do |path|
+    Dir.glob(File.join(folder_path, '**', '*'), File::FNM_DOTMATCH).each do |path|
+      next if File.basename(path) == '.' || File.basename(path) == '..'
       relative_path = path.sub("#{folder_path}/", '')
       parts = relative_path.split('/')
       current_level = structure

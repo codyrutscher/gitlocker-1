@@ -197,6 +197,11 @@ GEM
     fugit (1.11.0)
       et-orbi (~> 1, >= 1.2.11)
       raabro (~> 1.4)
+    git (2.3.1)
+      activesupport (>= 5.0)
+      addressable (~> 2.8)
+      process_executer (~> 1.1)
+      rchardet (~> 1.8)
     github-linguist (8.0.1)
       cgi
       charlock_holmes (~> 0.7.7)
@@ -567,6 +572,7 @@ DEPENDENCIES
   faraday-retry
   fog-aws
   friendly_id (~> 5.5.0)
+  git (~> 2.3.0)
   github-linguist
   good_job
   image_processing (~> 1.2)
