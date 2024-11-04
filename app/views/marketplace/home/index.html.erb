@@ -91,6 +91,7 @@
       <% end %>
       <hr class="h-px mt-8 bg-black border-8 border-black">
     <%= render 'middleTwo' %>
+    <hr class="h-px bg-black border-8 border-black">
       <% if @premium_products.size > 0 %>
         <!-- Premium Section -->
         <section aria-labelledby="popular-heading" class="bg-orange-400">
@@ -165,6 +166,7 @@
       <% end %>
     <hr class="h-px mt-8 bg-black border-8 border-black">
       <%= render 'middle' %>
+    <hr class="h-px bg-black border-8 border-black">
       <% if @languages.size > 0 %>
         <!-- Languages Section -->
         <section aria-labelledby="languages-heading" class="bg-orange-400">
@@ -181,7 +183,7 @@
           <hr class="h-px bg-black border-8 border-black">
           <div class="mt-6 flow-root">
             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 gap-4 lg:gap-8 px-4 sm:px-6 lg:px-8 xl:px-0 ">
-              <%= render partial: "home/language", collection: @languages, as: :language %>
+              <%=  partial: "home/language", collection: @languages, as: :language %>
             </div>
           </div>
         
@@ -203,13 +205,14 @@
           <hr class="h-px bg-black border-8 border-black">
           <div class="mt-6 flow-root">
             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 gap-4 lg:gap-8 px-4 sm:px-6 lg:px-8 xl:px-0 ">
-              <%= render partial: "home/category", collection: @categories, as: :category %>
+              <%=  partial: "home/category", collection: @categories, as: :category %>
             </div>
           </div>
       
       <% end %>
     <hr class="h-px mt-8 bg-black border-8 border-black">
     <%= render 'footer' %>
+    <hr class="h-px bg-black border-8 border-black">
     </main>
   </div>
   <%# <script>
