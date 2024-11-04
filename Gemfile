@@ -49,6 +49,7 @@ gem 'faraday'
 gem 'faraday-multipart'
 gem 'github-linguist'
 gem 'rack-brotli', '~> 2.0'
+gem 'canonical-rails', '~> 0.2.16'
 
 
 # Use Redis adapter to run Action Cable in production
