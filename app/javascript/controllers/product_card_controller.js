@@ -6,19 +6,26 @@ export default class extends Controller {
   static targets = ['menu', 'menuItem'];
 
   connect() {
-    this.menuItemTargets.forEach((menuItem) => {
-      useHover(this, { element: menuItem });
-    });
+    // Check if the menuTarget exists before attempting to use it
+    if (this.hasMenuTarget) {
+      this.menuItemTargets.forEach((menuItem) => {
+        useHover(this, { element: menuItem });
+      });
 
-    document.addEventListener('click', this.handleClickOutside.bind(this));
+      document.addEventListener('click', this.handleClickOutside.bind(this));
+    } else {
+      console.warn('Menu target is missing for "product-card" controller');
+    }
   }
 
   disconnect() {
-    document.removeEventListener('click', this.handleClickOutside.bind(this));
+    if (this.hasMenuTarget) {
+      document.removeEventListener('click', this.handleClickOutside.bind(this));
+    }
   }
 
   handleClickOutside(event) {
-    if (!this.element.contains(event.target)) {
+    if (this.hasMenuTarget && !this.element.contains(event.target)) {
       if (this.menuTarget.classList.contains('hidden')) {
         return;
       }
@@ -27,7 +34,9 @@ export default class extends Controller {
   }
 
   open() {
-    toggle(this.menuTarget);
+    if (this.hasMenuTarget) {
+      toggle(this.menuTarget);
+    }
   }
 
   mouseEnter(e) {
