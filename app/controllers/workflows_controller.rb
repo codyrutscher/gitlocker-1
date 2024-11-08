@@ -214,7 +214,7 @@ class WorkflowsController < ApplicationController
   def download_repo
     workflow_folder = Rails.root.join('workflows', "#{current_user.friendly_id}")
     if repo_params && repo_params[:username] && repo_params[:repo_name] && repo_params[:branch_name]
-      repo_url = "https://#{current_user.token}@github.com/#{repo_params[:username]}/#{repo_params[:repo_name]}"
+      repo_url = "https://#{current_user.token}@github.com/#{repo_params[:username]}/#{repo_params[:repo_name]}.git"
       folder_path = workflow_folder.join("#{repo_params[:repo_name]}")
       if File.exist?(folder_path) && File.directory?(folder_path)
         FileUtils.remove_dir(folder_path, true)
