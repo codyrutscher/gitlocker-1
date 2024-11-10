@@ -1,4 +1,4 @@
-<%= link_to marketplace_category_path(category.slug), class: "relative aspect-square border border-black border-4 rounded hover:shadow-[0px_20px_20px_15px_#1158f2] hover:scale-105" do %>
+<%= link_to marketplace_category_path(category.slug), class: "relative aspect-square border border-black border-4 rounded hover:shadow-[0px_20px_20px_15px_#1158f2]" do %>
   <%= image_tag "categories/#{category.image_name}", class: "h-full w-full aspect-square object-cover object-center rounded", alt: "#{category.image_name} Image" %>
   <div class="absolute rounded-b border-4 bottom-0 flex items-center right-0 left-0 bg-gradient-to-b from-transparent to-gray-300 ">
     <div class="bg-white rounded-3xl flex items-center">
