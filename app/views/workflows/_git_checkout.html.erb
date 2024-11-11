@@ -1,0 +1,18 @@
+<div id="git-checkout">
+  <p class="text-lg text-black font-bold"> <%= @message %> </p>
+  <%= form_with url: git_checkout_path(current_user), method: :post, local: true, data: { turbo: true }, class: 'max-w-sm mx-auto' do |form| %>
+    <%= form.hidden_field :repo_name, value: @repo_name %>
+    <% if @filenames.present? %>
+      <% @filenames.each do |file| %>
+        <div class='pb-4'>
+          <div class='flex items-start mb-5'>
+            <%= form.hidden_field "files[#{file}]", value: 1 %>
+            <%= form.check_box "files[#{file}]", id: "#{file}", checked: true, disabled: true, class: 'w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800' %>
+            <%= form.label "#{file}", "#{file}", class: 'px-2 text-sm font-medium text-gray-900 dark:text-gray-300' %>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+    <%= form.submit "Remove Changes", class: 'py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700' %>
+  <% end %>
+</div>
