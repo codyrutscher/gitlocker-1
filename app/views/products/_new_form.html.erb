@@ -422,7 +422,7 @@
     });
   });
 
-document.addEventListener('turbo:load', () => {
+document.addEventListener('turbo:render', () => {
   document.querySelectorAll('.import-repo-btn').forEach(button => {
     button.addEventListener('click', function(event) {
       event.preventDefault();
