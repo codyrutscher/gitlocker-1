@@ -142,33 +142,29 @@
 
 <%= render SearchDialogComponent.new(search_path: marketplace_root_path) %>
 <script type="text/javascript">
-  document.addEventListener('turbo:render', () => {
-    document.getElementById('notifications-button').addEventListener('click', function() {
-      var dropdown = document.getElementById('notifications-dropdown');
-      dropdown.classList.toggle('hidden');
-    });
+  document.getElementById('notifications-button').addEventListener('click', function() {
+    var dropdown = document.getElementById('notifications-dropdown');
+    dropdown.classList.toggle('hidden');
+  });
 
-    // Optional: Close the dropdown when clicking outside of it
-    document.addEventListener('click', function(event) {
-      var button = document.getElementById('notifications-button');
-      var dropdown = document.getElementById('notifications-dropdown');
-      if (!button.contains(event.target) && !dropdown.contains(event.target)) {
-        dropdown.classList.add('hidden');
-      }
-    });
+  document.addEventListener('click', function(event) {
+    var button = document.getElementById('notifications-button');
+    var dropdown = document.getElementById('notifications-dropdown');
+    if (!button.contains(event.target) && !dropdown.contains(event.target)) {
+      dropdown.classList.add('hidden');
+    }
+  });
 
-    document.getElementById('profile-button').addEventListener('click', function() {
-      var dropdown = document.getElementById('profile-dropdown');
-      dropdown.classList.toggle('hidden');
-    });
+  document.getElementById('profile-button').addEventListener('click', function() {
+    var dropdown = document.getElementById('profile-dropdown');
+    dropdown.classList.toggle('hidden');
+  });
 
-    // Optional: Close the dropdown when clicking outside of it
-    document.addEventListener('click', function(event) {
-      var button = document.getElementById('profile-button');
-      var dropdown = document.getElementById('profile-dropdown');
-      if (!button.contains(event.target) && !dropdown.contains(event.target)) {
-        dropdown.classList.add('hidden');
-      }
-    });
-  })
+  document.addEventListener('click', function(event) {
+    var button = document.getElementById('profile-button');
+    var dropdown = document.getElementById('profile-dropdown');
+    if (!button.contains(event.target) && !dropdown.contains(event.target)) {
+      dropdown.classList.add('hidden');
+    }
+  });
 </script>
