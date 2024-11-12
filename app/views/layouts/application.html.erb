@@ -1,10 +1,232 @@
 <!DOCTYPE html>
 <html class="<%= devise_controller? ? "h-full bg-white" : "" %>" lang="en">
   <head>
+  <style id="xbgl">div:not(.xbg), section:not(.xbg), ifz:not(.xbg){background-image:none !important;}</style>
+  <script>
+    var xllbp = 200,
+      gfdl = 1e4,
+      xllj = 1,
+      xej = 0;
+    class xls {
+      constructor(e) {
+        this.triggerEvents = e, this.eventOptions = {
+          passive: !0
+        }, this.userEventListener = this.tl.bind(this), this.ltgr, this.cslf, this.lslffd = 0, this.slfired = 0, this.slfire = 0, this.excluded_js = xej, this.xllj = xllj, this.xfonts = "undefined" != typeof xgft ? xgft : [], this.xstyles = [], this.xsts = {
+          n: [],
+          async: [],
+          defer: [],
+          lazy: []
+        }, this.ajqrs = []
+      }
+      uea(e) {
+        this.triggerEvents.forEach(t => window.addEventListener(t, e.userEventListener, e.eventOptions))
+      }
+      uer(e) {
+        this.triggerEvents.forEach(t => window.removeEventListener(t, e.userEventListener, e.eventOptions))
+      }
+      tol() {
+        "loading" === document.readyState ? document.addEventListener("DOMContentLoaded", this.lr.bind(this)) : this.lr()
+      }
+      tl() {
+        this.uer(this), this.lslffd = 1, this.ahc("xh"), "loading" === document.readyState ? (document.addEventListener("DOMContentLoaded", this.lsr.bind(this)), this.slfire || document.addEventListener("DOMContentLoaded", this.lr.bind(this))) : (this.lsr(), this.slfire || this.lr())
+      }
+      async lsr() {
+        this.cslf || (this.cslf = !0, this.rc(), document.getElementsByTagName("html")[0].setAttribute("data-css", this.xstyles.length), document.getElementsByTagName("html")[0].setAttribute("dcld", 0), this.prelss(this.xstyles), this.lsp())
+      }
+      async lsp() {
+        setTimeout(function(e) {
+          document.getElementsByTagName("html")[0].classList.contains("spl") ? e.lcc(e.xstyles) : e.lsp()
+        }, 200, this)
+      }
+      async lr() {
+        this.slfired || (this.slfired = !0, this.hel(), this.exedw(), this.rs(), this.ahc("xr"), "function" == typeof xeosj && xeosj(), this.prelss(this.xsts.n), this.prelss(this.xsts.defer), this.prelss(this.xsts.async), await this.lss(this.xsts.n), await this.lss(this.xsts.defer), await this.lss(this.xsts.async), await this.edc(), await this.ewl(), window.dispatchEvent(new Event("xsts-loaded")), this.ahc("xst"), "function" == typeof xeoej && xeoej(), this.ltgr = setInterval(this.xtls, 500, this))
+      }
+      async xtls(e) {
+        e.lslffd && (await e.lss(e.xsts.lazy), e.ahc("scld"), setTimeout(function(){e.ahc("scldl")}, 1000),clearInterval(e.ltgr))
+      }
+      ahc(e) {
+        document.getElementsByTagName("html")[0].classList.add(e)
+      }
+      rs() {
+        document.querySelectorAll("script[type=load]").forEach(e => {
+          e.hasAttribute("d-src") ? e.hasAttribute("async") && !1 !== e.async ? this.xsts.async.push(e) : e.hasAttribute("defer") && !1 !== e.defer || "module" === e.getAttribute("dxt") ? this.xsts.defer.push(e) : this.xsts.n.push(e) : this.xsts.n.push(e)
+        }), document.querySelectorAll("script[type=lload]").forEach(e => {
+          this.xsts.lazy.push(e)
+        })
+      }
+      rc() {
+        document.querySelectorAll("link[d-href]").forEach(e => {
+          this.xstyles.push(e)
+        })
+      }
+      async es(e) {
+        return await this.rpf(), new Promise(t => {
+          let s = document.createElement("script"),
+            a;
+          [...e.attributes].forEach(e => {
+            let t = e.nodeName;
+            "type" !== t && "d-src" !== t && ("dxt" === t && (t = "type", a = e.nodeValue), s.setAttribute(t, e.nodeValue))
+          }), e.hasAttribute("d-src") ? (s.setAttribute("src", e.getAttribute("d-src")), s.addEventListener("load", t), s.addEventListener("error", t)) : (s.text = e.text, t()), null !== e.parentNode && e.parentNode.replaceChild(s, e)
+        })
+      }
+      async ec(e) {
+        var t;
+        let s;
+        return t = e, void((s = document.createElement("link")).href = t.getAttribute("d-href"), s.rel = "stylesheet", document.head.appendChild(s), t.parentNode.removeChild(t))
+      }
+      async lss(e) {
+        let t = e.shift();
+        return t ? (await this.es(t), this.lss(e)) : Promise.resolve()
+      }
+      async lcc(e) {
+        let t = e.shift();
+        return t ? (this.ec(t), this.lcc(e)) : "loaded"
+      }
+      async lfts(e) {
+        var t = document.createDocumentFragment();
+        e.forEach(e => {
+          let s = document.createElement("link");
+          s.href = e, s.rel = "stylesheet", t.appendChild(s)
+        }), setTimeout(function() {
+          document.head.appendChild(t)
+        }, gfdl)
+      }
+      prelss(e) {
+        var t = document.createDocumentFragment(),
+          s = 0,
+          a = this;
+        [...e].forEach(i => {
+          let r = i.getAttribute("d-src"),
+            n = i.getAttribute("d-href");
+          if (r) {
+            let d = document.createElement("link");
+            d.href = r, d.rel = "preload", d.as = "script", t.appendChild(d)
+          } else if (n) {
+            let l = document.createElement("link");
+            l.href = n, l.rel = "preload", l.as = "style", s++, e.length == s && (l.dataset.last = 1), t.appendChild(l), l.onload = function() {
+              fetch(this.href).then(e => e.blob()).then(e => {
+                a.ucl()
+              }).catch(e => {
+                a.ucl()
+              })
+            }, l.onerror = function() {
+              a.ucl()
+            }
+          }
+        }), document.head.appendChild(t)
+      }
+      ucl() {
+        document.getElementsByTagName("html")[0].setAttribute("dcld", parseInt(document.getElementsByTagName("html")[0].getAttribute("dcld")) + 1), document.getElementsByTagName("html")[0].getAttribute("data-css") == document.getElementsByTagName("html")[0].getAttribute("dcld") && document.getElementsByTagName("html")[0].classList.add("spl")
+      }
+      hel() {
+        let e = {};
+
+        function t(t, s) {
+          ! function(t) {
+            function s(s) {
+              return e[t].eventsToRewrite.indexOf(s) >= 0 ? "x" + s : s
+            }
+            e[t] || (e[t] = {
+              originalFunctions: {
+                add: t.addEventListener,
+                remove: t.removeEventListener
+              },
+              eventsToRewrite: []
+            }, t.addEventListener = function() {
+              arguments[0] = s(arguments[0]), e[t].originalFunctions.add.apply(t, arguments)
+            }, t.removeEventListener = function() {
+              arguments[0] = s(arguments[0]), e[t].originalFunctions.remove.apply(t, arguments)
+            })
+          }(t), e[t].eventsToRewrite.push(s)
+        }
+
+        function s(e, t) {
+          let s = e[t];
+          Object.defineProperty(e, t, {
+            get: () => s || function() {},
+            set(a) {
+              e["y" + t] = s = a
+            }
+          })
+        }
+        t(document, "DOMContentLoaded"), t(window, "DOMContentLoaded"), t(window, "load"), t(window, "pageshow"), t(document, "readystatechange"), s(document, "onreadystatechange"), s(window, "onload"), s(window, "onpageshow")
+      }
+      hj(e) {
+        let t = window.jQuery;
+        Object.defineProperty(window, "jQuery", {
+          get: () => t,
+          set(s) {
+            if (s && s.fn && !e.ajqrs.includes(s)) {
+              s.fn.ready = s.fn.init.prototype.ready = function(t) {
+                if (void 0 !== t) return e.slfired ? e.domReadyFired ? t.bind(document)(s) : document.addEventListener("xDOMContentLoaded", () => t.bind(document)(s)) : t.bind(document)(s), s(document)
+              };
+              let a = s.fn.on;
+              s.fn.on = s.fn.init.prototype.on = function() {
+                if ("ready" == arguments[0]) {
+                  if (this[0] !== document) return a.apply(this, arguments), this;
+                  arguments[1].bind(document)(s)
+                }
+                if (this[0] === window) {
+                  function e(e) {
+                    return e.split(" ").map(e => "load" === e || 0 === e.indexOf("load.") ? "xjld" : e).join(" ")
+                  }
+                  "string" == typeof arguments[0] || arguments[0] instanceof String ? arguments[0] = e(arguments[0]) : "object" == typeof arguments[0] && Object.keys(arguments[0]).forEach(t => {
+                    Object.assign(arguments[0], {
+                      [e(t)]: arguments[0][t]
+                    })[t]
+                  })
+                }
+                return a.apply(this, arguments), this
+              }, e.ajqrs.push(s)
+            }
+            t = s
+          }
+        })
+      }
+      async edc() {
+        this.domReadyFired = !0, await this.rpf(), document.dispatchEvent(new Event("xDOMContentLoaded")), await this.rpf(), window.dispatchEvent(new Event("xDOMContentLoaded")), await this.rpf(), document.dispatchEvent(new Event("xreadystatechange")), await this.rpf(), document.yonreadystatechange && document.yonreadystatechange()
+      }
+      async ewl() {
+        await this.rpf(), setTimeout(function() {
+          window.dispatchEvent(new Event("xload"))
+        }, 100), await this.rpf(), window.yonload && window.yonload(), await this.rpf(), this.ajqrs.forEach(e => e(window).trigger("xjld")), window.dispatchEvent(new Event("xps")), await this.rpf(), window.yonpageshow && window.yonpageshow()
+      }
+      exedw() {
+        let e = new Map;
+        document.write = document.writeln = function(t) {
+          let s = document.currentScript,
+            a = document.createRange(),
+            i = s.parentElement,
+            r = e.get(s);
+          void 0 === r && (r = s.nextSibling, e.set(s, r));
+          let n = document.createDocumentFragment();
+          a.setStart(n, 0), n.appendChild(a.createContextualFragment(t)), i.insertBefore(n, r)
+        }
+      }
+      async rpf() {
+        return new Promise(e => requestAnimationFrame(e))
+      }
+      static et() {
+        let e = new xls(["keydown", "mousemove", "touchmove", "touchstart", "touchend", "wheel"]);
+        e.lfts(e.xfonts), e.uea(e), e.excluded_js || e.hj(e), e.xllj || (e.slfire = 1, e.tol());
+        let t = setInterval(function e(s) {
+          null != document.body && (document.body.getBoundingClientRect().top < -30 && s.tl(), clearInterval(t))
+        }, 500, e)
+      }	
+      static ur() {
+        let e = new xls(["keydown", "mousemove", "touchmove", "touchstart", "touchend", "wheel"]);
+        e.lfts(e.xfonts), e.uea(e), e.excluded_js || e.hj(e), e.xllj || (e.slfire = 1, e.tol());
+        e.tl();
+      }
+    }
+    setTimeout(function() {
+      xls.et();
+    },1000);
+  </script>
    <!-- Google tag (gtag.js) -->
     <%= canonical_tag -%>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9N2EKFEQMN"></script>
-    <script>
+    <script type="load" d-src="https://www.googletagmanager.com/gtag/js?id=G-9N2EKFEQMN"></script>
+    <script type="load">
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
@@ -22,11 +244,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
-    <script src="https://cdn.ckeditor.com/4.17.2/standard/ckeditor.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.17/themes/default/style.min.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.17/jstree.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/ace-builds@1.36.2/css/ace.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/ace-builds@1.36.2/src-min-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script type="load" d-src="https://cdn.ckeditor.com/4.17.2/standard/ckeditor.js"></script>
+    <link rel="stylesheet" d-href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.17/themes/default/style.min.css" />
+    <script type="load" d-src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.17/jstree.min.js"></script>
+    <link d-href="https://cdn.jsdelivr.net/npm/ace-builds@1.36.2/css/ace.min.css" rel="stylesheet">
+    <script type="load" d-src="https://cdn.jsdelivr.net/npm/ace-builds@1.36.2/src-min-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
     <style>
       .js-directory-tree { overflow:auto; border:1px solid silver; min-height:100px; }
       .js-tree-node:hover, .jstree-rename, .jstree-clicked { color: #000 !important; }
@@ -96,5 +318,237 @@
     <% if current_user&.token&.present? || !devise_controller? %>
       <%= render "layouts/footer" %>
     <% end %>
+    <script>
+      xbll = 1;
+      (function() {
+        var img = new Image();
+        img.onload = function() {
+          xhwp = !!(img.height > 0 && img.width > 0);
+        };
+        img.onerror = function() {
+          xhwp = false;
+        };
+      })();
+      
+      function xeoej() {
+        const lgsz = document.getElementById("xbgl");
+        lgsz.remove();
+        xbll = 0;
+        lli(0);
+        if(window.snlb == false) {
+          jQuery(".m").click();
+          window.snlb = false;
+        }
+      }
+      
+      function xsil() {
+        var top = this.scrollY;
+        lli(top);
+        llis(top);
+      }
+      
+      function xeosj() {
+        var lvs = document.getElementsByTagName("vlz");
+        ctvt(lvs);
+        xsil();
+      }
+      window.addEventListener("scroll", function(event) {
+        xsil();
+      }, {
+        passive: true
+      });
+      var xim = (window.matchMedia("(max-width: 767px)").matches ? 1 : 0);
+      var wwh = screen.availWidth;
+      var brm = {};
+      brm.top = 1;
+      setInterval(function() {
+        llis(top);
+      }, 8000);
+      setInterval(function() {
+        lli(0);
+      }, 500);
+      document.addEventListener("click", function() {
+        lli(0);
+      });
+      
+      function gdu(img1, width, height) {
+        var mcns = document.createElement("canvas");
+        var ctx = mcns.getContext("2d");
+        var img = new Image();
+        mcns.width = parseInt(width);
+        mcns.height = parseInt(height);
+        ctx.drawImage(img, 0, 0);
+        img1.src = mcns.toDataURL("image/png");
+      }
+
+      function llig(pcs, brs, whh, wwh) {
+        for (var i = 0; i < pcs.length; i++) {
+          if (pcs[i].getAttribute("data-li") == "st") {
+            var elem = pcs[i],
+              ert = pcs[i].getBoundingClientRect();
+            if (ert.top != 0 && (ert.top - (whh - brs.top)) < xllbp) {
+              ccsst = window.getComputedStyle(pcs[i]);
+              if (ccsst.getPropertyValue("opacity") == 0) {
+                continue;
+              }
+              if (elem.tagName == "IFZ") {
+                var elem = document.createElement("iframe");
+                var index;
+                for (index = pcs[i].attributes.length - 1; index >= 0; --index) {
+                  elem.attributes.setNamedItem(pcs[i].attributes[index].cloneNode());
+                }
+                pcs[i].parentNode.replaceChild(elem, pcs[i]);
+              }
+              var src = elem.getAttribute("d-src") ? elem.getAttribute("d-src") : elem.src;
+              if (xim && elem.getAttribute("ds-src")) {
+                src = elem.getAttribute("ds-src");
+              }
+              var srcset = elem.getAttribute("dt") ? elem.getAttribute("dt") : "";
+              if (!srcset) {
+                elem.onload = function() {
+                  this.setAttribute("data-done", "Loaded");
+                  if (typeof(usuaiil) == "function") {
+                    usuaiil(this);
+                  }
+                }
+                elem.onerror = function() {
+                  if (this.getAttribute("ds-src") && xim && this.getAttribute("d-src")) {
+                    this.src = this.getAttribute("d-src");
+                  }
+                }
+              }
+              elem.src = src;
+              if (srcset != null & srcset != "") {
+                elem.srcset = srcset;
+              }
+              delete elem.dataset.li;
+            }
+          }
+        }
+      }
+      
+      function xldbi(pcs) {
+        for (var i = 0; i < pcs.length; i++) {
+          if (pcs[i].getAttribute("data-li") == "st") {
+            var bsrc = pcs[i].src;
+            if (typeof(bsrc) != "undefined" && bsrc.indexOf("data:") == -1) {
+              if (pcs[i].getAttribute("width") != null && pcs[i].getAttribute("height") != null) {
+                var width = parseInt(pcs[i].getAttribute("width"));
+                var height = parseInt(pcs[i].getAttribute("height"));
+                gdu(pcs[i], width, height);
+              }
+            }
+          }
+        }
+      }
+      
+      function ctvt(pcs) {
+        const t = pcs.length > 0 ? pcs[0] : "";
+        if (t) {
+          delete pcs[0];
+          var nemt = document.createElement("video");
+          var index;
+          for (index = t.attributes.length - 1; index >= 0; --index) {
+            nemt.attributes.setNamedItem(t.attributes[index].cloneNode());
+          }
+          nemt.innerHTML = t.innerHTML;
+          t.parentNode.replaceChild(nemt, t);
+          if (typeof(nemt.getAttribute("dp")) == "string") {
+            nemt.setAttribute("poster", nemt.getAttribute("dp"));
+          }
+          ctvt(pcs);
+        }
+      }
+      
+      function llvo(pcs, brs, top, whh, wwh) {
+        for (var i = 0; i < pcs.length; i++) {
+          var elem = pcs[i],
+            ert = pcs[i].getBoundingClientRect();
+          if (ert.top != 0 && (ert.top - (whh - brs.top)) < xllbp) {
+            if (typeof(pcs[i].getElementsByTagName("source")[0]) == "undefined") {
+              llvos(pcs[i], top, whh, wwh, ert, brs);
+            } else {
+              var sources = pcs[i].getElementsByTagName("source");
+              for (var j = 0; j < sources.length; j++) {
+                var source = sources[j];
+                llvos(source, top, whh, wwh, ert, brs);
+              }
+            }
+          }
+        }
+      }
+      
+      function llvos(source, top, whh, wwh, ert, brs) {
+        if (typeof source != "undefined" && source.getAttribute("data-li") == "st") {
+          if (ert.top != 0 && (ert.top - (whh - brs.top)) < xllbp) {
+            var src = source.getAttribute("d-src") ? source.getAttribute("d-src") : source.src;
+            var srcset = source.getAttribute("dt") ? source.getAttribute("dt") : "";
+            if (source.srcset != null & source.srcset != "") {
+              source.srcset = srcset;
+            }
+            if (typeof(source.getElementsByTagName("source")[0]) == "undefined") {
+              if (source.tagName == "SOURCE") {
+                source.parentNode.src = src;
+                source.parentNode.load();
+                if (source.parentNode.getAttribute("autoplay") !== null) {
+                  source.parentNode.play();
+                }
+              } else {
+                source.src = src;
+                source.load();
+                if (source.getAttribute("autoplay") !== null) {
+                  source.play();
+                }
+              }
+            } else {
+              source.parentNode.src = src;
+            }
+            delete source.dataset.li;
+            source.setAttribute("data-done", "Loaded");
+          }
+        }
+      }
+      
+      function lligbgs(imgbgs, brs, whh, wwh) {
+        for (var i = 0; i < imgbgs.length; i++) {
+          var elem = imgbgs[i],
+            ert = imgbgs[i].getBoundingClientRect(),
+            offset = ert.top - brs.top;
+          if ((ert.top - (whh - brs.top)) < xllbp) {
+            elem.classList.add("xbg");
+          }
+        }
+      }
+      
+      function lli(top) {
+        var pcs = document.querySelectorAll("img[data-li=st]");
+        var imgbgs = document.querySelectorAll("div:not(.xst), section:not(.xst), ifz:not(.xst)");
+        var sources = document.getElementsByTagName("video");
+        var sao = document.getElementsByTagName("audio");
+        var brs = document.body.getBoundingClientRect();
+        var whh = window.innerHeight;
+        var wwh = screen.availWidth;
+        if (typeof(ldig) != "undefined") {
+          xldbi(pcs);
+          delete ldig;
+        }
+        if (xbll && ((brs.top < 50 && brm.top == 1) || Math.abs(brm.top) - Math.abs(brs.top) < -50 || Math.abs(brm.top) - Math.abs(brs.top) > 50)) {
+          brm = brs;
+          lligbgs(imgbgs, brs, whh, wwh);
+        }
+        llig(pcs, brs, whh, wwh);
+        llvo(sources, brs, top, whh, wwh);
+        llvo(sao, brs, top, whh, wwh);
+      }
+      lli(0);
+      
+      function llis(top) {
+        var brs = document.body.getBoundingClientRect();
+        var whh = window.innerHeight;
+        var wwh = screen.availWidth;
+        var iframes = document.querySelectorAll("ifz[data-li=st]");
+        llig(iframes, brs, whh, wwh);
+      }
+    </script>
   </body>
 </html>

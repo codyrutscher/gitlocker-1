@@ -119,11 +119,11 @@
                   <div class="flex flex-col divide-y">
                     <%= link_to "View Profile", marketplace_user_path(current_user), class: "text-sm inline-block text-black px-4 py-2 hover:bg-blue-500 hover:text-white " %>
                     <%= link_to "Edit Profile", edit_marketplace_user_path(current_user), class: "text-sm inline-block text-black px-4 py-2 hover:bg-blue-500 hover:text-white " %>
-                    <%= link_to "My Products", products_path, class: "text-sm inline-block text-black px-4 py-2 hover:bg-blue-500 hover:text-white " %>
+                    <%= link_to "Listed Products", products_path, class: "text-sm inline-block text-black px-4 py-2 hover:bg-blue-500 hover:text-white " %>
                     <%= link_to "Add Product", new_product_path, class: "text-sm inline-block text-black px-4 py-2 hover:bg-blue-500 hover:text-white " %>
+                    <%= link_to "Purchased Products", marketplace_purchases_path, class: "text-sm inline-block text-black px-4 py-2 hover:bg-blue-500 hover:text-white " %>
                     <%= link_to "Coding Resources", resources_path, class: "text-sm inline-block text-black px-4 py-2 hover:bg-blue-500 hover:text-white ", target: :blank %>
                     <%= link_to "Deployment Options", deployment_options_path, class: "text-sm inline-block text-black px-4 py-2 hover:bg-blue-500 hover:text-white ", target: :blank %>
-                    <%= link_to "Purchased Products", marketplace_purchases_path, class: "text-sm inline-block text-black px-4 py-2 hover:bg-blue-500 hover:text-white " %>
                     <%= link_to "Get Paid", seller_dashboard_path, class: "text-sm inline-block text-black px-4 py-2 hover:bg-blue-500 hover:text-white " %>
                     <%= link_to "Log out", destroy_user_session_path, data: { "turbo-method": :delete }, class: "text-sm inline-block text-black px-4 py-2 hover:bg-blue-500 hover:text-white " %>
                   </div>
@@ -147,7 +147,6 @@
     dropdown.classList.toggle('hidden');
   });
 
-  // Optional: Close the dropdown when clicking outside of it
   document.addEventListener('click', function(event) {
     var button = document.getElementById('notifications-button');
     var dropdown = document.getElementById('notifications-dropdown');
@@ -161,7 +160,6 @@
     dropdown.classList.toggle('hidden');
   });
 
-  // Optional: Close the dropdown when clicking outside of it
   document.addEventListener('click', function(event) {
     var button = document.getElementById('profile-button');
     var dropdown = document.getElementById('profile-dropdown');

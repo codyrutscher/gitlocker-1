@@ -19,6 +19,9 @@
 #python {
   background-color: #3572A;
 }
+#div {
+  display: inline-block
+}
 
 
 
@@ -26,17 +29,19 @@
 
 </style>
 </head>
-<section class="relative block homepage-section border-b-12 border-t-12 border-black">
+<section class="relative block bg-gradient-to-r from-indigo-500 via-blue-500 to-orange-500 border-b-12 border-t-12 border-black">
   <!-- Carousel Background -->
   <div class="absolute inset-0 z-0 h-full w-full flex">
-    <%= image_tag "header/banner-01.jpg", class: "w-screen object-contain", alt: "Gitlocker Header Banner" %>
+    
   </div>
 
   <!-- Section Content -->
-  <div class="relative container mx-auto px-4 text-center text-white py-16 rounded-3xl">
-        <h1 class="text-white text-5xl max-w-4xl mx-auto text-balance">
-          Browse <span class="font-bold">GitLocker's</span> selection of <span id="count" data-target="100000" class="font-bold italic text-orange-500 underline underline-offset-3 decoration-6 decoration-orange-500">100,000</span> free and premium code products<span class="font-bold italic text-orange-500 underline underline-offset-3 decoration-6 decoration-orange-500"></span> or sign up to start <span class="font-bold">buying and selling</span>! 
+  <div class="relative container mx-auto px-4 justify-center text-center text-white py-16 rounded-3xl">
+        <div id="div" class="bg-orange-400 border-black justify-center border-8 flex justify-center items-center rounded-2xl">
+        <h1 class="text-black text-5xl max-w-4xl mx-auto text-balance">
+          Browse <span class="font-bold">GitLocker's</span> selection of <span id="count" data-target="100000" class="font-bold italic text-blue-500 underline underline-offset-3 decoration-6 decoration-blue-500">100,000</span> free and premium code products<span class="font-bold italic text-orange-500 underline underline-offset-3 decoration-6 decoration-orange-500"></span> or sign up to start <span class="font-bold">buying and selling</span>! 
         </h1>
+        </div>
    
 
 
@@ -55,11 +60,11 @@
     </div>
 
     <div class="mt-8 flex justify-center space-x-4">
-      <%= link_to "JavaScript", '/marketplace/languages/javascript', id: "javascript", class: "hover:scale-110 text-black hover:text-black focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg border-black border-4 text-sm px-5 py-2.5 text-center me-2 mb-2" %>
-      <%= link_to "Ruby", '/marketplace/languages/ruby', id: "ruby", class: "hover:scale-110 text-black hover:text-black focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 border-black border-4 text-center me-2 mb-2" %>
-      <%= link_to "HTML", '/marketplace/languages/html', id: "html", class: "hover:scale-110 text-black hover:text-black focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 border-black border-4 text-center me-2 mb-2" %>
-      <%= link_to "CSS", '/marketplace/languages/css', id: "css", class: "hover:scale-110 text-black hover:text-black bg-orange-500 hover:bg-blue-500 focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 border-black border-4 text-center me-2 mb-2" %>
-      <%= link_to "PHP", '/marketplace/languages/php', id: "php", class: "hover:scale-110 text-black hover:text-black bg-orange-500 hover:bg-blue-500 focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 border-black border-4 text-center me-2 mb-2" %>
+      <%= link_to "JavaScript", '/marketplace/languages/javascript', id: "javascript", class: "hover:scale-110 text-white  focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg border-black border-4 text-sm px-5 py-2.5 text-center me-2 mb-2" %>
+      <%= link_to "Ruby", '/marketplace/languages/ruby', id: "ruby", class: "hover:scale-110 text-white  focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 border-black border-4 text-center me-2 mb-2" %>
+      <%= link_to "HTML", '/marketplace/languages/html', id: "html", class: "hover:scale-110 text-white  focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 border-black border-4 text-center me-2 mb-2" %>
+      <%= link_to "CSS", '/marketplace/languages/css', id: "css", class: "hover:scale-110 text-white  bg-orange-500 hover:bg-blue-500 focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 border-black border-4 text-center me-2 mb-2" %>
+      <%= link_to "PHP", '/marketplace/languages/php', id: "php", class: "hover:scale-110 text-white bg-orange-500 hover:bg-blue-500 focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 border-black border-4 text-center me-2 mb-2" %>
     </div>
 
      <div class="mt-8 flex justify-center space-x-4">

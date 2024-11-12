@@ -29,7 +29,11 @@
           <% end %>
   
         </div>
-
+        <% if product.purchase_count == 1 %>
+	      <p class="text-sm">1 purchase</p>
+	      <% else %>
+	      <p class="text-sm"><%= product.purchase_count %> purchases</p>
+	      <% end %>
         <%# Reviews + Price %>
         <div class="flex flex-row items-center divide-x divide-black p-0 m-0">
           <%# Reviews %>

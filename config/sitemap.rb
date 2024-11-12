@@ -17,4 +17,28 @@ SitemapGenerator::Sitemap.sitemaps_path = "sitemaps/"
 
 SitemapGenerator::Sitemap.create(compress: false) do
   add marketplace_root_path
+  # Product
+  Product.find_each do |product|
+    add product_path(product), lastmod: product.updated_at, priority: 0.5
+  end
+
+  # Blog
+  Blog.find_each do  |blog|
+    add blog_path(blog), lastmod: blog.updated_at, priority: 0.5
+  end
+
+  # Language
+  Language.find_each do |language|
+    add marketplace_language_path(language), priority: 0.5
+  end
+
+  # Category
+  Category.find_each do |category|
+    add marketplace_category_path(category), priority: 0.5
+  end
+
+  # Creator
+  User.find_each do |creator|
+    add marketplace_creator_path(creator.id), priority: 0.5
+  end
 end
