@@ -18,7 +18,7 @@
         <!-- Recent Section -->
         <section aria-labelledby="recent-heading" class="bg-orange-400 border-t-4 border-black">
           <div class=" px-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8 xl:px-0">
-            <h2 id="recent-heading" class="text-3xl font-bold tracking-tight text-black underline"><span class="text-blue-500"><%= @featured_products.count %></span> Featured Products:</h2>
+            <h2 id="recent-heading" class="text-3xl font-bold tracking-tight text-black underline"><span class=""><%= @featured_products.count %></span> Featured Products:</h2>
             <button class="bg-white text-black hover:text-white border-black border-4 font-bold py-2 px-4 rounded-full hover:shadow-[inset_24rem_0_0_0] hover:shadow-blue-400 duration-[400ms,700ms] transition-[color,box-shadow]">
             <%= link_to marketplace_browse_featured_path, class: "link" do %>
               Browse All Featured Repositories
@@ -44,7 +44,7 @@
         <!-- Recent Section -->
         <section aria-labelledby="recent-heading" class="bg-orange-400">
           <div class="px-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8 xl:px-0">
-            <h2 id="recent-heading" class="text-3xl font-bold tracking-tight text-black underline"><span class="text-blue-500"><%= @recent_products.count %></span> Recent Products:</h2>
+            <h2 id="recent-heading" class="text-3xl font-bold tracking-tight text-black underline"><span class=""><%= @recent_products.count %></span> Recent Products:</h2>
             <button class="bg-white text-black hover:text-white border-black border-4 font-bold py-2 px-4 rounded-full hover:shadow-[inset_22rem_0_0_0] hover:shadow-blue-400 duration-[400ms,700ms] transition-[color,box-shadow]">
             <%= link_to marketplace_browse_recent_path, class: "link" do %>
               Browse All Recent Repositories
@@ -69,7 +69,7 @@
         <!-- Popular Section -->
         <section aria-labelledby="popular-heading" class="bg-orange-400">
           <div class="px-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8 xl:px-0">
-            <h2 id="popular-heading" class="text-3xl font-bold tracking-tight text-black underline"><span class="text-blue-500"><%= @popular_products.count %></span>Popular Products:</h2>
+            <h2 id="popular-heading" class="text-3xl font-bold tracking-tight text-black underline"><span class=""><%= @popular_products.count %></span> Popular Products:</h2>
             <button class="bg-white hover:shadow-[inset_22rem_0_0_0] hover:shadow-blue-400 duration-[400ms,700ms] transition-[color,box-shadow] text-black hover:text-white border-black border-4 font-bold py-2 px-4 rounded-full">
             <%= link_to marketplace_browse_popular_path, class: "link" do %>
               Browse All Popular Repositories
@@ -96,7 +96,7 @@
         <!-- Premium Section -->
         <section aria-labelledby="popular-heading" class="bg-orange-400">
           <div class="px-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8 xl:px-0">
-            <h2 id="popular-heading" class="text-3xl font-bold tracking-tight text-black underline"><span class="text-blue-500"><%= @premium_products.count %></span>Premium Products:</h2>
+            <h2 id="popular-heading" class="text-3xl font-bold tracking-tight text-black underline"><span class=""><%= @premium_products.count %></span> Premium Products:</h2>
             <button class="bg-white hover:shadow-[inset_22rem_0_0_0] hover:shadow-blue-400 duration-[400ms,700ms] transition-[color,box-shadow] text-black hover:text-white border-black border-4 font-bold py-2 px-4 rounded-full">
             <%= link_to marketplace_browse_premium_path, class: "link" do %>
               Browse All Premium Repositories
@@ -122,7 +122,7 @@
         <!-- Free Section -->
         <section aria-labelledby="popular-heading" class="bg-orange-400">
           <div class="px-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8 xl:px-0">
-            <h2 id="popular-heading" class="text-3xl font-bold tracking-tight text-black underline"><span class="text-blue-500"><%= @free_products.count %></span>Free Products:</h2>
+            <h2 id="popular-heading" class="text-3xl font-bold tracking-tight text-black underline"><span class=""><%= @free_products.count %></span> Free Products:</h2>
             <button class="bg-white hover:shadow-[inset_22rem_0_0_0] hover:shadow-blue-400 duration-[400ms,700ms] transition-[color,box-shadow] text-black hover:text-white border-black border-4 font-bold py-2 px-4 rounded-full">
             <%= link_to marketplace_browse_free_path, class: "link" do %>
               Browse All Free Repositories
@@ -147,7 +147,7 @@
         <!-- Creators Section -->
         <section aria-labelledby="creators-heading" class="bg-orange-400">
           <div class="px-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8 xl:px-0">
-            <h2 id="creators-heading" class="text-3xl font-bold tracking-tight text-black underline"><span class="text-blue-500"><%= @creators.count %></span>Creators:</h2>
+            <h2 id="creators-heading" class="text-3xl font-bold tracking-tight text-black underline"><span class=""><%= @creators.count %></span> Creators:</h2>
             <button class="bg-white hover:shadow-[inset_22rem_0_0_0] hover:shadow-blue-400 duration-[400ms,700ms] transition-[color,box-shadow] text-black hover:text-white border-black border-4 font-bold py-2 px-4 rounded-full ">
             <%= link_to marketplace_creators_path, class: "link" do %>
               Browse All Creators
@@ -171,7 +171,7 @@
         <!-- Languages Section -->
         <section aria-labelledby="languages-heading" class="bg-orange-400">
           <div class="px-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8 xl:px-0">
-            <h2 id="languages-heading" class="text-3xl font-bold tracking-tight text-black underline "><span class="text-blue-500"><%= @languages.count %></span>Programming Languages:</h2>
+            <h2 id="languages-heading" class="text-3xl font-bold tracking-tight text-black underline "><span class=""><%= @languages.count %></span> Programming Languages:</h2>
             <button class="bg-white hover:shadow-[inset_22rem_0_0_0] hover:shadow-blue-400 duration-[400ms,700ms] transition-[color,box-shadow] text-black hover:text-white border-black border-4 font-bold py-2 px-4 rounded-full ">
             <%= link_to marketplace_browse_languages_path, class: "link" do %>
               Browse All Languages
@@ -193,7 +193,7 @@
         <!-- Categories Section -->
         <section aria-labelledby="categories-heading" class="bg-orange-400">
           <div class="px-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8 xl:px-0">
-            <h2 id="categories-heading" class="text-3xl font-bold tracking-tight text-black underline "><span class="text-blue-500"><%= @categories.count %></span>Programming Categories:</h2>
+            <h2 id="categories-heading" class="text-3xl font-bold tracking-tight text-black underline "><span class=""><%= @categories.count %></span> Programming Categories:</h2>
             <button class="bg-white hover:shadow-[inset_22rem_0_0_0] hover:shadow-blue-400 duration-[400ms,700ms] transition-[color,box-shadow] text-black hover:text-white border-black border-4 font-bold py-2 px-4 rounded-full ">
             <%= link_to marketplace_browse_categories_path, class: "link" do %>
               Browse All Categories
