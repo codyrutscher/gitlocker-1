@@ -14,11 +14,7 @@ Rails.application.routes.draw do
   get '/workflows/:id/download_zip', to: 'workflows#download_zip', as: "download_zip"
   post '/workflows/:id/upload_zip', to: 'workflows#upload_zip', as: "upload_zip"
   get '/workflows/:id/download_repo', to: 'workflows#download_repo', as: "download_repo"
-  post '/workflows/:id/git', to: 'workflows#git', as: "git"
-  post '/workflows/:id/git_pull', to: 'workflows#git_pull', as: "git_pull"
-  post '/workflows/:id/git_checkout', to: 'workflows#git_checkout', as: "git_checkout"
-  post '/workflows/:id/git_diff', to: 'workflows#git_diff', as: "git_diff"
-  post '/workflows/:id/git_push', to: 'workflows#git_push', as: "git_push"
+  get '/workflows/:id/push_to_git', to: 'workflows#push_to_git', as: "push_to_git"
 
   post '/workflows/:id/new_project', to: 'workflows#new_project', as: "new_project"
   delete '/workflows/:id/delete_project', to: 'workflows#delete_project', as: "delete_project"
