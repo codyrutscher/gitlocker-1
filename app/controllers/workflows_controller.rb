@@ -1,6 +1,7 @@
 require 'octokit'
 require 'open-uri'
 require 'zip'
+require 'git'
 
 class WorkflowsController < ApplicationController
   before_action :authenticate_user!
@@ -145,46 +146,223 @@ class WorkflowsController < ApplicationController
     end
   end
 
-  def push_to_git
-    if git_file_params
-      @octokit_client = Octokit::Client.new(access_token: current_user.token)
-      workflow_folder_path = Rails.root.join("workflows", current_user.friendly_id, git_file_params[:folder_name].to_s)
-      folder_name = git_file_params[:folder_name].gsub("-main","")
-      file_path = git_file_params[:file_path].gsub("#{git_file_params[:folder_name]}/","")
-
-      repos_name = @octokit_client.repos.pluck(:name)
-      local_file_path = workflow_folder_path + file_path
-      if File.exist?(local_file_path) && repos_name&.include?(folder_name)
-        if File.file?(local_file_path)
-          begin
-            file_content = File.read(local_file_path)
-            repo = @octokit_client.login + "/" + folder_name
-            repository = @octokit_client.repository(repo)
-            branch_name = repository.default_branch
-            ref = "heads/" + branch_name
-            blob = @octokit_client.create_blob(repo, file_content)
-            latest_commit = @octokit_client.commits(repo).first
-            latest_tree_sha = latest_commit.commit.tree.sha
-            new_tree = @octokit_client.create_tree(repo, [
-              {
-                path: "#{file_path}",
-                mode: '100644',
-                type: 'blob',
-                sha: blob
-              }
-            ], base_tree: latest_tree_sha)
-            commit_message = "Changed #{file_path}"
-            new_commit = @octokit_client.create_commit(repo, commit_message, new_tree.sha, [latest_commit.sha])
-            @octokit_client.update_ref(repo, ref, new_commit.sha)
-            redirect_to workflows_path(current_user, folder_name: git_file_params[:folder_name].to_s), notice: "Pushed updated file to Github Successfully!!"
-          rescue
-            redirect_to workflows_path(current_user), alert: "Failed to export to Github! Please try again!"
+  def git
+    if folder_name_params && folder_name_params[:folder_name]
+      folder_path = Rails.root.join('workflows', "#{current_user.friendly_id}", folder_name_params[:folder_name])
+      if File.exist?(folder_path) && File.directory?(folder_path)
+        begin 
+          git = Git.open(folder_path)
+          git_repo_name = File.basename(git.dir.path)
+          @repo_name = folder_name_params[:folder_name].to_s
+          if git_repo_name == @repo_name
+            respond_to do |format|
+              format.turbo_stream
+            end
+            return
+          else
+            flash[:alert] = 'Repository not initialized for this project.'
           end
-        else
-          redirect_to workflows_path(current_user), alert: "Folder cannot be imported!"
+        rescue => e
+          puts "Error : #{e.message}"
+          flash[:alert] = 'Project not found. Please try again.'
+        end
+      else 
+        flash[:alert] = 'Project not found. Please try again.'
+      end
+    else 
+      flash[:alert] = 'Repository not found. Please try again.'
+    end
+    flash_content = render_to_string(partial: '/shared/flash_messages')
+    respond_to do |format|
+      format.turbo_stream do
+        render turbo_stream: turbo_stream.replace('flash_wrapper', "<div id='flash_wrapper'>#{flash_content}</div>")
+      end
+    end
+  end
+
+  def git_pull
+    if folder_name_params && folder_name_params[:folder_name]
+      folder_path = Rails.root.join('workflows', "#{current_user.friendly_id}", folder_name_params[:folder_name])
+      if File.exist?(folder_path) && File.directory?(folder_path)
+        begin
+          octokit_client = Octokit::Client.new(access_token: current_user.token)
+          username = octokit_client.user.login
+          @repo_name = folder_name_params[:folder_name].to_s
+          repository = octokit_client.repository("#{username}/#{@repo_name}")
+          branch = repository.default_branch
+          git = Git.open(folder_path)
+          git_repo_name = File.basename(git.dir.path)
+          if git_repo_name == @repo_name
+            git.pull('origin',"#{branch}")
+            status = git.status
+            deleted = status.deleted.keys
+            changed = status.changed.keys
+            untracked = status.untracked.keys
+            @changes = {'Deleted:'=>deleted, 'Modified:'=>changed, 'Untracked:'=>untracked }
+            flash[:notice] = 'Local branch updated successfully!'
+            flash_content = render_to_string(partial: '/shared/flash_messages')
+            respond_to do |format|
+              format.turbo_stream do
+                render turbo_stream: [
+                  turbo_stream.replace('flash_wrapper', "<div id='flash_wrapper'>#{flash_content}</div>"),
+                  turbo_stream.replace('git-pull', "<div id='git-pull'></div>"),
+                  turbo_stream.replace('git-diff', partial: 'workflows/git_diff')
+                ]
+              end
+            end
+            return
+          else
+            flash[:alert] = 'Repository not initialized for this project.'
+          end
+        rescue Git::FailedError => e
+          puts "Error : #{e.message}"
+          stderr_content = e.message.match(/stderr: "(.*)"/m)[1]
+          @filenames = stderr_content.scan(/\\t(.*?)\\n/).flatten
+          @message = "Changes of the following files will be removed to update the local branch : "
+          flash[:alert] = 'Remove un-commited changes.'
+          flash.delete(:notice)
+          flash_content = render_to_string(partial: '/shared/flash_messages')
+          respond_to do |format|
+            format.turbo_stream do
+              render turbo_stream: [
+                turbo_stream.replace('flash_wrapper', "<div id='flash_wrapper'>#{flash_content}</div>"),
+                turbo_stream.replace('git-pull', "<div id='git-pull'></div>"),
+                turbo_stream.replace('git-checkout', partial: '/workflows/git_checkout')
+              ]
+            end
+          end
+          return
+        end
+      else 
+        flash[:alert] = 'Project not found. Please try again.'
+      end
+    else 
+      flash[:alert] = 'Repository not found. Please try again.'
+    end
+    flash_content = render_to_string(partial: '/shared/flash_messages')
+    respond_to do |format|
+      format.turbo_stream do
+        render turbo_stream: [
+          turbo_stream.replace('flash_wrapper', "<div id='flash_wrapper'>#{flash_content}</div>"),
+          turbo_stream.replace('github-modal', "<div id='github-modal'></div>"),
+        ]
+      end
+    end
+  end
+
+  def git_checkout
+    if git_file_params && git_file_params[:repo_name]
+      repo_name = git_file_params[:repo_name].to_s
+      files = git_file_params[:files]
+      folder_path = Rails.root.join('workflows',"#{current_user.friendly_id}","#{git_file_params[:repo_name].to_s}")
+      if File.exist?(folder_path) && File.directory?(folder_path)
+        begin 
+          octokit_client = Octokit::Client.new(access_token: current_user.token)
+          username = octokit_client.user.login
+          @repo_name = git_file_params[:repo_name].to_s
+          repository = octokit_client.repository("#{username}/#{@repo_name}")
+          branch = repository.default_branch
+          git = Git.open(folder_path)
+          files.each do |file, check|
+            git.checkout_file('HEAD', file)
+          end
+          git.pull('origin',"#{branch}")
+          status = git.status
+          deleted = status.deleted.keys
+          changed = status.changed.keys
+          untracked = status.untracked.keys
+          @changes = {'Deleted:'=>deleted, 'Modified:'=>changed, 'Untracked:'=>untracked }
+          flash[:notice] = 'Un-commited changes removed successfully.'
+          flash_content = render_to_string(partial: '/shared/flash_messages')
+          respond_to do |format|
+            format.turbo_stream do
+              render turbo_stream: [
+                turbo_stream.replace('flash_wrapper', "<div id='flash_wrapper'>#{flash_content}</div> "),
+                turbo_stream.replace('git-checkout', "<div id='git-checkout'></div>"),
+                turbo_stream.replace('git-diff', partial: 'workflows/git_diff')
+              ]
+            end
+          end
+          return
+        rescue => e
+          puts "Error : #{e.message}"
+          flash[:alert] = 'Not able to push the changes, please try again.'
         end
       else
-        redirect_to workflows_path(current_user), alert: "Failed to export to Github! Please try again!"
+        flash[:alert] = 'Project does not exist. Please try again.'
+      end
+    else 
+      flash[:alert] = 'Project does not exist. Please try again.'
+    end
+    return
+    flash_content = render_to_string(partial: '/shared/flash_messages')
+    respond_to do |format|
+      format.turbo_stream do
+        render turbo_stream: [
+          turbo_stream.replace('flash_wrapper', "<div id='flash_wrapper'>#{flash_content}</div> "),
+          turbo_stream.replace('github-modal', "<div id='github-modal'></div>")
+        ]
+      end
+    end
+  end
+
+  def git_push
+    if git_file_params && git_file_params[:repo_name]
+      repo_name = git_file_params[:repo_name].to_s
+      files = git_file_params[:files]
+      folder_path = Rails.root.join('workflows',"#{current_user.friendly_id}","#{git_file_params[:repo_name].to_s}")
+      if File.exist?(folder_path) && File.directory?(folder_path)
+        begin 
+          octokit_client = Octokit::Client.new(access_token: current_user.token)
+          username = octokit_client.user.login
+          name = octokit_client&.user&.name
+          email = octokit_client&.user&.email
+          @repo_name = git_file_params[:repo_name].to_s
+          repository = octokit_client.repository("#{username}/#{@repo_name}")
+          branch = repository.default_branch
+          git = Git.open(folder_path)
+          status = git.status
+          remote_url = "https://#{current_user.token}@github.com/#{username}/#{@repo_name}.git"
+          if git.remotes.any? { |r| r.name == 'origin' }
+            git.remote('origin').remove
+          end
+          git.add_remote('origin', remote_url)
+          git.config('user.name', "#{name}")
+          git.config('user.email', "#{email}")
+          files.each do |file, check|
+            if check == "1"
+              git.add(file)
+            end
+          end
+          git.commit(git_file_params[:commit_message].to_s)
+          git.push('origin',"#{branch}")
+          temp_zip_name = "#{current_user.friendly_id}-#{git_file_params[:repo_name]}.zip"
+          temp_zip_path = download_temp_zip(temp_zip_name, zip_url = nil, folder_path)
+          new_project_name = "#{git_file_params[:repo_name]}.zip"
+          delete_project_from_s3(new_project_name)
+          current_user.projects.attach(
+            io: File.open(temp_zip_path),
+            filename: new_project_name,
+            content_type: 'application/zip'
+          )
+          flash[:notice] = 'Changes commited and pushed successfully.'
+        rescue => e
+          puts "Error : #{e.message}"
+          flash[:alert] = 'Not able to push the changes, please try again.'
+        end
+      else
+        flash[:alert] = 'Project does not exist. Please try again.'
+      end
+    else 
+      flash[:alert] = 'Project does not exist. Please try again.'
+    end
+    flash_content = render_to_string(partial: '/shared/flash_messages')
+    respond_to do |format|
+      format.turbo_stream do
+        render turbo_stream: [
+          turbo_stream.replace('flash_wrapper', "<div id='flash_wrapper'>#{flash_content}</div> "),
+          turbo_stream.replace('github-modal', "<div id='github-modal'></div>")
+        ]
       end
     end
   end
@@ -211,46 +389,32 @@ class WorkflowsController < ApplicationController
   end
 
   def download_repo
-    workflow_folder = Rails.root.join('workflows', "#{current_user.friendly_id}").to_s
-    begin
-      tmp_directory = Rails.root.join('tmp')
-      zip_link = "https://github.com/#{repo_params[:username]}/#{repo_params[:repo_name]}/archive/refs/heads/#{repo_params[:branch_name]}.zip"
-      file = Tempfile.new(["#{repo_params[:username]}-#{repo_params[:repo_name]}", '.zip'], tmp_directory)
-      curl_command = "curl -L -H 'Authorization: token #{current_user.token}' -o #{file.path} #{zip_link}"
-      stdout, stderr, status = Open3.capture3(curl_command)
-      
-      if status.success?
-        if File.exist?(file.path)
-          new_project_name = "#{repo_params[:repo_name]}.zip"
-          delete_project_from_s3(new_project_name)
-          extract_zip(file.path, workflow_folder)
-          old_folder_path = File.join(workflow_folder, "#{repo_params[:repo_name]}-#{repo_params[:branch_name]}")
-          new_folder_path = File.join(workflow_folder, "#{repo_params[:repo_name]}")
-          FileUtils.mv old_folder_path, new_folder_path
-          File.delete(file.path) if File.exist?(file.path)
-          temp_zip_name = "#{repo_params[:repo_name]}.zip"
-          temp_zip_path = download_temp_zip(temp_zip_name, zip_url = nil, new_folder_path)
-          current_user.projects.attach(
-            io: File.open(temp_zip_path),
-            filename: new_project_name,
-            content_type: 'application/zip'
-          )
-          File.delete(temp_zip_path) if File.exist?(temp_zip_path)
-          redirect_to workflows_path(current_user, folder_name: repo_params[:repo_name]), notice: "Successfully Imported From Git."
-        else
-          puts "Failed to Import From Git : #{stderr}"
-          redirect_to workflows_path(current_user), alert: "Failed to import from Git. Please try again!"
-        end
-      else
-        puts "Failed to Import From Git : #{stderr}"
+    workflow_folder = Rails.root.join('workflows', "#{current_user.friendly_id}")
+    if repo_params && repo_params[:username] && repo_params[:repo_name] && repo_params[:branch_name]
+      repo_url = "https://#{current_user.token}@github.com/#{repo_params[:username]}/#{repo_params[:repo_name]}.git"
+      folder_path = workflow_folder.join("#{repo_params[:repo_name]}")
+      if File.exist?(folder_path) && File.directory?(folder_path)
+        FileUtils.remove_dir(folder_path, true)
+      end
+      begin
+        Git.clone(repo_url, folder_path, branch: repo_params[:branch_name])
+        new_project_name = "#{repo_params[:repo_name]}.zip"
+        delete_project_from_s3(new_project_name)
+        temp_zip_name = "#{repo_params[:repo_name]}.zip"
+        temp_zip_path = download_temp_zip(temp_zip_name, zip_url = nil, folder_path)
+        current_user.projects.attach(
+          io: File.open(temp_zip_path),
+          filename: new_project_name,
+          content_type: 'application/zip'
+        )
+        File.delete(temp_zip_path) if File.exist?(temp_zip_path)
+        redirect_to workflows_path(current_user, folder_name: repo_params[:repo_name]), notice: "Successfully Imported From Git."
+      rescue => e
+        puts "Exception occurred: #{e.message}"
         redirect_to workflows_path(current_user), alert: "Failed to import from Git. Please try again!"
       end
-    rescue => e
-      puts "Exception occurred: #{e.message}"
-      redirect_to workflows_path(current_user), alert: "Exception Occured. Please try again!"
-    ensure
-      file.close if file
-      file.unlink if file
+    else 
+      redirect_to workflows_path(current_user), alert: "Failed to import from Git. Please try again!"
     end
   end
 
@@ -538,7 +702,7 @@ class WorkflowsController < ApplicationController
   end
 
   def git_file_params
-    params.permit(:id, :folder_name, :file_path)
+    params.permit(:id, :repo_name, :commit_message, files: {})
   end
 
   def create_file_params
@@ -609,8 +773,9 @@ class WorkflowsController < ApplicationController
       main_folder_name = File.basename(folder_path)
       Zip::File.open(temp_zip_path, Zip::File::CREATE) do |zipfile|
         zipfile.mkdir(main_folder_name)
-        Dir[File.join(folder_path, '**', '**')].each do |file|
-          zipfile.add(File.join(main_folder_name,file.sub(folder_path.to_s + '/', '')), file)
+        Dir.glob(File.join(folder_path, '**', '*'), File::FNM_DOTMATCH).each do |file|
+          next if File.basename(file) == '.' || File.basename(file) == '..'
+          zipfile.add(File.join(main_folder_name, file.sub(folder_path.to_s + '/', '')), file)
         end
       end
       temp_zip_path

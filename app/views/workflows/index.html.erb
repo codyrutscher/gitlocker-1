@@ -4,7 +4,7 @@
     <li><a href='javascript:void(0);' id="open-new-project-modal">New Project</a></li>
     <li><a class='dropdown-arrow' href='javascript:void(0);'>Import Project</a>
       <ul class='sub-menus'>
-        <li><a href='javascript:void(0);' id="open-github-modal">From GitHub</a></li>
+        <li><a href='javascript:void(0);' id="open-github-repo-list-modal">From GitHub</a></li>
         <li><a href="javascript:void(0);" id="open-upload-zip-modal">From Local</a></li>
         <li><a href="javascript:void(0);" id="open-workflow-modal">Saved Projects</a></li>
       </ul>
@@ -12,7 +12,7 @@
     <li><a class='dropdown-arrow' href='javascript:void(0);'>Export Project</a>
       <ul class='sub-menus'>
         <li><%= link_to 'Download ZIP', download_zip_path(current_user, folder_name: @folder_name), id: 'download-zip' %></li>
-        <li><a href='javascript:void(0);' id="push-to-git">Push To GitHub</a></li>
+        <li><%= button_to 'Push to Github', git_path(current_user, folder_name: @folder_name), form: { method: :post, local: true, data: { turbo: true }, class: 'text-white' } %></li>
         <% save_project_url = save_project_url(current_user, folder_name: @folder_name) %>
         <li><a href="<%= save_project_url %>" id="save-project">Save Project</a></li>
       </ul>
@@ -174,14 +174,14 @@
   </div>
 </div>
 
-<div id="github-modal" data-modal-backdrop="static" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+<div id="github-repo-list-modal" data-modal-backdrop="static" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
   <div class="relative p-4 w-full max-w-2xl max-h-full">
     <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
       <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
         <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
           Select Project From Github
         </h3>
-        <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" id="close-github-modal-svg">
+        <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" id="close-github-repo-list-modal-svg">
           <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
               <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
           </svg>
@@ -200,10 +200,13 @@
         <% end %>
       </div>
       <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
-        <button id="close-github-modal-btn" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Close</button>
+        <button id="close-github-repo-list-modal-btn" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Close</button>
       </div>
     </div>
   </div>
+</div>
+
+<div id="github-modal">
 </div>
 
 <div id="workflow-modal" data-modal-backdrop="static" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
@@ -666,7 +669,6 @@
             }
             editor.setValue(data.file_data, -1);
             $("#save_file").attr("href", "<%= save_file_path(current_user) %>?file_path=" + encodeURIComponent(file_path));
-            $("#push-to-git").attr("href", "<%= push_to_git_path(current_user) %>?folder_name=" + encodeURIComponent(folder_name) + "&file_path=" + encodeURIComponent(file_path));
             $("#file_name").text(file_path.replace('file_path=','').split('/').slice(-1)[0]);
             $("#file-breadcrumb").text(file_path.replace('file_path=',''));
           }
@@ -696,7 +698,6 @@
         success: function(data) {
           editor.setValue("", -1);
           $("#save_file").attr("href", "javascript:void(0);");
-          $("#push-to-git").attr("href", "javascript:void(0);");
           $("#file_name").text("");
           $("#file-breadcrumb").text("");
         },
@@ -717,7 +718,7 @@
     });
 
 
-    $(document).on('click', '#open-workflow-modal, #open-upload-zip-modal, #open-github-modal, #open-new-project-modal, #open-editor-setting-modal', function (event) {
+    $(document).on('click', '#open-workflow-modal, #open-upload-zip-modal, #open-github-repo-list-modal, #open-new-project-modal', function (event) {
       if (open_project === '') {
         var button_id = this.id;
         var modal_id = button_id.replace('open-','');
@@ -729,7 +730,14 @@
       }
     });
 
-    $(document).on('click', '#close-workflow-modal-svg, #close-workflow-modal-btn, #close-upload-zip-modal-svg, #close-upload-zip-modal-btn, #close-github-modal-svg, #close-github-modal-btn, #close-new-project-modal-btn, #close-new-project-modal-svg, #close-editor-setting-modal-svg, #close-editor-setting-modal-btn, #close-existing-project-modal-svg, #close-existing-project-modal-btn', function (event) {
+    $(document).on('click', '#open-editor-setting-modal', function (event) {
+      var button_id = this.id;
+      var modal_id = button_id.replace('open-','');
+      $(`#${modal_id}`).removeClass('hidden');
+      $(`#${modal_id}`).addClass('flex');
+    });
+
+    $(document).on('click', '#close-workflow-modal-svg, #close-workflow-modal-btn, #close-upload-zip-modal-svg, #close-upload-zip-modal-btn, #close-github-repo-list-modal-svg, #close-github-repo-list-modal-btn, #close-new-project-modal-btn, #close-new-project-modal-svg, #close-editor-setting-modal-svg, #close-editor-setting-modal-btn, #close-existing-project-modal-svg, #close-existing-project-modal-btn, #close-github-modal-svg, #close-github-modal-btn', function (event) {
       var button_id = this.id;
       var modal_id = button_id.replace('close-','').replace('-svg','').replace('-btn','');
       $(`#${modal_id}`).addClass('hidden');
