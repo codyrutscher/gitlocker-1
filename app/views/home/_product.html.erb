@@ -7,7 +7,7 @@
           <% if product.covers.first.present? %>
             <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-li="st" d-src="<%= product.thumb_image_url %>" alt="<%= product.name %> Images" class="h-full w-full object-cover object-center">
           <% else %>
-            <img src="<%= asset_path('default-cover.png') %>" alt="No Image Available" class="h-full w-full object-cover object-center">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-li="st" d-src="<%= asset_path('default-cover.png') %>" alt="No Image Available" class="h-full w-full object-cover object-center">
           <% end %>
         </div>
 
