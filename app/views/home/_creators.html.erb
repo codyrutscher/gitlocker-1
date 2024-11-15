@@ -1,4 +1,5 @@
-<li class="col-span-1 flex flex-col divide-y-4 divide-black rounded-lg bg-gray-300 text-center hover:border-white border-black border-4 rounded-2xl hover:shadow-[0px_20px_20px_15px_#1a202c] hover:scale-105">
+<%= link_to marketplace_creator_path(creator.id), class: "" do %>
+ <li class="col-span-1 flex flex-col divide-y-4 divide-black rounded-lg bg-gray-300 text-center hover:border-white border-black border-4 rounded-2xl hover:shadow-[0px_20px_20px_15px_#1a202c] hover:scale-105">
   <div class="flex flex-1 flex-col p-8 border-2 border-black">
     <% if creator.profile_picture.attached? %>
       <%= image_tag creator.profile_picture, class: "mx-auto h-32 w-32 flex-shrink-0 rounded-full" %>
@@ -36,3 +37,4 @@
     </div>
   </div>
 </li>
+<% end %>
