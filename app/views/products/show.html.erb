@@ -174,7 +174,11 @@
         <% end %>
 
         <% if @product.description.present? %>
-          <%= content_for :meta_description, ActionView::Base.full_sanitizer.sanitize(@product.description)&.humanize&.first(160) %>
+          <% if @product.description.length < 70 %>
+            <%= content_for :meta_description, "#{ActionView::Base.full_sanitizer.sanitize(@product.description)&.humanize} product listed on the gitlocker code marketplace"  %>
+          <% else %>
+            <%= content_for :meta_description, ActionView::Base.full_sanitizer.sanitize(@product.description)&.humanize&.first(160) %>
+          <% end %>
           <div class="flex flex-col gap-4">
             <h2 class="text-2xl text-bold underline text-gray-900 ">Description:</h2>
             <p class="text-sm text-gray-500 "><%= sanitize @product.description %></p>
