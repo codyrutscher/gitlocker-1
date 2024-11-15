@@ -551,5 +551,31 @@
         llig(iframes, brs, whh, wwh);
       }
     </script>
+    <script type="lload">
+    setInterval(function() {
+        var lazyScripts = document.querySelectorAll('script[type="load"]');
+        for (var i = 0; i < lazyScripts.length; i++) {
+            var originalScript = lazyScripts[i];
+            var newScript = document.createElement("script");
+            Array.from(originalScript.attributes).forEach(attr => {
+                if (attr.name === "type") {
+                    return;
+                }
+                newScript.setAttribute(attr.name, attr.value);
+            });
+            var dataSrc = originalScript.getAttribute("d-src");
+            if (dataSrc) {
+                newScript.src = dataSrc;
+            } else {
+                var inlineScript = originalScript.innerText;
+                if (inlineScript.trim().length > 0) {
+                    newScript.textContent = inlineScript;
+                }
+            }
+            originalScript.parentNode.insertBefore(newScript, originalScript);
+            originalScript.parentNode.removeChild(originalScript);
+        }
+    }, 1000);
+    </script>
   </body>
 </html>
