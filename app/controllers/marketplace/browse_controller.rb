@@ -1,30 +1,30 @@
 module Marketplace
   class BrowseController < ApplicationController
     def index
-      @products = apply_filters_and_sort(Product.exclude_purchased(current_user)).page(params[:page]).per(50)
+      @products = apply_filters_and_sort(Product.exclude_purchased(current_user)).page(params[:page]).per(100)
     end
 
     def popular
-      @products = apply_filters_and_sort(Product.ordered_by_purchase_count).page(params[:page]).per(50)
+      @products = apply_filters_and_sort(Product.ordered_by_purchase_count).page(params[:page]).per(100)
     end
 
     def free
-      @products = apply_filters_and_sort(Product.where("price_cents <= 0")).page(params[:page]).per(50)
+      @products = apply_filters_and_sort(Product.where("price_cents <= 0")).page(params[:page]).per(100)
     end
 
     def premium
-      @products = apply_filters_and_sort(Product.where("price_cents > 0")).page(params[:page]).per(50)
+      @products = apply_filters_and_sort(Product.where("price_cents > 0")).page(params[:page]).per(100)
     end
 
   def featured
     # @products = Product.ordered_by_purchase_count.page(params[:page]).per(50)
-    @products = apply_filters_and_sort(Product.where(featured: true)).page(params[:page]).per(50)
+    @products = apply_filters_and_sort(Product.where(featured: true)).page(params[:page]).per(100)
     @products
   end
 
   def recent
     params[:sort_by] ||= "most_recent"
-    @products = apply_filters_and_sort(Product.exclude_purchased(current_user)).page(params[:page]).per(50)
+    @products = apply_filters_and_sort(Product.exclude_purchased(current_user)).page(params[:page]).per(100)
 
       respond_to do |format|
         format.html
