@@ -1,7 +1,7 @@
 module Marketplace
   class BrowseController < ApplicationController
     def index
-      @products = apply_filters_and_sort(Product.exclude_purchased(current_user)).order('random()').page(params[:page]).per(100)
+      @products = apply_filters_and_sort(Product.exclude_purchased(current_user)).page(params[:page]).per(100)
     end
 
     def popular
@@ -9,16 +9,16 @@ module Marketplace
     end
 
     def free
-      @products = apply_filters_and_sort(Product.where("price_cents <= 0")).order('random()').page(params[:page]).per(100)
+      @products = apply_filters_and_sort(Product.where("price_cents <= 0")).page(params[:page]).per(100)
     end
 
     def premium
-      @products = apply_filters_and_sort(Product.where("price_cents > 0")).order('random()').page(params[:page]).per(100)
+      @products = apply_filters_and_sort(Product.where("price_cents > 0")).page(params[:page]).per(100)
     end
 
   def featured
     # @products = Product.ordered_by_purchase_count.page(params[:page]).per(50)
-    @products = apply_filters_and_sort(Product.where(featured: true)).order('random()').page(params[:page]).per(100)
+    @products = apply_filters_and_sort(Product.where(featured: true)).page(params[:page]).per(100)
     @products
   end
 
