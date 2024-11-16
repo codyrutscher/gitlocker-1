@@ -1,7 +1,7 @@
 <div class="bg-gray-300 rounded-lg border-6" data-controller="product-card">
-  <div class="border h-full border-black rounded-lg hover:shadow-[0px_20px_20px_15px_#1158f2] flex flex-col divide-y divide-black">
+  <div class="border h-full border-black rounded-lg hover:shadow-[0px_20px_20px_15px_#1158f2] flex flex-col divide-y-4 divide-black">
     <%= link_to marketplace_library_path(product), class:"h-full" do %>
-      <div class="h-full grow flex flex-col divide-y divide-black">
+      <div class="h-full grow flex flex-col divide-y-4 divide-black">
         <%# Cover Image %>
         <div class="bg-gray-100 aspect-w-1 aspect-h-1 overflow-hidden rounded-t">
           <% if product.covers.first.present? %>
@@ -12,9 +12,12 @@
         </div>
 
         <div class="grow p-3 flex flex-col gap-4">
-          <h3 class="grow text-base font-medium text-black  line-clamp-2">
+          <h3 class="grow text-base font-medium text-xl text-black  line-clamp-2">
             <%= product.name %>
           </h3>
+	<p class="mt-2 mb-2 text-sm">
+            <%= sanitize product.description.truncate_words(20) %>
+         </p>
 
           <%# Languages %>
           <% if product.languages.present? && product.languages.size > 0 && product.languages[0]&.name != 'not_specified' || product.more_languages_from_createor.present? %>
@@ -32,7 +35,7 @@
         </div>
 
         <%# Reviews + Price %>
-        <div class="flex flex-row items-center divide-x divide-black p-0 m-0">
+        <div class="flex flex-row items-center divide-x-4 divide-black p-0 m-0">
           <%# Reviews %>
           <div class="p-3 grid grid-cols-2 grow">
             <% if product.reviews.size > 0 %> 
