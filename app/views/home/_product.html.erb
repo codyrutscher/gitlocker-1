@@ -15,8 +15,8 @@
           <h3 class="grow text-base font-medium text-black  line-clamp-2">
             <%= product.name %>
           </h3>
-	<p class="truncate mt-2 mb-2 text-sm">
-            <%= sanitize product.description %>
+	<p class="mt-2 mb-2 text-sm">
+            <%= sanitize product.description.truncate_words(20) %>
          </p>
 
           <%# Languages %>
