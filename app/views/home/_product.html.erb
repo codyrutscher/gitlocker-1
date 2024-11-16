@@ -33,7 +33,7 @@
           <% end %>
   	<% if product.categories.present? && product.categories.size > 0 %>
 	<% product.categories&.take(3).each do |category| %>
-        	<p class="text-xs border border-gray-900 rounded px-2 mt-2 py-1.5 text-black"><%= category.name %></p>
+        	<p class="text-xs border border-gray-900 rounded px-2 mt-2 py-1.5 bg-indigo-300 w-fit text-black"><%= category.name %></p>
         <% end %>
 	<% end %>
         </div>
