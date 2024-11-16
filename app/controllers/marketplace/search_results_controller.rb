@@ -3,16 +3,16 @@ module Marketplace
     def index
       if params[:search].present?
         @product = sort_products(Product.all, params[:sort_by])
-        @product_results = @product.search(params[:search]).page(params[:page]).per(50)
+        @product_results = @product.search(params[:search]).page(params[:page]).per(100)
 
         @user = sort_users(User.all, params[:sort_by])
-        @marketplace_creator_results = @user.search(params[:search]).page(params[:page]).per(50)
+        @marketplace_creator_results = @user.search(params[:search]).page(params[:page]).per(100)
 
         @category = sort_categories(Category.all, params[:sort_by])
-        @category_results = @category.search(params[:search]).page(params[:page]).per(50)
+        @category_results = @category.search(params[:search]).page(params[:page]).per(100)
 
         @language = sort_languages(Language.all, params[:sort_by])
-        @language_results = @language.search(params[:search]).page(params[:page]).per(50)
+        @language_results = @language.search(params[:search]).page(params[:page]).per(100)
 
         if params[:category_id].present?
           @product_results = @product_results.joins(:product_categories)
