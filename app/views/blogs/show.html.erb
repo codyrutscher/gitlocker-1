@@ -6,9 +6,7 @@
     
     <div class="text-black mb-6">
       <% 
-        linked_content = @blog.content.gsub(%r{(https?://[^\s<]+)}) do |url|
-         
-        end
+        linked_content = @blog.content
       %>
       <%= sanitize(linked_content) %>
     </div>
