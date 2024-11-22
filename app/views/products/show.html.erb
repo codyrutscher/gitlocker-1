@@ -99,14 +99,20 @@
           <%# Price %>
           <div>
             <% if @product.price.to_f.round(2) > 0.00 %> 
-              <p class="text-3xl font-bold p-2 rounded-xl bg-indigo-500 text-black text-center  underline"><%= @product.price.currency.symbol %><%= @product.price %></p>
+              <p class="text-3xl font-bold p-2 rounded-xl text-black underline"><%= @product.price.currency.symbol %><%= @product.price %></p>
             <% else %>
-              <p class="text-3xl font-bold p-2 rounded-xl bg-indigo-500 text-black  text-center underline">Free</p>
+              <p class="text-3xl font-bold p-2 rounded-xl text-black underline">Free</p>
             <% end %>
             <% if @product.price.to_f.round(2) > 0.00 %> 
               <div></div>
             <% else %>
-              <%= link_to "Donate to Compassion International", "https://www.compassion.com", class: "hover:scale-110 flex items-center justify-center mt-4 rounded-md border border-black border-2 bg-indigo-600 px-8 py-3 text-base w-96 h-10 font-medium text-black hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50", target: :blank %>
+              <a href="https://www.compassion.com" class="relative inline-flex w-48 h-10 items-center justify-center px-6 py-3 text-lg font-medium tracking-tighter text-white bg-gray-800 rounded-md group">
+        		<span class="absolute inset-0 w-full h-full mt-1 ml-1 transition-all duration-300 ease-in-out bg-red-600 rounded-md group-hover:mt-0 group-hover:ml-0"></span>
+        		<span class="absolute inset-0 w-full h-full bg-white rounded-md "></span>
+        		<span class="absolute inset-0 w-full h-full transition-all duration-200 ease-in-out delay-100 bg-red-600 rounded-md opacity-0 group-hover:opacity-100 "></span>
+        		<span class="relative text-black transition-colors duration-200 ease-in-out delay-100 group-hover:text-white">Donate</span>
+      		</a>
+		
             <% end %>
           </div>
 
