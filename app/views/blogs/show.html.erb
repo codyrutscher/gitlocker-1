@@ -1,22 +1,22 @@
 <%= content_for :meta_title, @blog.title %>
 <%= content_for :meta_description, @blog.content&.first(160)&.humanize %>
 <div class="bg-white">
-  <div class="container divide-y-4 bg-gray-200 mx-auto px-4 py-6">
+  <div class="container bg-gray-200 mx-auto px-4 py-6">
     <h1 class="text-3xl text-black font-bold underline mb-4"><%= @blog.title %></h1>
+    <hr class="h-px bg-black border-4 border-black">
     <% if @blog.image.attached? %>
       <div class="mb-6">
         <%= image_tag url_for(@blog.image), class: "w-full h-auto rounded-lg outline-4 shadow-2xl", alt: "#{@blog.title}" %>
       </div>
     <% end %>
+    <hr class="h-px bg-black border-4 border-black">
     <div class="text-black mb-6">
       <% 
         linked_content = @blog.content
       %>
       <%= sanitize(linked_content) %>
     </div>
-
-   
-
+    <hr class="h-px bg-black border-4 border-black">
     <div class="mt-6">
       <%= link_to 'Back to Blogs', blogs_path, class: "hover:text-white hover:shadow-3xl text-black bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 border-black border-4 text-center me-2 mb-2 font-mono" %>
     </div>
