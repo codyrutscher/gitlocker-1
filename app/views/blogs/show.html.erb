@@ -2,7 +2,7 @@
 <%= content_for :meta_description, @blog.content&.first(160)&.humanize %>
 <div class="bg-white">
   <div class="container divide-y-4 bg-gray-200 mx-auto px-4 py-6">
-    <h1 class="text-3xl text-black font-bold mb-4"><%= @blog.title %></h1>
+    <h1 class="text-3xl text-black font-bold underline mb-4"><%= @blog.title %></h1>
     <% if @blog.image.attached? %>
       <div class="mb-6">
         <%= image_tag url_for(@blog.image), class: "w-full h-auto rounded-lg shadow-md", alt: "#{@blog.title}" %>
