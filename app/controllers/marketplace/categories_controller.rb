@@ -2,7 +2,7 @@ module Marketplace
 class CategoriesController < ApplicationController
   def show
     @category = Category.friendly.find(params[:slug])
-    @products = apply_filters_and_sort(@category&.products)&.page(params[:page])&.per(50)
+    @products = apply_filters_and_sort(@category&.products)&.page(params[:page])&.per(140)
   end
 
   private
