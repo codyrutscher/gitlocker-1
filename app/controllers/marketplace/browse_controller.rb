@@ -33,11 +33,11 @@ module Marketplace
     end
 
     def languages
-      @languages = sort_categories(Language.page(params[:page]).per(50), params[:sort_by])
+      @languages = sort_categories(Language.page(params[:page]).per(70), params[:sort_by])
     end
 
     def categories
-      @categories = sort_categories(Category.page(params[:page]).per(50), params[:sort_by])
+      @categories = sort_categories(Category.page(params[:page]).per(70), params[:sort_by])
     end
 
     private
