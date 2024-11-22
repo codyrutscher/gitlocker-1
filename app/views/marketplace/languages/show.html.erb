@@ -13,6 +13,7 @@
       <div class="bg-gradient-to-r from-blue-700 to-orange-500">
       <%= image_tag("languages/#{@language.image_name}", class: "h-32 w-48 object-cover object-center mx-auto", alt: "#{@language.image_name} Images") %>
     </div>
+      <hr class="h-px bg-black border-4 mt-4 mb-4 border-black">
       <div class="mt-4 flow-root">
         <div class="-my-2">
           <div class="relative box-content overflow-x-auto py-2 xl:overflow-visible">
@@ -21,15 +22,18 @@
               <div class="pb-6">
               <%= render partial: 'shared/productFilter' %>
               </div>
+              <hr class="h-px bg-black border-4 mt-4 mb-4 border-black">
               <div class="mt-4 gap-4 sm:grid-cols-2 grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 xl:gap-x-8">
                 <% @products.each do |product| %>
                   <%= render partial: "home/product", locals: { product: product } %>
                 <% end %>
               </div>
+              <hr class="h-px bg-black border-4 mt-4 mb-4 border-black">
             <% else %>
               <p class="text-center text-black">No products available for this language.</p>
             <% end %>
           </div>
+          <hr class="h-px bg-black border-4 mt-4 mb-4 border-black">
           <div class="<%= 'mt-12' if @products.count > 50 %>">
             <!-- Pagination with sort_by parameter -->
             <%= render 'kaminari/tailwind/paginator', paginator: @products, params: { sort_by: params[:sort_by] } %>
