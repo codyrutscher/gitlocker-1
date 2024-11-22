@@ -5,6 +5,11 @@
   <%= content_for :meta_title, "GitLocker Blogs" %>
   <%= content_for :meta_description, "Discover the latest trends in software engineering with GitLocker's insightful blog posts. Stay ahead in the coding world with expert tips and tutorials" %>
 <% end %>
+<%=
+  render BreadcrumbComponent.new(current_user,[
+    { text: "Blogs", url: blogs_path }
+  ])
+%>
 <div class="w-full mx-auto bg-white">
   <div class="container mx-auto px-4 py-6">
     <h1 class="text-2xl font-bold  mb-6">All Blogs</h1>
