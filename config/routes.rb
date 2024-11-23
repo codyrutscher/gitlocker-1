@@ -60,6 +60,7 @@ Rails.application.routes.draw do
   get "refund_policy", to: "home#refund_policy"
   get "deployment_options", to: "home#deployment_options"
   get "contact", to: "home#contact"
+  get "pricing", to: "home#pricing"
   get "robots.txt", to: "home#robots"
 
   get "dashboard", to: "dashboard#index"
