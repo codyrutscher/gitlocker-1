@@ -259,6 +259,44 @@
       
       <% end %>
     <hr class="h-px mt-8 bg-black border-8 border-black">
+          <section aria-labelledby="categories-heading" class="bg-orange-400 pt-4 pb-4">
+          <div class="px-4 sm:flex sm:items-center justify-center space-x-4 sm:px-6 lg:px-8 xl:px-0">
+            <div>
+            <h2 id="recent-heading" class="text-3xl font-bold tracking-tight text-black underline"><span class="">Blogs</h2>
+            </div>
+          <a href="https://www.gitlocker.com/blogs" class="relative inline-flex items-center justify-start py-3 pl-4 pr-12 overflow-hidden font-semibold text-indigo-600 transition-all duration-150 ease-in-out rounded hover:pl-10 hover:pr-6 bg-gray-50 group">
+              <span class="absolute bottom-0 left-0 w-full h-1 transition-all duration-150 ease-in-out bg-indigo-600 group-hover:h-full"></span>
+                <span class="absolute right-0 pr-4 duration-200 ease-out group-hover:translate-x-12">
+                    <svg class="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </span>
+              <span class="absolute left-0 pl-2.5 -translate-x-12 group-hover:translate-x-0 ease-out duration-200">
+              <svg class="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+              </span>
+              <span class="relative w-full text-left transition-colors duration-200 ease-in-out group-hover:text-white">Browse All Blogs</span>
+              </a>
+          </div>
+          </section>
+      <hr class="h-px bg-black border-8 border-black">
+      <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-7">
+      <% @blogs.each do |blog| %>
+        <div class="bg-white hover:bounceOrig hover:shadow-[0px_20px_20px_15px_#1158f2] border-4 border-black rounded-lg overflow-hidden">
+          <%= link_to blog_path(blog), class: "block" do %>
+            <% if blog.image.attached? %>
+              <%= image_tag url_for(blog.image), class: "w-full h-48 object-cover", alt: "#{blog.title} Images" %>
+            <% end %>
+            <div class="p-4">
+              <h2 class="text-xl font-semibold mb-2"><%= blog.title %></h2>
+              <p class="text-gray-700 mb-4">
+              <% linked_content = blog.content %>
+                <%= sanitize(linked_content.truncate(300, separator: ' ')) %>
+              </p>
+              <p class="text-sm text-gray-500">Posted on <%= blog.created_at.strftime("%B %d, %Y") %></p>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+<hr class="h-px bg-black border-8 border-black">
     <%= render 'footer' %>
     <hr class="h-px bg-black border-8 border-black">
     </main>
