@@ -1,18 +1,18 @@
-module Marketplace
+0module Marketplace
   class SearchResultsController < ApplicationController
     def index
       if params[:search].present?
         @product = sort_products(Product.all, params[:sort_by])
-        @product_results = @product.search(params[:search]).page(params[:page]).per(100)
+        @product_results = @product.search(params[:search]).page(params[:page]).per(140)
 
         @user = sort_users(User.all, params[:sort_by])
-        @marketplace_creator_results = @user.search(params[:search]).page(params[:page]).per(100)
+        @marketplace_creator_results = @user.search(params[:search]).page(params[:page]).per(140)
 
         @category = sort_categories(Category.all, params[:sort_by])
-        @category_results = @category.search(params[:search]).page(params[:page]).per(100)
+        @category_results = @category.search(params[:search]).page(params[:page]).per(140)
 
         @language = sort_languages(Language.all, params[:sort_by])
-        @language_results = @language.search(params[:search]).page(params[:page]).per(100)
+        @language_results = @language.search(params[:search]).page(params[:page]).per(140)
 
         if params[:category_id].present?
           @product_results = @product_results.joins(:product_categories)
