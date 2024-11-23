@@ -7,15 +7,6 @@ class ApplicationController < ActionController::Base
     VisitorUser.new(session.id)
   end
   helper_method :visitor_user
-
-  def show_sitemap
-    require 'open-uri'
-    url = 'https://s3.us-east-2.amazonaws.com/gitlocker/sitemaps/sitemap.xml'
-    @sitemap_content = URI.open(url).read
-    render xml: @sitemap_content
-  rescue OpenURI::HTTPError
-    render plain: 'Sitemap not found', status: :not_found
-  end
   
   protected
 
