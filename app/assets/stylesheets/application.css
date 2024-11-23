@@ -116,12 +116,12 @@
     animation-timing-function: cubic-bezier(0.8,0,1,1);
   }
   50% {
-    transform: translateY(25%);
+    transform: translateY(2%);
     animation-timing-function: cubic-bezier(0,0,0.2,1);
   }
 }
 
-.hover\:bounceOrig:hover { animation: bounceOrig 1s infinite; }
+.hover\:bounceOrig:hover { animation: bounceOrig 1.5s infinite; }
 
 @media screen and (max-width: 800px){
 	#menu {position:relative; background: #444444; height: 45px;}
