@@ -1,6 +1,6 @@
 class BlogsController < ApplicationController
   def index
-    @blogs = Blog.includes([:image_attachment], image_attachment: :blob).page(params[:page]).per(18)
+    @blogs = Blog.includes([:image_attachment], image_attachment: :blob).page(params[:page]).per(60)
   end
 
   def show
