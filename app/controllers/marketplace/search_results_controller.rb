@@ -1,4 +1,4 @@
-0module Marketplace
+module Marketplace
   class SearchResultsController < ApplicationController
     def index
       if params[:search].present?
