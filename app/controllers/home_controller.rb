@@ -25,4 +25,8 @@ class HomeController < ApplicationController
   def robots
     respond_to :text
   end
+
+  def sitemap
+    send_data URI.parse("https://#{ENV["S3_BUCKET"]}.s3.us-east-2.amazonaws.com/sitemaps/#{params[:filename]}.xml").open.read, filename: params[:filename], type: 'text/xml', disposition: "inline", stream: true
+  end
 end

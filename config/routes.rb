@@ -50,8 +50,6 @@ Rails.application.routes.draw do
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
 
-  get '/sitemap.xml', to: 'application#show_sitemap', format: :xml
-
   # Defines the root path route ("/")
 
   get "privacy", to: "home#privacy"
@@ -62,6 +60,7 @@ Rails.application.routes.draw do
   get "contact", to: "home#contact"
   get "pricing", to: "home#pricing"
   get "robots.txt", to: "home#robots"
+  get '/sitemaps/:filename', to: 'home#sitemap'
 
   get "dashboard", to: "dashboard#index"
   get "seller_dashboard", to: "dashboard#seller_dashboard"

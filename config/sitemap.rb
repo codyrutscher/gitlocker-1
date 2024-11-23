@@ -9,11 +9,10 @@ SitemapGenerator::Sitemap.adapter = SitemapGenerator::S3Adapter.new(
   fog_region: ENV["AWS_REGION"]
 )
 
+SitemapGenerator::Sitemap.sitemaps_host = "https://www.gitlocker.com/"
 SitemapGenerator::Sitemap.public_path = "tmp/"
-
-SitemapGenerator::Sitemap.sitemaps_host = "https://#{ENV['S3_BUCKET']}.s3.us-east-2.amazonaws.com/"
-
 SitemapGenerator::Sitemap.sitemaps_path = "sitemaps/"
+SitemapGenerator::Sitemap.max_sitemap_links = ENV['MAX_SITEMAP_LINKS'].to_i if ENV['MAX_SITEMAP_LINKS'].present?
 
 SitemapGenerator::Sitemap.create(compress: false) do
   add marketplace_root_path
