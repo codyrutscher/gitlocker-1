@@ -9,7 +9,7 @@
 
     <!-- Product Search Results -->
     <% if params[:filter_by_type].blank? || params[:filter_by_type] == 'products' %>
-      <section aria-labelledby="products-heading" class="py-8 sm:py-16 xl:mx-auto xl:px-8">
+      <section aria-labelledby="products-heading" class="py-8 sm:py-16 xl:mx-auto">
         <div class="px-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8 xl:px-0 mb-4">
           <h2 id="products-heading" class="text-2xl font-bold tracking-tight text-gray-900 underline ">
             Product Search Results: <%= params[:search] %>
@@ -18,9 +18,9 @@
         <hr class="h-px bg-black border-4 mt-4 mb-4 border-black">
         <div class="mt-4 flow-root">
           <div class="-my-2">
-            <div class="px-4 sm:px-6 lg:px-8">
+            <div class="">
               <!-- Ensure the same gap value as the category view -->
-              <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+              <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7">
                 <% if @product_results&.empty? %>
                   <div class="mt-24 col-span-full text-center">
                     <p class="text-2xl">There are no product search results</p>
@@ -41,8 +41,8 @@
 
     <!-- Creator Search Results -->
     <% if params[:filter_by_type] == 'creators' %>
-      <section aria-labelledby="creators-heading" class="py-8 sm:py-16 xl:mx-auto xl:px-8">
-        <div class="px-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8 xl:px-0 mb-4">
+      <section aria-labelledby="creators-heading" class="py-8 sm:py-16 xl:mx-auto">
+        <div class="px-4 sm:flex sm:items-center sm:justify-between sm:px-6 xl:px-0 mb-4">
           <h2 id="creators-heading" class="text-2xl font-bold tracking-tight text-gray-900 underline mt-2 ">
             Creator Search Results: <%= params[:search] %>
           </h2>
@@ -50,8 +50,8 @@
         <hr class="h-px bg-black border-4 mt-4 mb-4 border-black">
         <div class="mt-4 flow-root">
           <div class="-my-2">
-            <div class="px-4 sm:px-6 lg:px-8">
-              <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+            <div class="p">
+              <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7">
                 <% if @marketplace_creator_results&.empty? %>
                   <div class="mt-24 col-span-full text-center">
                     <p class="text-2xl">There are no user search results</p>
@@ -72,7 +72,7 @@
 
     <!-- Category Search Results -->
     <% if params[:filter_by_type] == 'categories' %>
-      <section aria-labelledby="categories-heading" class="py-8 sm:py-16 xl:mx-auto xl:px-8 mt-2">
+      <section aria-labelledby="categories-heading" class="py-8 sm:py-16 xl:mx-auto mt-2">
         <div class="px-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8 xl:px-0 mb-4">
           <h2 id="categories-heading" class="text-2xl font-bold tracking-tight text-gray-900 underline ">
             Category Search Results: <%= params[:search] %>
@@ -81,9 +81,9 @@
         <hr class="h-px bg-black border-4 mt-4 mb-4 border-black">
         <div class="mt-4 flow-root">
           <div class="-my-2">
-            <div class="px-4 sm:px-6 lg:px-8">
+            <div class="">
               <!-- Same gap as in the product view -->
-              <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+              <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7">
                 <% if @category_results&.empty? %>
                   <div class="mt-24 col-span-full text-center">
                     <p class="text-2xl">There are no category search results</p>
@@ -104,7 +104,7 @@
 
     <!-- Language Search Results -->
     <% if params[:filter_by_type] == 'languages' %>
-      <section aria-labelledby="languages-heading" class="py-8 sm:py-16 xl:mx-auto xl:px-8 mt-2">
+      <section aria-labelledby="languages-heading" class="py-8 sm:py-16 xl:mx-auto mt-2">
         <div class="px-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8 xl:px-0 mb-4">
           <h2 id="languages-heading" class="text-2xl font-bold tracking-tight text-gray-900 underline ">
             Language Search Results: <%= params[:search] %>
@@ -113,9 +113,9 @@
         <hr class="h-px bg-black border-4 mt-4 mb-4 border-black">
         <div class="mt-4 flow-root">
           <div class="-my-2">
-            <div class="px-4 sm:px-6 lg:px-8">
+            <div class="">
               <!-- Ensure same gap for consistency -->
-              <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+              <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7">
                 <% if @language_results&.empty? %>
                   <div class="mt-24 col-span-full text-center">
                     <p class="text-2xl">There are no language search results</p>
