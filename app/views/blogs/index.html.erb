@@ -12,9 +12,9 @@
 %>
 <div class="w-full mx-auto bg-white">
   <div class="container mx-auto px-4 py-6">
-    <h1 class="text-2xl font-bold  mb-6">All Blogs</h1>
+    <h1 class="text-2xl font-bold mb-6">All Blogs</h1>
 
-    <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+    <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-6">
       <% @blogs.each do |blog| %>
         <div class="bg-white hover:shadow-[0px_20px_20px_15px_#1158f2] border-4 border-black rounded-lg overflow-hidden">
           <%= link_to blog_path(blog), class: "block" do %>
