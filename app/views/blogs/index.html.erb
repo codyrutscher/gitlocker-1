@@ -12,7 +12,7 @@
 %>
 <div class="w-full mx-auto bg-white">
   <div class="mx-auto py-6">
-    <h1 class="text-3xl underline font-bold text-center mb-6">All <span class="text-orange-500 italic"><%= @blogs.count %></span> Blogs</h1>
+    <h1 class="text-3xl underline font-bold text-center mb-6">All <span class="text-orange-500 italic"><%= Blog.count %></span> Blogs</h1>
      <hr class="h-px bg-black border-4 mt-4 mb-4 border-black">
     <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-6">
       <% @blogs.each do |blog| %>
