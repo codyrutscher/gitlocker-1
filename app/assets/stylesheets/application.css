@@ -110,6 +110,9 @@
 	color: #444444;
 }
 
+#description {
+	color: #1e293b;
+}
 @keyframes bounceOrig {
   0%, 100% {
     transform: translateY(0);
