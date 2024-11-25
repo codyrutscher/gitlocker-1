@@ -185,15 +185,15 @@
           <% else %>
             <%= content_for :meta_description, ActionView::Base.full_sanitizer.sanitize(@product.description)&.humanize&.first(160) %>
           <% end %>
-          <div class="flex flex-col h-fit bg-white p-4 rounded gap-4">
-            <h2 class="text-2xl text-bold underline text-gray-900 ">Description:</h2>
-            <p class="text-sm text-gray-500 "><%= sanitize @product.description %></p>
+          <div style="color:#1e293b" class="flex flex-col h-fit bg-white p-4 rounded-2xl gap-4">
+            <h2 class="text-2xl text-bold underline text-white ">Description:</h2>
+            <p class="text-sm text-white "><%= sanitize @product.description %></p>
           </div>
           <div class="w-full border-t-4 border-black"></div>
         <% end %>
 
         <% if @product.features.present? %>
-          <div class="flex flex-col h-fit bg-white p-4 rounded gap-4">
+          <div class="flex flex-col h-fit bg-white p-4 rounded-2xl gap-4">
             <h2 class="text-2xl text-bold underline text-gray-900 ">Features:</h2>
             <p class="text-sm text-gray-500"><%= sanitize @product.features %></p>
           </div>
@@ -201,7 +201,7 @@
         <% end %>
 
         <% if @product.requirements.present? %>
-          <div class="flex flex-col h-fit bg-white p-4 rounded gap-4">
+          <div class="flex flex-col h-fit bg-white p-4 rounded-2xl gap-4">
             <h2 class="text-2xl text-bold underline text-gray-900 ">Requirements:</h2>
             <p class="text-sm text-gray-500"><%= sanitize @product.requirements %></p>
           </div>
@@ -209,7 +209,7 @@
         <% end %>
 
         <% if @product.instructions.present? %>
-          <div class="flex flex-col h-fit bg-white p-4 rounded gap-4">
+          <div class="flex flex-col h-fit bg-white p-4 rounded-2xl gap-4">
             <h2 class="text-2xl text-bold underline text-gray-900 ">Instructions:</h2>
             <p class="text-sm text-gray-500"><%= sanitize @product.instructions %></p>
           </div>
