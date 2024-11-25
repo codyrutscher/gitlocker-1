@@ -57,7 +57,7 @@
 	<p class="text-2xl "><%= @product.purchase_count %> purchases</p>
 	<% end %>
 	<% if @product.featured %>
-	<div class="flex inline-flex bg-indigo-500 rounded-2xl p-2"><p class="text-2xl font-bold text-gray-900  underline sm:text-4xl">Featured</p></div>
+	<div class="flex inline-flex bg-blue-500 rounded-2xl p-2"><p class="text-2xl font-bold text-gray-900  underline sm:text-4xl">Featured</p></div>
 	<% end %>
       </div>
     </div>
@@ -185,9 +185,9 @@
           <% else %>
             <%= content_for :meta_description, ActionView::Base.full_sanitizer.sanitize(@product.description)&.humanize&.first(160) %>
           <% end %>
-          <div style="color:#1e293b" class="flex flex-col h-fit bg-white p-4 rounded-2xl gap-4">
+          <div style="color:#1e293b" class="flex flex-col h-fit p-4 rounded-2xl gap-4">
             <h2 class="text-2xl text-bold underline text-white ">Description:</h2>
-            <p class="text-sm text-white "><%= sanitize @product.description %></p>
+            <p class="text-sm text-white"><%= sanitize @product.description %></p>
           </div>
           <div class="w-full border-t-4 border-black"></div>
         <% end %>
