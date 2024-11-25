@@ -16,10 +16,6 @@
     <div class="flex flex-col md:flex-row md:items-center gap-4">
       <div class="grow">
         <h1 class="text-2xl font-bold tracking-tight text-black  underline sm:text-4xl"><%= @product.name %></h1>
-        <%= link_to marketplace_creator_path(@product.user), class: "mt-1 text-lg  text-black hover:text-black hover:underline" do %>
-          Creator: <%= @product.user.username %>
-        <% end %>
-      	<%= image_tag "profile_placeholder.png", class: "h-40 w-40" %>
 	<p class="text-lg text-black">
           Last updated:
           <time datetime="<%= @product.updated_at.strftime("%Y-%m-%d") %>">
@@ -116,7 +112,12 @@
 		
             <% end %>
           </div>
-
+	 <div> 
+		<%= link_to marketplace_creator_path(@product.user), class: "mt-1 text-lg  text-black hover:text-black hover:underline" do %>
+                 Creator: <%= @product.user.username %>
+                 <% end %>
+      	        <%= image_tag "profile_placeholder.png", class: "h-40 w-40" %>
+	</div>
           <%# Languages %>
           <% if @languages.present? && @languages.size > 0 && @languages[0].name != 'not_specified' || @product.more_languages_from_createor.present? %>
             <div class="flex flex-col gap-1">
