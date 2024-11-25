@@ -19,11 +19,7 @@
         <%= link_to marketplace_creator_path(@product.user), class: "mt-1 text-lg  text-black hover:text-black hover:underline" do %>
           Creator: <%= @product.user.username %>
         <% end %>
-	<% if user.profile_picture.attached? %>
-      		<%= image_tag user.profile_picture, class: "h-40 w-40", style: "object-fit: contain;" %>
-    	<% else %>
-      		<%= image_tag "profile_placeholder.png", class: "h-40 w-40", style: "object-fit: inherit;" %>
-    	<% end %>
+      	<%= image_tag "profile_placeholder.png", class: "h-40 w-40" %>
 	<p class="text-lg text-black">
           Last updated:
           <time datetime="<%= @product.updated_at.strftime("%Y-%m-%d") %>">
