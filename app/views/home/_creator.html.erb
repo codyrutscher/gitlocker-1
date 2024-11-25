@@ -6,6 +6,9 @@
       <%= image_tag "profile_placeholder.png", class: "h-full w-full object-cover object-center", style: "object-fit: inherit;" %>
     <% end %>
   </span>
-  <span aria-hidden="true" class="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-gray-800 opacity-50"></span>
-  <span class="relative mt-auto text-center text-xl font-bold text-white truncate"><%= creator.username %></span>
+  <div class="absolute rounded-b border-4 bottom-0 flex items-center justify-center right-0 left-0">
+    <div id="description" class="flex w-full items-center">
+    <p class="p-3 w-full text-center text-sm font-bold text-white"><%= creator.username %></p>
+    </div>
+  </div>
 <% end %>
