@@ -23,6 +23,7 @@ class ProductsController < ApplicationController
     @languages = @product.languages
     @categories = @product.categories
     @directory_tree_json = fetch_product_directory_tree(@product)
+    @user = User.friendly.find(params[:id])
   end
 
   def like
