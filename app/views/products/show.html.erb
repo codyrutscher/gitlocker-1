@@ -116,8 +116,8 @@
 		<%= link_to marketplace_creator_path(@product.user), class: "mt-1 text-lg  text-black hover:text-black hover:underline" do %>
                  Creator: <%= @product.user.username %>
                  <% end %>
-      	        <% if User.profile_picture.attached? %>
-     		 <%= image_tag User.profile_picture, class: "h-40 w-40" %>
+      	        <% if @user.profile_picture.attached? %>
+     		 <%= image_tag @user.profile_picture, class: "h-40 w-40" %>
 		<% else %>
       		<%= image_tag "profile_placeholder.png", class: "h-40 w-40" %>
 		<% end %>
