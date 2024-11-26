@@ -1,3 +1,19 @@
+<html>
+<head>
+<style>
+  ul {
+  margin-left: 20px;
+}
+ol {
+  margin-left: 20px;
+}
+li {
+  list-style-type: space-counter;
+}
+
+</style>
+</head>
+
 <%= content_for :meta_title, @blog.title %>
 <%= content_for :meta_description, ActionView::Base.full_sanitizer.sanitize(@blog.content)&.first(160)&.humanize %>
 <div class="bg-white">
@@ -19,3 +35,4 @@
     </div>
   </div>
 </div>
+</html>
