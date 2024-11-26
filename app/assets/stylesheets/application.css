@@ -18,7 +18,9 @@
 .test {
 	list-style-type: disc;
 }
-
+.bullet {
+	margin-left: 20px;
+}
 #menu {
 	background: #405C7C;
 	padding-left: 18px;
