@@ -22,7 +22,12 @@
 .cke_chrome {
     width: calc(80% - 22px) !important;
 }
-
+.cke_contents_ltr li {
+	list-style-type: disc;
+}
+.cke_contents_ltr ul {
+	margin-left: 20px;
+}
 
 .cke_notification_warning {
     display: none;
