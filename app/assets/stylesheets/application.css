@@ -15,12 +15,7 @@
  */
 
 
-.cke_contents_ltr li {
-	list-style-type: disc;
-}
-.cke_contents_ltr ul {
-	margin-left: 20px;
-}
+
 #menu {
 	background: #405C7C;
 	padding-left: 18px;
