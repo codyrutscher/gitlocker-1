@@ -11,10 +11,7 @@
     <% end %>
     <hr class="h-px bg-black border-4 mt-4 mb-4 border-black">
     <div class="text-black mb-6">
-      <% 
-        linked_content = @blog.content
-      %>
-      <%= sanitize(linked_content) %>
+      <%= @blog.content.html_safe %>
     </div>
     <hr class="h-px bg-black border-4 mt-4 mb-4 border-black">
     <div class="mt-6">
