@@ -23,7 +23,9 @@
     width: calc(80% - 22px) !important;
 }
 
-
+li, ol, ul {
+ display: inline
+}
 
 .cke_notification_warning {
     display: none;
