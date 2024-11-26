@@ -23,9 +23,7 @@
     width: calc(80% - 22px) !important;
 }
 
-li, ol, ul {
- display: inline
-}
+li { display: list-item !important; }
 
 .cke_notification_warning {
     display: none;
