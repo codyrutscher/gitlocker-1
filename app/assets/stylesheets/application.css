@@ -15,10 +15,10 @@
  */
 
 
-.test {
+.ck.ck-content li {
 	list-style-type: disc;
 }
-.bullet {
+.ck.ck-content ul {
 	margin-left: 20px;
 }
 #menu {
