@@ -15,10 +15,10 @@
  */
 
 
-.cke.ck-content li {
+.cke_contents_ltr li {
 	list-style-type: disc;
 }
-.cke.ck-content ul {
+.cke_contents_ltr ul {
 	margin-left: 20px;
 }
 #menu {
