@@ -56,7 +56,7 @@
                 </svg>
                 <% end %>
               <%= link_to pricing_path do %>
-              <h2 class="hover:text-white">Upgrade</h2>
+              <p class="hover:text-white">Upgrade</p>
               <% end %>
 
               <!-- Cart -->
@@ -132,7 +132,7 @@
                 </div>
               </div>
               <% else %>
-                <%= link_to "Sign in", new_user_session_path, data: { turbo: false }, class: "text-sm font-medium text-white hover:text-gray-100" %>
+                <%= link_to "Sign in", new_user_session_path, data: { turbo: false }, class: "text-sm font-medium text-black hover:text-white" %>
               <% end %>
             </div>
           </div>
