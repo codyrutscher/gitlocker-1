@@ -154,19 +154,19 @@
 
         <div class="grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-2">
           <% if policy(@product).edit? %>
-            <%= link_to "Edit", edit_product_path(@product), class: "flex w-full items-center justify-center hover:scale-110 rounded-md border-black border-2 bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50" %>
+            <%= link_to "Edit", edit_product_path(@product), class: "group relative inline-flex h-12 items-center justify-center overflow-hidden rounded-md border-2 border-black bg-transparent px-6 font-medium text-neutral-600 transition-all duration-100 [box-shadow:5px_5px_rgb(0_0_255)] hover:translate-x-[3px] hover:translate-y-[3px] hover:[box-shadow:0px_0px_rgb(0_0_255)]" %>
           <% elsif policy(@product).purchasable? %>
             <% if @in_cart %>
-              <%= link_to "Remove from Cart", marketplace_cart_item_path(@cart_item), data: { "turbo-method": :delete }, class: "hover:scale-110 flex w-full items-center justify-center rounded-md border-black border-2 bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50" %>
+              <%= link_to "Remove from Cart", marketplace_cart_item_path(@cart_item), data: { "turbo-method": :delete }, class: "group relative inline-flex h-12 items-center justify-center overflow-hidden rounded-md border-2 border-black bg-transparent px-6 font-medium text-neutral-600 transition-all duration-100 [box-shadow:5px_5px_rgb(0_0_255)] hover:translate-x-[3px] hover:translate-y-[3px] hover:[box-shadow:0px_0px_rgb(0_0_255)]" %>
             <% else %>
-              <%= link_to "Add to Cart", marketplace_cart_items_path(product_id: @product.id), data: { "turbo-method": :post }, class: "hover:scale-110 flex w-full items-center justify-center rounded-md border-black border-2 bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50", rel: "canonical" %>
+              <%= link_to "Add to Cart", marketplace_cart_items_path(product_id: @product.id), data: { "turbo-method": :post }, class: "group relative inline-flex h-12 items-center justify-center overflow-hidden rounded-md border-2 border-black bg-transparent px-6 font-medium text-neutral-600 transition-all duration-100 [box-shadow:5px_5px_rgb(0_0_255)] hover:translate-x-[3px] hover:translate-y-[3px] hover:[box-shadow:0px_0px_rgb(0_0_255)]", rel: "canonical" %>
             <% end %>
           <% elsif policy(@product).download_able? %>
-              <%= link_to "Download", @product.folder.url, class: "hover:scale-110 flex w-full items-center justify-center rounded-md border-black border-2 bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50" %>
+              <%= link_to "Download", @product.folder.url, class: "group relative inline-flex h-12 items-center justify-center overflow-hidden rounded-md border-2 border-black bg-transparent px-6 font-medium text-neutral-600 transition-all duration-100 [box-shadow:5px_5px_rgb(0_0_255)] hover:translate-x-[3px] hover:translate-y-[3px] hover:[box-shadow:0px_0px_rgb(0_0_255)]" %>
           <% end %>
           <button
             type="button"
-            class="group relative inline-flex h-12 items-center justify-center overflow-hidden rounded-md border border-neutral-200 bg-transparent px-6 font-medium text-neutral-600 transition-all duration-100 [box-shadow:5px_5px_rgb(82_82_82)] hover:translate-x-[3px] hover:translate-y-[3px] hover:[box-shadow:0px_0px_rgb(0_0_255)] preview-button"
+            class="group relative inline-flex h-12 items-center justify-center overflow-hidden rounded-md border-2 border-black bg-transparent px-6 font-medium text-neutral-600 transition-all duration-100 [box-shadow:5px_5px_rgb(0_0_255)] hover:translate-x-[3px] hover:translate-y-[3px] hover:[box-shadow:0px_0px_rgb(0_0_255)] preview-button"
           >
             Video Preview
           </button>
