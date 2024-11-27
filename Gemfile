@@ -88,3 +88,4 @@ end
 group :production do
   gem 'scout_apm'
 end
+gem "ckeditor", "~> 5.1"

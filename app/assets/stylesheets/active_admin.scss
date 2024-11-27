@@ -19,11 +19,23 @@
 @import 'activeadmin/quill_editor/quill.snow';
 @import 'activeadmin/quill_editor_input';
 
-.cke_chrome {
-    width: calc(80% - 22px) !important;
-}
-
-
 .cke_notification_warning {
     display: none;
+}
+
+.ckeditor{
+    width: calc(80% - 22px);
+}
+
+form fieldset > ol > li {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+}
+
+label[for=blog_content]{
+    font-size: 1.0em;
+    font-weight: bold;
+    color: #5E6469;
+    padding-left: 10px;
 }

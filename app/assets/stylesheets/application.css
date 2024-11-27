@@ -115,6 +115,15 @@
 #description {
 	background: #1e293b;
 }
+
+#blog-content ul {
+    list-style: disc;
+}
+
+#blog-content ul li {
+    list-style: disc;
+}
+
 @keyframes bounceOrig {
   0%, 100% {
     transform: translateY(0);
