@@ -4,7 +4,7 @@
     <div class="pb-8">
     <h2 class="text-xl sm:text-2xl font-bold tracking-tight  text-gray-900 underline">Earnings</h2>
     </div>
-    <hr class="h-px w-full bg-black border-8 mt-4 mb-4 border-black">
+    
     <div class="sm:flex sm:items-center sm:justify-between justify-center">
       <div class="flex gap-4 justify-center items-stretch">
         <div class="bg-white p-4 rounded shadow-2xl flex border-4 border-black">
@@ -57,7 +57,7 @@
       </div>
     </div>
     <br/>
-<hr class="h-px bg-black border-8 mt-4 mb-4 w-full border-black">
+
 
     <div class="col-span-1">
       <h1 class="text-lg  underline font-bold text-gray-900">Payment:</h1>
@@ -73,14 +73,14 @@
           </form>
           <br />
         <% end %>
-   <hr class="h-px bg-black border-8 mt-4 mb-4 w-full border-black">   
+    
         <%= form_tag funds_path, method: :post, class: "stripe-form", "data-turbo" => "false" do %>
           <%= submit_tag "Get Paid through Stripe", disabled: current_user.balance <= 0 || current_user.account.nil? , class: "mt-4 w-96 bg-indigo-600 border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white disabled:cursor-not-allowed disabled:bg-indigo-300 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500 cursor-pointer" %>
         <% end %>
       </div>
     </div>
   </div>
-<hr class="h-px bg-black border-8 mt-4 mb-4 w-full border-black">
+
   <div class="pb-8">
     <h1 class="text-xl  underline font-bold text-gray-900 p-4 m-4">Transaction History:</h1>
     <div class="mt-4">
@@ -105,7 +105,7 @@
         </table>
       </div>
     </div>
-  <hr class="h-px bg-black border-8 mt-4 mb-4 w-full border-black">
+  
     <div class="mt-4">
       <%= render 'kaminari/tailwind/paginator', paginator: @sales %>
     </div>
