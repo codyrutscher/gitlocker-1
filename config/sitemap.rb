@@ -18,7 +18,7 @@ SitemapGenerator::Sitemap.create(compress: false) do
   add marketplace_root_path
   # Product
   Product.find_each do |product|
-    add product_path(product), lastmod: product.updated_at, priority: 0.5
+    add marketplace_library_path(product), lastmod: product.updated_at, priority: 0.5
   end
 
   # Blog
