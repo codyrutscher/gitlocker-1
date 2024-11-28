@@ -11,7 +11,7 @@
     <section aria-labelledby="category-heading" class="py-16 sm:py-16 xl:mx-auto">
       <h1 class="text-3xl font-semibold mb-4 text-center underline "><span class="text-orange-500 italic"><%= @category.products.count %></span> <%= @category.name %> Category Products</h1>
       <div class="bg-gradient-to-r from-blue-700 to-orange-500">
-      <%= image_tag asset_path("categories/#{@category.image_name}"), class: "h-32 w-48 object-cover object-center mx-auto", alt: "#{@category.image_name} Images" %>
+      <%= image_tag asset_path("categories/#{@category.image_name}"), class: "h-96 w-96 object-cover object-center mx-auto", alt: "#{@category.image_name} Images" %>
     </div>
   <hr class="h-px bg-black border-4 mt-4 mb-4 border-black">
       <div class="mt-4 px-8 flow-root">
