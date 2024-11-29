@@ -15,9 +15,9 @@
           <h3 class="grow text-base font-medium text-xl text-black  line-clamp-2">
             <%= product.name %>
           </h3>
-	<p class="mt-2 mb-2 text-sm">
+	        <div class="mt-2 mb-2 text-md product-description">
             <%= sanitize product.description.truncate_words(20) %>
-         </p>
+          </div>
 
           <%# Languages %>
           <% if product.languages.present? && product.languages.size > 0 && product.languages[0]&.name != 'not_specified' || product.more_languages_from_createor.present? %>
