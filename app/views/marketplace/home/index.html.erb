@@ -67,8 +67,8 @@
         </section>
     <hr class="h-px bg-black border-8 border-black">
 
-     <div class="mt-6 px-8 overflow-hidden">
-          <div class="grid grid-cols-2 mb-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-7 gap-4 lg:gap-8 px-4 sm:px-6 lg:px-8 xl:px-0 ">
+     <div class="mt-6 lg:px-8 xl:px-8 overflow-hidden">
+          <div class="grid grid-cols-2 mb-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-7 gap-4 lg:gap-8 lg:px-8 xl:px-8">
               <%= render partial: "home/product", collection: @recent_products %>
             </div>
         </div>
@@ -100,8 +100,8 @@
         
           
 
-         <div class="mt-6 px-8 overflow-hidden">
-             <div class="grid grid-cols-2 mb-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-7 gap-4 lg:gap-8 px-4 sm:px-6 lg:px-8 xl:px-0 ">
+         <div class="mt-6 lg:px-8 xl:px-8 overflow-hidden">
+             <div class="grid grid-cols-2 mb-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-7 gap-4 lg:gap-8 lg:px-8 xl:px-8">
               <%= render partial: "home/product", collection: @popular_products %>
             </div>
               </div>
@@ -132,8 +132,8 @@
 
           
 
-         <div class="mt-6 px-8 overflow-hidden">
-              <div class="grid grid-cols-2 mb-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-7 gap-4 lg:gap-8 px-4 sm:px-6 lg:px-8 xl:px-0 ">
+         <div class="mt-6 lg:px-8 xl:px-8 overflow-hidden">
+              <div class="grid grid-cols-2 mb-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-7 gap-4 lg:gap-8 lg:px-8 xl:px-8">
               <%= render partial: "home/product", collection: @premium_products %>
             </div>
               </div>
@@ -163,8 +163,8 @@
         </section>
           <hr class="h-px bg-black border-8 border-black">
 
-         <div class="mt-6 px-8 overflow-hidden">
-              <div class="grid grid-cols-2 mb-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-7 gap-4 lg:gap-8 px-4 sm:px-6 lg:px-8 xl:px-0 ">
+         <div class="mt-6 lg:px-8 xl:px-8 overflow-hidden">
+              <div class="grid grid-cols-2 mb-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-7 gap-4 lg:gap-8 lg:px-8 xl:px-8">
               <%= render partial: "home/product", collection: @free_products %>
             </div>
               </div>
@@ -192,8 +192,8 @@
           </div>
            </section>
           <hr class="h-px bg-black border-8 border-black">
-          <div class="mt-6 px-8 overflow-hidden">
-             <div class="grid grid-cols-2 mb-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-7 gap-4 lg:gap-8 px-4 sm:px-6 lg:px-8 xl:px-0 ">
+          <div class="mt-6 lg:px-8 xl:px-8 overflow-hidden">
+             <div class="grid grid-cols-2 mb-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-7 gap-4 lg:gap-8 lg:px-8 xl:px-8">
               <%= render partial: "home/creator", collection: @creators %>
             </div>
               </div>
@@ -221,8 +221,8 @@
           </div>
           </section>
           <hr class="h-px bg-black border-8 border-black">
-          <div class="mt-6 px-8 flow-root">
-            <div class="grid grid-cols-2 mb-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-7 gap-4 lg:gap-8 px-4 sm:px-6 lg:px-8 xl:px-0 ">
+          <div class="mt-6 lg:px-8 xl:px-8 flow-root">
+            <div class="grid grid-cols-2 mb-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-7 gap-4 lg:gap-8 lg:px-8 xl:px-8">
               <%= render partial: "home/language", collection: @languages, as: :language %>
             </div>
           </div>
@@ -249,8 +249,8 @@
           </div>
           </section>
           <hr class="h-px bg-black border-8 border-black">
-          <div class="mt-6 px-8 flow-root">
-            <div class="grid grid-cols-2 mb-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-7 gap-4 lg:gap-8 px-4 sm:px-6 lg:px-8 xl:px-0 ">
+          <div class="mt-6 lg:px-8 xl:px-8 flow-root">
+            <div class="grid grid-cols-2 mb-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-7 gap-4 lg:gap-8 lg:px-8 xl:px-8">
               <%= render partial: "home/category", collection: @categories, as: :category %>
             </div>
           </div>
@@ -275,7 +275,7 @@
           </div>
           </section>
       <hr class="h-px bg-black border-8 mb-8 border-black">
-      <div class="grid px-8 gap-6 md:grid-cols-2 lg:grid-cols-7">
+      <div class="grid lg:px-8 xl:px-8 gap-6 md:grid-cols-2 lg:grid-cols-7">
       <% @blogs.each do |blog| %>
         <div class="bg-white hover:bounceOrig hover:shadow-[0px_20px_20px_15px_#1158f2] border-4 border-black rounded-lg overflow-hidden">
           <%= link_to blog_path(blog), class: "block" do %>
