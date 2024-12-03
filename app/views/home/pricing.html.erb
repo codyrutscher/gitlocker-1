@@ -3,17 +3,30 @@
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
   // select the button and the div
-  const button = document.getElementById('myButton');
+  const buttonOne = document.getElementById('myButton');
   const buttonTwo = document.getElementById('myButtonTwo');
-  const div = document.getElementById('myDiv');
+  const one = document.getElementById('one');
+  const two = document.getElementById('two');
+  const three = document.getElementById('three');
 
   // define the function to change the HTML content
-  function changeContent() {
-    div.innerHTML = '<p>New HTML content!</p>';
+  function changeContentOne() {
+    one.innerText = "$100";
+    two.innerText = "$150";
+    three.innerText = "$200";
+  }
+
+ // define the function to change the HTML content
+  function changeContentTwo() {
+    one.innerText = "$10";
+    two.innerText = "$15";
+    three.innerText = "$25";
   }
 
   // add event listener to the button
-  button.addEventListener('click', changeContent);
+  buttonOne.addEventListener('click', changeContentOne);
+  buttonTwo.addEventListener('click', changeContentTwo);
+
 </script>
 
 </head>
@@ -60,7 +73,7 @@
           <p class="mt-4 text-sm/6 text-gray-600">The essentials to provide your best work for clients.</p>
           <p class="mt-6 flex items-baseline gap-x-1">
             <!-- Price, update based on frequency toggle state -->
-            <span class="text-4xl font-semibold tracking-tight text-gray-900">$10</span>
+            <span id="one" class="text-4xl font-semibold tracking-tight text-gray-900">$10</span>
             <!-- Payment frequency, update based on frequency toggle state -->
             <span class="text-sm/6 font-semibold text-gray-600">/month</span>
           </p>
@@ -79,7 +92,7 @@
           <p class="mt-4 text-sm/6 text-gray-600">A plan that scales with your rapidly growing business.</p>
           <p class="mt-6 flex items-baseline gap-x-1">
             <!-- Price, update based on frequency toggle state -->
-            <span class="text-4xl font-semibold tracking-tight text-gray-900">$15</span>
+            <span id="two" class="text-4xl font-semibold tracking-tight text-gray-900">$15</span>
             <!-- Payment frequency, update based on frequency toggle state -->
             <span class="text-sm/6 font-semibold text-gray-600">/month</span>
           </p>
@@ -98,7 +111,7 @@
           <p class="mt-4 text-sm/6 text-gray-600">Dedicated support and infrastructure for your company.</p>
           <p class="mt-6 flex items-baseline gap-x-1">
             <!-- Price, update based on frequency toggle state -->
-            <span class="text-4xl font-semibold tracking-tight text-gray-900">$25</span>
+            <span id="three" class="text-4xl font-semibold tracking-tight text-gray-900">$25</span>
             <!-- Payment frequency, update based on frequency toggle state -->
             <span class="text-sm/6 font-semibold text-gray-600">/month</span>
           </p>
