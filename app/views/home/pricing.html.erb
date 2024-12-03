@@ -1,35 +1,10 @@
 <html>
 <head>
 <script src="https://cdn.tailwindcss.com"></script>
-<script>
-  // select the button and the div
-  const buttonOne = document.getElementById('myButton');
-  const buttonTwo = document.getElementById('myButtonTwo');
-  const one = document.getElementById('one');
-  const two = document.getElementById('two');
-  const three = document.getElementById('three');
 
-  // define the function to change the HTML content
-  function changeContentOne() {
-    one.innerText = "$100";
-    two.innerText = "$150";
-    three.innerText = "$200";
-  }
-
- // define the function to change the HTML content
-  function changeContentTwo() {
-    one.innerText = "$10";
-    two.innerText = "$15";
-    three.innerText = "$25";
-  }
-
-  // add event listener to the button
-  buttonOne.addEventListener('click', changeContentOne);
-  buttonTwo.addEventListener('click', changeContentTwo);
-
-</script>
 
 </head>
+<body>
 <%=
   render BreadcrumbComponent.new(current_user,[
     { text: "Pricing", url: pricing_path }
@@ -129,4 +104,32 @@
     </div>
 </main>
 </div>
+<script>
+  // select the button and the div
+  const buttonOne = document.getElementById('myButton');
+  const buttonTwo = document.getElementById('myButtonTwo');
+  const one = document.getElementById('one');
+  const two = document.getElementById('two');
+  const three = document.getElementById('three');
+
+  // define the function to change the HTML content
+  function changeContentOne() {
+    one.innerText = "$100";
+    two.innerText = "$150";
+    three.innerText = "$200";
+  }
+
+ // define the function to change the HTML content
+  function changeContentTwo() {
+    one.innerText = "$10";
+    two.innerText = "$15";
+    three.innerText = "$25";
+  }
+
+  // add event listener to the button
+  buttonOne.addEventListener('click', changeContentOne);
+  buttonTwo.addEventListener('click', changeContentTwo);
+
+</script>
+</body>
 </html>
