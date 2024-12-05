@@ -69,6 +69,8 @@ class User < ApplicationRecord
 
     if params[:creator_sort_by].present?
       users = users.sort_by_criteria(params[:creator_sort_by])
+    else 
+      users = users.sort_by_criteria('newest')
     end
 
     users

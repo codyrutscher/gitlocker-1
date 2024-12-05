@@ -2,7 +2,7 @@ module Marketplace
 class CreatorsController < ApplicationController
   before_action :authenticate_user!
   def index
-    @users = User.order(created_at: :desc).filter_and_sort(params).page(params[:page]).per(40)
+    @users = User.filter_and_sort(params).page(params[:page]).per(40)
      respond_to do |format|
       format.html
       format.js
