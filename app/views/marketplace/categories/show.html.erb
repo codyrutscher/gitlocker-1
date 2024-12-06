@@ -35,7 +35,7 @@
             <% end %>
           </div>
           <hr class="h-px bg-black border-4 mt-4 mb-4 border-black">
-          <div class="<%= 'mt-12' if @products.count > 50 %>">
+          <div class="<%= 'mt-12' if @products.size > 50 %>">
           <%= render 'kaminari/tailwind/paginator', paginator: @products, params: { sort_by: params[:sort_by] } %>
           </div>
         </div>
