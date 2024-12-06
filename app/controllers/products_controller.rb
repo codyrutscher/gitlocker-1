@@ -200,8 +200,12 @@ class ProductsController < ApplicationController
     end 
 
     else
-      render json: { message: 'Failed to create product. Repositry Aleady Exist.' }, status: :unprocessable_entity
-    end    
+      if @product.errors.details[:base].any? { |error| error[:code] == 402 }
+        render json: { message: 'Limit exceeded. Please upgrade your plan.'}, status: :unprocessable_entity
+      else
+        render json: { message: 'Failed to create product. Repositry Aleady Exist.' }, status: :unprocessable_entity
+      end
+    end
     
   rescue => e
     render json: { message: e.message }, status: :unprocessable_entity
