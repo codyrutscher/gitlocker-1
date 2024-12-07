@@ -72,6 +72,7 @@ Rails.application.routes.draw do
   put "complete_developer_registration", to: "complete_developer_registrations#update"
 
   get "pricing", to: "pricing#index"
+  get 'toggle_pricing', to: 'pricing#toggle_pricing'
 
   namespace :pricing do
     get :success

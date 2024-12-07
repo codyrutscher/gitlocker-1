@@ -2,8 +2,14 @@ class PricingController < ApplicationController
   HOST = ENV['HOST']
 
   def index
+    @pricing_type = 'monthly'
     service = BillingService.new(current_user)	
     @current_price_id = service.get_active_price_from_subscription
+  end
+
+  def toggle_pricing
+    @pricing_type = params[:pricing_type]
+    render turbo_stream: turbo_stream.replace("pricing_section", partial: "pricing/pricing_#{@pricing_type}")
   end
 
   def subscription
