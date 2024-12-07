@@ -23,9 +23,9 @@
       <!-- Price, update based on frequency toggle state -->
       <span class="text-4xl font-semibold tracking-tight text-gray-900">$100</span>
       <!-- Payment frequency, update based on frequency toggle state -->
-      <span class="text-sm/6 font-semibold text-gray-600">/month</span>
+      <span class="text-sm/6 font-semibold text-gray-600">/year</span>
     </p>
-    <%= link_to 'Buy plan', pricing_subscription_path(stripe_price: ENV['FREELANCER_YEAR']), class: "mt-6 block rounded-md px-3 py-2 text-center text-sm/6 font-semibold text-indigo-500 hover:text-white shadow-sm bg-white hover:bg-indigo-500 ring-1 ring-inset ring-indigo-200 hover:ring-indigo-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 #{ENV['FREELANCER_YEAR'] == @current_price_id ? 'disabled-link' : ''}" %>
+    <%= link_to 'Buy plan', pricing_subscription_path(stripe_price: ENV['FREELANCER_YEAR']), data: { turbo: false }, class: "mt-6 block rounded-md px-3 py-2 text-center text-sm/6 font-semibold text-indigo-500 hover:text-white shadow-sm bg-white hover:bg-indigo-500 ring-1 ring-inset ring-indigo-200 hover:ring-indigo-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 #{ENV['FREELANCER_YEAR'] == @current_price_id ? 'disabled-link' : ''}" %>
     <% if ENV['FREELANCER_YEAR'] == @current_price_id %>
       <%= link_to 'Cancel Subscription', pricing_cancel_subscription_path, class: "mt-6 block rounded-md px-3 py-2 text-center text-sm/6 font-semibold text-indigo-500 hover:text-white shadow-sm bg-white hover:bg-indigo-500 ring-1 ring-inset ring-indigo-200 hover:ring-indigo-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" %>
     <% end %>
@@ -45,9 +45,9 @@
       <!-- Price, update based on frequency toggle state -->
       <span class="text-4xl font-semibold tracking-tight text-gray-900">$150</span>
       <!-- Payment frequency, update based on frequency toggle state -->
-      <span class="text-sm/6 font-semibold text-gray-600">/month</span>
+      <span class="text-sm/6 font-semibold text-gray-600">/year</span>
     </p>
-    <%= link_to 'Buy plan', pricing_subscription_path(stripe_price: ENV['STARTUP_YEAR']), class: "mt-6 block rounded-md px-3 py-2 text-center text-sm/6 font-semibold text-indigo-500 hover:text-white shadow-sm bg-white hover:bg-indigo-500 ring-1 ring-inset ring-indigo-200 hover:ring-indigo-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 #{ENV['STARTUP_YEAR'] == @current_price_id ? 'disabled-link' : ''}" %>
+    <%= link_to 'Buy plan', pricing_subscription_path(stripe_price: ENV['STARTUP_YEAR']), data: { turbo: false }, class: "mt-6 block rounded-md px-3 py-2 text-center text-sm/6 font-semibold text-indigo-500 hover:text-white shadow-sm bg-white hover:bg-indigo-500 ring-1 ring-inset ring-indigo-200 hover:ring-indigo-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 #{ENV['STARTUP_YEAR'] == @current_price_id ? 'disabled-link' : ''}" %>
     <% if ENV['STARTUP_YEAR'] == @current_price_id %>
       <%= link_to 'Cancel Subscription', 
                   pricing_cancel_subscription_path,
@@ -69,9 +69,9 @@
       <!-- Price, update based on frequency toggle state -->
       <span class="text-4xl font-semibold tracking-tight text-gray-900">$200</span>
       <!-- Payment frequency, update based on frequency toggle state -->
-      <span class="text-sm/6 font-semibold text-gray-600">/month</span>
+      <span class="text-sm/6 font-semibold text-gray-600">/year</span>
     </p>
-    <%= link_to 'Buy plan', pricing_subscription_path(stripe_price: ENV['ENTERPRISE_YEAR']), class: "mt-6 block rounded-md px-3 py-2 text-center text-sm/6 font-semibold text-indigo-500 hover:text-white shadow-sm bg-white hover:bg-indigo-500 ring-1 ring-inset ring-indigo-200 hover:ring-indigo-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 #{ENV['ENTERPRISE_YEAR'] == @current_price_id ? 'disabled-link' : ''}" %>
+    <%= link_to 'Buy plan', pricing_subscription_path(stripe_price: ENV['ENTERPRISE_YEAR']), data: { turbo: false }, class: "mt-6 block rounded-md px-3 py-2 text-center text-sm/6 font-semibold text-indigo-500 hover:text-white shadow-sm bg-white hover:bg-indigo-500 ring-1 ring-inset ring-indigo-200 hover:ring-indigo-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 #{ENV['ENTERPRISE_YEAR'] == @current_price_id ? 'disabled-link' : ''}" %>
     <% if ENV['ENTERPRISE_YEAR'] == @current_price_id %>
       <%= link_to 'Cancel Subscription', pricing_cancel_subscription_path, class: "mt-6 block rounded-md px-3 py-2 text-center text-sm/6 font-semibold text-indigo-500 hover:text-white shadow-sm bg-white hover:bg-indigo-500 ring-1 ring-inset ring-indigo-200 hover:ring-indigo-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" %>
     <% end %>

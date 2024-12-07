@@ -25,7 +25,7 @@
       <!-- Payment frequency, update based on frequency toggle state -->
       <span class="text-sm/6 font-semibold text-gray-600">/month</span>
     </p>
-    <%= link_to 'Buy plan', pricing_subscription_path(stripe_price: ENV['FREELANCER']), class: "mt-6 block rounded-md px-3 py-2 text-center text-sm/6 font-semibold text-indigo-500 hover:text-white shadow-sm bg-white hover:bg-indigo-500 ring-1 ring-inset ring-indigo-200 hover:ring-indigo-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 #{ENV['FREELANCER'] == @current_price_id ? 'disabled-link' : ''}" %>
+    <%= link_to 'Buy plan', pricing_subscription_path(stripe_price: ENV['FREELANCER']), data: { turbo: false }, class: "mt-6 block rounded-md px-3 py-2 text-center text-sm/6 font-semibold text-indigo-500 hover:text-white shadow-sm bg-white hover:bg-indigo-500 ring-1 ring-inset ring-indigo-200 hover:ring-indigo-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 #{ENV['FREELANCER'] == @current_price_id ? 'disabled-link' : ''}" %>
     <% if ENV['FREELANCER'] == @current_price_id %>
       <%= link_to 'Cancel Subscription', pricing_cancel_subscription_path, class: "mt-6 block rounded-md px-3 py-2 text-center text-sm/6 font-semibold text-indigo-500 hover:text-white shadow-sm bg-white hover:bg-indigo-500 ring-1 ring-inset ring-indigo-200 hover:ring-indigo-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" %>
     <% end %>
@@ -47,7 +47,7 @@
       <!-- Payment frequency, update based on frequency toggle state -->
       <span class="text-sm/6 font-semibold text-gray-600">/month</span>
     </p>
-    <%= link_to 'Buy plan', pricing_subscription_path(stripe_price: ENV['STARTUP']), class: "mt-6 block rounded-md px-3 py-2 text-center text-sm/6 font-semibold text-indigo-500 hover:text-white shadow-sm bg-white hover:bg-indigo-500 ring-1 ring-inset ring-indigo-200 hover:ring-indigo-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 #{ENV['STARTUP'] == @current_price_id ? 'disabled-link' : ''}" %>
+    <%= link_to 'Buy plan', pricing_subscription_path(stripe_price: ENV['STARTUP']), data: { turbo: false }, class: "mt-6 block rounded-md px-3 py-2 text-center text-sm/6 font-semibold text-indigo-500 hover:text-white shadow-sm bg-white hover:bg-indigo-500 ring-1 ring-inset ring-indigo-200 hover:ring-indigo-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 #{ENV['STARTUP'] == @current_price_id ? 'disabled-link' : ''}" %>
     <% if ENV['STARTUP'] == @current_price_id %>
       <%= link_to 'Cancel Subscription', 
                   pricing_cancel_subscription_path,
@@ -71,7 +71,7 @@
       <!-- Payment frequency, update based on frequency toggle state -->
       <span class="text-sm/6 font-semibold text-gray-600">/month</span>
     </p>
-    <%= link_to 'Buy plan', pricing_subscription_path(stripe_price: ENV['ENTERPRISE']), class: "mt-6 block rounded-md px-3 py-2 text-center text-sm/6 font-semibold text-indigo-500 hover:text-white shadow-sm bg-white hover:bg-indigo-500 ring-1 ring-inset ring-indigo-200 hover:ring-indigo-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 #{ENV['ENTERPRISE'] == @current_price_id ? 'disabled-link' : ''}" %>
+    <%= link_to 'Buy plan', pricing_subscription_path(stripe_price: ENV['ENTERPRISE']), data: { turbo: false }, class: "mt-6 block rounded-md px-3 py-2 text-center text-sm/6 font-semibold text-indigo-500 hover:text-white shadow-sm bg-white hover:bg-indigo-500 ring-1 ring-inset ring-indigo-200 hover:ring-indigo-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 #{ENV['ENTERPRISE'] == @current_price_id ? 'disabled-link' : ''}" %>
     <% if ENV['ENTERPRISE'] == @current_price_id %>
       <%= link_to 'Cancel Subscription', pricing_cancel_subscription_path, class: "mt-6 block rounded-md px-3 py-2 text-center text-sm/6 font-semibold text-indigo-500 hover:text-white shadow-sm bg-white hover:bg-indigo-500 ring-1 ring-inset ring-indigo-200 hover:ring-indigo-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" %>
     <% end %>

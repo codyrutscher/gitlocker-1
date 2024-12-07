@@ -8,12 +8,14 @@ class PricingController < ApplicationController
   end
 
   def toggle_pricing
+    service = BillingService.new(current_user)	
+    @current_price_id = service.get_active_price_from_subscription
     @pricing_type = params[:pricing_type]
     render turbo_stream: turbo_stream.replace("pricing_section", partial: "pricing/pricing_#{@pricing_type}")
   end
 
   def subscription
-    if !current_user.is_new
+    if current_user.is_new
       service = BillingService.new(current_user)
       session_url = service.create_checkout_session(params[:stripe_price])
       redirect_to session_url, allow_other_host: true
