@@ -53,7 +53,7 @@
    
 
   <div id="div" class="border-black border-double bg-orange-400 justify-center border-8 flex justify-center items-center mt-8 mb-8 rounded-2xl">
-    <div class="mt-8 space-x-4">
+    <div class="mt-8 pl-4 pr-4 space-x-4">
       <% if user_signed_in? %>
         <%= link_to "Browse Creators", marketplace_creators_path, class: "inline-block bg-white hover:shadow-[inset_12rem_0_0_0] hover:shadow-blue-700 duration-[400ms,700ms] transition-[color,box-shadow] text-black hover:text-white border-black border-4 font-bold py-2 px-4 rounded-full" %>
         <%= link_to "Browse Free Code", marketplace_browse_free_path, class: "inline-block bg-white hover:shadow-[inset_12rem_0_0_0] hover:shadow-blue-700 duration-[400ms,700ms] transition-[color,box-shadow] text-black hover:text-white border-black border-4 font-bold py-2 px-4 rounded-full" %>
