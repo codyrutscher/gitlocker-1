@@ -1,4 +1,6 @@
 class PricingController < ApplicationController
+  HOST = ENV['HOST']
+
   def index
     service = BillingService.new(current_user)	
     @current_price_id = service.get_active_price_from_subscription
@@ -19,13 +21,19 @@ class PricingController < ApplicationController
     user = User.find(params[:user_id])
     service = BillingService.new(user)
     service.process_checkout_result(params[:session_id])
-    redirect_to "http://localhost:3000/pricing?returning=true&result=success"
+    redirect_to "#{HOST}/pricing?returning=true&result=success"
   end
 
   def cancel_subscription
-    Stripe::Subscription.cancel(current_user.stripe_subscription)
-  rescue Stripe::InvalidRequestError => e
-    puts "Error canceling subscription: #{e.message}"
-  redirect_to pricing_path
+    begin
+      subscription = Stripe::Subscription.delete(current_user.stripe_subscription)
+      Rails.logger.info "Subscription canceled successfully" if subscription
+      flash[:notice] = "Subscription canceled successfully."
+      redirect_to pricing_path
+    rescue Stripe::InvalidRequestError => e
+      Rails.logger.error "Error canceling subscription: #{e.message}"
+      flash[:alert] = "There was an issue canceling your subscription. Please try again."
+      redirect_to pricing_path
+    end
   end
 end

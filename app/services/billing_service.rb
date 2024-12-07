@@ -1,4 +1,6 @@
 class BillingService
+	HOST = ENV['HOST']
+	
 	def initialize(user)
 		@user = user
 	end
@@ -25,8 +27,8 @@ class BillingService
 			line_items: [
 				{price: stripe_price, quantity: 1},
 			],
-			success_url: "http://localhost:3000/pricing/process_checkout_result?session_id={CHECKOUT_SESSION_ID}&user_id=#{@user.id}",
-			cancel_url: "http://localhost:3000/pricing?returning=true&result=cancel",
+			success_url: "#{HOST}/pricing/process_checkout_result?session_id={CHECKOUT_SESSION_ID}&user_id=#{@user.id}",
+			cancel_url: "#{HOST}/pricing?returning=true&result=cancel",
 		}
 
 		session = Stripe::Checkout::Session.create(request)

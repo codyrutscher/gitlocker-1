@@ -1,6 +1,6 @@
 module PriceLimitMapper
   PRICE_LIMITS = {
-    ENV['FREELANCER'] => 1,
+    ENV['FREELANCER'] => 20,
     ENV['STARTUP'] => 30,
     ENV['ENTERPRISE'] => 99999999
 }.freeze
