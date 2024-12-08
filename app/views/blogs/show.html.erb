@@ -36,7 +36,7 @@ padding-bottom: 10px;
 
 <%= content_for :meta_title, @blog.title %>
 <%= content_for :meta_description, ActionView::Base.full_sanitizer.sanitize(@blog.content)&.first(160)&.humanize %>
-<div class="bg-white">
+<div id="backgroundImageFaq" class="bg-white">
   <div class="container bg-gray-200 mx-auto px-4 py-6">
     <h1 class="text-3xl text-black font-bold underline mb-4"><%= @blog.title %></h1>
     <hr class="h-px bg-black border-4 mt-4 mb-4 border-black">
