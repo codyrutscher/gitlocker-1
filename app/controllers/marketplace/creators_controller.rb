@@ -15,6 +15,7 @@ class CreatorsController < ApplicationController
     @languages = @user.languages
     @categories = @user.categories
     @service = BillingService.new(current_user)
+    @current_price_id = @service.get_active_price_from_subscription
   end
 end
 end
