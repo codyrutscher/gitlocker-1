@@ -1,0 +1,41 @@
+<html>
+  <head>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <%=
+    render BreadcrumbComponent.new(current_user,[
+      { text: "Pricing", url: pricing_path }
+    ])
+  %>
+
+  <div id="grad" class="bg-white mb-8">
+    <main>
+      <!-- Pricing section -->
+      <div class="mx-auto mt-16 max-w-7xl px-6 sm:mt-32 lg:px-8">
+        <div class="mx-auto max-w-4xl text-center">
+          <h1 class="text-base/7 font-semibold text-indigo-600">Pricing</h1>
+          <p class="mt-2 text-balance text-5xl font-semibold tracking-tight text-gray-900 sm:text-6xl">Pricing for sellers of any level.</p>
+        </div>
+        <p class="mx-auto mt-6 max-w-2xl text-pretty text-center text-lg font-medium text-gray-600 sm:text-xl/8">Choose an affordable plan that's packed with the best features for engaging your audience, creating customer loyalty, and driving sales.</p>
+        <div class="mt-16 flex flex-row justify-center space-x-4">
+          <%= link_to "Monthly", 
+              toggle_pricing_path(pricing_type: "monthly"), 
+              method: :get, 
+              data: { turbo_stream: true},
+              class: "p-4 border border-black rounded-3xl bg-white hover:bg-blue-500 text-black hover:text-white" %>
+          
+          <%= link_to "Annual", 
+              toggle_pricing_path(pricing_type: "annual"), 
+              method: :get, 
+              data: { turbo_stream: true},
+              class: "p-4 border border-black rounded-3xl bg-white hover:bg-blue-500 text-black hover:text-white" %>
+        </div>
+          <%= turbo_frame_tag "pricing_frame" do %>
+            <div id="pricing_section">
+              <%= render "pricing/pricing_#{@pricing_type}" %>
+            </div>
+          <% end %>
+      </div>
+    </main>
+  </div>
+</html>

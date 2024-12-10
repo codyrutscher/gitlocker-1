@@ -58,7 +58,7 @@ Rails.application.routes.draw do
   get "refund_policy", to: "home#refund_policy"
   get "deployment_options", to: "home#deployment_options"
   get "contact", to: "home#contact"
-  get "pricing", to: "home#pricing"
+  # get "pricing", to: "home#pricing"
   get "robots.txt", to: "home#robots"
   get '/sitemaps/:filename', to: 'home#sitemap'
 
@@ -71,6 +71,15 @@ Rails.application.routes.draw do
   get "complete_developer_registrations", to: "complete_developer_registrations#index"
   put "complete_developer_registration", to: "complete_developer_registrations#update"
 
+  get "pricing", to: "pricing#index"
+  get 'toggle_pricing', to: 'pricing#toggle_pricing'
+
+  namespace :pricing do
+    get :success
+    get :subscription
+    get :process_checkout_result
+    get :cancel_subscription
+  end
 
   resources :accounts
 

@@ -30,6 +30,8 @@ class Product < ApplicationRecord
   validates :name, presence: true, uniqueness: true, on: :create
   # validates :url, presence: true, uniqueness: { scope: :name }
 
+  validate :validate_product_limit, on: :create
+
   accepts_nested_attributes_for :product_categories
 
   # Generate thumbnails only when covers are created or updated
@@ -193,5 +195,16 @@ class Product < ApplicationRecord
   def more_from_this_creators
     user = self.user 
     products = user.products.order(created_at: :desc).limit(5)
+  end
+
+  def validate_product_limit
+    return true unless user.is_new # Skip validation for users who are not new
+  
+    service = BillingService.new(user)
+    user_limit = service.get_product_limit
+  
+    if user.products.count >= user_limit
+      errors.add(:base, "Limit exceeded. Please upgrade the plan to add more products.",  code: 402)
+    end
   end
 end
