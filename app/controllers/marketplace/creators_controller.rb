@@ -14,7 +14,7 @@ class CreatorsController < ApplicationController
     @products = @user.products.published.page(params[:page]).per(15)
     @languages = @user.languages
     @categories = @user.categories
-    service = BillingService.new(current_user)
+    @service = BillingService.new(current_user)
   end
 end
 end
