@@ -96,9 +96,9 @@
           <%# Price %>
           <div>
             <% if @product.price.to_f.round(2) > 0.00 %> 
-              <p class="bg-blue-100 text-blue-800 text-3xl font-semibold px-1 py-1 rounded dark:bg-blue-200 dark:text-blue-800 w-fit"><%= @product.price.currency.symbol %><%= @product.price %></p>
+              <p class="bg-blue-100 text-blue-800 text-3xl font-semibold px-1 py-1 m-4 rounded dark:bg-blue-200 dark:text-blue-800 w-fit"><%= @product.price.currency.symbol %><%= @product.price %></p>
             <% else %>
-              <p class="bg-blue-100 text-blue-800 text-3xl font-semibold px-1 py-1 rounded dark:bg-blue-200 dark:text-blue-800 w-fit">Free</p>
+              <p class="bg-blue-100 text-blue-800 text-3xl font-semibold px-1 py-1 m-4 rounded dark:bg-blue-200 dark:text-blue-800 w-fit">Free</p>
             <% end %>
             <% if @product.price.to_f.round(2) > 0.00 %> 
               <div></div>
