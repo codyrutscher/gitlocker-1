@@ -9,13 +9,14 @@ class CreatorsController < ApplicationController
     end
   end
 
-  def show
+def show
     @user = User.friendly.find(params[:id])
     @products = @user.products.published.page(params[:page]).per(15)
     @languages = @user.languages
     @categories = @user.categories
-    @service = BillingService.new(@user)
-    @current_price_id = service.get_active_price_from_subscription
+    service = BillingService.new(@user)
+    current_price_id = service.get_active_price_from_subscription
+    plan = PriceLimitMapper.find_plan_name(current_price_id)
   end
 end
 end
