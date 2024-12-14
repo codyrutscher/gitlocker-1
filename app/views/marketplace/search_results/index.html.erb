@@ -12,7 +12,7 @@
       <section aria-labelledby="products-heading" class="py-8 sm:py-16 xl:mx-auto">
         <div class="px-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8 xl:px-0 mb-4">
           <h2 id="products-heading" class="text-2xl font-bold tracking-tight text-gray-900 underline ">
-           <span class="bg-blue-100 text-blue-800 font-semibold px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800"><%= @product_results.count %></span> Product Search Results: <span class="bg-blue-100 text-blue-800 font-semibold px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800"><%= params[:search] %></span>
+           <%= @product_results.count %> Product Search Results: <span class="bg-blue-100 text-blue-800 font-semibold px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800"><%= params[:search] %></span>
           </h2>
         </div>
         <hr class="h-px bg-black border-4 mt-4 mb-4 border-black">
@@ -44,7 +44,7 @@
       <section aria-labelledby="creators-heading" class="py-8 sm:py-16 xl:mx-auto">
         <div class="px-4 sm:flex sm:items-center sm:justify-between sm:px-6 xl:px-0 mb-4">
           <h2 id="creators-heading" class="text-2xl font-bold tracking-tight text-gray-900 underline mt-2 ">
-            Creator Search Results: <%= params[:search] %>
+            <%= @marketplace_creator_results.count %> Creator Search Results: <span class="bg-blue-100 text-blue-800 font-semibold px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800"><%= params[:search] %></span>
           </h2>
         </div>
         <hr class="h-px bg-black border-4 mt-4 mb-4 border-black">
@@ -75,7 +75,7 @@
       <section aria-labelledby="categories-heading" class="py-8 sm:py-16 xl:mx-auto mt-2">
         <div class="px-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8 xl:px-0 mb-4">
           <h2 id="categories-heading" class="text-2xl font-bold tracking-tight text-gray-900 underline ">
-            Category Search Results: <%= params[:search] %>
+            <%= @category_results.count %> Category Search Results: <span class="bg-blue-100 text-blue-800 font-semibold px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800"><%= params[:search] %></span>
           </h2>
         </div>
         <hr class="h-px bg-black border-4 mt-4 mb-4 border-black">
@@ -107,7 +107,7 @@
       <section aria-labelledby="languages-heading" class="py-8 sm:py-16 xl:mx-auto mt-2">
         <div class="px-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8 xl:px-0 mb-4">
           <h2 id="languages-heading" class="text-2xl font-bold tracking-tight text-gray-900 underline ">
-            Language Search Results: <%= params[:search] %>
+            <%= @language_results.count %> Language Search Results: <span class="bg-blue-100 text-blue-800 font-semibold px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800"><%= params[:search] %></span>
           </h2>
         </div>
         <hr class="h-px bg-black border-4 mt-4 mb-4 border-black">
