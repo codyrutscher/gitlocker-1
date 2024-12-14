@@ -16,7 +16,7 @@ def show
     @categories = @user.categories
     service = BillingService.new(@user)
     current_price_id = service.get_active_price_from_subscription
-    plan = PriceLimitMapper.find_plan_name(current_price_id)
+    @plan = PriceLimitMapper.find_plan_name(current_price_id)
   end
 end
 end
