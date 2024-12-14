@@ -12,7 +12,7 @@
       <section aria-labelledby="products-heading" class="py-8 sm:py-16 xl:mx-auto">
         <div class="px-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8 xl:px-0 mb-4">
           <h2 id="products-heading" class="text-2xl font-bold tracking-tight text-gray-900 underline ">
-           <%= @product_results.count %> Product Search Results: <%= params[:search] %>
+           <span class="bg-blue-100 text-blue-800 font-semibold px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800"><%= @product_results.count %></span> Product Search Results: <span class="bg-blue-100 text-blue-800 font-semibold px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800"><%= params[:search] %></span>
           </h2>
         </div>
         <hr class="h-px bg-black border-4 mt-4 mb-4 border-black">
