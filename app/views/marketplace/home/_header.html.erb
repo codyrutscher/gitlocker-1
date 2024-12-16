@@ -75,7 +75,21 @@
                     </div>
                   </div>
                   <div class="px-6 pb-14 pt-6">
-                    <!-- Your code example -->
+                    import { useState } from 'react'
+import { Switch } from '@headlessui/react'
+
+function Example() {
+	const [enabled, setEnabled] = useState(true)
+
+	return (
+		<form action="/notification-settings" method="post">
+			<Switch checked={enabled} onChange={setEnabled} name="notifications">
+				{/* ... */}
+			</Switch>
+			<button>Submit</button>
+		</form>
+	)
+}
                   </div>
                 </div>
               </div>
