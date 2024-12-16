@@ -31,7 +31,11 @@
   background-size: cover;
   backdrop-filter: blur(4px);
 }
-
+.clip {
+  background: -webkit-linear-gradient(#eee, #333);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 
 
 
@@ -55,7 +59,7 @@
         <div class="flex">
           
         </div>
-        <h1 class="mt-10 text-pretty text-5xl font-semibold tracking-tight text-gray-900 sm:text-7xl">A better way to sell your <span class="bg-gradient-to-r from-blue-600 via-green-500 to-indigo-400 bg-clip-text">code</span></h1>
+        <h1 class="mt-10 text-pretty text-5xl font-semibold tracking-tight text-gray-900 sm:text-7xl">A better way to sell your <span class="clip">code</span></h1>
         <p class="mt-8 text-pretty text-lg font-medium text-gray-500 sm:text-xl/8">Browse <span class="font-bold">GitLocker's</span> selection of <span class="bg-blue-100 text-blue-800 font-semibold text-2xl px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800"><%= number_with_delimiter(Product.count, :delimiter => ',') %></span> free and premium code for websites, apps, games, plugins, themes, snippets and more or sign up to start <span class="font-bold">buying and selling</span>!</p>
         <div class="mt-10 flex items-center gap-x-6">
           <% if user_signed_in? %>
