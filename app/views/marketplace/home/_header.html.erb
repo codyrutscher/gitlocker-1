@@ -83,7 +83,48 @@ height: 100%;
 object-fit: cover;
 
 }
-
+.wrapper{
+    box-sizing: content-box;
+    background-color: #ffffff;
+    height: 70px;
+    display: flex;
+    border-radius: 8px;
+    box-shadow: 0 20px 25px rgba(0,0,0,0.2);
+}
+.words{
+    overflow: hidden;
+}
+code{
+    display: block;
+    height: 100%;
+    padding-left: 10px;
+    animation: spin_words 6s infinite;
+}
+@keyframes spin_words{
+    10%{
+        transform: translateY(-112%);
+    }
+    25%{
+        transform: translateY(-100%);
+    }
+    35%{
+        transform: translateY(-212%);
+    }
+    50%{
+        transform: translateY(-200%);
+    }
+    60%{
+        transform: translateY(-312%);
+    }
+    75%{
+        transform: translateY(-300%);
+    }
+    85%{
+        transform: translateY(-412%);
+    }
+    100%{
+        transform: translateY(-400%);
+    }
 </style>
 </head>
 <div class="bg-gradient-to-l from-gray-200 via-fuchsia-200 to-stone-100">
@@ -100,7 +141,20 @@ object-fit: cover;
         <div class="flex">
           
         </div>
-        <h1 class="mt-10 text-pretty text-5xl font-semibold tracking-tight text-gray-900 sm:text-7xl">A better way to sell your <span class="clip text-green-300 underline">code</span></h1>
+      <div class="wrapper">
+        <h1 class="mt-10 text-pretty text-5xl font-semibold tracking-tight text-gray-900 sm:text-7xl">
+          A better way to sell your 
+        </h1>
+          <div class="words">
+           <code class="word clip text-green-300 underline">code</code>
+           <code class="word clip text-green-300 underline">apps</code>
+           <code class="word clip text-green-300 underline">plugins</code>
+           <code class="word clip text-green-300 underline">games</code>
+           <code class="word clip text-green-300 underline">themes</code>
+           <code class="word clip text-green-300 underline">snippets</code>
+           <code class="word clip text-green-300 underline">packages</code>
+       </div>
+        
         <p class="mt-8 text-pretty text-lg font-medium text-gray-500 sm:text-xl/8">Browse <span class="font-bold">GitLocker's</span> selection of <span class="bg-blue-100 text-blue-800 font-semibold text-2xl px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800"><%= number_with_delimiter(Product.count, :delimiter => ',') %></span> free and premium code for websites, apps, games, plugins, themes, snippets, and packages from our <span class="bg-blue-100 text-blue-800 font-semibold text-2xl px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800"><%= User.count %></span> users or sign up to start <span class="font-bold">buying and selling</span>!</p>
         <div class="mt-10 flex items-center gap-x-6">
           <% if user_signed_in? %>
