@@ -6,8 +6,8 @@
     border-width: 4px;
     border-style: solid;
 }
-</head>
 </style>
+</head>
 <body>
 <%= link_to marketplace_category_path(category.slug), class: "relative aspect-square border border-black border-4 rounded hover:shadow-[0px_20px_20px_15px_#1158f2] hover:bounceOrig" do %>
   <%= image_tag "categories/#{category.image_name}", class: "h-full w-full aspect-square object-cover object-center rounded", alt: "#{category.image_name} Image" %>
