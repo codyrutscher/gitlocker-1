@@ -235,17 +235,17 @@ code{
                 <%= link_to "Browse Premium Code", marketplace_browse_premium_path, class: "inline-block bg-white hover:shadow-[inset_15rem_0_0_0] hover:shadow-blue-700 duration-[400ms,700ms] transition-[color,box-shadow] text-black hover:text-white border-black border-4 font-bold py-2 px-4 rounded-full" %>
                 <%= link_to "Sell Code", new_product_path, class: "inline-block bg-white hover:shadow-[inset_12rem_0_0_0] hover:shadow-blue-700 duration-[400ms,700ms] transition-[color,box-shadow] text-black hover:text-white border-black border-4 font-bold py-2 px-4 rounded-full" %>
                 <%= link_to "Get Paid", funds_path, class: "inline-block bg-white hover:shadow-[inset_12rem_0_0_0] hover:shadow-blue-700 duration-[400ms,700ms] transition-[color,box-shadow] text-black hover:text-white border-black border-4 font-bold py-2 px-4 rounded-full" %>
-                <%= link_to "Blogs", blogs_path, class: "inline-block bg-white hover:shadow-[inset_12rem_0_0_0] hover:shadow-blue-700 duration-[400ms,700ms] transition-[color,box-shadow] text-black hover:text-white border-black border-4 font-bold py-2 px-4 rounded-full" %>
+                <%= link_to "<%= Blog.count %> Blogs", blogs_path, class: "inline-block bg-white hover:shadow-[inset_12rem_0_0_0] hover:shadow-blue-700 duration-[400ms,700ms] transition-[color,box-shadow] text-black hover:text-white border-black border-4 font-bold py-2 px-4 rounded-full" %>
               <% else %>
                 <%= link_to "Sign In", new_user_session_path, class: "inline-block bg-white hover:shadow-[inset_12rem_0_0_0] hover:shadow-blue-700 duration-[400ms,700ms] transition-[color,box-shadow] text-black hover:text-white border-black border-4 font-bold py-2 px-4 rounded-full" %>
                 <%= link_to "Create An Account", new_user_registration_path, class: "inline-block bg-white hover:shadow-[inset_12rem_0_0_0] hover:shadow-blue-700 duration-[400ms,700ms] transition-[color,box-shadow] text-black hover:text-white border-black border-4 font-bold py-2 px-4 rounded-full" %>
-                <%= link_to "Browse", marketplace_browse_path, class: "inline-block bg-white hover:shadow-[inset_12rem_0_0_0] hover:shadow-blue-700 duration-[400ms,700ms] transition-[color,box-shadow] text-black hover:text-white border-black border-4 font-bold py-2 px-4 rounded-full" %>
-                <%= link_to "Blogs", blogs_path, class: "inline-block bg-white hover:shadow-[inset_12rem_0_0_0] hover:shadow-blue-700 duration-[400ms,700ms] transition-[color,box-shadow] text-black hover:text-white border-black border-4 font-bold py-2 px-4 rounded-full" %>
+                <%= link_to "Browse <%= Product.count %>", marketplace_browse_path, class: "inline-block bg-white hover:shadow-[inset_12rem_0_0_0] hover:shadow-blue-700 duration-[400ms,700ms] transition-[color,box-shadow] text-black hover:text-white border-black border-4 font-bold py-2 px-4 rounded-full" %>
+                <%= link_to "<%= Blog.count %> Blogs", blogs_path, class: "inline-block bg-white hover:shadow-[inset_12rem_0_0_0] hover:shadow-blue-700 duration-[400ms,700ms] transition-[color,box-shadow] text-black hover:text-white border-black border-4 font-bold py-2 px-4 rounded-full" %>
               <% end %>
           </div>
           <div class="grid grid-cols-3 gap-2 content-start">
       <a href="https://www.gitlocker.com/marketplace/languages/ruby">
-        <button class="button-56">Ruby</button>
+        <button class="button-56"><%= Languages.ruby.count %> Ruby Products</button>
       </a>
        <a href="https://www.gitlocker.com/marketplace/languages/php">
         <button class="button-56">PHP</button>
