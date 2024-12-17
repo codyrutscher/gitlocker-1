@@ -106,6 +106,7 @@ Rails.application.routes.draw do
   get "landing_page", to: "coming_soon#landing_page"
   get "faq", to: "faq#index"
   get "resources", to: "marketplace/home#resources"
+  get "forum", to: "marketplace/home#forum"
   
   namespace :marketplace do
     root "home#index"
