@@ -98,6 +98,9 @@ margin: 0em 0px;
     height: 40px;
     box-shadow: 0 20px 25px rgba(0,0,0,0.2);
     display: flex;
+    border-image: linear-gradient(to right, #3acfd5 0%, #3a4ed5 100%) 1;
+    border-width: 4px;
+    border-style: solid;
 }
 .words{
     overflow: hidden;
@@ -135,29 +138,7 @@ code{
         transform: translateY(-400%);
     }
 
-@import "https://unpkg.com/open-props" layer(design.system);
-@import "https://unpkg.com/open-props/normalize.min.css" layer(demo.support);
 
-@layer demo {
-  .wrapper {
-    inline-size: var(--size-content-1);
-    aspect-ratio: var(--ratio-widescreen);
-    border: solid var(--size-2) transparent;
-    border-radius: var(--radius-4);
-    background: 
-      linear-gradient(var(--surface-1), var(--surface-1)) padding-box, 
-      var(--gradient-1) border-box;
-  }
-}
-
-@layer demo.support {
-  body {
-    display: grid;
-    place-content: center;
-    padding: var(--size-5);
-    gap: var(--size-5);
-  } 
-}
 </style>
 </head>
 <div class="bg-gradient-to-l from-gray-200 via-fuchsia-200 to-stone-100">
