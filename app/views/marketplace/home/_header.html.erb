@@ -134,6 +134,30 @@ code{
     100%{
         transform: translateY(-400%);
     }
+
+@import "https://unpkg.com/open-props" layer(design.system);
+@import "https://unpkg.com/open-props/normalize.min.css" layer(demo.support);
+
+@layer demo {
+  .wrapper {
+    inline-size: var(--size-content-1);
+    aspect-ratio: var(--ratio-widescreen);
+    border: solid var(--size-2) transparent;
+    border-radius: var(--radius-4);
+    background: 
+      linear-gradient(var(--surface-1), var(--surface-1)) padding-box, 
+      var(--gradient-1) border-box;
+  }
+}
+
+@layer demo.support {
+  body {
+    display: grid;
+    place-content: center;
+    padding: var(--size-5);
+    gap: var(--size-5);
+  } 
+}
 </style>
 </head>
 <div class="bg-gradient-to-l from-gray-200 via-fuchsia-200 to-stone-100">
