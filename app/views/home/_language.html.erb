@@ -1,5 +1,6 @@
 <html>
 <head>
+<style>
 .aspect-square {
  border-image: linear-gradient(to right, #3acfd5 0%, #3a4ed5 100%) 1;
     border-width: 4px;
@@ -7,6 +8,7 @@
 }
 
 </head>
+</style>
 <body>
 <%= link_to marketplace_language_path(language.slug), class: "relative aspect-square border hover:bounceOrig rounded hover:shadow-[0px_20px_20px_15px_#1158f2]" do %>
   <%= image_tag "languages/#{language.image_name}", class: "h-full w-full aspect-square object-cover object-center rounded", alt: "#{language.image_name} Image" %>
