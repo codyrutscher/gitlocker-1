@@ -24,7 +24,7 @@
               <%= render partial: 'shared/productFilter' %>
               </div>
               <hr class="h-px bg-black border-4 mt-4 mb-4 border-black">
-              <div class="mt-4 gap-4 sm:grid-cols-1 grid-cols-1 grid xl:grid-cols-7 lg:grid-cols-4 md:grid-cols-3 xl:gap-x-8">
+              <div class="mt-4 gap-4 sm:grid-cols-1 grid-cols-1 grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 xl:gap-x-8">
                 <% @products.each do |product| %>
                   <%= render partial: "home/product", locals: { product: product } %>
                 <% end %>
