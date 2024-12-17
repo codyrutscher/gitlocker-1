@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   mount Sidekiq::Web => '/sidekiq'
   resources :follows
   get 'proxy/fetch_forum', to: 'proxy#fetch_forum', as: :fetch_forum
+  get 'proxy/fetch_youtube', to: 'proxy#fetch_youtube', as: :fetch_youtube
   get '/workflows/:id', to: 'workflows#index', as: "workflows"
   post '/workflows/:id', to: 'workflows#index'
   get '/workflows/:id/open_file', to: 'workflows#open_file', as: "open_file"
