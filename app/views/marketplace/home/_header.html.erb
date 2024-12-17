@@ -253,31 +253,31 @@ code{
           </div>
           <div class="grid grid-cols-3 gap-2 content-start">
       <a href="https://www.gitlocker.com/marketplace/languages/ruby">
-        <button class="button-56"><%= Language.where(name: "Ruby").count %> Ruby Products</button>
+        <button class="button-56"><%= Language.find_by(name: "Ruby")&.products.count %> Ruby Products</button>
       </a>
        <a href="https://www.gitlocker.com/marketplace/languages/php">
-        <button class="button-56">PHP</button>
+        <button class="button-56"><%= Language.find_by(name: "PHP")&.products.count %> PHP Products</button>
       </a>
        <a href="https://www.gitlocker.com/marketplace/languages/css">
-        <button class="button-56">CSS</button>
+        <button class="button-56"><%= Language.find_by(name: "CSS")&.products.count %> CSS Products</button>
       </a>
        <a href="https://www.gitlocker.com/marketplace/languages/html">
-        <button class="button-56">HTML</button>
+        <button class="button-56"><%= Language.find_by(name: "HTML")&.products.count %> HTML Products</button>
       </a>
        <a href="https://www.gitlocker.com/marketplace/languages/javascript">
-        <button class="button-56">Javascript</button>
+        <button class="button-56"><%= Language.find_by(name: "Javascript")&.products.count %> Javascript Products</button>
       </a>   
        <a href="https://www.gitlocker.com/marketplace/languages/c-0da30a8b-0eef-4e0f-9490-4ba3c509a69a">
-        <button class="button-56">C++</button>
+        <button class="button-56"><%= Language.find_by(name: "Cplusplus")&.products.count %> C++ Products</button>
       </a> 
        <a href="https://www.gitlocker.com/marketplace/languages/python">
-        <button class="button-56">Python</button>
+        <button class="button-56"><%= Language.find_by(name: "Python")&.products.count %> Python Products</button>
       </a>  
        <a href="https://www.gitlocker.com/marketplace/languages/c">
-        <button class="button-56">C#</button>
+        <button class="button-56"><%= Language.find_by(name: "Csharp")&.products.count %> C# Products</button>
       </a>  
      <a href="https://www.gitlocker.com/marketplace/languages/c-ba109df3-c051-4472-a5b2-8d51f6e245d2">
-        <button class="button-56">C</button>
+        <button class="button-56"><%= Language.find_by(name: "C")&.products.count %> C Products</button>
       </a>  
       
     </div>
