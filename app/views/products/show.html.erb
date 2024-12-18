@@ -113,7 +113,7 @@
             <% end %>
           </div>
 	 <div> 
-		<%= link_to marketplace_creator_path(@product.user), class: "mt-1 text-lg  text-white hover:text-blue-300 hover:underline" do %>
+		<%= link_to marketplace_creator_path(@product.user), class: "mt-1 text-lg  text-gray-900 hover:text-blue-300 hover:underline" do %>
                  Creator: <%= @product.user.username %>
                  <% end %>
 	</div>
@@ -186,32 +186,32 @@
           <% else %>
             <%= content_for :meta_description, ActionView::Base.full_sanitizer.sanitize(@product.description)&.humanize&.first(160) %>
           <% end %>
-          <div id="description" class="flex flex-col text-white h-fit p-4 rounded-2xl gap-4">
-            <h2 class="text-2xl text-bold underline text-white">Description:</h2>
+          <div id="description" class="flex flex-col text-gray-900 h-fit p-4 rounded-2xl gap-4">
+            <h2 class="text-2xl text-bold underline text-gray-900">Description:</h2>
             <p class="text-sm text-white"><%= sanitize @product.description %></p>
           </div>
           <div class="w-full border-t-4 border-black"></div>
         <% end %>
 
         <% if @product.features.present? %>
-          <div id="description" class="flex flex-col h-fit p-4 text-white rounded-2xl gap-4">
-            <h2 class="text-2xl text-bold underline text-white">Features:</h2>
+          <div id="description" class="flex flex-col h-fit p-4 text-gray-900 rounded-2xl gap-4">
+            <h2 class="text-2xl text-bold underline text-gray-900">Features:</h2>
             <p class="text-sm text-white"><%= sanitize @product.features %></p>
           </div>
           <div class="w-full border-t-4 border-black"></div>
         <% end %>
 
         <% if @product.requirements.present? %>
-          <div id="description" class="flex flex-col h-fit text-white p-4 rounded-2xl gap-4">
-            <h2 class="text-2xl text-bold underline text-white">Requirements:</h2>
+          <div id="description" class="flex flex-col h-fit text-gray-900 p-4 rounded-2xl gap-4">
+            <h2 class="text-2xl text-bold underline text-gray-900">Requirements:</h2>
             <p class="text-sm text-white"><%= sanitize @product.requirements %></p>
           </div>
           <div class="w-full border-t-4 border-black"></div>
         <% end %>
 
         <% if @product.instructions.present? %>
-          <div id="description" class="flex flex-col h-fit text-white p-4 rounded-2xl gap-4">
-            <h2 class="text-2xl text-bold underline text-white">Instructions:</h2>
+          <div id="description" class="flex flex-col h-fit text-gray-900 p-4 rounded-2xl gap-4">
+            <h2 class="text-2xl text-bold underline text-gray-900">Instructions:</h2>
             <p class="text-sm text-white"><%= sanitize @product.instructions %></p>
           </div>
           <div class="w-full border-t-4 border-black"></div>
