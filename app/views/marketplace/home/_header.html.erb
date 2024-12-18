@@ -185,7 +185,7 @@ code{
                 <%= link_to "Sell Code", new_product_path, class: "text-center inline-block bg-white hover:shadow-[inset_15rem_0_0_0] hover:shadow-blue-700 duration-[400ms,700ms] transition-[color,box-shadow] text-black hover:text-white border-black border-4 font-bold py-2 px-4 rounded-full" %>
                 <%= link_to "Get Paid", funds_path, class: "text-center inline-block bg-white hover:shadow-[inset_15rem_0_0_0] hover:shadow-blue-700 duration-[400ms,700ms] transition-[color,box-shadow] text-black hover:text-white border-black border-4 font-bold py-2 px-4 rounded-full" %>
                 <%= link_to blogs_path, class: "text-center inline-block bg-white hover:shadow-[inset_15rem_0_0_0] hover:shadow-blue-700 duration-[400ms,700ms] transition-[color,box-shadow] text-black hover:text-white border-black border-4 font-bold py-2 px-4 rounded-full" do %>
-                    <h2><%= Blog.count %> Blogs</h2>
+                    <h2>Blog</h2>
                 <% end %>
               <% else %>
                 <%= link_to "Sign In", new_user_session_path, class: "text-center inline-block bg-white hover:shadow-[inset_52rem_0_0_0] hover:shadow-blue-700 duration-[400ms,700ms] transition-[color,box-shadow] text-black hover:text-white border-black border-4 font-bold py-2 px-4 rounded-full" %>
@@ -194,7 +194,7 @@ code{
                   <h2>Premium Products</h2>
                 <% end %>
                  <%= link_to blogs_path, class: "text-center inline-block bg-white hover:shadow-[inset_12rem_0_0_0] hover:shadow-blue-700 duration-[400ms,700ms] transition-[color,box-shadow] text-black hover:text-white border-black border-4 font-bold py-2 px-4 rounded-full" do %>
-                    <h2><%= Blog.count %> Blogs </h2>
+                    <h2>Blog</h2>
                 <% end %>
               <% end %>
           </div>
