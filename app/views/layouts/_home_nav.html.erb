@@ -69,6 +69,9 @@
                 <%= link_to "https://www.youtube.com/channel/UCyjfk_yoecwHoiEYbV0ndMQ", target: "_blank" do %>
                   <h2 class="hover:text-white hidden sm:block">Tutorials</h2>
                 <% end %>
+                 <%= link_to blogs_path do %>
+                  <h2 class="hover:text-white hidden sm:block">Tutorials</h2>
+                <% end %>
               <!-- Cart -->
               <div>
                 <%= link_to marketplace_cart_items_path, class: "group -m-2 flex items-center p-2" do %>
@@ -141,7 +144,9 @@
                 </div>
               </div>
               <% else %>
-                <%= link_to "Sign in", new_user_session_path, data: { turbo: false }, class: "text-sm font-medium text-black hover:text-white" %>
+                <%= link_to new_user_session_path, data: { turbo: false }, class: "text-sm font-medium text-black hover:text-white" do %>
+                  <h2 class="hover:text-white">Sign In</h2>
+                <% end %>
               <% end %>
             </div>
           </div>
