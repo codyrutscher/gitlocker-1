@@ -118,7 +118,10 @@
 }
 
 #description {
-	background: #1e293b;
+	background: #A9A9A9;
+	border-image: linear-gradient(to right, #3acfd5 0%, #3a4ed5 100%) 1;
+    	border-width: 4px;
+    	border-style: solid;
 }
 
 #blog-content ul {
