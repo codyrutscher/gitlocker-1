@@ -8,7 +8,7 @@ class ProductsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_product, only: [:like, :unlike]
   before_action :update_state
-  before_action :set_user_repos
+  before_action :set_user_repos, if: -> { current_user.token.present? }
   include ProductConcern
 
   def index
@@ -251,6 +251,8 @@ class ProductsController < ApplicationController
   private
 
   def import_table
+    return unless current_user.token.present?
+
     private_repos = @user_repos.select { |repo| repo[:private] }
     product_urls = current_user.products.unscoped.pluck("url")
     repo_hash = private_repos.map do |repo|
