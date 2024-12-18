@@ -119,6 +119,9 @@
 
 #description {
 	background: #A9A9A9;
+	border: solid;
+	border-width: 4px;
+	border-color: black;
 }
 
 #blog-content ul {
