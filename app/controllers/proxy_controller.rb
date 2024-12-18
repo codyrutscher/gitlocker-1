@@ -4,7 +4,7 @@ class ProxyController < ApplicationController
   require 'uri'
 
   def fetch_forum
-    url = URI.parse("https://gitlocker.freeforums.net")
+    url = URI.parse("https://www.gitlocker.freeforums.net")
 
     # Setting up custom headers (simulate a browser request)
     headers = {
