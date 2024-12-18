@@ -1,3 +1,18 @@
+<html>
+<head>
+<style>
+
+.bg {
+    border-image: linear-gradient(to right, #3acfd5 0%, #3a4ed5 100%) 1;
+    border-width: 4px;
+    border-style: solid;
+}
+
+</style>
+</head>
+<body>
+
+
 <% if @product.name.length < 30 %>
   <% content_for :meta_title, "#{@product&.name&.titleize&.first(65)} | GitLocker.com Product " %>
 <% else %>
@@ -64,7 +79,7 @@
     <div class="lg:grid lg:grid-cols-7 lg:grid-rows-1 lg:gap-x-8 lg:gap-y-10 xl:gap-x-12">
       <!-- Product image -->
       <div class="lg:col-span-4 lg:row-end-1 flex flex-col gap-8 lg:gap-10 xl:gap-12">
-        <div class="overflow-hidden rounded-lg bg-gray-100 border-8 border-solid border-black hover:shadow-[0px_20px_20px_15px_#1a202c]">
+        <div class="overflow-hidden rounded-lg bg-gray-100 bg hover:shadow-[0px_20px_20px_15px_#1a202c]">
           <% if @product.covers.exists? %>
             <!-- 
             <%# <%= render CarouselComponent.new(@product.covers) %> %>
@@ -76,7 +91,7 @@
             <%= image_tag "default-cover.png", class: "object-cover object-center relative w-full", alt: "Default Cover" %>
           <% end %>
         </div>
-        <div class="border-black rounded-lg border-6">
+        <div class="bg rounded-lg ">
           <div class="rounded-lg flex flex-col">
             <div class="grow gap-3 grid md:grid-cols-5 sm:grid-cols-4 grid-cols-3">
               <%# Cover Image %>
@@ -172,12 +187,12 @@
           </button>
         </div>
 
-        <div class="w-full border-t-4 border-black"></div>
+        <div class="w-full bg"></div>
         <div id="video-container"></div>
 
         <% if @product.video_file.attached? %>
           <div id="video-container"></div>
-          <div class="w-full border-t-4 border-black"></div>
+          <div class="w-full bg"></div>
         <% end %>
 
         <% if @product.description.present? %>
@@ -186,7 +201,7 @@
           <% else %>
             <%= content_for :meta_description, ActionView::Base.full_sanitizer.sanitize(@product.description)&.humanize&.first(160) %>
           <% end %>
-          <div id="description" class="flex flex-col text-gray-900 h-fit p-4 rounded-2xl gap-4">
+          <div id="description" class="flex bg flex-col text-gray-900 h-fit p-4 rounded-2xl gap-4">
             <h2 class="text-2xl text-bold underline text-gray-900">Description:</h2>
             <p class="text-sm text-white"><%= sanitize @product.description %></p>
           </div>
@@ -194,7 +209,7 @@
         <% end %>
 
         <% if @product.features.present? %>
-          <div id="description" class="flex flex-col h-fit p-4 text-gray-900 rounded-2xl gap-4">
+          <div id="description" class="flex bg flex-col h-fit p-4 text-gray-900 rounded-2xl gap-4">
             <h2 class="text-2xl text-bold underline text-gray-900">Features:</h2>
             <p class="text-sm text-white"><%= sanitize @product.features %></p>
           </div>
@@ -202,7 +217,7 @@
         <% end %>
 
         <% if @product.requirements.present? %>
-          <div id="description" class="flex flex-col h-fit text-gray-900 p-4 rounded-2xl gap-4">
+          <div id="description" class="flex bg flex-col h-fit text-gray-900 p-4 rounded-2xl gap-4">
             <h2 class="text-2xl text-bold underline text-gray-900">Requirements:</h2>
             <p class="text-sm text-white"><%= sanitize @product.requirements %></p>
           </div>
@@ -210,7 +225,7 @@
         <% end %>
 
         <% if @product.instructions.present? %>
-          <div id="description" class="flex flex-col h-fit text-gray-900 p-4 rounded-2xl gap-4">
+          <div id="description" class="flex bg flex-col h-fit text-gray-900 p-4 rounded-2xl gap-4">
             <h2 class="text-2xl text-bold underline text-gray-900">Instructions:</h2>
             <p class="text-sm text-white"><%= sanitize @product.instructions %></p>
           </div>
@@ -224,7 +239,7 @@
           <div class="w-full border-t-4 border-black"></div>
         <% end %>
 
-        <div id="description" class="flex rounded-2xl flex-col p-4 gap-4">
+        <div id="description" class="flex rounded-2xl bg flex-col p-4 gap-4">
           <h3 class="text-2xl font-medium underline text-black">License:</h3>
           <p class="text-sm text-black">For personal and professional use. You cannot resell or redistribute these repositories in their original state.</p>
         </div>
@@ -256,7 +271,7 @@
 
       
 
-      <div class="mx-auto mt-16 w-full max-w-2xl lg:col-span-4 lg:mt-0 lg:max-w-none">
+      <div class="mx-auto mt-16 w-full max-w-2xl bg lg:col-span-4 lg:mt-0 lg:max-w-none">
         <% if @directory_tree_json != "[]"  %>
           <h2 class="text-2xl text-bold text-gray-900  mb-4 underline">Files In This Product:</h2>
           <div id="directory-tree-data" class="js-directory-tree mb-4 bg-gray-400"></div>
@@ -527,3 +542,5 @@
           }]
       });
 </script> %>
+</body>
+</html>
