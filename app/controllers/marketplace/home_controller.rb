@@ -24,6 +24,9 @@ module Marketplace
     def forum
 
     end
+    def youtube
+
+    end
 
     def recently_subscribed
       recently_followed_users = User.joins(:following_users).order('follows.created_at DESC').limit(20)
