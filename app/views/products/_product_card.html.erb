@@ -1,5 +1,23 @@
-<div class="bg-gray-300 rounded-lg border-6" data-controller="product-card">
-  <div class="border h-full border-black rounded-lg hover:shadow-[0px_20px_20px_15px_#1158f2] flex flex-col divide-y-4 divide-black">
+<html>
+<head>
+<style>
+
+.bg-gray-300 {
+    border-image: linear-gradient(to right, #3acfd5 0%, #3a4ed5 100%) 1;
+    border-width: 4px;
+    border-style: solid;
+}
+.bg {
+    border-image: linear-gradient(to right, #3acfd5 0%, #3a4ed5 100%) 1;
+    border-width: 4px;
+    border-style: solid;
+}
+
+</style>
+</head>
+<body>
+<div class="bg-gray-300 rounded-lg" data-controller="product-card">
+  <div class="bg h-full rounded-lg hover:shadow-[0px_20px_20px_15px_#1158f2] flex flex-col divide-y-4 divide-black">
     <%= link_to marketplace_library_path(product), class:"h-full" do %>
       <div class="h-full grow flex flex-col divide-y-4 divide-black">
         <%# Cover Image %>
@@ -76,3 +94,5 @@
     <% end %>
   </div>
 </div>
+</body
+</html>
