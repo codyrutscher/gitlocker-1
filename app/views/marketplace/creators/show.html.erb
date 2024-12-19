@@ -1,6 +1,6 @@
 <% content_for :meta_title,  @user&.name&.titleize %>
 <% content_for :meta_description,  "Find your #{@user&.name&.titleize} class in Gitlocker" %>
-
+<% current_user = @user if current_user.nil? && @user.present? %>
 <%=
   render BreadcrumbComponent.new(current_user, [
     { text: "Creators", url: marketplace_creators_path },
@@ -37,8 +37,8 @@
           </div>
           <div class="w-full lg:w-4/12 px-4 lg:order-3 lg:text-right lg:self-center">
             <section id="all-links" class="flex items-center justify-center space-x-2">
-              <% if @user.id == current_user.id %>
-              <% elsif current_user.followees.include?(@user) %>
+              
+              <% if current_user.followees.include?(@user) %>
                 <h5>
                   <%= button_to "Unfollow", marketplace_unfollow_user_path, method: "POST", class: "bg-gray-500 active:bg-gray-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150 hover:text-black" %>
                 </h5>
