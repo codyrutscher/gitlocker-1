@@ -33,10 +33,12 @@ module Marketplace
     end
 
     def languages
+      params[:sort_by] ||= "most_recent"
       @languages = sort_categories(Language.page(params[:page]).per(70), params[:sort_by])
     end
 
     def categories
+      params[:sort_by] ||= "most_recent"
       @categories = sort_categories(Category.page(params[:page]).per(70), params[:sort_by])
     end
 
@@ -84,6 +86,8 @@ module Marketplace
         categories.order(name: :desc)
       when 'oldest'
         categories.order(created_at: :asc)
+      when 'most_recent'
+        categories.order(created_at: :desc)
       else
         categories.order(name: :asc) # Default sorting
       end

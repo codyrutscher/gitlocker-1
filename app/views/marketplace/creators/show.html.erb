@@ -1,5 +1,6 @@
 <% content_for :meta_title,  @user&.name&.titleize %>
 <% content_for :meta_description,  "Find your #{@user&.name&.titleize} class in Gitlocker" %>
+<% current_user = @user if current_user.nil? && @user.present? %>
 
 <%=
   render BreadcrumbComponent.new(current_user, [
