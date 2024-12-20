@@ -39,7 +39,7 @@
               </a>
           </div>
            </section>
-    <hr class="h-px bg-black border-8 border-black">
+    
      <div class="mt-6 lg:px-8 xl:px-8 overflow-hidden">
           <div class="grid grid-cols-2 mb-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 gap-4 lg:gap-8 lg:px-8 xl:px-8 ">
               <%= render partial: "home/product", collection: @featured_products %>
@@ -48,7 +48,7 @@
 
         
       <% end %>
-      <hr class="h-px mt-8 bg-black border-8 border-black">
+      
 
 
       <% if @recent_products.size > 0 %>
@@ -70,7 +70,7 @@
               </a>
           </div>
         </section>
-    <hr class="h-px bg-black border-8 border-black">
+  
 
      <div class="mt-6 lg:px-8 xl:px-8 overflow-hidden">
           <div class="grid grid-cols-2 mb-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 gap-4 lg:gap-8 lg:px-8 xl:px-8">
@@ -81,7 +81,7 @@
         
       <% end %>
 
-      <hr class="h-px mt-8 bg-black border-8 border-black">
+      
       <% if @popular_products.size > 0 %>
         <!-- Popular Section -->
         <section aria-labelledby="popular-heading" class="bg-blue-400 pt-4 pb-4">
@@ -101,7 +101,7 @@
               </a>
           </div>
         </section>
-        <hr class="h-px bg-black border-8 border-black">
+        
         
           
 
@@ -112,7 +112,7 @@
               </div>
       
       <% end %>
-      <hr class="h-px mt-8 bg-black border-8 border-black">
+     
 
       <% if @premium_products.size > 0 %>
         <!-- Premium Section -->
@@ -133,7 +133,7 @@
               </a>
           </div>
        </section>
-        <hr class="h-px bg-black border-8 border-black">
+        
 
           
 
@@ -145,7 +145,7 @@
 
         
       <% end %>
-    <hr class="h-px mt-8 bg-black border-8 border-black">
+    
       <% if @free_products.size > 0 %>
         <!-- Free Section -->
         <section aria-labelledby="popular-heading" class="bg-blue-400 pt-4 pb-4">
@@ -166,7 +166,7 @@
           </div>
         
         </section>
-          <hr class="h-px bg-black border-8 border-black">
+          
 
          <div class="mt-6 lg:px-8 xl:px-8 overflow-hidden">
               <div class="grid grid-cols-2 mb-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 gap-4 lg:gap-8 lg:px-8 xl:px-8">
@@ -176,7 +176,7 @@
 
         
       <% end %>
-    <hr class="h-px mt-8 bg-black border-8 border-black">
+    
  <% if @creators.size > 0 %>
         <!-- Creators Section -->
         <section aria-labelledby="creators-heading" class="bg-blue-400 pt-4 pb-4">
@@ -204,7 +204,7 @@
               </div>
        
       <% end %>
-    <hr class="h-px mt-8 bg-black border-8 border-black">
+    
  
       <% if @languages.size > 0 %>
         <!-- Languages Section -->
@@ -233,7 +233,7 @@
           </div>
         
       <% end %>
-      <hr class="h-px mt-8 bg-black border-8 border-black">
+     
       <% if @categories.size > 0 %>
         <!-- Categories Section -->
         <section aria-labelledby="categories-heading" class="bg-blue-400 pt-4 pb-4">
@@ -253,7 +253,7 @@
               </a>
           </div>
           </section>
-          <hr class="h-px bg-black border-8 border-black">
+          
           <div class="mt-6 lg:px-8 xl:px-8 flow-root">
             <div class="grid grid-cols-2 mb-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 gap-4 lg:gap-8 lg:px-8 xl:px-8">
               <%= render partial: "home/category", collection: @categories, as: :category %>
@@ -261,7 +261,7 @@
           </div>
       
       <% end %>
-    <hr class="h-px mt-8 bg-black border-8 border-black">
+   
           <section aria-labelledby="categories-heading" class="bg-blue-400 pt-4 pb-4">
           <div class="px-4 sm:flex sm:items-center justify-center space-x-4 sm:px-6 lg:px-8 xl:px-0">
             <div>
@@ -279,7 +279,7 @@
               </a>
           </div>
           </section>
-      <hr class="h-px bg-black border-8 mb-8 border-black">
+     
       <div class="grid sm:px-0 lg:px-16 xl:px-16 mb-8 gap-6 grid-cols-2 md:grid-cols-2 lg:grid-cols-5">
       <% @blogs.each do |blog| %>
         <div class="bg-white hover:bounceOrig hover:shadow-[0px_20px_20px_15px_#1158f2] border-4 border-black rounded-lg overflow-hidden">
