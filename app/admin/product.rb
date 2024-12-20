@@ -27,7 +27,7 @@ ActiveAdmin.register Product do
       end
     end
   end
-  permit_params :name, :slug, :price_cents, :user_id, :published, :folder, :video_file, :refund_id, :upload_file,
+  permit_params :name, :slug, :price_cents, :description, :user_id, :published, :folder, :video_file, :refund_id, :upload_file,
                 category_ids: [], language_ids: [], covers: [], 
                 product_categories_attributes: [:id, :category_id, :active, :_destroy],
                 product_languages_attributes: [:id, :language_id, :active, :_destroy]
