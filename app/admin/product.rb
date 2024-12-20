@@ -55,6 +55,7 @@ ActiveAdmin.register Product do
       f.input :price_cents
       f.input :user
       f.input :published
+      f.input :description
       f.input :folder, as: :file
       f.input :video_file, as: :file
       f.input :upload_file, as: :file
@@ -71,6 +72,7 @@ ActiveAdmin.register Product do
       row :name
       row :slug
       row :price_cents
+      row :description
       row :user
       row :published
       row :created_at
