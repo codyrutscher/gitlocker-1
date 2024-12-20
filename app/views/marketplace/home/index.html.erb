@@ -253,7 +253,7 @@
               </a>
           </div>
           </section>
-          
+          <hr class="h-px bg-black border-8 border-black">
           <div class="mt-6 lg:px-8 xl:px-8 flow-root">
             <div class="grid grid-cols-2 mb-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 gap-4 lg:gap-8 lg:px-8 xl:px-8">
               <%= render partial: "home/category", collection: @categories, as: :category %>
@@ -280,7 +280,7 @@
           </div>
           </section>
 <hr class="h-px bg-black border-8 border-black">     
-      <div class="grid sm:px-0 lg:px-16 xl:px-16 mb-8 gap-6 grid-cols-2 md:grid-cols-2 lg:grid-cols-5">
+      <div class="grid mt-6 sm:px-0 lg:px-16 xl:px-16 mb-8 gap-6 grid-cols-2 md:grid-cols-2 lg:grid-cols-5">
       <% @blogs.each do |blog| %>
         <div class="bg-white hover:bounceOrig hover:shadow-[0px_20px_20px_15px_#1158f2] border-4 border-black rounded-lg overflow-hidden">
           <%= link_to blog_path(blog), class: "block" do %>
