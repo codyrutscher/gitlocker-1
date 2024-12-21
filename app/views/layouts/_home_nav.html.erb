@@ -76,10 +76,10 @@
                   <% end %>
                 <% end %>
                <div class="relative">
-                <button type="button" id="profile-button" class="text-white hover:text-gray-400 hidden sm:block">
+                <button type="button" id="profile-button-browse" class="text-white hover:text-gray-400 hidden sm:block">
                   Browse
                 </button>
-                <div id="profile-dropdown" class="hidden z-10 min-w-32 absolute right-0 top-10 bg-white shadow-lg rounded-md ring-1 ring-black ring-opacity-5">
+                <div id="profile-dropdown-browse" class="hidden z-10 min-w-32 absolute right-0 top-10 bg-white shadow-lg rounded-md ring-1 ring-black ring-opacity-5">
                   <div class="flex flex-col divide-y">
                     <%= link_to "Premium Code", marketplace_browse_premium_path, class: "text-sm inline-block text-black px-4 py-2 hover:bg-blue-500 hover:text-white " %>
                     <%= link_to "Free Code", marketplace_browse_free_path, class: "text-sm inline-block text-black px-4 py-2 hover:bg-blue-500 hover:text-white " %>
@@ -208,6 +208,20 @@
   document.addEventListener('click', function(event) {
     var button = document.getElementById('profile-button');
     var dropdown = document.getElementById('profile-dropdown');
+    if (!button.contains(event.target) && !dropdown.contains(event.target)) {
+      dropdown.classList.add('hidden');
+    }
+  });
+
+
+  document.getElementById('profile-button-browse').addEventListener('click', function() {
+    var dropdown = document.getElementById('profile-dropdown-browse');
+    dropdown.classList.toggle('hidden');
+  });
+
+  document.addEventListener('click', function(event) {
+    var button = document.getElementById('profile-button-browse');
+    var dropdown = document.getElementById('profile-dropdown-browse');
     if (!button.contains(event.target) && !dropdown.contains(event.target)) {
       dropdown.classList.add('hidden');
     }
