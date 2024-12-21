@@ -252,20 +252,33 @@ code{
       </div>
     </div>
 </div>
-<div class="body mt-10 bg-gradient-to-l from-gray-200 via-fuchsia-200 to-stone-100 pb-10 overflow-clip">
-<div class="box flex mt-10 items-center pb-10 justify-center">
-  <span style="--i:1;"><img src="https://gitlocker.s3.us-east-2.amazonaws.com/c-sharp.png"></span>
-  <span style="--i:2;"><img src="https://gitlocker.s3.us-east-2.amazonaws.com/javascript.png"></span>
-  <span style="--i:3;"><img src="https://gitlocker.s3.us-east-2.amazonaws.com/java.png"></span>
-  <span style="--i:4;"><img src="https://gitlocker.s3.us-east-2.amazonaws.com/html.png"></span>
-  <span style="--i:5;"><img src="https://gitlocker.s3.us-east-2.amazonaws.com/golang.png"></span>
-  <span style="--i:6;"><img src="https://gitlocker.s3.us-east-2.amazonaws.com/css.png"></span>
-  <span style="--i:7;"><img src="https://gitlocker.s3.us-east-2.amazonaws.com/c%2B%2B.png"></span>
-  <span style="--i:8;"><img src="https://gitlocker.s3.us-east-2.amazonaws.com/c.png"></span>
-
-
-
-</div>
+<div class="bg-gray-900 py-24 sm:py-32">
+  <div class="mx-auto max-w-7xl px-6 lg:px-8">
+    <div class="mx-auto max-w-2xl lg:max-w-none">
+      <div class="text-center">
+        <h2 class="text-balance text-4xl font-semibold tracking-tight text-white sm:text-5xl">Trusted by developers worldwide</h2>
+        <p class="mt-4 text-lg/8 text-gray-300"></p>
+      </div>
+      <dl class="mt-16 grid grid-cols-1 gap-0.5 overflow-hidden rounded-2xl text-center sm:grid-cols-2 lg:grid-cols-4">
+        <div class="flex flex-col bg-white/5 p-8">
+          <dt class="text-sm/6 font-semibold text-gray-300">Developers on the platform</dt>
+          <dd class="order-first text-3xl font-semibold tracking-tight text-white"><%= User.count %></dd>
+        </div>
+        <div class="flex flex-col bg-white/5 p-8">
+          <dt class="text-sm/6 font-semibold text-gray-300">Flat platform fee</dt>
+          <dd class="order-first text-3xl font-semibold tracking-tight text-white">10%</dd>
+        </div>
+        <div class="flex flex-col bg-white/5 p-8">
+          <dt class="text-sm/6 font-semibold text-gray-300">Uptime guarantee</dt>
+          <dd class="order-first text-3xl font-semibold tracking-tight text-white">99.9%</dd>
+        </div>
+        <div class="flex flex-col bg-white/5 p-8">
+          <dt class="text-sm/6 font-semibold text-gray-300">Products on the Marketplace</dt>
+          <dd class="order-first text-3xl font-semibold tracking-tight text-white"><%= number_with_delimiter(Product.count, :delimiter => ',') %></dd>
+        </div>
+      </dl>
+    </div>
+  </div>
 </div>
 <div class="over border-t-4 border-b-4 place-items-center border-black grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2 mx-auto pt-2 pb-2  bg-gradient-to-l from-gray-200 via-fuchsia-200 to-stone-100">
                 <div class="font">
@@ -435,33 +448,6 @@ code{
         </div>
   </div>
 </div>
-<div class="bg-gray-900 py-24 sm:py-32">
-  <div class="mx-auto max-w-7xl px-6 lg:px-8">
-    <div class="mx-auto max-w-2xl lg:max-w-none">
-      <div class="text-center">
-        <h2 class="text-balance text-4xl font-semibold tracking-tight text-white sm:text-5xl">Trusted by developers worldwide</h2>
-        <p class="mt-4 text-lg/8 text-gray-300"></p>
-      </div>
-      <dl class="mt-16 grid grid-cols-1 gap-0.5 overflow-hidden rounded-2xl text-center sm:grid-cols-2 lg:grid-cols-4">
-        <div class="flex flex-col bg-white/5 p-8">
-          <dt class="text-sm/6 font-semibold text-gray-300">Developers on the platform</dt>
-          <dd class="order-first text-3xl font-semibold tracking-tight text-white"><%= User.count %></dd>
-        </div>
-        <div class="flex flex-col bg-white/5 p-8">
-          <dt class="text-sm/6 font-semibold text-gray-300">Flat platform fee</dt>
-          <dd class="order-first text-3xl font-semibold tracking-tight text-white">10%</dd>
-        </div>
-        <div class="flex flex-col bg-white/5 p-8">
-          <dt class="text-sm/6 font-semibold text-gray-300">Uptime guarantee</dt>
-          <dd class="order-first text-3xl font-semibold tracking-tight text-white">99.9%</dd>
-        </div>
-        <div class="flex flex-col bg-white/5 p-8">
-          <dt class="text-sm/6 font-semibold text-gray-300">Products on the Marketplace</dt>
-          <dd class="order-first text-3xl font-semibold tracking-tight text-white"><%= number_with_delimiter(Product.count, :delimiter => ',') %></dd>
-        </div>
-      </dl>
-    </div>
-  </div>
-</div>
+
 
 </html>
