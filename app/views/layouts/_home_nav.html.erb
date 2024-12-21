@@ -15,7 +15,7 @@
 <div data-controller="home-nav" class="border-t-12 border-b-4 sticky top-0 border-black">
   <%= render "layouts/home_mobile_menu" %>
   <!-- Hero section -->
-  <div class="relative bg-blue-400">
+  <div class="relative bg-gray-900">
     <!-- Navigation -->
     <header class="relative z-10">
       <nav aria-label="Top">
@@ -65,18 +65,18 @@
                 </form>
               </div>
                <%= link_to marketplace_root_path do %>
-                  <svg class="h-6 w-6 flex-shrink-0 text-black fill-black hover:fill-white hover:text-white" fill="none" viewBox="0 0 50 50" width="50px" height="50px" aria-hidden="true">
+                  <svg class="h-6 w-6 flex-shrink-0 text-white fill-white hover:fill-gray-400 hover:text-gray-400" fill="none" viewBox="0 0 50 50" width="50px" height="50px" aria-hidden="true">
                   <path d="M 25 1.0507812 C 24.7825 1.0507812 24.565859 1.1197656 24.380859 1.2597656 L 1.3808594 19.210938 C 0.95085938 19.550938 0.8709375 20.179141 1.2109375 20.619141 C 1.5509375 21.049141 2.1791406 21.129062 2.6191406 20.789062 L 4 19.710938 L 4 46 C 4 46.55 4.45 47 5 47 L 19 47 L 19 29 L 31 29 L 31 47 L 45 47 C 45.55 47 46 46.55 46 46 L 46 19.710938 L 47.380859 20.789062 C 47.570859 20.929063 47.78 21 48 21 C 48.3 21 48.589063 20.869141 48.789062 20.619141 C 49.129063 20.179141 49.049141 19.550938 48.619141 19.210938 L 25.619141 1.2597656 C 25.434141 1.1197656 25.2175 1.0507812 25 1.0507812 z M 35 5 L 35 6.0507812 L 41 10.730469 L 41 5 L 35 5 z"/>
                 </svg>
                 <% end %>
 
                 <% if current_user.present? %>
                   <%= link_to pricing_path do %>
-                    <h3 class="hover:text-white">Subscription</h3>
+                    <h3 class="text-white hover:text-gray-400">Subscription</h3>
                   <% end %>
                 <% end %>
                <div class="relative">
-                <button type="button" id="profile-button" class="hover:text-white hidden sm:block">
+                <button type="button" id="profile-button" class="text-white hover:text-gray-400 hidden sm:block">
                   Browse
                 </button>
                 <div id="profile-dropdown" class="hidden z-10 min-w-32 absolute right-0 top-10 bg-white shadow-lg rounded-md ring-1 ring-black ring-opacity-5">
@@ -92,22 +92,22 @@
                 
 
                 <%= link_to "https://gitlocker.freeforums.net/", target: "_blank" do %>
-                  <h3 class="hover:text-white hidden sm:block">Forum</h3>
+                  <h3 class="text-white hover:text-gray-400 hidden sm:block">Forum</h3>
                 <% end %>
 
                 <%= link_to "https://www.youtube.com/channel/UCyjfk_yoecwHoiEYbV0ndMQ", target: "_blank" do %>
-                  <h3 class="hover:text-white hidden sm:block">Tutorials</h3>
+                  <h3 class="text-white hover:text-gray-400 hidden sm:block">Tutorials</h3>
                 <% end %>
                  <%= link_to blogs_path do %>
-                  <h3 class="hover:text-white hidden sm:block">Blog</h3>
+                  <h3 class="text-white hover:text-gray-400 hidden sm:block">Blog</h3>
                 <% end %>
               <!-- Cart -->
               <div>
                 <%= link_to marketplace_cart_items_path, class: "group -m-2 flex items-center p-2" do %>
-                <svg class="h-6 w-6 flex-shrink-0 text-black hover:text-white" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                <svg class="h-6 w-6 flex-shrink-0 text-white hover:text-gray-400" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
                 </svg>
-                <span class="sm:ml-2 ml-1 text-sm font-medium text-black"><%= current_user&.cart_items_count || visitor_user.cart_items.size %></span>
+                <span class="sm:ml-2 ml-1 text-sm font-medium text-white"><%= current_user&.cart_items_count || visitor_user.cart_items.size %></span>
                 <span class="sr-only">items in cart, view bag</span>
                 <% end %>
               </div>
@@ -116,7 +116,7 @@
               <div class="relative">
                 <button type="button" id="notifications-button" class="flex items-center -m-2.5 p-2.5 text-gray-400 hover:text-gray-500">
                   <span class="sr-only">View notifications</span>
-                  <svg class="h-6 w-6 text-black hover:text-white" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                  <svg class="h-6 w-6 text-white hover:text-gray-400" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
                   </svg>
                   <% if current_user&.notifications&.unread&.count.to_i > 0 %>
