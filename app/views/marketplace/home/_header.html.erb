@@ -277,29 +277,36 @@ code{
           <dd class="order-first text-3xl font-semibold tracking-tight text-white"><%= number_with_delimiter(Product.count, :delimiter => ',') %></dd>
         </div>
       </dl>
+     <dl class="mt-16 grid grid-cols-1 gap-0.5 overflow-hidden rounded-2xl text-center sm:grid-cols-2 lg:grid-cols-4">
+        <div class="flex flex-col bg-white/5 p-8">
+          <dt class="text-sm/6 font-semibold text-gray-300"></dt>
+          <dd class="order-first text-3xl font-semibold tracking-tight text-white">Packages</dd>
+        </div>
+        <div class="flex flex-col bg-white/5 p-8">
+          <dt class="text-sm/6 font-semibold text-gray-300"></dt>
+          <dd class="order-first text-3xl font-semibold tracking-tight text-white">Games</dd>
+        </div>
+        <div class="flex flex-col bg-white/5 p-8">
+          <dt class="text-sm/6 font-semibold text-gray-300"></dt>
+          <dd class="order-first text-3xl font-semibold tracking-tight text-white">Templates</dd>
+        </div>
+        <div class="flex flex-col bg-white/5 p-8">
+          <dt class="text-sm/6 font-semibold text-gray-300"></dt>
+          <dd class="order-first text-3xl font-semibold tracking-tight text-white">Plugins</dd>
+        </div>
+        <div class="flex flex-col bg-white/5 p-8">
+          <dt class="text-sm/6 font-semibold text-gray-300"></dt>
+          <dd class="order-first text-3xl font-semibold tracking-tight text-white">Themes</dd>
+        </div>
+        <div class="flex flex-col bg-white/5 p-8">
+          <dt class="text-sm/6 font-semibold text-gray-300"></dt>
+          <dd class="order-first text-3xl font-semibold tracking-tight text-white">Components</dd>
+        </div>
+      </dl>
     </div>
   </div>
 </div>
-<div class="over border-t-4 border-b-4 place-items-center border-black grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2 mx-auto pt-2 pb-2  bg-gradient-to-l from-gray-200 via-fuchsia-200 to-stone-100">
-                <div class="font">
-                  <h2 class="text-3xl underline">Components</h2>
-                </div>
-              <div class="font">
-                  <h2 class="text-3xl underline">Plugins</h2>
-                </div>
-                <div class="font">
-                  <h2 class="text-3xl underline">Themes</h2>
-                </div>
-              <div class="font">
-                  <h2 class="text-3xl underline">Templates</h2>
-                </div>
-                <div class="font">
-                  <h2 class="text-3xl underline">Packages</h2>
-                </div>
-                 <div class="font">
-                  <h2 class="text-3xl underline">Games</h2>
-                </div>
-</div> 
+
 <div class="bg-gradient-to-l from-gray-200 via-fuchsia-200 to-stone-100 pb-8 pt-24 sm:pb-8 sm:pt-32 xl:pb-8">
   <div class="bg-gray-900 pb-20 sm:pb-24 xl:pb-0">
     <div class="mx-auto flex max-w-7xl flex-col items-center gap-x-8 gap-y-10 px-6 sm:gap-y-8 lg:px-8 xl:flex-row xl:items-stretch">
