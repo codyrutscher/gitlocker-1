@@ -6,6 +6,27 @@
 
   z-index: 9999;
 }
+
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  padding: 12px 16px;
+  z-index: 1;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
 </style>
 </head>
 <body>
@@ -72,6 +93,21 @@
                     <h3 class="hover:text-white">Subscription</h3>
                   <% end %>
                 <% end %>
+               <div class="relative">
+                <button type="button" id="profile-button" class="hover:text-white hidden sm:block">
+                  Browse
+                </button>
+                <div id="profile-dropdown" class="hidden z-10 min-w-32 absolute right-0 top-10 bg-white shadow-lg rounded-md ring-1 ring-black ring-opacity-5">
+                  <div class="flex flex-col divide-y">
+                    <%= link_to "Premium Code", marketplace_browse_premium_path, class: "text-sm inline-block text-black px-4 py-2 hover:bg-blue-500 hover:text-white " %>
+                    <%= link_to "Free Code", marketplace_browse_free_path, class: "text-sm inline-block text-black px-4 py-2 hover:bg-blue-500 hover:text-white " %>
+                    <%= link_to "Featured Code", marketplace_browse_featured_path, class: "text-sm inline-block text-black px-4 py-2 hover:bg-blue-500 hover:text-white " %>
+                    <%= link_to "Languages", marketplace_browse_languages_path, class: "text-sm inline-block text-black px-4 py-2 hover:bg-blue-500 hover:text-white " %>
+                    <%= link_to "Categories", marketplace_browse_categories_path, class: "text-sm inline-block text-black px-4 py-2 hover:bg-blue-500 hover:text-white " %>
+                  </div>
+                </div>
+              </div>
+                
 
                 <%= link_to "https://gitlocker.freeforums.net/", target: "_blank" do %>
                   <h3 class="hover:text-white hidden sm:block">Forum</h3>
