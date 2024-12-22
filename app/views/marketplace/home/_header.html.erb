@@ -151,36 +151,22 @@ code{
     }
 </style>
 </head>
-<div class="bg-gradient-to-l from-gray-200 via-fuchsia-200 to-stone-100 mb-10 over">
-<div class="relative isolate pt-14 mb-10">
-    <svg class="absolute inset-0 -z-10 size-full stroke-gray-200 [mask-image:radial-gradient(100%_100%_at_top_right,white,transparent)]" aria-hidden="true">
-      <defs>
-        <pattern id="83fd4e5a-9d52-42fc-97b6-718e5d7ee527" width="200" height="200" x="50%" y="-1" patternUnits="userSpaceOnUse">
-          <path d="M100 200V.5M.5 .5H200" fill="none" />
-        </pattern>
-      </defs>
-    </svg>
-    <div class="mx-auto max-w-7xl px-6 py-12 lg:flex lg:gap-x-10 lg:px-8 lg:py-12">
-      <div class="pt-8 mx-auto max-w-2xl lg:mx-0 lg:flex-auto">
-        <div class="flex">
-        
-        </div>
-         <div class="wrapper">
-        <h1 class="text-2xl lg:text-4xl font-semibold text-gray-900">A better way to ship</h1>
-        <div class="words">
-           <code class="word text-xl underline lg:text-4xl">code</code>
-           <code class="word text-xl underline lg:text-4xl">apps</code>
-           <code class="word text-xl underline lg:text-4xl">plugins</code>
-           <code class="word text-xl underline lg:text-4xl">games</code>
-           <code class="word text-xl underline lg:text-4xl">themes</code>
-           <code class="word text-xl underline lg:text-4xl">snippets</code>
-           <code class="word text-xl underline lg:text-4xl">packages</code>
-       </div>
-          
-          
-        </div>
-       <p class="mt-8 text-pretty text-lg font-medium text-gray-500 sm:text-xl/8">Browse <span class="font-bold">GitLocker's</span> selection of <span class="bg-blue-100 text-blue-800 font-semibold text-2xl px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800"><%= number_with_delimiter(Product.count, :delimiter => ',') %></span> free and premium code for websites, apps, games, plugins, themes, snippets, and packages from our <span class="bg-blue-100 text-blue-800 font-semibold text-2xl px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800"><%= User.count %></span> users or sign up to start <span class="font-bold">buying and selling</span>!</p>
-        <div class="mt-10 items-center">
+<div class="bg-gradient-to-l from-gray-200 via-fuchsia-200 to-stone-100">
+  <div class="relative">
+    <div class="mx-auto max-w-7xl">
+      <div class="relative z-10 pt-14 lg:w-full lg:max-w-2xl">
+        <svg class="absolute inset-y-0 right-8 hidden h-full w-80 translate-x-1/2 transform fill-white lg:block" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+          <polygon points="0,0 90,0 50,100 0,100" />
+        </svg>
+
+        <div class="relative px-6 py-32 sm:py-40 lg:px-8 lg:py-56 lg:pr-0">
+          <div class="mx-auto max-w-2xl lg:mx-0 lg:max-w-xl">
+            <div class="hidden sm:mb-10 sm:flex">
+              
+            </div>
+            <h1 class="text-pretty text-5xl font-semibold tracking-tight text-gray-900 sm:text-7xl">A Better Way To Sell Your Code</h1>
+            <p class="mt-8 text-pretty text-lg font-medium text-gray-500 sm:text-xl/8">Browse <span class="font-bold">GitLocker's</span> selection of free and premium code for websites, apps, games, plugins, themes, snippets, packages, and more from our users or sign up to start <span class="font-bold">buying and selling</span>!</p>
+         <div class="mt-10 items-center">
           <div class="mb-8 grid grid-cols-2 gap-2">
             <% if user_signed_in? %>
                 <%= link_to marketplace_browse_premium_path, class: "text-center inline-block bg-white hover:shadow-[inset_30rem_0_0_0] hover:shadow-blue-700 duration-[400ms,700ms] transition-[color,box-shadow] text-black hover:text-white border-black border-4 font-bold py-2 px-4 rounded-full" do %>
@@ -233,12 +219,14 @@ code{
       
     </div>
         </div>
-    
-      </div>
-      <div class="mt-16 sm:mt-24 lg:mt-0 w-3/4 lg:shrink-0 lg:grow">
-            <img class="" src="https://images.unsplash.com/photo-1483389127117-b6a2102724ae?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1587&q=80" alt="">
+          </div>
+        </div>
       </div>
     </div>
+    <div class="bg-gray-50 lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
+      <img class="aspect-[3/2] object-cover lg:aspect-auto lg:size-full" src="https://images.unsplash.com/photo-1483389127117-b6a2102724ae?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1587&q=80" alt="">
+    </div>
+  </div>
 </div>
 <div class="bg-gray-900 py-24 sm:py-32">
   <div class="mx-auto max-w-7xl px-6 lg:px-8">
