@@ -1,58 +1,106 @@
-<div class="bg-gradient-to-l from-gray-200 via-fuchsia-200 to-stone-100">
-<div class="space-y-8">
-<h1 class="text-3xl  underline">Deployment Options</h1>
-<h2 class="text-2xl  underline mt-4 mb-4">These are some options for deploying your apps to the web.</h2>
-<ul class="space-y-8">
-  <li>
-     <%= link_to "Heroku", "https://www.heroku.com", class: " text-2xl hover:text-gray-400", target: :_blank, rel: "noreferrer" %>
-      <h2 class="text-xl">-Heroku is a platform as a service (PaaS) that enables developers to build, run, and operate applications entirely in the cloud.</h2>
-  </li>
-<hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
-   <li>
-     <%= link_to "Vercel", "https://www.vercel.com", class: " text-2xl hover:text-gray-400", target: :_blank, rel: "noreferrer" %>
-    <h2 class="text-xl">-Your complete platform for the web. Vercel provides the developer tools and cloud infrastructure to build, scale, and secure a faster, more personalized web.</h2>
-  </li>
-<hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
-  <li>
-     <%= link_to "Netlify", "https://www.netlify.com", class: " text-2xl hover:text-gray-400", target: :_blank, rel: "noreferrer" %>
-    <h2 class="text-xl">-Netlify is the essential platform for the delivery of exceptional and dynamic web experiences, without limitations.</h2>
-  </li>
-<hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
-   <li>
-     <%= link_to "Firebase", "https://firebase.google.com", class: " text-2xl hover:text-gray-400", target: :_blank, rel: "noreferrer" %>
-    <h2 class="text-xl">-Discover Firebase, Google's mobile and web app development platform that helps developers build apps and games that users will love.</h2>
-  </li>
-<hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
-   <li>
-     <%= link_to "GitHub Pages", "https://pages.github.com", class: " text-2xl hover:text-gray-400", target: :_blank, rel: "noreferrer" %>
-     <h2 class="text-xl">-Build your own site from scratch or generate one for your project. You get one site per GitHub account and organization, and unlimited project sites.</h2>
-  </li>
-<hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
-   <li>
-     <%= link_to "Amazon Web Services", "https://aws.amazon.com", class: " text-2xl hover:text-gray-400", target: :_blank, rel: "noreferrer" %>
+<div class="relative isolate overflow-hidden bg-gradient-to-l from-gray-200 via-fuchsia-200 to-stone-100 px-6 py-24 sm:py-32 lg:overflow-visible lg:px-0">
+  <div class="absolute inset-0 -z-10 overflow-hidden">
+    <svg class="absolute left-[max(50%,25rem)] top-0 h-[64rem] w-[128rem] -translate-x-1/2 stroke-gray-200 [mask-image:radial-gradient(64rem_64rem_at_top,white,transparent)]" aria-hidden="true">
+      <defs>
+        <pattern id="e813992c-7d03-4cc4-a2bd-151760b470a0" width="200" height="200" x="50%" y="-1" patternUnits="userSpaceOnUse">
+          <path d="M100 200V.5M.5 .5H200" fill="none" />
+        </pattern>
+      </defs>
+      <svg x="50%" y="-1" class="overflow-visible fill-gray-50">
+        <path d="M-100.5 0h201v201h-201Z M699.5 0h201v201h-201Z M499.5 400h201v201h-201Z M-300.5 600h201v201h-201Z" stroke-width="0" />
+      </svg>
+      <rect width="100%" height="100%" stroke-width="0" fill="url(#e813992c-7d03-4cc4-a2bd-151760b470a0)" />
+    </svg>
+  </div>
+  <div class="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:mx-0 lg:max-w-none lg:grid-cols-2 lg:items-start lg:gap-y-10">
+    <div class="lg:col-span-2 lg:col-start-1 lg:row-start-1 lg:mx-auto lg:grid lg:w-full lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
+      <div class="lg:pr-4">
+        <div class="lg:max-w-lg">
+          <p class="text-base/7 font-semibold text-indigo-600">Deploy faster</p>
+          <h1 class="mt-2 text-pretty text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl">Deployment Options</h1>
+          <p class="mt-6 text-xl/8 text-gray-700">Below is a list of options that help you deploy your web apps.</p>
+        </div>
+      </div>
+    </div>
+    <div class="-ml-12 -mt-12 p-12 lg:sticky lg:top-4 lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:overflow-hidden">
+      <img class="w-[48rem] max-w-none rounded-xl bg-gray-900 shadow-xl ring-1 ring-gray-400/10 sm:w-[57rem]" src="https://tailwindui.com/plus/img/component-images/dark-project-app-screenshot.png" alt="">
+    </div>
+    <div class="lg:col-span-2 lg:col-start-1 lg:row-start-2 lg:mx-auto lg:grid lg:w-full lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
+      <div class="lg:pr-4">
+        <div class="max-w-xl text-base/7 text-gray-700 lg:max-w-lg">
+          
+          <ul role="list" class="mt-8 space-y-8 text-gray-600">
+            <li class="flex gap-x-3">
+              <svg class="mt-1 size-5 flex-none text-indigo-600" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+                <path fill-rule="evenodd" d="M5.5 17a4.5 4.5 0 0 1-1.44-8.765 4.5 4.5 0 0 1 8.302-3.046 3.5 3.5 0 0 1 4.504 4.272A4 4 0 0 1 15 17H5.5Zm3.75-2.75a.75.75 0 0 0 1.5 0V9.66l1.95 2.1a.75.75 0 1 0 1.1-1.02l-3.25-3.5a.75.75 0 0 0-1.1 0l-3.25 3.5a.75.75 0 1 0 1.1 1.02l1.95-2.1v4.59Z" clip-rule="evenodd" />
+              </svg>
+              <%= link_to "Heroku", "https://www.heroku.com", class: " text-2xl hover:text-gray-400", target: :_blank, rel: "noreferrer" %>
+              <h2 class="text-xl">-Heroku is a platform as a service (PaaS) that enables developers to build, run, and operate applications entirely in the cloud.</h2>
+            </li>
+            <li class="flex gap-x-3">
+              <svg class="mt-1 size-5 flex-none text-indigo-600" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+                <path fill-rule="evenodd" d="M5.5 17a4.5 4.5 0 0 1-1.44-8.765 4.5 4.5 0 0 1 8.302-3.046 3.5 3.5 0 0 1 4.504 4.272A4 4 0 0 1 15 17H5.5Zm3.75-2.75a.75.75 0 0 0 1.5 0V9.66l1.95 2.1a.75.75 0 1 0 1.1-1.02l-3.25-3.5a.75.75 0 0 0-1.1 0l-3.25 3.5a.75.75 0 1 0 1.1 1.02l1.95-2.1v4.59Z" clip-rule="evenodd" />
+              </svg>
+              <%= link_to "Vercel", "https://www.vercel.com", class: " text-2xl hover:text-gray-400", target: :_blank, rel: "noreferrer" %>
+              <h2 class="text-xl">-Your complete platform for the web. Vercel provides the developer tools and cloud infrastructure to build, scale, and secure a faster, more personalized web.</h2>
+            <li class="flex gap-x-3">
+              <svg class="mt-1 size-5 flex-none text-indigo-600" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+                <path fill-rule="evenodd" d="M5.5 17a4.5 4.5 0 0 1-1.44-8.765 4.5 4.5 0 0 1 8.302-3.046 3.5 3.5 0 0 1 4.504 4.272A4 4 0 0 1 15 17H5.5Zm3.75-2.75a.75.75 0 0 0 1.5 0V9.66l1.95 2.1a.75.75 0 1 0 1.1-1.02l-3.25-3.5a.75.75 0 0 0-1.1 0l-3.25 3.5a.75.75 0 1 0 1.1 1.02l1.95-2.1v4.59Z" clip-rule="evenodd" />
+              </svg>
+               <%= link_to "Netlify", "https://www.netlify.com", class: " text-2xl hover:text-gray-400", target: :_blank, rel: "noreferrer" %>
+              <h2 class="text-xl">-Netlify is the essential platform for the delivery of exceptional and dynamic web experiences, without limitations.</h2>
+            </li>
+            <li class="flex gap-x-3">
+              <svg class="mt-1 size-5 flex-none text-indigo-600" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+                <path fill-rule="evenodd" d="M5.5 17a4.5 4.5 0 0 1-1.44-8.765 4.5 4.5 0 0 1 8.302-3.046 3.5 3.5 0 0 1 4.504 4.272A4 4 0 0 1 15 17H5.5Zm3.75-2.75a.75.75 0 0 0 1.5 0V9.66l1.95 2.1a.75.75 0 1 0 1.1-1.02l-3.25-3.5a.75.75 0 0 0-1.1 0l-3.25 3.5a.75.75 0 1 0 1.1 1.02l1.95-2.1v4.59Z" clip-rule="evenodd" />
+              </svg>
+              <%= link_to "Firebase", "https://firebase.google.com", class: " text-2xl hover:text-gray-400", target: :_blank, rel: "noreferrer" %>
+            <h2 class="text-xl">-Discover Firebase, Google's mobile and web app development platform that helps developers build apps and games that users will love.</h2>
+            </li>
+            <li class="flex gap-x-3">
+              <svg class="mt-1 size-5 flex-none text-indigo-600" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+                <path fill-rule="evenodd" d="M5.5 17a4.5 4.5 0 0 1-1.44-8.765 4.5 4.5 0 0 1 8.302-3.046 3.5 3.5 0 0 1 4.504 4.272A4 4 0 0 1 15 17H5.5Zm3.75-2.75a.75.75 0 0 0 1.5 0V9.66l1.95 2.1a.75.75 0 1 0 1.1-1.02l-3.25-3.5a.75.75 0 0 0-1.1 0l-3.25 3.5a.75.75 0 1 0 1.1 1.02l1.95-2.1v4.59Z" clip-rule="evenodd" />
+              </svg>
+              <%= link_to "GitHub Pages", "https://pages.github.com", class: " text-2xl hover:text-gray-400", target: :_blank, rel: "noreferrer" %>
+             <h2 class="text-xl">-Build your own site from scratch or generate one for your project. You get one site per GitHub account and organization, and unlimited project sites.</h2>
+            </li>
+            <li class="flex gap-x-3">
+              <svg class="mt-1 size-5 flex-none text-indigo-600" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+                <path fill-rule="evenodd" d="M5.5 17a4.5 4.5 0 0 1-1.44-8.765 4.5 4.5 0 0 1 8.302-3.046 3.5 3.5 0 0 1 4.504 4.272A4 4 0 0 1 15 17H5.5Zm3.75-2.75a.75.75 0 0 0 1.5 0V9.66l1.95 2.1a.75.75 0 1 0 1.1-1.02l-3.25-3.5a.75.75 0 0 0-1.1 0l-3.25 3.5a.75.75 0 1 0 1.1 1.02l1.95-2.1v4.59Z" clip-rule="evenodd" />
+              </svg>
+              <%= link_to "Amazon Web Services", "https://aws.amazon.com", class: " text-2xl hover:text-gray-400", target: :_blank, rel: "noreferrer" %>
     <h2 class="text-xl">-Start Building Now at No Cost — Build, Deploy, and Manage Websites, Apps or Processes on AWS Secure, Reliable Network.</h2>
-  </li>
-<hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
-  <li>
-     <%= link_to "DigitalOcean", "https://www.digitalocean.com", class: " text-2xl hover:text-gray-400", target: :_blank, rel: "noreferrer" %>
+            </li>
+            <li class="flex gap-x-3">
+              <svg class="mt-1 size-5 flex-none text-indigo-600" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+                <path fill-rule="evenodd" d="M5.5 17a4.5 4.5 0 0 1-1.44-8.765 4.5 4.5 0 0 1 8.302-3.046 3.5 3.5 0 0 1 4.504 4.272A4 4 0 0 1 15 17H5.5Zm3.75-2.75a.75.75 0 0 0 1.5 0V9.66l1.95 2.1a.75.75 0 1 0 1.1-1.02l-3.25-3.5a.75.75 0 0 0-1.1 0l-3.25 3.5a.75.75 0 1 0 1.1 1.02l1.95-2.1v4.59Z" clip-rule="evenodd" />
+              </svg>
+             <%= link_to "DigitalOcean", "https://www.digitalocean.com", class: " text-2xl hover:text-gray-400", target: :_blank, rel: "noreferrer" %>
     <h2 class="text-xl">-DigitalOcean Droplets are simple, scalable virtual machines for all your web hosting and VPS hosting needs.</h2>
-  </li>
-<hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
-  <li>
-     <%= link_to "Railway", "https://www.railway.app", class: " text-2xl hover:text-gray-400", target: :_blank, rel: "noreferrer" %>
+            </li>
+            <li class="flex gap-x-3">
+              <svg class="mt-1 size-5 flex-none text-indigo-600" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+                <path fill-rule="evenodd" d="M5.5 17a4.5 4.5 0 0 1-1.44-8.765 4.5 4.5 0 0 1 8.302-3.046 3.5 3.5 0 0 1 4.504 4.272A4 4 0 0 1 15 17H5.5Zm3.75-2.75a.75.75 0 0 0 1.5 0V9.66l1.95 2.1a.75.75 0 1 0 1.1-1.02l-3.25-3.5a.75.75 0 0 0-1.1 0l-3.25 3.5a.75.75 0 1 0 1.1 1.02l1.95-2.1v4.59Z" clip-rule="evenodd" />
+              </svg>
+             <%= link_to "Railway", "https://www.railway.app", class: " text-2xl hover:text-gray-400", target: :_blank, rel: "noreferrer" %>
     <h2 class="text-xl">-Railway is an infrastructure platform where you can provision infrastructure, develop with that infrastructure locally, and then deploy to the cloud.</h2>
-  </li>
-<hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
-   <li>
-     <%= link_to "Surge", "https://www.surge.sh", class: " text-2xl hover:text-gray-400", target: :_blank, rel: "noreferrer" %>
+            <li class="flex gap-x-3">
+              <svg class="mt-1 size-5 flex-none text-indigo-600" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+                <path fill-rule="evenodd" d="M5.5 17a4.5 4.5 0 0 1-1.44-8.765 4.5 4.5 0 0 1 8.302-3.046 3.5 3.5 0 0 1 4.504 4.272A4 4 0 0 1 15 17H5.5Zm3.75-2.75a.75.75 0 0 0 1.5 0V9.66l1.95 2.1a.75.75 0 1 0 1.1-1.02l-3.25-3.5a.75.75 0 0 0-1.1 0l-3.25 3.5a.75.75 0 1 0 1.1 1.02l1.95-2.1v4.59Z" clip-rule="evenodd" />
+              </svg>
+             <%= link_to "Surge", "https://www.surge.sh", class: " text-2xl hover:text-gray-400", target: :_blank, rel: "noreferrer" %>
     <h2 class="text-xl">-Static web publishing for Front-End Developers. Simple, single-command web publishing. Publish HTML , CSS , and JS for free, without leaving the command line.</h2>
-  </li>
-<hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
-   <li>
-     <%= link_to "Render", "https://render.com", class: " text-2xl hover:text-gray-400", target: :_blank, rel: "noreferrer" %>
+            </li>
+            <li class="flex gap-x-3">
+              <svg class="mt-1 size-5 flex-none text-indigo-600" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+                <path fill-rule="evenodd" d="M5.5 17a4.5 4.5 0 0 1-1.44-8.765 4.5 4.5 0 0 1 8.302-3.046 3.5 3.5 0 0 1 4.504 4.272A4 4 0 0 1 15 17H5.5Zm3.75-2.75a.75.75 0 0 0 1.5 0V9.66l1.95 2.1a.75.75 0 1 0 1.1-1.02l-3.25-3.5a.75.75 0 0 0-1.1 0l-3.25 3.5a.75.75 0 1 0 1.1 1.02l1.95-2.1v4.59Z" clip-rule="evenodd" />
+              </svg>
+               <%= link_to "Render", "https://render.com", class: " text-2xl hover:text-gray-400", target: :_blank, rel: "noreferrer" %>
     <h2 class="text-xl">On Render, you can build, deploy, and scale your apps with unparalleled ease – from your first user to your billionth.</h2>
   </li>
-<hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
-</ul>
-</div>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
