@@ -1,92 +1,103 @@
-<div class="bg-gradient-to-l from-gray-200 via-fuchsia-200 to-stone-100">
-<div class="space-y-8">
-<h1 class="text-3xl underline">Learning Resources</h1>
-<ul class="space-y-8">
-  <li>
-     <%= link_to "freeCodeCamp", "https://www.freecodecamp.org", class: "text-2xl hover:text-gray-400", target: :_blank, rel: "noreferrer" %>
+<div class="relative isolate overflow-hidden bg-gradient-to-l from-gray-200 via-fuchsia-200 to-stone-100 px-6 py-24 sm:py-32 lg:overflow-visible lg:px-0">
+  <div class="absolute inset-0 -z-10 overflow-hidden">
+    <svg class="absolute left-[max(50%,25rem)] top-0 h-[64rem] w-[128rem] -translate-x-1/2 stroke-gray-200 [mask-image:radial-gradient(64rem_64rem_at_top,white,transparent)]" aria-hidden="true">
+      <defs>
+        <pattern id="e813992c-7d03-4cc4-a2bd-151760b470a0" width="200" height="200" x="50%" y="-1" patternUnits="userSpaceOnUse">
+          <path d="M100 200V.5M.5 .5H200" fill="none" />
+        </pattern>
+      </defs>
+  
+    </svg>
+  </div>
+  <div class="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:mx-0 lg:max-w-none lg:grid-cols-2 lg:items-start lg:gap-y-10">
+    <div class="lg:col-span-2 lg:col-start-1 lg:row-start-1 lg:mx-auto lg:grid lg:w-full lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
+      <div class="lg:pr-4">
+        <div class="lg:max-w-lg">
+          <p class="text-base/7 font-semibold text-indigo-600">Deploy faster</p>
+          <h1 class="mt-2 text-pretty text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl">Deployment Options</h1>
+          <p class="mt-6 text-xl/8 text-gray-700">Below is a list of options that help you deploy your web apps.</p>
+        </div>
+      </div>
+    </div>
+    <div class="-ml-12 -mt-12 p-12 lg:sticky lg:top-4 lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:overflow-hidden">
+      <img class="w-[48rem] max-w-none rounded-xl bg-gray-900 shadow-xl ring-1 ring-gray-400/10 sm:w-[57rem]" src="https://tailwindui.com/plus/img/component-images/dark-project-app-screenshot.png" alt="">
+    </div>
+    <div class="lg:col-span-2 lg:col-start-1 lg:row-start-2 lg:mx-auto lg:grid lg:w-full lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
+      <div class="lg:pr-4">
+        <div class="max-w-xl text-base/7 text-gray-700 lg:max-w-lg">
+          
+          <ul role="list" class="mt-8 space-y-8 text-gray-600">
+            <li class="flex gap-x-3">
+              <svg class="mt-1 size-5 flex-none text-indigo-600" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+                <path fill-rule="evenodd" d="M5.5 17a4.5 4.5 0 0 1-1.44-8.765 4.5 4.5 0 0 1 8.302-3.046 3.5 3.5 0 0 1 4.504 4.272A4 4 0 0 1 15 17H5.5Zm3.75-2.75a.75.75 0 0 0 1.5 0V9.66l1.95 2.1a.75.75 0 1 0 1.1-1.02l-3.25-3.5a.75.75 0 0 0-1.1 0l-3.25 3.5a.75.75 0 1 0 1.1 1.02l1.95-2.1v4.59Z" clip-rule="evenodd" />
+              </svg>
+              <%= link_to "freeCodeCamp", "https://www.freecodecamp.org", class: "text-2xl hover:text-gray-400", target: :_blank, rel: "noreferrer" %>
       <h2 class="text-xl">-freeCodeCamp is a non-profit educational organization that consists of an interactive learning web platform, an online community forum, chat rooms, online publications and local organizations that intend to make learning software development accessible to anyone.</h2>
-  </li>
-<hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
-   <li>
-     <%= link_to "Codecademy", "https://www.codecademy.com", class: "text-2xl hover:text-gray-400", target: :_blank, rel: "noreferrer" %>
+            </li>
+            <li class="flex gap-x-3">
+              <svg class="mt-1 size-5 flex-none text-indigo-600" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+                <path fill-rule="evenodd" d="M5.5 17a4.5 4.5 0 0 1-1.44-8.765 4.5 4.5 0 0 1 8.302-3.046 3.5 3.5 0 0 1 4.504 4.272A4 4 0 0 1 15 17H5.5Zm3.75-2.75a.75.75 0 0 0 1.5 0V9.66l1.95 2.1a.75.75 0 1 0 1.1-1.02l-3.25-3.5a.75.75 0 0 0-1.1 0l-3.25 3.5a.75.75 0 1 0 1.1 1.02l1.95-2.1v4.59Z" clip-rule="evenodd" />
+              </svg>
+              <%= link_to "Codecademy", "https://www.codecademy.com", class: "text-2xl hover:text-gray-400", target: :_blank, rel: "noreferrer" %>
     <h2 class="text-xl">-Codecademy is an American online interactive platform that offers free coding classes in 12 different programming languages including Python, Java, Go, JavaScript, Ruby, SQL, C++, C#, and Swift, as well as markup languages HTML and CSS.</h2>
-  </li>
-<hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
-  <li>
-     <%= link_to "The Odin Project", "https://www.theodinproject.com", class: "text-2xl hover:text-gray-400", target: :_blank, rel: "noreferrer" %>
+            <li class="flex gap-x-3">
+              <svg class="mt-1 size-5 flex-none text-indigo-600" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+                <path fill-rule="evenodd" d="M5.5 17a4.5 4.5 0 0 1-1.44-8.765 4.5 4.5 0 0 1 8.302-3.046 3.5 3.5 0 0 1 4.504 4.272A4 4 0 0 1 15 17H5.5Zm3.75-2.75a.75.75 0 0 0 1.5 0V9.66l1.95 2.1a.75.75 0 1 0 1.1-1.02l-3.25-3.5a.75.75 0 0 0-1.1 0l-3.25 3.5a.75.75 0 1 0 1.1 1.02l1.95-2.1v4.59Z" clip-rule="evenodd" />
+              </svg>
+                <%= link_to "The Odin Project", "https://www.theodinproject.com", class: "text-2xl hover:text-gray-400", target: :_blank, rel: "noreferrer" %>
     <h2 class="text-xl">-The Odin Project provides a free open source coding curriculum that can be taken entirely online. Since its inception, it has helped many students get hired as developers and has assisted countless others in learning enough programming to work on their own personal projects.</h2>
-  </li>
-<hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
-   <li>
-     <%= link_to "Scrimba", "https://v2.scrimba.com", class: "text-2xl hover:text-gray-400", target: :_blank, rel: "noreferrer" %>
+            </li>
+            <li class="flex gap-x-3">
+              <svg class="mt-1 size-5 flex-none text-indigo-600" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+                <path fill-rule="evenodd" d="M5.5 17a4.5 4.5 0 0 1-1.44-8.765 4.5 4.5 0 0 1 8.302-3.046 3.5 3.5 0 0 1 4.504 4.272A4 4 0 0 1 15 17H5.5Zm3.75-2.75a.75.75 0 0 0 1.5 0V9.66l1.95 2.1a.75.75 0 1 0 1.1-1.02l-3.25-3.5a.75.75 0 0 0-1.1 0l-3.25 3.5a.75.75 0 1 0 1.1 1.02l1.95-2.1v4.59Z" clip-rule="evenodd" />
+              </svg>
+             <%= link_to "Scrimba", "https://v2.scrimba.com", class: "text-2xl hover:text-gray-400", target: :_blank, rel: "noreferrer" %>
     <h2 class="text-xl">-Scrimba is a place to level up your coding skills and build awesome projects.</h2>
-  </li>
-<hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
-   <li>
-     <%= link_to "Udemy", "https://www.udemy.com", class: "text-2xl hover:text-gray-400", target: :_blank, rel: "noreferrer" %>
+            </li>
+            <li class="flex gap-x-3">
+              <svg class="mt-1 size-5 flex-none text-indigo-600" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+                <path fill-rule="evenodd" d="M5.5 17a4.5 4.5 0 0 1-1.44-8.765 4.5 4.5 0 0 1 8.302-3.046 3.5 3.5 0 0 1 4.504 4.272A4 4 0 0 1 15 17H5.5Zm3.75-2.75a.75.75 0 0 0 1.5 0V9.66l1.95 2.1a.75.75 0 1 0 1.1-1.02l-3.25-3.5a.75.75 0 0 0-1.1 0l-3.25 3.5a.75.75 0 1 0 1.1 1.02l1.95-2.1v4.59Z" clip-rule="evenodd" />
+              </svg>
+              <%= link_to "Udemy", "https://www.udemy.com", class: "text-2xl hover:text-gray-400", target: :_blank, rel: "noreferrer" %>
      <h2 class="text-xl">-Udemy is an online learning and teaching marketplace with over 250000 courses and 73 million students. Learn programming, marketing, data science and more.</h2>
-  </li>
-<hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
-   <li>
-     <%= link_to "Khan Academy", "https://www.khanacademy.org", class: "text-2xl hover:text-gray-400", target: :_blank, rel: "noreferrer" %>
+            </li>
+            <li class="flex gap-x-3">
+              <svg class="mt-1 size-5 flex-none text-indigo-600" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+                <path fill-rule="evenodd" d="M5.5 17a4.5 4.5 0 0 1-1.44-8.765 4.5 4.5 0 0 1 8.302-3.046 3.5 3.5 0 0 1 4.504 4.272A4 4 0 0 1 15 17H5.5Zm3.75-2.75a.75.75 0 0 0 1.5 0V9.66l1.95 2.1a.75.75 0 1 0 1.1-1.02l-3.25-3.5a.75.75 0 0 0-1.1 0l-3.25 3.5a.75.75 0 1 0 1.1 1.02l1.95-2.1v4.59Z" clip-rule="evenodd" />
+              </svg>
+              <%= link_to "Khan Academy", "https://www.khanacademy.org", class: "text-2xl hover:text-gray-400", target: :_blank, rel: "noreferrer" %>
     <h2 class="text-xl">-Khan Academy is a free, online educational resource for all ages that offers a variety of learning tools and resources.</h2>
-  </li>
-<hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
-  <li>
-     <%= link_to "Coursera", "https://www.coursera.org", class: "text-2xl hover:text-gray-400", target: :_blank, rel: "noreferrer" %>
+            </li>
+            <li class="flex gap-x-3">
+              <svg class="mt-1 size-5 flex-none text-indigo-600" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+                <path fill-rule="evenodd" d="M5.5 17a4.5 4.5 0 0 1-1.44-8.765 4.5 4.5 0 0 1 8.302-3.046 3.5 3.5 0 0 1 4.504 4.272A4 4 0 0 1 15 17H5.5Zm3.75-2.75a.75.75 0 0 0 1.5 0V9.66l1.95 2.1a.75.75 0 1 0 1.1-1.02l-3.25-3.5a.75.75 0 0 0-1.1 0l-3.25 3.5a.75.75 0 1 0 1.1 1.02l1.95-2.1v4.59Z" clip-rule="evenodd" />
+              </svg>
+             <%= link_to "Coursera", "https://www.coursera.org", class: "text-2xl hover:text-gray-400", target: :_blank, rel: "noreferrer" %>
     <h2 class="text-xl">-Coursera is the global online learning platform that offers anyone, anywhere access to online courses and degrees from world-class universities and companies.</h2>
-  </li>
-<hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
-  <li>
-     <%= link_to "Stack Overflow", "https://www.stackoverflow.com", class: "text-2xl hover:text-gray-400", target: :_blank, rel: "noreferrer" %>
+            </li>
+            <li class="flex gap-x-3">
+              <svg class="mt-1 size-5 flex-none text-indigo-600" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+                <path fill-rule="evenodd" d="M5.5 17a4.5 4.5 0 0 1-1.44-8.765 4.5 4.5 0 0 1 8.302-3.046 3.5 3.5 0 0 1 4.504 4.272A4 4 0 0 1 15 17H5.5Zm3.75-2.75a.75.75 0 0 0 1.5 0V9.66l1.95 2.1a.75.75 0 1 0 1.1-1.02l-3.25-3.5a.75.75 0 0 0-1.1 0l-3.25 3.5a.75.75 0 1 0 1.1 1.02l1.95-2.1v4.59Z" clip-rule="evenodd" />
+              </svg>
+             <%= link_to "Stack Overflow", "https://www.stackoverflow.com", class: "text-2xl hover:text-gray-400", target: :_blank, rel: "noreferrer" %>
     <h2 class="text-xl">-Stack Overflow is the largest, most trusted online community for developers to learn, share​ ​their programming ​knowledge, and build their careers.</h2>
-  </li>
-<hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
-   <li>
-     <%= link_to "Codewars", "https://www.codewars.com", class: "text-2xl hover:text-gray-400", target: :_blank, rel: "noreferrer" %>
+            <li class="flex gap-x-3">
+              <svg class="mt-1 size-5 flex-none text-indigo-600" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+                <path fill-rule="evenodd" d="M5.5 17a4.5 4.5 0 0 1-1.44-8.765 4.5 4.5 0 0 1 8.302-3.046 3.5 3.5 0 0 1 4.504 4.272A4 4 0 0 1 15 17H5.5Zm3.75-2.75a.75.75 0 0 0 1.5 0V9.66l1.95 2.1a.75.75 0 1 0 1.1-1.02l-3.25-3.5a.75.75 0 0 0-1.1 0l-3.25 3.5a.75.75 0 1 0 1.1 1.02l1.95-2.1v4.59Z" clip-rule="evenodd" />
+              </svg>
+              <%= link_to "Codewars", "https://www.codewars.com", class: "text-2xl hover:text-gray-400", target: :_blank, rel: "noreferrer" %>
     <h2 class="text-xl">-Codewars is an online platform for learning and practicing coding skills through a variety of programming challenges.</h2>
-  </li>
-<hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
-   <li>
-     <%= link_to "edX", "https://www.edx.org", class: "text-2xl hover:text-gray-400", target: :_blank, rel: "noreferrer" %>
+            </li>
+            <li class="flex gap-x-3">
+              <svg class="mt-1 size-5 flex-none text-indigo-600" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+                <path fill-rule="evenodd" d="M5.5 17a4.5 4.5 0 0 1-1.44-8.765 4.5 4.5 0 0 1 8.302-3.046 3.5 3.5 0 0 1 4.504 4.272A4 4 0 0 1 15 17H5.5Zm3.75-2.75a.75.75 0 0 0 1.5 0V9.66l1.95 2.1a.75.75 0 1 0 1.1-1.02l-3.25-3.5a.75.75 0 0 0-1.1 0l-3.25 3.5a.75.75 0 1 0 1.1 1.02l1.95-2.1v4.59Z" clip-rule="evenodd" />
+              </svg>
+                <%= link_to "edX", "https://www.edx.org", class: "text-2xl hover:text-gray-400", target: :_blank, rel: "noreferrer" %>
     <h2 class="text-xl">-edX is the online learning platform from world-leading digital education company 2U, Inc. edX was founded by Harvard and MIT as an experiment to make the world’s best education available to everyone.</h2>
   </li>
-<hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
-   <li>
-     <%= link_to "HackerRank", "https://www.hackerrank.com", class: "text-2xl hover:text-gray-400", target: :_blank, rel: "noreferrer" %>
-    <h2 class="text-xl">-HackerRank is a technology company that focuses on competitive programming challenges for both consumers and businesses.</h2>
-  </li>
-<hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
-   <li>
-     <%= link_to "Exercism", "https://www.exercism.org", class: "text-2xl hover:text-gray-400", target: :_blank, rel: "noreferrer" %>
-    <h2 class="text-xl">-Get really good at programming. Develop fluency in 74 programming languages with our unique blend of learning, practice and mentoring.</h2>
-  </li>
-<hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
-   <li>
-     <%= link_to "Ruby on Rails Guide", "https://guides.rubyonrails.org", class: "text-2xl hover:text-gray-400", target: :_blank, rel: "noreferrer" %>
-    <h2 class="text-xl">-These guides are designed to make you immediately productive with Rails, and to help you understand how all of the pieces fit together.</h2>
-  </li>
-<hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
-   <li>
-     <%= link_to "MDN Web Docs", "https://developer.mozilla.org/en-US", class: "text-2xl hover:text-gray-400", target: :_blank, rel: "noreferrer" %>
-    <h2 class="text-xl">-The MDN Web Docs site provides information about Open Web technologies including HTML, CSS, and APIs for both Web sites and progressive web apps.</h2>
-  </li>
-<hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
-   <li>
-     <%= link_to "W3Schools", "https://www.w3schools.com/", class: "text-2xl hover:text-gray-400", target: :_blank, rel: "noreferrer" %>
-    <h2 class="text-xl">-We create simplified and interactive learning experiences. Learning web development should be easy to understand and available for everyone, everywhere! W3Schools is a school for web developers, covering all the aspects of web development.</h2>
-  </li>
-<hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
-  <li>
-     <%= link_to "Udacity", "https://www.udacity.com", class: "text-2xl hover:text-gray-400", target: :_blank, rel: "noreferrer" %>
-    <h2 class="text-xl">-Udacity—Learn AI, Data, & More — Content is co-created with the world’s most innovative tech companies.</h2>
-  </li>
-<hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
-  <li>
-     <%= link_to "Other", "https://couponfollow.com/research/learn-to-code-from-home", class: "text-2xl hover:text-gray-400", target: :_blank, rel: "noreferrer" %>
-    <h2 class="text-xl">-Here are some more recommended links to help you learn coding!</h2>
-  </li>
-<hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
-</ul>
-</div>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
