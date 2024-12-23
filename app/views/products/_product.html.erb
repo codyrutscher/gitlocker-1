@@ -55,7 +55,7 @@
             <% if product.price.to_f.round(2) > 0.00 %> 
               <p class="px-1 py-1 text-sm font-medium text-black"><%= product.price.currency.symbol %><%= product.price %></p>
             <% else %>
-              <p class="text-3xl font-bold px-1 py-1 rounded bg-yellow-500 text-black">Free</p>
+              <p class="text-sm font-bold px-1 py-1 rounded bg-blue-500 text-black">Free</p>
             <% end %>
           </div>
         </div>
