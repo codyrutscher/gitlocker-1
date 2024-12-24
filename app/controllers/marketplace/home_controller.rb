@@ -24,6 +24,11 @@ module Marketplace
     def forum
 
     end
+    
+    def careers
+
+    end
+    
     def youtube
 
     end
