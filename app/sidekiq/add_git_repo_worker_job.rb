@@ -107,7 +107,7 @@ class AddGitRepoWorkerJob
 
     rescue ActiveRecord::RecordNotUnique => e
       @product.destroy
-      puts 'Failed to create product. Repositry Aleady Exist.'
+      puts 'Failed to create product. Repository Aleady Exist.'
     end
   end
 
