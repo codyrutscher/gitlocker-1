@@ -6,7 +6,7 @@
 </style>
 </head>
 <body>
-<%= link_to marketplace_language_path(language.slug), class: "relative aspect-square border-4 border-gray-900 hover:bounceOrig rounded hover:shadow-[0px_20px_20px_15px_#1158f2]" do %>
+<%= link_to marketplace_language_path(language.slug), class: "relative aspect-square border-4 border-gray-900 rounded hover:shadow-[0px_20px_20px_15px_#1158f2]" do %>
   <%= image_tag "languages/#{language.image_name}", class: "h-full w-full aspect-square object-cover object-center rounded", alt: "#{language.image_name} Image" %>
   <div class="absolute rounded-b border-4 bottom-0 flex items-center justify-center right-0 left-0">
     <div id="description" class="flex w-full items-center">
