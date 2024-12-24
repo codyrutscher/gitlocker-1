@@ -293,7 +293,7 @@
             $('#product_url').val('')
         }
 
-      formData.append('product[product_url]', $('#product_url').val());
+      formData.append('product[url]', $('#product_url').val());
       var coverImages = $('#covers')[0].files;
       $.each(coverImages, function(index, image) {
           formData.append('product[covers][]', image);

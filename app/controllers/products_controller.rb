@@ -274,7 +274,7 @@ class ProductsController < ApplicationController
 
   def product_params
     params.require(:product).permit(
-      :name, :featured, :description, :price,:boost_price, :active, :published, :category_ids,:preview_video_url, :video_file,:upload_file, :features, :instructions, :requirements, :demo_url,
+      :name, :featured, :description, :price,:boost_price, :active, :published, :category_ids,:preview_video_url, :video_file,:upload_file, :features, :instructions, :requirements, :demo_url, :url,
       covers: [],
       product_categories_attributes: [:id, :active],
       covers_attributes: [:id, :image]

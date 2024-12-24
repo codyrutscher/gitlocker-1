@@ -286,7 +286,7 @@
             $('#product_url').val('')
         }
 
-        formData.append('product[product_url]', $('#product_url').val());
+        formData.append('product[url]', $('#product_url').val());
         formData.append('product[demo_url]', $('#product_demo_url').val());
         var coverImages = $('#covers')[0].files;
         $.each(coverImages, function(index, image) {
@@ -436,34 +436,32 @@
     });
   });
 
-document.addEventListener('turbo:render', () => {
-  document.querySelectorAll('.import-repo-btn').forEach(button => {
-    button.addEventListener('click', function(event) {
-      event.preventDefault();
-      const repoName = this.getAttribute('data-repo-name');
-      const repoUrl = this.getAttribute('data-repo-url');
-      const repoDescription = this.getAttribute('data-repo-description');
+document.querySelectorAll('.import-repo-btn').forEach(button => {
+  button.addEventListener('click', function(event) {
+    event.preventDefault();
+    const repoName = this.getAttribute('data-repo-name');
+    const repoUrl = this.getAttribute('data-repo-url');
+    const repoDescription = this.getAttribute('data-repo-description');
 
-      const nameField = document.getElementById('product_name');
-      const urlField = document.getElementById('product_url');
-      const ckEditorInstances = document.getElementsByClassName('ckEditor');
+    const nameField = document.getElementById('product_name');
+    const urlField = document.getElementById('product_url');
+    const ckEditorInstances = document.getElementsByClassName('ckEditor');
 
-      if (nameField && urlField) {
-        nameField.value = repoName;
-        urlField.value = repoUrl;
+    if (nameField && urlField) {
+      nameField.value = repoName;
+      urlField.value = repoUrl;
 
-        for (let i = 0; i < ckEditorInstances.length; i++) {
-          const ckEditorInstance = CKEDITOR.instances[ckEditorInstances[i].name];
-          if (ckEditorInstance) {
-            ckEditorInstance.setData(repoDescription);
-          } else {
-            ckEditorInstances[i].value = repoDescription;
-          }
+      for (let i = 0; i < ckEditorInstances.length; i++) {
+        const ckEditorInstance = CKEDITOR.instances[ckEditorInstances[i].name];
+        if (ckEditorInstance) {
+          ckEditorInstance.setData(repoDescription);
+        } else {
+          ckEditorInstances[i].value = repoDescription;
         }
-      } else {
-        console.error('Form fields not found. Check the IDs.');
       }
-    });
+    } else {
+      console.error('Form fields not found. Check the IDs.');
+    }
   });
 });
 $(document).ready(function() {
