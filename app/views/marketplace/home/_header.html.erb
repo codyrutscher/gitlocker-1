@@ -161,6 +161,17 @@ code{
           <div class="mx-auto max-w-2xl lg:mx-0 lg:max-w-xl">
             <div class="hidden sm:mb-10 sm:flex">
               <%= image_tag("logo.png") %>
+               <div class="relative flex items-center gap-x-4 rounded-full bg-white px-4 py-1 text-sm/6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
+            <span class="font-semibold text-indigo-600">We’re hiring</span>
+            <span class="h-4 w-px bg-gray-900/10" aria-hidden="true"></span>
+            <a href="https://www.gitlocker.com/careers" class="flex items-center gap-x-1">
+              <span class="absolute inset-0" aria-hidden="true"></span>
+              See open positions
+              <svg class="-mr-2 size-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+                <path fill-rule="evenodd" d="M8.22 5.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L11.94 10 8.22 6.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
+              </svg>
+            </a>
+               </div>
             </div>
             <h1 class="text-pretty text-5xl font-semibold tracking-tight text-gray-900 sm:text-7xl">A Better Way To Sell Your Code</h1>
             <p class="mt-8 text-pretty text-lg font-medium text-gray-500 sm:text-xl/8">Browse <span class="font-bold">GitLocker's</span> selection of free and premium code products from our users or sign up to start <span class="font-bold">buying and selling</span>! We are also accepting coding blog posts to promote your website, company, idea, or product!</p>
@@ -177,8 +188,7 @@ code{
                 <%= link_to "Get Paid", funds_path, class: "text-center inline-block bg-white hover:shadow-[inset_30rem_0_0_0] hover:shadow-blue-700 duration-[400ms,700ms] transition-[color,box-shadow] text-black hover:text-white border-black border-4 font-bold py-2 px-4 rounded-full" %>
                <%= link_to "Purchased Products", marketplace_purchases_path, class: "text-center inline-block bg-white hover:shadow-[inset_30rem_0_0_0] hover:shadow-blue-700 duration-[400ms,700ms] transition-[color,box-shadow] text-black hover:text-white border-black border-4 font-bold py-2 px-4 rounded-full" %>
                <%= link_to "Listed Products", products_path, class: "text-center inline-block bg-white hover:shadow-[inset_30rem_0_0_0] hover:shadow-blue-700 duration-[400ms,700ms] transition-[color,box-shadow] text-black hover:text-white border-black border-4 font-bold py-2 px-4 rounded-full" %>
-              <%= link_to "Become Our CMO", careers_path, class: "text-center inline-block bg-white hover:shadow-[inset_30rem_0_0_0] hover:shadow-blue-700 duration-[400ms,700ms] transition-[color,box-shadow] text-black hover:text-white border-black border-4 font-bold py-2 px-4 rounded-full" %>
-                <%= link_to "Featured", marketplace_featured_path, class: "text-center inline-block bg-white hover:shadow-[inset_30rem_0_0_0] hover:shadow-blue-700 duration-[400ms,700ms] transition-[color,box-shadow] text-black hover:text-white border-black border-4 font-bold py-2 px-4 rounded-full" %>
+              
               <% else %>
                 <%= link_to "Sign In", new_user_session_path, class: "text-center inline-block bg-white hover:shadow-[inset_52rem_0_0_0] hover:shadow-blue-700 duration-[400ms,700ms] transition-[color,box-shadow] text-black hover:text-white border-black border-4 font-bold py-2 px-4 rounded-full" %>
                 <%= link_to "Create An Account", new_user_registration_path, class: "text-center inline-block bg-white hover:shadow-[inset_30rem_0_0_0] hover:shadow-blue-700 duration-[400ms,700ms] transition-[color,box-shadow] text-black hover:text-white border-black border-4 font-bold py-2 px-4 rounded-full" %>
@@ -188,8 +198,7 @@ code{
                  <%= link_to marketplace_creators_path, class: "text-center inline-block bg-white hover:shadow-[inset_30rem_0_0_0] hover:shadow-blue-700 duration-[400ms,700ms] transition-[color,box-shadow] text-black hover:text-white border-black border-4 font-bold py-2 px-4 rounded-full" do %>
                   <h2>Developers</h2>
                 <% end %>
-               <%= link_to "Become Our CMO", careers_path, class: "text-center inline-block bg-white hover:shadow-[inset_30rem_0_0_0] hover:shadow-blue-700 duration-[400ms,700ms] transition-[color,box-shadow] text-black hover:text-white border-black border-4 font-bold py-2 px-4 rounded-full" %>
-                <%= link_to "Featured", marketplace_featured_path, class: "text-center inline-block bg-white hover:shadow-[inset_30rem_0_0_0] hover:shadow-blue-700 duration-[400ms,700ms] transition-[color,box-shadow] text-black hover:text-white border-black border-4 font-bold py-2 px-4 rounded-full" %>
+               
               <% end %>
           </div>
           <div class="grid grid-cols-3 gap-2 content-start">
