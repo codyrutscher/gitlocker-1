@@ -196,7 +196,6 @@ class Category < ApplicationRecord
       "Calendars": "Web-app.png",
       "Countdowns": "Web-app.png",
       "Database Abstractions": "Web-app.png",
-      "Forms": "Web-app.png",
       "Images and Media": "Web-app.png",
       "Loaders and Uploaders": "Web-app.png",
       "Media": "Web-app.png",
