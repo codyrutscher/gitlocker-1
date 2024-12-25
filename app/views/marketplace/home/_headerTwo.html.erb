@@ -3,7 +3,11 @@
     <h2 class="text-2xl/7 font-bold text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">Browse Projects Or Post Your Code</h2>
   </div>
   <div class="mt-4  pt-5 md:ml-4 md:mt-0">
-    <button type="button" class=" rounded-md bg-white px-5 py-5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">Browse</button>
-    <button type="button" class="ml-3 rounded-md bg-indigo-600 px-5 py-5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Post</button>
+    <%= link_to "Browse", marketplace_browse_path, class: "rounded-md bg-white hover:bg-indigo-700 hover:text-white px-5 py-5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50" %>
+    <%= link_to "Post", new_product_path, class: "ml-3 rounded-md bg-white hover:bg-indigo-700 hover:text-white px-5 py-5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50" %>
+  </div>
+   <div class="mt-4  pt-5 md:ml-4 md:mt-0">
+    <%= link_to "Get Paid", funds_path, class: "rounded-md bg-white hover:bg-indigo-700 hover:text-white px-5 py-5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50" %>
+   
   </div>
 </div>
