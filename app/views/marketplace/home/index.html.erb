@@ -19,6 +19,9 @@
    <% if !current_user %>
   <%= render 'header' %>
   <% end %>
+   <% if current_user %>
+  <%= render 'headerTwo' %>
+  <% end %>
   
   <!-- Home Content -->
   <div class="bg-white over">
