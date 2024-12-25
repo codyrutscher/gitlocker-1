@@ -209,7 +209,7 @@ class Category < ApplicationRecord
       "Miscellaneous": "Web-app.png",
       "Animations and Effects": "Web-app.png",
       "Buttons": "Web-app.png",
-      "Charts and Graphs": "Web-app.png"
+      "Charts and Graphs": "Web-app.png",
       "Forms": "Web-app.png",
       "Layouts": "Web-app.png",
       "Pricing Tables": "Web-app.png",
