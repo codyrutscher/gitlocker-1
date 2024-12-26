@@ -14,7 +14,9 @@
  *= require_self
  */
 
-
+body {
+  	cursor: url("cursor.svg"), default;
+}
 
 #menu {
 	background: #405C7C;
