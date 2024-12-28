@@ -7,17 +7,20 @@
         <p class="mt-1 text-xl leading-6 text-black ">Below are your basic product information.</p>
 
         <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-
-          <div class="sm:col-span-4 border-t-4 border-black" id= "url-field">
-            <%= f.label :url,"GitHub Private Repository URL", class: "block text-xl font-medium leading-6 text-gray-900 " %>
-            <div class="mt-2">
-              <%= f.text_field :url, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", maxlength: "70", placeholder: "Paste Repository URL", readonly: false %>
+          <% if false %>
+            <div class="sm:col-span-4 border-t-4 border-black" id= "url-field">
+              <%= f.label :url,"GitHub Private Repository URL", class: "block text-xl font-medium leading-6 text-gray-900 " %>
+              <div class="mt-2">
+                <%= f.text_field :url, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", maxlength: "70", placeholder: "Paste Repository URL", readonly: false %>
+              </div>
             </div>
-          </div>
+          <% end %>
     <div class="upload_repo_zip sm:col-span-4">
-      <div class="sm:col-span-4 text-center2">
-        <span class="text-gray-500 font-medium">OR</span>
-      </div>
+      <% if false %>
+        <div class="sm:col-span-4 text-center2">
+          <span class="text-gray-500 font-medium">OR</span>
+        </div>
+      <% end %>
       <!-- New Upload ZIP File Field -->
       <div class="sm:col-span-4 border-t-4 border-black" id="zip-upload-field">
         <%= f.label :upload_file, "Upload ZIP File", class: "block text-xl font-medium leading-6 text-gray-900 " %>
