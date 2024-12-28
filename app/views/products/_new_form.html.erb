@@ -20,11 +20,11 @@
 
     <%= form_for @product, url: products_path, class: "bg-gradient-to-l from-gray-200 via-fuchsia-200 to-stone-100", data: {turbo: false, remote: true }, html: { id: "product-form",multipart: true } do |f| %>
       <div class="space-y-12">
-        <% if current_user.token.present? %>
+        <% if false && current_user.token.present? %>
           <%= render partial: 'products/import_table', locals: { filtered_repos: @filtered_repos } %>
         <% end %>
         <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-          <% if current_user.token.present? %>
+          <% if false && current_user.token.present? %>
             <div class="sm:col-span-4 border-t-4 border-black" id= "url-field">
               <%= f.label :url,"GitHub Private Repository URL:", class: "block text-xl font-medium leading-6 text-gray-900 " %>
               <div class="mt-2">
@@ -33,9 +33,11 @@
             </div>
           <% end %>
           <div class="upload_repo_zip sm:col-span-4">
-            <div class="sm:col-span-4 text-center pt-8 pb-8">
-              <span class="text-black text-3xl ">OR</span>
-            </div>
+            <% if false %>
+              <div class="sm:col-span-4 text-center pt-8 pb-8">
+                <span class="text-black text-3xl ">OR</span>
+              </div>
+            <% end %>
             <!-- New Upload ZIP File Field -->
             <!-- New Upload ZIP File Field -->
             <div class="sm:col-span-4 border-t-4 border-black" id="zip-upload-field">
