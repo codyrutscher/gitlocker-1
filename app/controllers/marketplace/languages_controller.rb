@@ -3,6 +3,7 @@ module Marketplace
 class LanguagesController < ApplicationController
   def show
     @language = Language.friendly.find(params[:slug])
+    params[:sort_by] ||= "most_recent"
     @products = apply_filters_and_sort(@language&.products).includes([:languages])&.page(params[:page])&.per(100)
   end
 
