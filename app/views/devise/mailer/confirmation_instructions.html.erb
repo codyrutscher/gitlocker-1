@@ -1,18 +1,15 @@
 <section style="max-width: 600px; margin: 0 auto; padding: 20px; color: #4a5568; font-family: Arial, sans-serif;">
-  <header style="text-align: center;">
-    <%= link_to 'https://gitlocker.com' do %>
-      <%= image_tag("https://i.ibb.co/db8sjx8/Screenshot-from-2024-05-28-14-03-42-removebg-preview.jpg", width: "200") %>
-    <% end %>
-  </header>
 
   <main style="margin-top: 20px;">
-    <h2 style="color: #2d3748;">Welcome to GitLocker!</h2>
+    <h2 style="color: #2d3748; text-align: center;">Welcome to GitLocker!</h2>
     <p>Hi <%= @email %>,</p>
     <p>Thanks for signing up with GitLocker. To complete your registration, please confirm your account by clicking the button below:</p>
-    
+
     <div style="text-align: center; margin: 30px 0;">
-      <%= link_to 'Confirm my account', confirmation_url(@resource, confirmation_token: @token), 
-          style: "background-color: #3182ce; color: white; padding: 12px 24px; text-decoration: none; border-radius: 5px; font-weight: bold;" %>
+      <a href="<%= confirmation_url(@resource, confirmation_token: @token) %>" 
+        style="background-color: #3182ce; color: white; padding: 12px 24px; text-decoration: none; border-radius: 5px; font-weight: bold;">
+        Confirm my account
+      </a>
     </div>
 
     <p>If the button doesn't work, copy and paste this link into your browser:</p>
