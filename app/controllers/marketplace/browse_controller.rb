@@ -1,6 +1,7 @@
 module Marketplace
   class BrowseController < ApplicationController
     def index
+      params[:sort_by] ||= "most_recent" unless params[:sort_by].present?
       @products = apply_filters_and_sort(Product.exclude_purchased(current_user)).page(params[:page]).per(100)
     end
 
