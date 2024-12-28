@@ -2,6 +2,7 @@ module Marketplace
 class CategoriesController < ApplicationController
   def show
     @category = Category.friendly.find(params[:slug])
+    params[:sort_by] ||= "most_recent"
     @products = apply_filters_and_sort(@category&.products)&.page(params[:page])&.per(100)
   end
 
