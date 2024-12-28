@@ -83,90 +83,10 @@
       <% end %>
       
     
- <% if @creators.size > 0 %>
-        <!-- Creators Section -->
-        <section aria-labelledby="creators-heading" class="bg-gray-900 pt-4 pb-4">
-          <div class="px-4 sm:flex sm:items-center justify-center space-x-4 sm:px-6 lg:px-8 xl:px-0">
-            <div>
-            <h2 id="recent-heading" class="text-3xl font-bold tracking-tight text-white underline"><span class="">Developers</h2>
-            </div>
-            <a href="https://www.gitlocker.com/marketplace/creators" class="relative inline-flex items-center justify-start py-3 pl-4 pr-12 overflow-hidden font-semibold text-blue-700 transition-all duration-150 ease-in-out rounded hover:pl-10 hover:pr-6 bg-gray-50 group">
-              <span class="absolute bottom-0 left-0 w-full h-1 transition-all duration-150 ease-in-out bg-blue-700 group-hover:h-full"></span>
-                <span class="absolute right-0 pr-4 duration-200 ease-out group-hover:translate-x-12">
-                    <svg class="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                </span>
-              <span class="absolute left-0 pl-2.5 -translate-x-12 group-hover:translate-x-0 ease-out duration-200">
-              <svg class="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-              </span>
-              <span class="relative w-full text-left transition-colors duration-200 ease-in-out group-hover:text-white">Browse All Developers</span>
-              </a>
-          </div>
-           </section>
-        
-          <div class="mt-6 lg:px-8 xl:px-8 overflow-hidden">
-             <div class="grid grid-cols-2 mb-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 gap-4 lg:gap-8 lg:px-8 xl:px-8">
-              <%= render partial: "home/creator", collection: @creators %>
-            </div>
-              </div>
-       
-      <% end %>
+
     
  
-      <% if @languages.size > 0 %>
-        <!-- Languages Section -->
-        <section aria-labelledby="languages-heading" class="bg-gray-900 pt-4 pb-4">
-          <div class="px-4 sm:flex sm:items-center justify-center space-x-4 sm:px-6 lg:px-8 xl:px-0">
-            <div>
-            <h2 id="recent-heading" class="text-3xl font-bold tracking-tight text-white underline"><span class="">Programming Languages</h2>
-            </div>
-            <a href="https://www.gitlocker.com/marketplace/browse/languages" class="relative inline-flex items-center justify-start py-3 pl-4 pr-12 overflow-hidden font-semibold text-blue-700 transition-all duration-150 ease-in-out rounded hover:pl-10 hover:pr-6 bg-gray-50 group">
-              <span class="absolute bottom-0 left-0 w-full h-1 transition-all duration-150 ease-in-out bg-blue-700 group-hover:h-full"></span>
-                <span class="absolute right-0 pr-4 duration-200 ease-out group-hover:translate-x-12">
-                    <svg class="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                </span>
-              <span class="absolute left-0 pl-2.5 -translate-x-12 group-hover:translate-x-0 ease-out duration-200">
-              <svg class="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-              </span>
-              <span class="relative w-full text-left transition-colors duration-200 ease-in-out group-hover:text-white">Browse All Languages</span>
-              </a>
-          </div>
-          </section>
-          
-          <div class="mt-6 lg:px-8 xl:px-8 flow-root">
-            <div class="grid grid-cols-2 mb-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 gap-4 lg:gap-8 lg:px-8 xl:px-8">
-              <%= render partial: "home/language", collection: @languages, as: :language %>
-            </div>
-          </div>
-        
-      <% end %>
-     
-      <% if @categories.size > 0 %>
-        <!-- Categories Section -->
-        <section aria-labelledby="categories-heading" class="bg-gray-900 pt-4 pb-4">
-          <div class="px-4 sm:flex sm:items-center justify-center space-x-4 sm:px-6 lg:px-8 xl:px-0">
-            <div>
-            <h2 id="recent-heading" class="text-3xl font-bold tracking-tight text-white underline"><span class="">Programming Categories</h2>
-            </div>
-            <a href="https://www.gitlocker.com/marketplace/browse/categories" class="relative inline-flex items-center justify-start py-3 pl-4 pr-12 overflow-hidden font-semibold text-blue-700 transition-all duration-150 ease-in-out rounded hover:pl-10 hover:pr-6 bg-gray-50 group">
-              <span class="absolute bottom-0 left-0 w-full h-1 transition-all duration-150 ease-in-out bg-blue-700 group-hover:h-full"></span>
-                <span class="absolute right-0 pr-4 duration-200 ease-out group-hover:translate-x-12">
-                    <svg class="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                </span>
-              <span class="absolute left-0 pl-2.5 -translate-x-12 group-hover:translate-x-0 ease-out duration-200">
-              <svg class="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-              </span>
-              <span class="relative w-full text-left transition-colors duration-200 ease-in-out group-hover:text-white">Browse All Categories</span>
-              </a>
-          </div>
-          </section>
       
-          <div class="mt-6 lg:px-8 xl:px-8 flow-root">
-            <div class="grid grid-cols-2 mb-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 gap-4 lg:gap-8 lg:px-8 xl:px-8">
-              <%= render partial: "home/category", collection: @categories, as: :category %>
-            </div>
-          </div>
-      
-      <% end %>
    
           <section aria-labelledby="categories-heading" class="bg-gray-900 pt-4 pb-4">
           <div class="px-4 sm:flex sm:items-center justify-center space-x-4 sm:px-6 lg:px-8 xl:px-0">
