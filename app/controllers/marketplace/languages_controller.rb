@@ -7,6 +7,19 @@ class LanguagesController < ApplicationController
     @products = apply_filters_and_sort(@language&.products).includes([:languages])&.page(params[:page])&.per(100)
   end
 
+  def load_more
+    offset = params[:offset].to_i
+    limit = params[:limit].to_i
+    
+    @languages = Language.offset(offset + 1).limit(limit)
+    
+    render json: { 
+      languages: @languages.map { |lang| 
+        { id: lang.id, name: lang.name } 
+      }
+    }
+  end
+
   private
   def filter_params
     params.permit(:category, :language, :sort_by)

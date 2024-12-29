@@ -122,8 +122,16 @@ Rails.application.routes.draw do
     get "browse/categories", to: "browse#categories"
     get "creators/show", to: "creators#show"
     resources :creators, only: [:index, :show]
-    resources :languages, only: :show, param: :slug
-    resources :categories, only: [:show, :create], param: :slug
+    resources :languages, only: :show, param: :slug do
+      collection do
+        get :load_more
+      end
+    end
+    resources :categories, only: [:show, :create], param: :slug do
+    collection do
+      get :load_more
+    end
+  end
     resources :library, only: :show, path: "l" do
       resources :reviews, only: [:new, :create]
     end
