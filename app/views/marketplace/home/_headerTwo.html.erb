@@ -25,7 +25,7 @@
           <a href="https://www.gitlocker.com/marketplace/browse" class="rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">Browse</a>
           <a href="https://www.gitlocker.com/products/new" class="rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">Post</a>
         </div>
-        <div class="pt-4">
+        <div class="pt-4 mt-4">
           <a href="https://www.gitlocker.com/funds" class="text-sm/6 font-semibold px-3.5 py-2.5 border-white border-2 text-white">Get Paid <span aria-hidden="true">→</span></a>
         </div>
       </div>
@@ -35,66 +35,5 @@
     </div>
   </div>
 </div>
-<div class="bg-gray-900 py-24 sm:py-32">
-  <div class="mx-auto max-w-7xl px-6 lg:px-8">
-    <div class="mx-auto max-w-2xl lg:max-w-none">
-      <div class="text-center">
-        <h2 class="text-balance text-4xl font-semibold tracking-tight text-white sm:text-5xl">Trusted by developers worldwide</h2>
-        <p class="mt-4 text-lg/8 text-gray-300"></p>
-      </div>
-      <dl class="mt-16 grid grid-cols-1 gap-0.5 overflow-hidden rounded-2xl text-center sm:grid-cols-2 lg:grid-cols-4">
-        <div class="flex flex-col bg-white/5 p-8">
-          <dt class="text-sm/6 font-semibold text-gray-300">Developers on the platform</dt>
-          <dd class="order-first text-3xl font-semibold tracking-tight text-white"><%= User.count %></dd>
-        </div>
-        <div class="flex flex-col bg-white/5 p-8">
-          <dt class="text-sm/6 font-semibold text-gray-300">Flat platform fee</dt>
-          <dd class="order-first text-3xl font-semibold tracking-tight text-white">10%</dd>
-        </div>
-        <div class="flex flex-col bg-white/5 p-8">
-          <dt class="text-sm/6 font-semibold text-gray-300">Uptime guarantee</dt>
-          <dd class="order-first text-3xl font-semibold tracking-tight text-white">99.9%</dd>
-        </div>
-        <div class="flex flex-col bg-white/5 p-8">
-          <dt class="text-sm/6 font-semibold text-gray-300">Products on the Marketplace</dt>
-          <dd class="order-first text-3xl font-semibold tracking-tight text-white"><%= number_with_delimiter(Product.count, :delimiter => ',') %></dd>
-        </div>
-      </dl>
-     <dl class="mt-16 grid grid-cols-1 gap-0.5 overflow-hidden rounded-2xl text-center sm:grid-cols-2 lg:grid-cols-4">
-        <div class="flex flex-col bg-white/5 p-8">
-          <dt class="text-sm/6 font-semibold text-gray-300"></dt>
-          <dd class="order-first text-3xl font-semibold tracking-tight text-white">Packages</dd>
-        </div>
-        <div class="flex flex-col bg-white/5 p-8">
-          <dt class="text-sm/6 font-semibold text-gray-300"></dt>
-          <dd class="order-first text-3xl font-semibold tracking-tight text-white">Games</dd>
-        </div>
-        <div class="flex flex-col bg-white/5 p-8">
-          <dt class="text-sm/6 font-semibold text-gray-300"></dt>
-          <dd class="order-first text-3xl font-semibold tracking-tight text-white">Templates</dd>
-        </div>
-        <div class="flex flex-col bg-white/5 p-8">
-          <dt class="text-sm/6 font-semibold text-gray-300"></dt>
-          <dd class="order-first text-3xl font-semibold tracking-tight text-white">Plugins</dd>
-        </div>
-        <div class="flex flex-col bg-white/5 p-8">
-          <dt class="text-sm/6 font-semibold text-gray-300"></dt>
-          <dd class="order-first text-3xl font-semibold tracking-tight text-white">Themes</dd>
-        </div>
-        <div class="flex flex-col bg-white/5 p-8">
-          <dt class="text-sm/6 font-semibold text-gray-300"></dt>
-          <dd class="order-first text-3xl font-semibold tracking-tight text-white">Components</dd>
-        </div>
-           <div class="flex flex-col bg-white/5 p-8">
-          <dt class="text-sm/6 font-semibold text-gray-300"></dt>
-          <dd class="order-first text-3xl font-semibold tracking-tight text-white">Scripts</dd>
-        </div>
-           <div class="flex flex-col bg-white/5 p-8">
-          <dt class="text-sm/6 font-semibold text-gray-300"></dt>
-          <dd class="order-first text-3xl font-semibold tracking-tight text-white">Websites</dd>
-        </div>
-      </dl>
-    </div>
-  </div>
-</div>
+
 </html>
