@@ -10,7 +10,7 @@ module Marketplace
       @categories = Category.order(:name).limit(25)
       @creators = User.order(created_at: :desc).limit(25)
       @users = User.order(created_at: :desc).limit(25)
-      @recent_products = Product.with_attached_covers.published.includes([:languages]).recent.exclude_purchased(current_user).first(40)
+      @recent_products = Product.with_attached_covers.published.includes([:languages]).recent.exclude_purchased(current_user).first(50)
       @popular_products = Product.with_attached_covers.includes([:languages]).exclude_purchased(current_user).ordered_by_purchase_count.first(10)
       @free_products = Product.with_attached_covers.includes([:languages]).where("price_cents <= 0").exclude_purchased(current_user).order(created_at: :desc).first(10)
       @premium_products = Product.with_attached_covers.includes([:languages]).where("price_cents > 0").exclude_purchased(current_user).order(created_at: :desc).first(10)
