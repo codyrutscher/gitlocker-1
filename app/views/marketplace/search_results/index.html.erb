@@ -3,7 +3,6 @@
   <main>
     <div class="px-8 py-4">
       <!-- Filter Form -->
-      <%= render partial: 'shared/filters' %>
     </div>
   <hr class="h-px bg-black border-4 mt-4 mb-4 border-black">
 
@@ -21,6 +20,7 @@
             <div class="">
               <!-- Ensure the same gap value as the category view -->
               <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+                <%= render partial: "shared/filters" %>
                 <% if @product_results&.empty? %>
                   <div class="mt-24 col-span-full text-center">
                     <p class="text-2xl">There are no product search results</p>
