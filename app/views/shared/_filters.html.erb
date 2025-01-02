@@ -5,7 +5,7 @@
       <h2 class="text-xl font-bold text-gray-900 mb-3">Filters</h2>
     </div>
     
-    <!-- Storage Space Filter -->
+    <!-- Categories Filter -->
     <div data-controller="collapsible">
       <div class="flex items-center justify-between cursor-pointer hover:bg-gray-50 p-2 rounded-md" data-action="click->collapsible#toggle">
         <h3 class="font-medium text-gray-900">Categories</h3>
@@ -25,7 +25,7 @@
                      name="category[]" 
                      value="<%= category.id %>" 
                      id="category-<%= category.id %>"
-                     class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                     class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 filter-checkbox">
               <label for="category-<%= category.id %>" class="ml-3 text-sm text-gray-600">
                 <%= category.name %>
               </label>
@@ -101,7 +101,7 @@
                      name="language[]" 
                      value="<%= language.id %>" 
                      id="language-<%= language.id %>"
-                     class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                     class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 filter-checkbox">
               <label for="language-<%= language.id %>" class="ml-3 text-sm text-gray-600">
                 <%= language.name %>
               </label>
@@ -140,7 +140,7 @@
           checkbox.name = 'language[]';
           checkbox.value = language.id;
           checkbox.id = `language-${language.id}`;
-          checkbox.classList.add('h-4', 'w-4', 'rounded', 'border-gray-300', 'text-indigo-600', 'focus:ring-indigo-500');
+          checkbox.classList.add('h-4', 'w-4', 'rounded', 'border-gray-300', 'text-indigo-600', 'focus:ring-indigo-500', 'filter-checkbox');
 
           const label = document.createElement('label');
           label.htmlFor = `language-${language.id}`;
@@ -173,7 +173,7 @@
           checkbox.name = 'category[]';
           checkbox.value = category.id;
           checkbox.id = `category-${category.id}`;
-          checkbox.classList.add('h-4', 'w-4', 'rounded', 'border-gray-300', 'text-indigo-600', 'focus:ring-indigo-500');
+          checkbox.classList.add('h-4', 'w-4', 'rounded', 'border-gray-300', 'text-indigo-600', 'focus:ring-indigo-500', 'filter-checkbox');
 
           const label = document.createElement('label');
           label.htmlFor = `category-${category.id}`;
@@ -187,5 +187,47 @@
       });
     }
 });
+
+$(document).ready(function () {
+  const page = $('#filter-container').data('page');
+  let url;
+  if (page === 'browse') {
+    url = '/marketplace/browse';
+  } else if (page === 'featured') {
+    url = '/marketplace/browse/featured';
+  }
+  const $checkboxes = $(".filter-checkbox");
+
+  $('#categories-container, #languages-container').on("change", ".filter-checkbox", function () {
+    const selectedFilters = {};
+
+    $(".filter-checkbox:checked").each(function () {
+      const filterGroup = $(this).attr("name").replace("[]", "");
+      if (!selectedFilters[filterGroup]) {
+        selectedFilters[filterGroup] = [];
+      }
+      selectedFilters[filterGroup].push($(this).val());
+    });
+
+    fetchProducts(selectedFilters);
+  });
+
+  function fetchProducts(filters) {
+    const data = {};
+
+    $.each(filters, function (group, values) {
+      data[`filters[${group}]`] = values;
+    });
+
+    $.ajax({
+      url: url,
+      method: "GET",
+      data: $.param(data),
+      dataType: 'script'
+    });
+  }
+});
+
+
 
 </script>

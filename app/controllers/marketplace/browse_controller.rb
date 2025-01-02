@@ -2,7 +2,23 @@ module Marketplace
   class BrowseController < ApplicationController
     def index
       params[:sort_by] ||= "most_recent" unless params[:sort_by].present?
-      @products = apply_filters_and_sort(Product.exclude_purchased(current_user)).page(params[:page]).per(100)
+      @products = apply_filters_and_sort(Product.exclude_purchased(current_user))
+
+      if params[:filters].present?
+        prod_ids = []
+        prod_ids.push(ProductCategory.where(category_id: filter_params[:categories]).pluck(:product_id)) if filter_params[:categories].present?
+        prod_ids.push(ProductLanguage.where(language_id: filter_params[:languages]).pluck(:product_id)) if filter_params[:languages].present?
+        
+        prod_ids = prod_ids.flatten
+        @products = @products.where(id: prod_ids)
+      end
+
+      @products = @products.page(filter_params[:page]).per(100)
+
+      respond_to do |format|
+        format.html
+        format.js
+      end
     end
 
     def popular
@@ -20,7 +36,21 @@ module Marketplace
   def featured
     # @products = Product.ordered_by_purchase_count.page(params[:page]).per(50)
     @products = apply_filters_and_sort(Product.where(featured: true)).page(params[:page]).per(100)
+
+    if params[:filters].present?
+      prod_ids = []
+      prod_ids.push(ProductCategory.where(category_id: filter_params[:categories]).pluck(:product_id)) if filter_params[:categories].present?
+      prod_ids.push(ProductLanguage.where(language_id: filter_params[:languages]).pluck(:product_id)) if filter_params[:languages].present?
+
+      prod_ids = prod_ids.flatten
+      @products = @products.where(id: prod_ids)
+    end
     @products
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def recent
@@ -46,8 +76,20 @@ module Marketplace
     private
 
     def filter_params
-      params.permit(:category, :language, :sort_by)
+      params.delete(:_)
+      permitted_params = params.permit(:category, :language, :sort_by, filters: {})
+    
+      # Permit nested filters only if they exist
+      filters = permitted_params[:filters]&.permit(category: [], language: []) || {}
+    
+      # Combine top-level and nested filters
+      {
+        categories: ([permitted_params[:category]].compact + (filters[:category] || [])).uniq,
+        languages: ([permitted_params[:language]].compact + (filters[:language] || [])).uniq,
+        sort_by: permitted_params[:sort_by]
+      }
     end
+    
 
     def apply_filters_and_sort(resource)
       resource = resource.includes(:product_categories, :languages, :user, :categories, :product_languages)
