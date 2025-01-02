@@ -1,93 +1,233 @@
-<%= form_with url: url_for(request.query_parameters.merge(search: params[:search])), method: :get, local: true, id: 'filter_form' do %>
-  <%= hidden_field_tag :search, params[:search] %>
-
-  <div class="flex space-x-4 mb-4">
+<div class="hidden lg:block">
+  <div class="bg-white rounded-lg border-2 border-gray-900 p-4 shadow-lg">
+    <!-- Filters Heading -->
+    <div class="border-b-2 border-gray-900 mb-6">
+      <h2 class="text-xl font-bold text-gray-900 mb-3">Filters</h2>
+    </div>
     
-    <div class="w-full sm:w-auto">
-      <%= select_tag :filter_by_type, options_for_select([
-        ['Products', 'products'],
-        ['Creators', 'creators'],
-        ['Categories', 'categories'],
-        ['Languages', 'languages']
-      ], params[:filter_by_type].presence || 'products'), prompt: 'Filter by Type', id: 'filter_by_type', class: 'form-select block w-full py-2 px-9 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm' %>
+    <!-- Categories Filter -->
+    <div data-controller="collapsible">
+      <div class="flex items-center justify-between cursor-pointer hover:bg-gray-50 p-2 rounded-md" data-action="click->collapsible#toggle">
+        <h3 class="font-medium text-gray-900">Categories</h3>
+        <!-- Plus/Minus icons -->
+        <svg class="h-5 w-5 text-gray-500" viewBox="0 0 20 20" fill="currentColor" data-collapsible-target="expandIcon">
+          <path d="M10.75 4.75a.75.75 0 0 0-1.5 0v4.5h-4.5a.75.75 0 0 0 0 1.5h4.5v4.5a.75.75 0 0 0 1.5 0v-4.5h4.5a.75.75 0 0 0 0-1.5h-4.5v-4.5Z" />
+        </svg>
+        <svg class="h-5 w-5 text-gray-500 hidden" viewBox="0 0 20 20" fill="currentColor" data-collapsible-target="collapseIcon">
+          <path fill-rule="evenodd" d="M4 10a.75.75 0 0 1 .75-.75h10.5a.75.75 0 0 1 0 1.5H4.75A.75.75 0 0 1 4 10Z" clip-rule="evenodd" />
+        </svg>
+      </div>
+      <div class="mt-4 hidden px-2" data-collapsible-target="content">
+        <div class="space-y-4" id="categories-container">
+        <% Category.first(5).each do |category| %>
+            <div class="flex items-center">
+              <input type="checkbox" 
+                     name="category[]" 
+                     value="<%= category.id %>" 
+                     id="category-<%= category.id %>"
+                     class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 filter-checkbox">
+              <label for="category-<%= category.id %>" class="ml-3 text-sm text-gray-600">
+                <%= category.name %>
+              </label>
+            </div>
+          <% end %>
+        </div>
+                  <button id="load-more-categories" 
+                class="mt-4 w-full text-sm text-indigo-600 hover:text-indigo-500">
+          Load More Categories
+        </button>
+        </div>
+      
+    </div>
+    
+    <hr class="my-4 border-t-2 border-gray-200">
+
+    <!-- Price Filter -->
+    <div data-controller="collapsible">
+      <div class="flex items-center justify-between cursor-pointer hover:bg-gray-50 p-2 rounded-md" data-action="click->collapsible#toggle">
+        <h3 class="font-medium text-gray-900">Price Range</h3>
+        <!-- Plus/Minus icons -->
+        <svg class="h-5 w-5 text-gray-500" viewBox="0 0 20 20" fill="currentColor" data-collapsible-target="expandIcon">
+          <path d="M10.75 4.75a.75.75 0 0 0-1.5 0v4.5h-4.5a.75.75 0 0 0 0 1.5h4.5v4.5a.75.75 0 0 0 1.5 0v-4.5h4.5a.75.75 0 0 0 0-1.5h-4.5v-4.5Z" />
+        </svg>
+        <svg class="h-5 w-5 text-gray-500 hidden" viewBox="0 0 20 20" fill="currentColor" data-collapsible-target="collapseIcon">
+          <path fill-rule="evenodd" d="M4 10a.75.75 0 0 1 .75-.75h10.5a.75.75 0 0 1 0 1.5H4.75A.75.75 0 0 1 4 10Z" clip-rule="evenodd" />
+        </svg>
+      </div>
+      <div class="mt-4 hidden px-2" data-collapsible-target="content">
+        <div class="space-y-4">
+          <div class="flex flex-col space-y-2">
+            <label class="text-sm text-gray-600">Min Price ($)</label>
+            <input type="number" 
+                   name="min_price"
+                   min="0" 
+                   placeholder="Min" 
+                   class="rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+          </div>
+          <div class="flex flex-col space-y-2">
+            <label class="text-sm text-gray-600">Max Price ($)</label>
+            <input type="number" 
+                   name="max_price"
+                   min="0" 
+                   placeholder="Max" 
+                   class="rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+          </div>
+          <button class="w-full bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+            Apply Price Filter
+          </button>
+        </div>
+      </div>
     </div>
 
-    <div class="w-full sm:w-auto">
-      <%= select_tag :sort_by, nil, prompt: 'Sort By', id: 'sort_by', class: 'form-select block w-full py-2 px-9 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm' %>
-    </div>
+    <hr class="my-4 border-t-2 border-gray-200">
 
-    <div>
-      <%= submit_tag 'Apply Filters', class: 'group relative inline-flex h-12 items-center justify-center overflow-hidden rounded-md border-2 border-black bg-transparent px-6 font-medium text-neutral-600 transition-all duration-100 [box-shadow:5px_5px_rgb(0_0_255)] hover:translate-x-[3px] hover:translate-y-[3px] hover:[box-shadow:0px_0px_rgb(0_0_255)]' %>
+    <!-- Languages Filter -->
+    <div data-controller="collapsible">
+      <div class="flex items-center justify-between cursor-pointer hover:bg-gray-50 p-2 rounded-md" data-action="click->collapsible#toggle">
+        <h3 class="font-medium text-gray-900">Languages</h3>
+        <!-- Plus/Minus icons -->
+        <svg class="h-5 w-5 text-gray-500" viewBox="0 0 20 20" fill="currentColor" data-collapsible-target="expandIcon">
+          <path d="M10.75 4.75a.75.75 0 0 0-1.5 0v4.5h-4.5a.75.75 0 0 0 0 1.5h4.5v4.5a.75.75 0 0 0 1.5 0v-4.5h4.5a.75.75 0 0 0 0-1.5h-4.5v-4.5Z" />
+        </svg>
+        <svg class="h-5 w-5 text-gray-500 hidden" viewBox="0 0 20 20" fill="currentColor" data-collapsible-target="collapseIcon">
+          <path fill-rule="evenodd" d="M4 10a.75.75 0 0 1 .75-.75h10.5a.75.75 0 0 1 0 1.5H4.75A.75.75 0 0 1 4 10Z" clip-rule="evenodd" />
+        </svg>
+      </div>
+      <div class="mt-4 hidden px-2" data-collapsible-target="content">
+        <div class="space-y-4" id="languages-container">
+          <% Language.first(5).each do |language| %>
+            <div class="flex items-center">
+              <input type="checkbox" 
+                     name="language[]" 
+                     value="<%= language.id %>" 
+                     id="language-<%= language.id %>"
+                     class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 filter-checkbox">
+              <label for="language-<%= language.id %>" class="ml-3 text-sm text-gray-600">
+                <%= language.name %>
+              </label>
+            </div>
+          <% end %>
+        </div>
+        <button id="load-more-languages" 
+                class="mt-4 w-full text-sm text-indigo-600 hover:text-indigo-500">
+          Load More Languages
+        </button>
+      </div>
     </div>
-
   </div>
-<% end %>
-<script type="text/javascript">
-  document.addEventListener('turbo:render', () => {
-  const filterByTypeSelect = document.getElementById('filter_by_type');
-  const sortBySelect = document.getElementById('sort_by');
-  const searchInput = document.getElementById('productSearch');
+</div>
 
-  const sortingOptions = {
-    'products': [
-      { value: 'alphabetical_asc', text: 'Sort Alphabetically A-Z' },
-      { value: 'alphabetical_desc', text: 'Sort Alphabetically Z-A' },
-      { value: 'cheapest', text: 'Sort Cheapest to Most Expensive' },
-      { value: 'most_expensive', text: 'Sort Most Expensive to Cheapest' },
-      { value: 'most_likes', text: 'Sort by Most Likes' },
-      { value: 'most_recent', text: 'Sort by Most Recent' },
-      { value: 'oldest', text: 'Sort by Oldest' }
-    ],
-    'creators': [
-      { value: 'alphabetical_asc', text: 'Sort Alphabetically A-Z' },
-      { value: 'alphabetical_desc', text: 'Sort Alphabetically Z-A' },
-      { value: 'most_recent', text: 'Sort by Most Recent' },
-      { value: 'oldest', text: 'Sort by Oldest' }
-    ],
-    'categories': [
-      { value: 'alphabetical_asc', text: 'Sort Alphabetically A-Z' },
-      { value: 'alphabetical_desc', text: 'Sort Alphabetically Z-A' },
-      { value: 'most_recent', text: 'Sort by Most Recent' },
-      { value: 'oldest', text: 'Sort by Oldest' }
-    ],
-    'languages': [
-      { value: 'alphabetical_asc', text: 'Sort Alphabetically A-Z' },
-      { value: 'alphabetical_desc', text: 'Sort Alphabetically Z-A' },
-      { value: 'most_recent', text: 'Sort by Most Recent' },
-      { value: 'oldest', text: 'Sort by Oldest' }
-    ]
-  };
+<script>
+  document.body.addEventListener('click', function (event) {
+  if (event.target.id === 'load-more-languages') {
+    const container = document.getElementById('languages-container');
+    const offset = container.children.length;
+    const limit = 5;
 
-  function updateSortOptions() {
-    const selectedFilter = filterByTypeSelect.value || 'products';
-    const options = sortingOptions[selectedFilter] || [];
-    const currentSortByValue = '<%= params[:sort_by].presence || "" %>';
+    fetch(`/marketplace/languages/load_more?offset=${offset}&limit=${limit}`)
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.languages.length < limit) {
+          document.getElementById('load-more-languages').style.display = 'none';
+        }
 
-    sortBySelect.innerHTML = '';
+        data.languages.forEach(function (language) {
+          const languageDiv = document.createElement('div');
+          languageDiv.classList.add('flex', 'items-center');
 
-    const promptOption = document.createElement('option');
-    promptOption.text = 'Sort By';
-    promptOption.value = '';
-    sortBySelect.appendChild(promptOption);
+          const checkbox = document.createElement('input');
+          checkbox.type = 'checkbox';
+          checkbox.name = 'language[]';
+          checkbox.value = language.id;
+          checkbox.id = `language-${language.id}`;
+          checkbox.classList.add('h-4', 'w-4', 'rounded', 'border-gray-300', 'text-indigo-600', 'focus:ring-indigo-500', 'filter-checkbox');
 
-    options.forEach(option => {
-      const opt = document.createElement('option');
-      opt.value = option.value;
-      opt.text = option.text;
-      sortBySelect.appendChild(opt);
+          const label = document.createElement('label');
+          label.htmlFor = `language-${language.id}`;
+          label.textContent = language.name;
+          label.classList.add('ml-3', 'text-sm', 'text-gray-600');
+
+          languageDiv.appendChild(checkbox);
+          languageDiv.appendChild(label);
+          container.appendChild(languageDiv);
+        });
+      });
+  }else if (event.target.id === 'load-more-categories') {
+    const container = document.getElementById('categories-container');
+    const offset = container.children.length;
+    const limit = 5;
+
+    fetch(`/marketplace/categories/load_more?offset=${offset}&limit=${limit}`)
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.categories.length < limit) {
+          document.getElementById('load-more-categories').style.display = 'none';
+        }
+
+        data.categories.forEach(function (category) {
+          const categoryDiv = document.createElement('div');
+          categoryDiv.classList.add('flex', 'items-center');
+
+          const checkbox = document.createElement('input');
+          checkbox.type = 'checkbox';
+          checkbox.name = 'category[]';
+          checkbox.value = category.id;
+          checkbox.id = `category-${category.id}`;
+          checkbox.classList.add('h-4', 'w-4', 'rounded', 'border-gray-300', 'text-indigo-600', 'focus:ring-indigo-500', 'filter-checkbox');
+
+          const label = document.createElement('label');
+          label.htmlFor = `category-${category.id}`;
+          label.textContent = category.name;
+          label.classList.add('ml-3', 'text-sm', 'text-gray-600');
+
+          categoryDiv.appendChild(checkbox);
+          categoryDiv.appendChild(label);
+          container.appendChild(categoryDiv);
+        });
+      });
+    }
+});
+
+$(document).ready(function () {
+  const page = $('#filter-container').data('page');
+  let url;
+  if (page === 'browse') {
+    url = '/marketplace/browse';
+  } else if (page === 'featured') {
+    url = '/marketplace/browse/featured';
+  }
+  const $checkboxes = $(".filter-checkbox");
+
+  $('#categories-container, #languages-container').on("change", ".filter-checkbox", function () {
+    const selectedFilters = {};
+
+    $(".filter-checkbox:checked").each(function () {
+      const filterGroup = $(this).attr("name").replace("[]", "");
+      if (!selectedFilters[filterGroup]) {
+        selectedFilters[filterGroup] = [];
+      }
+      selectedFilters[filterGroup].push($(this).val());
     });
 
-    // Set the selected value if available
-    sortBySelect.value = currentSortByValue;
-  }
-
-  filterByTypeSelect.addEventListener('change', updateSortOptions);
-
-  searchInput.addEventListener('input', () => {
-    document.querySelector('input[name="filter_by_type"]').value = filterByTypeSelect.value;
+    fetchProducts(selectedFilters);
   });
 
-  updateSortOptions();
+  function fetchProducts(filters) {
+    const data = {};
+
+    $.each(filters, function (group, values) {
+      data[`filters[${group}]`] = values;
+    });
+
+    $.ajax({
+      url: url,
+      method: "GET",
+      data: $.param(data),
+      dataType: 'script'
+    });
+  }
 });
+
+
 
 </script>

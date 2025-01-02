@@ -12,21 +12,26 @@
       </div>
       <hr class="h-px bg-black mb-4 border-4 border-black">
       
-    <div class="bg-white">
-      <!-- Filter Form -->
-      <%= render partial: 'shared/productFilter' %>
-    </div>
-  <hr class="h-px bg-black border-4 mt-4 mb-4 border-black">
-      <div class="mt-4 flow-root">
-        <div class="">
-          <div class="px-8">
-            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-              <%= render partial: "home/product", collection: @products %>
+      <div class="bg-white">
+        <%= render partial: 'shared/productFilter' %>
+      </div>
+      <hr class="h-px bg-black border-4 mt-4 mb-4 border-black">
+      <div class="px-8">
+        <div class="mx-auto max-w-6xl">
+          <div class="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4">
+            <%= render partial: "shared/filters" %>
+            
+            <!-- Product Grid -->
+            <div class="lg:col-span-3">
+              <div id="products" data-page="featured" class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4">
+                <%= render partial: "home/product", collection: @products %>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    <hr class="h-px bg-black border-4 mt-4 mb-4 border-black">
+
+      <hr class="h-px bg-black border-4 mt-4 mb-4 border-black">
       <div class="mt-4 px-4 sm:px-6 lg:px-8 space-y-8">
         <%= render 'kaminari/tailwind/paginator', paginator: @products %>
       </div>

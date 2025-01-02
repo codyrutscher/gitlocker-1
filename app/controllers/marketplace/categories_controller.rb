@@ -6,6 +6,19 @@ class CategoriesController < ApplicationController
     @products = apply_filters_and_sort(@category&.products)&.page(params[:page])&.per(100)
   end
 
+  def load_more
+    offset = params[:offset].to_i
+    limit = params[:limit].to_i
+    
+    @categories = Category.offset(offset + 1).limit(limit)
+    
+    render json: { 
+      categories: @categories.map { |cat| 
+        { id: cat.id, name: cat.name } 
+      }
+    }
+  end
+
   private
   def filter_params
     params.permit(:category, :language, :sort_by)
