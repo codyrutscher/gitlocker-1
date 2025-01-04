@@ -27,7 +27,7 @@ class Product < ApplicationRecord
   has_many :cart_items, dependent: :destroy
   has_one :featured_payment_intent, dependent: :destroy
 
-  validates :name, presence: true, uniqueness: true, on: :create
+  validates :name, presence: true, on: :create
   # validates :url, presence: true, uniqueness: { scope: :name }
 
   validate :validate_product_limit, on: :create
