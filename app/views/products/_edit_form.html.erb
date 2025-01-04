@@ -26,7 +26,7 @@
         <%= f.label :upload_file, "Upload ZIP File", class: "block text-xl font-medium leading-6 text-gray-900 " %>
         <div class="mt-2">
           <%= f.file_field :upload_file, class: "form-control w-full", id: "upload_file", accept: ".zip" %>
-          <h1>(Only .zip files are allowed)</h1>
+          <h1>(Only .zip files are allowed and please keep the zip file below 500mb)</h1>
           <button id="clear_file" type="button" class="text-gray-500 hover:text-gray-700 focus:outline-none">
             Clear
           </button>
