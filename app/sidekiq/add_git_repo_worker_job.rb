@@ -9,7 +9,7 @@ class AddGitRepoWorkerJob
     @current_user = User.find(params[:user_id])
     @file_path = params[:file_path] || ""
 
-    @octokit_client ||= Octokit::Client.new(access_token: @current_user.token)
+    @octokit_client ||= Octokit::Client.new(access_token: @current_user.token) if @current_user.token.present?
     if action=="update"
       update params
     else
@@ -20,7 +20,8 @@ class AddGitRepoWorkerJob
   end
   private
   def create params
-    repositories_count = @octokit_client.user.public_repos + @octokit_client.user.total_private_repos
+    
+    repositories_count = @octokit_client.user.public_repos + @octokit_client.user.total_private_repos if @current_user.token.present?
     if params[:product][:product_url].present?
       repo_url = params[:product][:product_url]
       owner, repo_name = extract_owner_and_repo_name(repo_url)
