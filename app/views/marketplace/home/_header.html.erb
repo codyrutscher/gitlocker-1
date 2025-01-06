@@ -146,20 +146,23 @@ margin: 0em 0px;
     }
 </style>
 </head>
-<div class="bg-gradient-to-l from-gray-200 via-fuchsia-200 to-stone-100">
-  <div class="relative">
-    <div class="mx-auto ">
-      <div class="relative z-10 pt-14 lg:w-full ">
-        <div class="relative px-6 py-32 sm:py-40 lg:px-20 lg:py-56 lg:pr-0">
-          <div class="mx-auto max-w-2xl lg:mx-0 lg:max-w-xl">
-            <div class="hidden sm:mb-10 sm:flex">
-              <%= image_tag("logo.png") %> 
-            </div>
-            <h1 class="text-pretty text-5xl font-semibold tracking-tight text-gray-900 sm:text-7xl">Browse Projects Or Post Your Code To <span class="italic underline font-bold">Start Earning!</span></h1>
-            <p class="mt-8 text-pretty text-black text-xl font-medium">Browse GitLocker's selection of premium code products from our users or sign up to start buying and selling!</p>
-         <div class="mt-10 items-center">
-          <div class="mb-8 grid grid-cols-2 gap-2">
-            <% if user_signed_in? %>
+<div class="bg-white">
+  <div class="mx-auto  py-10 sm:px-6 sm:py-10 lg:px-8">
+    <div class="relative isolate overflow-hidden bg-gray-900 px-6 pt-16 shadow-2xl sm:rounded-3xl sm:px-10 md:pt-24 lg:flex lg:gap-x-20 lg:px-10 lg:pt-0">
+      <svg viewBox="0 0 1024 1024" class="absolute left-1/2 top-1/2 -z-10 size-[64rem] -translate-y-1/2 [mask-image:radial-gradient(closest-side,white,transparent)] sm:left-full sm:-ml-80 lg:left-1/2 lg:ml-0 lg:-translate-x-1/2 lg:translate-y-0" aria-hidden="true">
+        <circle cx="512" cy="512" r="512" fill="url(#759c1415-0410-454c-8f7c-9a820de03641)" fill-opacity="0.7" />
+        <defs>
+          <radialGradient id="759c1415-0410-454c-8f7c-9a820de03641">
+            <stop stop-color="#7775D6" />
+            <stop offset="1" stop-color="#E935C1" />
+          </radialGradient>
+        </defs>
+      </svg>
+      <div class="mx-auto max-w-md text-center lg:mx-0 lg:flex-auto lg:py-32 lg:text-left">
+        <h1 class="text-balance text-3xl font-semibold tracking-tight text-white sm:text-4xl">Browse Projects Or Post Your Code To <span class="underline font-bold italic">Start Earning</span></h1>
+        <p class="mt-6 text-pretty text-lg/8 text-gray-300"></p>
+        <div class="mt-10 flex items-center justify-center gap-x-6 lg:justify-start">
+          <% if user_signed_in? %>
                 <%= link_to marketplace_browse_path, class: "text-center inline-block bg-white hover:shadow-[inset_30rem_0_0_0] hover:shadow-blue-700 duration-[400ms,700ms] transition-[color,box-shadow] text-black hover:text-white border-black border-4 font-bold py-2 px-4 rounded-full" do %>
                   <h2>Browse Products</h2>
                 <% end %>
@@ -180,20 +183,15 @@ margin: 0em 0px;
                   <h2>Developers</h2>
                 <% end %>
               <% end %>
-          </div>
-          <div class="grid grid-cols-3 gap-2 content-start">
-           
-    </div>
-        </div>
-          </div>
         </div>
       </div>
-    </div>
-    <div class="bg-gray-50 lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
-      <img class="aspect-[3/2] object-cover lg:aspect-auto lg:size-full" src="https://images.unsplash.com/photo-1483389127117-b6a2102724ae?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1587&q=80" alt="">
+      <div class="relative mt-16 h-80 lg:mt-8">
+        <img class="absolute left-0 top-0 w-[57rem] max-w-none rounded-md bg-white/5 ring-1 ring-white/10" src="https://tailwindui.com/plus/img/component-images/dark-project-app-screenshot.png" alt="App screenshot" width="1824" height="1080">
+      </div>
     </div>
   </div>
 </div>
+
 <div class="bg-gray-900 py-24 border-b-2 border-white sm:py-32">
   <div class="mx-auto max-w-7xl px-6 lg:px-8">
     <div class="mx-auto max-w-2xl lg:max-w-none">
@@ -256,146 +254,7 @@ margin: 0em 0px;
     </div>
   </div>
 </div>
-<div class="bg-gray-900 py-24 border-b-2 border-white sm:py-32">
-  <div class="relative isolate">
-    <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
-      <div class="mx-auto flex max-w-2xl flex-col gap-16 bg-white/5 px-6 py-16 ring-1 ring-white/10 sm:rounded-3xl sm:p-8 lg:mx-0 lg:max-w-none lg:flex-row lg:items-center lg:py-20 xl:gap-x-20 xl:px-20">
-        <img class="h-96 w-full flex-none rounded-2xl object-cover shadow-xl lg:aspect-square lg:h-auto lg:max-w-sm" src="https://images.unsplash.com/photo-1519338381761-c7523edc1f46?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" alt="">
-        <div class="w-full flex-auto">
-          <h2 class="text-pretty text-4xl font-semibold tracking-tight text-white sm:text-5xl">Become Our CMO</h2>
-          <p class="mt-6 text-pretty text-lg/8 text-gray-300">Become our chief marketing officer and get a salary as well as equity in the company.</p>
-          
-          <div class="mt-10 flex">
-            <a href="https://www.gitlocker.com/careers" class="text-sm/6 font-semibold text-indigo-400">CMO Job Post <span aria-hidden="true">&rarr;</span></a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="absolute inset-x-0 -top-16 -z-10 flex transform-gpu justify-center overflow-hidden blur-3xl" aria-hidden="true">
-      <div class="aspect-[1318/752] w-[82.375rem] flex-none bg-gradient-to-r from-[#80caff] to-[#4f46e5] opacity-25" style="clip-path: polygon(73.6% 51.7%, 91.7% 11.8%, 100% 46.4%, 97.4% 82.2%, 92.5% 84.9%, 75.7% 64%, 55.3% 47.5%, 46.5% 49.4%, 45% 62.9%, 50.3% 87.2%, 21.3% 64.1%, 0.1% 100%, 5.4% 51.1%, 21.4% 63.9%, 58.9% 0.2%, 73.6% 51.7%)"></div>
-    </div>
-  </div>
-</div>
 
-<div class="bg-gray-900 py-24 border-b-2 border-white sm:py-32">
-  <div class="mx-auto max-w-7xl px-6 lg:px-8">
-    <div class="-mx-6 grid grid-cols-2 gap-0.5 overflow-hidden sm:mx-0 sm:rounded-2xl md:grid-cols-3">
-      <div class="bg-white/5 p-8 sm:p-10">
-        <img class="max-h-12 w-full object-contain" src="https://tailwindui.com/plus/img/logos/158x48/transistor-logo-white.svg" alt="Transistor" width="158" height="48">
-      </div>
-      <div class="bg-white/5 p-6 sm:p-10">
-        <img class="max-h-12 w-full object-contain" src="https://tailwindui.com/plus/img/logos/158x48/reform-logo-white.svg" alt="Reform" width="158" height="48">
-      </div>
-      <div class="bg-white/5 p-6 sm:p-10">
-        <img class="max-h-12 w-full object-contain" src="https://tailwindui.com/plus/img/logos/158x48/tuple-logo-white.svg" alt="Tuple" width="158" height="48">
-      </div>
-      <div class="bg-white/5 p-6 sm:p-10">
-        <img class="max-h-12 w-full object-contain" src="https://tailwindui.com/plus/img/logos/158x48/laravel-logo-white.svg" alt="Laravel" width="158" height="48">
-      </div>
-      <div class="bg-white/5 p-6 sm:p-10">
-        <img class="max-h-12 w-full object-contain" src="https://tailwindui.com/plus/img/logos/158x48/savvycal-logo-white.svg" alt="SavvyCal" width="158" height="48">
-      </div>
-      <div class="bg-white/5 p-6 sm:p-10">
-        <img class="max-h-12 w-full object-contain" src="https://tailwindui.com/plus/img/logos/158x48/statamic-logo-white.svg" alt="Statamic" width="158" height="48">
-      </div>
-    </div>
-  </div>
-</div>
-<div class="bg-gradient-to-l from-gray-200 via-fuchsia-200 to-stone-100 py-24 pb-12 sm:py-32">
-  <div class="mx-auto max-w-7xl px-6 pb-12 lg:px-8">
-    <div class="mx-auto max-w-2xl text-center">
-      <h2 class="text-base/7 font-semibold text-indigo-600">Testimonials</h2>
-      <p class="mt-2 text-balance text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl">We have worked with hundreds of amazing people</p>
-    </div>
-    <div class="mx-auto mt-16 flow-root max-w-2xl sm:mt-20 lg:mx-0 lg:max-w-none">
-      <div class="-mt-8 sm:-mx-4 grid grid-cols-1 sm:grid-cols-2 sm:text-[0] lg:grid-cols-3">
-        <div class="pt-8 sm:inline-block sm:w-full sm:px-4">
-          <figure class="rounded-2xl bg-gray-300 p-8 text-sm/6">
-            <blockquote class="text-gray-900">
-              <p class="text-xl">“GitLocker has been an invaluable resource in my development projects, offering a vast selection of over 130,000 free and premium code assets across various programming languages. Its user-friendly interface and active community of over 400 creators make it a standout choice in the coding marketplace, facilitating efficient access to high-quality code for websites, apps, games, plugins, themes, and more.”</p>
-            </blockquote>
-            <figcaption class="mt-6 flex items-center gap-x-4">
-              <img class="size-15 bg-gray-50" src="https://gitlocker.s3.us-east-2.amazonaws.com/Screenshot+2024-12-20+at+11.59.39%E2%80%AFPM.webp" alt="">
-              <div>
-                <div class="font-semibold text-gray-900">Koly Akter</div>
-                <div class="text-gray-600">Content Creator</div>
-              </div>
-            </figcaption>
-          </figure>
-        </div>
-           <div class="pt-8 sm:inline-block sm:w-full sm:px-4">
-          <figure class="rounded-2xl bg-gray-300 p-8 text-sm/6">
-            <blockquote class="text-gray-900">
-              <p class="text-xl">“I have really enjoyed using GitLocker because it makes buying and selling private repositories safe and streamlined through its user-friendly interface. Connecting with trusted developers and accessing unique projects across various domains has been incredibly valuable.”</p>
-            </blockquote>
-            <figcaption class="mt-6 flex items-center gap-x-4">
-              <img class="size-13 bg-gray-50" src="https://gitlocker.s3.us-east-2.amazonaws.com/Screenshot+2024-12-21+at+12.30.09%E2%80%AFAM.webp" alt="">
-              <div>
-                <div class="font-semibold text-gray-900">Gurwinder Singh</div>
-                <div class="text-gray-600">MediaWiki developer</div>
-              </div>
-            </figcaption>
-          </figure>
-        </div>
-           <div class="pt-8 sm:inline-block sm:w-full sm:px-4">
-          <figure class="rounded-2xl bg-gray-300 p-8 text-sm/6">
-            <blockquote class="text-gray-900">
-              <p class="text-xl">“GitLocker stands out as a fantastic platform for developers, offering a seamless way to buy and sell private repositories with ease. Its user-friendly interface and secure transaction process make it a trustworthy choice in the coding marketplace. I’ve enjoyed working with GitLocker because it empowers developers to monetize their hard work while connecting with a community that values high-quality code.”</p>
-            </blockquote>
-            <figcaption class="mt-6 flex items-center gap-x-4">
-              <img class="size-12  bg-gray-50" src="https://gitlocker.s3.us-east-2.amazonaws.com/Screenshot+2024-12-20+at+2.11.21%E2%80%AFAM.webp" alt="">
-              <div>
-                <div class="font-semibold text-gray-900">Hamza Akram</div>
-                <div class="text-gray-600">Ruby On Rails Developer</div>
-              </div>
-            </figcaption>
-          </figure>
-        </div>
-           <div class="pt-8 sm:inline-block sm:w-full sm:px-4">
-          <figure class="rounded-2xl bg-gray-300 p-8 text-sm/6">
-            <blockquote class="text-gray-900">
-              <p class="text-xl">“Working with GitLocker has been an exceptional experience due to its seamless integration and user-friendly interface. It offers powerful tools that simplify collaboration and ensure code security, making it an invaluable choice for developers and teams. GitLocker truly stands out in the coding marketplace for its reliability and innovation”</p>
-            </blockquote>
-            <figcaption class="mt-6 flex items-center gap-x-4">
-              <img class="size-12 bg-gray-50" src="https://gitlocker.s3.us-east-2.amazonaws.com/Screenshot+2024-12-20+at+2.11.59%E2%80%AFAM.webp" alt="">
-              <div>
-                <div class="font-semibold text-gray-900">Ivy Villagonzalo</div>
-                <div class="text-gray-600">Content Creator</div>
-              </div>
-            </figcaption>
-          </figure>
-        </div>
-           <div class="pt-8 sm:inline-block sm:w-full sm:px-4">
-          <figure class="rounded-2xl bg-gray-300 p-8 text-sm/6">
-            <blockquote class="text-gray-900">
-              <p class="text-xl">“I have enjoyed working with GitLocker because they offer a top of the line experience for developers who are just beginning or are seasoned vets to find and exchange valuable code with eachother.”</p>
-            </blockquote>
-            <figcaption class="mt-6 flex items-center gap-x-4">
-              <img class="size-15  bg-gray-50" src="https://gitlocker.s3.us-east-2.amazonaws.com/Screenshot+2024-12-21+at+1.10.34%E2%80%AFAM.webp" alt="">
-              <div>
-                <div class="font-semibold text-gray-900">Hassan Mahmood</div>
-                <div class="text-gray-600">Full Stack Rails Developer</div>
-              </div>
-            </figcaption>
-          </figure>
-        </div>
-           <div class="pt-8 sm:inline-block sm:w-full sm:px-4">
-          <figure class="rounded-2xl bg-gray-300 p-8 text-sm/6">
-            <blockquote class="text-gray-900">
-              <p class="text-xl">“GitLocker is an incredible resource to help grow your programming knowledge and your wallet by trading premium and free coding resources and connecting with trusted developers”</p>
-            </blockquote>
-            <figcaption class="mt-6 flex items-center gap-x-4">
-              <img class="size-15 bg-gray-50" src="https://gitlocker.s3.us-east-2.amazonaws.com/Screenshot+2024-12-21+at+1.10.26%E2%80%AFAM.webp" alt="">
-              <div>
-                <div class="font-semibold text-gray-900">Vederis Leunardus</div>
-                <div class="text-gray-600">Ruby On Rails Developer</div>
-              </div>
-            </figcaption>
-          </figure>
-        </div>
-        </div>
-  </div>
-</div>
 
 
 </html>
