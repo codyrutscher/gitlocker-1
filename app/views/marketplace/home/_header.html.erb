@@ -163,23 +163,23 @@ margin: 0em 0px;
         <p class="mt-6 text-pretty text-lg/8 text-gray-300"></p>
         <div class="mt-10 flex items-center justify-center gap-x-6 lg:justify-start">
           <% if user_signed_in? %>
-                <%= link_to marketplace_browse_path, class: "text-center inline-block bg-white hover:shadow-[inset_30rem_0_0_0] hover:shadow-blue-700 duration-[400ms,700ms] transition-[color,box-shadow] text-black hover:text-white border-black border-4 font-bold py-2 px-4 rounded-full" do %>
+                <%= link_to marketplace_browse_path, class: "text-center inline-block bg-white hover:shadow-[inset_30rem_0_0_0] hover:shadow-blue-700 duration-[400ms,700ms] transition-[color,box-shadow] text-black hover:text-white border-black border-4 font-bold py-2 px-4" do %>
                   <h2>Browse Products</h2>
                 <% end %>
-                <%= link_to marketplace_creators_path, class: "text-center inline-block bg-white hover:shadow-[inset_30rem_0_0_0] hover:shadow-blue-700 duration-[400ms,700ms] transition-[color,box-shadow] text-black hover:text-white border-black border-4 font-bold py-2 px-4 rounded-full" do %>
+                <%= link_to marketplace_creators_path, class: "text-center inline-block bg-white hover:shadow-[inset_30rem_0_0_0] hover:shadow-blue-700 duration-[400ms,700ms] transition-[color,box-shadow] text-black hover:text-white border-black border-4 font-bold py-2 px-4" do %>
                   <h2>Browse Developers</h2>
                 <% end %>
-                <%= link_to "Sell Code", new_product_path, class: "text-center inline-block bg-white hover:shadow-[inset_30rem_0_0_0] hover:shadow-blue-700 duration-[400ms,700ms] transition-[color,box-shadow] text-black hover:text-white border-black border-4 font-bold py-2 px-4 rounded-full" %>
-                <%= link_to "Get Paid", funds_path, class: "text-center inline-block bg-white hover:shadow-[inset_30rem_0_0_0] hover:shadow-blue-700 duration-[400ms,700ms] transition-[color,box-shadow] text-black hover:text-white border-black border-4 font-bold py-2 px-4 rounded-full" %>
-               <%= link_to "Purchased Products", marketplace_purchases_path, class: "text-center inline-block bg-white hover:shadow-[inset_30rem_0_0_0] hover:shadow-blue-700 duration-[400ms,700ms] transition-[color,box-shadow] text-black hover:text-white border-black border-4 font-bold py-2 px-4 rounded-full" %>
-               <%= link_to "Listed Products", products_path, class: "text-center inline-block bg-white hover:shadow-[inset_30rem_0_0_0] hover:shadow-blue-700 duration-[400ms,700ms] transition-[color,box-shadow] text-black hover:text-white border-black border-4 font-bold py-2 px-4 rounded-full" %>
+                <%= link_to "Sell Code", new_product_path, class: "text-center inline-block bg-white hover:shadow-[inset_30rem_0_0_0] hover:shadow-blue-700 duration-[400ms,700ms] transition-[color,box-shadow] text-black hover:text-white border-black border-4 font-bold py-2 px-4" %>
+                <%= link_to "Get Paid", funds_path, class: "text-center inline-block bg-white hover:shadow-[inset_30rem_0_0_0] hover:shadow-blue-700 duration-[400ms,700ms] transition-[color,box-shadow] text-black hover:text-white border-black border-4 font-bold py-2 px-4" %>
+               <%= link_to "Purchased Products", marketplace_purchases_path, class: "text-center inline-block bg-white hover:shadow-[inset_30rem_0_0_0] hover:shadow-blue-700 duration-[400ms,700ms] transition-[color,box-shadow] text-black hover:text-white border-black border-4 font-bold py-2 px-4" %>
+               <%= link_to "Listed Products", products_path, class: "text-center inline-block bg-white hover:shadow-[inset_30rem_0_0_0] hover:shadow-blue-700 duration-[400ms,700ms] transition-[color,box-shadow] text-black hover:text-white border-black border-4 font-bold py-2 px-4" %>
               <% else %>
-                <%= link_to "Sign In", new_user_session_path, class: "text-center inline-block bg-white hover:shadow-[inset_52rem_0_0_0] hover:shadow-blue-700 duration-[400ms,700ms] transition-[color,box-shadow] text-black hover:text-white border-black border-4 font-bold py-2 px-4 rounded-full" %>
-                <%= link_to "Create An Account", new_user_registration_path, class: "text-center inline-block bg-white hover:shadow-[inset_30rem_0_0_0] hover:shadow-blue-700 duration-[400ms,700ms] transition-[color,box-shadow] text-black hover:text-white border-black border-4 font-bold py-2 px-4 rounded-full" %>
-                <%= link_to marketplace_browse_path, class: "text-center inline-block bg-white hover:shadow-[inset_30rem_0_0_0] hover:shadow-blue-700 duration-[400ms,700ms] transition-[color,box-shadow] text-black hover:text-white border-black border-4 font-bold py-2 px-4 rounded-full" do %>
+                <%= link_to "Sign In", new_user_session_path, class: "text-center inline-block bg-white hover:shadow-[inset_52rem_0_0_0] hover:shadow-blue-700 duration-[400ms,700ms] transition-[color,box-shadow] text-black hover:text-white border-black border-4 font-bold py-2 px-4" %>
+                <%= link_to "Create An Account", new_user_registration_path, class: "text-center inline-block bg-white hover:shadow-[inset_30rem_0_0_0] hover:shadow-blue-700 duration-[400ms,700ms] transition-[color,box-shadow] text-black hover:text-white border-black border-4 font-bold py-2 px-4" %>
+                <%= link_to marketplace_browse_path, class: "text-center inline-block bg-white hover:shadow-[inset_30rem_0_0_0] hover:shadow-blue-700 duration-[400ms,700ms] transition-[color,box-shadow] text-black hover:text-white border-black border-4 font-bold py-2 px-4" do %>
                   <h2>Premium Products</h2>
                 <% end %>
-                 <%= link_to marketplace_creators_path, class: "text-center inline-block bg-white hover:shadow-[inset_30rem_0_0_0] hover:shadow-blue-700 duration-[400ms,700ms] transition-[color,box-shadow] text-black hover:text-white border-black border-4 font-bold py-2 px-4 rounded-full" do %>
+                 <%= link_to marketplace_creators_path, class: "text-center inline-block bg-white hover:shadow-[inset_30rem_0_0_0] hover:shadow-blue-700 duration-[400ms,700ms] transition-[color,box-shadow] text-black hover:text-white border-black border-4 font-bold py-2 px-4" do %>
                   <h2>Developers</h2>
                 <% end %>
               <% end %>
