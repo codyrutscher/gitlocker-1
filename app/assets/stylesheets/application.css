@@ -123,12 +123,6 @@ body {
 	color: #444444;
 }
 
-#description {
-	background: #A9A9A9;
-	border-image: linear-gradient(to right, #3acfd5 0%, #3a4ed5 100%) 1;
-    	border-width: 4px;
-    	border-style: solid;
-}
 
 #blog-content ul {
     list-style: disc;
