@@ -184,7 +184,7 @@
           <% else %>
             <%= content_for :meta_description, ActionView::Base.full_sanitizer.sanitize(@product.description)&.humanize&.first(160) %>
           <% end %>
-          <div id="description" class="flex bg flex-col text-gray-900 h-fit p-4 rounded-2xl gap-4">
+          <div id="description" class="flex border-black border-2 flex-col text-gray-900 h-fit p-4 rounded-2xl gap-4">
             <h2 class="text-2xl text-bold underline text-gray-900">Description:</h2>
             <p class="text-sm text-white"><%= sanitize @product.description %></p>
           </div>
@@ -192,7 +192,7 @@
         <% end %>
 
         <% if @product.features.present? %>
-          <div id="description" class="flex bg flex-col h-fit p-4 text-gray-900 rounded-2xl gap-4">
+          <div id="description" class="flex border-black border-2 flex-col h-fit p-4 text-gray-900 rounded-2xl gap-4">
             <h2 class="text-2xl text-bold underline text-gray-900">Features:</h2>
             <p class="text-sm text-white"><%= sanitize @product.features %></p>
           </div>
@@ -200,7 +200,7 @@
         <% end %>
 
         <% if @product.requirements.present? %>
-          <div id="description" class="flex bg flex-col h-fit text-gray-900 p-4 rounded-2xl gap-4">
+          <div id="description" class="flex border-black border-2 flex-col h-fit text-gray-900 p-4 rounded-2xl gap-4">
             <h2 class="text-2xl text-bold underline text-gray-900">Requirements:</h2>
             <p class="text-sm text-white"><%= sanitize @product.requirements %></p>
           </div>
@@ -208,7 +208,7 @@
         <% end %>
 
         <% if @product.instructions.present? %>
-          <div id="description" class="flex bg flex-col h-fit text-gray-900 p-4 rounded-2xl gap-4">
+          <div id="description" class="flex border-black border-2 flex-col h-fit text-gray-900 p-4 rounded-2xl gap-4">
             <h2 class="text-2xl text-bold underline text-gray-900">Instructions:</h2>
             <p class="text-sm text-white"><%= sanitize @product.instructions %></p>
           </div>
@@ -222,7 +222,7 @@
           <div class="w-full border-t-4 border-black"></div>
         <% end %>
 
-        <div id="description" class="flex rounded-2xl bg flex-col p-4 gap-4">
+        <div id="description" class="flex rounded-2xl border-black border-2 flex-col p-4 gap-4">
           <h3 class="text-2xl font-medium underline text-black">License:</h3>
           <p class="text-sm text-black">For personal and professional use. You cannot resell or redistribute these repositories in their original state.</p>
         </div>
