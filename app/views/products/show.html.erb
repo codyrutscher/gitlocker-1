@@ -118,7 +118,7 @@
           <%# Languages %>
           <% if @languages.present? && @languages.size > 0 && @languages[0].name != 'not_specified' || @product.more_languages_from_createor.present? %>
             <div class="flex flex-col gap-1">
-              <h2 class="font-semibold text-white">Languages</h2>
+              <h2 class="font-semibold text-black">Languages</h2>
               <div class="flex flex-row flex-wrap items-center justify-start gap-2">
                 <% @languages.take(5).each do |language| %>
                   <%= link_to language.name, marketplace_language_path(language), class: "hover:scale-110 text-black font-medium rounded-lg text-sm px-5 py-2.5 border-black border-2 text-center me-2 mb-2", style: get_color_code(language.name).present? ? "background-color: #{get_color_code(language.name)}; color: white;" : ''  %>
@@ -134,7 +134,7 @@
           <%# Categories %>
           <% if @categories.present? && @categories.size > 0 && @categories[0].name != 'not_specified' || @product.more_categories_from_createor.present? %>
             <div class="flex flex-col gap-1">
-              <h2 class="font-semibold text-white">Categories</h2>
+              <h2 class="font-semibold text-black">Categories</h2>
               <div class="flex flex-row flex-wrap items-center justify-start gap-2">
                 <% @categories.take(5).each do |category| %>
                   <%= link_to category.name, marketplace_category_path(category), class: "hover:scale-110 text-black border-black border-2 bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" %>
