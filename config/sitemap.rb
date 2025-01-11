@@ -1,5 +1,5 @@
 # Set the host name for URL creation
-SitemapGenerator::Sitemap.default_host = "https://www.gitlocker.com"
+SitemapGenerator::Sitemap.default_host = "https://www.coderz.us"
 
 SitemapGenerator::Sitemap.adapter = SitemapGenerator::S3Adapter.new(
   fog_provider: "AWS",
@@ -9,7 +9,7 @@ SitemapGenerator::Sitemap.adapter = SitemapGenerator::S3Adapter.new(
   fog_region: ENV["AWS_REGION"]
 )
 
-SitemapGenerator::Sitemap.sitemaps_host = "https://www.gitlocker.com/"
+SitemapGenerator::Sitemap.sitemaps_host = "https://www.coderz.us"
 SitemapGenerator::Sitemap.public_path = "tmp/"
 SitemapGenerator::Sitemap.sitemaps_path = "sitemaps/"
 SitemapGenerator::Sitemap.max_sitemap_links = ENV['MAX_SITEMAP_LINKS'].to_i if ENV['MAX_SITEMAP_LINKS'].present?
