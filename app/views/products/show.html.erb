@@ -13,7 +13,7 @@
   <% content_for :meta_title, @product&.name&.titleize&.first(65) %>
 <% end %>
 
-<div class="bg-gradient-to-l from-gray-200 via-fuchsia-200 to-stone-100">
+<div class="bg-indigo-100">
   <%=
     render BreadcrumbComponent.new(current_user,[
       { text: "Products", url: current_user&.buyer? ? marketplace_browse_path : marketplace_browse_path },
