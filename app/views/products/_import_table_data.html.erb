@@ -8,7 +8,7 @@
     <% filtered_repos.each do |repo| %>
         <tr class="even:bg-gray-50">
             <td class="min-w-[256px] w-[256px] border-l-2 whitespace-nowrap px-6 py-4 pl-4 pr-3 text-sm font-medium text-black sm:pl-6 border-r border-gray-200 flex items-center space-x-2">
-                <img src="https://gitlocker.com/cdn-cgi/image/compression=fast,format=auto/<%= repo[:avatar_url] %>" alt="<%= repo[:name] %> Avatar" class="w-10 h-10 rounded-full">
+                <img src="https://www.gitlocker.com/cdn-cgi/image/compression=fast,format=auto/<%= repo[:avatar_url] %>" alt="<%= repo[:name] %> Avatar" class="w-10 h-10 rounded-full">
                 <a href="<%= repo[:url] %>" class="text-black-500 hover:underline" target="_blank">
                 <%= repo[:name] %>
                 </a>

@@ -52,7 +52,7 @@ module Gitlocker
     config.middleware.use Rack::Brotli
     config.action_controller.asset_host = Proc.new { |source|
       if source =~ /\b(.png|.jpg|.gif|.jpeg)\b/i
-        "https://gitlocker.com/cdn-cgi/image/compression=fast,format=auto/"
+        "https://www.gitlocker.com/cdn-cgi/image/compression=fast,format=auto/"
       end
     }
 
