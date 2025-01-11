@@ -1,0 +1,2 @@
+document.getElementById('search_products').innerHTML = `<%= j render partial: "products/product_card", collection: @product_results, as: :product %>`;
+document.getElementById('search_products_count').innerHTML = `<%= @product_results.count %>`;

@@ -77,16 +77,15 @@ module Marketplace
 
     def filter_params
       params.delete(:_)
-      permitted_params = params.permit(:category, :language, :sort_by, filters: {})
+      permitted_params = params.permit(:category, :language, :sort_by, :page, filters: {})
     
-      # Permit nested filters only if they exist
       filters = permitted_params[:filters]&.permit(category: [], language: []) || {}
     
-      # Combine top-level and nested filters
       {
         categories: ([permitted_params[:category]].compact + (filters[:category] || [])).uniq,
         languages: ([permitted_params[:language]].compact + (filters[:language] || [])).uniq,
-        sort_by: permitted_params[:sort_by]
+        sort_by: permitted_params[:sort_by],
+        page: permitted_params[:page]
       }
     end
     
