@@ -139,10 +139,10 @@
                 <button type="button" id="profile-button" class="flex items-center -m-2.5 p-2.5 text-gray-400 hover:text-gray-500">
                   <% if current_user.profile_picture.attached? %>
                     <%= image_tag current_user.profile_picture, class: "h-8 w-8 rounded-full bg-gray-800" %>
-                    <%= image_tag "icons8-drop-down-32.png", class: "h-8 w-8 bg-white pl-2" %>
+                    <%= image_tag "dropdownmenu1", class: "h-6 w-6 bg-white" %>
                   <% else %>
                     <%= image_tag "profile_placeholder.png", class: "h-8 w-8 rounded-full bg-gray-800", alt: "Profile Placeholder" %>
-                    <%= image_tag "icons8-drop-down-32.png", class: "h-8 w-8 bg-white pl-2" %>
+                    <%= image_tag "dropdownmenu1", class: "h-6 w-6 bg-white" %>
                   <% end %>
                 </button>
                 <div id="profile-dropdown" class="hidden z-10 min-w-32 absolute right-0 top-10 bg-white shadow-lg rounded-md ring-1 ring-black ring-opacity-5">
