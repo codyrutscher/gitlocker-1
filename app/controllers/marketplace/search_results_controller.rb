@@ -24,6 +24,20 @@ module Marketplace
         @category_results = []
         @language_results = []
       end
+
+      if params[:filters].present?
+        prod_ids = []
+        prod_ids.push(ProductCategory.where(category_id: params[:filters][:category]).pluck(:product_id)) if params[:filters][:category].present?
+        prod_ids.push(ProductLanguage.where(language_id: params[:filters][:language]).pluck(:product_id)) if params[:filters][:language].present?
+        
+        prod_ids = prod_ids.flatten
+        @product_results = @product_results.where(id: prod_ids)
+      end
+      
+      respond_to do |format|
+        format.html
+        format.js
+      end
     end
 
     private
