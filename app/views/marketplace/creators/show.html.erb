@@ -1,5 +1,5 @@
 <% content_for :meta_title,  @user&.name&.titleize %>
-<% content_for :meta_description,  "Find your #{@user&.name&.titleize} class in Gitlocker" %>
+<% content_for :meta_description,  "Find #{@user&.name&.titleize} and their products on Coderz" %>
 <% visitor = @user if !user_signed_in? && @user.present? %>
 
 <%=
