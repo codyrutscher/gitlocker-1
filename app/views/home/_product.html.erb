@@ -35,9 +35,7 @@
                 <p class="text-xs border border-gray-900 rounded px-2 py-1.5 text-black" style="<%= get_color_code(language.name).present? ? "background-color: #{get_color_code(language.name)}; color: white;" : '' %>"><%= language.name %></p>
               <% end %>
               
-              <% product.more_languages_from_createor&.take(2).each do |lang| %>
-                <p class="text-xs border border-gray-900 rounded px-2 py-1.5 bg-blue-500 text-white"><%= lang %></p>
-              <% end %>
+             
             </div>
           <% end %>
   	<% if product.categories.present? && product.categories.size > 0 %>
