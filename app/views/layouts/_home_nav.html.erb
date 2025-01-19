@@ -77,14 +77,12 @@
                     <h3 class="text-white hover:text-gray-400">Browse</h3>
                   <% end %>
               
-                
+                   <a href="www.coderz.us/products"><h3 class="text-white hover:text-gray-400">Manage</h3></a>
+
                 <%= link_to new_product_path do %>
                   <h3 class="text-white hover:text-gray-400 hidden sm:block">Post</h3>
                 <% end %>
                 
-                 <%= link_to blogs_path do %>
-                  <h3 class="text-white hover:text-gray-400 hidden sm:block">Blog</h3>
-                <% end %>
               <!-- Cart -->
               <div>
                 <%= link_to marketplace_cart_items_path, class: "group -m-2 flex items-center p-2" do %>
