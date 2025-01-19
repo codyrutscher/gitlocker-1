@@ -32,7 +32,7 @@
                 <%= link_to marketplace_root_path do %>
                   <div class="flex items-center">
                     <div class="hidden lg:flex lg:items-center">
-                      <%= image_tag "coderz.png", class: "h-12 w-40 ml-2", alt: "GitLocker Logo" %>
+                      <%= image_tag "https://www.coderz.us/assets/coderz-cfe1fce4096a63cc8d20e62db00b93087c7d02667f06be9af7fc117cbc7cab93.png", class: "h-12 w-40 ml-2", alt: "GitLocker Logo" %>
                     </div>
                   </div>
                 <% end %>
@@ -139,10 +139,10 @@
                 <button type="button" id="profile-button" class="flex items-center -m-2.5 p-2.5 text-gray-400 hover:text-gray-500">
                   <% if current_user.profile_picture.attached? %>
                     <%= image_tag current_user.profile_picture, class: "h-8 w-8 rounded-full bg-gray-800" %>
-                    <%= image_tag "dropdownmenu1.png", class: "h-4 w-4 bg-white object-center ml-2" %>
+                    <%= image_tag "https://www.coderz.us/assets/dropdownmenu1-9674e1e26d348ec8857eb9fd34ff69e56c80eddb04e7962d0d35eda079098363.png", class: "h-4 w-4 bg-white object-center ml-2" %>
                   <% else %>
-                    <%= image_tag "profile_placeholder.png", class: "h-8 w-8 rounded-full bg-gray-800", alt: "Profile Placeholder" %>
-                    <%= image_tag "dropdownmenu1.png", class: "h-4 w-4 bg-white object-center ml-2" %>
+                    <%= image_tag "https://www.coderz.us/assets/profile_placeholder-55aef9092fd1863fb412cb84eb131facc3ba218c4e520ed7d6bc04fd4127cd20.png", class: "h-8 w-8 rounded-full bg-gray-800", alt: "Profile Placeholder" %>
+                    <%= image_tag "https://www.coderz.us/assets/dropdownmenu1-9674e1e26d348ec8857eb9fd34ff69e56c80eddb04e7962d0d35eda079098363.png", class: "h-4 w-4 bg-white object-center ml-2" %>
                   <% end %>
                 </button>
                 <div id="profile-dropdown" class="hidden z-10 min-w-32 absolute right-0 top-10 bg-white shadow-lg rounded-md ring-1 ring-black ring-opacity-5">
