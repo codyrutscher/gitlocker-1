@@ -2,17 +2,33 @@ module Marketplace
   class SearchResultsController < ApplicationController
     def index
       if params[:search].present?
-        @product = sort_products(Product.all, params[:sort_by])
-        @product_results = @product.search(params[:search]).page(params[:page]).per(140)
+        if params[:filters].is_a?(String)
+          params[:filters] = JSON.parse(params[:filters])
+        end
+        
+        if params[:filters].present?
+          prod_ids = []
+          prod_ids.push(ProductCategory.where(category_id: params[:filters][:category]).pluck(:product_id)) if params[:filters][:category].present?
+          prod_ids.push(ProductLanguage.where(language_id: params[:filters][:language]).pluck(:product_id)) if params[:filters][:language].present?
+          
+          prod_ids = prod_ids.flatten
+          
+          @product_results = Product.all.where(id: prod_ids)
+        end
+        
+        @product_results = params[:filters].present? ? @product_results : Product.all
+
+        @product_results = @product_results.search(params[:search]).page(params[:page]).per(25)
+        @product_results = sort_products(@product_results, params[:sort_by])
 
         @user = sort_users(User.all, params[:sort_by])
-        @marketplace_creator_results = @user.search(params[:search]).page(params[:page]).per(140)
+        @marketplace_creator_results = @user.search(params[:search]).page(params[:page]).per(25)
 
         @category = sort_categories(Category.all, params[:sort_by])
-        @category_results = @category.search(params[:search]).page(params[:page]).per(140)
+        @category_results = @category.search(params[:search]).page(params[:page]).per(25)
 
         @language = sort_languages(Language.all, params[:sort_by])
-        @language_results = @language.search(params[:search]).page(params[:page]).per(140)
+        @language_results = @language.search(params[:search]).page(params[:page]).per(25)
 
         if params[:category_id].present?
           @product_results = @product_results.joins(:product_categories)
@@ -23,15 +39,6 @@ module Marketplace
         @marketplace_creator_results = []
         @category_results = []
         @language_results = []
-      end
-
-      if params[:filters].present?
-        prod_ids = []
-        prod_ids.push(ProductCategory.where(category_id: params[:filters][:category]).pluck(:product_id)) if params[:filters][:category].present?
-        prod_ids.push(ProductLanguage.where(language_id: params[:filters][:language]).pluck(:product_id)) if params[:filters][:language].present?
-        
-        prod_ids = prod_ids.flatten
-        @product_results = @product_results.where(id: prod_ids)
       end
       
       respond_to do |format|

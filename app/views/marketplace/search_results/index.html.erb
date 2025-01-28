@@ -8,35 +8,41 @@
 
     <!-- Product Search Results -->
     <% if params[:filter_by_type].blank? || params[:filter_by_type] == 'products' %>
-      <section aria-labelledby="products-heading" class="py-8 sm:py-16 xl:mx-auto">
+      <section aria-labelledby="products-heading">
         <div class="px-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8 xl:px-0 mb-4">
-          <h2 id="products-heading" class="text-2xl font-bold tracking-tight text-gray-900 underline ">
-           <span id="search_products_count"><%= @product_results.count %></span> Product Search Results: <span class="underline"><%= params[:search] %></span>
+          <h2 id="products-heading" class="text-2xl font-bold tracking-tight text-gray-900 underline">
+            <span id="search_products_count"><%= @product_results.count %></span> Product Search Results: <span class="underline"><%= params[:search] %></span>
           </h2>
         </div>
         <hr class="h-px bg-black border-4 mt-4 mb-4 border-black">
-        <div class="mt-4 flow-root">
-          <div class="-my-2">
-            <div class="">
-              <!-- Ensure the same gap value as the category view -->
-              <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+        
+        <div class="">
+          <div class="mx-auto">
+            <div class="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4">
+              <!-- Filters Sidebar -->
+              <div class="lg:col-span-1">
                 <%= render partial: "shared/filters" %>
+              </div>
+              
+              <!-- Product Grid -->
+              <div class="lg:col-span-3">
                 <% if @product_results&.empty? %>
-                  <div class="mt-24 col-span-full text-center">
+                  <div class="mt-24 text-center">
                     <p class="text-2xl">There are no product search results</p>
                   </div>
                 <% else %>
-                <div id="search_products" style="display: contents;">
-                  <%= render partial: "products/product_card", collection: @product_results, as: :product %>
-                </div>
+                  <div id="search_products" class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                    <%= render partial: "products/product_card", collection: @product_results, as: :product %>
+                  </div>
                 <% end %>
               </div>
             </div>
           </div>
         </div>
-      <hr class="h-px bg-black border-4 mt-4 mb-4 border-black">
-        <div class="mt-4 px-4 sm:px-6 lg:px-8">
-          <%= render 'kaminari/tailwind/paginator', paginator: @product_results if @product_results.present?%>
+
+        <hr class="h-px bg-black border-4 mt-4 mb-4 border-black">
+        <div id="search_paginator" class="mt-4 px-4 sm:px-6 lg:px-8 space-y-8 my-4">
+          <%= render 'kaminari/tailwind/paginator', paginator: @product_results if @product_results.present? %>
         </div>
       </section>
     <% end %>

@@ -1,2 +1,3 @@
 document.getElementById('search_products').innerHTML = `<%= j render partial: "products/product_card", collection: @product_results, as: :product %>`;
 document.getElementById('search_products_count').innerHTML = `<%= @product_results.count %>`;
+document.getElementById('search_paginator').innerHTML = `<%= j render partial: 'kaminari/tailwind/paginator', locals: { paginator: @product_results, params: } if @product_results.present? %>`;
