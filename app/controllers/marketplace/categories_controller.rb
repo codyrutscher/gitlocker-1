@@ -3,7 +3,7 @@ class CategoriesController < ApplicationController
   def show
     @category = Category.friendly.find(params[:slug])
     params[:sort_by] ||= "most_recent" unless params[:sort_by].present?
-    @products = apply_filters_and_sort(@category&.products)&.page(params[:page])&.per(100)
+    @products = apply_filters_and_sort(@category&.products)&.page(params[:page])&.per(25)
   end
 
   def load_more
@@ -50,7 +50,7 @@ class CategoriesController < ApplicationController
       resource.order(created_at: :desc)
     else
       resource.order(name: :asc) # Default sorting
-    end.page(params[:page]).per(50)
+    end.page(params[:page]).per(25)
   end
 end
 end
