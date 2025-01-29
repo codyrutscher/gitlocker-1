@@ -299,7 +299,7 @@ src="https://www.facebook.com/tr?id=900797662269591&ev=PageView&noscript=1"
     <link rel="stylesheet" d-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload", cache: 'cached/all' %>
     <%= javascript_importmap_tags %>
-    <%= favicon_link_tag "https://www.coderz.us/assets/favicon-58263ab9df5d8e6eb93860446f6177b49a5dfdfbc10afe943f2879ef2c7d6180.png" %>
+    <%= favicon_link_tag "favicon.png" %>
 
     <% if controller_name == "checkout" || controller_name == "funds" %>
       <%= stripe_javascript_tag %>
