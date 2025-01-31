@@ -8,9 +8,9 @@
     { text: @user.name || @user.username, url: marketplace_creator_path(@user) }
   ])
 %>
-
-<main class="profile-page overflow-clip">
-  <section id="" class="relative bg-gradient-to-l from-gray-200 via-fuchsia-200 to-stone-100 block h-500-px">
+<div class="grid grid-cols-2 w-full h-fit">
+<div class="profile-page overflow-clip">
+  <section id="" class="relative bg-indigo-300 block h-500-px">
     <div class="absolute top-0 w-full h-full bg-center bg-cover" style="
     background-image: url('https://gitlocker.s3.us-east-2.amazonaws.com/banner-01.jpg');
     ">
@@ -171,16 +171,15 @@
     </div>
   </footer>
 </section>
-</main>
-<hr class="h-4 bg-black">
-<main class="pb-4 pt-6 sm:pb-6 bg-white">
+</div>
+<div class="pb-4 pt-6 sm:pb-6 bg-indigo-200">
   <div class="space-y-16 py-16 divide-y-4 xl:space-y-20">
     <!-- Creators list-->
     <div class="mx-auto px-4 sm:px-6 lg:px-8">
       <div class="mx-auto max-w-2xl lg:mx-0 lg:max-w-none">
-        <h1 class="font-bold underline  text-3xl mb-8"><%= @user.name %> Listed Products:</h1>
+        <h1 class="font-bold underline  text-3xl mb-8"><%= @user.name %> Listed Repositories:</h1>
         <% if @products.empty? %>
-          <p class="font-medium leading-7 text-gray-900 text-xl">The user has no listed products for sale.</p>
+          <p class="font-medium leading-7 text-gray-900 text-xl">The user has no listed repositories.</p>
         <% else %>
           <ul role="list" class="grid sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 gap-4 lg:gap-8 px-4 sm:px-6 lg:px-8 xl:px-0">
             <%= render partial: "products/product", collection: @products, as: :product %>
@@ -192,4 +191,5 @@
       </div>
     </div>
   </div>
-</main>
+</div>
+</div>
