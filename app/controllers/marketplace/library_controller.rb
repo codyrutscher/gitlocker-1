@@ -15,8 +15,8 @@ class LibraryController < ApplicationController
     @more_from_this_creators = @product.more_from_this_creators
     @reviews = @product.reviews.includes(:user).page(params[:page]).per(5)
     @in_cart = (current_user || visitor_user).products_in_cart.include?(@product) || false
-    @languages = @product.languages
-    @categories = @product.categories
+    @languages = @product.languages.uniq
+    @categories = @product.categories.uniq
     @cart_item = if @in_cart
                   CartItem.find_by(user: current_user, product: @product)
                  else

@@ -20,8 +20,8 @@ class ProductsController < ApplicationController
     @product = current_user.products.includes(:reviews, :languages).friendly.find(params[:id])
     @related_products = @product.related_products
     @reviews = @product.reviews.page(params[:page]).per(5)
-    @languages = @product.languages
-    @categories = @product.categories
+    @languages = @product.languages.uniq
+    @categories = @product.categories.uniq
     @directory_tree_json = fetch_product_directory_tree(@product)
     @user = User.friendly.find(params[:id])
   end
