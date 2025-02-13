@@ -10,6 +10,9 @@ class HomeController < ApplicationController
   def refund_policy
   end
 
+  def test
+  end
+
   def pricing
   end
   
