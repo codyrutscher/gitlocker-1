@@ -53,6 +53,7 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
 
   get "privacy", to: "home#privacy"
+  get "test", to: "home#test"
   get "explore", to: "home#explore"
   get "terms", to: "home#terms"
   get "refund_policy", to: "home#refund_policy"
