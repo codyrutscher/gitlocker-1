@@ -180,7 +180,7 @@
 
         <% if @product.description.present? %>
           <% if @product.description.length < 70 %>
-            <%= content_for :meta_description, "#{ActionView::Base.full_sanitizer.sanitize(@product.description)&.humanize} product listed on the gitlocker code marketplace"  %>
+            <%= content_for :meta_description, "#{ActionView::Base.full_sanitizer.sanitize(@product.description)&.humanize} product listed on the Coderz's code marketplace"  %>
           <% else %>
             <%= content_for :meta_description, ActionView::Base.full_sanitizer.sanitize(@product.description)&.humanize&.first(160) %>
           <% end %>

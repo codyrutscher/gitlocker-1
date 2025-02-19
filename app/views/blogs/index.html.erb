@@ -1,9 +1,9 @@
 <% if params[:page].present? %>
-  <%= content_for :meta_title, "GitLocker Blogs Page #{params[:page]}" %>
-  <%= content_for :meta_description, "Discover the latest trends in software engineering with GitLocker's insightful blog posts. Stay ahead in the coding world with expert tips and tutorials Page #{params[:page]}" %>
+  <%= content_for :meta_title, "Coderz Blogs Page #{params[:page]}" %>
+  <%= content_for :meta_description, "Discover the latest trends in software engineering with Coderz's insightful blog posts. Stay ahead in the coding world with expert tips and tutorials Page #{params[:page]}" %>
 <% else %>
-  <%= content_for :meta_title, "GitLocker Blogs" %>
-  <%= content_for :meta_description, "Discover the latest trends in software engineering with GitLocker's insightful blog posts. Stay ahead in the coding world with expert tips and tutorials" %>
+  <%= content_for :meta_title, "Coderz Blogs" %>
+  <%= content_for :meta_description, "Discover the latest trends in software engineering with Coderz's insightful blog posts. Stay ahead in the coding world with expert tips and tutorials" %>
 <% end %>
 <%=
   render BreadcrumbComponent.new(current_user,[
