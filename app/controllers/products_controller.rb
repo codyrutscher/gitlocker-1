@@ -302,7 +302,7 @@ class ProductsController < ApplicationController
   end
 
   def repositories_count
-    octokit_client.user.public_repos + octokit_client.user.total_private_repos
+    octokit_client.user.public_repos + octokit_client.user.total_private_repos.to_i
   end
 
   def set_product
