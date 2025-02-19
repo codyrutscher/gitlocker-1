@@ -105,6 +105,11 @@ class ProductsController < ApplicationController
     
   end
 
+  def new_product
+    @product = Product.unscoped.new
+    @filtered_repos = import_table
+  end
+
   def new
     @product = Product.unscoped.new
     @filtered_repos = import_table

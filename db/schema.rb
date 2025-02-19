@@ -10,8 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_05_093842) do
+ActiveRecord::Schema[7.1].define(version: 2025_02_16_085316) do
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
   create_table "accounts", force: :cascade do |t|
@@ -83,6 +84,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_05_093842) do
     t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "slug"
+    t.index ["slug"], name: "index_blogs_on_slug", unique: true
   end
 
   create_table "cart_items", force: :cascade do |t|
@@ -104,6 +107,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_05_093842) do
     t.string "image_name"
     t.string "slug"
     t.index ["name"], name: "index_categories_on_name", unique: true
+  end
+
+  create_table "featured_payment_intents", force: :cascade do |t|
+    t.string "intent_id"
+    t.json "intent_object"
+    t.bigint "product_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "status", default: "unpaid"
+    t.string "session_id"
+    t.index ["product_id"], name: "index_featured_payment_intents_on_product_id"
   end
 
   create_table "follows", force: :cascade do |t|
@@ -236,6 +250,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_05_093842) do
     t.string "total_currency", default: "USD", null: false
     t.string "stripe_charge_id"
     t.boolean "commission_paid", default: false, null: false
+    t.string "stripe_session_id"
     t.index ["user_id"], name: "index_payments_on_user_id"
   end
 
@@ -255,7 +270,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_05_093842) do
     t.datetime "updated_at", null: false
     t.boolean "active", default: false, null: false
     t.index ["category_id"], name: "index_product_categories_on_category_id"
-    t.index ["product_id", "category_id"], name: "index_product_categories_on_product_id_and_category_id", unique: true
     t.index ["product_id"], name: "index_product_categories_on_product_id"
   end
 
@@ -288,6 +302,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_05_093842) do
     t.integer "purchases_count", default: 0, null: false
     t.string "preview_video_url"
     t.string "download_path"
+    t.boolean "upload_complete", default: false, null: false
+    t.text "features"
+    t.text "instructions"
+    t.text "requirements"
+    t.string "demo_url"
+    t.decimal "boost_price", precision: 10, scale: 2, default: "0.0"
+    t.boolean "is_boost", default: false
+    t.text "directory_tree"
+    t.string "more_categories_from_createor", default: [], array: true
+    t.string "more_languages_from_createor", default: [], array: true
     t.index ["repo_id"], name: "index_products_on_repo_id", unique: true
     t.index ["slug"], name: "index_products_on_slug", unique: true
     t.index ["user_id"], name: "index_products_on_user_id"
@@ -303,6 +327,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_05_093842) do
     t.bigint "payment_id"
     t.boolean "pending", default: true, null: false
     t.boolean "refund", default: false
+    t.string "refund_id"
     t.index ["payment_id"], name: "index_purchases_on_payment_id"
     t.index ["product_id"], name: "index_purchases_on_product_id"
     t.index ["user_id", "product_id"], name: "index_purchases_on_user_id_and_product_id", unique: true
@@ -393,6 +418,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_05_093842) do
     t.string "instagram_url"
     t.string "linkedin_url"
     t.string "youtube_url"
+    t.string "stripe_customer"
+    t.string "stripe_subscription"
+    t.boolean "is_new", default: true, null: false
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
@@ -404,6 +432,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_05_093842) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "cart_items", "products"
   add_foreign_key "cart_items", "users"
+  add_foreign_key "featured_payment_intents", "products"
   add_foreign_key "likes", "products"
   add_foreign_key "notifications", "products"
   add_foreign_key "payments", "users"
