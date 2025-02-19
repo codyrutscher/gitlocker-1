@@ -79,7 +79,7 @@
             <%# <%= render CarouselComponent.new(@product.covers) %> %>
             -->
             <figure class="block md:h-[384px] sm:h-[300px]  h-[250px] w-full">
-              <%= image_tag @product.covers.first.url, id:"main-image", class:"block object-contain w-full h-full", alt: "#{@product.name} Image" %>
+              <%= image_tag rails_blob_url(@product.covers.first, only_path: false), id:"main-image", class:"block object-contain w-full h-full", alt: "#{@product.name} Image" %>
             </figure>
           <% else %>
             <%= image_tag "https://www.coderz.us/assets/altumcode-PNbDkQ2DDgM-unsplash-148a417763beaff5a232d5cf1a303bb0da6c72ddf27597f5f605342ca4d80a26.jpg", class: "object-cover object-center relative w-full", alt: "Default Cover" %>
@@ -91,7 +91,7 @@
               <%# Cover Image %>
                 <% @product.covers.each do |thumbnail| %>
                   <div class="bg-gray-100 overflow-hidden rounded block border border-black">
-                        <img src="https://www.gitlocker.com/cdn-cgi/image/compression=fast,format=auto/<%= thumbnail.url %>" alt="<%= @product.name %> Images"  class="block object-cover object-center h-full w-full cursor-pointer" onclick="changeImage(this.src)">
+                    <img src="<%= rails_blob_url(thumbnail, only_path: true) %>" alt="<%= @product.name %> Images"  class="block object-cover object-center h-full w-full cursor-pointer" onclick="changeImage(this.src)">
                   </div>
                 <% end %>
             </div>
