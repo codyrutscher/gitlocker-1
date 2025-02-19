@@ -1,9 +1,9 @@
 <section style="max-width: 600px; margin: 0 auto; padding: 20px; color: #4a5568; font-family: Arial, sans-serif;">
 
   <main style="margin-top: 20px;">
-    <h2 style="color: #2d3748; text-align: center;">Welcome to GitLocker!</h2>
+    <h2 style="color: #2d3748; text-align: center;">Welcome to Coderz!</h2>
     <p>Hi <%= @email %>,</p>
-    <p>Thanks for signing up with GitLocker. To complete your registration, please confirm your account by clicking the button below:</p>
+    <p>Thanks for signing up with Coderz. To complete your registration, please confirm your account by clicking the button below:</p>
 
     <div style="text-align: center; margin: 30px 0;">
       <a href="<%= confirmation_url(@resource, confirmation_token: @token) %>" 
@@ -15,6 +15,6 @@
     <p>If the button doesn't work, copy and paste this link into your browser:</p>
     <p style="word-break: break-all; color: #4299e1;"><%= confirmation_url(@resource, confirmation_token: @token) %></p>
     
-    <p>If you didn't sign up for GitLocker, please ignore this email.</p>
+    <p>If you didn't sign up for Coderz, please ignore this email.</p>
   </main>
 </section>

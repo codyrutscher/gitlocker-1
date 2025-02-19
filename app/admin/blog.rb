@@ -41,7 +41,7 @@ ActiveAdmin.register Blog do
       end
       row :image do |blog|
         if blog.image.attached?
-          image_tag url_for(blog.image)
+          image_tag rails_blob_url(blog.image, only_path: false)
         end
       end
       row :created_at
