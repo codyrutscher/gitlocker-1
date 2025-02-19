@@ -13,7 +13,7 @@ module Marketplace
         @products = @products.where(id: prod_ids)
       end
 
-      @products = @products.page(filter_params[:page]).per(25)
+      @products = @products.page(filter_params[:page]).per(80)
 
       respond_to do |format|
         format.html
@@ -22,20 +22,20 @@ module Marketplace
     end
 
     def popular
-      @products = apply_filters_and_sort(Product.ordered_by_purchase_count).page(params[:page]).per(25)
+      @products = apply_filters_and_sort(Product.ordered_by_purchase_count).page(params[:page]).per(80)
     end
 
     def free
-      @products = apply_filters_and_sort(Product.where("price_cents <= 0")).page(params[:page]).per(25)
+      @products = apply_filters_and_sort(Product.where("price_cents <= 0")).page(params[:page]).per(80)
     end
 
     def premium
-      @products = apply_filters_and_sort(Product.where("price_cents > 0")).page(params[:page]).per(25)
+      @products = apply_filters_and_sort(Product.where("price_cents > 0")).page(params[:page]).per(80)
     end
 
   def featured
     # @products = Product.ordered_by_purchase_count.page(params[:page]).per(50)
-    @products = apply_filters_and_sort(Product.where(featured: true)).page(params[:page]).per(25)
+    @products = apply_filters_and_sort(Product.where(featured: true)).page(params[:page]).per(80)
 
     if params[:filters].present?
       prod_ids = []
@@ -55,7 +55,7 @@ module Marketplace
 
   def recent
     params[:sort_by] ||= "most_recent"
-    @products = apply_filters_and_sort(Product.exclude_purchased(current_user)).page(params[:page]).per(25)
+    @products = apply_filters_and_sort(Product.exclude_purchased(current_user)).page(params[:page]).per(80)
 
       respond_to do |format|
         format.html
