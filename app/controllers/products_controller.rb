@@ -106,8 +106,19 @@ class ProductsController < ApplicationController
   end
 
   def new_product
-    @product = Product.unscoped.new
-    @filtered_repos = import_table
+  end
+
+  def create_from_github
+    # repo_ids = params[:repo_ids]
+    # repo_ids.each do |repo_id|
+    #   repo = @user_repos.find { |r| r[:id] == repo_id.to_i }
+    #   current_user.products.create(
+    #     name: repo[:name],
+    #     description: repo[:description],
+    #     url: repo[:html_url]
+    #   )
+    # end
+    redirect_to products_path, notice: 'Products created successfully from GitHub repositories.'
   end
 
   def new
@@ -142,7 +153,6 @@ class ProductsController < ApplicationController
     # )
 
     # payment = Payment.create!(user: current_user, total_cents: 5000, stripe_session_id: session.id)
-    # binding.pry
     # redirect_to session.url, allow_other_host: true
 
     uploaded_file = product_params[:upload_file]
@@ -315,7 +325,7 @@ class ProductsController < ApplicationController
   end
 
   def set_user_repos
-    @user_repos ||= octokit_client.repositories(nil, type: 'private', per_page: repositories_count)
+    @user_repos ||= octokit_client.repositories(nil, per_page: repositories_count)
   end
 
   def download_repository_as_zip(owner, repo, ref, token)

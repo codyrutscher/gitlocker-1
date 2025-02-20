@@ -9,7 +9,11 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       flash[:notice] = I18n.t "devise.omniauth_callbacks.success", kind: "Github"
       if @user.registration_pending?
         sign_in @user, event: :authentication
-        redirect_to marketplace_root_path
+        if request.env['omniauth.params']['state'] == 'import_products'
+          redirect_to new_product_products_path
+        else
+          redirect_to marketplace_root_path
+        end
       else
         sign_in_and_redirect @user, event: :authentication
       end

@@ -87,6 +87,7 @@ Rails.application.routes.draw do
   resources :products, only: [:index, :show, :edit, :update,:new, :create, :destroy] do
     resources :covers, only: [:create, :destroy], controller: "product_covers"
     get 'new_product', on: :collection
+    post 'create_from_github', on: :collection
     post 'like', on: :member
     post 'unlike', on: :member
     get 'search', on: :collection

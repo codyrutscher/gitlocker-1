@@ -23,7 +23,12 @@
             <h4 class="text-xl font-bold">Import Git Repository</h4>
             <div class="bg-gray-800 p-6 rounded-lg mt-4">
                 <p class="text-gray-400 text-sm">Select a Git provider to import an existing project from a Git Repository.</p>
-                <a href="#" class="block w-full bg-gray-700 hover:bg-gray-600 text-white font-semibold py-2 mt-3 text-center rounded">Continue with GitHub</a>
+                <button id="github-button" class="block w-full bg-gray-700 hover:bg-gray-600 text-white font-semibold py-2 mt-3 text-center rounded">
+                    <%= current_user.token.present? ? 'Continue' : 'Login' %> with GitHub
+                </button>
+                <%= form_with url: omniauth_authorize_path(User, :github, state: 'import_products'), method: :post, data: { turbo: "false" }, id: "github-auth-form", class: "hidden" do %>
+                    <button type="submit"></button>
+                <% end %>
                 <a href="#" class="block w-full bg-purple-600 hover:bg-purple-500 text-white font-semibold py-2 mt-3 text-center rounded">Continue with GitLab</a>
                 <a href="#" class="block w-full bg-blue-500 hover:bg-blue-400 text-white font-semibold py-2 mt-3 text-center rounded">Continue with Bitbucket</a>
                 <a href="#" class="block mt-4 text-gray-300 hover:text-white text-sm">Import Third-Party Git Repository →</a>
@@ -53,4 +58,38 @@
             <a href="#" class="block mt-4 text-gray-300 hover:text-white text-sm">Browse All Templates →</a>
         </div>
     </div>
+    <!-- Display GitHub Repositories -->
+    <div id="repos-section" class="hidden mt-8">
+        <% if @user_repos.present? %>
+            <h1 class="text-2xl font-bold mb-4">Select GitHub Repositories to Add as Products</h1>
+            <%= form_with url: create_from_github_products_path, method: :post do %>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <% @user_repos.each do |repo| %>
+                    <div class="bg-gray-900 p-6 rounded-lg shadow-lg">
+                    <h4 class="text-xl font-bold"><%= repo[:name] %></h4>
+                    <p class="text-gray-400 text-sm"><%= repo[:description] %></p>
+                    <label class="block mt-4">
+                        <%= check_box_tag 'repo_ids[]', repo[:id], false, class: 'mr-2' %>
+                        Select this repository
+                    </label>
+                    </div>
+                <% end %>
+                </div>
+                <div class="mt-6">
+                <%= submit_tag 'Add Selected Repositories as Products', class: 'bg-blue-500 hover:bg-blue-400 text-white font-semibold py-2 px-4 rounded' %>
+                </div>
+            <% end %>
+        <% end %>
+    </div>
 </div>
+
+<script>
+  document.getElementById('github-button').addEventListener('click', function(event) {
+    event.preventDefault();
+    <% if current_user.token.present? %>
+      document.getElementById('repos-section').classList.remove('hidden');
+    <% else %>
+      document.getElementById('github-auth-form').querySelector('button').click();
+    <% end %>
+  });
+</script>
