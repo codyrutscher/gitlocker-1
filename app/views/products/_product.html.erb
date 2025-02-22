@@ -5,7 +5,7 @@
         <%# Cover Image %>
         <div class="bg-gray-100 aspect-w-1 aspect-h-1 overflow-hidden rounded-t">
           <% if product.covers.first.present? %>
-            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-li="st" d-src="https://www.gitlocker.com/cdn-cgi/image/compression=fast,format=auto/<%= product.covers.first.url %>" alt="<%= product.name %> Images" class="h-full w-full object-cover object-center">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-li="st" d-src="<%= rails_blob_url(product.covers.first, only_path: true) %>" alt="<%= product.name %> Images" class="h-full w-full object-cover object-center">
           <% else %>
             <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-li="st" d-src="https://www.coderz.us/assets/altumcode-PNbDkQ2DDgM-unsplash-148a417763beaff5a232d5cf1a303bb0da6c72ddf27597f5f605342ca4d80a26.jpg" alt="No Image Available" class="h-full w-full object-cover object-center">
           <% end %>

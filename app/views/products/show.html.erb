@@ -255,7 +255,7 @@
       
 
       <div class="mx-auto mt-16 w-full max-w-2xl lg:col-span-4 lg:mt-0 lg:max-w-none">
-	<h2 class="text-2xl text-bold text-gray-900  mb-4 underline">Files In This Product: (if this is empty don't purchase this product)</h2>
+        <h2 class="text-2xl text-bold text-gray-900  mb-4 underline">Files In This Product: (if this is empty don't purchase this product)</h2>
         <% if @directory_tree_json != "[]"  %>
           <div id="directory-tree-data" class="js-directory-tree bg mb-4 bg-gray-400"></div>
         <% end %>
@@ -481,6 +481,36 @@
 			'data' : <%= @directory_tree_json %>
 		}
 	});
+
+  $('#directory-tree-data').on('select_node.jstree', function(e, data) {
+    var node = data.node;
+    if (node && node.original && node.original.type === 'file') {
+        var fileName = node.text;
+        var url = '<%= show_file_content_product_path(@product) %>';
+
+        var form = document.createElement('form');
+        form.method = 'POST';
+        form.action = url;
+        form.target = '_blank'; // Open in a new tab
+
+        var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+        var csrfInput = document.createElement('input');
+        csrfInput.type = 'hidden';
+        csrfInput.name = 'authenticity_token';
+        csrfInput.value = csrfToken;
+        form.appendChild(csrfInput);
+
+        var input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = 'file_name';
+        input.value = fileName;
+        form.appendChild(input);
+
+        document.body.appendChild(form);
+        form.submit();
+        document.body.removeChild(form);
+    }
+  });
 </script>
 
  <%# <script>

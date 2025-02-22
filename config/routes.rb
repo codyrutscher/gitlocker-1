@@ -89,6 +89,7 @@ Rails.application.routes.draw do
     post 'like', on: :member
     post 'unlike', on: :member
     get 'search', on: :collection
+    post 'show_file_content', on: :member
   end
   get 'search_repositories/(:query)', to: "products#search_repositories"
 
