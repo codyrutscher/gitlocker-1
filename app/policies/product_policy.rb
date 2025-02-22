@@ -43,4 +43,16 @@ class ProductPolicy < ApplicationPolicy
 
     record.user_id != user.id
   end
+
+  def viewable?
+    return false unless record.active?
+
+    return false unless record.published?
+
+    return false if user.blank?
+
+    return false if record.purchases.pluck(:user_id).include?(user.id)
+
+    record.user_id != user.id
+  end
 end

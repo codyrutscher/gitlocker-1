@@ -78,4 +78,37 @@ module ProductConcern
       end
     end
   end
+
+  def extract_file_content(product, file_name, lines = nil, char_limit = nil)
+    return nil unless product.folder.attached?
+
+    if policy(product).viewable?
+      lines = 10
+      char_limit = 1000
+    end
+    temp_zip_path = Rails.root.join("tmp", "temp_zip_#{SecureRandom.hex}.zip")
+    File.open(temp_zip_path, 'wb') { |file| file.write(product.folder.download) }
+  
+    file_content = nil
+
+    begin
+      Zip::File.open(temp_zip_path) do |zip_file|
+        zip_file.each do |entry|
+          if entry.name.include?(file_name)
+            file_content = entry.get_input_stream.read.lines
+            if lines
+              file_content = file_content.first(lines).join
+              file_content = file_content[0, char_limit] if char_limit && file_content.length > char_limit
+            else
+              file_content = file_content.join
+            end
+            break
+          end
+        end
+      end
+    ensure
+      File.delete(temp_zip_path) if File.exist?(temp_zip_path)
+    end
+    file_content
+  end
 end
