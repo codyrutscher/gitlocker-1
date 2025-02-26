@@ -45,9 +45,12 @@ class CheckoutController < ApplicationController
         PurchaseNotification.create!(recipient: purchase.product.user, buyer: current_user, product: purchase.product)
         purchase.payment = payment
         purchase.save
+
+        SalesUpdateService.process_payments_for(purchase.product.user)
+        StripePayoutService.new(purchase.product.user, purchase.price_cents / 100).process_payout
       end
     end
-
+    
     redirect_to marketplace_purchases_url, notice: 'Payment successful! Your order has been placed.'
   end
 

@@ -121,6 +121,18 @@ class ProductsController < ApplicationController
     redirect_to products_path, notice: 'Products created successfully from GitHub repositories.'
   end
 
+  def show_file_content
+    product = Product.friendly.find(params[:id])
+    file_name = params[:file_name]
+    file_extension = file_name.split('.').last
+    @file_content = extract_file_content(product, file_name)
+    if %w[jpg jpeg png gif].include?(file_extension)
+      send_data @file_content, type: "image/#{file_extension}", disposition: "inline", filename: "#{file_name}"
+    else
+      render "show_file_content", layout: false, locals: { file_content: @file_content || 'File not found' }
+    end
+  end
+
   def new
     @product = Product.unscoped.new
     @filtered_repos = import_table

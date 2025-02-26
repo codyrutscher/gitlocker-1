@@ -8,23 +8,6 @@
     <div class="sm:flex sm:items-center sm:justify-between justify-center">
       <div class="flex gap-4 justify-center items-stretch">
         <div class="bg-white p-4 rounded shadow-2xl flex border-4 border-black">
-          <% [["Pending", sprintf("$%.2f", @funds)]].each do |label, amount, extra| %>
-            <div class="text-center">
-              <p class="text-gray-500">
-                <%= label %>
-                <span class="relative" x-data="{ tooltip: false }">
-                  <span @mouseenter="tooltip = true" @mouseleave="tooltip = false" class="inline-block w-5 h-5 bg-black text-white text-xs rounded-full cursor-pointer">?</span>
-                  <span x-show="tooltip" class="absolute z-10 w-40 p-2 -mt-8 text-sm text-white bg-black rounded-lg" style="display: none;">Payments are pending for a week for customers to review</span>
-                </span>
-              </p>
-              <p class="text-2xl font-semibold"><%= amount %></p>
-              <% if extra %>
-                <p class="text-gray-500 text-sm"><%= extra %></p>
-              <% end %>
-            </div>
-          <% end %>
-        </div>
-        <div class="bg-white p-4 rounded shadow-2xl flex border-4 border-black">
           <% [["Available", sprintf("$%.2f", current_user.balance)]].each do |label, amount, extra| %>
             <div class="text-center">
               <p class="text-gray-500">
