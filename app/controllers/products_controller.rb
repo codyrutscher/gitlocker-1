@@ -13,7 +13,6 @@ class ProductsController < ApplicationController
 
   def index
     @products = current_user.products.page(params[:page]).per(50)
-    
   end
 
   def show
@@ -109,16 +108,57 @@ class ProductsController < ApplicationController
   end
 
   def create_from_github
-    # repo_ids = params[:repo_ids]
-    # repo_ids.each do |repo_id|
-    #   repo = @user_repos.find { |r| r[:id] == repo_id.to_i }
-    #   current_user.products.create(
-    #     name: repo[:name],
-    #     description: repo[:description],
-    #     url: repo[:html_url]
-    #   )
-    # end
-    redirect_to products_path, notice: 'Products created successfully from GitHub repositories.'
+    repo_ids = params[:repo_ids]
+    failed_repos = []
+    skipped_repos = []
+    successful_repos = []
+  
+    repo_ids.each do |repo_id|
+      ActiveRecord::Base.transaction do
+        begin
+          repo = octokit_client.repository(repo_id.to_i)
+          owner, repo_name = extract_owner_and_repo_name(repo[:html_url])
+  
+          if Product.exists?(url: repo[:html_url])
+            Rails.logger.info "Repository #{repo_name} already exists. Skipping..."
+            skipped_repos << repo_name
+            next
+          end
+  
+          product = Product.new(
+            name: repo[:name],
+            description: repo[:description],
+            url: repo[:html_url],
+            user_id: current_user.id
+          )
+  
+          if product.save
+            result = load_repo_and_link_tree(owner, repo_name, 'master', current_user.token, product)
+            if result
+              successful_repos << repo_name
+            else
+              Rails.logger.error "Failed to process repository #{repo_name}, skipping..."
+              failed_repos << repo_name
+              product.destroy
+            end
+          else
+            Rails.logger.error "Failed to save product for repo #{repo_name}, skipping..."
+            failed_repos << repo_name
+            raise ActiveRecord::Rollback
+          end
+        rescue => e
+          Rails.logger.error "Error processing repo #{repo_id}: #{e.message}"
+          failed_repos << repo_name
+        end
+      end
+    end
+  
+    message = []
+    message << "✅ Successfully added: #{successful_repos.join(', ')}" unless successful_repos.empty?
+    message << "⚠️ Skipped existing repositories: #{skipped_repos.join(', ')}" unless skipped_repos.empty?
+    message << "❌ Failed to process: #{failed_repos.join(', ')}" unless failed_repos.empty?
+  
+    redirect_to products_path, alert: message.join(' ')
   end
 
   def show_file_content
@@ -337,7 +377,7 @@ class ProductsController < ApplicationController
   end
 
   def set_user_repos
-    @user_repos ||= octokit_client.repositories(nil, per_page: repositories_count)
+    @user_repos ||= octokit_client.repositories(nil, per_page: 12)
   end
 
   def download_repository_as_zip(owner, repo, ref, token)

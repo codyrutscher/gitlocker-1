@@ -19,24 +19,28 @@ module ProductConcern
 
   def zip_structure_for_js_tree(file_path)
     structure = {}
-    Zip::File.open(file_path) do |zip_file|
-      sorted_entries = zip_file.sort_by { |entry| [entry.directory? ? 0 : 1, entry.name] }
-      sorted_entries.each do |entry|
-        parts = entry.name.split('/')
-        current_level = structure
-        parts.each_with_index do |part, index|
-          if index == parts.size - 1
-            if entry.directory?
-              current_level[part] ||= {}
+    begin
+      Zip::File.open(file_path) do |zip_file|
+        sorted_entries = zip_file.sort_by { |entry| [entry.directory? ? 0 : 1, entry.name] }
+        sorted_entries.each do |entry|
+          parts = entry.name.split('/')
+          current_level = structure
+          parts.each_with_index do |part, index|
+            if index == parts.size - 1
+              if entry.directory?
+                current_level[part] ||= {}
+              else
+                current_level[part] = 'file'
+              end
             else
-              current_level[part] = 'file'
+              current_level[part] ||= {}
+              current_level = current_level[part]
             end
-          else
-            current_level[part] ||= {}
-            current_level = current_level[part]
           end
         end
       end
+    rescue Zip::Error => e
+      return nil
     end
     convert_to_js_tree_format(structure)
   end
@@ -110,5 +114,49 @@ module ProductConcern
       File.delete(temp_zip_path) if File.exist?(temp_zip_path)
     end
     file_content
+  end
+
+  def load_repo_and_link_tree(owner, repo, ref, token, product)
+    begin
+      zip_link = "https://github.com/#{owner}/#{repo}/archive/refs/heads/#{ref}.zip"
+      temp_file = Tempfile.new([repo, '.zip'])
+  
+      curl_command = "curl -L -H 'Authorization: token #{token}' -o #{temp_file.path} #{zip_link}"
+      stdout, stderr, status = Open3.capture3(curl_command)
+  
+      unless status.success?
+        Rails.logger.error "Failed to download ZIP: #{stderr}"
+        return nil
+      end
+  
+      Rails.logger.info "Successfully downloaded #{temp_file.path}"
+  
+      # Ensure file exists before attaching
+      if File.exist?(temp_file.path) && File.size(temp_file.path) > 0
+        product.folder.attach(
+          io: File.open(temp_file.path),
+          filename: "#{repo}-#{ref}.zip",
+          content_type: 'application/zip'
+        )
+  
+        directory_tree_str = zip_structure_for_js_tree(temp_file.path).to_s
+        if directory_tree_str.present? && product.update(directory_tree: directory_tree_str)
+          Rails.logger.info "Successfully attached #{repo}-#{ref}.zip to the product"
+          return temp_file.path
+        else
+          Rails.logger.error "Failed to update directory_tree for product #{product.id}"
+          return nil
+        end
+      else
+        Rails.logger.error "Downloaded file is empty or missing."
+        return nil
+      end
+    rescue => e
+      Rails.logger.error "Exception occurred: #{e.message}"
+      return nil
+    ensure
+      temp_file.close
+      temp_file.unlink if File.exist?(temp_file.path)
+    end
   end
 end

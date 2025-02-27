@@ -1,6 +1,12 @@
 <script src="https://cdn.tailwindcss.com"></script>
 
-<div class="bg-black text-white min-h-screen font-sans p-6">
+<%=
+  render BreadcrumbComponent.new(current_user,[
+    { text: "Import Product", url: new_product_products_path }
+  ])
+%>
+
+<div class="bg-white text-white min-h-screen font-sans p-6">
     <!-- Top Search Bar -->
     <div class="flex justify-between items-center bg-gray-900 px-4 py-3 rounded-lg shadow-lg max-w-2xl mx-auto">
         <input type="text" placeholder="Ask v0 to build something..." class="bg-transparent flex-1 text-white placeholder-gray-500 focus:outline-none px-3">
@@ -62,7 +68,7 @@
     <div id="repos-section" class="hidden mt-8">
         <% if @user_repos.present? %>
             <h1 class="text-2xl font-bold mb-4">Select GitHub Repositories to Add as Products</h1>
-            <%= form_with url: create_from_github_products_path, method: :post do %>
+            <%= form_with url: create_from_github_products_path, method: :post, data: { turbo: false } do %>
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
                 <% @user_repos.each do |repo| %>
                     <div class="bg-gray-900 p-6 rounded-lg shadow-lg">

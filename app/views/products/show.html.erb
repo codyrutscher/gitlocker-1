@@ -186,7 +186,7 @@
           <% end %>
           <div id="description" class="flex border-black border-2 flex-col text-gray-900 h-fit p-4 rounded-2xl gap-4">
             <h2 class="text-2xl text-bold underline text-gray-900">Description:</h2>
-            <p class="text-sm text-white"><%= sanitize @product.description %></p>
+            <p class="text-sm text-black"><%= sanitize @product.description %></p>
           </div>
           <div class="w-full border-t-4 border-black"></div>
         <% end %>
@@ -194,7 +194,7 @@
         <% if @product.features.present? %>
           <div id="description" class="flex border-black border-2 flex-col h-fit p-4 text-gray-900 rounded-2xl gap-4">
             <h2 class="text-2xl text-bold underline text-gray-900">Features:</h2>
-            <p class="text-sm text-white"><%= sanitize @product.features %></p>
+            <p class="text-sm text-black"><%= sanitize @product.features %></p>
           </div>
           <div class="w-full border-t-4 border-black"></div>
         <% end %>
@@ -202,7 +202,7 @@
         <% if @product.requirements.present? %>
           <div id="description" class="flex border-black border-2 flex-col h-fit text-gray-900 p-4 rounded-2xl gap-4">
             <h2 class="text-2xl text-bold underline text-gray-900">Requirements:</h2>
-            <p class="text-sm text-white"><%= sanitize @product.requirements %></p>
+            <p class="text-sm text-black"><%= sanitize @product.requirements %></p>
           </div>
           <div class="w-full border-t-4 border-black"></div>
         <% end %>
@@ -210,7 +210,7 @@
         <% if @product.instructions.present? %>
           <div id="description" class="flex border-black border-2 flex-col h-fit text-gray-900 p-4 rounded-2xl gap-4">
             <h2 class="text-2xl text-bold underline text-gray-900">Instructions:</h2>
-            <p class="text-sm text-white"><%= sanitize @product.instructions %></p>
+            <p class="text-sm text-black"><%= sanitize @product.instructions %></p>
           </div>
           <div class="w-full border-t-4 border-black"></div>
         <% end %>
