@@ -2,7 +2,7 @@
 
 <%=
   render BreadcrumbComponent.new(current_user,[
-    { text: "Import Product", url: new_product_products_path }
+    { text: "Create Repository", url: new_product_products_path }
   ])
 %>
 
@@ -26,7 +26,7 @@
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8 max-w-5xl mx-auto">
         <!-- Import Git Repository -->
         <div class="bg-gray-900 p-6 rounded-lg shadow-lg">
-            <h4 class="text-xl font-bold">Import Git Repository</h4>
+            <h4 class="text-xl font-bold">Import Git Repositories</h4>
             <div class="bg-gray-800 p-6 rounded-lg mt-4">
                 <p class="text-gray-400 text-sm">Select a Git provider to import an existing project from a Git Repository.</p>
                 <button id="github-button" class="block w-full bg-gray-700 hover:bg-gray-600 text-white font-semibold py-2 mt-3 text-center rounded">
@@ -36,8 +36,9 @@
                     <button type="submit"></button>
                 <% end %>
                 <a href="#" class="block w-full bg-purple-600 hover:bg-purple-500 text-white font-semibold py-2 mt-3 text-center rounded">Continue with GitLab</a>
-                <a href="#" class="block w-full bg-blue-500 hover:bg-blue-400 text-white font-semibold py-2 mt-3 text-center rounded">Continue with Bitbucket</a>
-                <a href="#" class="block mt-4 text-gray-300 hover:text-white text-sm">Import Third-Party Git Repository →</a>
+                <a href="#" class="block w-full bg-blue-700 hover:bg-blue-400 text-white font-semibold py-2 mt-3 text-center rounded">Continue with Bitbucket</a>
+
+                <a href="<%= new_product_path %>" class="block mt-4 text-gray-300 hover:text-white text-sm">Manually Upload Zip File →</a>
             </div>
         </div>
         
