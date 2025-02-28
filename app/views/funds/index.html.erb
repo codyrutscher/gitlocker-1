@@ -1,56 +1,56 @@
 <%= render BreadcrumbComponent.new(current_user, [{ text: "Funds", url: funds_path }]) %>
-<div class="w-full m-4 bg-gradient-to-l from-gray-200 via-fuchsia-200 to-stone-100 justify-center" data-controller="checkout" style="min-height: 27.65rem;">
-  <div class="py-16">
-    <div class="pb-8">
-    <h2 class="text-xl sm:text-2xl font-bold tracking-tight  text-gray-900 underline">Earnings</h2>
+<div class="w-full m-4  via-fuchsia-200 to-stone-100 justify-center" data-controller="checkout" style="min-height: 27.65rem;">
+  <div class="from-gray-200 border border-gray-200 rounded-xl" style="margin: 5%">
+    <div class="">
+    <h2 class="text-xl sm:text-2xl font-bold tracking-tight text-gray-900"  style="margin-left: 5%; margin-top: 2%">Earnings</h2>
     </div>
-    
-    <div class="sm:flex sm:items-center sm:justify-between justify-center">
-      <div class="flex gap-4 justify-center items-stretch">
-        <div class="bg-white p-4 rounded shadow-2xl flex border-4 border-black">
-          <% [["Available", sprintf("$%.2f", current_user.balance)]].each do |label, amount, extra| %>
-            <div class="text-center">
-              <p class="text-gray-500">
-                <%= label %>
-                <span class="relative" x-data="{ tooltip: false }">
-                  <span @mouseenter="tooltip = true" @mouseleave="tooltip = false" class="inline-block w-5 h-5 bg-black text-white text-xs rounded-full cursor-pointer">?</span>
-                  <span x-show="tooltip" class="absolute z-10 w-40 p-2 -mt-8 text-sm text-white bg-black rounded-lg" style="display: none;">Transfers are processed only for amounts exceeding $0.50</span>
-                </span>
-              </p>
-              <p class="text-2xl font-semibold"><%= amount %></p>
-              <% if extra %>
-                <p class="text-gray-500 text-sm"><%= extra %></p>
-              <% end %>
-            </div>
-          <% end %>
-        </div>
-        <div class="bg-white p-4 rounded shadow-2xl flex border-4 border-black">
-          <% [["Total Earnings", sprintf("$%.2f", current_user.total_earning)]].each do |label, amount, extra| %>
-            <div class="text-center">
-              <p class="text-gray-500">
-                <%= label %>
-              </p>
-              <p class="text-2xl font-semibold"><%= amount %></p>
-              <% if extra %>
-                <p class="text-gray-500 text-sm"><%= extra %></p>
-              <% end %>
-            </div>
-          <% end %>
+    <div class="border border-gray-200 rounded-xl p-4 bg-black" style="margin: 5%">
+      <div class="sm:flex sm:items-center sm:justify-center justify-center py-16 bg-gradient-to-l ">
+        <div class="flex gap-4 justify-center items-stretch">
+          <div class="bg-white p-4 rounded shadow-2xl flex border-4 border-black">
+            <% [["Available", sprintf("$%.2f", current_user.balance)]].each do |label, amount, extra| %>
+              <div class="text-center">
+                <p class="text-gray-500">
+                  <%= label %>
+                  <span class="relative" x-data="{ tooltip: false }">
+                    <span @mouseenter="tooltip = true" @mouseleave="tooltip = false" class="inline-block w-5 h-5 bg-black text-white text-xs rounded-full cursor-pointer">?</span>
+                    <span x-show="tooltip" class="absolute z-10 w-40 p-2 -mt-8 text-sm text-white bg-black rounded-lg" style="display: none;">Transfers are processed only for amounts exceeding $0.50</span>
+                  </span>
+                </p>
+                <p class="text-2xl font-semibold"><%= amount %></p>
+                <% if extra %>
+                  <p class="text-gray-500 text-sm"><%= extra %></p>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+          <div class="bg-white p-4 rounded shadow-2xl flex border-4 border-black">
+            <% [["Total Earnings", sprintf("$%.2f", current_user.total_earning)]].each do |label, amount, extra| %>
+              <div class="text-center">
+                <p class="text-gray-500">
+                  <%= label %>
+                </p>
+                <p class="text-2xl font-semibold"><%= amount %></p>
+                <% if extra %>
+                  <p class="text-gray-500 text-sm"><%= extra %></p>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
         </div>
       </div>
-    </div>
     <br/>
 
 
     <div class="col-span-1">
-      <h1 class="text-lg  underline font-bold text-gray-900">Payment:</h1>
-      <h2 class="">If you have any issues withdrawing your funds please email cody@gitlocker.com and describe your issue with either a loom video or screenshots of the issue, and we will get right back with you and help you get your money!</h2>
-      <div class="mt-6">
+      <h1 class="text-lg font-bold text-white text-center ">Payment</h1>
+      <h2 class="text-center text-white ">If you have any issues withdrawing your funds please email cody@gitlocker.com and describe your issue with either a loom video or screenshots of the issue, and we will get right back with you and help you get your money!</h2>
+      <div class="mt-6 flex justify-center text-white ">
 
         <% if current_user.account.nil? %>
           <form action="/accounts" method="POST" data-turbo="false" class="mt-4">
             <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-            <button type="submit" class="inline-flex w-96 items-center px-4 py-2 border border-transparent text-sm font-medium  rounded-md shadow-sm bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+            <button type="submit" class="inline-flex w-96 items-center justify-center px-4 py-2 border border-transparent text-sm font-medium  rounded-md shadow-sm bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
               Create a Stripe Account
             </button>
           </form>
@@ -58,14 +58,16 @@
         <% end %>
     
         <%= form_tag funds_path, method: :post, class: "stripe-form", "data-turbo" => "false" do %>
-          <%= submit_tag "Get Paid through Stripe", disabled: current_user.balance <= 0 || current_user.account.nil? , class: "mt-4 w-96 bg-indigo-600 border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white disabled:cursor-not-allowed disabled:bg-indigo-300 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500 cursor-pointer" %>
+          <%= submit_tag "Get Paid through Stripe", disabled: current_user.balance <= 0 || current_user.account.nil? , class: "mt-4 w-96 bg-indigo-600 justify-center border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white disabled:cursor-not-allowed disabled:bg-indigo-300 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500 cursor-pointer" %>
         <% end %>
       </div>
     </div>
+    </div>
+
   </div>
 
-  <div class="pb-8">
-    <h1 class="text-xl  underline font-bold text-gray-900 p-4 m-4">Transaction History:</h1>
+  <div class="pb-8 bg-gradient-to-l from-gray-200">
+    <h1 class="text-xl font-bold text-gray-900 p-4 m-4">Transaction History</h1>
     <div class="mt-4">
       <div class="flex">
         <table class="table-auto rounded m-8 p-8  text-gray-500 border-black border-2">
@@ -79,7 +81,7 @@
           <tbody>
             <% @sales.each do |sale| %>
               <tr class="bg-white text-gray-900 hover:bg-gray-200">
-                <td class="px-6 py-3 border-black border-2"><%= sale.user&.name %></td>
+                <td class="px-6 py-3 border-black border-2"><%= sale.user&.username %></td>
                 <td class="px-6 py-3 border-black border-2"><%= sale.product&.name %></td>
                 <td class="px-6 py-3 border-black border-2"><%= number_to_currency(sale.price_cents.to_f/100, unit: '$') %></td>
               </tr>
