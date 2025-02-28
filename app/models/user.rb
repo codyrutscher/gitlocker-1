@@ -3,7 +3,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
-         :confirmable, :omniauthable, omniauth_providers: [:github]
+         :confirmable, :omniauthable, omniauth_providers: [:github, :gitlab]
 
   enum :registration_status, {
     registration_pending: 0,
@@ -91,28 +91,30 @@ class User < ApplicationRecord
                   }
 
   def self.from_omniauth(access_token)
+    provider = access_token.provider
     token    = access_token.credentials.token
     email    = access_token.info.email
     name     = access_token.info.name
-    username = access_token.info.nickname
+    username = access_token.info.nickname || access_token.info.username
     user     = User.find_by(email: email)
-
-    if user
+    if user && provider == 'github'
       user.update(token: token, name: name, username: username)
+    elsif user && provider == 'gitlab'
+      user.update(gitlab_token: token, name: name, username: username)
     else
       user = User.create(
         # You can record new values based on the model and github api e.g -> name: data["name"],
         email: email,
         password: Devise.friendly_token[0, 20],
-        token: token,
+        token: provider == 'github' ? token : nil,
+        gitlab_token: provider == 'gitlab' ? token : nil,
         name: name,
         username: username
       )
     end
-
     user
   end
-
+  
   def clone_repositories(git_url)
     # Temporary method to have a note of how to clone repositories
     "git clone https://oauth2:#{token}@github.com/#{username}/{repository_name}"

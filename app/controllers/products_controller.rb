@@ -9,6 +9,7 @@ class ProductsController < ApplicationController
   before_action :set_product, only: [:like, :unlike]
   before_action :update_state
   before_action :set_user_repos, if: -> { current_user.token.present? }
+  before_action :set_gitlab_repos, if: -> { current_user.gitlab_token.present? }
   include ProductConcern
 
   def index
@@ -378,6 +379,16 @@ class ProductsController < ApplicationController
 
   def set_user_repos
     @user_repos ||= octokit_client.repositories(nil, per_page: 12)
+  end
+
+  def set_gitlab_repos
+    gitlab_client = Gitlab.client(endpoint: 'https://gitlab.com/api/v4', private_token: ENV['GITLAB_PRIVATE_TOKEN'])
+    @gitlab_repos = gitlab_client.projects(membership: true, per_page: 12)
+  end
+
+  def download_gitlab_repo(project_id, token)
+    zip_link = "https://gitlab.com/api/v4/projects/#{project_id}/repository/archive.zip"
+    system("curl -H 'Private-Token: #{token}' -o repo.zip #{zip_link}")
   end
 
   def download_repository_as_zip(owner, repo, ref, token)

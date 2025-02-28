@@ -38,6 +38,7 @@ Rails.application.routes.draw do
     omniauth_callbacks: "users/omniauth_callbacks",
     passwords: 'passwords'
   }
+
   devise_scope :user do
     get '/password_instructions', to: 'passwords#show_instructions'
     get '/signup_success', to: 'users/registrations#signup_success', as: 'signup_success'
@@ -88,6 +89,7 @@ Rails.application.routes.draw do
     resources :covers, only: [:create, :destroy], controller: "product_covers"
     get 'new_product', on: :collection
     post 'create_from_github', on: :collection
+    post 'create_from_gitlab', on: :collection
     post 'like', on: :member
     post 'unlike', on: :member
     get 'search', on: :collection

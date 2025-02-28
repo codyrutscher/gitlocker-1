@@ -87,6 +87,23 @@
             <% end %>
           </div>
         </div>
+        <div class="mt-6 relative">
+          <div class="relative flex justify-center text-sm font-medium leading-6">
+            <span class="bg-white px-6 text-gray-900">Or continue with</span>
+          </div>
+          <div class="mt-6 grid grid-cols-1 gap-4">
+            <%= button_to omniauth_authorize_path(User, :gitlab),  method: :post, data: { turbo: "false" }, class: "flex w-full items-center justify-center gap-3 rounded-md bg-[#24292F] px-3 py-1.5 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#24292F]" do %>
+              <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M23.05 9.638 20.14 2.1a.875.875 0 0 0-1.642 0L16.02 7.58H7.98L5.503 2.1a.874.874 0 0 0-1.641 0L.95 9.638a1.723 1.723 0 0 0 .61 1.957l10.44 7.432 10.44-7.432a1.724 1.724 0 0 0 .61-1.957zM12 17.69l-7.413-5.278a.276.276 0 0 1-.097-.312l1.38-4.574h12.26l1.38 4.574a.276.276 0 0 1-.097.312L12 17.69z"/>
+              </svg>
+              <% if @gitlab_email.present? %>
+                <span class="text-sm font-semibold leading-6">Continue as <%= @gitlab_email %></span>
+              <% else %>
+              <span class="text-sm font-semibold leading-6">Gitlab</span>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
       </div>
     </div>
   </div>

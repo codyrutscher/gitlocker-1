@@ -5,6 +5,7 @@ module Users
     def new
       self.resource = resource_class.new
       @github_email = cookies[:github_email]
+      @gitlab_email = cookies[:gitlab_email]
       super
     end
 
