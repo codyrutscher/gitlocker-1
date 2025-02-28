@@ -103,10 +103,10 @@
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
                 <% @gitlab_repos.each do |repo| %>
                     <div class="bg-gray-900 p-6 rounded-lg shadow-lg">
-                    <h4 class="text-xl font-bold"><%= repo[:name] %></h4>
-                    <p class="text-gray-400 text-sm"><%= repo[:description] %></p>
+                    <h4 class="text-xl font-bold"><%= repo['name'] %></h4>
+                    <p class="text-gray-400 text-sm"><%= repo['description'] %></p>
                     <label class="block mt-4">
-                        <%= check_box_tag 'repo_ids[]', repo[:id], false, class: 'mr-2' %>
+                        <%= check_box_tag 'repo_ids[]', repo['id'], false, class: 'mr-2' %>
                         Select this repository
                     </label>
                     </div>

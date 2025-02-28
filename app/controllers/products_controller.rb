@@ -108,6 +108,10 @@ class ProductsController < ApplicationController
   def new_product
   end
 
+  def create_from_gitlab
+    redirect_to products_path, notice: 'Repo added as product successfully'
+  end
+
   def create_from_github
     repo_ids = params[:repo_ids]
     failed_repos = []
@@ -382,7 +386,7 @@ class ProductsController < ApplicationController
   end
 
   def set_gitlab_repos
-    gitlab_client = Gitlab.client(endpoint: 'https://gitlab.com/api/v4', private_token: ENV['GITLAB_PRIVATE_TOKEN'])
+    gitlab_client = Gitlab.client(endpoint: 'https://gitlab.com/api/v4', private_token: current_user.gitlab_token)
     @gitlab_repos = gitlab_client.projects(membership: true, per_page: 12)
   end
 
