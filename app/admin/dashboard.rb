@@ -29,5 +29,12 @@ ActiveAdmin.register_page "Dashboard" do
     #     end
     #   end
     # end
+    columns do
+      column do
+        panel "Reserved Payment" do
+          para "Reserved Balance(Not to be withdrawn): #{number_to_currency(User.sum(:balance))}"
+        end
+      end
+    end
   end # content
 end
