@@ -15,33 +15,63 @@ jobs:
 
     - name: Set up SSH Keys for EC2 Instances
       run: |
+        echo "Setting up SSH keys..."
         echo "${{ secrets.EC2_1_SSH_KEY }}" > coderz-key-pair.pem
         echo "${{ secrets.EC2_2_SSH_KEY }}" > sidekiq-worker.pem
         echo "${{ secrets.EC2_3_SSH_KEY }}" > rake-job-coderz-sg.pem
-
         chmod 600 coderz-key-pair.pem sidekiq-worker.pem rake-job-coderz-sg.pem
+        echo "SSH keys setup completed."
 
     - name: Deploy to EC2-1 (Main Server)
       run: |
+        echo "Deploying to Main Server (EC2-1)..."
         ssh -o StrictHostKeyChecking=no -i coderz-key-pair.pem ubuntu@ec2-54-166-100-135.compute-1.amazonaws.com << 'EOF'
-        cd /var/www/coderz-app
-        git pull origin main
-        bundle install 
-        sudo systemctl restart puma_coderz.service
+          set -e
+          echo "Connected to EC2-1"
+          cd /var/www/coderz-app
+          echo "Pulling latest changes..."
+          git pull origin main
+          echo "Installing dependencies..."
+          bundle install
+          echo "Restarting Puma service..."
+          sudo systemctl restart puma_coderz.service
+          echo "Checking Puma service status..."
+          sudo systemctl status puma_coderz.service --no-pager || true
         EOF
+        echo "Deployment to EC2-1 completed."
 
     - name: Deploy to EC2-2 (Sidekiq Worker)
       run: |
+        echo "Deploying to Sidekiq Worker (EC2-2)..."
         ssh -o StrictHostKeyChecking=no -i sidekiq-worker.pem ubuntu@ec2-3-86-212-41.compute-1.amazonaws.com << 'EOF'
-        cd /var/www/coderz-worker-sidekiq
-        bundle install
-        sudo systemctl restart sidekiq_worker.service
+          set -e
+          echo "Connected to EC2-2"
+          cd /var/www/coderz-worker-sidekiq
+          echo "Pulling latest changes..."
+          git pull origin main
+          echo "Installing dependencies..."
+          bundle install
+          echo "Restarting Sidekiq worker..."
+          sudo systemctl restart sidekiq_worker.service
+          echo "Checking Sidekiq service status..."
+          sudo systemctl status sidekiq_worker.service --no-pager || true
         EOF
+        echo "Deployment to EC2-2 completed."
 
     - name: Deploy to EC2-3 (Rake Job Server)
       run: |
+        echo "Deploying to Rake Job Server (EC2-3)..."
         ssh -o StrictHostKeyChecking=no -i rake-job-coderz-sg.pem ubuntu@ec2-3-90-215-104.compute-1.amazonaws.com << 'EOF'
-        cd /var/www/coderz-worker-rake
-        bundle install 
-        sudo systemctl restart rake_jobs_worker.service
+          set -e
+          echo "Connected to EC2-3"
+          cd /var/www/coderz-worker-rake
+          echo "Pulling latest changes..."
+          git pull origin main
+          echo "Installing dependencies..."
+          bundle install
+          echo "Restarting Rake Jobs worker..."
+          sudo systemctl restart rake_jobs_worker.service
+          echo "Checking Rake Jobs service status..."
+          sudo systemctl status rake_jobs_worker.service --no-pager || true
         EOF
+        echo "Deployment to EC2-3 completed."
