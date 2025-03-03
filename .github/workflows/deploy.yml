@@ -1,0 +1,47 @@
+name: Deploy to AWS EC2 Instances
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Set up SSH Keys for EC2 Instances
+      run: |
+        echo "${{ secrets.EC2_1_SSH_KEY }}" > coderz-key-pair.pem
+        echo "${{ secrets.EC2_2_SSH_KEY }}" > sidekiq-worker.pem
+        echo "${{ secrets.EC2_3_SSH_KEY }}" > rake-job-coderz-sg.pem
+
+        chmod 600 coderz-key-pair.pem sidekiq-worker.pem rake-job-coderz-sg.pem
+
+    - name: Deploy to EC2-1 (Main Server)
+      run: |
+        ssh -o StrictHostKeyChecking=no -i coderz-key-pair.pem ubuntu@ec2-54-166-100-135.compute-1.amazonaws.com << 'EOF'
+        cd /var/www/coderz-app
+        git pull origin main
+        bundle install 
+        sudo systemctl restart puma_coderz.service
+        EOF
+
+    - name: Deploy to EC2-2 (Sidekiq Worker)
+      run: |
+        ssh -o StrictHostKeyChecking=no -i sidekiq-worker.pem ubuntu@ec2-3-86-212-41.compute-1.amazonaws.com << 'EOF'
+        cd /var/www/coderz-worker-sidekiq
+        bundle install
+        sudo systemctl restart sidekiq_worker.service
+        EOF
+
+    - name: Deploy to EC2-3 (Rake Job Server)
+      run: |
+        ssh -o StrictHostKeyChecking=no -i rake-job-coderz-sg.pem ubuntu@ec2-3-90-215-104.compute-1.amazonaws.com << 'EOF'
+        cd /var/www/coderz-worker-rake
+        bundle install 
+        sudo systemctl restart rake_jobs_worker.service
+        EOF
