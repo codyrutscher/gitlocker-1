@@ -13,6 +13,18 @@
   <% content_for :meta_title, @product&.name&.titleize&.first(65) %>
 <% end %>
 
+
+
+
+
+
+<div class="bg-indigo-100">
+  <%=
+    render BreadcrumbComponent.new(current_user,[
+      { text: "Products", url: current_user&.buyer? ? marketplace_browse_path : marketplace_browse_path },
+      { text: @product.name, url: request.original_url.include?("/l/") ? marketplace_library_path(@product) : product_path(@product) }
+    ])
+  %> 
 <header>
 <div class="bg-gray-500 w-full h-fit grid grid-cols-1 md:grid-cols-7 lg:grid-cols-7 py-6 border-b-4">
 	<div>
@@ -44,17 +56,6 @@
 	</div>
 </div>
 </header>
-
-
-
-
-<div class="bg-indigo-100">
-  <%=
-    render BreadcrumbComponent.new(current_user,[
-      { text: "Products", url: current_user&.buyer? ? marketplace_browse_path : marketplace_browse_path },
-      { text: @product.name, url: request.original_url.include?("/l/") ? marketplace_library_path(@product) : product_path(@product) }
-    ])
-  %> 
 <div class="mx-auto px-4 py-8 sm:px-6 lg:px-8">
     <!-- Product -->
     <div class="flex flex-col md:flex-row md:items-center gap-4">
