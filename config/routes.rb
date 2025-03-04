@@ -104,6 +104,7 @@ Rails.application.routes.draw do
   get 'pullrequests', to: "products#pullrequests"
   get 'branches', to: "products#branches"
   get 'commits', to: "products#commits"
+  get 'team', to: "products#team"
   
 
   resources :subscribed_users, only: :create
