@@ -108,6 +108,27 @@ class ProductsController < ApplicationController
   def new_product
   end
 
+  def code
+  end
+
+  def commits
+  end
+
+  def configurations
+  end
+
+  def deployments
+  end
+
+  def issues
+  end
+
+  def branches
+  end
+
+  def pullrequest
+  end
+
   def create_from_gitlab
     redirect_to products_path, notice: 'Repo added as product successfully'
   end
