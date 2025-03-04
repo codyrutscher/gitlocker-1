@@ -92,12 +92,12 @@ Rails.application.routes.draw do
     post 'create_from_gitlab', on: :collection
     post 'like', on: :member
     post 'unlike', on: :member
+    get 'code', on: :member
     get 'search', on: :collection
     post 'show_file_content', on: :member
   end
   get 'search_repositories/(:query)', to: "products#search_repositories"
 
-  get 'code', to: "products#code"
   get 'deployments', to: "products#deployments"
   get 'issues', to: "products#issues"
   get 'configurations', to: "products#configurations"
