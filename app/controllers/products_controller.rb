@@ -114,6 +114,9 @@ class ProductsController < ApplicationController
   def commits
   end
 
+  def team 
+  end
+
   def configurations
   end
 
