@@ -29,3 +29,46 @@
 	</div>
 </div>
 </header>
+
+<div class="flex flex-col items-center p-6">
+        <!-- Header -->
+        <header class="w-full max-w-4xl bg-white shadow p-4 rounded-lg flex justify-between items-center">
+            <h1 class="text-xl font-bold">Repository Commit History</h1>
+            <button class="bg-blue-500 text-white px-4 py-2 rounded">New Commit</button>
+        </header>
+        
+        <!-- Commit List -->
+        <section class="w-full max-w-4xl bg-white shadow p-4 mt-6 rounded-lg">
+            <h2 class="text-lg font-semibold">Commit History</h2>
+            <ul class="mt-4 space-y-3">
+                <li class="flex justify-between items-center border-b pb-2">
+                    <div>
+                        <p class="text-blue-600 font-medium">Fix authentication bug</p>
+                        <p class="text-sm text-gray-600">Commit #a1b2c3 - by John Doe, 10m ago</p>
+                    </div>
+                    <span class="text-green-600">✅ Merged</span>
+                </li>
+                <li class="flex justify-between items-center border-b pb-2">
+                    <div>
+                        <p class="text-blue-600 font-medium">Refactor API calls</p>
+                        <p class="text-sm text-gray-600">Commit #d4e5f6 - by Jane Smith, 2h ago</p>
+                    </div>
+                    <span class="text-green-600">✅ Merged</span>
+                </li>
+                <li class="flex justify-between items-center border-b pb-2">
+                    <div>
+                        <p class="text-blue-600 font-medium">Update UI components</p>
+                        <p class="text-sm text-gray-600">Commit #g7h8i9 - by Alex Johnson, 5h ago</p>
+                    </div>
+                    <span class="text-yellow-600">🕒 Pending Review</span>
+                </li>
+                <li class="flex justify-between items-center border-b pb-2">
+                    <div>
+                        <p class="text-blue-600 font-medium">Fix broken tests</p>
+                        <p class="text-sm text-gray-600">Commit #j1k2l3 - by Sarah Lee, 1d ago</p>
+                    </div>
+                    <span class="text-red-600">❌ Rejected</span>
+                </li>
+            </ul>
+        </section>
+    </div>
