@@ -97,6 +97,15 @@ Rails.application.routes.draw do
   end
   get 'search_repositories/(:query)', to: "products#search_repositories"
 
+  get 'code', to: "products#code"
+  get 'deployments', to: "products#deployments"
+  get 'issues', to: "products#issues"
+  get 'configurations', to: "products#configurations"
+  get 'pullrequests', to: "products#pullrequests"
+  get 'branches', to: "products#branches"
+  get 'commits', to: "products#commits"
+  
+
   resources :subscribed_users, only: :create
 
 
