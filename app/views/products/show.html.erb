@@ -13,6 +13,41 @@
   <% content_for :meta_title, @product&.name&.titleize&.first(65) %>
 <% end %>
 
+<header>
+<div class="bg-gray-500 w-full h-fit grid grid-cols-1 md:grid-cols-7 lg:grid-cols-7 py-6 border-b-4">
+	<div>
+	<h2 class="text-center hover:underline hover:text-white">Code</h2>
+	</div>
+
+	<div>
+	<h2 class="text-center hover:underline hover:text-white">Commits</h2>
+	</div>
+
+	<div>
+	<h2 class="text-center hover:underline hover:text-white">Issues</h2>
+	</div>
+
+	<div>
+	<h2 class="text-center hover:underline hover:text-white">Branches</h2>
+	</div>
+
+	<div>
+	<h2 class="text-center hover:underline hover:text-white">Pull Requests</h2>
+	</div>
+
+	<div>
+	<h2 class="text-center hover:underline hover:text-white">Configurations</h2>
+	</div>
+
+	<div>
+	<h2 class="text-center hover:underline hover:text-white">Deployments</h2>
+	</div>
+</div>
+</header>
+
+
+
+
 <div class="bg-indigo-100">
   <%=
     render BreadcrumbComponent.new(current_user,[
