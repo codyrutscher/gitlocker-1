@@ -126,7 +126,7 @@ class ProductsController < ApplicationController
   def branches
   end
 
-  def pullrequest
+  def pullrequests
   end
 
   def create_from_gitlab
