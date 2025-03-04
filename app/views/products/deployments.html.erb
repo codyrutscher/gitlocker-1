@@ -1,31 +1,66 @@
-<header>
-<div class="bg-gray-500 w-full h-fit grid grid-cols-1 md:grid-cols-7 lg:grid-cols-7 py-6 border-b-4">
-	<div>
-	<h2 class="text-center hover:underline hover:text-white">Code</h2>
-	</div>
-
-	<div>
-	<h2 class="text-center hover:underline hover:text-white">Commits</h2>
-	</div>
-
-	<div>
-	<h2 class="text-center hover:underline hover:text-white">Issues</h2>
-	</div>
-
-	<div>
-	<h2 class="text-center hover:underline hover:text-white">Branches</h2>
-	</div>
-
-	<div>
-	<h2 class="text-center hover:underline hover:text-white">Pull Requests</h2>
-	</div>
-
-	<div>
-	<h2 class="text-center hover:underline hover:text-white">Configurations</h2>
-	</div>
-
-	<div>
-	<h2 class="text-center hover:underline hover:text-white">Deployments</h2>
-	</div>
-</div>
-</header>
+<body class="bg-gray-100">
+    <div class="min-h-screen flex flex-col items-center p-6">
+        <!-- Header -->
+        <header class="w-full max-w-4xl bg-white shadow p-4 rounded-lg flex justify-between items-center">
+            <h1 class="text-xl font-bold">Version Control Deployment</h1>
+            <button class="bg-blue-500 text-white px-4 py-2 rounded">New Deployment</button>
+        </header>
+        
+        <!-- Repo Selection -->
+        <section class="w-full max-w-4xl bg-white shadow p-4 mt-6 rounded-lg">
+            <h2 class="text-lg font-semibold">Select Repository</h2>
+            <select class="mt-2 w-full p-2 border rounded">
+                <option>my-project-repo</option>
+                <option>frontend-app</option>
+                <option>backend-service</option>
+            </select>
+        </section>
+        
+        <!-- Deployment Status -->
+        <section class="w-full max-w-4xl bg-white shadow p-4 mt-6 rounded-lg">
+            <h2 class="text-lg font-semibold">Current Deployment</h2>
+            <div class="mt-4 flex items-center justify-between">
+                <span class="text-gray-700">Branch: <strong>main</strong></span>
+                <span class="text-green-600 font-semibold">✅ Deployed Successfully</span>
+            </div>
+        </section>
+        
+        <!-- Deployment History -->
+        <section class="w-full max-w-4xl bg-white shadow p-4 mt-6 rounded-lg">
+            <h2 class="text-lg font-semibold">Deployment History</h2>
+            <ul class="mt-4 space-y-2">
+                <li class="flex justify-between items-center border-b pb-2">
+                    <span>🔄 Commit #a1b2c3 - Pushed 5m ago</span>
+                    <span class="text-green-600">✅ Success</span>
+                </li>
+                <li class="flex justify-between items-center border-b pb-2">
+                    <span>🔄 Commit #d4e5f6 - Pushed 1h ago</span>
+                    <span class="text-red-600">❌ Failed</span>
+                </li>
+                <li class="flex justify-between items-center border-b pb-2">
+                    <span>🔄 Commit #g7h8i9 - Pushed 3h ago</span>
+                    <span class="text-green-600">✅ Success</span>
+                </li>
+            </ul>
+        </section>
+        
+        <!-- Domain Linking -->
+        <section class="w-full max-w-4xl bg-white shadow p-4 mt-6 rounded-lg">
+            <h2 class="text-lg font-semibold">Link a Domain</h2>
+            <div class="mt-4 flex">
+                <input type="text" placeholder="Enter your domain (e.g., example.com)" class="w-full p-2 border rounded">
+                <button class="ml-2 bg-blue-500 text-white px-4 py-2 rounded">Link Domain</button>
+            </div>
+            <ul class="mt-4 space-y-2">
+                <li class="flex justify-between items-center border-b pb-2">
+                    <span>🌍 example.com</span>
+                    <span class="text-green-600">✅ Linked</span>
+                </li>
+                <li class="flex justify-between items-center border-b pb-2">
+                    <span>🌍 app.mydomain.io</span>
+                    <span class="text-green-600">✅ Linked</span>
+                </li>
+            </ul>
+        </section>
+    </div>
+</body>
