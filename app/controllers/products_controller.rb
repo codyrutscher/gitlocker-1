@@ -45,7 +45,7 @@ class ProductsController < ApplicationController
     csv_data = CSV.generate(headers: true) do |csv|
       csv << Product.column_names
     
-      Product.find_each do |product|
+      Product.limit(50).find_each do |product|
         csv << product.attributes.values
       end
     end
