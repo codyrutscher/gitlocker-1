@@ -102,6 +102,7 @@ Rails.application.routes.draw do
     get 'commits', on: :member
     get 'team', on: :member
     get 'code', on: :member
+    get :export_data, on: :collection
   end
   get 'search_repositories/(:query)', to: "products#search_repositories"
 

@@ -41,6 +41,20 @@ class ProductsController < ApplicationController
     @product_categories = @product.product_categories.includes(:category)
   end
 
+  def export_data
+    csv_data = CSV.generate(headers: true) do |csv|
+      csv << Product.column_names
+    
+      Product.find_each do |product|
+        csv << product.attributes.values
+      end
+    end
+    send_data csv_data, filename: "products_data.csv"
+    respond_to do |format|
+      format.csv
+    end
+  end
+
   def update
 
     uploaded_file = product_params[:upload_file]
