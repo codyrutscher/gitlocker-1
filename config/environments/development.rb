@@ -12,7 +12,10 @@ Rails.application.configure do
   config.eager_load = false
 
   # Show full error reports.
+  # Make it false to check full errors
   config.consider_all_requests_local = true
+
+  # uncomment this line to see custom error file locally
   # Use custom error handling
   # config.exceptions_app = self.routes
 
