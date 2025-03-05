@@ -1,13 +1,16 @@
 class ErrorsController < ApplicationController
   def not_found
-    render status: 404
+    @error_details = request.env['action_dispatch.exception'].message
+    render template: 'errors/not_found', status: :not_found
   end
 
   def unacceptable
-    render status: 422
+    @error_details = request.env['action_dispatch.exception'].message
+    render template: 'errors/unacceptable', status: :unprocessable_entity
   end
 
   def internal_server_error
-    render status: 500
+    @error_details = request.env['action_dispatch.exception'].message
+    render template: 'errors/internal_server_error', status: :internal_server_error
   end
 end
