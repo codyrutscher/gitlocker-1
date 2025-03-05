@@ -92,19 +92,19 @@ Rails.application.routes.draw do
     post 'create_from_gitlab', on: :collection
     post 'like', on: :member
     post 'unlike', on: :member
-    get 'code', on: :member
     get 'search', on: :collection
     post 'show_file_content', on: :member
+    get 'deployments', on: :member
+    get 'issues', on: :member
+    get 'configurations', on: :member
+    get 'pullrequests', on: :member
+    get 'branches', on: :member
+    get 'commits', on: :member
+    get 'team', on: :member
+    get 'code', on: :member
   end
   get 'search_repositories/(:query)', to: "products#search_repositories"
 
-  get 'deployments', to: "products#deployments"
-  get 'issues', to: "products#issues"
-  get 'configurations', to: "products#configurations"
-  get 'pullrequests', to: "products#pullrequests"
-  get 'branches', to: "products#branches"
-  get 'commits', to: "products#commits"
-  get 'team', to: "products#team"
   
 
   resources :subscribed_users, only: :create

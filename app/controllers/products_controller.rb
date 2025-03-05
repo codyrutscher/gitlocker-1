@@ -113,24 +113,31 @@ class ProductsController < ApplicationController
   end
 
   def commits
+    @product = current_user.products.includes(:reviews, :languages).friendly.find(params[:id])
   end
 
   def team 
+    @product = current_user.products.includes(:reviews, :languages).friendly.find(params[:id])
   end
 
   def configurations
+    @product = current_user.products.includes(:reviews, :languages).friendly.find(params[:id])
   end
 
   def deployments
+    @product = current_user.products.includes(:reviews, :languages).friendly.find(params[:id])
   end
 
   def issues
+    @product = current_user.products.includes(:reviews, :languages).friendly.find(params[:id])
   end
 
   def branches
+    @product = current_user.products.includes(:reviews, :languages).friendly.find(params[:id])
   end
 
   def pullrequests
+    @product = current_user.products.includes(:reviews, :languages).friendly.find(params[:id])
   end
 
   def create_from_gitlab
