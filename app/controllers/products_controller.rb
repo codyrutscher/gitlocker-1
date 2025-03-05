@@ -9,7 +9,7 @@ class ProductsController < ApplicationController
   before_action :set_product, only: [:like, :unlike]
   before_action :update_state
   before_action :set_user_repos, if: -> { current_user.token.present? }
-  before_action :set_gitlab_repos, if: -> { current_user.gitlab_token.present? }
+  before_action :set_gitlab_repos, if: -> { false && current_user.gitlab_token.present? }
   include ProductConcern
 
   def index
