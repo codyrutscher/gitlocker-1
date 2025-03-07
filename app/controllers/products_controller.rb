@@ -123,7 +123,7 @@ class ProductsController < ApplicationController
   end
 
   def code
-    @product = current_user.products.includes(:reviews, :languages).friendly.find(params[:id])
+    @product = Product.friendly.find(params[:id])
   end
 
   def commits
