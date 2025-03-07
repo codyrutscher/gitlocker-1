@@ -55,4 +55,18 @@ class ProductPolicy < ApplicationPolicy
 
     record.user_id != user.id
   end
+
+  def can_access_vcs_functionality?
+    return false unless record.active?
+
+    return false unless record.published?
+
+    return false if user.blank?
+
+    return false if record.purchases.pluck(:user_id).include?(user.id)
+
+    return false if record.reviews.pluck(:user_id).include?(user.id)
+
+    record.user_id != user.id
+  end
 end
