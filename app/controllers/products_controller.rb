@@ -6,7 +6,7 @@ require 'fileutils'
 
 class ProductsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_product, only: [:like, :unlike]
+  before_action :set_product, only: [:like, :unlike, :code, :commits, :team, :configurations, :deployments, :issues, :branches, :pullrequests]
   before_action :update_state
   before_action :set_user_repos, if: -> { current_user.token.present? }
   before_action :set_gitlab_repos, if: -> { false && current_user.gitlab_token.present? }
@@ -123,35 +123,27 @@ class ProductsController < ApplicationController
   end
 
   def code
-    @product = Product.friendly.find(params[:id])
   end
 
   def commits
-    @product = current_user.products.includes(:reviews, :languages).friendly.find(params[:id])
   end
 
-  def team 
-    @product = current_user.products.includes(:reviews, :languages).friendly.find(params[:id])
+  def team
   end
 
   def configurations
-    @product = current_user.products.includes(:reviews, :languages).friendly.find(params[:id])
   end
 
   def deployments
-    @product = current_user.products.includes(:reviews, :languages).friendly.find(params[:id])
   end
 
   def issues
-    @product = current_user.products.includes(:reviews, :languages).friendly.find(params[:id])
   end
 
   def branches
-    @product = current_user.products.includes(:reviews, :languages).friendly.find(params[:id])
   end
 
   def pullrequests
-    @product = current_user.products.includes(:reviews, :languages).friendly.find(params[:id])
   end
 
   def create_from_gitlab
