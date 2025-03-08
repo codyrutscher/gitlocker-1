@@ -128,6 +128,7 @@ Rails.application.routes.draw do
   get "forum", to: "marketplace/home#forum"
   get "youtube", to: "marketplace/home#youtube"
   get "careers", to: "marketplace/home#careers"
+  get "manage", to: "marketplace/home#manage"
   
   namespace :marketplace do
     root "home#index"
