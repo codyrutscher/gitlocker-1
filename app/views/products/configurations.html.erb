@@ -53,22 +53,7 @@
 <div class="">
   <div class="add_product_form bg-indigo-100 min-h-screen min-w-full md:p-8 py-8 px-4">
     <h2 class="font-semibold leading-7 text-gray-900 text-3xl underline ">Edit Your Product</h2>
-    <%= form_for @product, url: products_path, class: "bg-gradient-to-l from-gray-200 via-fuchsia-200 to-stone-100", data: {turbo: false, remote: true }, html: { id: "product-form",multipart: true } do |f| %>
-      <div class="space-y-12">
-       
-            <!-- New Upload ZIP File Field -->
-            <!-- New Upload ZIP File Field -->
-            <div class="sm:col-span-4 border-t-4 border-black" id="zip-upload-field">
-              <%= f.label :upload_file, "Upload ZIP File:", class: "block text-xl font-medium leading-6 text-gray-900 " %>
-              <div class="mt-0">
-                <%= f.file_field :upload_file, class: "form-control w-full", id: "upload_file", accept: ".zip" %>
-                <h6 class="text-sm ">(Only .zip files are allowed and please keep zip below 500mb)</h6>
-                <button id="clear_file" type="button" class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
-                  Clear
-                </button>
-              </div>
-            </div>
-          </div>
+    <%= form_for @product, url: products_path, class: "bg-indigo-100", data: {turbo: false, remote: true }, html: { id: "product-form",multipart: true } do |f| %>
 
           <div class="sm:col-span-4 border-t-4 border-black shadow-2xl">
             <%= f.label :name, class: "block text-xl font-medium leading-6 text-gray-900 " %>
