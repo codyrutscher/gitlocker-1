@@ -105,6 +105,7 @@ Rails.application.routes.draw do
     get :export_data, on: :collection
   end
   get 'search_repositories/(:query)', to: "products#search_repositories"
+  get 'teamrepositories', to: "products#teamrepositories"
 
   
 
