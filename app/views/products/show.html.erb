@@ -25,9 +25,9 @@
       { text: @product.name, url: request.original_url.include?("/l/") ? marketplace_library_path(@product) : product_path(@product) }
     ])
   %>
-<%# <% if policy(@product).can_access_vcs_functionality? %> %>
+<% if policy(@product).can_access_vcs_functionality? %>
   <%= render partial: 'products/sub_header' %>
-<%# <% end %> %>
+<% end %> 
 <div class="mx-auto px-4 py-8 sm:px-6 lg:px-8">
     <!-- Product -->
     <div class="flex flex-col md:flex-row md:items-center gap-4">
