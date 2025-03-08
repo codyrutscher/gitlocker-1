@@ -2,13 +2,15 @@
     <div class="bg-white p-6 rounded-lg shadow-lg text-center">
         <h2 class="text-3xl font-semibold mb-4 underline ">Select Repository Type</h2>
         <div class="flex space-x-4">
-           <a href="https://www.coderz.us/products"><button class="w-96 h-96 bg-blue-500 text-white font-medium rounded-lg hover:bg-white hover:text-black border-black border-4  transition flex items-center justify-center">
+           
+            <a href="https://www.coderz.us/products">
+            <button class="w-96 h-96 bg-blue-500 text-white font-medium rounded-lg hover:bg-white hover:text-black border-black border-4  transition flex items-center justify-center">
                 My Personal Repositories
-            </button></a>
-
-            <button class="w-96 h-96 bg-green-500 text-white font-medium rounded-lg hover:bg-white hover:text-black border-black border-4 transition flex items-center justify-center">
-                My Team's Repositories
             </button>
+            </a>
+
+            <%= link_to "My Team's Repositories", teamrepositories_path, class: "w-96 h-96 bg-green-500 text-white font-medium rounded-lg hover:bg-white hover:text-black border-black border-4 transition flex items-center justify-center" %>
+
         </div>
     </div>
 </body>
