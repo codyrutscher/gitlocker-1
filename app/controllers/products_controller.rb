@@ -146,7 +146,7 @@ class ProductsController < ApplicationController
   def pullrequests
   end
 
-  def teamRepositories
+  def teamrepositories
   end
 
   def create_from_gitlab
