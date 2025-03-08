@@ -77,7 +77,8 @@
                     <h3 class="text-white hover:text-gray-400">Browse</h3>
                   <% end %>
               
-                   <a href="/products"><h3 class="text-white hover:text-gray-400">Manage</h3></a>
+                  <%= link_to "Manage", manage_path, class: "text-white hover:text-gray-400" %>
+
 
                 <%= link_to new_product_path do %>
                   <h3 class="text-white hover:text-gray-400 hidden sm:block">Create</h3>
