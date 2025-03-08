@@ -73,27 +73,45 @@
     </div>
     <!-- Display GitHub Repositories -->
     <div id="repos-section" class="hidden mt-8">
-        <% if @user_repos.present? %>
-            <h1 class="text-2xl font-bold mb-4">Select GitHub Repositories to Add as Products</h1>
-            <%= form_with url: create_from_github_products_path, method: :post, data: { turbo: false } do %>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+    <% if @user_repos.present? %>
+        <h1 class="text-2xl font-bold mb-4">Select GitHub Repositories to Add as Products</h1>
+        <%= form_with url: create_from_github_products_path, method: :post, data: { turbo: false } do %>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
                 <% @user_repos.each do |repo| %>
                     <div class="bg-gray-900 p-6 rounded-lg shadow-lg">
-                    <h4 class="text-xl font-bold"><%= repo[:name] %></h4>
-                    <p class="text-gray-400 text-sm"><%= repo[:description] %></p>
-                    <label class="block mt-4">
-                        <%= check_box_tag 'repo_ids[]', repo[:id], false, class: 'mr-2' %>
-                        Select this repository
-                    </label>
+                        <h4 class="text-xl font-bold"><%= repo[:name] %></h4>
+                        <p class="text-gray-400 text-sm"><%= repo[:description] %></p>
+                        <label class="block mt-4">
+                            <%= check_box_tag 'repo_ids[]', repo[:id], false, class: 'mr-2' %>
+                            Select this repository
+                        </label>
                     </div>
                 <% end %>
-                </div>
-                <div class="mt-6">
+            </div>
+            
+            <!-- Pagination Controls -->
+            <div class="mt-6 flex justify-between items-center">
                 <%= submit_tag 'Add Selected Repositories as Products', class: 'bg-blue-500 hover:bg-blue-400 text-white font-semibold py-2 px-4 rounded' %>
+                
+                <div class="flex items-center gap-4">
+                    <%= link_to 'Previous', 
+                            create_from_github_products_path(page: @page.to_i - 1),
+                            class: 'bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded disabled:opacity-50',
+                            disabled: @page.to_i <= 1,
+                            data: { turbo: false } %>
+                    
+                    <span class="text-gray-400">Page <%= @page || 1 %></span>
+                    
+                    <%= link_to 'Next', 
+                            create_from_github_products_path(page: @page.to_i + 1),
+                            class: 'bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded disabled:opacity-50',
+                            disabled: @user_repos.length < per_page,
+                            data: { turbo: false } %>
                 </div>
-            <% end %>
+            </div>
         <% end %>
-    </div>
+    <% end %>
+</div>
     
     <!-- Display GitLab Repositories -->
     <div id="gitlab-repos-section" class="hidden mt-8">
