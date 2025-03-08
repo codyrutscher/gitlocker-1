@@ -76,12 +76,15 @@
                   <%= link_to marketplace_browse_path do %>
                     <h3 class="text-white hover:text-gray-400">Browse</h3>
                   <% end %>
-              
+
+                   <% if current_user.present? %>
                   <%= link_to "Manage", manage_path, class: "text-white hover:text-gray-400" %>
+                  <% end %>
 
-
+                 <% if current_user.present? %>
                 <%= link_to new_product_path do %>
                   <h3 class="text-white hover:text-gray-400 hidden sm:block">Create</h3>
+                <% end %>
                 <% end %>
                 
               <!-- Cart -->
