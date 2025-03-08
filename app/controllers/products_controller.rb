@@ -147,7 +147,58 @@ class ProductsController < ApplicationController
   end
 
   def create_from_gitlab
-    redirect_to products_path, notice: 'Repo added as product successfully'
+    repo_ids = params[:repo_ids]
+    failed_repos = []
+    skipped_repos = []
+    successful_repos = []
+
+    repo_ids.each do |repo_id|
+      ActiveRecord::Base.transaction do
+        begin
+          repo = gitlab_client.project(repo_id)
+          owner_name = repo.namespace.full_path
+          repo_name = repo.name
+          if Product.exists?(url: repo.web_url)
+            Rails.logger.info "Repository #{repo_name} already exists. Skipping..."
+            skipped_repos << repo_name
+            next
+          end
+
+          product = Product.new(
+            name: repo.name,
+            description: repo.description,
+            url: repo.web_url,
+            user_id: current_user.id,
+            active: true,
+            published: true
+          )
+          if product.save
+            result = load_repo_and_link_tree(owner_name, repo_name, 'master', current_user.token, product, 'gitlab')
+            if result
+              successful_repos << repo_name
+            else
+              Rails.logger.error "Failed to process repository #{repo_name}, skipping..."
+              failed_repos << repo_name
+              product.destroy
+            end
+          else
+            Rails.logger.error "Failed to save product for repo #{repo_name}, skipping..."
+            failed_repos << repo_name
+            raise ActiveRecord::Rollback
+          end
+        rescue => e
+          Rails.logger.error "Error processing repo #{repo_id}: #{e.message}"
+          failed_repos << repo_name
+        end
+      end
+    end
+  
+    message = []
+    message << "✅ Successfully added: #{successful_repos.join(', ')}" unless successful_repos.empty?
+    message << "⚠️ Skipped existing repositories: #{skipped_repos.join(', ')}" unless skipped_repos.empty?
+    message << "❌ Failed to process: #{failed_repos.join(', ')}" unless failed_repos.empty?
+  
+    redirect_to products_path, alert: message.join(' ')
   end
 
   def create_from_github
@@ -385,6 +436,10 @@ class ProductsController < ApplicationController
     [parts[1], parts[2]]
   end
 
+  def gitlab_client
+    @gitlab_client ||= Gitlab.client(endpoint: 'https://gitlab.com/api/v4', private_token: current_user.gitlab_token)
+  end
+
   def octokit_client
     @octokit_client ||= Octokit::Client.new(access_token: current_user.token)
   end
@@ -426,7 +481,6 @@ class ProductsController < ApplicationController
   end
 
   def set_gitlab_repos
-    gitlab_client = Gitlab.client(endpoint: 'https://gitlab.com/api/v4', private_token: current_user.gitlab_token)
     @gitlab_repos = gitlab_client.projects(membership: true, per_page: 12)
   end
 

@@ -116,9 +116,13 @@ module ProductConcern
     file_content
   end
 
-  def load_repo_and_link_tree(owner, repo, ref, token, product)
+  def load_repo_and_link_tree(owner, repo, ref, token, product, source = 'github')
     begin
-      zip_link = "https://github.com/#{owner}/#{repo}/archive/refs/heads/#{ref}.zip"
+      if source == 'github'
+        zip_link = "https://github.com/#{owner}/#{repo}/archive/refs/heads/#{ref}.zip"
+      elsif source == 'gitlab'
+        zip_link = "https://gitlab.com/#{owner}/#{repo}/-/archive/#{ref}/#{repo}-#{ref}.zip"
+      end
       temp_file = Tempfile.new([repo, '.zip'])
   
       curl_command = "curl -L -H 'Authorization: token #{token}' -o #{temp_file.path} #{zip_link}"
