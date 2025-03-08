@@ -51,7 +51,7 @@ class ProductPolicy < ApplicationPolicy
 
     return false if user.blank?
 
-    return false if record.purchases.pluck(:user_id).include?(user.id)
+    return true if record.purchases.pluck(:user_id).include?(user.id)
 
     record.user_id != user.id
   end
@@ -63,10 +63,7 @@ class ProductPolicy < ApplicationPolicy
 
     return false if user.blank?
 
-    return false if record.purchases.pluck(:user_id).include?(user.id)
-
-    return false if record.reviews.pluck(:user_id).include?(user.id)
-
-    record.user_id != user.id
+    user_ids = record.purchases.pluck(:user_id) + record.reviews.pluck(:user_id) + [record.user_id]
+    user_ids.include?(user.id)
   end
 end

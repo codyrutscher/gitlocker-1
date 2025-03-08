@@ -9,7 +9,7 @@ class ProductsController < ApplicationController
   before_action :set_product, only: [:like, :unlike, :code, :commits, :team, :configurations, :deployments, :issues, :branches, :pullrequests]
   before_action :update_state
   before_action :set_user_repos, if: -> { current_user.token.present? }
-  before_action :set_gitlab_repos, if: -> { false && current_user.gitlab_token.present? }
+  before_action :set_gitlab_repos, if: -> { current_user.gitlab_token.present? }
   include ProductConcern
 
   def index
@@ -172,7 +172,9 @@ class ProductsController < ApplicationController
             name: repo[:name],
             description: repo[:description],
             url: repo[:html_url],
-            user_id: current_user.id
+            user_id: current_user.id,
+            active: true,
+            published: true
           )
   
           if product.save
