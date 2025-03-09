@@ -94,8 +94,8 @@
                 <%= submit_tag 'Add Selected Repositories as Products', class: 'bg-blue-500 hover:bg-blue-400 text-white font-semibold py-2 px-4 rounded' %>
                 
                 <% if @display_next_page_link %>
-                    <div class="flex items-center gap-4">
-                        <%= link_to 'See More Repos', load_more_github_repos_products_path(page: (@github_page + 1)), id: 'load-more-repos', class: 'bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded disabled:opacity-50' %>
+                    <div class="flex items-center gap-4" id="load_more_repos_button">
+                        <%= link_to 'See More Repos', load_more_github_repos_products_path, data: { page: (@github_page + 1) }, id: 'load-more-repos', class: 'bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded disabled:opacity-50' %>
                     </div>
                 <% end %>
             </div>
@@ -154,6 +154,7 @@
             url: $(this).attr('href'),
             type: 'GET',
             dataType: 'script',
+            data: { page: $(this).data('page') }
         });
     });
 </script>
