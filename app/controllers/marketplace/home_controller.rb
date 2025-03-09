@@ -24,6 +24,11 @@ module Marketplace
     def forum
 
     end
+
+    def manage
+
+    end
+
     
     def careers
 
