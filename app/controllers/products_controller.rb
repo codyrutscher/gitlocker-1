@@ -214,6 +214,16 @@ class ProductsController < ApplicationController
     end
   end
 
+  def load_more_gitlab_repos
+    @gitlab_page = params[:page]&.to_i || 2
+    @gitlab_total_repos_count = gitlab_client.projects(membership: true).length
+    @display_next_page_link_gitlab = @gitlab_total_repos_count <= (Product::PER_PAGE_REPOS * @gitlab_page)
+    @repos = gitlab_client.projects(membership: true, per_page: Product::PER_PAGE_REPOS, page: @gitlab_page)
+    respond_to do |format|
+      format.js
+    end
+  end
+
   def create_from_github
     repo_ids = params[:repo_ids]
     failed_repos = []
@@ -499,6 +509,8 @@ class ProductsController < ApplicationController
   def set_gitlab_repos
     begin
       @gitlab_page = params[:page]&.to_i || 1
+      @gitlab_total_repos_count = gitlab_client.projects(membership: true).size
+      @display_next_page_link_gitlab = @gitlab_total_repos_count > (Product::PER_PAGE_REPOS * @gitlab_page)
       @gitlab_repos = gitlab_client.projects(membership: true, per_page: Product::PER_PAGE_REPOS, page: @gitlab_page)
     rescue Gitlab::Error::Unauthorized
       current_user.update(gitlab_token: nil)

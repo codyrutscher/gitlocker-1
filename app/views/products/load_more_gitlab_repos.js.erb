@@ -1,0 +1,8 @@
+$("#gitlab_repos").append("<%= j render partial: 'single_gitlab_repo', collection: @repos, as: :repo %>");
+var nextPage = <%= @gitlab_page + 1 %>;
+$('#load-more-gitlab-repos').data('page', nextPage); // Updates jQuery cached value
+$('#load-more-gitlab-repos').attr('data-page', nextPage); // Updates actual HTML attribute
+
+<% if @display_next_page_link_gitlab %>
+    $('#load_more_gitlab_repos_button').hide();
+<% end %>

@@ -108,20 +108,25 @@
         <% if @gitlab_repos.present? %>
             <h1 class="text-2xl font-bold mb-4">Select GitLab Repositories to Add as Products</h1>
             <%= form_with url: create_from_gitlab_products_path, method: :post, data: { turbo: false } do %>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-                <% @gitlab_repos.each do |repo| %>
-                    <div class="bg-gray-900 p-6 rounded-lg shadow-lg">
-                    <h4 class="text-xl font-bold"><%= repo['name'] %></h4>
-                    <p class="text-gray-400 text-sm"><%= repo['description'] %></p>
-                    <label class="block mt-4">
-                        <%= check_box_tag 'repo_ids[]', repo['id'], false, class: 'mr-2' %>
-                        Select this repository
-                    </label>
-                    </div>
-                <% end %>
+                <div id="gitlab_repos" class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                    <% @gitlab_repos.each do |repo| %>
+                        <div class="bg-gray-900 p-6 rounded-lg shadow-lg">
+                            <h4 class="text-xl font-bold"><%= repo['name'] %></h4>
+                            <p class="text-gray-400 text-sm"><%= repo['description'] %></p>
+                            <label class="block mt-4">
+                                <%= check_box_tag 'repo_ids[]', repo['id'], false, class: 'mr-2' %>
+                                Select this repository
+                            </label>
+                        </div>
+                    <% end %>
                 </div>
-                <div class="mt-6">
-                <%= submit_tag 'Add Selected Repositories as Products', class: 'bg-blue-500 hover:bg-blue-400 text-white font-semibold py-2 px-4 rounded' %>
+                <div class="mt-6 flex justify-between items-center">
+                    <%= submit_tag 'Add Selected Repositories as Products', class: 'bg-blue-500 hover:bg-blue-400 text-white font-semibold py-2 px-4 rounded' %>
+                    <% if @display_next_page_link_gitlab %>
+                        <div class="flex items-center gap-4" id="load_more_gitlab_repos_button">
+                            <%= link_to 'See More Repos', load_more_gitlab_repos_products_path, data: { page: (@gitlab_page + 1) }, id: 'load-more-gitlab-repos', class: 'bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded disabled:opacity-50' %>
+                        </div>
+                    <% end %>
                 </div>
             <% end %>
         <% end %>
@@ -157,4 +162,14 @@
             data: { page: $(this).data('page') }
         });
     });
+    $('#load-more-gitlab-repos').on('click', function(event) {
+        event.preventDefault();
+        $.ajax({
+            url: $(this).attr('href'),
+            type: 'GET',
+            dataType: 'script',
+            data: { page: $(this).data('page') }
+        });
+    });
+
 </script>

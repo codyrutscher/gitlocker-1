@@ -103,6 +103,7 @@ Rails.application.routes.draw do
     get 'team', on: :member
     get 'code', on: :member
     get 'load_more_github_repos', on: :collection
+    get 'load_more_gitlab_repos', on: :collection
     get :export_data, on: :collection
   end
   get 'search_repositories/(:query)', to: "products#search_repositories"
