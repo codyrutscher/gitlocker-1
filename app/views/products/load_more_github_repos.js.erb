@@ -1,1 +1,8 @@
 $("#github_repos").append("<%= j render partial: 'single_repo', collection: @repos, as: :repo %>");
+var nextPage = <%= @github_page + 1 %>;
+$('#load-more-repos').data('page', nextPage); // Updates jQuery cached value
+$('#load-more-repos').attr('data-page', nextPage); // Updates actual HTML attribute
+
+<% if @display_next_page_link %>
+    $('#load_more_repos_button').hide();
+<% end %>

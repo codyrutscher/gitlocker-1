@@ -206,8 +206,9 @@ class ProductsController < ApplicationController
 
   def load_more_github_repos
     @github_page = params[:page]&.to_i || 2
+    @total_repos_count = repositories_count
+    @display_next_page_link = @total_repos_count < (Product::PER_PAGE_REPOS * @github_page)
     @repos = octokit_client.repositories(nil, per_page: Product::PER_PAGE_REPOS, page: @github_page)
-
     respond_to do |format|
       format.js
     end
@@ -489,7 +490,7 @@ class ProductsController < ApplicationController
   end
 
   def set_user_repos
-    @github_page = params[:page].to_i || 1
+    @github_page = params[:page]&.to_i || 1
     @total_repos_count = repositories_count
     @display_next_page_link = @total_repos_count > (Product::PER_PAGE_REPOS * @github_page)
     @user_repos ||= octokit_client.repositories(nil, per_page: Product::PER_PAGE_REPOS, page: @github_page)
