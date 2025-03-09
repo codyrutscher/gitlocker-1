@@ -1,10 +1,11 @@
 class ErrorsController < ApplicationController
   def not_found
     @error_details = request.env['action_dispatch.exception'].message
+    @error_backtrace = request.env['action_dispatch.exception'].backtrace
     render template: 'errors/not_found', status: :not_found
   end
 
-  def unacceptable
+  def unacceptsable
     @error_details = request.env['action_dispatch.exception'].message
     render template: 'errors/unacceptable', status: :unprocessable_entity
   end
