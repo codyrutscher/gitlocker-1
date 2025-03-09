@@ -481,7 +481,12 @@ class ProductsController < ApplicationController
   end
 
   def set_gitlab_repos
-    @gitlab_repos = gitlab_client.projects(membership: true, per_page: 12)
+    begin
+      @gitlab_repos = gitlab_client.projects(membership: true, per_page: 12)
+    rescue Gitlab::Error::Unauthorized
+      current_user.update(gitlab_token: nil)
+      redirect_to new_product_products_path, alert: 'Your GitLab token has expired. Please re-authorize.'
+    end
   end
 
   def download_gitlab_repo(project_id, token)
