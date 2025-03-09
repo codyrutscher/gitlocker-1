@@ -77,6 +77,13 @@ module Marketplace
 
     def filter_params
       params.delete(:_)
+      if params[:filters].is_a?(String)
+        begin
+          params[:filters] = JSON.parse(params[:filters])
+        rescue JSON::ParserError
+          params[:filters] = {}
+        end
+      end
       permitted_params = params.permit(:category, :language, :sort_by, :page, filters: {})
     
       filters = permitted_params[:filters]&.permit(category: [], language: []) || {}
