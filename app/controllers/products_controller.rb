@@ -155,7 +155,7 @@ class ProductsController < ApplicationController
     skipped_repos = []
     successful_repos = []
 
-    repo_ids.each do |repo_id|
+    repo_ids&.each do |repo_id|
       ActiveRecord::Base.transaction do
         begin
           repo = gitlab_client.project(repo_id)
@@ -204,13 +204,22 @@ class ProductsController < ApplicationController
     redirect_to products_path, alert: message.join(' ')
   end
 
+  def load_more_github_repos
+    @github_page = params[:page]&.to_i || 2
+    @repos = octokit_client.repositories(nil, per_page: Product::PER_PAGE_REPOS, page: @github_page)
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
   def create_from_github
     repo_ids = params[:repo_ids]
     failed_repos = []
     skipped_repos = []
     successful_repos = []
   
-    repo_ids.each do |repo_id|
+    repo_ids&.each do |repo_id|
       ActiveRecord::Base.transaction do
         begin
           repo = octokit_client.repository(repo_id.to_i)
@@ -480,12 +489,16 @@ class ProductsController < ApplicationController
   end
 
   def set_user_repos
-    @user_repos ||= octokit_client.repositories(nil, per_page: 12)
+    @github_page = params[:page].to_i || 1
+    @total_repos_count = repositories_count
+    @display_next_page_link = @total_repos_count > (Product::PER_PAGE_REPOS * @github_page)
+    @user_repos ||= octokit_client.repositories(nil, per_page: Product::PER_PAGE_REPOS, page: @github_page)
   end
 
   def set_gitlab_repos
     begin
-      @gitlab_repos = gitlab_client.projects(membership: true, per_page: 12)
+      @gitlab_page = params[:page]&.to_i || 1
+      @gitlab_repos = gitlab_client.projects(membership: true, per_page: Product::PER_PAGE_REPOS, page: @gitlab_page)
     rescue Gitlab::Error::Unauthorized
       current_user.update(gitlab_token: nil)
       redirect_to new_product_products_path, alert: 'Your GitLab token has expired. Please re-authorize.'

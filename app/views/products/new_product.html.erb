@@ -76,7 +76,7 @@
     <% if @user_repos.present? %>
         <h1 class="text-2xl font-bold mb-4">Select GitHub Repositories to Add as Products</h1>
         <%= form_with url: create_from_github_products_path, method: :post, data: { turbo: false } do %>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+            <div id="github_repos" class="grid grid-cols-2 md:grid-cols-4 gap-6">
                 <% @user_repos.each do |repo| %>
                     <div class="bg-gray-900 p-6 rounded-lg shadow-lg">
                         <h4 class="text-xl font-bold"><%= repo[:name] %></h4>
@@ -93,21 +93,11 @@
             <div class="mt-6 flex justify-between items-center">
                 <%= submit_tag 'Add Selected Repositories as Products', class: 'bg-blue-500 hover:bg-blue-400 text-white font-semibold py-2 px-4 rounded' %>
                 
-                <div class="flex items-center gap-4">
-                    <%= link_to 'Previous', 
-                            create_from_github_products_path(page: @page.to_i - 1),
-                            class: 'bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded disabled:opacity-50',
-                            disabled: @page.to_i <= 1,
-                            data: { turbo: false } %>
-                    
-                    <span class="text-gray-400">Page <%= @page || 1 %></span>
-                    
-                    <%= link_to 'Next', 
-                            create_from_github_products_path(page: @page.to_i + 1),
-                            class: 'bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded disabled:opacity-50',
-                            disabled: @user_repos.length < per_page,
-                            data: { turbo: false } %>
-                </div>
+                <% if @display_next_page_link %>
+                    <div class="flex items-center gap-4">
+                        <%= link_to 'See More Repos', load_more_github_repos_products_path(page: (@github_page + 1)), id: 'load-more-repos', class: 'bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded disabled:opacity-50' %>
+                    </div>
+                <% end %>
             </div>
         <% end %>
     <% end %>
@@ -158,5 +148,12 @@
             document.getElementById('gitlab-auth-form').querySelector('button').click();
         <% end %>
     });
-
+    $('#load-more-repos').on('click', function(event) {
+        event.preventDefault();
+        $.ajax({
+            url: $(this).attr('href'),
+            type: 'GET',
+            dataType: 'script',
+        });
+    });
 </script>

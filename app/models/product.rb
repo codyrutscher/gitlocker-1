@@ -33,7 +33,7 @@ class Product < ApplicationRecord
   validate :validate_product_limit, on: :create
 
   accepts_nested_attributes_for :product_categories
-
+  PER_PAGE_REPOS = 12
   # Generate thumbnails only when covers are created or updated
   # after_commit :thumb_images, if: :saved_change_to_covers?
 
