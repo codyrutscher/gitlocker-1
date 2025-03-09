@@ -149,6 +149,9 @@ class ProductsController < ApplicationController
   def teamrepositories
   end
 
+  def templatesindex
+  end
+
   def create_from_gitlab
     repo_ids = params[:repo_ids]
     failed_repos = []
