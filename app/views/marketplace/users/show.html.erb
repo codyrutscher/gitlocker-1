@@ -25,37 +25,42 @@
 							<% end %>
 						</div>
 					</div>
-					<div class="w-full lg:w-4/12 px-4 lg:order-3 lg:text-right lg:self-center">
-						<section id="all-links">
-						    <% if @user.id == current_user.id %>
-						    <% elsif current_user.followees.include?(@user) %>
-						        <h5><%= button_to "Unfollow", marketplace_unfollow_user_path, method: "POST",class: "bg-pink-500 active:bg-pink-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150" %></h5>
-						    <% else %>
-						        <h5><%= button_to "Follow", marketplace_follow_user_path, method: "POST",class: "bg-pink-500 active:bg-pink-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150"  %></h5>
-						    <% end%>
-						    <br>
-						</section>
-					</div>
-					<div class="w-full lg:w-4/12 px-4 lg:order-1">
-						<div class="flex justify-center py-4 lg:pt-4 pt-8">
-							<div class="mr-4 p-3 text-center">
-							  <%= link_to user_followers_marketplace_user_path(@user) do %>
-							    <span class="text-xl font-bold block uppercase tracking-wide text-blueGray-600"><%= @user.followers.count %></span>
-							    <span class="text-sm text-blueGray-400">Followers</span>
-							  <% end %>
-							</div>
-							<div class="mr-4 p-3 text-center">
-							  <%= link_to user_followees_marketplace_user_path(@user) do %>
-							    <span class="text-xl font-bold block uppercase tracking-wide text-blueGray-600"><%= @user.followees.count %></span>
-							    <span class="text-sm text-blueGray-400">Following</span>
-							  <% end %>
-							</div>
-							<div class="mr-4 p-3 text-center">
-							  <span class="text-xl font-bold block uppercase tracking-wide text-blueGray-600">$<%= number_with_precision(@user.total_earning, precision: 2) %></span>
-							  <span class="text-sm text-blueGray-400">Total Sales From Code Marketplace</span>
+					<% if current_user.present? %>
+						<div class="w-full lg:w-4/12 px-4 lg:order-3 lg:text-right lg:self-center">
+							<section id="all-links">
+								<% if @user.id == current_user.id %>
+								<% elsif current_user.followees.include?(@user) %>
+									<h5><%= button_to "Unfollow", marketplace_unfollow_user_path, method: "POST",class: "bg-pink-500 active:bg-pink-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150" %></h5>
+								<% else %>
+									<h5><%= button_to "Follow", marketplace_follow_user_path, method: "POST",class: "bg-pink-500 active:bg-pink-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150"  %></h5>
+								<% end%>
+								<br>
+							</section>
+						</div>
+					<% end %>
+					<% if current_user.present? %>
+						<div class="w-full lg:w-4/12 px-4 lg:order-1">
+							<div class="flex justify-center py-4 lg:pt-4 pt-8">
+								<div class="mr-4 p-3 text-center">
+								<%= link_to user_followers_marketplace_user_path(@user) do %>
+									<span class="text-xl font-bold block uppercase tracking-wide text-blueGray-600"><%= @user.followers.count %></span>
+									<span class="text-sm text-blueGray-400">Followers</span>
+								<% end %>
+								</div>
+								<div class="mr-4 p-3 text-center">
+								<%= link_to user_followees_marketplace_user_path(@user) do %>
+									<span class="text-xl font-bold block uppercase tracking-wide text-blueGray-600"><%= @user.followees.count %></span>
+									<span class="text-sm text-blueGray-400">Following</span>
+								<% end %>
+								</div>
+								<div class="mr-4 p-3 text-center">
+								<span class="text-xl font-bold block uppercase tracking-wide text-blueGray-600">$<%= number_with_precision(@user.total_earning, precision: 2) %></span>
+								<span class="text-sm text-blueGray-400">Total Sales From Code Marketplace</span>
+								</div>
 							</div>
 						</div>
-					</div>
+					<% else %>
+					<% end %>
 				</div>
 				<div class="flex flex-wrap justify-center">
 					 <div class="mt-10 flex justify-center space-x-10">

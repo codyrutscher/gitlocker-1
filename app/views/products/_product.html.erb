@@ -70,7 +70,7 @@
         <%= link_to "Download", product.folder.url , data: { "turbo-method": :post }, class: "flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-3 py-2 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50" %>
       </div>
     <% end %>
-    <% if current_user.id == product.user_id %>
+    <% if current_user.present? && current_user.id == product.user_id %>
       <div class="flex flex-row">
         <%= link_to "Update", edit_product_path(product), class: "text-center rounded-bl basis-1/2 bg-indigo-600 px-3 py-2 text-white hover:bg-indigo-700" %>
         
