@@ -1,178 +1,189 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<script src="https://cdn.tailwindcss.com"></script>
-<link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.23/dist/full.min.css" rel="stylesheet" type="text/css" />
-<style>
-  
-
-
-
-
-
-
-
-
-.font {
-     font-family: 'Apple Chancery', sans-serif;                                          
-}
-
-#javascript {
-  background-color: #f1e05a;
-}
-#ruby {
-  background-color: #701516;
-}
-#css {
-  background-color: #563d7c;
-}
-#html {
-  background-color: #e34c26;
-}
-#php {
-  background-color: #4F5D95;
-}
-#python {
-  background-color: #3572A;
-}
-#c++ {
-  background-color: #2596be;
-}
-#div {
-  
-}
-/* #grad {
-  background-image: radial-gradient(circle, blue, DodgerBlue, orange);
-} */
-
-#grad {
-  background-image: url("https://gitlocker.s3.us-east-2.amazonaws.com/original-4c3fd5c6563b9572a50a8a7936b203ce.webp");
-  background-size: cover;
-  backdrop-filter: blur(4px);
-}
-.clip {
-  background: -webkit-linear-gradient(#eee, #333);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.body {
-display: flex;
-justify-content: center;
-align-items: center;
-padding: 100px
-}
-.box {
-position: relative;
-width: 400px;
-height: 200px;
-transform-style: preserve-3d;
-animation: animate 20s linear infinite;
-}
-
-@keyframes animate 
-{
-  0%
-  {
-      transform: perspective(1000px) rotateY(0deg);
-  }
-  100%
-  {
-      transform: perspective(1000px) rotateY(360deg);
-  }
-}
-.box span {
-position: absolute;
-top: 0;
-left: 0;
-width: 75%;
-height: 100%;
-transform-origin: center;
-transform-style: preserve-3d;
-transform: rotateY(calc(var(--i) * 45deg)) translateZ(400px);
--webkit-box-reflect: below 0px linear-gradient(transparent, transparent, #0004);
-}
-
-.box span img {
-
-position: absolute;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-object-fit: cover;
-
-}
-
-.over {
-  overflow-x: hidden;
-}
-
-h1 {
-
-margin: 0em 0px;
-
-}
-.wrapper{
-    box-sizing: content-box;
-    background-color: #ffffff;
-    border-radius: 8px;
-    padding: 50px 30px;
-    height: 40px;
-    box-shadow: 0 20px 25px rgba(0,0,0,0.5);
-    display: flex;
-    border-image: linear-gradient(to right, #3acfd5 0%, #3a4ed5 100%) 1;
-    border-width: 4px;
-    border-style: solid;
-}
-.words{
-    overflow: hidden;
-}
-
-@keyframes spin_words{
-    10%{
-        transform: translateY(-112%);
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* Main container for the header */
+    .halftone-header {
+      position: relative;
+      width: 100%;
+      height: 100vh; /* Full viewport height to ensure animation covers entire section */
+      min-height: 600px; /* Minimum height to ensure content fits */
+      overflow: hidden;
+      background-color: black;
+      font-family: 'Poppins', sans-serif;
     }
-    25%{
-        transform: translateY(-100%);
+    
+    #halftoneCanvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
     }
-    35%{
-        transform: translateY(-212%);
+    
+    .content-container {
+      position: absolute; /* Changed to absolute for better centering */
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%); /* Center in the viewport */
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 90%;
+      max-width: 1200px;
+      gap: 20px;
     }
-    50%{
-        transform: translateY(-200%);
+    
+    .text-overlay {
+      text-align: center;
+      color: white;
+      padding: 20px;
+      background-color: #000000;
+      border-radius: 10px;
+      width: 100%;
     }
-    60%{
-        transform: translateY(-312%);
+    
+    .text-overlay h1 {
+      font-size: 2.5rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      line-height: 1.3;
     }
-    75%{
-        transform: translateY(-300%);
+    
+    .gradient-underline {
+      position: relative;
+      white-space: nowrap;
     }
-    85%{
-        transform: translateY(-412%);
+    
+    .gradient-underline::after {
+      content: "";
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, #ff6b6b, #4ecdc4, #7f50ff);
+      border-radius: 1.5px;
     }
-    100%{
-        transform: translateY(-400%);
+    
+    .italic-text {
+      font-style: italic;
+      font-weight: 400;
     }
-</style>
+    
+    .dashboard-image-container {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .dashboard-image {
+      width: 100%;
+      max-width: 800px; /* Control maximum width */
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      transition: transform 0.3s ease;
+    }
+    
+    .dashboard-image:hover {
+      transform: translateY(-5px);
+    }
+    
+    .button-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      width: 100%;
+    }
+    
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      width: 100%;
+    }
+    
+    .button {
+      display: inline-block;
+      padding: 10px 14px;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      text-align: center;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+      background-color: white;
+      color: #111827;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    }
+    
+    .button:hover {
+      background-color: #f3f4f6;
+    }
+    
+    @media (max-width: 768px) {
+      .text-overlay h1 {
+        font-size: 1.8rem;
+      }
+      .content-container {
+        gap: 15px;
+      }
+      .button {
+        padding: 8px 12px;
+        font-size: 13px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .halftone-header {
+        height: auto;
+        min-height: 100vh;
+      }
+      .text-overlay h1 {
+        font-size: 1.4rem;
+      }
+      .gradient-underline::after {
+        height: 2px;
+        bottom: -1px;
+      }
+      .content-container {
+        position: relative;
+        top: 0;
+        left: 0;
+        transform: none;
+        margin: 40px auto;
+        gap: 10px;
+      }
+      .button-row {
+        flex-direction: column;
+        width: 100%;
+      }
+      .button {
+        width: 100%;
+      }
+    }
+  </style>
 </head>
-<div class="bg-indigo-100">
-  <div class="mx-auto  py-10 sm:px-6 sm:py-10 lg:px-8">
-    <div class="relative isolate overflow-hidden bg-gray-900 px-6 pt-16 shadow-2xl sm:rounded-3xl sm:px-10 md:pt-24 lg:flex lg:gap-x-20 lg:px-10 lg:pt-0">
-      <svg viewBox="0 0 1024 1024" class="absolute left-1/2 top-1/2 -z-10 size-[64rem] -translate-y-1/2 [mask-image:radial-gradient(closest-side,white,transparent)] sm:left-full sm:-ml-80 lg:left-1/2 lg:ml-0 lg:-translate-x-1/2 lg:translate-y-0" aria-hidden="true">
-        <circle cx="512" cy="512" r="512" fill="url(#759c1415-0410-454c-8f7c-9a820de03641)" fill-opacity="0.7" />
-        <defs>
-          <radialGradient id="759c1415-0410-454c-8f7c-9a820de03641">
-            <stop stop-color="#7775D6" />
-            <stop offset="1" stop-color="#E935C1" />
-          </radialGradient>
-        </defs>
-      </svg>
-      <div class="mx-auto max-w-md text-center lg:mx-0 lg:flex-auto lg:py-32 lg:text-left">
-       <%= image_tag "https://www.coderz.us/assets/coderz-cfe1fce4096a63cc8d20e62db00b93087c7d02667f06be9af7fc117cbc7cab93.png", class: "h-12 w-40 mb-4", alt: "Coderz Logo" %>
-        <h1 class="text-balance text-3xl font-semibold tracking-tight text-white sm:text-4xl">Your All-In-One <span class="underline font-bold italic">Version Control Marketplace</span> with <span class="bg-gradient-to-r from-rose-400 via-fuchsia-500 to-indigo-500 bg-[length:100%_6px] bg-no-repeat bg-bottom">AI commits!</span> Browse <%= number_with_delimiter(Product.count, :delimiter => ',') %> Projects From <%= User.count %> Developers Or Post Your Code To Start <span class="underline font-bold italic">Managing, Deploying and Earning!</span></h1>
-        <p class="mt-6 text-pretty text-lg/8 text-gray-300"></p>
-        <div class="mt-10 flex items-center justify-center gap-x-6 lg:justify-start grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
-          <% if user_signed_in? %>
+<body>
+  <div class="halftone-header">
+    <canvas id="halftoneCanvas"></canvas>
+    
+    <div class="content-container">
+      <div class="text-overlay">
+        <h1>Your All-In-One Version Control Marketplace with <span class="gradient-underline">AI commits</span>! Browse <%= number_with_delimiter(Product.count, :delimiter => ',') %> Projects From <%= User.count %> Developers Or Post Your Code To Start <span class="italic-text">Managing, Deploying and Earning!</span></h1>
+      </div>
+      
+      <div class="button-container">
+        <% if user_signed_in? %>
                <div>
                 <%= link_to marketplace_browse_path, class: "text-center inline-block bg-white hover:shadow-[inset_30rem_0_0_0] hover:shadow-blue-700 duration-[400ms,700ms] transition-[color,box-shadow] text-black hover:text-white border-black border-4 font-bold py-2 px-4" do %>
                   <h2>Browse Repositories</h2>
@@ -210,14 +221,19 @@ margin: 0em 0px;
                 </a>
                </div>
               <% end %>
-        </div>
       </div>
-      <div class="relative mt-16 h-80 lg:mt-8">
-        <img class="absolute left-0 top-0 w-[57rem] max-w-none rounded-md bg-white/5 ring-1 ring-white/10" src="https://tailwindui.com/plus-assets/img/component-images/dark-project-app-screenshot.png" alt="App screenshot" width="1824" height="1080">
+      
+      <div class="dashboard-image-container">
+        <img 
+          src="https://sjc.microlink.io/9Zod8AawqkU_Bu0heJI11BIkYtNEuGLCUeGVToSTTT5qYGdTKTHa1gxtvOKvjJwtZ7LLeXkR3V3LMd9wKnmTUA.jpeg" 
+          alt="Project management dashboard interface" 
+          class="dashboard-image" 
+          loading="lazy"
+          crossorigin="anonymous"
+        />
       </div>
     </div>
   </div>
-</div>
 
 <div class="bg-gray-900 py-24 border-b-2 border-white sm:py-32">
   <div class="mx-auto max-w-7xl px-6 lg:px-8">
@@ -281,7 +297,72 @@ margin: 0em 0px;
     </div>
   </div>
 </div>
-
-
-
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const canvas = document.getElementById('halftoneCanvas');
+      const ctx = canvas.getContext('2d');
+      
+      let animationFrameId;
+      let time = 0;
+      
+      function resizeCanvas() {
+        // Size canvas to its parent container to ensure full coverage
+        const header = canvas.parentElement;
+        canvas.width = header.offsetWidth;
+        canvas.height = header.offsetHeight;
+        console.log(`Canvas resized to ${canvas.width}x${canvas.height}`);
+      }
+      
+      function drawHalftoneWave() {
+        const gridSize = 20;
+        const rows = Math.ceil(canvas.height / gridSize) + 1; // Add extra row to ensure full coverage
+        const cols = Math.ceil(canvas.width / gridSize) + 1; // Add extra column to ensure full coverage
+        
+        for (let y = 0; y < rows; y++) {
+          for (let x = 0; x < cols; x++) {
+            const centerX = x * gridSize;
+            const centerY = y * gridSize;
+            const distanceFromCenter = Math.sqrt(
+              Math.pow(centerX - canvas.width / 2, 2) + 
+              Math.pow(centerY - canvas.height / 2, 2)
+            );
+            const maxDistance = Math.sqrt(
+              Math.pow(canvas.width / 2, 2) + 
+              Math.pow(canvas.height / 2, 2)
+            );
+            const normalizedDistance = distanceFromCenter / maxDistance;
+            
+            const waveOffset = Math.sin(normalizedDistance * 10 - time) * 0.5 + 0.5;
+            const size = gridSize * waveOffset * 0.8;
+            
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, size / 2, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(255, 255, 255, ${waveOffset * 0.5})`;
+            ctx.fill();
+          }
+        }
+      }
+      
+      function animate() {
+        // Fill with semi-transparent black for trail effect
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        
+        drawHalftoneWave();
+        
+        time += 0.05;
+        animationFrameId = requestAnimationFrame(animate);
+      }
+      
+      // Initialize
+      resizeCanvas();
+      window.addEventListener('resize', () => {
+        resizeCanvas();
+      });
+      
+      // Start animation
+      animate();
+    });
+  </script>
+</body>
 </html>
