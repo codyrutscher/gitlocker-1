@@ -5,17 +5,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
-    /* Main container for the header */
-    .halftone-header {
-      width: 100%;
-      height: 100vh; /* Full viewport height to ensure animation covers entire section */
-      min-height: 600px; /* Minimum height to ensure content fits */
-      overflow: hidden;
-      background-color: black;
+    /* Reset and basic styles */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
       font-family: 'Poppins', sans-serif;
     }
     
+    /* Main container for the header */
+    .halftone-header {
+      width: 100%;
+      min-height: 100vh; /* Full viewport height */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: black;
+      position: relative;
+      padding: 40px 0;
+    }
+    
     #halftoneCanvas {
+      position: absolute;
       top: 0;
       left: 0;
       width: 100%;
@@ -24,9 +38,6 @@
     }
     
     .content-container {
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%); /* Center in the viewport */
       z-index: 2;
       display: flex;
       flex-direction: column;
@@ -34,13 +45,13 @@
       width: 90%;
       max-width: 1200px;
       gap: 20px;
+      margin: 0 auto;
     }
     
     .text-overlay {
       text-align: center;
       color: white;
       padding: 20px; 
-      margin-top: 20px;
       background-color: #000000;
       border-radius: 10px;
       width: 100%;
@@ -51,7 +62,6 @@
       font-weight: 600;
       margin-bottom: 1rem;
       line-height: 1.3;
-      
     }
     
     .gradient-underline {
@@ -110,23 +120,21 @@
       width: 100%;
     }
     
-    .button {
+    .custom-button {
       display: inline-block;
-      padding: 10px 14px;
-      border-radius: 6px;
-      font-size: 14px;
-      font-weight: 600;
-      text-decoration: none;
-      text-align: center;
-      transition: all 0.2s ease;
-      white-space: nowrap;
       background-color: white;
-      color: #111827;
-      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+      color: black;
+      border: 4px solid black;
+      font-weight: bold;
+      padding: 8px 16px;
+      text-align: center;
+      text-decoration: none;
+      transition: box-shadow 700ms, color 400ms;
     }
     
-    .button:hover {
-      background-color: #f3f4f6;
+    .custom-button:hover {
+      box-shadow: inset 30rem 0 0 0 #3b82f6; /* blue-700 */
+      color: white;
     }
     
     @media (max-width: 768px) {
@@ -136,7 +144,7 @@
       .content-container {
         gap: 15px;
       }
-      .button {
+      .custom-button {
         padding: 8px 12px;
         font-size: 13px;
       }
@@ -144,8 +152,7 @@
     
     @media (max-width: 480px) {
       .halftone-header {
-        height: auto;
-        min-height: 100vh;
+        padding: 30px 0;
       }
       .text-overlay h1 {
         font-size: 1.4rem;
@@ -155,18 +162,16 @@
         bottom: -1px;
       }
       .content-container {
-        position: relative;
-        top: 0;
-        left: 0;
-        transform: none;
-        margin: 40px auto;
         gap: 10px;
+      }
+      .button-container {
+        width: 100%;
       }
       .button-row {
         flex-direction: column;
         width: 100%;
       }
-      .button {
+      .custom-button {
         width: 100%;
       }
     }
@@ -178,24 +183,24 @@
     
     <div class="content-container">
       <div class="text-overlay">
-        <h1>Your All-In-One Version Control Marketplace with <span class="gradient-underline">AI commits</span>! Browse <%= number_with_delimiter(Product.count, :delimiter => ',') %> Projects From <%= User.count %> Developers Or Post Your Code To Start <span class="italic-text">Managing, Deploying and Earning!</span></h1>
+        <h1>Your All-In-One Version Control Marketplace with <span class="gradient-underline">AI commits</span>! Browse 100,000+ Projects From 1000+ Developers Or Post Your Code To Start <span class="italic-text">Managing, Deploying and Earning!</span></h1>
       </div>
       
       <div class="button-container">
-               <div>
-                <%= link_to "Sign In", new_user_session_path, class: "text-center inline-block bg-white hover:shadow-[inset_52rem_0_0_0] hover:shadow-blue-700 duration-[400ms,700ms] transition-[color,box-shadow] text-black hover:text-white border-black border-4 font-bold py-2 px-4" %>
-               </div>
-               <div>
-               <%= link_to "Create An Account", new_user_registration_path, class: "text-center inline-block bg-white hover:shadow-[inset_30rem_0_0_0] hover:shadow-blue-700 duration-[400ms,700ms] transition-[color,box-shadow] text-black hover:text-white border-black border-4 font-bold py-2 px-4" %>
-               </div>
-               <div>
-               <%= link_to marketplace_browse_path, class: "text-center inline-block bg-white hover:shadow-[inset_30rem_0_0_0] hover:shadow-blue-700 duration-[400ms,700ms] transition-[color,box-shadow] text-black hover:text-white border-black border-4 font-bold py-2 px-4" do %>
-                  <h2>Browse</h2>
-                <% end %>
-                <a href="/marketplace/creators" class="text-center inline-block bg-white hover:shadow-[inset_30rem_0_0_0] hover:shadow-blue-700 duration-[400ms,700ms] transition-[color,box-shadow] text-black hover:text-white border-black border-4 font-bold py-2 px-4">
-                  <h2>Developers</h2>
-                </a>
-               </div>
+        <div>
+          <a href="/users/sign_in" class="custom-button">Sign In</a>
+        </div>
+        <div>
+          <a href="/users/sign_up" class="custom-button">Create An Account</a>
+        </div>
+        <div>
+          <a href="/marketplace/browse" class="custom-button">
+            <h2>Browse</h2>
+          </a>
+          <a href="/marketplace/creators" class="custom-button">
+            <h2>Developers</h2>
+          </a>
+        </div>
       </div>
       
       <div class="dashboard-image-container">
@@ -209,7 +214,6 @@
       </div>
     </div>
   </div>
-
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
