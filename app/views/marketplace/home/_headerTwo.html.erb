@@ -5,13 +5,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
+    /* Main container for the header */
+    .halftone-header {
+      position: relative;
+      width: 100%;
+      height: 100vh; /* Full viewport height to ensure animation covers entire section */
+      min-height: 600px; /* Minimum height to ensure content fits */
+      overflow: hidden;
+      background-color: black;
+      font-family: 'Poppins', sans-serif;
+    }
     
     #halftoneCanvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       z-index: 1;
     }
     
     .content-container {
-      transform: translate(-50%, -50%);
+      position: absolute; /* Changed to absolute for better centering */
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%); /* Center in the viewport */
       z-index: 2;
       display: flex;
       flex-direction: column;
@@ -43,6 +61,8 @@
     }
     
     .gradient-underline::after {
+      content: "";
+      position: absolute;
       bottom: -2px;
       left: 0;
       width: 100%;
@@ -56,8 +76,16 @@
       font-weight: 400;
     }
     
+    .dashboard-image-container {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
     .dashboard-image {
       width: 100%;
+      max-width: 800px; /* Control maximum width */
       border-radius: 10px;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
       transition: transform 0.3s ease;
@@ -116,6 +144,10 @@
     }
     
     @media (max-width: 480px) {
+      .halftone-header {
+        height: auto;
+        min-height: 100vh;
+      }
       .text-overlay h1 {
         font-size: 1.4rem;
       }
@@ -124,6 +156,11 @@
         bottom: -1px;
       }
       .content-container {
+        position: relative;
+        top: 0;
+        left: 0;
+        transform: none;
+        margin: 40px auto;
         gap: 10px;
       }
       .button-row {
@@ -137,34 +174,38 @@
   </style>
 </head>
 <body>
-  <canvas id="halftoneCanvas"></canvas>
-  
-  <div class="content-container">
-    <div class="text-overlay">
-      <h1>Your All-In-One Version Control Marketplace with <span class="gradient-underline">AI commits</span>! Browse 131,400 Projects From 964 Developers Or Post Your Code To Start <span class="italic-text">Managing, Deploying and Earning</span></h1>
-    </div>
+  <div class="halftone-header">
+    <canvas id="halftoneCanvas"></canvas>
     
-    <div class="button-container">
-      <div class="button-row">
-        <a href="https://www.coderz.us/marketplace/browse/featured" class="button">Featured</a>
-        <a href="https://www.coderz.us/marketplace/creators" class="button">Developers</a>
-        <a href="https://www.coderz.us/marketplace/browse" class="button">Browse</a>
-        <a href="https://www.coderz.us/products/new" class="button">Create</a>
+    <div class="content-container">
+      <div class="text-overlay">
+        <h1>Your All-In-One Version Control Marketplace with <span class="gradient-underline">AI commits</span>! Browse 131,400 Projects From 964 Developers Or Post Your Code To Start <span class="italic-text">Managing, Deploying and Earning</span></h1>
       </div>
       
-      <div class="button-row">
-        <a href="https://www.coderz.us/manage" class="button">Manage Repositories</a>
-        <a href="https://www.coderz.us/funds" class="button">Get Paid <span aria-hidden="true">→</span></a>
+      <div class="button-container">
+        <div class="button-row">
+          <a href="https://www.coderz.us/marketplace/browse/featured" class="button">Featured</a>
+          <a href="https://www.coderz.us/marketplace/creators" class="button">Developers</a>
+          <a href="https://www.coderz.us/marketplace/browse" class="button">Browse</a>
+          <a href="https://www.coderz.us/products/new" class="button">Create</a>
+        </div>
+        
+        <div class="button-row">
+          <a href="https://www.coderz.us/manage" class="button">Manage Repositories</a>
+          <a href="https://www.coderz.us/funds" class="button">Get Paid <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+      
+      <div class="dashboard-image-container">
+        <img 
+          src="https://sjc.microlink.io/9Zod8AawqkU_Bu0heJI11BIkYtNEuGLCUeGVToSTTT5qYGdTKTHa1gxtvOKvjJwtZ7LLeXkR3V3LMd9wKnmTUA.jpeg" 
+          alt="Project management dashboard interface" 
+          class="dashboard-image" 
+          loading="lazy"
+          crossorigin="anonymous"
+        />
       </div>
     </div>
-    
-    <img 
-      src="https://sjc.microlink.io/9Zod8AawqkU_Bu0heJI11BIkYtNEuGLCUeGVToSTTT5qYGdTKTHa1gxtvOKvjJwtZ7LLeXkR3V3LMd9wKnmTUA.jpeg" 
-      alt="Project management dashboard interface" 
-      class="dashboard-image" 
-      loading="lazy"
-      crossorigin="anonymous"
-    />
   </div>
   
   <script>
@@ -176,14 +217,17 @@
       let time = 0;
       
       function resizeCanvas() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+        // Size canvas to its parent container to ensure full coverage
+        const header = canvas.parentElement;
+        canvas.width = header.offsetWidth;
+        canvas.height = header.offsetHeight;
+        console.log(`Canvas resized to ${canvas.width}x${canvas.height}`);
       }
       
       function drawHalftoneWave() {
         const gridSize = 20;
-        const rows = Math.ceil(canvas.height / gridSize);
-        const cols = Math.ceil(canvas.width / gridSize);
+        const rows = Math.ceil(canvas.height / gridSize) + 1; // Add extra row to ensure full coverage
+        const cols = Math.ceil(canvas.width / gridSize) + 1; // Add extra column to ensure full coverage
         
         for (let y = 0; y < rows; y++) {
           for (let x = 0; x < cols; x++) {
@@ -223,7 +267,9 @@
       
       // Initialize
       resizeCanvas();
-      window.addEventListener('resize', resizeCanvas);
+      window.addEventListener('resize', () => {
+        resizeCanvas();
+      });
       
       // Start animation
       animate();
