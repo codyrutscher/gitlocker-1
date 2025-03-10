@@ -15,6 +15,15 @@
           <%= render partial: 'shared/creator_filters' %>
         </div>
       <hr class="h-px bg-black border-4 mt-4 mb-4 border-black">
+      <div class="mx-auto px-4 justify-center sm:px-6 lg:px-8">
+        <%= form_with url: marketplace_creators_path, method: :get, local: true, class: "mb-6" do |form| %>
+        <div class="flex space-x-2">
+        <%= form.text_field :search, value: params[:search], placeholder: "Search Developers...", class: "border p-2 rounded w-full" %>
+        <%= form.submit "Search", class: "bg-blue-500 text-white px-4 py-2 rounded" %>
+        </div>
+      <% end %>
+    </div>
+
         
         <ul role="list" class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           <%= render partial: "marketplace/creators/creator", collection: @users, as: :user %>
