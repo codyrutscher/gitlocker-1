@@ -188,18 +188,16 @@
       
       <div class="button-container">
         <div>
-          <a href="/users/sign_in" class="custom-button">Sign In</a>
+          <%= link_to "Sign In", new_user_session_path, class: "text-center inline-block bg-white hover:shadow-[inset_52rem_0_0_0] hover:shadow-blue-700 duration-[400ms,700ms] transition-[color,box-shadow] text-black hover:text-white border-black border-4 font-bold py-2 px-4" %>
         </div>
         <div>
-          <a href="/users/sign_up" class="custom-button">Create An Account</a>
+          <%= link_to "Create An Account", new_user_registration_path, class: "text-center inline-block bg-white hover:shadow-[inset_30rem_0_0_0] hover:shadow-blue-700 duration-[400ms,700ms] transition-[color,box-shadow] text-black hover:text-white border-black border-4 font-bold py-2 px-4" %>
         </div>
         <div>
-          <a href="/marketplace/browse" class="custom-button">
-            <h2>Browse</h2>
-          </a>
-          <a href="/marketplace/creators" class="custom-button">
-            <h2>Developers</h2>
-          </a>
+          <%= link_to marketplace_browse_path, class: "text-center inline-block bg-white hover:shadow-[inset_30rem_0_0_0] hover:shadow-blue-700 duration-[400ms,700ms] transition-[color,box-shadow] text-black hover:text-white border-black border-4 font-bold py-2 px-4" do %>
+          <a href="/marketplace/creators" class="text-center inline-block bg-white hover:shadow-[inset_30rem_0_0_0] hover:shadow-blue-700 duration-[400ms,700ms] transition-[color,box-shadow] text-black hover:text-white border-black border-4 font-bold py-2 px-4">
+                  <h2>Developers</h2>
+            </a>
         </div>
       </div>
       
