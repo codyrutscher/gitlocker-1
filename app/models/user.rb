@@ -11,6 +11,7 @@ class User < ApplicationRecord
   }
 
   enum state: { buyer: 0, seller: 1 }
+
   extend FriendlyId
   friendly_id :email_stripped, use: :slugged, slug_column: :username
 
@@ -64,18 +65,6 @@ class User < ApplicationRecord
     end
   }
 
-  def self.filter_and_sort(params)
-    users = self.all
-
-    if params[:creator_sort_by].present?
-      users = users.sort_by_criteria(params[:creator_sort_by])
-    else 
-      users = users.sort_by_criteria('newest')
-    end
-
-    users
-  end
-
   has_one_attached :profile_picture
   has_many_attached :projects
 
@@ -90,6 +79,23 @@ class User < ApplicationRecord
                     tsearch: { prefix: true }
                   }
 
+  # Unified filtering and sorting method
+  def self.filter_and_sort(params)
+    users = self.all
+
+    # Apply search filter
+    users = users.search(params[:search]) if params[:search].present?
+
+    # Apply sorting
+    if params[:creator_sort_by].present?
+      users = users.sort_by_criteria(params[:creator_sort_by])
+    else 
+      users = users.sort_by_criteria('newest')
+    end
+
+    users
+  end
+
   def self.from_omniauth(access_token)
     provider = access_token.provider
     token    = access_token.credentials.token
@@ -97,13 +103,13 @@ class User < ApplicationRecord
     name     = access_token.info.name
     username = access_token.info.nickname || access_token.info.username
     user     = User.find_by(email: email)
+    
     if user && provider == 'github'
       user.update(token: token, name: name, username: username)
     elsif user && provider == 'gitlab'
       user.update(gitlab_token: token, name: name, username: username)
     else
       user = User.create(
-        # You can record new values based on the model and github api e.g -> name: data["name"],
         email: email,
         password: Devise.friendly_token[0, 20],
         token: provider == 'github' ? token : nil,
@@ -116,7 +122,6 @@ class User < ApplicationRecord
   end
   
   def clone_repositories(git_url)
-    # Temporary method to have a note of how to clone repositories
     "git clone https://oauth2:#{token}@github.com/#{username}/{repository_name}"
   end
 
@@ -133,5 +138,5 @@ class User < ApplicationRecord
   def send_on_create_confirmation_instructions
     return
   end
-  
 end
+
