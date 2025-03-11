@@ -301,6 +301,7 @@ src="https://www.facebook.com/tr?id=900797662269591&ev=PageView&noscript=1"
     <link rel="stylesheet" d-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload", cache: 'cached/all' %>
     <%= javascript_importmap_tags %>
+    <%= javascript_pack_tag 'browse_filters' %>
     <link rel="icon" type="image/x-icon" href="https://gitlocker.s3.us-east-2.amazonaws.com/favicon.png">
 
     <% if controller_name == "checkout" || controller_name == "funds" %>
