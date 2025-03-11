@@ -6,6 +6,8 @@ module Marketplace
 
       if params[:filters].present?
         prod_ids = []
+        
+        # Apply category and language filters
         prod_ids.push(ProductCategory.where(category_id: filter_params[:categories]).pluck(:product_id)) if filter_params[:categories].present?
         prod_ids.push(ProductLanguage.where(language_id: filter_params[:languages]).pluck(:product_id)) if filter_params[:languages].present?
         
@@ -13,6 +15,7 @@ module Marketplace
         @products = @products.where(id: prod_ids)
       end
 
+      # Apply pagination
       @products = @products.page(filter_params[:page]).per(80)
 
       respond_to do |format|
@@ -24,6 +27,7 @@ module Marketplace
     private
 
     def filter_params
+      # Parse the filters from the URL
       params.delete(:_)
       if params[:filters].is_a?(String)
         begin
@@ -34,7 +38,7 @@ module Marketplace
       end
       permitted_params = params.permit(:category, :language, :sort_by, :page, filters: {})
 
-      filters = permitted_params[:filters]&.permit(category: [], language: [], min_price: [], max_price: []) || {}
+      filters = permitted_params[:filters]&.permit(category: [], language: [], min_price: [], max_price: [], upload_date: [], alphabetical: []) || {}
 
       {
         categories: ([permitted_params[:category]].compact + (filters[:category] || [])).uniq,
@@ -42,16 +46,21 @@ module Marketplace
         sort_by: permitted_params[:sort_by],
         page: permitted_params[:page],
         min_price: filters[:min_price],
-        max_price: filters[:max_price]
+        max_price: filters[:max_price],
+        upload_date: filters[:upload_date],
+        alphabetical: filters[:alphabetical]
       }
     end
 
     def apply_filters_and_sort(resource)
+      # Apply filtering if needed (e.g., by category or language)
       resource = resource.includes(:product_categories, :languages, :user, :categories, :product_languages)
 
-      # Apply filtering if needed (e.g., by category or language)
-      resource = resource.where(category_id: filter_params[:category]) if filter_params[:category].present?
-      resource = resource.where(language_id: filter_params[:language]) if filter_params[:language].present?
+      # Category filter
+      resource = resource.where(category_id: filter_params[:categories]) if filter_params[:categories].present?
+      
+      # Language filter
+      resource = resource.where(language_id: filter_params[:languages]) if filter_params[:languages].present?
       
       # Price filter
       if filter_params[:min_price].present?
@@ -62,28 +71,48 @@ module Marketplace
         resource = resource.where('price_cents <= ?', filter_params[:max_price].to_i * 100)
       end
 
-      resource = resource.with_attached_covers
-      
+      # Apply Upload Date filter (Newest or Oldest)
+      if filter_params[:upload_date].present?
+        case filter_params[:upload_date]
+        when "newest"
+          resource = resource.order(created_at: :desc)
+        when "oldest"
+          resource = resource.order(created_at: :asc)
+        end
+      end
+
+      # Apply Alphabetical filter (A-Z or Z-A)
+      if filter_params[:alphabetical].present?
+        case filter_params[:alphabetical]
+        when "asc"
+          resource = resource.order(name: :asc)
+        when "desc"
+          resource = resource.order(name: :desc)
+        end
+      end
+
+      # Default sorting if no specific filter is applied
       case filter_params[:sort_by]
       when 'alphabetical_asc'
-        resource.order(name: :asc)
+        resource = resource.order(name: :asc)
       when 'alphabetical_desc'
-        resource.order(name: :desc)
+        resource = resource.order(name: :desc)
       when 'oldest'
-        resource.order(created_at: :asc)
+        resource = resource.order(created_at: :asc)
       when 'cheapest'
-        resource.order(price_cents: :asc)
+        resource = resource.order(price_cents: :asc)
       when 'most_expensive'
-        resource.order(price_cents: :desc)
+        resource = resource.order(price_cents: :desc)
       when 'most_likes'
-        resource.left_joins(:likes)
+        resource = resource.left_joins(:likes)
                 .group('products.id')
                 .order('COUNT(likes.id) DESC NULLS LAST')
       when 'most_recent'
-        resource.order(created_at: :desc)
+        resource = resource.order(created_at: :desc)
       else
-        resource.order(name: :asc) # Default sorting
+        resource = resource.order(name: :asc) # Default sorting
       end
+      resource
     end
   end
 end
