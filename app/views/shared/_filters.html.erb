@@ -4,12 +4,11 @@
     <div class="border-b-2 border-gray-900 mb-6">
       <h2 class="text-xl font-bold text-gray-900 mb-3">Filters</h2>
     </div>
-    
+
     <!-- Categories Filter -->
     <div data-controller="collapsible">
       <div class="flex items-center justify-between cursor-pointer hover:bg-gray-50 p-2 rounded-md" data-action="click->collapsible#toggle">
         <h3 class="font-medium text-gray-900">Categories</h3>
-        <!-- Plus/Minus icons -->
         <svg class="h-5 w-5 text-gray-500 <%= 'hidden' if params.dig(:filters, :category).present? %>" viewBox="0 0 20 20" fill="currentColor" data-collapsible-target="expandIcon">
           <path d="M10.75 4.75a.75.75 0 0 0-1.5 0v4.5h-4.5a.75.75 0 0 0 0 1.5h4.5v4.5a.75.75 0 0 0 1.5 0v-4.5h4.5a.75.75 0 0 0 0-1.5h-4.5v-4.5Z" />
         </svg>
@@ -46,8 +45,14 @@
     <div data-controller="collapsible">
       <div class="flex items-center justify-between cursor-pointer hover:bg-gray-50 p-2 rounded-md" data-action="click->collapsible#toggle">
         <h3 class="font-medium text-gray-900">Price Range</h3>
+        <svg class="h-5 w-5 text-gray-500 <%= 'hidden' if params.dig(:filters, :price).present? %>" viewBox="0 0 20 20" fill="currentColor" data-collapsible-target="expandIcon">
+          <path d="M10.75 4.75a.75.75 0 0 0-1.5 0v4.5h-4.5a.75.75 0 0 0 0 1.5h4.5v4.5a.75.75 0 0 0 1.5 0v-4.5h4.5a.75.75 0 0 0 0-1.5h-4.5v-4.5Z" />
+        </svg>
+        <svg class="h-5 w-5 text-gray-500 <%= params.dig(:filters, :price).present? ? '' : 'hidden' %>" viewBox="0 0 20 20" fill="currentColor" data-collapsible-target="collapseIcon">
+          <path fill-rule="evenodd" d="M4 10a.75.75 0 0 1 .75-.75h10.5a.75.75 0 0 1 0 1.5H4.75A.75.75 0 0 1 4 10Z" clip-rule="evenodd" />
+        </svg>
       </div>
-      <div class="mt-4 hidden px-2" data-collapsible-target="content">
+      <div class="mt-4 <%= params.dig(:filters, :price).present? ? '' : 'hidden' %> px-2" data-collapsible-target="content">
         <div class="space-y-4">
           <div class="flex flex-col space-y-2">
             <label class="text-sm text-gray-600">Min Price ($)</label>
@@ -65,9 +70,6 @@
                    placeholder="Max" 
                    class="rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
           </div>
-          <button class="w-full bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-            Apply Price Filter
-          </button>
         </div>
       </div>
     </div>
@@ -78,6 +80,12 @@
     <div data-controller="collapsible">
       <div class="flex items-center justify-between cursor-pointer hover:bg-gray-50 p-2 rounded-md" data-action="click->collapsible#toggle">
         <h3 class="font-medium text-gray-900">Languages</h3>
+        <svg class="h-5 w-5 text-gray-500 <%= 'hidden' if params.dig(:filters, :language).present? %>" viewBox="0 0 20 20" fill="currentColor" data-collapsible-target="expandIcon">
+          <path d="M10.75 4.75a.75.75 0 0 0-1.5 0v4.5h-4.5a.75.75 0 0 0 0 1.5h4.5v4.5a.75.75 0 0 0 1.5 0v-4.5h4.5a.75.75 0 0 0 0-1.5h-4.5v-4.5Z" />
+        </svg>
+        <svg class="h-5 w-5 text-gray-500 <%= params.dig(:filters, :language).present? ? '' : 'hidden' %>" viewBox="0 0 20 20" fill="currentColor" data-collapsible-target="collapseIcon">
+          <path fill-rule="evenodd" d="M4 10a.75.75 0 0 1 .75-.75h10.5a.75.75 0 0 1 0 1.5H4.75A.75.75 0 0 1 4 10Z" clip-rule="evenodd" />
+        </svg>
       </div>
       <div class="mt-4 <%= params.dig(:filters, :language).present? ? '' : 'hidden' %> px-2" data-collapsible-target="content">
         <div class="space-y-4" id="languages-container">
@@ -101,8 +109,68 @@
         </button>
       </div>
     </div>
+
+    <hr class="my-4 border-t-2 border-gray-200">
+
+    <!-- Upload Date Filter -->
+    <div data-controller="collapsible">
+      <div class="flex items-center justify-between cursor-pointer hover:bg-gray-50 p-2 rounded-md" data-action="click->collapsible#toggle">
+        <h3 class="font-medium text-gray-900">Upload Date</h3>
+        <svg class="h-5 w-5 text-gray-500 <%= 'hidden' if params.dig(:filters, :upload_date).present? %>" viewBox="0 0 20 20" fill="currentColor" data-collapsible-target="expandIcon">
+          <path d="M10.75 4.75a.75.75 0 0 0-1.5 0v4.5h-4.5a.75.75 0 0 0 0 1.5h4.5v4.5a.75.75 0 0 0 1.5 0v-4.5h4.5a.75.75 0 0 0 0-1.5h-4.5v-4.5Z" />
+        </svg>
+        <svg class="h-5 w-5 text-gray-500 <%= params.dig(:filters, :upload_date).present? ? '' : 'hidden' %>" viewBox="0 0 20 20" fill="currentColor" data-collapsible-target="collapseIcon">
+          <path fill-rule="evenodd" d="M4 10a.75.75 0 0 1 .75-.75h10.5a.75.75 0 0 1 0 1.5H4.75A.75.75 0 0 1 4 10Z" clip-rule="evenodd" />
+        </svg>
+      </div>
+      <div class="mt-4 <%= params.dig(:filters, :upload_date).present? ? '' : 'hidden' %> px-2" data-collapsible-target="content">
+        <div class="space-y-4">
+          <div class="flex items-center">
+            <input type="radio" name="filters[upload_date]" value="newest" 
+                   <%= 'checked' if params.dig(:filters, :upload_date) == 'newest' %> class="text-indigo-600">
+            <label for="newest" class="ml-3 text-sm text-gray-600">Newest First</label>
+          </div>
+          <div class="flex items-center">
+            <input type="radio" name="filters[upload_date]" value="oldest" 
+                   <%= 'checked' if params.dig(:filters, :upload_date) == 'oldest' %> class="text-indigo-600">
+            <label for="oldest" class="ml-3 text-sm text-gray-600">Oldest First</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="my-4 border-t-2 border-gray-200">
+
+    <!-- Alphabetical Order Filter -->
+    <div data-controller="collapsible">
+      <div class="flex items-center justify-between cursor-pointer hover:bg-gray-50 p-2 rounded-md" data-action="click->collapsible#toggle">
+        <h3 class="font-medium text-gray-900">Alphabetical Order</h3>
+        <svg class="h-5 w-5 text-gray-500 <%= 'hidden' if params.dig(:filters, :alphabetical).present? %>" viewBox="0 0 20 20" fill="currentColor" data-collapsible-target="expandIcon">
+          <path d="M10.75 4.75a.75.75 0 0 0-1.5 0v4.5h-4.5a.75.75 0 0 0 0 1.5h4.5v4.5a.75.75 0 0 0 1.5 0v-4.5h4.5a.75.75 0 0 0 0-1.5h-4.5v-4.5Z" />
+        </svg>
+        <svg class="h-5 w-5 text-gray-500 <%= params.dig(:filters, :alphabetical).present? ? '' : 'hidden' %>" viewBox="0 0 20 20" fill="currentColor" data-collapsible-target="collapseIcon">
+          <path fill-rule="evenodd" d="M4 10a.75.75 0 0 1 .75-.75h10.5a.75.75 0 0 1 0 1.5H4.75A.75.75 0 0 1 4 10Z" clip-rule="evenodd" />
+        </svg>
+      </div>
+      <div class="mt-4 <%= params.dig(:filters, :alphabetical).present? ? '' : 'hidden' %> px-2" data-collapsible-target="content">
+        <div class="space-y-4">
+          <div class="flex items-center">
+            <input type="radio" name="filters[alphabetical]" value="asc" 
+                   <%= 'checked' if params.dig(:filters, :alphabetical) == 'asc' %> class="text-indigo-600">
+            <label for="asc" class="ml-3 text-sm text-gray-600">A-Z</label>
+          </div>
+          <div class="flex items-center">
+            <input type="radio" name="filters[alphabetical]" value="desc" 
+                   <%= 'checked' if params.dig(:filters, :alphabetical) == 'desc' %> class="text-indigo-600">
+            <label for="desc" class="ml-3 text-sm text-gray-600">Z-A</label>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
+
+
 
 <script>
 document.body.addEventListener('click', function (event) {
