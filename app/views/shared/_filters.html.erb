@@ -22,7 +22,7 @@
           <% Category.first(5).each do |category| %>
             <div class="flex items-center">
               <input type="checkbox" 
-                     name="category[]" 
+                     name="filters[category][]" 
                      value="<%= category.id %>" 
                      id="category-<%= category.id %>"
                      <%= 'checked' if params.dig(:filters, :category)&.include?(category.id.to_s) %>
@@ -46,20 +46,13 @@
     <div data-controller="collapsible">
       <div class="flex items-center justify-between cursor-pointer hover:bg-gray-50 p-2 rounded-md" data-action="click->collapsible#toggle">
         <h3 class="font-medium text-gray-900">Price Range</h3>
-        <!-- Plus/Minus icons -->
-        <svg class="h-5 w-5 text-gray-500" viewBox="0 0 20 20" fill="currentColor" data-collapsible-target="expandIcon">
-          <path d="M10.75 4.75a.75.75 0 0 0-1.5 0v4.5h-4.5a.75.75 0 0 0 0 1.5h4.5v4.5a.75.75 0 0 0 1.5 0v-4.5h4.5a.75.75 0 0 0 0-1.5h-4.5v-4.5Z" />
-        </svg>
-        <svg class="h-5 w-5 text-gray-500 hidden" viewBox="0 0 20 20" fill="currentColor" data-collapsible-target="collapseIcon">
-          <path fill-rule="evenodd" d="M4 10a.75.75 0 0 1 .75-.75h10.5a.75.75 0 0 1 0 1.5H4.75A.75.75 0 0 1 4 10Z" clip-rule="evenodd" />
-        </svg>
       </div>
       <div class="mt-4 hidden px-2" data-collapsible-target="content">
         <div class="space-y-4">
           <div class="flex flex-col space-y-2">
             <label class="text-sm text-gray-600">Min Price ($)</label>
             <input type="number" 
-                   name="min_price"
+                   name="filters[min_price]"
                    min="0" 
                    placeholder="Min" 
                    class="rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
@@ -67,7 +60,7 @@
           <div class="flex flex-col space-y-2">
             <label class="text-sm text-gray-600">Max Price ($)</label>
             <input type="number" 
-                   name="max_price"
+                   name="filters[max_price]"
                    min="0" 
                    placeholder="Max" 
                    class="rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
@@ -85,20 +78,13 @@
     <div data-controller="collapsible">
       <div class="flex items-center justify-between cursor-pointer hover:bg-gray-50 p-2 rounded-md" data-action="click->collapsible#toggle">
         <h3 class="font-medium text-gray-900">Languages</h3>
-        <!-- Plus/Minus icons -->
-        <svg class="h-5 w-5 text-gray-500 <%= 'hidden' if params.dig(:filters, :language).present? %>" viewBox="0 0 20 20" fill="currentColor" data-collapsible-target="expandIcon">
-          <path d="M10.75 4.75a.75.75 0 0 0-1.5 0v4.5h-4.5a.75.75 0 0 0 0 1.5h4.5v4.5a.75.75 0 0 0 1.5 0v-4.5h4.5a.75.75 0 0 0 0-1.5h-4.5v-4.5Z" />
-        </svg>
-        <svg class="h-5 w-5 text-gray-500 <%= params.dig(:filters, :language).present? ? '' : 'hidden' %>" viewBox="0 0 20 20" fill="currentColor" data-collapsible-target="collapseIcon">
-          <path fill-rule="evenodd" d="M4 10a.75.75 0 0 1 .75-.75h10.5a.75.75 0 0 1 0 1.5H4.75A.75.75 0 0 1 4 10Z" clip-rule="evenodd" />
-        </svg>
       </div>
       <div class="mt-4 <%= params.dig(:filters, :language).present? ? '' : 'hidden' %> px-2" data-collapsible-target="content">
         <div class="space-y-4" id="languages-container">
           <% Language.first(5).each do |language| %>
             <div class="flex items-center">
               <input type="checkbox" 
-                     name="language[]" 
+                     name="filters[language][]" 
                      value="<%= language.id %>" 
                      id="language-<%= language.id %>"
                      <%= 'checked' if params.dig(:filters, :language)&.include?(language.id.to_s) %>
@@ -140,7 +126,7 @@ document.body.addEventListener('click', function (event) {
 
           const checkbox = document.createElement('input');
           checkbox.type = 'checkbox';
-          checkbox.name = 'language[]';
+          checkbox.name = 'filters[language][]';
           checkbox.value = language.id;
           checkbox.id = `language-${language.id}`;
           checkbox.classList.add('h-4', 'w-4', 'rounded', 'border-gray-300', 'text-indigo-600', 'focus:ring-indigo-500', 'filter-checkbox');
@@ -183,7 +169,7 @@ document.body.addEventListener('click', function (event) {
 
           const checkbox = document.createElement('input');
           checkbox.type = 'checkbox';
-          checkbox.name = 'category[]';
+          checkbox.name = 'filters[category][]';
           checkbox.value = category.id;
           checkbox.id = `category-${category.id}`;
           checkbox.classList.add('h-4', 'w-4', 'rounded', 'border-gray-300', 'text-indigo-600', 'focus:ring-indigo-500', 'filter-checkbox');
@@ -229,7 +215,7 @@ $(document).ready(function () {
     const selectedFilters = {};
     
     // Get all checked categories
-    const checkedCategories = $('input[name="category[]"]:checked').map(function() {
+    const checkedCategories = $('input[name="filters[category][]"]:checked').map(function() {
       return $(this).val();
     }).get();
     
@@ -238,7 +224,7 @@ $(document).ready(function () {
     }
     
     // Get all checked languages
-    const checkedLanguages = $('input[name="language[]"]:checked').map(function() {
+    const checkedLanguages = $('input[name="filters[language][]"]:checked').map(function() {
       return $(this).val();
     }).get();
     
@@ -271,41 +257,9 @@ $(document).ready(function () {
         'Accept': 'text/javascript'
       },
       success: function(response) {
-        // Remove the manual DOM updates since index.js.erb will handle it
+        // DOM updates are handled in the `index.js.erb` file
       }
     });
   });
 });
-
-document.addEventListener('DOMContentLoaded', function() {
-  const urlParams = new URLSearchParams(window.location.search);
-  const filters = urlParams.get('filters');
-  
-  if (filters) {
-    const parsedFilters = JSON.parse(decodeURIComponent(filters));
-    
-    // Load more categories if needed
-    if (parsedFilters.category) {
-      const categoryCount = parsedFilters.category.length;
-      if (categoryCount > 5) {
-        const loadMoreCount = Math.ceil(categoryCount / 5) - 1;
-        for (let i = 0; i < loadMoreCount; i++) {
-          document.getElementById('load-more-categories').click();
-        }
-      }
-    }
-    
-    // Load more languages if needed
-    if (parsedFilters.language) {
-      const languageCount = parsedFilters.language.length;
-      if (languageCount > 5) {
-        const loadMoreCount = Math.ceil(languageCount / 5) - 1;
-        for (let i = 0; i < loadMoreCount; i++) {
-          document.getElementById('load-more-languages').click();
-        }
-      }
-    }
-  }
-});
-
 </script>
