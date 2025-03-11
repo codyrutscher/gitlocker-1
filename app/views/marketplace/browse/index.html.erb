@@ -1,21 +1,23 @@
-<%= content_for :meta_title, "Coderz Browse Categories" %>
+<%= content_for :meta_title, "Coderz Browse Products" %>
 <%= content_for :meta_description, "Navigate through Coderz marketplace with ease. Browse free and premium resources to find the perfect fit for your development needs" %>
 
 <div class="bg-indigo-100">
   <%= render BreadcrumbComponent.new(current_user,[
     { text: "Browse", url: marketplace_browse_path }
   ]) %>
-   <main>
+  
+  <main>
     <section aria-labelledby="category-heading" class="sm:py-8">
       <div class="mb-4 sm:flex sm:items-center justify-center align-center sm:px-6">
         <h1 id="category-heading" class="text-xl sm:text-2xl align-center font-bold text-center tracking-tight text-gray-900 underline">Browse All Repositories</h1>
       </div>
       <hr class="h-px bg-black mb-4 border-4 border-black">
+      
       <div class="px-8">
         <div class="mx-auto p-4">
           <div class="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4">
             <%= render partial: "shared/filters" %>
-            
+
             <!-- Product Grid -->
             <div class="lg:col-span-3">
               <div id="products" data-page="featured" class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4">
@@ -28,8 +30,9 @@
 
       <hr class="h-px bg-black border-4 mt-4 mb-4 border-black">
       <div class="mt-4 px-4 sm:px-6 lg:px-8 space-y-8">
-        <%= render 'kaminari/tailwind/paginator', paginator: @products %>
+        <%= render 'kaminari/tailwind/paginator', paginator: @products, params: request.query_parameters.merge(page: params[:page]) %>
       </div>
     </section>
   </main>
 </div>
+
