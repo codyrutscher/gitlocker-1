@@ -11,17 +11,20 @@ class AddGitRepoWorkerJob
 
     @octokit_client ||= Octokit::Client.new(access_token: @current_user.token) if @current_user.token.present?
     if action=="update"
+      puts "Update Product"
       update params
     else
+      puts "Create Product"
       create params
     end
   rescue => e
     puts "Error:- #{e}"
+    puts "Error:- #{e.backtrace}"
   end
   private
   def create params
     
-    repositories_count = @octokit_client.user.public_repos + @octokit_client.user.total_private_repos if @current_user.token.present?
+    repositories_count = (@octokit_client.user.public_repos || 0) + (@octokit_client.user.total_private_repos || 0) if @current_user.token.present?
     if params[:product][:product_url].present?
       repo_url = params[:product][:product_url]
       owner, repo_name = extract_owner_and_repo_name(repo_url)
@@ -49,8 +52,7 @@ class AddGitRepoWorkerJob
       #     )
       # end
     end
-    
-    if params[:product][:category_ids].present?
+    if params.dig(:product, :category_ids).present?
       # category_ids = params[:product][:category_ids][0].split(",").map(&:to_i)
       category_ids, category_names = differentiate_id_name(params[:product][:category_ids][0])
 
@@ -63,7 +65,7 @@ class AddGitRepoWorkerJob
       end 
     end
 
-    if params[:product][:language_ids].present?
+    if params.dig(:product, :language_ids).present?
       # language_ids = params[:product][:language_ids][0].split(",").map(&:to_i)
 
       language_ids, language_names = differentiate_id_name(params[:product][:language_ids][0])
@@ -94,6 +96,7 @@ class AddGitRepoWorkerJob
 
         # UserMailer.repo_added(@product, @product.user, "created", @product_url).deliver_now
       else
+        puts "Failed to create product."
         notification_params = {
           recipient: @product.user,
           params: {
@@ -109,6 +112,9 @@ class AddGitRepoWorkerJob
     rescue ActiveRecord::RecordNotUnique => e
       @product.destroy
       puts 'Failed to create product. Repository Aleady Exist.'
+    rescue Exception => e
+      puts e
+      puts e.backtrace
     end
   end
 

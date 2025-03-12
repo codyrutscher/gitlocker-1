@@ -118,14 +118,18 @@ module ProductConcern
 
   def load_repo_and_link_tree(owner, repo, ref, token, product, source = 'github')
     begin
+      header = " -H 'Authorization: token #{token}' " if token.present?
       if source == 'github'
         zip_link = "https://github.com/#{owner}/#{repo}/archive/refs/heads/#{ref}.zip"
       elsif source == 'gitlab'
         zip_link = "https://gitlab.com/#{owner}/#{repo}/-/archive/#{ref}/#{repo}-#{ref}.zip"
+      else
+        owner, repo, ref = parse_github_url(source)
+        zip_link = "https://github.com/#{owner}/#{repo}/archive/refs/heads/#{ref}.zip"
       end
       temp_file = Tempfile.new([repo, '.zip'])
   
-      curl_command = "curl -L -H 'Authorization: token #{token}' -o #{temp_file.path} #{zip_link}"
+      curl_command = "curl -L #{header} -o #{temp_file.path} #{zip_link}"
       stdout, stderr, status = Open3.capture3(curl_command)
   
       unless status.success?
@@ -162,5 +166,13 @@ module ProductConcern
       temp_file.close
       temp_file.unlink if File.exist?(temp_file.path)
     end
+  end
+
+  def parse_github_url(url)
+    match = url.match(%r{https://github.com/(?<owner>[^/]+)/(?<repo>[^/]+)(/tree/(?<ref>[^/]+))?})
+    owner = match[:owner]
+    repo = match[:repo]
+    ref = match[:ref] || 'main'
+    [owner, repo, ref]
   end
 end

@@ -55,20 +55,15 @@
                 <span class="text-gray-400">Framework ▼</span>
             </div>
             <div class="grid grid-cols-2 gap-4 mt-4">
-                <div class="bg-gray-800 p-4 rounded-lg text-center">
-                    <p class="text-white">Next.js Boilerplate</p>
-                </div>
-                <div class="bg-gray-800 p-4 rounded-lg text-center">
-                    <p class="text-white">AI Chatbot</p>
-                </div>
-                <div class="bg-gray-800 p-4 rounded-lg text-center">
-                    <p class="text-white">Commerce</p>
-                </div>
-                <div class="bg-gray-800 p-4 rounded-lg text-center">
-                    <p class="text-white">Vite + React Starter</p>
-                </div>
+                <% @templates.each do |template| %>
+                    <div class="bg-gray-800 p-4 rounded-lg text-center">
+                        <%= link_to template_path(template), class: "block bg-gray-800 p-4 rounded-lg text-center hover:bg-gray-700" do %>
+                            <p class="text-white"><%= template.name %></p>
+                        <% end %>                        
+                    </div>
+                <% end %>
             </div>
-            <a href="https://www.coderz.us/templatesindex" class="block mt-4 text-gray-300 hover:text-white text-sm">Browse All Templates →</a>
+            <a href="<%= templates_path %>" class="block mt-4 text-gray-300 hover:text-white text-sm">Browse All Templates →</a>
         </div>
     </div>
     <!-- Display GitHub Repositories -->

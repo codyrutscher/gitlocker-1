@@ -120,6 +120,7 @@ class ProductsController < ApplicationController
   end
 
   def new_product
+    @templates = Template.first(4)
   end
 
   def code
@@ -147,9 +148,6 @@ class ProductsController < ApplicationController
   end
 
   def teamrepositories
-  end
-
-  def templatesindex
   end
 
   def create_from_gitlab
@@ -296,13 +294,20 @@ class ProductsController < ApplicationController
   end
 
   def new
-    @product = Product.unscoped.new
+    if params[:template_id].present?
+      template = Template.find(params[:template_id])
+      @product = Product.unscoped.new(template_id: params[:template_id], name: template.name, description: template.description, demo_url: template.default_url)
+      if template.folder.attached?
+        @product.folder.attach(template.folder.blob)
+      end
+    else
+      @product = Product.unscoped.new
+    end
+    
     @filtered_repos = import_table
   end
 
   def create
-
-
     # boost_price = product_params[:boost_price].to_d
     # unit_amount = (boost_price * 100).to_i
     
@@ -340,12 +345,27 @@ class ProductsController < ApplicationController
     @product = Product.unscoped.new(product_params_with_user)
     featured = @product.featured
     @product.featured = false
+    @template = @product.template
+    if @template.present? && @template.folder.attached?
+      @product.folder.attach(@template.folder.blob)
+    end
     if @product.save
-      uploaded_file = product_params[:upload_file]
+      if @template.present?
+        @template.update(cloned_count: @product.template.cloned_count + 1)
+        uploaded_file = @template.folder.blob
+        filename = uploaded_file.filename.to_s
+      else
+        uploaded_file = product_params[:upload_file]
+        filename = uploaded_file.original_filename
+      end
       if uploaded_file
 
-      Tempfile.open(['uploaded_file', File.extname(uploaded_file.original_filename)], binmode: true) do |temp_file|
-        temp_file.write(uploaded_file.read)
+      Tempfile.open(['uploaded_file', File.extname(filename)], binmode: true) do |temp_file|
+        if @template.present?
+          temp_file.write(uploaded_file.download)
+        else
+          temp_file.write(uploaded_file.read)
+        end
         temp_file.flush
         temp_file.close
         directory_tree_str = zip_structure_for_js_tree(temp_file.path).to_s
@@ -364,12 +384,12 @@ class ProductsController < ApplicationController
 
       AddGitRepoWorkerJob.perform_async(params.to_json)
     
-    if featured
-      session = featured_stripe_session(@product)
-      render json: { url: session.url, status: :ok}
-    else 
-      render json: { message: 'Your file was large so we are finishing uploading it in the background. You will be notified when it is on the market.' }, status: :ok
-    end 
+      if featured
+        session = featured_stripe_session(@product)
+        render json: { url: session.url, status: :ok}
+      else
+        render json: { message: 'Your file was large so we are finishing uploading it in the background. You will be notified when it is on the market.' }, status: :ok
+      end 
 
     else
       if @product.errors.details[:base].any? { |error| error[:code] == 402 }
@@ -385,6 +405,7 @@ class ProductsController < ApplicationController
 
   def destroy
     @product = current_user.products.friendly.find(params[:id])
+    @product.template.update(cloned_count: @product.template.cloned_count - 1) if @product.template.present?
     @product.destroy
     redirect_to products_path, notice: 'Product was successfully deleted.'
   end
@@ -447,7 +468,7 @@ class ProductsController < ApplicationController
   def product_params
     params.require(:product).permit(
       :name, :featured, :description, :price, :boost_price, :active, :published, :preview_video_url, 
-      :video_file, :upload_file, :features, :instructions, :requirements, :demo_url, :url, 
+      :video_file, :upload_file, :features, :instructions, :requirements, :demo_url, :url, :template_id,
       :category_ids, :language_ids,
       category_ids: [],            
       language_ids: [],            

@@ -26,6 +26,7 @@ class Product < ApplicationRecord
   has_many :likes, dependent: :destroy
   has_many :cart_items, dependent: :destroy
   has_one :featured_payment_intent, dependent: :destroy
+  belongs_to :template, optional: true
 
   validates :name, presence: true, on: :create
   # validates :url, presence: true, uniqueness: { scope: :name }

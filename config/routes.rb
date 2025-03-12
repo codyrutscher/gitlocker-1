@@ -85,6 +85,15 @@ Rails.application.routes.draw do
 
   resources :accounts
 
+  resources :templates, only: %i[show index] do
+    member do
+      post :clone
+    end
+    collection do
+      get :create_default_templates
+    end
+  end
+
   resources :products, only: [:index, :show, :edit, :update,:new, :create, :destroy] do
     resources :covers, only: [:create, :destroy], controller: "product_covers"
     get 'new_product', on: :collection
@@ -108,7 +117,6 @@ Rails.application.routes.draw do
   end
   get 'search_repositories/(:query)', to: "products#search_repositories"
   get 'teamrepositories', to: "products#teamrepositories"
-  get 'templatesindex', to: "products#templatesindex"
 
   
 

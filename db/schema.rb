@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_02_27_182506) do
+ActiveRecord::Schema[7.1].define(version: 2025_03_12_012649) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -312,6 +312,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_27_182506) do
     t.text "directory_tree"
     t.string "more_categories_from_createor", default: [], array: true
     t.string "more_languages_from_createor", default: [], array: true
+    t.integer "template_id"
     t.index ["repo_id"], name: "index_products_on_repo_id", unique: true
     t.index ["slug"], name: "index_products_on_slug", unique: true
     t.index ["user_id"], name: "index_products_on_user_id"
@@ -359,6 +360,16 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_27_182506) do
 
   create_table "subscribed_users", force: :cascade do |t|
     t.string "email"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "templates", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.string "default_url"
+    t.integer "cloned_count"
+    t.text "directory_tree"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
