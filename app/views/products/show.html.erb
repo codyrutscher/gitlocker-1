@@ -1,7 +1,11 @@
 <html>
 <head>
 <style>
-
+.disabled-link {
+  pointer-events: none;
+  cursor: not-allowed;
+  text-decoration: none;  /* Keeps the link look, but can be adjusted based on design needs */
+}
 </style>
 </head>
 <body>
@@ -129,8 +133,10 @@
               <h2 class="font-semibold text-black">Languages</h2>
               <div class="flex flex-row flex-wrap items-center justify-start gap-2">
                 <% @languages.take(5).each do |language| %>
-                  <%= link_to language.name, 'javascript:void(0)', class: "hover:scale-110 text-black font-medium rounded-lg text-sm px-5 py-2.5 border-black border-2 text-center me-2 mb-2", style: get_color_code(language.name).present? ? "background-color: #{get_color_code(language.name)}; color: white;" : ''  %>
-                <% end %>
+  			<%= link_to language.name, 'javascript:void(0)', 
+        			class: "hover:scale-110 text-black font-medium rounded-lg text-sm px-5 py-2.5 border-black border-2 text-center me-2 mb-2 disabled-link", 
+        			style: get_color_code(language.name).present? ? "background-color: #{get_color_code(language.name)}; color: white;" : '' %>
+		<% end %>
 
                 <% @product.more_languages_from_createor.take(2).each do |language| %>
                   <span class="text-black bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 border-black border-2 text-center me-2 mb-2 disabled"><%= language %></span>
