@@ -12,6 +12,15 @@
         <h1 id="category-heading" class="text-xl sm:text-2xl align-center font-bold text-center tracking-tight text-gray-900 underline">Browse All Repositories</h1>
       </div>
       <hr class="h-px bg-black mb-4 border-4 border-black">
+      <div class="px-8">
+        <%= form_with(url: marketplace_browse_path, method: :get, local: true, class: 'mb-4') do %>
+        <div class="flex justify-center">
+          <input type="text" name="query" value="<%= params[:query] %>" placeholder="Search repositories..." class="px-4 py-2 border rounded-md w-1/2">
+          <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-md ml-2">Search</button>
+        </div>
+        <% end %>
+      </div>
+
       
       <div class="px-8">
         <div class="mx-auto p-4">
