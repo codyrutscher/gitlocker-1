@@ -51,6 +51,11 @@ jobs:
           set -e
           echo "Connected to EC2-2"
           cd /var/www/coderz-worker-sidekiq
+
+          echo "Resetting any local changes..."
+          git reset --hard HEAD
+          git clean -fd
+          
           echo "Pulling latest changes..."
           git pull origin main
           echo "Installing dependencies..."
@@ -69,6 +74,11 @@ jobs:
           set -e
           echo "Connected to EC2-3"
           cd /var/www/coderz-worker-rake
+
+          echo "Resetting any local changes..."
+          git reset --hard HEAD
+          git clean -fd
+
           echo "Pulling latest changes..."
           git pull origin main
           echo "Installing dependencies..."
