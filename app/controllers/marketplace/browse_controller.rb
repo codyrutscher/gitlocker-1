@@ -31,6 +31,27 @@ module Marketplace
       end
     end
 
+
+    def featured
+      params[:sort_by] ||= "most_recent" unless params[:sort_by].present?
+      @products = Product.where(featured: true)
+      if params[:filters].present?
+        prod_ids = []
+        
+        prod_ids.push(ProductCategory.where(category_id: filter_params[:categories]).pluck(:product_id)) if filter_params[:categories].present?
+        prod_ids.push(ProductLanguage.where(language_id: filter_params[:languages]).pluck(:product_id)) if filter_params[:languages].present?
+        prod_ids = prod_ids.flatten
+        @products = @products.where(id: prod_ids)
+      end
+
+      @products = @products.page(filter_params[:page]).per(10)
+
+      respond_to do |format|
+        format.html
+        format.js
+      end
+    end
+
     private
 
     def filter_params
