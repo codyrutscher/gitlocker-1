@@ -2,11 +2,11 @@ module Marketplace
   class BrowseController < ApplicationController
     def index
       params[:sort_by] ||= "most_recent" unless params[:sort_by].present?
-      
+
       # Apply filters and sorting
       @products = apply_filters_and_sort(Product.exclude_purchased(current_user))
 
-      # Search functionality
+      # Search functionality for index page
       if params[:query].present?
         @products = @products.where("name LIKE ?", "%#{params[:query]}%")
       end
@@ -31,19 +31,29 @@ module Marketplace
       end
     end
 
-
     def featured
       params[:sort_by] ||= "most_recent" unless params[:sort_by].present?
+
+      # Filter featured products
       @products = Product.where(featured: true)
+
+      # Search functionality for featured page
+      if params[:query].present?
+        @products = @products.where("name LIKE ?", "%#{params[:query]}%")
+      end
+
+      # Apply filters
       if params[:filters].present?
         prod_ids = []
-        
+
+        # Apply category and language filters
         prod_ids.push(ProductCategory.where(category_id: filter_params[:categories]).pluck(:product_id)) if filter_params[:categories].present?
         prod_ids.push(ProductLanguage.where(language_id: filter_params[:languages]).pluck(:product_id)) if filter_params[:languages].present?
         prod_ids = prod_ids.flatten
         @products = @products.where(id: prod_ids)
       end
 
+      # Apply pagination
       @products = @products.page(filter_params[:page]).per(10)
 
       respond_to do |format|
@@ -145,4 +155,3 @@ module Marketplace
     end
   end
 end
-
