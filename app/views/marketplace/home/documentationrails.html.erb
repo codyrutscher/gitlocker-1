@@ -1,0 +1,3199 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ruby on Rails Docs - Coderz</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css" />
+    <!-- Syntax Highlighting -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <style>
+      /* Custom scrollbar for sidebar */
+      .sidebar::-webkit-scrollbar {
+        width: 8px;
+      }
+      .sidebar::-webkit-scrollbar-thumb {
+        background: #4a5568;
+        border-radius: 4px;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50">
+    <!-- Reuse sidebar from index.html -->
+    <div class="min-h-screen md:flex">
+      <!-- Sidebar Container -->
+      <aside
+        class="sidebar bg-gray-800 text-gray-300 w-64 fixed h-screen overflow-y-auto z-30"
+      >
+        <!-- Sidebar Content -->
+        <div class="p-4">
+          <a
+            href="index.html"
+            class="block mb-6 text-blue-400 hover:text-blue-300"
+          >
+            ← Back to Tech Stack
+          </a>
+          <h2 class="text-xl font-bold mb-4">Ruby on Rails</h2>
+          <!-- Nested Navigation -->
+          <nav>
+            <h3 class="text-sm font-semibold text-gray-400 mb-4">
+              RAILS DOCUMENTATION
+            </h3>
+            <ul class="space-y-2">
+              <li>
+                <a
+                  href="#introduction"
+                  class="sidebar-link flex items-center px-3 py-2 rounded hover:bg-gray-700"
+                >
+                  Introduction
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#installation"
+                  class="sidebar-link flex items-center px-3 py-2 rounded hover:bg-gray-700"
+                >
+                  Installation
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#mvc"
+                  class="sidebar-link flex items-center px-3 py-2 rounded hover:bg-gray-700"
+                >
+                  MVC Architecture
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#routing"
+                  class="sidebar-link flex items-center px-3 py-2 rounded hover:bg-gray-700"
+                >
+                  Routes
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#controllers"
+                  class="sidebar-link flex items-center px-3 py-2 rounded hover:bg-gray-700"
+                >
+                  Controllers
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#views"
+                  class="sidebar-link flex items-center px-3 py-2 rounded hover:bg-gray-700"
+                >
+                  Views
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#models"
+                  class="sidebar-link flex items-center px-3 py-2 rounded hover:bg-gray-700"
+                >
+                  Models
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#associations"
+                  class="sidebar-link flex items-center px-3 py-2 rounded hover:bg-gray-700"
+                >
+                  Associations
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#querying"
+                  class="sidebar-link flex items-center px-3 py-2 rounded hover:bg-gray-700"
+                >
+                  Queries
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#testing-queries"
+                  class="sidebar-link flex items-center px-3 py-2 rounded hover:bg-gray-700"
+                >
+                  Testing Queries
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#database-transactions"
+                  class="sidebar-link flex items-center px-3 py-2 rounded hover:bg-gray-700"
+                >
+                  Database Transactions
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#asset-pipeline"
+                  class="sidebar-link flex items-center px-3 py-2 rounded hover:bg-gray-700"
+                >
+                  Asset Pipeline
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#concerns"
+                  class="sidebar-link flex items-center px-3 py-2 rounded hover:bg-gray-700"
+                >
+                  Concerns
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#helpers"
+                  class="sidebar-link flex items-center px-3 py-2 rounded hover:bg-gray-700"
+                >
+                  Helpers
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#jobs"
+                  class="sidebar-link flex items-center px-3 py-2 rounded hover:bg-gray-700"
+                >
+                  Jobs
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#components"
+                  class="sidebar-link flex items-center px-3 py-2 rounded hover:bg-gray-700"
+                >
+                  Components
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#deployment"
+                  class="sidebar-link flex items-center px-3 py-2 rounded hover:bg-gray-700"
+                >
+                  Deployment
+                </a>
+              </li>
+
+              <!-- Add more sections -->
+            </ul>
+          </nav>
+        </div>
+      </aside>
+
+      <!-- Mobile Menu Button -->
+      <button
+        id="sidebarToggle"
+        class="md:hidden fixed top-4 left-4 z-40 p-2 bg-gray-800 rounded-lg text-white"
+      >
+        ☰
+      </button>
+
+      <main class="flex-1 md:p-8 p-4 bg-gray-50 md:ml-64">
+        <article class="max-w-4xl mx-auto">
+          <!-- Breadcrumb -->
+          <nav class="text-sm text-gray-600 mb-6">
+            <a href="index.html" class="hover:text-gray-800">Home</a> /
+            <span class="font-medium">Ruby on Rails</span>
+          </nav>
+
+          <!-- Course Outline -->
+          <div class="mb-12">
+            <h1 class="text-4xl font-bold text-gray-900 mb-6">
+              Ruby on Rails Mastery
+            </h1>
+            <div class="bg-blue-50 p-6 rounded-lg">
+              <h2 class="text-xl font-semibold mb-4">Learning Path</h2>
+              <ol class="list-decimal pl-6 space-y-3">
+                <li>Introduction to Rails</li>
+                <li>Setting Up Development Environment</li>
+                <li>MVC Architecture Deep Dive</li>
+                <li>Working with Models and Databases</li>
+                <!-- Add more steps -->
+              </ol>
+            </div>
+          </div>
+
+          <!-- Lesson 1: Introduction -->
+
+          <section id="introduction" class="mb-12 pt-8">
+            <h2 class="text-3xl font-semibold text-gray-800 mb-6">
+              1. Introduction to Ruby on Rails
+            </h2>
+
+            <div class="space-y-6 text-gray-600">
+              <!-- Overview -->
+              <div class="bg-white p-6 rounded-lg shadow-sm">
+                <h3 class="text-xl font-semibold mb-4">
+                  What is Ruby on Rails?
+                </h3>
+
+                <p class="mb-4">
+                  Rails is a full-stack web framework that provides:
+                </p>
+                <ul class="list-disc pl-6 space-y-2">
+                  <li>
+                    <strong>Convention over Configuration:</strong> Sensible
+                    defaults for rapid development
+                  </li>
+                  <li>
+                    <strong>DRY Principle:</strong> "Don't Repeat Yourself"
+                    philosophy
+                  </li>
+                  <li>
+                    <strong>MVC Architecture:</strong> Clean separation of
+                    concerns
+                  </li>
+                  <li>
+                    <strong>Built-in Testing:</strong> Test-driven development
+                    support
+                  </li>
+                </ul>
+
+                <!-- Real-world Analogy -->
+                <div class="bg-green-50 p-4 rounded-lg mt-4">
+                  <h3 class="font-semibold mb-2">🍰 Cake Baking Analogy</h3>
+                  <p>Think of Rails as a professional kitchen where:</p>
+                  <ul class="list-disc pl-6 mt-2">
+                    <li><strong>Chef = Rails Developer</strong></li>
+                    <li><strong>Recipe Book = Rails Conventions</strong></li>
+                    <li><strong>Ingredients = Gems (Libraries)</strong></li>
+                  </ul>
+                </div>
+
+                <div class="mt-6 bg-blue-50 p-4 rounded-lg">
+                  <h4 class="font-semibold mb-2">📚 Historical Context</h4>
+                  <p>
+                    Created by David Heinemeier Hansson in 2004, Rails has
+                    powered major platforms like:
+                  </p>
+                  <ul class="list-disc pl-6 mt-2">
+                    <li>GitHub</li>
+                    <li>Shopify</li>
+                    <li>Airbnb (initial version)</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <!-- Cross-Platform Setup -->
+            <h2 class="text-3xl font-semibold text-gray-800 mb-6 mt-10">
+              2. Setting Up Development Environment
+            </h2>
+
+            <div class="bg-white p-6 rounded-lg shadow-sm mt-6">
+              <h3 class="text-xl font-semibold mb-4">Workspace Setup</h3>
+
+              <!-- macOS Instructions -->
+              <div class="mb-6">
+                <h4 class="font-semibold mb-2">🍎 For macOS Users</h4>
+                <pre
+                  class="bg-gray-800 p-4 rounded-lg"
+                ><code class="language-bash">
+# Install Homebrew (if not installed)
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+# Install Ruby and Rails
+brew install rbenv
+rbenv init
+rbenv install 3.2.2
+rbenv global 3.2.2
+gem install rails
+                            </code></pre>
+              </div>
+
+              <!-- Ubuntu Instructions -->
+              <div>
+                <h4 class="font-semibold mb-2">🐧 For Ubuntu Users</h4>
+                <pre
+                  class="bg-gray-800 p-4 rounded-lg"
+                ><code class="language-bash">
+# Install dependencies
+sudo apt-get install curl gnupg2
+
+# Install RVM (Ruby Version Manager)
+curl -sSL https://get.rvm.io | bash -s stable
+source ~/.rvm/scripts/rvm
+rvm install 3.2.2
+rvm use 3.2.2 --default
+
+# Install Rails
+gem install rails
+                            </code></pre>
+              </div>
+
+              <!-- Verification -->
+              <div class="mt-6 bg-green-50 p-4 rounded-lg">
+                <h4 class="font-semibold mb-2">✅ Verify Installation</h4>
+                <p class="mb-2">Check versions for both OS:</p>
+                <pre
+                  class="bg-gray-800 p-4 rounded-lg"
+                ><code class="language-bash">
+ruby -v  # Should show 3.2.2
+rails -v # Should show 7.0.8 or newer
+                            </code></pre>
+              </div>
+            </div>
+          </section>
+
+          <section id="installation" class="mb-12 pt-8">
+            <!-- Cross-Platform Setup -->
+            <h2 class="text-3xl font-semibold text-gray-800 mb-6">
+              2. Setting Up Development Environment
+            </h2>
+
+            <div class="bg-white p-6 rounded-lg shadow-sm mt-6">
+              <h3 class="text-xl font-semibold mb-4">Workspace Setup</h3>
+
+              <!-- macOS Instructions -->
+              <div class="mb-6">
+                <h4 class="font-semibold mb-2">🍎 For macOS Users</h4>
+                <pre
+                  class="bg-gray-800 p-4 rounded-lg"
+                ><code class="language-bash">
+# Install Homebrew (if not installed)
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+# Install Ruby and Rails
+brew install rbenv
+rbenv init
+rbenv install 3.2.2
+rbenv global 3.2.2
+gem install rails
+                            </code></pre>
+              </div>
+
+              <!-- Ubuntu Instructions -->
+              <div>
+                <h4 class="font-semibold mb-2">🐧 For Ubuntu Users</h4>
+                <pre
+                  class="bg-gray-800 p-4 rounded-lg"
+                ><code class="language-bash">
+# Install dependencies
+sudo apt-get install curl gnupg2
+
+# Install RVM (Ruby Version Manager)
+curl -sSL https://get.rvm.io | bash -s stable
+source ~/.rvm/scripts/rvm
+rvm install 3.2.2
+rvm use 3.2.2 --default
+
+# Install Rails
+gem install rails
+                            </code></pre>
+              </div>
+
+              <!-- Verification -->
+              <div class="mt-6 bg-green-50 p-4 rounded-lg">
+                <h4 class="font-semibold mb-2">✅ Verify Installation</h4>
+                <p class="mb-2">Check versions for both OS:</p>
+                <pre
+                  class="bg-gray-800 p-4 rounded-lg"
+                ><code class="language-bash">
+            ruby -v  # Should show 3.2.2
+            rails -v # Should show 7.0.8 or newer
+                            </code></pre>
+              </div>
+            </div>
+          </section>
+
+          <!-- MVC -->
+          <section id="mvc" class="mb-12 pt-8">
+            <h2 class="text-3xl font-semibold text-gray-800 mb-6">
+              3. MVC Architecture Explained
+            </h2>
+
+            <div class="space-y-6 text-gray-600">
+              <!-- MVC Diagram -->
+              <div class="bg-white p-6 rounded-lg shadow-sm">
+                <h3 class="text-xl font-semibold mb-4">
+                  Visual Representation
+                </h3>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
+                  <!-- Model Card -->
+                  <div class="bg-gray-50 p-4 rounded-lg">
+                    <h4 class="font-semibold mb-2">💾 Model</h4>
+                    <p class="text-sm">Manages data and business logic</p>
+                    <pre class="mt-2"><code class="language-ruby">
+class User < ApplicationRecord
+  validates :email, presence: true
+  has_many :posts
+end
+                            </code></pre>
+                  </div>
+
+                  <!-- View Card -->
+                  <div class="bg-gray-50 p-4 rounded-lg">
+                    <h4 class="font-semibold mb-2">🖼️ View</h4>
+                    <p class="text-sm">Handles presentation layer</p>
+                    <pre class="mt-2"><code class="language-ruby">
+<%# app/views/users/show.html.erb %>
+<h1><%= @user.name %></h1>
+<p>Member since: <%= @user.created_at %></p>
+                                                  </code></pre>
+                  </div>
+
+                  <!-- Controller Card -->
+                  <div class="bg-gray-50 p-4 rounded-lg">
+                    <h4 class="font-semibold mb-2">🎮 Controller</h4>
+                    <p class="text-sm">Manages user requests</p>
+                    <pre class="mt-2"><code class="language-ruby">
+class UsersController < ApplicationController
+  def show
+    @user = User.find(params[:id])
+  end
+end
+                            </code></pre>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Workflow Explanation -->
+              <div class="bg-white p-6 rounded-lg shadow-sm mt-6">
+                <h3 class="text-xl font-semibold mb-4">
+                  Complete Workflow Example
+                </h3>
+                <ol class="list-decimal pl-6 space-y-4">
+                  <li>User visits <code>/users/1</code></li>
+                  <li>Routes → UsersController#show</li>
+                  <li>Controller fetches User(1) from Model</li>
+                  <li>Model queries database</li>
+                  <li>Controller passes user to View</li>
+                  <li>View renders HTML response</li>
+                </ol>
+
+                <div class="mt-6 bg-yellow-50 p-4 rounded-lg">
+                  <h4 class="font-semibold mb-2">💡 Pro Tip</h4>
+                  <p>Generate MVC components quickly using:</p>
+                  <pre
+                    class="bg-gray-800 p-4 rounded-lg mt-2"
+                  ><code class="language-bash">
+        rails generate scaffold User name:string email:string
+                        </code></pre>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="routing" class="mb-12 pt-8">
+            <h2 class="text-3xl font-semibold text-gray-800 mb-6">
+              4. Routing Fundamentals
+            </h2>
+
+            <div class="space-y-6 text-gray-600">
+              <!-- Concept Explanation -->
+              <div class="bg-white p-6 rounded-lg shadow-sm">
+                <h3 class="text-xl font-semibold mb-4">What are Routes?</h3>
+                <p class="mb-4">
+                  Routes are URL patterns that map to controller actions. They
+                  work like:
+                </p>
+
+                <!-- Real-World Analogy -->
+                <div class="bg-blue-50 p-4 rounded-lg mb-4">
+                  <p>📮 <strong>Post Office Analogy:</strong></p>
+                  <ul class="list-disc pl-6 mt-2">
+                    <li>URL = Mailing address</li>
+                    <li>Router = Postal sorting system</li>
+                    <li>Controller = Recipient processing mail</li>
+                  </ul>
+                </div>
+
+                <!-- Basic Route Example -->
+                <pre
+                  class="bg-gray-800 p-4 rounded-lg"
+                ><code class="language-ruby">
+  # config/routes.rb
+  Rails.application.routes.draw do
+    get '/about', to: 'pages#about'
+    get '/contact', to: 'pages#contact'
+  end
+                    </code></pre>
+                <div class="mt-4 bg-gray-50 p-4 rounded-lg">
+                  <h4 class="font-semibold mb-2">Code Explanation:</h4>
+                  <ul class="list-disc pl-6">
+                    <li>
+                      <code>Rails.application.routes.draw do</code>: This starts
+                      the routing definition block in Rails.
+                    </li>
+                    <li>
+                      <code>get '/about', to: 'pages#about'</code>: This defines
+                      a route for the URL <code>/about</code>. When a user
+                      visits this URL, the <code>about</code> action in the
+                      <code>PagesController</code> will be called.
+                    </li>
+                    <li>
+                      <code>get '/contact', to: 'pages#contact'</code>:
+                      Similarly, this defines a route for the URL
+                      <code>/contact</code>, which maps to the
+                      <code>contact</code> action in the
+                      <code>PagesController</code>.
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- RESTful Routes -->
+          <div class="bg-white p-6 rounded-lg shadow-sm mt-6">
+            <h3 class="text-xl font-semibold mb-4">RESTful Resource Routing</h3>
+            <p class="mb-4">Standard CRUD routes for a resource:</p>
+
+            <!-- Routes Table -->
+            <div class="overflow-x-auto">
+              <table class="min-w-full border-collapse">
+                <thead class="bg-gray-50">
+                  <tr>
+                    <th class="p-3 text-left border">HTTP Verb</th>
+                    <th class="p-3 text-left border">Path</th>
+                    <th class="p-3 text-left border">Controller#Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="p-3 border">GET</td>
+                    <td class="p-3 border">/posts</td>
+                    <td class="p-3 border">posts#index</td>
+                  </tr>
+                  <tr>
+                    <td class="p-3 border">GET</td>
+                    <td class="p-3 border">/posts/new</td>
+                    <td class="p-3 border">posts#new</td>
+                  </tr>
+                  <tr>
+                    <td class="p-3 border">POST</td>
+                    <td class="p-3 border">/posts</td>
+                    <td class="p-3 border">posts#create</td>
+                  </tr>
+                  <tr>
+                    <td class="p-3 border">GET</td>
+                    <td class="p-3 border">/posts/:id</td>
+                    <td class="p-3 border">posts#show</td>
+                  </tr>
+                  <tr>
+                    <td class="p-3 border">GET</td>
+                    <td class="p-3 border">/posts/:id/edit</td>
+                    <td class="p-3 border">posts#edit</td>
+                  </tr>
+                  <tr>
+                    <td class="p-3 border">PATCH/PUT</td>
+                    <td class="p-3 border">/posts/:id</td>
+                    <td class="p-3 border">posts#update</td>
+                  </tr>
+                  <tr>
+                    <td class="p-3 border">DELETE</td>
+                    <td class="p-3 border">/posts/:id</td>
+                    <td class="p-3 border">posts#destroy</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Resource Generator -->
+            <div class="mt-6 bg-green-50 p-4 rounded-lg">
+              <h4 class="font-semibold mb-2">🚀 Quick Setup</h4>
+              <p>Generate all REST routes with one line:</p>
+              <pre
+                class="bg-gray-800 p-4 rounded-lg mt-2"
+              ><code class="language-ruby">
+resources :posts  # Creates all 7 RESTful routes
+                </code></pre>
+              <div class="mt-4 bg-gray-50 p-4 rounded-lg">
+                <h4 class="font-semibold mb-2">Code Explanation:</h4>
+                <ul class="list-disc pl-6">
+                  <li>
+                    <code>resources :posts</code>: This single line generates
+                    all seven RESTful routes for the
+                    <code>posts</code> resource. It automatically maps HTTP
+                    verbs to controller actions, as shown in the table above.
+                  </li>
+                  <li>
+                    For example, <code>GET /posts</code> maps to
+                    <code>posts#index</code>, and
+                    <code>DELETE /posts/:id</code> maps to
+                    <code>posts#destroy</code>.
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white p-6 rounded-lg shadow-sm mt-6">
+            <h3 class="text-xl font-semibold mb-4">
+              Advanced Routing Techniques
+            </h3>
+
+            <!-- Namespaces -->
+            <div class="mb-6">
+              <h4 class="font-semibold mb-2">API Namespacing</h4>
+              <pre
+                class="bg-gray-800 p-4 rounded-lg"
+              ><code class="language-ruby">
+namespace :api do
+  namespace :v1 do
+    resources :users
+  end
+end
+# Creates /api/v1/users routes
+                </code></pre>
+              <div class="mt-4 bg-gray-50 p-4 rounded-lg">
+                <h4 class="font-semibold mb-2">Code Explanation:</h4>
+                <ul class="list-disc pl-6">
+                  <li>
+                    <code>namespace :api</code>: This groups routes under the
+                    <code>/api</code> URL prefix.
+                  </li>
+                  <li>
+                    <code>namespace :v1</code>: Further groups routes under
+                    <code>/api/v1</code>, which is useful for versioning APIs.
+                  </li>
+                  <li>
+                    <code>resources :users</code>: Generates RESTful routes for
+                    the <code>users</code> resource under
+                    <code>/api/v1/users</code>.
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Member vs Collection -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div class="bg-gray-50 p-4 rounded-lg">
+                <h4 class="font-semibold mb-2">Member Routes</h4>
+                <pre><code class="language-ruby">
+resources :posts do
+  member do
+    get 'preview'
+  end
+end
+# /posts/1/preview
+                    </code></pre>
+                <div class="mt-4 bg-gray-50 p-4 rounded-lg">
+                  <h4 class="font-semibold mb-2">Code Explanation:</h4>
+                  <ul class="list-disc pl-6">
+                    <li>
+                      <code>member do</code>: Defines a route that acts on a
+                      specific member (instance) of the resource.
+                    </li>
+                    <li>
+                      <code>get 'preview'</code>: Creates a route like
+                      <code>/posts/1/preview</code>, where <code>1</code> is the
+                      ID of the post. This route maps to the
+                      <code>preview</code> action in the
+                      <code>PostsController</code>.
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="bg-gray-50 p-4 rounded-lg">
+                <h4 class="font-semibold mb-2">Collection Routes</h4>
+                <pre><code class="language-ruby">
+resources :posts do
+  collection do
+    get 'search'
+  end
+end
+# /posts/search
+                    </code></pre>
+                <div class="mt-4 bg-gray-50 p-4 rounded-lg">
+                  <h4 class="font-semibold mb-2">Code Explanation:</h4>
+                  <ul class="list-disc pl-6">
+                    <li>
+                      <code>collection do</code>: Defines a route that acts on
+                      the entire collection of resources.
+                    </li>
+                    <li>
+                      <code>get 'search'</code>: Creates a route like
+                      <code>/posts/search</code>, which maps to the
+                      <code>search</code> action in the
+                      <code>PostsController</code>.
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <section id="controllers" class="mb-12 pt-8">
+            <h2 class="text-3xl font-semibold text-gray-800 mb-6">
+              5. Controller Implementation
+            </h2>
+
+            <div class="space-y-6 text-gray-600">
+              <!-- Controller Fundamentals -->
+              <div class="bg-white p-6 rounded-lg shadow-sm">
+                <h3 class="text-xl font-semibold mb-4">
+                  What Do Controllers Do?
+                </h3>
+
+                <div class="bg-blue-50 p-4 rounded-lg mb-4">
+                  <p>🎮 <strong>Controller Responsibilities:</strong></p>
+                  <ul class="list-disc pl-6 mt-2">
+                    <li>Process incoming requests</li>
+                    <li>Interact with models</li>
+                    <li>Prepare data for views</li>
+                    <li>Handle response formats (HTML/JSON)</li>
+                  </ul>
+                </div>
+
+                <!-- Basic Controller Example -->
+                <pre
+                  class="bg-gray-800 p-4 rounded-lg"
+                ><code class="language-ruby">
+# app/controllers/posts_controller.rb
+class PostsController < ApplicationController
+  def index
+    @posts = Post.all
+  end
+
+  def show
+    @post = Post.find(params[:id])
+  end
+end
+                  </code></pre>
+              </div>
+
+              <!-- Security Section -->
+              <div class="bg-white p-6 rounded-lg shadow-sm mt-6">
+                <h3 class="text-xl font-semibold mb-4">Secure Data Handling</h3>
+
+                <div class="bg-red-50 p-4 rounded-lg mb-4">
+                  <p>🔒 <strong>Never Do This:</strong></p>
+                  <pre
+                    class="bg-gray-800 p-4 rounded-lg mt-2"
+                  ><code class="language-ruby">
+# UNSAFE - Allows mass assignment
+Post.new(params[:post])
+              </code></pre>
+                </div>
+
+                <!-- Strong Parameters -->
+                <div class="bg-green-50 p-4 rounded-lg">
+                  <p>✅ <strong>Safe Approach (Strong Parameters):</strong></p>
+                  <pre
+                    class="bg-gray-800 p-4 rounded-lg mt-2"
+                  ><code class="language-ruby">
+private
+
+def post_params
+params.require(:post).permit(:title, :content, :category_id)
+end
+              </code></pre>
+                </div>
+
+                <!-- Usage in Actions -->
+                <div class="mt-6">
+                  <pre
+                    class="bg-gray-800 p-4 rounded-lg"
+                  ><code class="language-ruby">
+def create
+@post = Post.new(post_params)
+# ...
+end
+              </code></pre>
+                </div>
+              </div>
+
+              <!-- Filters Section -->
+              <div class="bg-white p-6 rounded-lg shadow-sm mt-6">
+                <h3 class="text-xl font-semibold mb-4">Controller Filters</h3>
+
+                <!-- Before Action Example -->
+                <div class="mb-6">
+                  <pre
+                    class="bg-gray-800 p-4 rounded-lg"
+                  ><code class="language-ruby">
+before_action :set_post, only: [:show, :edit, :update, :destroy]
+
+private
+
+def set_post
+  @post = Post.find(params[:id])
+end
+                    </code></pre>
+                </div>
+
+                <!-- Filter Types -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div class="bg-gray-50 p-4 rounded-lg">
+                    <h4 class="font-semibold mb-2">before_action</h4>
+                    <p class="text-sm">Runs before specified actions</p>
+                  </div>
+                  <div class="bg-gray-50 p-4 rounded-lg">
+                    <h4 class="font-semibold mb-2">after_action</h4>
+                    <p class="text-sm">Runs after specified actions</p>
+                  </div>
+                  <div class="bg-gray-50 p-4 rounded-lg">
+                    <h4 class="font-semibold mb-2">around_action</h4>
+                    <p class="text-sm">Wraps around actions</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Response Handling -->
+              <div class="bg-white p-6 rounded-lg shadow-sm mt-6">
+                <h3 class="text-xl font-semibold mb-4">Format Responses</h3>
+
+                <!-- Multi-Format Example -->
+                <pre
+                  class="bg-gray-800 p-4 rounded-lg"
+                ><code class="language-ruby">
+def show
+@post = Post.find(params[:id])
+
+respond_to do |format|
+  format.html # show.html.erb
+  format.json { render json: @post }
+  format.pdf do
+    render pdf: "post_#{@post.id}", template: 'posts/show'
+  end
+end
+end
+          </code></pre>
+
+                <!-- Status Codes -->
+                <div class="mt-6 bg-yellow-50 p-4 rounded-lg">
+                  <p>📢 <strong>Common HTTP Status Codes:</strong></p>
+                  <ul class="list-disc pl-6 mt-2">
+                    <li><code>200 OK</code> - Success</li>
+                    <li><code>404 Not Found</code> - Missing resource</li>
+                    <li>
+                      <code>422 Unprocessable Entity</code> - Validation errors
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="views" class="mb-12 pt-8">
+            <h2 class="text-3xl font-semibold text-gray-800 mb-6">
+              6. Views & ERB Templates
+            </h2>
+
+            <div class="space-y-6 text-gray-600">
+              <!-- ERB Fundamentals -->
+              <div class="bg-white p-6 rounded-lg shadow-sm">
+                <h3 class="text-xl font-semibold mb-4">Understanding ERB</h3>
+
+                <div class="bg-blue-50 p-4 rounded-lg mb-4">
+                  <p>📝 <strong>ERB = Embedded Ruby</strong></p>
+                  <ul class="list-disc pl-6 mt-2">
+                    <li><code>&lt;% %></code> Executes Ruby code</li>
+                    <li><code>&lt;%= %></code> Outputs Ruby result</li>
+                    <li><code>&lt;%# %></code> ERB comments</li>
+                  </ul>
+                </div>
+
+                <!-- Basic Example -->
+                <pre
+                  class="bg-gray-800 p-4 rounded-lg"
+                ><code class="language-ruby">
+<%# app/views/posts/index.html.erb %>
+&lt;h1 class="text-2xl font-bold mb-4">&lt;%= @user.name %>'s Posts&lt;/h1>
+
+&lt;% @posts.each do |post| %>
+  &lt;div class="post-card">
+    &lt;h2>&lt;%= post.title %>&lt;/h2>
+    &lt;p>&lt;%= truncate(post.content, length: 150) %>&lt;/p>
+  &lt;/div>
+&lt;% end %>
+                    </code></pre>
+
+                <div class="mt-4 p-4 bg-gray-50 rounded-lg">
+                  <h4 class="font-semibold mb-2">🧠 What This Does:</h4>
+                  <ul class="list-disc pl-6 space-y-2">
+                    <li>
+                      <strong>Line 2:</strong> Displays the user's name from
+                      controller's <code>@user</code> instance variable
+                    </li>
+                    <li>
+                      <strong>Line 4:</strong> Starts loop through
+                      <code>@posts</code> collection
+                    </li>
+                    <li>
+                      <strong>Line 5-7:</strong> Creates a card for each post
+                      with truncated content
+                    </li>
+                    <li><strong><%= %></strong> Outputs values to HTML</li>
+                    <li>
+                      <strong><% %></strong> Executes logic without output
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- Reusable Components -->
+              <div class="bg-white p-6 rounded-lg shadow-sm mt-6">
+                <h3 class="text-xl font-semibold mb-4">Partial Templates</h3>
+
+                <!-- Partial Example -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <pre
+                      class="bg-gray-800 p-4 rounded-lg"
+                    ><code class="language-ruby">
+<%# app/views/posts/_form.html.erb %>
+&lt;%= form_with model: @post do |form| %>
+&lt;div class="field">
+  &lt;%= form.label :title %>
+  &lt;%= form.text_field :title, class: "input" %>
+&lt;/div>
+&lt;% end %>
+                  </code></pre>
+                  </div>
+                  <div>
+                    <pre
+                      class="bg-gray-800 p-4 rounded-lg"
+                    ><code class="language-ruby">
+<%# app/views/posts/new.html.erb %>
+&lt;h1>New Post&lt;/h1>
+&lt;%= render 'form' %>
+                  </code></pre>
+                  </div>
+                </div>
+
+                <div class="mt-4 p-4 bg-gray-50 rounded-lg">
+                  <h4 class="font-semibold mb-2">🧠 Key Concepts:</h4>
+                  <ul class="list-disc pl-6 space-y-2">
+                    <li>
+                      <strong>Partial Files:</strong> Start with underscore
+                      <code>_form.html.erb</code>
+                    </li>
+                    <li>
+                      <strong>form_with:</strong> Rails helper creating
+                      &lt;form> tag with proper attributes
+                    </li>
+                    <li>
+                      <strong>render 'form':</strong> Reuses the partial
+                      template
+                    </li>
+                    <li>
+                      <strong>@post:</strong> Instance variable passed from
+                      controller
+                    </li>
+                  </ul>
+                </div>
+
+                <!-- Layout Structure -->
+                <div class="mt-6 bg-green-50 p-4 rounded-lg">
+                  <h4 class="font-semibold mb-2">Application Layout</h4>
+                  <pre class="bg-gray-800 p-4 rounded-lg">
+                  
+                  <code class="language-ruby">
+<%# app/views/layouts/application.html.erb %>
+&lt;!DOCTYPE html>
+&lt;html>
+&lt;head>
+  &lt;title>MyApp&lt;/title>
+  &lt;%= csrf_meta_tags %>
+&lt;/head>
+&lt;body class="bg-gray-50">
+  &lt;%= yield %> &lt;!-- Page content injects here -->
+&lt;/body>
+&lt;/html>
+              </code></pre>
+
+                  <div class="mt-4 p-4 bg-gray-100 rounded-lg">
+                    <h4 class="font-semibold mb-2">🔍 Explanation:</h4>
+                    <ul class="list-disc pl-6 space-y-2">
+                      <li>
+                        <strong>csrf_meta_tags:</strong> Security feature
+                        preventing CSRF attacks
+                      </li>
+                      <li>
+                        <strong>yield:</strong> Placeholder where individual
+                        view content is inserted
+                      </li>
+                      <li>
+                        <strong>Layouts:</strong> Wrap all views for consistent
+                        header/footer
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Helpers Section -->
+              <div class="bg-white p-6 rounded-lg shadow-sm mt-6">
+                <h3 class="text-xl font-semibold mb-4">
+                  Built-in View Helpers
+                </h3>
+
+                <!-- Common Helpers -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div class="bg-gray-50 p-4 rounded-lg">
+                    <h4 class="font-semibold mb-2">Link Helpers</h4>
+                    <pre><code class="language-ruby">
+&lt;%= link_to "View Post", post_path(@post), 
+    class: "btn-primary", 
+    data: { turbo_method: :delete } %>
+                        </code></pre>
+                    <div class="mt-2 p-3 bg-white rounded-lg">
+                      <p class="text-sm">Generates:</p>
+                      <code class="text-sm break-words">
+                        &lt;a href="/posts/1" class="btn-primary"
+                        data-turbo-method="delete"> View Post &lt;/a>
+                      </code>
+                      <p class="mt-2 text-gray-600 text-sm">
+                        Turbo Drive handles DELETE request asynchronously
+                      </p>
+                    </div>
+                  </div>
+
+                  <div class="bg-gray-50 p-4 rounded-lg">
+                    <h4 class="font-semibold mb-2">Form Helpers</h4>
+                    <pre><code class="language-ruby">
+&lt;%= form_for @user do |f| %>
+  &lt;%= f.text_field :email, placeholder: "Enter email" %>
+  &lt;%= f.submit "Save", class: "btn-submit" %>
+&lt;% end %>
+                        </code></pre>
+                    <div class="mt-2 p-3 bg-white rounded-lg">
+                      <p class="text-sm">Generates:</p>
+                      <code class="text-sm break-words">
+                        &lt;form action="/users" method="post"> &lt;input
+                        type="text" name="user[email]" placeholder="Enter
+                        email"> &lt;button type="submit" class="btn-submit">
+                        Save &lt;/button> &lt;/form>
+                      </code>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Custom Helpers -->
+                <div class="mt-6 bg-yellow-50 p-4 rounded-lg">
+                  <h4 class="font-semibold mb-2">Creating Custom Helpers</h4>
+                  <pre
+                    class="bg-gray-800 p-4 rounded-lg"
+                  ><code class="language-ruby">
+# app/helpers/posts_helper.rb
+module PostsHelper
+  def formatted_date(date)
+    date.strftime("%B %d, %Y") #=> "January 01, 2023"
+  end
+end
+                    </code></pre>
+                  <div class="mt-4 p-4 bg-gray-100 rounded-lg">
+                    <h4 class="font-semibold mb-2">💡 Usage:</h4>
+                    <ul class="list-disc pl-6 space-y-2">
+                      <li>Available in all views after creation</li>
+                      <li>
+                        Call with:
+                        <code>&lt;%= formatted_date(@post.created_at) %></code>
+                      </li>
+                      <li>Keeps complex logic out of views</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Asset Pipeline -->
+              <div class="bg-white p-6 rounded-lg shadow-sm mt-6">
+                <h3 class="text-xl font-semibold mb-4">Managing Assets</h3>
+
+                <!-- CSS/JS Inclusion -->
+                <pre
+                  class="bg-gray-800 p-4 rounded-lg"
+                ><code class="language-ruby">
+&lt;%# In layout file %>
+&lt;%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+&lt;%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+          </code></pre>
+
+                <div class="mt-4 p-4 bg-gray-50 rounded-lg">
+                  <h4 class="font-semibold mb-2">📦 What This Means:</h4>
+                  <ul class="list-disc pl-6 space-y-2">
+                    <li>
+                      <strong>stylesheet_link_tag:</strong> Links compiled CSS
+                      from <code>app/assets/stylesheets</code>
+                    </li>
+                    <li>
+                      <strong>javascript_include_tag:</strong> Loads JS from
+                      <code>app/assets/javascript</code>
+                    </li>
+                    <li>
+                      <strong>data-turbo-track:</strong> Auto-reloads assets
+                      when changed
+                    </li>
+                    <li>
+                      <strong>defer:</strong> Loads JavaScript after HTML
+                      parsing
+                    </li>
+                  </ul>
+                </div>
+
+                <!-- Image Handling -->
+                <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div class="bg-gray-50 p-4 rounded-lg">
+                    <h4 class="font-semibold mb-2">Image Tag</h4>
+                    <pre><code class="language-ruby">
+&lt;%= image_tag "logo.png", 
+  alt: "App Logo", 
+  class: "w-32 h-auto" %>
+                  </code></pre>
+                    <div class="mt-2 p-3 bg-white rounded-lg">
+                      <p class="text-sm">Looks in:</p>
+                      <code class="text-sm">app/assets/images/logo.png</code>
+                      <p class="mt-2 text-sm">Generates:</p>
+                      <code class="text-sm break-words">
+                        &lt;img src="/assets/logo-abc123.png" alt="App Logo"
+                        class="w-32 h-auto">
+                      </code>
+                    </div>
+                  </div>
+
+                  <div class="bg-gray-50 p-4 rounded-lg">
+                    <h4 class="font-semibold mb-2">Asset Path</h4>
+                    <pre><code class="language-ruby">
+&lt;%= link_to "Download Guide", 
+  asset_path("user_guide.pdf") %>
+                  </code></pre>
+                    <div class="mt-2 p-3 bg-white rounded-lg">
+                      <p class="text-sm">File location:</p>
+                      <code class="text-sm">public/assets/user_guide.pdf</code>
+                      <p class="mt-2 text-sm">Generates path:</p>
+                      <code class="text-sm">/assets/user_guide.pdf</code>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="models" class="mb-12 pt-8">
+            <h2 class="text-3xl font-semibold text-gray-800 mb-6">
+              7. Models & Active Record
+            </h2>
+
+            <div class="space-y-6 text-gray-600">
+              <!-- ORM Explanation -->
+              <div class="bg-white p-6 rounded-lg shadow-sm">
+                <h3 class="text-xl font-semibold mb-4">What is Model?</h3>
+
+                <div class="bg-blue-50 p-4 rounded-lg mb-4">
+                  <p>💾 <strong>Model:</strong></p>
+                  <ul class="list-disc pl-6 mt-2">
+                    <p>
+                      A Rails model is like a blueprint for a type of data in
+                      your app. It helps your app store, manage, and retrieve
+                      information from the database.
+                    </p>
+                    <p>
+                      <strong>For example,</strong> if you're building a blog,
+                      you might have a model called Post. This model would
+                      define what a post looks like and what it can do.
+                    </p>
+                  </ul>
+                </div>
+
+                <h3 class="text-xl font-semibold mb-4">
+                  What is Active Record?
+                </h3>
+
+                <div class="bg-blue-50 p-4 rounded-lg mb-4">
+                  <p>💾 <strong>Active Record Pattern:</strong></p>
+                  <ul class="list-disc pl-6 mt-2">
+                    <li>Maps database tables to Ruby classes</li>
+                    <li>Each row = Object instance</li>
+                    <li>Columns = Object attributes</li>
+                  </ul>
+                </div>
+
+                <!-- Basic Model Example -->
+                <pre
+                  class="bg-gray-800 p-4 rounded-lg"
+                ><code class="language-ruby">
+# app/models/user.rb
+class User < ApplicationRecord
+  has_many :posts
+  validates :email, presence: true, uniqueness: true
+end
+                    </code></pre>
+
+                <div class="mt-4 p-4 bg-gray-50 rounded-lg">
+                  <h4 class="font-semibold mb-2">🧠 Key Features:</h4>
+                  <ul class="list-disc pl-6 space-y-2">
+                    <li>
+                      <strong>Inheritance:</strong> All models inherit from
+                      <code>ApplicationRecord</code>
+                    </li>
+                    <li>
+                      <strong>Associations:</strong>
+                      <code>has_many</code> defines relationships
+                    </li>
+                    <li>
+                      <strong>Validations:</strong>
+                      <code>validates</code> ensures data quality
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- Migrations Section -->
+              <div class="bg-white p-6 rounded-lg shadow-sm mt-6">
+                <h3 class="text-xl font-semibold mb-4">Database Migrations</h3>
+
+                <!-- Migration Example -->
+                <pre
+                  class="bg-gray-800 p-4 rounded-lg"
+                ><code class="language-ruby">
+# db/migrate/20231010123456_create_users.rb
+class CreateUsers < ActiveRecord::Migration[7.0]
+def change
+  create_table :users do |t|
+    t.string :name
+    t.string :email
+    t.timestamps
+  end
+end
+end
+          </code></pre>
+
+                <div class="mt-4 p-4 bg-gray-50 rounded-lg">
+                  <h4 class="font-semibold mb-2">🔍 Explanation:</h4>
+                  <ul class="list-disc pl-6 space-y-2">
+                    <li>
+                      <strong>Migration Files:</strong> Versioned database
+                      schema changes
+                    </li>
+                    <li>
+                      <strong>create_table:</strong> Generates new database
+                      table
+                    </li>
+                    <li>
+                      <strong>t.timestamps:</strong> Adds
+                      <code>created_at</code> and
+                      <code>updated_at</code> columns
+                    </li>
+                    <li>
+                      <strong>Run with:</strong> <code>rails db:migrate</code>
+                    </li>
+                  </ul>
+                </div>
+
+                <!-- Migration Commands -->
+                <div class="mt-6 bg-green-50 p-4 rounded-lg">
+                  <h4 class="font-semibold mb-2">🛠️ Common Commands</h4>
+                  <pre
+                    class="bg-gray-800 p-4 rounded-lg"
+                  ><code class="language-bash">
+# Generate new migration
+rails generate migration AddAgeToUsers age:integer
+
+# Rollback last migration
+rails db:rollback
+
+# Check migration status
+rails db:migrate:status
+              </code></pre>
+                </div>
+              </div>
+
+              <!-- CRUD Section -->
+              <div class="bg-white p-6 rounded-lg shadow-sm mt-6">
+                <h3 class="text-xl font-semibold mb-4">
+                  Basic CRUD Operations
+                </h3>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <!-- Create -->
+                  <div class="bg-gray-50 p-4 rounded-lg">
+                    <h4 class="font-semibold mb-2">Create</h4>
+                    <pre><code class="language-ruby">
+user = User.new(name: "John", email: "john@example.com")
+user.save #=> true/false
+
+# Alternative
+User.create(name: "John", email: "john@example.com")
+                        </code></pre>
+                  </div>
+
+                  <!-- Read -->
+                  <div class="bg-gray-50 p-4 rounded-lg">
+                    <h4 class="font-semibold mb-2">Read</h4>
+                    <pre><code class="language-ruby">
+User.all # All records
+User.find(1) # Find by ID
+User.where(name: "John") # Conditional query
+                        </code></pre>
+                  </div>
+
+                  <!-- Update -->
+                  <div class="bg-gray-50 p-4 rounded-lg">
+                    <h4 class="font-semibold mb-2">Update</h4>
+                    <pre><code class="language-ruby">
+user = User.find(1)
+user.update(name: "Johnny")
+
+# Alternative
+User.where(name: "John").update_all(name: "Johnny")
+                        </code></pre>
+                  </div>
+
+                  <!-- Delete -->
+                  <div class="bg-gray-50 p-4 rounded-lg">
+                    <h4 class="font-semibold mb-2">Delete</h4>
+                    <pre><code class="language-ruby">
+user = User.find(1)
+user.destroy
+
+# Alternative
+User.where(name: "Johnny").destroy_all
+                        </code></pre>
+                  </div>
+                </div>
+
+                <div class="mt-6 bg-yellow-50 p-4 rounded-lg">
+                  <h4 class="font-semibold mb-2">💡 Best Practices</h4>
+                  <ul class="list-disc pl-6 space-y-2">
+                    <li>
+                      Use <code>create!</code>/<code>save!</code> to raise
+                      errors on failure
+                    </li>
+                    <li>
+                      Prefer <code>update</code> over modifying attributes
+                      manually
+                    </li>
+                    <li>
+                      Use <code>dependent: :destroy</code> for associated
+                      records
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- Validations Section -->
+              <div class="bg-white p-6 rounded-lg shadow-sm mt-6">
+                <h3 class="text-xl font-semibold mb-4">Data Validation</h3>
+
+                <!-- Validation Example -->
+                <pre
+                  class="bg-gray-800 p-4 rounded-lg"
+                ><code class="language-ruby">
+class Post < ApplicationRecord
+validates :title, presence: true,
+                  length: { minimum: 5 }
+                  
+validates :slug, uniqueness: true,
+                 format: { with: /\A[a-z0-9\-]+\z/ }
+
+before_create :generate_slug
+
+private
+
+def generate_slug
+  self.slug ||= title.parameterize
+end
+end
+          </code></pre>
+
+                <div class="mt-4 p-4 bg-gray-50 rounded-lg">
+                  <h4 class="font-semibold mb-2">🔍 Explanation:</h4>
+                  <ul class="list-disc pl-6 space-y-2">
+                    <li>
+                      <strong>Validations:</strong> Ensure valid data before
+                      saving
+                    </li>
+                    <li>
+                      <strong>Callbacks:</strong>
+                      <code>before_create</code> runs before saving new records
+                    </li>
+                    <li>
+                      <strong>parameterize:</strong> Converts "Hello World" to
+                      "hello-world"
+                    </li>
+                    <li>
+                      <strong>self:</strong> Refers to the current instance
+                    </li>
+                  </ul>
+                </div>
+
+                <!-- Common Validations -->
+                <div class="mt-6 bg-red-50 p-4 rounded-lg">
+                  <h4 class="font-semibold mb-2">Common Validation Types</h4>
+                  <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-2">
+                    <div class="bg-white p-3 rounded">
+                      <code>presence: true</code>
+                      <p class="text-sm mt-1">Must be present</p>
+                    </div>
+                    <div class="bg-white p-3 rounded">
+                      <code>uniqueness: true</code>
+                      <p class="text-sm mt-1">Unique value</p>
+                    </div>
+                    <div class="bg-white p-3 rounded">
+                      <code>length: { minimum: 5 }</code>
+                      <p class="text-sm mt-1">Character limits</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="associations" class="mb-12 pt-8">
+            <h2 class="text-3xl font-semibold text-gray-800 mb-6">
+              8. Model Associations
+            </h2>
+
+            <div class="space-y-6 text-gray-600">
+              <!-- Association Definition -->
+              <div class="bg-white p-6 rounded-lg shadow-sm">
+                <h3 class="text-xl font-semibold mb-4">
+                  What are Associations?
+                </h3>
+
+                <div class="bg-blue-50 p-4 rounded-lg mb-4">
+                  <p>🔗 <strong>Definition:</strong></p>
+                  <p class="mt-2">
+                    Associations define relationships between models. They allow
+                    you to:
+                  </p>
+                  <ul class="list-disc pl-6 mt-2">
+                    <li>Connect database tables</li>
+                    <li>Simplify data retrieval</li>
+                    <li>Maintain data integrity</li>
+                  </ul>
+                </div>
+
+                <!-- Example Scenario -->
+                <div class="mt-6 bg-green-50 p-4 rounded-lg">
+                  <h4 class="font-semibold mb-2">📚 Example Scenario</h4>
+                  <p>In a blog application:</p>
+                  <ul class="list-disc pl-6 mt-2">
+                    <li>
+                      A <strong>User</strong> has many <strong>Posts</strong>
+                    </li>
+                    <li>
+                      Each <strong>Post</strong> belongs to a
+                      <strong>User</strong>
+                    </li>
+                    <li>Posts can have many <strong>Comments</strong></li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- One-to-Many -->
+              <div class="bg-white p-6 rounded-lg shadow-sm mt-6">
+                <h3 class="text-xl font-semibold mb-4">
+                  One-to-Many Relationship
+                </h3>
+
+                <div class="bg-yellow-50 p-4 rounded-lg mb-4">
+                  <p>1️⃣→📚 <strong>Definition:</strong></p>
+                  <p class="mt-2">
+                    A single record in one table can be associated with many
+                    records in another table.
+                  </p>
+                </div>
+
+                <!-- Example Code -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <pre
+                      class="bg-gray-800 p-4 rounded-lg"
+                    ><code class="language-ruby">
+# app/models/user.rb
+class User < ApplicationRecord
+has_many :posts
+end
+                  </code></pre>
+                  </div>
+                  <div>
+                    <pre
+                      class="bg-gray-800 p-4 rounded-lg"
+                    ><code class="language-ruby">
+# app/models/post.rb
+class Post < ApplicationRecord
+belongs_to :user
+end
+                  </code></pre>
+                  </div>
+                </div>
+
+                <div class="mt-4 p-4 bg-gray-50 rounded-lg">
+                  <h4 class="font-semibold mb-2">🧠 Key Points:</h4>
+                  <ul class="list-disc pl-6 space-y-2">
+                    <li>
+                      <strong>Foreign Key:</strong> <code>posts</code> table has
+                      <code>user_id</code> column
+                    </li>
+                    <li><strong>has_many:</strong> User can have many posts</li>
+                    <li>
+                      <strong>belongs_to:</strong> Post is owned by one user
+                    </li>
+                  </ul>
+                </div>
+
+                <!-- Usage Example -->
+                <div class="mt-6 bg-purple-50 p-4 rounded-lg">
+                  <h4 class="font-semibold mb-2">💻 Usage Example</h4>
+                  <pre
+                    class="bg-gray-800 p-4 rounded-lg"
+                  ><code class="language-ruby">
+# Create a user
+user = User.create(name: "John")
+
+# Create posts for the user
+user.posts.create(title: "First Post")
+user.posts.create(title: "Second Post")
+
+# Retrieve user's posts
+user.posts.each do |post|
+puts post.title
+end
+              </code></pre>
+                </div>
+              </div>
+
+              <!-- Many-to-Many -->
+              <div class="bg-white p-6 rounded-lg shadow-sm mt-6">
+                <h3 class="text-xl font-semibold mb-4">
+                  Many-to-Many Relationship
+                </h3>
+
+                <div class="bg-red-50 p-4 rounded-lg mb-4">
+                  <p>📚↔️📚 <strong>Definition:</strong></p>
+                  <p class="mt-2">
+                    Records in one table can be associated with many records in
+                    another table, and vice versa.
+                  </p>
+                </div>
+
+                <!-- Example Code -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <pre
+                      class="bg-gray-800 p-4 rounded-lg"
+                    ><code class="language-ruby">
+# app/models/post.rb
+class Post < ApplicationRecord
+  has_many :post_tags
+  has_many :tags, through: :post_tags
+end
+                        </code></pre>
+                  </div>
+                  <div>
+                    <pre
+                      class="bg-gray-800 p-4 rounded-lg"
+                    ><code class="language-ruby">
+# app/models/tag.rb
+class Tag < ApplicationRecord
+  has_many :post_tags
+  has_many :posts, through: :post_tags
+end
+                        </code></pre>
+                  </div>
+                </div>
+
+                <div class="mt-4 p-4 bg-gray-50 rounded-lg">
+                  <h4 class="font-semibold mb-2">🧠 Key Points:</h4>
+                  <ul class="list-disc pl-6 space-y-2">
+                    <li>
+                      <strong>Join Table:</strong>
+                      <code>post_tags</code> connects <code>posts</code> and
+                      <code>tags</code>
+                    </li>
+                    <li><strong>through:</strong> Specifies the join model</li>
+                    <li>
+                      <strong>has_many :through:</strong> Indirect association
+                    </li>
+                  </ul>
+                </div>
+
+                <!-- Usage Example -->
+                <div class="mt-6 bg-green-50 p-4 rounded-lg">
+                  <h4 class="font-semibold mb-2">💻 Usage Example</h4>
+                  <pre
+                    class="bg-gray-800 p-4 rounded-lg"
+                  ><code class="language-ruby">
+# Create tags
+ruby = Tag.create(name: "Ruby")
+rails = Tag.create(name: "Rails")
+
+# Associate tags with a post
+post = Post.create(title: "Rails Tips")
+post.tags << ruby
+post.tags << rails
+
+# Find posts by tag
+ruby.posts.each do |post|
+  puts post.title
+end
+                    </code></pre>
+                </div>
+              </div>
+
+              <!-- Polymorphic -->
+              <div class="bg-white p-6 rounded-lg shadow-sm mt-6">
+                <h3 class="text-xl font-semibold mb-4">
+                  Polymorphic Associations
+                </h3>
+
+                <div class="bg-blue-50 p-4 rounded-lg mb-4">
+                  <p>🔄 <strong>Definition:</strong></p>
+                  <p class="mt-2">
+                    A model can belong to multiple other models on a single
+                    association.
+                  </p>
+                </div>
+
+                <!-- Example Code -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <pre
+                      class="bg-gray-800 p-4 rounded-lg"
+                    ><code class="language-ruby">
+# app/models/comment.rb
+class Comment < ApplicationRecord
+belongs_to :commentable, polymorphic: true
+end
+                  </code></pre>
+                  </div>
+                  <div>
+                    <pre
+                      class="bg-gray-800 p-4 rounded-lg"
+                    ><code class="language-ruby">
+# app/models/post.rb
+class Post < ApplicationRecord
+has_many :comments, as: :commentable
+end
+
+# app/models/photo.rb
+class Photo < ApplicationRecord
+has_many :comments, as: :commentable
+end
+                  </code></pre>
+                  </div>
+                </div>
+
+                <div class="mt-4 p-4 bg-gray-50 rounded-lg">
+                  <h4 class="font-semibold mb-2">🧠 Key Points:</h4>
+                  <ul class="list-disc pl-6 space-y-2">
+                    <li>
+                      <strong>commentable_type:</strong> Stores the associated
+                      model name
+                    </li>
+                    <li>
+                      <strong>commentable_id:</strong> Stores the associated
+                      record ID
+                    </li>
+                    <li>
+                      <strong>Flexible:</strong> Comments can belong to Posts or
+                      Photos
+                    </li>
+                  </ul>
+                </div>
+
+                <!-- Usage Example -->
+                <div class="mt-6 bg-yellow-50 p-4 rounded-lg">
+                  <h4 class="font-semibold mb-2">💻 Usage Example</h4>
+                  <pre
+                    class="bg-gray-800 p-4 rounded-lg"
+                  ><code class="language-ruby">
+# Create a post
+post = Post.create(title: "New Post")
+
+# Add comment to post
+post.comments.create(body: "Great post!")
+
+# Create a photo
+photo = Photo.create(url: "example.jpg")
+
+# Add comment to photo
+photo.comments.create(body: "Nice photo!")
+              </code></pre>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="querying" class="mb-12 pt-8">
+            <h2 class="text-3xl font-semibold text-gray-800 mb-6">
+              9. Active Record Query Interface
+            </h2>
+
+            <div class="space-y-6 text-gray-600">
+              <!-- Basic Definition -->
+              <div class="bg-white p-6 rounded-lg shadow-sm">
+                <h3 class="text-xl font-semibold mb-4">
+                  What is the Query Interface?
+                </h3>
+
+                <div class="bg-blue-50 p-4 rounded-lg mb-4">
+                  <p>🔍 <strong>Definition:</strong></p>
+                  <p class="mt-2">
+                    A set of methods to retrieve and manipulate data from your
+                    database without writing raw SQL.
+                  </p>
+                </div>
+
+                <!-- Basic Example -->
+                <pre
+                  class="bg-gray-800 p-4 rounded-lg"
+                ><code class="language-ruby">
+# Get all published posts
+Post.where(published: true)
+
+# Equivalent SQL:
+# SELECT * FROM posts WHERE published = true
+                    </code></pre>
+              </div>
+
+              <!-- Query Methods -->
+              <div class="bg-white p-6 rounded-lg shadow-sm mt-6">
+                <h3 class="text-xl font-semibold mb-4">
+                  Essential Query Methods
+                </h3>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <!-- Where -->
+                  <div class="bg-gray-50 p-4 rounded-lg">
+                    <h4 class="font-semibold mb-2">where (Filtering)</h4>
+                    <pre><code class="language-ruby">
+Post.where("created_at > ?", 1.week.ago)
+                  </code></pre>
+                    <div class="mt-2 p-3 bg-white rounded-lg">
+                      <p class="text-sm">✅ Safe from SQL injection</p>
+                      <p class="text-sm">
+                        ❌ Avoid:
+                        <code>where("created_at > #{params[:date]}")</code>
+                      </p>
+                    </div>
+                  </div>
+
+                  <!-- Order -->
+                  <div class="bg-gray-50 p-4 rounded-lg">
+                    <h4 class="font-semibold mb-2">order (Sorting)</h4>
+                    <pre><code class="language-ruby">
+User.order(created_at: :desc)
+                  </code></pre>
+                    <div class="mt-2 p-3 bg-white rounded-lg">
+                      <p class="text-sm">Sort by multiple columns:</p>
+                      <code class="text-sm"
+                        >.order(:last_name, :first_name)</code
+                      >
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Limit/Pagination -->
+                <div class="mt-6 bg-green-50 p-4 rounded-lg">
+                  <h4 class="font-semibold mb-2">Limit & Pagination</h4>
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <pre><code class="language-ruby">
+Post.limit(5)  # First 5 posts
+                      </code></pre>
+                    </div>
+                    <div>
+                      <pre><code class="language-ruby">
+# With pagination gem
+Post.page(2).per(10)
+                      </code></pre>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Advanced Techniques -->
+              <div class="bg-white p-6 rounded-lg shadow-sm mt-6">
+                <h3 class="text-xl font-semibold mb-4">
+                  Advanced Query Patterns
+                </h3>
+
+                <!-- Scopes -->
+                <div class="bg-purple-50 p-4 rounded-lg mb-4">
+                  <h4 class="font-semibold mb-2">Scopes (Reusable Queries)</h4>
+                  <pre
+                    class="bg-gray-800 p-4 rounded-lg"
+                  ><code class="language-ruby">
+class Post < ApplicationRecord
+  scope :published, -> { where(published: true) }
+  scope :recent, -> { where("created_at > ?", 1.week.ago) }
+end
+
+# Usage:
+Post.published.recent
+                    </code></pre>
+                </div>
+
+                <!-- Joins -->
+                <div class="bg-yellow-50 p-4 rounded-lg mb-4">
+                  <h4 class="font-semibold mb-2">
+                    Joins (Cross-Table Queries)
+                  </h4>
+                  <pre
+                    class="bg-gray-800 p-4 rounded-lg"
+                  ><code class="language-ruby">
+Post.joins(:comments)
+    .where(comments: { approved: true })
+                    </code></pre>
+                  <div class="mt-2 p-3 bg-white rounded-lg">
+                    <p class="text-sm">Equivalent SQL:</p>
+                    <code class="text-sm"
+                      >SELECT posts.* FROM posts INNER JOIN comments ON
+                      comments.post_id = posts.id WHERE comments.approved =
+                      true</code
+                    >
+                  </div>
+                </div>
+
+                <!-- Aggregations -->
+                <div class="bg-red-50 p-4 rounded-lg">
+                  <h4 class="font-semibold mb-2">Aggregations</h4>
+                  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div>
+                      <pre><code class="language-ruby">
+Post.count  # Total posts
+                            </code></pre>
+                    </div>
+                    <div>
+                      <pre><code class="language-ruby">
+Comment.group(:post_id).count
+# {1 => 5, 2 => 3} (Post ID => Comment count)
+                            </code></pre>
+                    </div>
+                    <div>
+                      <pre><code class="language-ruby">
+Order.average(:total_price)
+                            </code></pre>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Performance -->
+              <div class="bg-white p-6 rounded-lg shadow-sm mt-6">
+                <h3 class="text-xl font-semibold mb-4">
+                  Performance Considerations
+                </h3>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <!-- Eager Loading -->
+                  <div class="bg-blue-50 p-4 rounded-lg">
+                    <h4 class="font-semibold mb-2">Eager Loading</h4>
+                    <pre><code class="language-ruby">
+# Bad (N+1 Query)
+Post.all.each { |p| p.comments.count }
+
+# Good
+Post.includes(:comments).each { |p| p.comments.size }
+                  </code></pre>
+                  </div>
+
+                  <!-- Pluck -->
+                  <div class="bg-green-50 p-4 rounded-lg">
+                    <h4 class="font-semibold mb-2">Pluck vs Select</h4>
+                    <pre><code class="language-ruby">
+# Returns array of emails
+User.pluck(:email)  
+
+# Returns User objects
+User.select(:email) 
+                  </code></pre>
+                  </div>
+                </div>
+
+                <!-- Indexes -->
+                <div class="mt-6 bg-yellow-50 p-4 rounded-lg">
+                  <h4 class="font-semibold mb-2">💡 Database Indexes</h4>
+                  <pre
+                    class="bg-gray-800 p-4 rounded-lg"
+                  ><code class="language-ruby">
+class AddIndexToPosts < ActiveRecord::Migration[7.0]
+def change
+  add_index :posts, :published
+  add_index :comments, [:post_id, :approved]
+end
+end
+              </code></pre>
+                  <p class="mt-2 text-sm">
+                    Indexes speed up queries but slow down writes
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="testing-queries" class="mb-12 pt-8">
+            <h2 class="text-3xl font-semibold text-gray-800 mb-6">
+              10. Testing Active Record Queries
+            </h2>
+
+            <div class="space-y-6 text-gray-600">
+              <!-- Why Test Queries -->
+              <div class="bg-white p-6 rounded-lg shadow-sm">
+                <h3 class="text-xl font-semibold mb-4">
+                  Why Test Database Queries?
+                </h3>
+
+                <div class="bg-blue-50 p-4 rounded-lg mb-4">
+                  <ul class="list-disc pl-6 space-y-2">
+                    <li>Ensure data integrity</li>
+                    <li>Verify complex query logic</li>
+                    <li>Prevent performance regressions</li>
+                    <li>Validate security constraints</li>
+                  </ul>
+                </div>
+
+                <!-- Testing Pyramid -->
+                <div class="mt-6 bg-green-50 p-4 rounded-lg">
+                  <h4 class="font-semibold mb-2">🧪 Testing Pyramid</h4>
+                  <img
+                    src="testing-pyramid.png"
+                    alt="Testing Pyramid"
+                    class="mb-4"
+                  />
+                  <p class="text-sm">
+                    Prioritize unit tests > integration tests > system tests
+                  </p>
+                </div>
+              </div>
+
+              <!-- Test Configuration -->
+              <div class="bg-white p-6 rounded-lg shadow-sm mt-6">
+                <h3 class="text-xl font-semibold mb-4">Test Setup</h3>
+
+                <!-- spec_helper.rb -->
+                <pre
+                  class="bg-gray-800 p-4 rounded-lg"
+                ><code class="language-ruby">
+# spec/rails_helper.rb
+RSpec.configure do |config|
+config.use_transactional_fixtures = true
+config.include FactoryBot::Syntax::Methods
+end
+          </code></pre>
+
+                <div class="mt-4 p-4 bg-gray-50 rounded-lg">
+                  <h4 class="font-semibold mb-2">🔧 Key Configurations:</h4>
+                  <ul class="list-disc pl-6 space-y-2">
+                    <li>
+                      <strong>Transactional tests:</strong> Rollback database
+                      after each test
+                    </li>
+                    <li>
+                      <strong>FactoryBot:</strong> Create test data easily
+                    </li>
+                    <li>
+                      <strong>Database Cleaner:</strong> Alternative for complex
+                      setups
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- Model Tests -->
+              <div class="bg-white p-6 rounded-lg shadow-sm mt-6">
+                <h3 class="text-xl font-semibold mb-4">
+                  Testing Model Queries
+                </h3>
+
+                <!-- Scope Test -->
+                <div class="bg-purple-50 p-4 rounded-lg mb-4">
+                  <h4 class="font-semibold mb-2">Testing Scopes</h4>
+                  <pre
+                    class="bg-gray-800 p-4 rounded-lg"
+                  ><code class="language-ruby">
+# spec/models/post_spec.rb
+RSpec.describe Post, type: :model do
+  describe '.published' do
+    let!(:draft) { create(:post, published: false) }
+    let!(:published_post) { create(:post, published: true) }
+
+    it 'returns only published posts' do
+      expect(Post.published).to contain_exactly(published_post)
+    end
+  end
+end
+                    </code></pre>
+
+                  <div class="mt-4 p-4 bg-white rounded-lg">
+                    <h4 class="font-semibold mb-2">🧠 What We're Testing:</h4>
+                    <ul class="list-disc pl-6 space-y-2">
+                      <li>Scope filters records correctly</li>
+                      <li>Excludes unpublished posts</li>
+                      <li>Uses FactoryBot for test data</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <!-- Association Test -->
+                <div class="bg-yellow-50 p-4 rounded-lg">
+                  <h4 class="font-semibold mb-2">Testing Associations</h4>
+                  <pre
+                    class="bg-gray-800 p-4 rounded-lg"
+                  ><code class="language-ruby">
+# spec/models/user_spec.rb
+RSpec.describe User, type: :model do
+  describe 'associations' do
+    it { should have_many(:posts) }
+    it { should have_many(:comments).through(:posts) }
+  end
+end
+                    </code></pre>
+                </div>
+              </div>
+
+              <!-- Request Tests -->
+              <div class="bg-white p-6 rounded-lg shadow-sm mt-6">
+                <h3 class="text-xl font-semibold mb-4">
+                  Testing API Endpoints
+                </h3>
+
+                <!-- Filtering Test -->
+                <div class="bg-blue-50 p-4 rounded-lg mb-4">
+                  <pre
+                    class="bg-gray-800 p-4 rounded-lg"
+                  ><code class="language-ruby">
+# spec/requests/posts_spec.rb
+RSpec.describe 'Posts API', type: :request do
+let!(:user) { create(:user) }
+let!(:posts) { create_list(:post, 3, user: user) }
+
+describe 'GET /api/posts' do
+  it 'filters by user_id' do
+    get '/api/posts', params: { user_id: user.id }
+    expect(json_response.size).to eq(3)
+    expect(response).to have_http_status(:ok)
+  end
+end
+end
+              </code></pre>
+
+                  <div class="mt-4 p-4 bg-white rounded-lg">
+                    <h4 class="font-semibold mb-2">🔍 Test Verification:</h4>
+                    <ul class="list-disc pl-6 space-y-2">
+                      <li>Endpoint returns correct status code</li>
+                      <li>Response contains expected data count</li>
+                      <li>Parameters are properly filtered</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Performance Tests -->
+              <div class="bg-white p-6 rounded-lg shadow-sm mt-6">
+                <h3 class="text-xl font-semibold mb-4">
+                  Query Performance Tests
+                </h3>
+
+                <!-- N+1 Detection -->
+                <div class="bg-red-50 p-4 rounded-lg">
+                  <h4 class="font-semibold mb-2">Detecting N+1 Queries</h4>
+                  <pre
+                    class="bg-gray-800 p-4 rounded-lg"
+                  ><code class="language-ruby">
+# spec/performance/posts_spec.rb
+require 'rails_helper'
+
+RSpec.describe 'Post Performance', type: :model do
+  before { create_list(:post, 50, :with_comments) }
+
+  it 'avoids N+1 queries' do
+    expect { Post.all.each { |p| p.comments.to_a } }
+      .to make_database_queries(count: 2)
+  end
+end
+                    </code></pre>
+
+                  <div class="mt-4 p-4 bg-white rounded-lg">
+                    <h4 class="font-semibold mb-2">⚡ Key Checks:</h4>
+                    <ul class="list-disc pl-6 space-y-2">
+                      <li>Query count stays constant</li>
+                      <li>Eager loading (<code>includes</code>) works</li>
+                      <li>No performance regressions</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="database-transactions" class="mb-12 pt-8">
+            <h2 class="text-3xl font-semibold text-gray-800 mb-6">
+              11. Database Transactions
+            </h2>
+
+            <div class="space-y-6 text-gray-600">
+              <!-- Definition -->
+              <div class="bg-white p-6 rounded-lg shadow-sm">
+                <h3 class="text-xl font-semibold mb-4">
+                  What is a Database Transaction?
+                </h3>
+
+                <div class="bg-blue-50 p-4 rounded-lg mb-4">
+                  <p>🔒 <strong>Definition:</strong></p>
+                  <p class="mt-2">
+                    A transaction is a sequence of database operations that are
+                    treated as a single unit of work. Either all operations
+                    succeed, or none are applied.
+                  </p>
+                </div>
+
+                <!-- Real-World Analogy -->
+                <div class="mt-6 bg-green-50 p-4 rounded-lg">
+                  <h4 class="font-semibold mb-2">📚 Real-World Analogy</h4>
+                  <p>Think of a bank transfer:</p>
+                  <ul class="list-disc pl-6 mt-2">
+                    <li>Debit from Account A</li>
+                    <li>Credit to Account B</li>
+                    <li>Both must succeed or fail together</li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- Importance -->
+              <div class="bg-white p-6 rounded-lg shadow-sm mt-6">
+                <h3 class="text-xl font-semibold mb-4">
+                  Why Are Transactions Important?
+                </h3>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <!-- Data Integrity -->
+                  <div class="bg-gray-50 p-4 rounded-lg">
+                    <h4 class="font-semibold mb-2">💾 Data Integrity</h4>
+                    <p>
+                      Ensures your database remains in a consistent state, even
+                      if errors occur.
+                    </p>
+                    <pre class="mt-2"><code class="language-ruby">
+# Without transactions
+def transfer_funds
+account_a.debit(100)
+account_b.credit(100) # Fails here
+end
+                  </code></pre>
+                    <p class="mt-2 text-sm">
+                      ❌ Account A loses money, but B doesn't receive it
+                    </p>
+                  </div>
+
+                  <!-- Error Handling -->
+                  <div class="bg-gray-50 p-4 rounded-lg">
+                    <h4 class="font-semibold mb-2">🚨 Error Handling</h4>
+                    <p>
+                      Automatically rolls back changes if any operation fails.
+                    </p>
+                    <pre class="mt-2"><code class="language-ruby">
+# With transactions
+def transfer_funds
+Account.transaction do
+  account_a.debit(100)
+  account_b.credit(100) # Fails here
+end
+end
+                  </code></pre>
+                    <p class="mt-2 text-sm">
+                      ✅ Both debit and credit are rolled back
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Implementation -->
+              <div class="bg-white p-6 rounded-lg shadow-sm mt-6">
+                <h3 class="text-xl font-semibold mb-4">
+                  How to Use Transactions
+                </h3>
+
+                <!-- Basic Example -->
+                <div class="bg-purple-50 p-4 rounded-lg mb-4">
+                  <h4 class="font-semibold mb-2">Basic Transaction</h4>
+                  <pre
+                    class="bg-gray-800 p-4 rounded-lg"
+                  ><code class="language-ruby">
+def create_order(user, product)
+  Order.transaction do
+    order = user.orders.create!(status: 'pending')
+    order.line_items.create!(product: product, quantity: 1)
+    order.update!(status: 'completed')
+  end
+end
+                    </code></pre>
+
+                  <div class="mt-4 p-4 bg-white rounded-lg">
+                    <h4 class="font-semibold mb-2">🧠 Key Points:</h4>
+                    <ul class="list-disc pl-6 space-y-2">
+                      <li>
+                        <strong>create!:</strong> Raises exception on failure
+                      </li>
+                      <li>
+                        <strong>transaction:</strong> Wraps all operations
+                      </li>
+                      <li><strong>Atomic:</strong> All or nothing</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <!-- Nested Transactions -->
+                <div class="bg-yellow-50 p-4 rounded-lg">
+                  <h4 class="font-semibold mb-2">Nested Transactions</h4>
+                  <pre
+                    class="bg-gray-800 p-4 rounded-lg"
+                  ><code class="language-ruby">
+def complex_operation
+  User.transaction do
+    user = User.create!(name: "John")
+    
+    Account.transaction(requires_new: true) do
+      user.accounts.create!(balance: 100)
+      raise "Error" # Rollback only this block
+    end
+  end
+end
+                    </code></pre>
+
+                  <div class="mt-4 p-4 bg-white rounded-lg">
+                    <h4 class="font-semibold mb-2">🔍 Behavior:</h4>
+                    <ul class="list-disc pl-6 space-y-2">
+                      <li>
+                        <strong>requires_new:</strong> Starts a new transaction
+                      </li>
+                      <li>Outer transaction continues if inner fails</li>
+                      <li>Useful for partial rollbacks</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Advanced -->
+              <div class="bg-white p-6 rounded-lg shadow-sm mt-6">
+                <h3 class="text-xl font-semibold mb-4">
+                  Advanced Transaction Patterns
+                </h3>
+
+                <!-- Savepoints -->
+                <div class="bg-blue-50 p-4 rounded-lg mb-4">
+                  <h4 class="font-semibold mb-2">Savepoints</h4>
+                  <pre
+                    class="bg-gray-800 p-4 rounded-lg"
+                  ><code class="language-ruby">
+def complex_operation
+User.transaction do
+  user = User.create!(name: "John")
+  
+  ActiveRecord::Base.transaction(requires_new: true) do
+    user.accounts.create!(balance: 100)
+    raise ActiveRecord::Rollback # Partial rollback
+  end
+
+  user.update!(email: "john@example.com")
+end
+end
+              </code></pre>
+
+                  <div class="mt-4 p-4 bg-white rounded-lg">
+                    <h4 class="font-semibold mb-2">💡 Use Cases:</h4>
+                    <ul class="list-disc pl-6 space-y-2">
+                      <li>Recover from partial failures</li>
+                      <li>Continue outer transaction</li>
+                      <li>Log errors without full rollback</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <!-- Locking -->
+                <div class="bg-red-50 p-4 rounded-lg">
+                  <h4 class="font-semibold mb-2">Locking Records</h4>
+                  <pre
+                    class="bg-gray-800 p-4 rounded-lg"
+                  ><code class="language-ruby">
+def update_balance(account)
+Account.transaction do
+  account.lock! # Prevents concurrent updates
+  account.update!(balance: account.balance + 100)
+end
+end
+              </code></pre>
+
+                  <div class="mt-4 p-4 bg-white rounded-lg">
+                    <h4 class="font-semibold mb-2">🔒 Lock Types:</h4>
+                    <ul class="list-disc pl-6 space-y-2">
+                      <li><strong>lock!:</strong> Exclusive lock</li>
+                      <li>
+                        <strong>with_lock:</strong> Shorthand for lock + block
+                      </li>
+                      <li>
+                        <strong>Optimistic Locking:</strong> Uses
+                        <code>lock_version</code>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="asset-pipeline" class="mb-12 pt-8">
+            <h2 class="text-3xl font-semibold text-gray-800 mb-6">
+              12. The Asset Pipeline
+            </h2>
+
+            <div class="space-y-6 text-gray-600">
+              <!-- Definition -->
+              <div class="bg-white p-6 rounded-lg shadow-sm">
+                <h3 class="text-xl font-semibold mb-4">
+                  What is the Asset Pipeline?
+                </h3>
+
+                <div class="bg-blue-50 p-4 rounded-lg mb-4">
+                  <p>📦 <strong>Definition:</strong></p>
+                  <p class="mt-2">
+                    Rails' built-in system for managing and optimizing:
+                  </p>
+                  <ul class="list-disc pl-6 mt-2">
+                    <li>JavaScript files</li>
+                    <li>Stylesheets</li>
+                    <li>Images/Fonts</li>
+                  </ul>
+                </div>
+
+                <!-- Real-World Analogy -->
+                <div class="mt-6 bg-green-50 p-4 rounded-lg">
+                  <h4 class="font-semibold mb-2">🏭 Factory Analogy</h4>
+                  <p>Think of it as a processing plant that:</p>
+                  <ul class="list-disc pl-6 mt-2">
+                    <li>Combines raw materials (individual files)</li>
+                    <li>Packages them efficiently (minification)</li>
+                    <li>Adds quality stamps (fingerprinting)</li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- Configuration -->
+              <div class="bg-white p-6 rounded-lg shadow-sm mt-6">
+                <h3 class="text-xl font-semibold mb-4">Basic Configuration</h3>
+
+                <!-- Asset Paths -->
+                <pre
+                  class="bg-gray-800 p-4 rounded-lg"
+                ><code class="language-ruby">
+# config/application.rb
+module MyApp
+class Application < Rails::Application
+  # Add custom directories
+  config.assets.paths << Rails.root.join("app", "assets", "fonts")
+  config.assets.paths << Rails.root.join("lib", "assets")
+end
+end
+          </code></pre>
+
+                <div class="mt-4 p-4 bg-gray-50 rounded-lg">
+                  <h4 class="font-semibold mb-2">🔧 Code Explanation:</h4>
+                  <ul class="list-disc pl-6 space-y-2">
+                    <li>
+                      <code>config.assets.paths</code>: Directories where Rails
+                      looks for assets
+                    </li>
+                    <li>
+                      <code>Rails.root.join</code>: Builds platform-independent
+                      file paths
+                    </li>
+                    <li>
+                      Common directories: <code>app/assets</code>,
+                      <code>lib/assets</code>, <code>vendor/assets</code>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- Including Assets -->
+              <div class="bg-white p-6 rounded-lg shadow-sm mt-6">
+                <h3 class="text-xl font-semibold mb-4">
+                  Using Assets in Views
+                </h3>
+
+                <!-- CSS Example -->
+                <div class="bg-purple-50 p-4 rounded-lg mb-4">
+                  <pre
+                    class="bg-gray-800 p-4 rounded-lg"
+                  ><code class="language-ruby">
+    &lt;%# app/views/layouts/application.html.erb %>
+    &lt;%= stylesheet_link_tag "application", media: "all", "data-turbo-track": "reload" %>
+                    </code></pre>
+
+                  <div class="mt-4 p-4 bg-white rounded-lg">
+                    <h4 class="font-semibold mb-2">🎨 What This Does:</h4>
+                    <ul class="list-disc pl-6 space-y-2">
+                      <li>
+                        Loads
+                        <code>app/assets/stylesheets/application.css</code>
+                      </li>
+                      <li>
+                        <code>media: "all"</code>: Applies to all media types
+                      </li>
+                      <li>
+                        <code>data-turbo-track</code>: Reloads assets when
+                        changed
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+
+                <!-- JS Example -->
+                <div class="bg-yellow-50 p-4 rounded-lg">
+                  <pre
+                    class="bg-gray-800 p-4 rounded-lg"
+                  ><code class="language-ruby">
+    &lt;%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+                    </code></pre>
+
+                  <div class="mt-4 p-4 bg-white rounded-lg">
+                    <h4 class="font-semibold mb-2">📜 Key Features:</h4>
+                    <ul class="list-disc pl-6 space-y-2">
+                      <li>
+                        <code>defer: true</code>: Loads JS after HTML parsing
+                      </li>
+                      <li>
+                        Concatenates all files in <code>application.js</code>
+                      </li>
+                      <li>Automatically minifies in production</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Preprocessors -->
+              <div class="bg-white p-6 rounded-lg shadow-sm mt-6">
+                <h3 class="text-xl font-semibold mb-4">Asset Preprocessing</h3>
+
+                <!-- SCSS Example -->
+                <div class="bg-blue-50 p-4 rounded-lg mb-4">
+                  <pre
+                    class="bg-gray-800 p-4 rounded-lg"
+                  ><code class="language-scss">
+// app/assets/stylesheets/application.scss
+$primary-color: #3B82F6;
+
+.header {
+background-color: $primary-color;
+
+&__title {
+  font-size: 2rem;
+}
+}
+              </code></pre>
+
+                  <div class="mt-4 p-4 bg-white rounded-lg">
+                    <h4 class="font-semibold mb-2">🔄 Processing Steps:</h4>
+                    <ol class="list-decimal pl-6 space-y-2">
+                      <li>Compiles SCSS to CSS</li>
+                      <li>Resolves variables and mixins</li>
+                      <li>Outputs nested CSS structure</li>
+                    </ol>
+                  </div>
+                </div>
+
+                <!-- CoffeeScript Example -->
+                <div class="bg-green-50 p-4 rounded-lg">
+                  <pre
+                    class="bg-gray-800 p-4 rounded-lg"
+                  ><code class="language-ruby">
+# app/assets/javascripts/application.coffee
+square = (x) -> x * x
+
+$ ->
+console.log "DOM ready!"
+              </code></pre>
+
+                  <div class="mt-4 p-4 bg-white rounded-lg">
+                    <h4 class="font-semibold mb-2">☕ Compiled Result:</h4>
+                    <pre
+                      class="bg-gray-800 p-4 rounded-lg"
+                    ><code class="language-js">
+(function() {
+var square = function(x) {
+  return x * x;
+};
+
+$(function() {
+  return console.log("DOM ready!");
+});
+
+}).call(this);
+                  </code></pre>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Organization -->
+              <div class="bg-white p-6 rounded-lg shadow-sm mt-6">
+                <h3 class="text-xl font-semibold mb-4">File Organization</h3>
+
+                <!-- Directory Structure -->
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <pre class="bg-gray-800 p-4 rounded-lg"><code>
+app/assets/
+├── images/
+│   └── logo.png
+├── stylesheets/
+│   ├── application.scss
+│   └── components/
+│       └── _buttons.scss
+└── javascripts/
+    ├── application.js
+    └── channels/
+        └── chat.js
+                    </code></pre>
+
+                  <div class="mt-4 p-4 bg-white rounded-lg">
+                    <h4 class="font-semibold mb-2">🗂️ Best Practices:</h4>
+                    <ul class="list-disc pl-6 space-y-2">
+                      <li>Use subdirectories for components</li>
+                      <li>
+                        Prefix partials with underscore
+                        (<code>_buttons.scss</code>)
+                      </li>
+                      <li>
+                        Keep third-party code in <code>vendor/assets</code>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Fingerprinting -->
+              <div class="bg-white p-6 rounded-lg shadow-sm mt-6">
+                <h3 class="text-xl font-semibold mb-4">Cache Management</h3>
+
+                <div class="bg-red-50 p-4 rounded-lg">
+                  <pre
+                    class="bg-gray-800 p-4 rounded-lg"
+                  ><code class="language-html">
+&lt;!-- Production Output -->
+&lt;link rel="stylesheet" href="/assets/application-908e25f4.css" />
+              </code></pre>
+
+                  <div class="mt-4 p-4 bg-white rounded-lg">
+                    <h4 class="font-semibold mb-2">🔑 Fingerprinting:</h4>
+                    <ul class="list-disc pl-6 space-y-2">
+                      <li>Unique hash based on file content</li>
+                      <li>Forces cache refresh when files change</li>
+                      <li>Generated during <code>assets:precompile</code></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <!-- External Libraries -->
+              <div class="bg-white p-6 rounded-lg shadow-sm mt-6">
+                <h3 class="text-xl font-semibold mb-4">Adding Bootstrap</h3>
+
+                <!-- Yarn Installation -->
+                <pre
+                  class="bg-gray-800 p-4 rounded-lg"
+                ><code class="language-bash">
+yarn add bootstrap @popperjs/core
+                </code></pre>
+
+                <!-- JS Import -->
+                <div class="mt-4 bg-blue-50 p-4 rounded-lg">
+                  <pre
+                    class="bg-gray-800 p-4 rounded-lg"
+                  ><code class="language-js">
+// app/javascript/application.js
+import "bootstrap"
+                </code></pre>
+                </div>
+
+                <!-- SCSS Import -->
+                <div class="mt-4 bg-purple-50 p-4 rounded-lg">
+                  <pre
+                    class="bg-gray-800 p-4 rounded-lg"
+                  ><code class="language-scss">
+// app/assets/stylesheets/application.scss
+@import "bootstrap/scss/bootstrap";
+                </code></pre>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Concerns -->
+          <section id="concerns" class="mb-12 pt-8">
+            <h2 class="text-3xl font-semibold text-gray-800 mb-6">
+              13. Concerns & Mixins
+            </h2>
+
+            <div class="space-y-6 text-gray-600">
+              <!-- Concerns Deep Dive -->
+              <div class="bg-white p-6 rounded-lg shadow-sm">
+                <h3 class="text-xl font-semibold mb-4">Concerns in Rails</h3>
+                <p class="mb-4">
+                  Concerns help organize reusable code that can be shared across
+                  multiple models/controllers.
+                </p>
+
+                <div class="bg-blue-50 p-4 rounded-lg mb-4">
+                  <p>🍰 <strong>Real-World Analogy:</strong></p>
+                  <p>
+                    Think of concerns like a recipe book. Instead of writing the
+                    same recipe (code) in every kitchen (class), you keep it in
+                    one book and reference it when needed.
+                  </p>
+                </div>
+
+                <pre
+                  class="bg-gray-800 p-4 rounded-lg"
+                ><code class="language-ruby">
+# app/models/concerns/trashable.rb
+module Trashable
+  extend ActiveSupport::Concern
+
+  included do
+    scope :in_trash, -> { where(trashed: true) }
+    scope :not_trashed, -> { where(trashed: false) }
+  end
+
+  def move_to_trash
+    update(trashed: true)
+  end
+end
+      </code></pre>
+
+                <div class="mt-4 bg-gray-50 p-4 rounded-lg">
+                  <h4 class="font-semibold mb-2">Full Explanation:</h4>
+                  <ul class="list-disc pl-6 space-y-3">
+                    <li>
+                      <strong>File Location:</strong> Stored in
+                      <code>app/models/concerns</code> or
+                      <code>app/controllers/concerns</code>
+                    </li>
+                    <li>
+                      <strong>extend ActiveSupport::Concern</strong>: Gives
+                      Rails-specific features like <code>included</code> blocks
+                    </li>
+                    <li>
+                      <strong>included do</strong>: Runs code when module is
+                      included in a class (sets up relationships/scopes)
+                    </li>
+                    <li>
+                      <strong>Usage:</strong> Add
+                      <code>include Trashable</code> to any model needing trash
+                      functionality
+                    </li>
+                    <li>
+                      <strong>Benefits:</strong> Avoid code duplication, easier
+                      maintenance
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- Mixins Deep Dive -->
+              <div class="bg-white p-6 rounded-lg shadow-sm mt-6">
+                <h3 class="text-xl font-semibold mb-4">Ruby Mixins</h3>
+                <p class="mb-4">
+                  Mixins add common functionality to classes using plain Ruby
+                  modules.
+                </p>
+
+                <div class="bg-green-50 p-4 rounded-lg mb-4">
+                  <p>🔌 <strong>Real-World Analogy:</strong></p>
+                  <p>
+                    Like USB ports on a laptop. You can plug in different
+                    devices (modules) to add functionality (keyboard, mouse)
+                    without rebuilding the laptop.
+                  </p>
+                </div>
+
+                <pre
+                  class="bg-gray-800 p-4 rounded-lg"
+                ><code class="language-ruby">
+module Exportable
+  def to_csv
+    CSV.generate do |csv|
+      csv << column_names
+      all.each do |item|
+        csv << item.attributes.values
+      end
+    end
+  end
+end
+
+class Product < ApplicationRecord
+  include Exportable
+end
+
+# Usage:
+Product.all.to_csv # Generates CSV data
+      </code></pre>
+
+                <div class="mt-4 bg-gray-50 p-4 rounded-lg">
+                  <h4 class="font-semibold mb-2">
+                    Key Differences from Concerns:
+                  </h4>
+                  <ul class="list-disc pl-6 space-y-2">
+                    <li>Works in any Ruby class (not just Rails)</li>
+                    <li>No special <code>included</code> blocks</li>
+                    <li>Simpler code sharing without Rails magic</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Helpers Deep Dive -->
+          <section id="helpers" class="mb-12 pt-8">
+            <h2 class="text-3xl font-semibold text-gray-800 mb-6">
+              14. View Helpers
+            </h2>
+
+            <div class="bg-white p-6 rounded-lg shadow-sm">
+              <div class="bg-yellow-50 p-4 rounded-lg mb-4">
+                <p>🧹 <strong>Why Use Helpers?</strong></p>
+                <p>
+                  Helpers keep your views clean by moving complex logic out of
+                  HTML templates. Think of them as specialized tools in a
+                  toolbox - each has a specific job.
+                </p>
+              </div>
+
+              <pre
+                class="bg-gray-800 p-4 rounded-lg"
+              ><code class="language-ruby">
+# app/helpers/posts_helper.rb
+module PostsHelper
+  def reading_time(post)
+    words_per_minute = 200
+    words = post.content.split.size
+    minutes = (words / words_per_minute).ceil
+    "#{minutes} #{'minute'.pluralize(minutes)} read"
+  end
+end
+    </code></pre>
+
+              <div class="mt-4 bg-gray-50 p-4 rounded-lg">
+                <h4 class="font-semibold mb-2">Detailed Breakdown:</h4>
+                <ul class="list-disc pl-6 space-y-3">
+                  <li>
+                    <strong>Automatic Availability:</strong> Helpers are
+                    automatically available in their corresponding views
+                  </li>
+                  <li>
+                    <strong>Organization:</strong>
+                    <ul class="list-[circle] pl-6 mt-2">
+                      <li>
+                        <code>ApplicationHelper</code>: Available to all views
+                      </li>
+                      <li>
+                        <code>PostsHelper</code>: Only available in post views
+                      </li>
+                    </ul>
+                  </li>
+                  <li>
+                    <strong>Best Practices:</strong>
+                    <ul class="list-[circle] pl-6 mt-2">
+                      <li>Keep helpers focused on presentation logic</li>
+                      <li>Never put database queries in helpers</li>
+                      <li>
+                        Name helpers clearly (e.g., <code>format_date</code> not
+                        <code>date_thing</code>)
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="mt-6 bg-white p-4 rounded-lg border">
+                <h4 class="font-semibold mb-2">🚨 Common Mistakes:</h4>
+                <ul class="list-disc pl-6 text-red-600">
+                  <li>Putting business logic in helpers</li>
+                  <li>Creating huge helper files</li>
+                  <li>Not using view components when appropriate</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <!-- Background Jobs Deep Dive -->
+          <section id="jobs" class="mb-12 pt-8">
+            <h2 class="text-3xl font-semibold text-gray-800 mb-6">
+              15. Background Jobs
+            </h2>
+
+            <div class="bg-white p-6 rounded-lg shadow-sm">
+              <div class="bg-purple-50 p-4 rounded-lg mb-4">
+                <p>⏳ <strong>When to Use Background Jobs?</strong></p>
+                <ul class="list-disc pl-6">
+                  <li>Email sending</li>
+                  <li>Image processing</li>
+                  <li>Data exports</li>
+                  <li>Third-party API calls</li>
+                </ul>
+              </div>
+
+              <pre
+                class="bg-gray-800 p-4 rounded-lg"
+              ><code class="language-ruby">
+# app/jobs/image_processing_job.rb
+class ImageProcessingJob < ApplicationJob
+  queue_as :high_priority
+
+  rescue_from(Error::Timeout) do
+    retry_job wait: 5.minutes
+  end
+
+  def perform(user_id, image_path)
+    user = User.find(user_id)
+    ImageProcessor.new(user, image_path).process
+  end
+end
+    </code></pre>
+
+              <div class="mt-4 bg-gray-50 p-4 rounded-lg">
+                <h4 class="font-semibold mb-2">Job Lifecycle Explained:</h4>
+                <ol class="list-decimal pl-6 space-y-3">
+                  <li>
+                    <strong>Enqueue:</strong> Add job to queue
+                    <pre
+                      class="bg-gray-800 p-2 rounded-lg mt-2"
+                    ><code class="language-ruby">
+ImageProcessingJob.perform_later(current_user.id, uploaded_image.path)
+          </code></pre>
+                  </li>
+                  <li>
+                    <strong>Processing:</strong> Job runner (Sidekiq/Resque)
+                    picks up job
+                  </li>
+                  <li>
+                    <strong>Execution:</strong> Runs <code>perform</code> method
+                  </li>
+                  <li>
+                    <strong>Completion/Retry:</strong> Marks job as done or
+                    retries on failure
+                  </li>
+                </ol>
+              </div>
+
+              <div class="mt-6 bg-red-50 p-4 rounded-lg">
+                <h4 class="font-semibold mb-2">⚠️ Job Safety Tips:</h4>
+                <ul class="list-disc pl-6">
+                  <li>
+                    Jobs should be <strong>idempotent</strong> (safe to run
+                    multiple times)
+                  </li>
+                  <li>Pass database IDs (not entire objects) to jobs</li>
+                  <li>Set reasonable retry limits</li>
+                  <li>Use separate queues for different priority jobs</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <!-- Components Deep Dive -->
+          <section id="components" class="mb-12 pt-8">
+            <h2 class="text-3xl font-semibold text-gray-800 mb-6">
+              16. View Components
+            </h2>
+
+            <div class="bg-white p-6 rounded-lg shadow-sm">
+              <div class="bg-pink-50 p-4 rounded-lg mb-4">
+                <p>🧩 <strong>Component Benefits:</strong></p>
+                <ul class="list-disc pl-6">
+                  <li>Reusable UI elements</li>
+                  <li>Testable in isolation</li>
+                  <li>Clear parameter interface</li>
+                  <li>Better performance than partials</li>
+                </ul>
+              </div>
+
+              <pre
+                class="bg-gray-800 p-4 rounded-lg"
+              ><code class="language-ruby">
+# app/components/alert_component.rb
+class AlertComponent < ViewComponent::Base
+  ERB_TEMPLATE = <<~ERB
+    &lt;div class="alert alert--&lt;%= @type %&gt;"&gt;
+      &lt;%= @message %&gt;
+    &lt;/div&gt;
+  ERB
+
+  def initialize(type: :info, message:)
+    @type = type
+    @message = message
+  end
+
+  def call
+    render inline: ERB_TEMPLATE, type: @type, message: @message
+  end
+end
+    </code></pre>
+
+              <div class="mt-4 bg-gray-50 p-4 rounded-lg">
+                <h4 class="font-semibold mb-2">Component Structure:</h4>
+                <ul class="list-disc pl-6 space-y-3">
+                  <li>
+                    <strong>Initialization:</strong> Define clear input
+                    parameters
+                  </li>
+                  <li>
+                    <strong>Templates:</strong> Can use separate ERB files or
+                    inline templates
+                  </li>
+                  <li>
+                    <strong>Rendering:</strong> Explicitly define what to render
+                    in <code>call</code>
+                  </li>
+                  <li>
+                    <strong>Testing:</strong> Test components with RSpec like
+                    regular classes
+                  </li>
+                </ul>
+              </div>
+
+              <div class="mt-6 bg-white p-4 rounded-lg border">
+                <h4 class="font-semibold mb-2">🔍 When to Use Components:</h4>
+                <ul class="list-disc pl-6">
+                  <li>Reused UI elements (buttons, cards)</li>
+                  <li>Complex view logic</li>
+                  <li>Need for view testing</li>
+                  <li>Team collaboration (clear interfaces)</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <!-- Rails Deployment -->
+          <section id="deployment" class="mb-12 pt-8">
+            <h2 class="text-3xl font-semibold text-gray-800 mb-6">
+              17. Rails Deployment Made Simple
+            </h2>
+
+            <div class="space-y-6 text-gray-600">
+              <!-- Deployment Strategy -->
+              <div class="bg-white p-6 rounded-lg shadow-sm">
+                <div class="bg-green-50 p-4 rounded-lg mb-4">
+                  <p>🚀 <strong>Recommended Solution:</strong></p>
+                  <p class="mt-2">
+                    Use <strong>Heroku</strong> or <strong>Render</strong> (free
+                    tiers available) + PostgreSQL + Git-based deployment
+                  </p>
+                </div>
+
+                <h3 class="text-xl font-semibold mb-4">Why This Works Best?</h3>
+                <ul class="list-disc pl-6 space-y-2">
+                  <li>No server management required</li>
+                  <li>Automatic scaling</li>
+                  <li>Built-in SSL certificates</li>
+                  <li>Database backups included</li>
+                </ul>
+              </div>
+
+              <!-- Step-by-Step Guide -->
+              <div class="bg-white p-6 rounded-lg shadow-sm">
+                <h3 class="text-xl font-semibold mb-4">
+                  Step 1: Prepare Your App
+                </h3>
+
+                <div class="bg-blue-50 p-4 rounded-lg mb-4">
+                  <p>🔧 <strong>Essential Pre-Deployment Checks</strong></p>
+                </div>
+
+                <pre
+                  class="bg-gray-800 p-4 rounded-lg"
+                ><code class="language-ruby">
+# Gemfile - Must include these
+gem 'pg' # Replace sqlite3
+gem 'rails_12factor' # For logging and static assets
+      </code></pre>
+
+                <div class="mt-4 bg-gray-50 p-4 rounded-lg">
+                  <h4 class="font-semibold mb-2">Database Configuration:</h4>
+                  <pre
+                    class="bg-gray-800 p-4 rounded-lg"
+                  ><code class="language-ruby">
+# config/database.yml
+production:
+  <<: *default
+  url: <%= ENV['DATABASE_URL'] %>
+        </code></pre>
+                  <p class="mt-2">Remove any hardcoded credentials!</p>
+                </div>
+              </div>
+
+              <!-- Deployment Process -->
+              <div class="bg-white p-6 rounded-lg shadow-sm">
+                <h3 class="text-xl font-semibold mb-4">
+                  Step 2: Deploy to Heroku
+                </h3>
+
+                <div class="space-y-4">
+                  <div class="bg-yellow-50 p-4 rounded-lg">
+                    <p>💻 <strong>Terminal Commands</strong></p>
+                  </div>
+
+                  <pre
+                    class="bg-gray-800 p-4 rounded-lg"
+                  ><code class="language-bash">
+# 1. Install Heroku CLI
+brew tap heroku/brew && brew install heroku
+
+# 2. Login
+heroku login
+
+# 3. Create app
+heroku create your-app-name
+
+# 4. Add PostgreSQL
+heroku addons:create heroku-postgresql:hobby-dev
+
+# 5. Set Rails master key
+heroku config:set RAILS_MASTER_KEY=your_master_key_value
+
+# 6. Deploy code
+git push heroku main
+
+# 7. Run migrations
+heroku run rails db:migrate
+
+# 8. Restart dynos
+heroku restart
+        </code></pre>
+
+                  <div class="bg-purple-50 p-4 rounded-lg">
+                    <h4 class="font-semibold mb-2">💡 Pro Tips:</h4>
+                    <ul class="list-disc pl-6">
+                      <li>Always test with <code>heroku local</code> first</li>
+                      <li>Use <code>heroku logs --tail</code> for debugging</li>
+                      <li>Set up automatic deployments from GitHub</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Common Issues & Fixes -->
+              <div class="bg-white p-6 rounded-lg shadow-sm">
+                <h3 class="text-xl font-semibold mb-4">
+                  🚨 Common Deployment Errors
+                </h3>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div class="bg-red-50 p-4 rounded-lg">
+                    <h4 class="font-semibold mb-2">Asset Compilation Failed</h4>
+                    <p><strong>Fix:</strong></p>
+                    <pre
+                      class="bg-gray-800 p-2 rounded-lg mt-2"
+                    ><code class="language-bash">
+heroku run rails assets:precompile
+          </code></pre>
+                  </div>
+
+                  <div class="bg-red-50 p-4 rounded-lg">
+                    <h4 class="font-semibold mb-2">
+                      Database Connection Issues
+                    </h4>
+                    <p><strong>Fix:</strong></p>
+                    <pre
+                      class="bg-gray-800 p-2 rounded-lg mt-2"
+                    ><code class="language-bash">
+heroku pg:reset DATABASE
+heroku run rails db:setup
+          </code></pre>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Monitoring & Maintenance -->
+              <div class="bg-white p-6 rounded-lg shadow-sm">
+                <h3 class="text-xl font-semibold mb-4">
+                  🔍 Post-Deployment Checklist
+                </h3>
+
+                <div class="bg-green-50 p-4 rounded-lg">
+                  <ul class="list-disc pl-6 space-y-2">
+                    <li>Set up error monitoring (Sentry/Honeybadger)</li>
+                    <li>Configure automatic backups</li>
+                    <li>Enable SSL (auto-configured on Heroku/Render)</li>
+                    <li>Set up a staging environment</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </section>
+        </article>
+      </main>
+    </div>
+
+    <script>
+      // Toggle sidebar on mobile
+      const sidebar = document.querySelector(".sidebar");
+      const sidebarToggle = document.getElementById("sidebarToggle");
+
+      function toggleSidebar() {
+        sidebar.classList.toggle("-translate-x-full");
+      }
+
+      // Toggle button click
+      sidebarToggle.addEventListener("click", toggleSidebar);
+
+      // Close sidebar when clicking outside on mobile
+      document.addEventListener("click", (event) => {
+        if (
+          window.innerWidth < 768 &&
+          !sidebar.contains(event.target) &&
+          !sidebarToggle.contains(event.target)
+        ) {
+          sidebar.classList.add("-translate-x-full");
+        }
+      });
+
+      // Close sidebar when resizing to desktop
+      window.addEventListener("resize", () => {
+        if (window.innerWidth >= 768) {
+          sidebar.classList.remove("-translate-x-full");
+        }
+      });
+    </script>
+
+    <style>
+      .sidebar {
+        scrollbar-width: thin;
+        scrollbar-color: #4a5568 #2d3748;
+      }
+
+      .sidebar::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      .sidebar::-webkit-scrollbar-thumb {
+        background-color: #4a5568;
+        border-radius: 4px;
+      }
+
+      @media (max-width: 767px) {
+        .sidebar {
+          width: 75%;
+          box-shadow: 4px 0 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        main {
+          margin-left: 0 !important;
+        }
+      }
+    </style>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+
+    <script src="scripts.js"></script>
+    <script>
+      hljs.highlightAll();
+    </script>
+  </body>
+</html>
