@@ -38,6 +38,15 @@ module Marketplace
 
     end
 
+    def documentationindex
+    end
+
+    def documentationrails
+    end
+
+    def documentationreact
+    end
+
     def recently_subscribed
       recently_followed_users = User.joins(:following_users).order('follows.created_at DESC').limit(20)
       followed_user_ids = recently_followed_users.pluck(:id)
