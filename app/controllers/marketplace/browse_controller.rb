@@ -92,14 +92,15 @@ module Marketplace
     end
 
     def apply_filters_and_sort(resource)
+
       # Apply filtering if needed (e.g., by category or language)
       resource = resource.includes(:product_categories, :languages, :user, :categories, :product_languages)
 
       # Category filter
-      resource = resource.where(category_id: filter_params[:categories]) if filter_params[:categories].present?
+      # resource = resource.where(category_id: filter_params[:categories]) if filter_params[:categories].present?
 
       # Language filter
-      resource = resource.where(language_id: filter_params[:languages]) if filter_params[:languages].present?
+      # resource = resource.where(language_id: filter_params[:languages]) if filter_params[:languages].present?
 
       # Price filter
       if filter_params[:min_price].present?

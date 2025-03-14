@@ -19,19 +19,22 @@
       <div class="mt-4 <%= params.dig(:filters, :category).present? ? '' : 'hidden' %> px-2" data-collapsible-target="content">
         <input type="text" id="category-search" placeholder="Search categories..." class="w-full p-2 mb-2 border rounded">
         <div class="space-y-4" id="categories-container">
-          <% Category.first(5).each do |category| %>
-            <div class="flex items-center category-item">
-              <input type="checkbox" 
-                     name="filters[category][]" 
-                     value="<%= category.id %>" 
-                     id="category-<%= category.id %>"
-                     <%= 'checked' if params.dig(:filters, :category)&.include?(category.id.to_s) %>
-                     class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 filter-checkbox">
-              <label for="category-<%= category.id %>" class="ml-3 text-sm text-gray-600">
-                <%= category.name %>
-              </label>
-            </div>
-          <% end %>
+          <% categories_data = Category.all.load %>
+          <div id="categories_data" class="flex flex-col space-y-4" data-categories="<%= categories_data.to_json %>">
+            <% categories_data.first(5).each do |category| %>
+              <div class="category-item flex items-center" data-category-id="<%= category.id %>">
+                <input type="checkbox" 
+                      name="filters[category][]" 
+                      value="<%= category.id %>" 
+                      id="category-<%= category.id %>"
+                      <%= 'checked' if params.dig(:filters, :category)&.include?(category.id.to_s) %>
+                      class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 filter-checkbox">
+                <label for="category-<%= category.id %>" class="ml-3 text-sm text-gray-600">
+                  <%= category.name %>
+                </label>
+              </div>
+            <% end %>
+          </div>
         </div>
         <button id="load-more-categories" 
                 class="mt-4 w-full text-sm text-indigo-600 hover:text-indigo-500">
@@ -177,17 +180,122 @@
 
 <!-- Add JavaScript directly within the _filters.html.erb -->
 <script>
+  // Handle "Load More" buttons for Categories and Languages
+  document.body.addEventListener('click', function (event) {
+    if (event.target.id === 'load-more-languages') {
+      const container = document.getElementById('languages-container');
+      const offset = container.children.length;
+      const limit = 5;
+      const urlParams = new URLSearchParams(window.location.search);
+
+      fetch(`/marketplace/languages/load_more?offset=${offset}&limit=${limit}`)
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.languages.length < limit) {
+            document.getElementById('load-more-languages').style.display = 'none';
+          }
+
+          data.languages.forEach(function (language) {
+            const languageDiv = document.createElement('div');
+            languageDiv.classList.add('flex', 'items-center');
+
+            const checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            checkbox.name = 'filters[language][]';
+            checkbox.value = language.id;
+            checkbox.id = `language-${language.id}`;
+            checkbox.classList.add('h-4', 'w-4', 'rounded', 'border-gray-300', 'text-indigo-600', 'focus:ring-indigo-500', 'filter-checkbox');
+            
+            const label = document.createElement('label');
+            label.htmlFor = `language-${language.id}`;
+            label.textContent = language.name;
+            label.classList.add('ml-3', 'text-sm', 'text-gray-600');
+
+            languageDiv.appendChild(checkbox);
+            languageDiv.appendChild(label);
+            container.appendChild(languageDiv);
+          });
+        });
+    } else if (event.target.id === 'load-more-categories') {
+      const container = document.getElementById('categories-container');
+      const offset = container.children.length;
+      const limit = 5;
+      const urlParams = new URLSearchParams(window.location.search);
+
+      fetch(`/marketplace/categories/load_more?offset=${offset}&limit=${limit}`)
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.categories.length < limit) {
+            document.getElementById('load-more-categories').style.display = 'none';
+          }
+
+          data.categories.forEach(function (category) {
+            const categoryDiv = document.createElement('div');
+            categoryDiv.classList.add('flex', 'items-center', 'load-more-category-data');
+
+            const checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            checkbox.name = 'filters[category][]';
+            checkbox.value = category.id;
+            checkbox.id = `category-${category.id}`;
+            checkbox.classList.add('h-4', 'w-4', 'rounded', 'border-gray-300', 'text-indigo-600', 'focus:ring-indigo-500', 'filter-checkbox');
+            
+            const label = document.createElement('label');
+            label.htmlFor = `category-${category.id}`;
+            label.textContent = category.name;
+            label.classList.add('ml-3', 'text-sm', 'text-gray-600');
+
+            categoryDiv.appendChild(checkbox);
+            categoryDiv.appendChild(label);
+            container.appendChild(categoryDiv);
+          });
+        });
+    }
+  });
+
   $(document).ready(function () {
-    // Function to filter categories based on the search input
     $('#category-search').on('input', function () {
       const searchQuery = $(this).val().toLowerCase();
-      $('.category-item').each(function () {
-        const categoryName = $(this).find('label').text().toLowerCase();
-        if (categoryName.includes(searchQuery)) {
-          $(this).show();
-        } else {
-          $(this).hide();
-        }
+      if(searchQuery.length > 0){ 
+        $("#load-more-categories").hide();
+        $(".load-more-category-data").hide();
+      }else{
+        $(".load-more-category-data").show();
+        $("#load-more-categories").show();
+      } 
+      // Get all categories from the data-categories attribute
+      const allCategories = $('#categories_data').data('categories');
+
+      // Filter the categories based on the search query
+      const filteredCategories = allCategories.filter(function(category) {
+          return category.name.toLowerCase().includes(searchQuery);
+      });
+
+      // Clear the current displayed categories
+      $('#categories_data').empty();
+      if(filteredCategories.length == 0){
+        $('#categories_data').append(
+          `<div class="category-item flex items-center">
+              <label class="ml-3 text-sm text-gray-600">
+                No categories found
+              </label>
+          </div>`
+        );
+      }
+      // Append the filtered categories to the container
+      filteredCategories.slice(0, 5).forEach(function(category) {
+          $('#categories_data').append(
+              `<div class="category-item flex items-center" data-category-id="${category.id}">
+                  <input type="checkbox" 
+                        name="filters[category][]" 
+                        value="${category.id}" 
+                        id="category-${category.id}"
+                        class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 filter-checkbox">
+                  <label for="category-${category.id}" class="ml-3 text-sm text-gray-600">
+                    ${category.name}
+                  </label>
+              </div>`
+          );
       });
     });
 
@@ -204,77 +312,69 @@
       });
     });
 
-    // Handle "Load More" buttons for Categories and Languages
-    document.body.addEventListener('click', function (event) {
-      if (event.target.id === 'load-more-languages') {
-        const container = document.getElementById('languages-container');
-        const offset = container.children.length;
-        const limit = 5;
-        const urlParams = new URLSearchParams(window.location.search);
+    const page = $('#filter-container').data('page');
+    let url;
+    if (page === 'browse') {
+      url = '/marketplace/browse';
+    } else if (page === 'featured') {
+      url = '/marketplace/browse/featured';
+    } else {
+      url = window.location.pathname;
+    }
 
-        fetch(`/marketplace/languages/load_more?offset=${offset}&limit=${limit}`)
-          .then((response) => response.json())
-          .then((data) => {
-            if (data.languages.length < limit) {
-              document.getElementById('load-more-languages').style.display = 'none';
-            }
-
-            data.languages.forEach(function (language) {
-              const languageDiv = document.createElement('div');
-              languageDiv.classList.add('flex', 'items-center');
-
-              const checkbox = document.createElement('input');
-              checkbox.type = 'checkbox';
-              checkbox.name = 'filters[language][]';
-              checkbox.value = language.id;
-              checkbox.id = `language-${language.id}`;
-              checkbox.classList.add('h-4', 'w-4', 'rounded', 'border-gray-300', 'text-indigo-600', 'focus:ring-indigo-500', 'filter-checkbox');
-              
-              const label = document.createElement('label');
-              label.htmlFor = `language-${language.id}`;
-              label.textContent = language.name;
-              label.classList.add('ml-3', 'text-sm', 'text-gray-600');
-
-              languageDiv.appendChild(checkbox);
-              languageDiv.appendChild(label);
-              container.appendChild(languageDiv);
-            });
-          });
-      } else if (event.target.id === 'load-more-categories') {
-        const container = document.getElementById('categories-container');
-        const offset = container.children.length;
-        const limit = 5;
-        const urlParams = new URLSearchParams(window.location.search);
-
-        fetch(`/marketplace/categories/load_more?offset=${offset}&limit=${limit}`)
-          .then((response) => response.json())
-          .then((data) => {
-            if (data.categories.length < limit) {
-              document.getElementById('load-more-categories').style.display = 'none';
-            }
-
-            data.categories.forEach(function (category) {
-              const categoryDiv = document.createElement('div');
-              categoryDiv.classList.add('flex', 'items-center');
-
-              const checkbox = document.createElement('input');
-              checkbox.type = 'checkbox';
-              checkbox.name = 'filters[category][]';
-              checkbox.value = category.id;
-              checkbox.id = `category-${category.id}`;
-              checkbox.classList.add('h-4', 'w-4', 'rounded', 'border-gray-300', 'text-indigo-600', 'focus:ring-indigo-500', 'filter-checkbox');
-              
-              const label = document.createElement('label');
-              label.htmlFor = `category-${category.id}`;
-              label.textContent = category.name;
-              label.classList.add('ml-3', 'text-sm', 'text-gray-600');
-
-              categoryDiv.appendChild(checkbox);
-              categoryDiv.appendChild(label);
-              container.appendChild(categoryDiv);
-            });
-          });
+    $('#categories-container, #languages-container').on("change", ".filter-checkbox", function () {
+      const filterType = $(this).attr('name').replace('[]', '');
+      const value = $(this).val();
+      
+      // Collect all checked checkboxes
+      const selectedFilters = {};
+      
+      // Get all checked categories
+      const checkedCategories = $('input[name="filters[category][]"]:checked').map(function() {
+        return $(this).val();
+      }).get();
+      
+      if (checkedCategories.length > 0) {
+        selectedFilters.category = checkedCategories;
       }
+      
+      // Get all checked languages
+      const checkedLanguages = $('input[name="filters[language][]"]:checked').map(function() {
+        return $(this).val();
+      }).get();
+      
+      if (checkedLanguages.length > 0) {
+        selectedFilters.language = checkedLanguages;
+      }
+
+      // Update URL and fetch results
+      const searchParams = new URLSearchParams(window.location.search);
+      
+      if (Object.keys(selectedFilters).length > 0) {
+        searchParams.set('filters', JSON.stringify(selectedFilters));
+      } else {
+        searchParams.delete('filters');
+      }
+      searchParams.delete('page');
+
+      // Update URL without refresh
+      const newUrl = `${url}?${searchParams.toString()}`;
+      window.history.pushState({}, '', newUrl);
+
+      // Fetch updated results via AJAX
+      $.ajax({
+        url: url,
+        method: 'GET',
+        data: searchParams.toString(),
+        dataType: 'script',
+        headers: {
+          'X-Requested-With': 'XMLHttpRequest',
+          'Accept': 'text/javascript'
+        },
+        success: function(response) {
+          // DOM updates are handled in the `index.js.erb` file
+        }
+      });
     });
   });
 </script>
