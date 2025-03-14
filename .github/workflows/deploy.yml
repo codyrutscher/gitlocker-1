@@ -88,4 +88,4 @@ jobs:
           echo "Checking Rake Jobs service status..."
           sudo systemctl status rake_jobs_worker.service --no-pager || true
         EOF
-        echo "Deployment to EC2-3 completed. "
+        echo "Deployment to EC2-3 completed."
