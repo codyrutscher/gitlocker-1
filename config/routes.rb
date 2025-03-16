@@ -144,8 +144,8 @@ Rails.application.routes.draw do
   get "documentationindex", to: "marketplace/home#documentationindex"
   get "documentationreact", to: "marketplace/home#documentationreact"
   get "documentationrails", to: "marketplace/home#documentationrails"
-  get "documentationrails", to: "marketplace/home#documentation_django"
-  get "documentationrails", to: "marketplace/home#documentation_laravel"
+  get "documentation_django", to: "marketplace/home#documentation_django"
+  get "documentation_laravel", to: "marketplace/home#documentation_laravel"
   
   namespace :marketplace do
     root "home#index"
