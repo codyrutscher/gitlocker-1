@@ -38,7 +38,7 @@
       </div>
 
       <hr class="h-px bg-black border-4 mt-4 mb-4 border-black">
-      <div class="mt-4 px-4 sm:px-6 lg:px-8 space-y-8">
+      <div id="pagination_div" class="mt-4 px-4 sm:px-6 lg:px-8 space-y-8">
         <%= render 'kaminari/tailwind/paginator', paginator: @products, params: request.query_parameters.merge(page: params[:page]) %>
       </div>
     </section>
