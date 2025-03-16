@@ -1,0 +1,4579 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Laravel Docs - Coderz</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Syntax Highlighting -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <style>
+    .sidebar::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .sidebar::-webkit-scrollbar-thumb {
+      background: #4a5568;
+      border-radius: 4px;
+    }
+
+    .prose :where(code):not(:where([class~="not-prose"] *))::before {
+      content: "";
+    }
+
+    .prose :where(code):not(:where([class~="not-prose"] *))::after {
+      content: "";
+    }
+  </style>
+</head>
+
+<body class="bg-gray-50">
+  <div class="min-h-screen md:flex">
+    <!-- Sidebar -->
+    <aside class="sidebar bg-gray-800 text-gray-300 w-64 fixed h-screen overflow-y-auto z-30 -translate-x-full md:translate-x-0 transition-transform duration-300">
+      <div class="p-4">
+        <%= link_to documentationindex_path, class: "block mb-6 text-blue-400 hover:text-blue-300" do %>
+        ← Back to Tech Stack <% end %>
+        </a>
+        <h2 class="text-xl font-bold mb-4">Laravel Documentation</h2>
+        <nav>
+          <h3 class="text-sm font-semibold text-gray-400 mb-4">
+            CORE CONCEPTS
+          </h3>
+          <ul class="space-y-2">
+            <li>
+              <a href="#introduction" class="flex items-center px-3 py-2 rounded hover:bg-gray-700">Introduction</a>
+            </li>
+            <li>
+              <a href="#installation" class="flex items-center px-3 py-2 rounded hover:bg-gray-700">Installation</a>
+            </li>
+            <li>
+              <a href="#routing" class="flex items-center px-3 py-2 rounded hover:bg-gray-700">Routing</a>
+            </li>
+            <li>
+              <a href="#controllers" class="flex items-center px-3 py-2 rounded hover:bg-gray-700">Controllers</a>
+            </li>
+            <li>
+              <a href="#views" class="flex items-center px-3 py-2 rounded hover:bg-gray-700">Views & Blade</a>
+            </li>
+            <li>
+              <a href="#models" class="flex items-center px-3 py-2 rounded hover:bg-gray-700">Models & Eloquent</a>
+            </li>
+            <li>
+              <a href="#migrations" class="flex items-center px-3 py-2 rounded hover:bg-gray-700">Migrations</a>
+            </li>
+            <li>
+              <a href="#middleware" class="flex items-center px-3 py-2 rounded hover:bg-gray-700">Middleware</a>
+            </li>
+            <li>
+              <a href="#authentication" class="flex items-center px-3 py-2 rounded hover:bg-gray-700">Authentication</a>
+            </li>
+            <li>
+              <a href="#validation" class="flex items-center px-3 py-2 rounded hover:bg-gray-700">Validation</a>
+            </li>
+            <h3 class="text-sm font-semibold text-gray-400 mt-8 mb-4">
+              ADVANCED TOPICS
+            </h3>
+            <li>
+              <a href="#cache" class="flex items-center px-3 py-2 rounded hover:bg-gray-700">Cache System</a>
+            </li>
+            <li>
+              <a href="#api" class="flex items-center px-3 py-2 rounded hover:bg-gray-700">API Development</a>
+            </li>
+            <li>
+              <a href="#events" class="flex items-center px-3 py-2 rounded hover:bg-gray-700">Events & Listeners</a>
+            </li>
+            <li>
+              <a href="#deployment" class="flex items-center px-3 py-2 rounded hover:bg-gray-700">Deployment</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </aside>
+
+    <!-- Mobile Menu Button -->
+    <button id="sidebarToggle" class="md:hidden fixed top-4 left-4 z-40 p-2 bg-gray-800 rounded-lg text-white ml-4 mt-4">
+      ☰
+    </button>
+
+    <!-- Main Content -->
+    <main class="flex-1 bg-gray-50 ml-0 md:ml-64">
+      <div class="max-w-4xl mx-auto prose max-w-full md:max-w-4xl">
+        <!-- Introduction Section -->
+        <section id="introduction">
+          <h1 class="text-4xl font-bold text-gray-800 mb-8">
+            1. Introduction to Laravel
+          </h1>
+
+          <div class="space-y-8">
+            <!-- What is Laravel? -->
+            <div>
+              <h2 class="text-2xl font-semibold text-gray-800 mb-3">
+                What is Laravel?
+              </h2>
+              <p class="text-gray-600 leading-relaxed">
+                Laravel is a modern, full-stack PHP framework that provides an
+                elegant syntax and robust tools for building web applications.
+                It follows the Model-View-Controller (MVC) architectural
+                pattern and offers numerous features like routing,
+                authentication, sessions, caching, and more out of the box.
+                Laravel's philosophy emphasizes developer experience and
+                clean, readable code while maintaining flexibility for complex
+                applications.
+              </p>
+            </div>
+
+            <!-- Key Features -->
+            <div>
+              <h2 class="text-2xl font-semibold text-gray-800 mb-3">
+                Key Features
+              </h2>
+              <div class="bg-blue-50 p-6 rounded-lg">
+                <ul class="list-disc space-y-3 pl-6 text-gray-600">
+                  <li>
+                    <strong class="font-semibold">Eloquent ORM:</strong>
+                    Advanced ActiveRecord implementation for working with
+                    databases
+                  </li>
+                  <li>
+                    <strong class="font-semibold">Blade Templating:</strong>
+                    Lightweight yet powerful templating engine with template
+                    inheritance
+                  </li>
+                  <li>
+                    <strong class="font-semibold">Artisan CLI:</strong>
+                    Built-in command-line tool for common tasks and code
+                    generation
+                  </li>
+                  <li>
+                    <strong class="font-semibold">Middleware:</strong>
+                    Flexible system for filtering HTTP requests entering your
+                    application
+                  </li>
+                  <li>
+                    <strong class="font-semibold">Authentication System:</strong>
+                    Ready-to-use implementation including registration, login,
+                    and password reset
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- MVC Architecture -->
+            <div>
+              <h2 class="text-2xl font-semibold text-gray-800 mb-3">
+                MVC Architecture
+              </h2>
+              <div class="bg-gray-50 p-6 rounded-lg">
+                <p class="text-gray-600 mb-4">
+                  Laravel follows the Model-View-Controller (MVC) pattern,
+                  which separates application logic into three distinct
+                  components:
+                </p>
+
+                <div class="grid gap-4 md:grid-cols-3">
+                  <div class="p-4 bg-white rounded-lg shadow-sm">
+                    <h3 class="font-semibold text-blue-600 mb-2">Model</h3>
+                    <p class="text-sm text-gray-600">
+                      Represents data structure and business logic. Handles
+                      database interactions through Eloquent ORM.
+                    </p>
+                  </div>
+                  <div class="p-4 bg-white rounded-lg shadow-sm">
+                    <h3 class="font-semibold text-blue-600 mb-2">View</h3>
+                    <p class="text-sm text-gray-600">
+                      Presents data to users through Blade templates. Contains
+                      HTML/CSS and display logic.
+                    </p>
+                  </div>
+                  <div class="p-4 bg-white rounded-lg shadow-sm">
+                    <h3 class="font-semibold text-blue-600 mb-2">
+                      Controller
+                    </h3>
+                    <p class="text-sm text-gray-600">
+                      Handles user requests, processes data from Models, and
+                      returns Views.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Basic Example -->
+            <div>
+              <h2 class="text-2xl font-semibold text-gray-800 mb-3">
+                Basic Example
+              </h2>
+              <p class="text-gray-600 mb-4">
+                Here's a simple route example showing Laravel's basic
+                structure:
+              </p>
+
+              <pre class="rounded-lg overflow-hidden text-sm">
+                  <code class="language-php">
+// routes/web.php
+Route::get('/greeting', function () {
+    return view('greeting', ['name' => 'James']);
+});
+
+// resources/views/greeting.blade.php
+&lt;html&gt;
+    &lt;body&gt;
+        &lt;h1&gt;Hello, {{ $name }}!&lt;/h1&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+                  </code>
+                </pre>
+
+              <div class="bg-yellow-50 p-4 rounded-lg mt-4">
+                <h4 class="font-semibold text-yellow-800 mb-2">
+                  Code Explanation
+                </h4>
+                <ul class="list-disc pl-6 text-yellow-800 space-y-2">
+                  <li>
+                    The route defines a URL endpoint (/greeting) and a closure
+                    to handle requests
+                  </li>
+                  <li>
+                    The view() helper returns a Blade template with passed
+                    data
+                  </li>
+                  <li>Blade's {{ }} syntax safely outputs escaped data</li>
+                  <li>
+                    This demonstrates the MVC flow: Route → Controller-like
+                    logic → View
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="installation" class="py-8 mt-4">
+          <h2 class="text-3xl font-bold text-gray-800 mb-6">
+            2. Laravel Installation
+          </h2>
+
+          <div class="space-y-8">
+            <!-- System Requirements -->
+            <div>
+              <h3 class="text-2xl font-semibold text-gray-800 mb-4">
+                System Requirements
+              </h3>
+              <div class="bg-gray-50 rounded-lg border border-gray-200">
+                <p class="text-gray-600 mb-4">
+                  Before installing Laravel, ensure your system meets these
+                  requirements:
+                </p>
+                <ul class="list-disc space-y-3 pl-6 text-gray-600">
+                  <li>
+                    <strong class="font-semibold">PHP ≥8.1</strong> with
+                    extensions:
+                    <ul class="list-circle pl-6 mt-2 space-y-2">
+                      <li>
+                        Ctype, cURL, DOM, Fileinfo, Filter, Hash, Mbstring
+                      </li>
+                      <li>OpenSSL, PCRE, PDO, Session, Tokenizer, XML</li>
+                    </ul>
+                  </li>
+                  <li>
+                    <strong class="font-semibold">Composer</strong> - PHP
+                    dependency manager
+                  </li>
+                  <li>
+                    <strong class="font-semibold">Database Server</strong>
+                    (MySQL, PostgreSQL, SQLite, or SQL Server)
+                  </li>
+                </ul>
+
+                <div class="mt-6 bg-blue-50 p-4 rounded-lg">
+                  <h4 class="font-semibold text-blue-800 mb-2">
+                    💡 Verification Command
+                  </h4>
+                  <pre class="rounded-lg overflow-hidden text-sm"><code class="language-bash">
+php -v        # Check PHP version
+composer -v   # Verify Composer installation
+php -m        # List loaded PHP extensions
+                    </code></pre>
+                </div>
+              </div>
+            </div>
+
+            <!-- Installing Laravel -->
+            <div>
+              <h3 class="text-2xl font-semibold text-gray-800 mb-4">
+                Installing Laravel
+              </h3>
+              <div class="space-y-6">
+                <p class="text-gray-600">
+                  Laravel utilizes Composer for package management. Choose one
+                  of these installation methods:
+                </p>
+
+                <!-- Method 1 -->
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                  <h4 class="text-xl font-semibold text-gray-800 mb-3">
+                    Method 1: Via Composer
+                  </h4>
+                  <pre class="rounded-lg overflow-hidden text-sm"><code class="language-bash">
+composer create-project laravel/laravel project-name
+                    </code></pre>
+                  <div class="mt-4 text-gray-600">
+                    This command will:
+                    <ul class="list-disc pl-6 mt-2 space-y-2">
+                      <li>Create new directory 'project-name'</li>
+                      <li>Install core Laravel files</li>
+                      <li>Download all dependencies</li>
+                      <li>Generate basic application structure</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <!-- Method 2 -->
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                  <h4 class="text-xl font-semibold text-gray-800 mb-3">
+                    Method 2: Global Installer
+                  </h4>
+                  <div class="space-y-4">
+                    <pre class="rounded-lg overflow-hidden text-sm"><code class="language-bash">
+composer global require laravel/installer
+laravel new project-name
+                      </code></pre>
+                    <div class="bg-yellow-50 p-4 rounded-lg overflow-x-auto">
+                      <h4 class="font-semibold text-yellow-800 mb-2">
+                        ⚠️ Path Configuration
+                      </h4>
+                      <p class="text-yellow-800 text-sm">
+                        Ensure Composer's global bin directory is in your
+                        system PATH:
+                        <code class="text-yellow-900">~/.composer/vendor/bin</code>
+                        (Linux/Mac) or
+                        <code class="text-yellow-900 block whitespace-nowrap">
+                          %USERPROFILE%\AppData\Roaming\Composer\vendor\bin
+                        </code>
+                        (Windows)
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Directory Structure -->
+            <div>
+              <h3 class="text-2xl font-semibold text-gray-800 mb-4">
+                Directory Structure
+              </h3>
+              <div class="bg-gray-50 rounded-lg border border-gray-200">
+                <p class="text-gray-600 mb-4">
+                  A fresh Laravel installation contains these key directories:
+                </p>
+
+                <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                  <div class="p-4 bg-white rounded-lg shadow-sm">
+                    <h4 class="font-semibold text-purple-600 mb-2">app/</h4>
+                    <p class="text-sm text-gray-600">
+                      Contains core application code - Models, Controllers,
+                      Middleware, and application services
+                    </p>
+                  </div>
+                  <div class="p-4 bg-white rounded-lg shadow-sm">
+                    <h4 class="font-semibold text-purple-600 mb-2">
+                      config/
+                    </h4>
+                    <p class="text-sm text-gray-600">
+                      All configuration files for database, mail, services,
+                      and application settings
+                    </p>
+                  </div>
+                  <div class="p-4 bg-white rounded-lg shadow-sm">
+                    <h4 class="font-semibold text-purple-600 mb-2">
+                      database/
+                    </h4>
+                    <p class="text-sm text-gray-600">
+                      Database migrations, seeders, factories, and SQLite
+                      database file
+                    </p>
+                  </div>
+                  <div class="p-4 bg-white rounded-lg shadow-sm">
+                    <h4 class="font-semibold text-purple-600 mb-2">
+                      public/
+                    </h4>
+                    <p class="text-sm text-gray-600">
+                      Web server entry point containing assets (CSS, JS,
+                      images) and index.php
+                    </p>
+                  </div>
+                  <div class="p-4 bg-white rounded-lg shadow-sm">
+                    <h4 class="font-semibold text-purple-600 mb-2">
+                      routes/
+                    </h4>
+                    <p class="text-sm text-gray-600">
+                      All application route definitions (web.php, api.php,
+                      console.php, channels.php)
+                    </p>
+                  </div>
+                  <div class="p-4 bg-white rounded-lg shadow-sm">
+                    <h4 class="font-semibold text-purple-600 mb-2">
+                      resources/
+                    </h4>
+                    <p class="text-sm text-gray-600">
+                      Views, raw assets (CSS/JS), and language files
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Environment Configuration -->
+            <div>
+              <h3 class="text-2xl font-semibold text-gray-800 mb-4">
+                Environment Setup
+              </h3>
+              <div class="bg-gray-50 rounded-lg border border-gray-200">
+                <p class="text-gray-600 mb-4">
+                  Laravel uses a <code>.env</code> file for
+                  environment-specific configuration:
+                </p>
+
+                <pre class="rounded-lg overflow-hidden text-sm"><code class="language-ini">
+APP_NAME=Coderz
+APP_ENV=local
+APP_KEY=base64:... (generated automatically)
+APP_DEBUG=true
+APP_URL=http://localhost
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=coderz
+DB_USERNAME=root
+DB_PASSWORD=
+                  </code></pre>
+
+                <div class="mt-6 space-y-4">
+                  <div class="bg-green-50 p-4 rounded-lg">
+                    <h4 class="font-semibold text-green-800 mb-2">
+                      🔑 Generating Application Key
+                    </h4>
+                    <pre class="rounded-lg overflow-hidden text-sm"><code class="language-bash">
+php artisan key:generate
+                      </code></pre>
+                    <p class="text-green-800 text-sm mt-2">
+                      This command generates a secure application key and
+                      updates your .env file automatically
+                    </p>
+                  </div>
+
+                  <div class="bg-red-50 p-4 rounded-lg">
+                    <h4 class="font-semibold text-red-800 mb-2">
+                      ⚠️ Security Note
+                    </h4>
+                    <p class="text-red-800 text-sm">
+                      Never commit your .env file to version control. Use
+                      .env.example for base configuration and keep sensitive
+                      data in .env (already in .gitignore by default)
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Running the Server -->
+            <div>
+              <h3 class="text-2xl font-semibold text-gray-800 mb-4">
+                Starting Development Server
+              </h3>
+              <div class="bg-gray-50 rounded-lg border border-gray-200">
+                <pre class="rounded-lg overflow-hidden text-sm"><code class="language-bash">
+php artisan serve
+
+# Specify host and port
+php artisan serve --host=0.0.0.0 --port=8000
+                  </code></pre>
+
+                <div class="mt-4 text-gray-600">
+                  <p class="mb-2">
+                    Access your application at
+                    <code>http://localhost:8000</code>
+                  </p>
+                  <ul class="list-disc pl-6 space-y-2">
+                    <li>Built-in PHP development server</li>
+                    <li>Auto-reloads when code changes</li>
+                    <li>Not suitable for production</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="routing" class="py-8 mt-4">
+          <h2 class="text-3xl font-bold text-gray-800 mb-6">
+            3. Routing Basics
+          </h2>
+
+          <div class="space-y-8">
+            <!-- Basic Routing -->
+            <div>
+              <h3 class="text-2xl font-semibold text-gray-800 mb-4">
+                3.1 Basic Routing
+              </h3>
+              <div class="bg-gray-50 rounded-lg border border-gray-200">
+                <p class="text-gray-600 mb-4">
+                  Routes define entry points to your application and map URLs
+                  to controller actions or closures. All Laravel routes are
+                  defined in <code>routes/web.php</code> for web routes and
+                  <code>routes/api.php</code> for API routes.
+                </p>
+
+                <pre class="rounded-lg overflow-hidden text-sm mb-4"><code class="language-php">
+// Basic GET route
+Route::get('/welcome', function () {
+    return view('welcome');
+});
+
+// Supporting multiple HTTP verbs
+Route::match(['get', 'post'], '/contact', function () {
+    // Handle both GET and POST requests
+});
+
+// All HTTP verbs
+Route::any('/any-request', function () {
+    // Handle any HTTP method
+});
+                  </code></pre>
+
+                <div class="bg-blue-50 p-4 rounded-lg">
+                  <h4 class="font-semibold text-blue-800 mb-2">
+                    💡 Route Types
+                  </h4>
+                  <ul class="list-disc pl-6 text-blue-800 space-y-2">
+                    <li>
+                      <strong>Web Routes:</strong> For UI interactions
+                      (session state, CSRF protection)
+                    </li>
+                    <li>
+                      <strong>API Routes:</strong> For stateless JSON APIs
+                      (rate limiting, auth via tokens)
+                    </li>
+                    <li>
+                      <strong>Console Routes:</strong> For custom Artisan
+                      commands
+                    </li>
+                    <li>
+                      <strong>Channel Routes:</strong> For broadcasting events
+                      via WebSockets
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <!-- Route Parameters -->
+            <div>
+              <h3 class="text-2xl font-semibold text-gray-800 mb-4">
+                3.2 Route Parameters
+              </h3>
+              <div class="space-y-6">
+                <div class="bg-gray-50 rounded-lg border border-gray-200">
+                  <p class="text-gray-600 mb-4">
+                    Routes can capture segments of the URI as parameters.
+                    Parameters are always enclosed in curly braces
+                    <code>{}</code> and passed to your route
+                    callback/controller.
+                  </p>
+
+                  <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+                    <div class="p-4 bg-white rounded-lg shadow-sm">
+                      <h4 class="font-semibold text-purple-600 mb-2">Required Parameters</h4>
+                      <div class="rounded-lg overflow-x-auto bg-gray-100 p-2">
+                        <pre class="text-sm"><code class="language-php">
+Route::get('/user/{id}', function ($id) {
+    return "User ID: ".$id;
+});
+                          </code></pre>
+                      </div>
+                      <p class="text-sm text-gray-600 mt-2">
+                        Parameters must be present in the URL. Missing parameters will trigger 404.
+                      </p>
+                    </div>
+
+                    <div class="p-4 bg-white rounded-lg shadow-sm">
+                      <h4 class="font-semibold text-purple-600 mb-2">Optional Parameters</h4>
+                      <div class="rounded-lg overflow-x-auto bg-gray-100 p-2">
+                        <pre class="text-sm"><code class="language-php">
+Route::get('/posts/{slug?}', function ($slug = 'latest') {
+    return "Showing post: ".$slug;
+});
+                          </code></pre>
+                      </div>
+                      <p class="text-sm text-gray-600 mt-2">
+                        Mark parameters optional with <code>?</code>. Provide default values.
+                      </p>
+                    </div>
+                  </div>
+
+
+                  <div class="mt-6 bg-yellow-50 p-4 rounded-lg">
+                    <h4 class="font-semibold text-yellow-800 mb-2">
+                      🔍 Parameter Constraints
+                    </h4>
+                    <pre class="rounded-lg overflow-hidden text-sm"><code class="language-php">
+Route::get('/user/{id}', function ($id) {
+    // ...
+})->where('id', '[0-9]+');
+
+// Multiple constraints
+Route::get('/post/{year}/{slug}', function ($year, $slug) {
+    // ...
+})->where([
+    'year' => '[0-9]{4}',
+    'slug' => '[A-Za-z\-]+'
+]);
+                      </code></pre>
+                    <p class="text-yellow-800 text-sm mt-2">
+                      Use regular expressions to validate parameters before
+                      they reach your route logic
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Named Routes -->
+            <div>
+              <h3 class="text-2xl font-semibold text-gray-800 mb-4">
+                3.3 Named Routes
+              </h3>
+              <div class="bg-gray-50 rounded-lg border border-gray-200">
+                <p class="text-gray-600 mb-4">
+                  Named routes allow convenient URL generation and redirects.
+                  Names should be unique.
+                </p>
+
+                <pre class="rounded-lg overflow-hidden text-sm"><code class="language-php">
+// Assigning name
+Route::get('/dashboard', function () {
+    // ...
+})->name('dashboard');
+
+// Generating URLs
+$url = route('dashboard');
+
+// Redirecting
+return redirect()->route('dashboard');
+                  </code></pre>
+
+                <div class="mt-6 grid gap-4 md:grid-cols-2">
+                  <div class="bg-green-50 p-4 rounded-lg">
+                    <h4 class="font-semibold text-green-800 mb-2">
+                      ✅ Benefits
+                    </h4>
+                    <ul class="list-disc pl-6 text-green-800 space-y-2">
+                      <li>Decouple URLs from implementation</li>
+                      <li>Automatic URL updates when routes change</li>
+                      <li>Easier maintenance in large applications</li>
+                    </ul>
+                  </div>
+
+                  <div class="bg-blue-50 p-4 rounded-lg overflow-x-auto">
+                    <h4 class="font-semibold text-blue-800 mb-2">
+                      📌 Parameter Handling
+                    </h4>
+                    <pre class="rounded-lg overflow-hidden text-sm"><code class="language-php">
+// With parameters
+Route::get('/user/{id}/profile', function ($id) {
+    // ...
+})->name('profile');
+
+// Generate URL with parameter
+route('profile', ['id' => 12]);
+                      </code></pre>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Route Groups -->
+            <div>
+              <h3 class="text-2xl font-semibold text-gray-800 mb-4">
+                3.4 Route Groups
+              </h3>
+              <div class="bg-gray-50 rounded-lg border border-gray-200">
+                <p class="text-gray-600 mb-4">
+                  Route groups allow you to apply attributes to multiple
+                  routes without repeating code.
+                </p>
+
+                <div class="space-y-6">
+                  <div class="p-4 bg-white rounded-lg shadow-sm">
+                    <h4 class="font-semibold text-purple-600 mb-3">
+                      Middleware Groups
+                    </h4>
+                    <pre class="rounded-lg overflow-hidden text-sm"><code class="language-php">
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/dashboard', function () {
+        // Uses auth + verified middleware
+    });
+    
+    Route::get('/settings', function () {
+        // Uses auth + verified middleware
+    });
+});
+                      </code></pre>
+                  </div>
+
+                  <div class="p-4 bg-white rounded-lg shadow-sm">
+                    <h4 class="font-semibold text-purple-600 mb-3">
+                      Prefix Groups
+                    </h4>
+                    <pre class="rounded-lg overflow-hidden text-sm"><code class="language-php">
+Route::prefix('admin')->group(function () {
+    Route::get('/users', function () {
+        // Matches /admin/users
+    });
+    
+    Route::get('/settings', function () {
+        // Matches /admin/settings
+    });
+});
+                      </code></pre>
+                  </div>
+
+                  <div class="p-4 bg-white rounded-lg shadow-sm">
+                    <h4 class="font-semibold text-purple-600 mb-3">
+                      Name Prefixes
+                    </h4>
+                    <pre class="rounded-lg overflow-hidden text-sm"><code class="language-php">
+Route::name('admin.')->group(function () {
+    Route::get('/users', function () {
+        // Route name: admin.users
+    })->name('users');
+});
+                      </code></pre>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Route Model Binding -->
+            <div>
+              <h3 class="text-2xl font-semibold text-gray-800 mb-4">
+                3.5 Route Model Binding
+              </h3>
+              <div class="bg-gray-50 rounded-lg border border-gray-200">
+                <p class="text-gray-600 mb-4">
+                  Laravel automatically injects model instances into your
+                  routes that type-hint Eloquent models.
+                </p>
+
+                <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+                  <!-- Implicit Binding -->
+                  <div class="p-4 bg-white rounded-lg shadow-sm">
+                    <h4 class="font-semibold text-purple-600 mb-2">Implicit Binding</h4>
+                    <div class="rounded-lg overflow-x-auto bg-gray-100 p-2">
+                      <pre class="text-sm whitespace-pre"><code class="language-php">
+Route::get('/user/{user}', function (User $user) {
+    return $user;
+});
+                        </code></pre>
+                    </div>
+                    <p class="text-sm text-gray-600 mt-2">
+                      Automatically retrieves User model matching the route parameter (ID or slug)
+                    </p>
+                  </div>
+
+                  <!-- Custom Keys -->
+                  <div class="p-4 bg-white rounded-lg shadow-sm">
+                    <h4 class="font-semibold text-purple-600 mb-2">Custom Keys</h4>
+                    <div class="rounded-lg overflow-x-auto bg-gray-100 p-2">
+                      <pre class="text-sm whitespace-pre"><code class="language-php">
+// Use username instead of ID
+Route::get('/user/{user:username}', function (User $user) {
+    return $user;
+});
+                        </code></pre>
+                    </div>
+                    <p class="text-sm text-gray-600 mt-2">
+                      Specify which database column to use for model resolution
+                    </p>
+                  </div>
+                </div>
+
+
+                <div class="mt-6 bg-red-50 p-4 rounded-lg">
+                  <h4 class="font-semibold text-red-800 mb-2">
+                    ⚠️ Important Notes
+                  </h4>
+                  <ul class="list-disc pl-6 text-red-800 space-y-2">
+                    <li>
+                      Models must type-hint the route parameter variable
+                    </li>
+                    <li>404 is automatically thrown if model not found</li>
+                    <li>Works with controller methods as well</li>
+                    <li>
+                      Supports soft-deleted models with
+                      <code>withTrashed()</code>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="controllers" class="py-8 mt-4">
+          <h2 class="text-3xl font-bold text-gray-800 mb-6">
+            4. Controllers
+          </h2>
+
+          <div class="space-y-8">
+            <!-- Introduction -->
+            <div>
+              <h3 class="text-2xl font-semibold text-gray-800 mb-4">
+                4.1 Controller Basics
+              </h3>
+              <div class="bg-gray-50 rounded-lg border border-gray-200">
+                <p class="text-gray-600 mb-4">
+                  Controllers group related request handling logic in a single
+                  class. They serve as intermediary between Routes and
+                  Views/Models, following the
+                  <strong>Single Responsibility Principle</strong>.
+                </p>
+
+                <div class="grid gap-4 md:grid-cols-2">
+                  <div class="p-4 bg-white rounded-lg shadow-sm">
+                    <h4 class="font-semibold text-purple-600 mb-2">
+                      Key Responsibilities
+                    </h4>
+                    <ul class="list-disc pl-6 text-gray-600 space-y-2 text-sm">
+                      <li>Process incoming HTTP requests</li>
+                      <li>Retrieve data from Models</li>
+                      <li>Return appropriate responses</li>
+                      <li>Handle validation and errors</li>
+                      <li>Manage application flow</li>
+                    </ul>
+                  </div>
+
+                  <div class="p-4 bg-white rounded-lg shadow-sm">
+                    <h4 class="font-semibold text-purple-600 mb-2">
+                      Lifecycle Flow
+                    </h4>
+                    <p class="text-sm text-gray-600">
+                      Route → Controller → Model (Database) → View → Response
+                    </p>
+                    <div class="mt-2 text-xs text-gray-500">
+                      Middleware can intercept at any stage
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Creating Controllers -->
+            <div>
+              <h3 class="text-2xl font-semibold text-gray-800 mb-4">
+                4.2 Creating Controllers
+              </h3>
+              <div class="bg-gray-50 rounded-lg border border-gray-200">
+                <pre class="rounded-lg overflow-hidden text-sm"><code class="language-bash">
+php artisan make:controller UserController
+                  </code></pre>
+
+                <div class="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2">
+                  <!-- Basic Controller Structure -->
+                  <div class="p-4 bg-white rounded-lg shadow-sm">
+                    <h4 class="font-semibold text-purple-600 mb-2">Basic Controller Structure</h4>
+                    <div class="rounded-lg overflow-x-auto bg-gray-100 p-2">
+                      <pre class="text-sm whitespace-pre-wrap"><code class="language-php">
+namespace App\Http\Controllers;
+
+use App\Models\User;
+use Illuminate\Http\Request;
+
+class UserController extends Controller
+{
+    public function index()
+    {
+        $users = User::all();
+        return view('users.index', compact('users'));
+    }
+}
+                        </code></pre>
+                    </div>
+                  </div>
+
+                  <!-- Route Binding -->
+                  <div class="p-4 bg-white rounded-lg shadow-sm">
+                    <h4 class="font-semibold text-purple-600 mb-2">Route Binding</h4>
+                    <div class="rounded-lg overflow-x-auto bg-gray-100 p-2">
+                      <pre class="text-sm whitespace-pre-wrap"><code class="language-php">
+// routes/web.php
+use App\Http\Controllers\UserController;
+
+Route::get('/users', [UserController::class, 'index']);
+                        </code></pre>
+                    </div>
+                    <div class="mt-4 bg-blue-50 p-3 rounded-lg">
+                      <p class="text-blue-800 text-sm">
+                        💡 Always use controller class references instead of string syntax
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Resource Controllers -->
+            <div>
+              <h3 class="text-2xl font-semibold text-gray-800 mb-4">
+                4.3 Resource Controllers
+              </h3>
+              <div class="bg-gray-50 rounded-lg border border-gray-200">
+                <div class="space-y-6">
+                  <pre class="rounded-lg overflow-hidden text-sm"><code class="language-bash">
+php artisan make:controller ProductController --resource --model=Product
+                    </code></pre>
+
+                  <div class="bg-green-50 p-4 rounded-lg">
+                    <h4 class="font-semibold text-green-800 mb-2">
+                      Generated Methods
+                    </h4>
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-4 text-sm">
+                      <div class="p-2 bg-white rounded">
+                        <code>index()</code><br />
+                        List resources
+                      </div>
+                      <div class="p-2 bg-white rounded">
+                        <code>create()</code><br />
+                        Create form
+                      </div>
+                      <div class="p-2 bg-white rounded">
+                        <code>store()</code><br />
+                        Save new
+                      </div>
+                      <div class="p-2 bg-white rounded">
+                        <code>show()</code><br />
+                        Display single
+                      </div>
+                      <div class="p-2 bg-white rounded">
+                        <code>edit()</code><br />
+                        Edit form
+                      </div>
+                      <div class="p-2 bg-white rounded">
+                        <code>update()</code><br />
+                        Update
+                      </div>
+                      <div class="p-2 bg-white rounded">
+                        <code>destroy()</code><br />
+                        Delete
+                      </div>
+                    </div>
+                  </div>
+
+                  <pre class="rounded-lg overflow-hidden text-sm"><code class="language-php">
+// Route registration
+Route::resource('products', ProductController::class);
+
+// Partial resources
+Route::resource('products', ProductController::class)
+    ->only(['index', 'show'])
+    ->except(['destroy']);
+                    </code></pre>
+                </div>
+              </div>
+            </div>
+
+            <!-- Dependency Injection -->
+            <div>
+              <h3 class="text-2xl font-semibold text-gray-800 mb-4">
+                4.4 Dependency Injection
+              </h3>
+              <div class="bg-gray-50 rounded-lg border border-gray-200">
+                <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+                  <!-- Constructor Injection -->
+                  <div class="p-4 bg-white rounded-lg shadow-sm">
+                    <h4 class="font-semibold text-purple-600 mb-2">Constructor Injection</h4>
+                    <div class="rounded-lg overflow-x-auto bg-gray-100 p-2">
+                      <pre class="text-sm whitespace-pre-wrap"><code class="language-php">
+class PaymentController extends Controller
+{
+    protected $paymentService;
+
+    public function __construct(PaymentService $paymentService)
+    {
+        $this->paymentService = $paymentService;
+    }
+}
+                        </code></pre>
+                    </div>
+                  </div>
+
+                  <!-- Method Injection -->
+                  <div class="p-4 bg-white rounded-lg shadow-sm">
+                    <h4 class="font-semibold text-purple-600 mb-2">Method Injection</h4>
+                    <div class="rounded-lg overflow-x-auto bg-gray-100 p-2">
+                      <pre class="text-sm whitespace-pre-wrap"><code class="language-php">
+public function store(Request $request, Product $product)
+{
+    $data = $request->validated();
+    $product->update($data);
+}
+                        </code></pre>
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="mt-6 bg-yellow-50 p-4 rounded-lg">
+                  <h4 class="font-semibold text-yellow-800 mb-2">
+                    ⚡ Resolution Process
+                  </h4>
+                  <ul class="list-disc pl-6 text-yellow-800 space-y-2 text-sm">
+                    <li>Automatic resolution via Service Container</li>
+                    <li>Dependencies declared in type-hints</li>
+                    <li>Supports interface binding</li>
+                    <li>Enables mock testing</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <!-- Controller Middleware -->
+            <div>
+              <h3 class="text-2xl font-semibold text-gray-800 mb-4">
+                4.5 Controller Middleware
+              </h3>
+              <div class="bg-gray-50 rounded-lg border border-gray-200">
+                <div class="space-y-6">
+                  <pre class="rounded-lg overflow-hidden text-sm"><code class="language-php">
+// Assign in controller constructor
+class UserController extends Controller
+{
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('log')->only('index');
+        $this->middleware('subscribed')->except('store');
+    }
+}
+                    </code></pre>
+
+                  <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+                    <!-- Route Specific -->
+                    <div class="bg-blue-50 p-4 rounded-lg">
+                      <h4 class="font-semibold text-blue-800 mb-2">Route Specific</h4>
+                      <div class="rounded-lg overflow-x-auto bg-gray-100 p-2">
+                        <pre class="text-sm whitespace-pre-wrap"><code class="language-php">
+Route::get('/profile', [UserController::class, 'show'])
+    ->middleware('auth');
+                          </code></pre>
+                      </div>
+                    </div>
+
+                    <!-- Inline Middleware -->
+                    <div class="bg-green-50 p-4 rounded-lg">
+                      <h4 class="font-semibold text-green-800 mb-2">Inline Middleware</h4>
+                      <div class="rounded-lg overflow-x-auto bg-gray-100 p-2">
+                        <pre class="text-sm whitespace-pre-wrap"><code class="language-php">
+Route::put('/post/{id}', function ($id) {
+    // ...
+})->middleware('can:update,post');
+                          </code></pre>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            <!-- Advanced Patterns -->
+            <div>
+              <h3 class="text-2xl font-semibold text-gray-800 mb-4">
+                4.6 Advanced Patterns
+              </h3>
+              <div class="bg-gray-50 rounded-lg border border-gray-200">
+                <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+                  <!-- Single Action Controllers -->
+                  <div class="p-4 bg-white rounded-lg shadow-sm">
+                    <h4 class="font-semibold text-purple-600 mb-2">Single Action Controllers</h4>
+                    <div class="rounded-lg overflow-x-auto bg-gray-100 p-2">
+                      <pre class="text-sm whitespace-pre-wrap"><code class="language-php">
+php artisan make:controller ShowProfile --invokable
+
+// Controller
+public function __invoke(User $user)
+{
+    return view('profile', compact('user'));
+}
+
+// Route
+Route::get('/user/{user}/profile', ShowProfile::class);
+                        </code></pre>
+                    </div>
+                  </div>
+
+                  <!-- Nested Controllers -->
+                  <div class="p-4 bg-white rounded-lg shadow-sm">
+                    <h4 class="font-semibold text-purple-600 mb-2">Nested Controllers</h4>
+                    <div class="rounded-lg overflow-x-auto bg-gray-100 p-2">
+                      <pre class="text-sm whitespace-pre-wrap"><code class="language-php">
+// app/Http/Controllers/Admin/UserController.php
+namespace App\Http\Controllers\Admin;
+
+class UserController extends Controller
+{
+    // ...
+}
+
+// Route
+Route::get('/admin/users', 
+    [Admin\UserController::class, 'index']);
+                        </code></pre>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+        <section id="views" class="py-8 mt-4">
+          <h2 class="text-3xl font-bold text-gray-800 mb-6">
+            5. Views & Blade Templating
+          </h2>
+
+          <div class="space-y-8">
+            <!-- Blade Basics -->
+            <div>
+              <h3 class="text-2xl font-semibold text-gray-800 mb-4">
+                5.1 Blade Templating Fundamentals
+              </h3>
+              <div class="bg-gray-50 rounded-lg border border-gray-200">
+                <p class="text-gray-600 mb-4">
+                  Blade is Laravel's powerful templating engine that combines
+                  HTML with PHP in an elegant syntax. Blade files use
+                  <code>.blade.php</code> extension and are compiled into
+                  plain PHP code for execution.
+                </p>
+
+                <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+                  <!-- Basic Syntax -->
+                  <div class="p-4 bg-white rounded-lg shadow-sm">
+                    <h4 class="font-semibold text-purple-600 mb-2">Basic Syntax</h4>
+                    <div class="rounded-lg overflow-x-auto bg-gray-100 p-2">
+                      <pre class="text-sm whitespace-pre-wrap"><code class="language-php">
+// Display variable (auto-escaping)
+{{ $user->name }}
+
+// Raw output
+{!! $unsafeHtml !!}
+
+// Comments
+{{-- Hidden from final output --}}
+                        </code></pre>
+                    </div>
+                  </div>
+
+                  <!-- Template Inheritance -->
+                  <div class="p-4 bg-white rounded-lg shadow-sm">
+                    <h4 class="font-semibold text-purple-600 mb-2">Template Inheritance</h4>
+                    <div class="rounded-lg overflow-x-auto bg-gray-100 p-2">
+                      <pre class="text-sm whitespace-pre-wrap"><code class="language-php">
+// layout.blade.php
+@section('sidebar')
+  Default sidebar
+@show
+
+// child.blade.php
+@extends('layout')
+@section('sidebar')
+  Custom sidebar content
+@endsection
+                        </code></pre>
+                    </div>
+                  </div>
+                </div>
+
+
+
+              </div>
+            </div>
+
+            <!-- Control Structures -->
+            <div>
+              <h3 class="text-2xl font-semibold text-gray-800 mb-4">
+                5.2 Control Structures
+              </h3>
+              <div class="bg-gray-50 rounded-lg border border-gray-200">
+                <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+                  <!-- Conditionals -->
+                  <div class="p-4 bg-white rounded-lg shadow-sm">
+                    <h4 class="font-semibold text-purple-600 mb-2">Conditionals</h4>
+                    <div class="rounded-lg overflow-x-auto bg-gray-100 p-2">
+                      <pre class="text-sm whitespace-pre-wrap"><code class="language-php">
+@if(count($users) === 1)
+  Single user
+@elseif(count($users) > 1)
+  Multiple users
+@else
+  No users
+@endif
+                        </code></pre>
+                    </div>
+                  </div>
+
+                  <!-- Loops -->
+                  <div class="p-4 bg-white rounded-lg shadow-sm">
+                    <h4 class="font-semibold text-purple-600 mb-2">Loops</h4>
+                    <div class="rounded-lg overflow-x-auto bg-gray-100 p-2">
+                      <pre class="text-sm whitespace-pre-wrap"><code class="language-php">
+@for ($i = 0; $i < 10; $i++)
+  Value: {{ $i }}
+@endfor
+
+@foreach ($users as $user)
+  {{ $user->name }}
+@endforeach
+                        </code></pre>
+                    </div>
+                  </div>
+
+                  <!-- Loop Variables -->
+                  <div class="p-4 bg-white rounded-lg shadow-sm">
+                    <h4 class="font-semibold text-purple-600 mb-2">Loop Variables</h4>
+                    <div class="rounded-lg overflow-x-auto bg-gray-100 p-2">
+                      <pre class="text-sm whitespace-pre-wrap"><code class="language-php">
+@foreach ($items as $item)
+  @if($loop->first)
+    First item
+  @endif
+  
+  Iteration: {{ $loop->iteration }}
+@endforeach
+                        </code></pre>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Components -->
+            <div>
+              <h3 class="text-2xl font-semibold text-gray-800 mb-4">
+                5.3 Blade Components
+              </h3>
+              <div class="bg-gray-50 rounded-lg border border-gray-200">
+                <div class="space-y-6">
+                  <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+                    <!-- Anonymous Component -->
+                    <div class="p-4 bg-white rounded-lg shadow-sm">
+                      <h4 class="font-semibold text-purple-600 mb-2">Anonymous Component</h4>
+                      <div class="rounded-lg overflow-x-auto bg-gray-100 p-2">
+                        <pre class="text-sm whitespace-pre-wrap"><code class="language-php">
+// resources/views/components/alert.blade.php
+<div class="alert alert-{{ $type }}">
+  {{ $slot }}
+</div>
+
+// Usage
+<x-alert type="error">
+  Validation errors!
+</x-alert>
+                          </code></pre>
+                      </div>
+                    </div>
+
+                    <!-- Class Component -->
+                    <div class="p-4 bg-white rounded-lg shadow-sm">
+                      <h4 class="font-semibold text-purple-600 mb-2">Class Component</h4>
+                      <div class="rounded-lg overflow-x-auto bg-gray-100 p-2">
+                        <pre class="text-sm whitespace-pre-wrap"><code class="language-php">
+php artisan make:component Input/Button
+
+// App\View\Components\Input\Button
+public function render()
+{
+    return view('components.input.button');
+}
+                          </code></pre>
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <div class="bg-blue-50 p-4 rounded-lg">
+                    <h4 class="font-semibold text-blue-800 mb-2">
+                      Slot Types
+                    </h4>
+                    <div class="grid gap-4 md:grid-cols-3">
+                      <div class="p-3 bg-white rounded shadow-sm">
+                        <code>Default Slot</code>
+                        <p class="text-sm text-gray-600 mt-1">
+                          Main content between component tags
+                        </p>
+                      </div>
+                      <div class="p-3 bg-white rounded shadow-sm">
+                        <code>Named Slots</code>
+                        <p class="text-sm text-gray-600 mt-1">
+                          Specific content areas using x-slot
+                        </p>
+                      </div>
+                      <div class="p-3 bg-white rounded shadow-sm">
+                        <code>Scoped Slots</code>
+                        <p class="text-sm text-gray-600 mt-1">
+                          Pass data back to parent components
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Advanced Features -->
+            <div>
+              <h3 class="text-2xl font-semibold text-gray-800 mb-4">
+                5.4 Advanced Blade Features
+              </h3>
+              <div class="bg-gray-50 rounded-lg border border-gray-200">
+                <div class="space-y-6">
+                  <!-- Grid for Custom Directives & View Composers -->
+                  <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+                    <!-- Custom Directives -->
+                    <div class="p-4 bg-white rounded-lg shadow-sm">
+                      <h4 class="font-semibold text-purple-600 mb-2">Custom Directives</h4>
+                      <div class="rounded-lg overflow-x-auto bg-gray-100 p-2">
+                        <pre class="text-sm whitespace-pre-wrap"><code class="language-php">
+// AppServiceProvider boot()
+Blade::directive('datetime', function ($expression) {
+    return "<?php echo ($expression)->format('m/d/Y H:i'); ?>";
+});
+
+// Usage
+@datetime($user->created_at)
+                          </code></pre>
+                      </div>
+                    </div>
+
+                    <!-- View Composers -->
+                    <div class="p-4 bg-white rounded-lg shadow-sm">
+                      <h4 class="font-semibold text-purple-600 mb-2">View Composers</h4>
+                      <div class="rounded-lg overflow-x-auto bg-gray-100 p-2">
+                        <pre class="text-sm whitespace-pre-wrap"><code class="language-php">
+View::composer('profile', function ($view) {
+    $view->with('stats', Auth::user()->stats);
+});
+                          </code></pre>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Performance Tips -->
+                  <div class="bg-yellow-50 p-4 rounded-lg">
+                    <h4 class="font-semibold text-yellow-800 mb-2">Performance Tips</h4>
+                    <ul class="list-disc pl-6 text-yellow-800 space-y-2">
+                      <li>Use @once directive for single execution blocks</li>
+                      <li>Cache expensive operations with @cache</li>
+                      <li>Precompile assets in production</li>
+                      <li>Limit nested component rendering depth</li>
+                    </ul>
+                  </div>
+
+                  <!-- Security Best Practices -->
+                  <div class="bg-red-50 p-4 rounded-lg">
+                    <h4 class="font-semibold text-red-800 mb-2">Security Best Practices</h4>
+                    <ul class="list-disc pl-6 text-red-800 space-y-2">
+                      <li>Always escape output with {{ }} unless HTML is intentional</li>
+                      <li>Sanitize user input before display</li>
+                      <li>Use CSRF protection on forms</li>
+                      <li>Validate uploaded files before processing</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Form Handling -->
+            <div>
+              <h3 class="text-2xl font-semibold text-gray-800 mb-4">
+                5.5 Form Handling
+              </h3>
+              <div class="bg-gray-50 rounded-lg border border-gray-200">
+                <div class="space-y-6">
+                  <pre class="rounded-lg overflow-hidden text-sm"><code class="language-php">
+@csrf
+@method('PUT')
+<input type="text" name="username" 
+        value="{{ old('username', $user->name) }}">
+  @ error('username') 
+  <div class="alert">{{ $message }}</div>
+@enderror
+                    </code></pre>
+
+                  <div class="grid gap-4 md:grid-cols-2">
+                    <div class="bg-green-50 p-4 rounded-lg">
+                      <h4 class="font-semibold text-green-800 mb-2">
+                        Form Directives
+                      </h4>
+                      <ul class="list-disc pl-6 text-green-800 space-y-2">
+                        <li>@csrf - Adds CSRF token field</li>
+                        <li>@method - Spoof HTTP verbs</li>
+                        <li>@ error - Display validation errors</li>
+                        <li>@old - Retain previous input</li>
+                      </ul>
+                    </div>
+
+                    <div class="bg-blue-50 p-4 rounded-lg">
+                      <h4 class="font-semibold text-blue-800 mb-2">
+                        File Uploads
+                      </h4>
+                      <pre class="rounded-lg overflow-hidden text-sm"><code class="language-php">
+// Controller
+$path = $request->file('avatar')
+          ->store('avatars');
+                          </code></pre>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="models" class="py-8 mt-4">
+          <h2 class="text-3xl font-bold text-gray-800 mb-6">
+            6. Models & Eloquent ORM
+          </h2>
+
+          <div class="space-y-8">
+            <!-- Eloquent Fundamentals -->
+            <div>
+              <h3 class="text-2xl font-semibold text-gray-800 mb-4">
+                6.1 Eloquent Fundamentals
+              </h3>
+              <div class="bg-gray-50 rounded-lg border border-gray-200">
+                <p class="text-gray-600 mb-4">
+                  Eloquent is Laravel's advanced ActiveRecord implementation
+                  that provides an elegant way to interact with databases.
+                  Each database table has a corresponding "Model" that allows
+                  you to query data and insert/update records. Eloquent models
+                  use conventions to minimize configuration while providing
+                  powerful query capabilities.
+                </p>
+
+                <div class="grid gap-4 md:grid-cols-2">
+                  <div class="p-4 bg-white rounded-lg shadow-sm">
+                    <h4 class="font-semibold text-purple-600 mb-3">
+                      Key Features
+                    </h4>
+                    <ul class="list-disc pl-6 text-gray-600 space-y-2">
+                      <li>Automatic database table mapping</li>
+                      <li>Built-in CRUD operations</li>
+                      <li>Relationship management</li>
+                      <li>Mass assignment protection</li>
+                      <li>
+                        Database agnostic (supports MySQL, PostgreSQL, SQLite,
+                        SQL Server)
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div class="p-4 bg-white rounded-lg shadow-sm">
+                    <h4 class="font-semibold text-purple-600 mb-3">
+                      Model Conventions
+                    </h4>
+                    <ul class="list-disc pl-6 text-gray-600 space-y-2">
+                      <li>
+                        Class name in singular PascalCase (User => users
+                        table)
+                      </li>
+                      <li>
+                        Primary key named <code>id</code> (auto-incrementing
+                        integer)
+                      </li>
+                      <li>
+                        Timestamps <code>created_at</code> and
+                        <code>updated_at</code>
+                      </li>
+                      <li>
+                        Models stored in <code>app/Models</code> directory
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Creating Models -->
+            <div>
+              <h3 class="text-2xl font-semibold text-gray-800 mb-4">
+                6.2 Creating Models
+              </h3>
+              <div class="bg-gray-50 rounded-lg border border-gray-200">
+                <pre class="rounded-lg overflow-hidden text-sm"><code class="language-bash">
+# Create model with migration
+php artisan make:model Product -m
+                  </code></pre>
+
+                <div class="mt-6 space-y-6">
+                  <div class="p-4 bg-white rounded-lg shadow-sm">
+                    <h4 class="font-semibold text-purple-600 mb-3">
+                      Basic Model Structure
+                    </h4>
+                    <pre class="rounded-lg overflow-hidden text-sm"><code class="language-php">
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Product extends Model
+{
+    /**
+      * The attributes that are mass assignable
+      * @var array
+      */
+    protected $fillable = [
+        'name', 
+        'price',
+        'description'
+    ];
+
+    /**
+      * The attributes that should be hidden for arrays
+      * @var array
+      */
+    protected $hidden = [
+        'internal_code'
+    ];
+
+    /**
+      * The attributes that should be cast to native types
+      * @var array
+      */
+    protected $casts = [
+        'price' => 'decimal:2',
+        'is_active' => 'boolean'
+    ];
+}
+                      </code></pre>
+                    <div class="mt-4 bg-blue-50 p-4 rounded-lg">
+                      <h4 class="font-semibold text-blue-800 mb-2">
+                        Code Explanation
+                      </h4>
+                      <ul class="list-disc pl-6 text-blue-800 space-y-2">
+                        <li>
+                          <code>$fillable</code>: Specifies which attributes
+                          can be mass assigned (security measure)
+                        </li>
+                        <li>
+                          <code>$hidden</code>: Attributes excluded from
+                          array/JSON representations
+                        </li>
+                        <li>
+                          <code>$casts</code>: Automatically converts
+                          attributes to common data types
+                        </li>
+                        <li>Timestamps automatically managed by Eloquent</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- CRUD Operations -->
+            <div>
+              <h3 class="text-2xl font-semibold text-gray-800 mb-4">
+                6.3 CRUD Operations
+              </h3>
+              <div class="bg-gray-50 rounded-lg border border-gray-200">
+                <div class="space-y-6">
+                  <!-- Create & Read -->
+                  <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+                    <!-- Create -->
+                    <div class="p-4 bg-white rounded-lg shadow-sm">
+                      <h4 class="font-semibold text-purple-600 mb-2">Create</h4>
+                      <div class="rounded-lg overflow-x-auto bg-gray-100 p-2">
+                        <pre class="text-sm whitespace-pre-wrap"><code class="language-php">
+// Create and save immediately
+$product = Product::create([
+    'name' => 'Laptop',
+    'price' => 999.99
+]);
+
+// Create instance then save
+$product = new Product;
+$product->name = 'Monitor';
+$product->save();
+                          </code></pre>
+                      </div>
+                      <div class="mt-2 text-sm text-gray-700">
+                        <strong>Mass Assignment:</strong> Requires fields to be in
+                        <code>$fillable</code>
+                      </div>
+                    </div>
+
+                    <!-- Read -->
+                    <div class="p-4 bg-white rounded-lg shadow-sm">
+                      <h4 class="font-semibold text-purple-600 mb-2">Read</h4>
+                      <div class="rounded-lg overflow-x-auto bg-gray-100 p-2">
+                        <pre class="text-sm whitespace-pre-wrap"><code class="language-php">
+// Get all records
+$products = Product::all();
+
+// Find by ID
+$product = Product::find(1);
+
+// First matching record
+$product = Product::where('price', '>', 500)
+    ->orderBy('name')
+    ->first();
+                          </code></pre>
+                      </div>
+                      <div class="mt-2 text-sm text-gray-700">
+                        <strong>Eager Loading:</strong> Use <code>with()</code> to prevent N+1 queries
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Update & Delete -->
+                  <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+                    <!-- Update -->
+                    <div class="p-4 bg-white rounded-lg shadow-sm">
+                      <h4 class="font-semibold text-purple-600 mb-2">Update</h4>
+                      <div class="rounded-lg overflow-x-auto bg-gray-100 p-2">
+                        <pre class="text-sm whitespace-pre-wrap"><code class="language-php">
+// Update single instance
+$product = Product::find(1);
+$product->price = 899.99;
+$product->save();
+
+// Mass update
+Product::where('category', 'electronics')
+    ->update(['discount' => 0.15]);
+                          </code></pre>
+                      </div>
+                      <div class="mt-2 text-sm text-gray-700">
+                        <strong>Note:</strong> Mass updates bypass model events
+                      </div>
+                    </div>
+
+                    <!-- Delete -->
+                    <div class="p-4 bg-white rounded-lg shadow-sm">
+                      <h4 class="font-semibold text-purple-600 mb-2">Delete</h4>
+                      <div class="rounded-lg overflow-x-auto bg-gray-100 p-2">
+                        <pre class="text-sm whitespace-pre-wrap"><code class="language-php">
+// Delete instance
+$product = Product::find(1);
+$product->delete();
+
+// Direct deletion
+Product::destroy(1);
+Product::where('price', '>', 1000)->delete();
+                          </code></pre>
+                      </div>
+                      <div class="mt-2 text-sm text-gray-700">
+                        <strong>Soft Deletes:</strong> Use <code>SoftDeletes</code> trait for archive functionality
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Relationships -->
+            <div>
+              <h3 class="text-2xl font-semibold text-gray-800 mb-4">
+                6.4 Eloquent Relationships
+              </h3>
+              <div class="bg-gray-50 rounded-lg border border-gray-200">
+                <div class="space-y-6">
+                  <p class="text-gray-700">
+                    Eloquent relationships define connections between models. They serve as
+                    powerful query builders while providing intuitive ways to access related
+                    data.
+                  </p>
+
+                  <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+                    <!-- One-to-Many -->
+                    <div class="p-4 bg-white rounded-lg shadow-sm">
+                      <h4 class="font-semibold text-purple-600 mb-2">One-to-Many</h4>
+                      <div class="rounded-lg overflow-x-auto bg-gray-100 p-2">
+                        <pre class="text-sm whitespace-pre-wrap"><code class="language-php">
+// User model
+public function posts()
+{
+    return $this->hasMany(Post::class);
+}
+
+// Post model
+public function user()
+{
+    return $this->belongsTo(User::class);
+}
+
+// Usage
+$user = User::find(1);
+foreach ($user->posts as $post) {
+    // Access user's posts
+}
+                          </code></pre>
+                      </div>
+                      <div class="mt-2 text-sm text-gray-700">
+                        <strong>Use Case:</strong> Blog author with multiple articles
+                      </div>
+                    </div>
+
+                    <!-- Many-to-Many -->
+                    <div class="p-4 bg-white rounded-lg shadow-sm">
+                      <h4 class="font-semibold text-purple-600 mb-2">Many-to-Many</h4>
+                      <div class="rounded-lg overflow-x-auto bg-gray-100 p-2">
+                        <pre class="text-sm whitespace-pre-wrap"><code class="language-php">
+// User model
+public function roles()
+{
+    return $this->belongsToMany(Role::class);
+}
+
+// Role model
+public function users()
+{
+    return $this->belongsToMany(User::class);
+}
+
+// Usage
+$user = User::find(1);
+$user->roles()->attach($roleId);
+$user->roles()->sync([1, 2, 3]);
+                          </code></pre>
+                      </div>
+                      <div class="mt-2 text-sm text-gray-700">
+                        <strong>Pivot Tables:</strong> Automatically handles intermediate table
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Relationship Types -->
+                  <div class="bg-yellow-50 p-4 rounded-lg">
+                    <h4 class="font-semibold text-yellow-800 mb-2">Relationship Types</h4>
+                    <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
+                      <div class="p-3 bg-white rounded-lg shadow-sm">
+                        <code class="text-purple-600 font-semibold">HasOne</code>
+                        <p class="text-sm text-gray-700 mt-1">User has one Phone number</p>
+                      </div>
+                      <div class="p-3 bg-white rounded-lg shadow-sm">
+                        <code class="text-purple-600 font-semibold">HasManyThrough</code>
+                        <p class="text-sm text-gray-700 mt-1">
+                          Country has many Posts through Users
+                        </p>
+                      </div>
+                      <div class="p-3 bg-white rounded-lg shadow-sm">
+                        <code class="text-purple-600 font-semibold">MorphToMany</code>
+                        <p class="text-sm text-gray-700 mt-1">Polymorphic tagging system</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Advanced Features -->
+            <div>
+              <h3 class="text-2xl font-semibold text-gray-800 mb-4">
+                6.5 Advanced Eloquent Features
+              </h3>
+              <div class="bg-gray-50 rounded-lg border border-gray-200">
+                <div class="space-y-6">
+                  <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+                    <!-- Query Scopes -->
+                    <div class="p-4 bg-white rounded-lg shadow-sm">
+                      <h4 class="font-semibold text-purple-600 mb-2">Query Scopes</h4>
+                      <div class="rounded-lg overflow-x-auto bg-gray-100 p-2">
+                        <pre class="text-sm whitespace-pre-wrap"><code class="language-php">
+// Model scope
+public function scopePopular($query)
+{
+    return $query->where('votes', '>', 100);
+}
+
+// Usage
+$users = User::popular()->orderBy('name')->get();
+                          </code></pre>
+                      </div>
+                      <div class="mt-2 text-sm text-gray-700">
+                        Create reusable query constraints
+                      </div>
+                    </div>
+
+                    <!-- Accessors/Mutators -->
+                    <div class="p-4 bg-white rounded-lg shadow-sm">
+                      <h4 class="font-semibold text-purple-600 mb-2">
+                        Accessors & Mutators
+                      </h4>
+                      <div class="rounded-lg overflow-x-auto bg-gray-100 p-2">
+                        <pre class="text-sm whitespace-pre-wrap"><code class="language-php">
+// Accessor
+public function getFullNameAttribute()
+{
+    return "{$this->first_name} {$this->last_name}";
+}
+
+// Mutator
+public function setPasswordAttribute($value)
+{
+    $this->attributes['password'] = bcrypt($value);
+}
+                          </code></pre>
+                      </div>
+                      <div class="mt-2 text-sm text-gray-700">
+                        Transform attribute values during get/set
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Performance Considerations -->
+                  <div class="bg-red-50 p-4 rounded-lg">
+                    <h4 class="font-semibold text-red-800 mb-2">
+                      Performance Considerations
+                    </h4>
+                    <ul class="list-disc pl-6 text-red-800 space-y-2">
+                      <li>
+                        Use <code class="text-red-600 font-medium">chunk()</code> for large datasets
+                      </li>
+                      <li>
+                        Select only needed columns with
+                        <code class="text-red-600 font-medium">select()</code>
+                      </li>
+                      <li>
+                        Avoid N+1 problems with
+                        <code class="text-red-600 font-medium">with()</code>
+                      </li>
+                      <li>Use database indexing for frequent queries</li>
+                      <li>Consider caching frequently accessed data</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <section id="migrations" class="py-8 mt-4">
+          <h2 class="text-3xl font-bold text-gray-800 mb-6">
+            7. Database Migrations
+          </h2>
+
+          <div class="space-y-8">
+            <!-- Migration Basics -->
+            <div>
+              <h3 class="text-2xl font-semibold text-gray-800 mb-4">
+                7.1 Migration Fundamentals
+              </h3>
+              <div class="bg-gray-50 rounded-lg border border-gray-200">
+                <p class="text-gray-600 mb-4">
+                  Migrations are version control for your database schema -
+                  they allow teams to modify and share the application's
+                  database structure consistently. Each migration file
+                  contains two main methods: <code>up</code> (apply changes)
+                  and <code>down</code> (revert changes).
+                </p>
+
+                <div class="grid gap-4 grid-cols-1 md:grid-cols-2">
+                  <div class="p-4 bg-white rounded-lg shadow-sm">
+                    <h4 class="font-semibold text-purple-600 mb-3">Key Benefits</h4>
+                    <ul class="list-disc pl-6 text-gray-700 space-y-2">
+                      <li>Team-wide schema consistency</li>
+                      <li>Database-agnostic schema definitions</li>
+                      <li>Rollback capabilities for schema changes</li>
+                      <li>Track schema changes alongside code</li>
+                      <li>Environment-specific database setups</li>
+                    </ul>
+                  </div>
+
+                  <div class="p-4 bg-white rounded-lg shadow-sm">
+                    <h4 class="font-semibold text-purple-600 mb-3">File Structure</h4>
+                    <div class="rounded-lg overflow-x-auto bg-gray-100 p-2">
+                      <pre class="text-sm whitespace-pre-wrap"><code class="language-php">
+2023_08_20_000000_create_users_table.php
+↑           ↑         ↑
+|           |         └── Migration Name
+|           └── Month
+└── Year
+
+Timestamp format: YYYY_MM_DD_HHMMSS (ensures chronological order)
+                        </code></pre>
+                    </div>
+                  </div>
+                </div>
+
+
+              </div>
+            </div>
+
+            <!-- Creating Migrations -->
+            <div>
+              <h3 class="text-2xl font-semibold text-gray-800 mb-4">
+                7.2 Creating Migrations
+              </h3>
+              <div class="bg-gray-50 rounded-lg border border-gray-200">
+                <pre class="rounded-lg overflow-hidden text-sm"><code class="language-bash">
+php artisan make:migration create_posts_table
+php artisan make:migration add_category_to_posts_table --table=posts
+                  </code></pre>
+
+                <div class="mt-6 space-y-6">
+                  <div class="p-4 bg-white rounded-lg shadow-sm">
+                    <h4 class="font-semibold text-purple-600 mb-3">
+                      Basic Migration Structure
+                    </h4>
+                    <pre class="rounded-lg overflow-hidden text-sm"><code class="language-php">
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreateUsersTable extends Migration
+{
+    public function up()
+    {
+        Schema::create('users', function (Blueprint $table) {
+            $table->id(); // Auto-incrementing primary key
+            $table->string('name');
+            $table->string('email')->unique();
+            $table->timestamp('email_verified_at')->nullable();
+            $table->string('password');
+            $table->rememberToken();
+            $table->timestamps(); // created_at & updated_at
+        });
+    }
+
+    public function down()
+    {
+        Schema::dropIfExists('users');
+    }
+}
+                      </code></pre>
+                    <div class="mt-4 bg-blue-50 p-4 rounded-lg">
+                      <h4 class="font-semibold text-blue-800 mb-2">
+                        Code Breakdown
+                      </h4>
+                      <ul class="list-disc pl-6 text-blue-800 space-y-2">
+                        <li>
+                          <code>Schema::create</code> - Creates new database
+                          table
+                        </li>
+                        <li>
+                          <code>Blueprint $table</code> - Defines table
+                          structure
+                        </li>
+                        <li>
+                          <code>->id()</code> - Creates auto-incrementing
+                          primary key
+                        </li>
+                        <li>
+                          <code>->string()</code> - VARCHAR equivalent column
+                        </li>
+                        <li>
+                          <code>->unique()</code> - Adds unique index
+                          constraint
+                        </li>
+                        <li>
+                          <code>->timestamps()</code> - Adds standard
+                          timestamp columns
+                        </li>
+                        <li>
+                          <code>down()</code> - Defines rollback behavior
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Schema Building -->
+            <div>
+              <h3 class="text-2xl font-semibold text-gray-800 mb-4">
+                7.3 Schema Builder
+              </h3>
+              <div class="bg-gray-50 rounded-lg border border-gray-200">
+                <div class="space-y-6">
+                  <div class="grid gap-4 grid-cols-1 md:grid-cols-2">
+                    <!-- Column Types -->
+                    <div class="p-4 bg-white rounded-lg shadow-sm">
+                      <h4 class="font-semibold text-purple-600 mb-2">Column Types</h4>
+                      <div class="rounded-lg overflow-x-auto bg-gray-100 p-2">
+                        <pre class="text-sm whitespace-pre-wrap"><code class="language-php">
+// Common column types
+$table->string('title', 100);    // VARCHAR(100)
+$table->text('description');     // TEXT
+$table->integer('views');        // INTEGER
+$table->float('price');          // FLOAT
+$table->decimal('total', 8, 2);  // DECIMAL(8,2)
+$table->boolean('active');       // BOOLEAN/TINYINT
+$table->dateTime('published_at');// DATETIME
+$table->json('meta');            // JSON column
+                          </code></pre>
+                      </div>
+                      <div class="mt-2 text-sm text-gray-600">
+                        Full list of 25+ column types in Laravel documentation
+                      </div>
+                    </div>
+
+                    <!-- Indexes & Constraints -->
+                    <div class="p-4 bg-white rounded-lg shadow-sm">
+                      <h4 class="font-semibold text-purple-600 mb-2">Indexes & Constraints</h4>
+                      <div class="rounded-lg overflow-x-auto bg-gray-100 p-2">
+                        <pre class="text-sm whitespace-pre-wrap"><code class="language-php">
+// Single column index
+$table->string('email')->unique();
+
+// Composite index
+$table->index(['state', 'country']);
+
+// Foreign key constraint
+$table->foreignId('user_id')
+      ->constrained()
+      ->onUpdate('cascade')
+      ->onDelete('restrict');
+
+// Custom index name
+$table->unique('slug', 'posts_slug_unique');
+                          </code></pre>
+                      </div>
+                      <div class="mt-2 text-sm text-gray-600">
+                        Foreign keys help maintain referential integrity
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Indexing Best Practices -->
+                  <div class="bg-yellow-50 p-4 rounded-lg">
+                    <h4 class="font-semibold text-yellow-800 mb-2">Indexing Best Practices</h4>
+                    <ul class="list-disc pl-6 text-yellow-800 space-y-2">
+                      <li>Index columns used in WHERE, JOIN, ORDER BY clauses</li>
+                      <li>Avoid over-indexing - each index slows writes</li>
+                      <li>Use composite indexes for multi-column queries</li>
+                      <li>Consider full-text indexes for search columns</li>
+                      <li>Regularly analyze query performance</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Running Migrations -->
+            <div>
+              <h3 class="text-2xl font-semibold text-gray-800 mb-4">
+                7.4 Migration Operations
+              </h3>
+              <div class="bg-gray-50 rounded-lg border border-gray-200">
+                <div class="space-y-6">
+                  <div class="grid gap-4 grid-cols-1 md:grid-cols-2">
+                    <!-- Basic Commands -->
+                    <div class="p-4 bg-white rounded-lg shadow-sm">
+                      <h4 class="font-semibold text-purple-600 mb-2">Basic Commands</h4>
+                      <div class="rounded-lg overflow-x-auto bg-gray-100 p-2">
+                        <pre class="text-sm whitespace-pre-wrap"><code class="language-bash">
+# Run all pending migrations
+php artisan migrate
+
+# Rollback last migration batch
+php artisan migrate:rollback
+
+# Reset entire database
+php artisan migrate:reset
+
+# Rollback and re-run migrations
+php artisan migrate:refresh
+                          </code></pre>
+                      </div>
+                      <div class="mt-2 text-sm text-gray-600">
+                        Migration batches are tracked in migrations table
+                      </div>
+                    </div>
+
+                    <!-- Modifying Tables -->
+                    <div class="p-4 bg-white rounded-lg shadow-sm">
+                      <h4 class="font-semibold text-purple-600 mb-2">Modifying Tables</h4>
+                      <div class="rounded-lg overflow-x-auto bg-gray-100 p-2">
+                        <pre class="text-sm whitespace-pre-wrap"><code class="language-php">
+Schema::table('users', function (Blueprint $table) {
+    $table->string('avatar')->after('email');
+    $table->renameColumn('name', 'full_name');
+    $table->dropColumn('age');
+    $table->unsignedBigInteger('role_id')->change();
+});
+                          </code></pre>
+                      </div>
+                      <div class="mt-2 text-sm text-gray-600">
+                        Always test destructive operations in development first
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Critical Warnings -->
+                  <div class="bg-red-50 p-4 rounded-lg">
+                    <h4 class="font-semibold text-red-800 mb-2">Critical Warnings</h4>
+                    <ul class="list-disc pl-6 text-red-800 space-y-2">
+                      <li>Never modify migrations that have been run in production</li>
+                      <li>Always backup database before running migrations</li>
+                      <li>Test migrations on staging environment first</li>
+                      <li>
+                        Use <code>doctrine/dbal</code> package for column modifications
+                      </li>
+                      <li>Avoid raw SQL unless absolutely necessary</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Advanced Techniques -->
+            <div>
+              <h3 class="text-2xl font-semibold text-gray-800 mb-4">
+                7.5 Advanced Migration Patterns
+              </h3>
+              <div class="bg-gray-50 rounded-lg border border-gray-200">
+                <div class="space-y-6">
+                  <div class="grid gap-4 grid-cols-1 md:grid-cols-2">
+                    <!-- Temporary Tables -->
+                    <div class="p-4 bg-white rounded-lg shadow-sm">
+                      <h4 class="font-semibold text-purple-600 mb-2">Temporary Tables</h4>
+                      <div class="rounded-lg overflow-x-auto bg-gray-100 p-2">
+                        <pre class="text-sm whitespace-pre-wrap"><code class="language-php">
+Schema::create('temp_results', function (Blueprint $table) {
+    $table->temporary(); // Session-scoped table
+    $table->id();
+    $table->string('calculation');
+    $table->decimal('result');
+});
+                          </code></pre>
+                      </div>
+                      <div class="mt-2 text-sm text-gray-600">
+                        Automatically dropped at session end, useful for reporting
+                      </div>
+                    </div>
+
+                    <!-- Polymorphic Relations -->
+                    <div class="p-4 bg-white rounded-lg shadow-sm">
+                      <h4 class="font-semibold text-purple-600 mb-2">Polymorphic Relations</h4>
+                      <div class="rounded-lg overflow-x-auto bg-gray-100 p-2">
+                        <pre class="text-sm whitespace-pre-wrap"><code class="language-php">
+Schema::create('comments', function (Blueprint $table) {
+    $table->id();
+    $table->text('body');
+    $table->morphs('commentable'); // Adds:
+    // commentable_id (BIGINT)
+    // commentable_type (VARCHAR)
+});
+                          </code></pre>
+                      </div>
+                      <div class="mt-2 text-sm text-gray-600">
+                        Enables relationships to multiple models
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Migration Squashing -->
+                  <div class="bg-green-50 p-4 rounded-lg">
+                    <h4 class="font-semibold text-green-800 mb-2">Migration Squashing</h4>
+                    <div class="rounded-lg overflow-x-auto bg-gray-100 p-2">
+                      <pre class="text-sm whitespace-pre-wrap"><code class="language-bash">
+php artisan schema:dump
+# Creates schema/migrations/schema.sql
+# Combines existing migrations into single file
+                        </code></pre>
+                    </div>
+                    <ul class="list-disc pl-6 text-green-800 space-y-2 mt-2">
+                      <li>Reduces migration file count</li>
+                      <li>Improves performance for new setups</li>
+                      <li>Automatically used when running migrations</li>
+                      <li>Regenerate when schema changes significantly</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Migration Security -->
+            <div>
+              <h3 class="text-2xl font-semibold text-gray-800 mb-4">
+                7.6 Security Considerations
+              </h3>
+              <div class="bg-gray-50 rounded-lg border border-gray-200">
+                <div class="space-y-6">
+                  <div class="grid gap-4 sm:grid-cols-1 md:grid-cols-2">
+                    <!-- Sensitive Data -->
+                    <div class="p-4 bg-white rounded-lg shadow-sm">
+                      <h4 class="font-semibold text-purple-600 mb-2">Sensitive Data</h4>
+                      <div class="rounded-lg overflow-x-auto bg-gray-100 p-2">
+                        <pre class="text-sm whitespace-pre-wrap"><code class="language-php">
+// Bad practice - storing credentials in migrations
+Schema::table('services', function (Blueprint $table) {
+    $table->string('api_key'); // 🚫
+});
+
+// Better approach - use environment variables
+$table->string('encrypted_api_key')
+    ->comment('Encrypted using app key');
+                          </code></pre>
+                      </div>
+                      <div class="mt-2 text-sm text-gray-600">
+                        Never store actual credentials in migrations
+                      </div>
+                    </div>
+
+                    <!-- Column Comments -->
+                    <div class="p-4 bg-white rounded-lg shadow-sm">
+                      <h4 class="font-semibold text-purple-600 mb-2">Column Comments</h4>
+                      <div class="rounded-lg overflow-x-auto bg-gray-100 p-2">
+                        <pre class="text-sm whitespace-pre-wrap"><code class="language-php">
+$table->decimal('price')
+    ->comment('Stored in USD, tax excluded');
+                          </code></pre>
+                      </div>
+                      <div class="mt-2 text-sm text-gray-600">
+                        Document complex columns for future maintainers
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Migration Security Checklist -->
+                  <div class="bg-blue-50 p-4 rounded-lg">
+                    <h4 class="font-semibold text-blue-800 mb-2">Migration Security Checklist</h4>
+                    <ul class="list-disc pl-6 text-blue-800 space-y-2">
+                      <li>Review all migrations for sensitive data</li>
+                      <li>Use database encryption for sensitive fields</li>
+                      <li>Implement column-level permissions</li>
+                      <li>Regularly audit database permissions</li>
+                      <li>Use migration groups for multi-tenant systems</li>
+                      <li>Test rollback procedures regularly</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+        <section id="middleware" class="py-8 mt-4">
+          <h2 class="text-3xl font-bold text-gray-800 mb-6">8. Middleware</h2>
+
+          <div class="space-y-8">
+            <!-- Middleware Fundamentals -->
+            <div>
+              <h3 class="text-2xl font-semibold text-gray-800 mb-4">
+                8.1 Middleware Fundamentals
+              </h3>
+              <div class="bg-gray-50 rounded-lg border border-gray-200">
+                <p class="text-gray-600 mb-4">
+                  Middleware acts as a series of layered filters for HTTP
+                  requests, providing a convenient mechanism for inspecting
+                  and filtering requests entering your application. They
+                  execute in the order they're registered, wrapping around
+                  your application logic like concentric layers of an onion.
+                </p>
+
+                <div class="grid gap-4 md:grid-cols-2">
+                  <div class="p-4 bg-white rounded-lg shadow-sm">
+                    <h4 class="font-semibold text-purple-600 mb-3">
+                      Key Concepts
+                    </h4>
+                    <ul class="list-disc pl-6 text-gray-600 space-y-2">
+                      <li>
+                        <strong>Authentication:</strong> Verify user identity
+                        before granting access
+                      </li>
+                      <li>
+                        <strong>CSRF Protection:</strong> Prevent cross-site
+                        request forgery attacks
+                      </li>
+                      <li>
+                        <strong>Request Modification:</strong> Alter incoming
+                        requests before handling
+                      </li>
+                      <li>
+                        <strong>Response Modification:</strong> Modify
+                        outgoing responses
+                      </li>
+                      <li>
+                        <strong>Logging:</strong> Track request/response
+                        details
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div class="p-4 bg-white rounded-lg shadow-sm">
+                    <h4 class="font-semibold text-purple-600 mb-3">
+                      Request Lifecycle
+                    </h4>
+                    <div class="text-sm text-gray-600 space-y-2">
+                      <div class="flex items-center gap-2">
+                        <div class="w-2 h-2 bg-blue-500 rounded-full"></div>
+                        HTTP Request Received
+                      </div>
+                      <div class="flex items-center gap-2 ml-4">
+                        <div class="w-2 h-2 bg-blue-500 rounded-full"></div>
+                        Global Middleware
+                      </div>
+                      <div class="flex items-center gap-2 ml-8">
+                        <div class="w-2 h-2 bg-blue-500 rounded-full"></div>
+                        Route Middleware
+                      </div>
+                      <div class="flex items-center gap-2 ml-12">
+                        <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                        Controller Logic
+                      </div>
+                      <div class="flex items-center gap-2 ml-8">
+                        <div class="w-2 h-2 bg-blue-500 rounded-full"></div>
+                        Response Middleware
+                      </div>
+                      <div class="flex items-center gap-2">
+                        <div class="w-2 h-2 bg-blue-500 rounded-full"></div>
+                        HTTP Response Sent
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Creating Middleware -->
+            <div>
+              <h3 class="text-2xl font-semibold text-gray-800 mb-4">
+                8.2 Creating Middleware
+              </h3>
+              <div class="bg-gray-50 rounded-lg border border-gray-200">
+                <pre class="rounded-lg overflow-hidden text-sm"><code class="language-bash">
+php artisan make:middleware EnsureUserIsAdmin
+                  </code></pre>
+
+                <div class="mt-6 space-y-6">
+                  <div class="p-4 bg-white rounded-lg shadow-sm">
+                    <h4 class="font-semibold text-purple-600 mb-3">
+                      Middleware Structure
+                    </h4>
+                    <pre class="rounded-lg overflow-hidden text-sm"><code class="language-php">
+namespace App\Http\Middleware;
+
+use Closure;
+use Illuminate\Http\Request;
+
+class EnsureUserIsAdmin
+{
+    /**
+      * Handle incoming request
+      * @param  Request  $request
+      * @param  Closure  $next
+      * @return mixed
+      */
+    public function handle(Request $request, Closure $next)
+    {
+        if (!auth()->user()->is_admin) {
+            abort(403, 'Administrative access required');
+        }
+
+        return $next($request);
+    }
+}
+                      </code></pre>
+                    <div class="mt-4 bg-blue-50 p-4 rounded-lg">
+                      <h4 class="font-semibold text-blue-800 mb-2">
+                        Code Breakdown
+                      </h4>
+                      <ul class="list-disc pl-6 text-blue-800 space-y-2">
+                        <li>
+                          <code>handle()</code>: Required method that
+                          processes the request
+                        </li>
+                        <li>
+                          <code>$next</code>: Closure to pass request to next
+                          middleware
+                        </li>
+                        <li>
+                          <code>abort(403)</code>: Helper to return HTTP error
+                          response
+                        </li>
+                        <li>
+                          <code>auth()->user()</code>: Access authenticated
+                          user instance
+                        </li>
+                        <li>
+                          Must return either a response or
+                          <code>$next($request)</code>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Middleware Types -->
+            <div>
+              <h3 class="text-2xl font-semibold text-gray-800 mb-4">8.3 Middleware Types</h3>
+              <div class="bg-gray-50 rounded-lg border border-gray-200">
+                <div class="grid gap-4 sm:grid-cols-1 md:grid-cols-2">
+                  <!-- Global Middleware -->
+                  <div class="p-4 bg-white rounded-lg shadow-sm">
+                    <h4 class="font-semibold text-purple-600 mb-2">Global Middleware</h4>
+                    <div class="rounded-lg bg-gray-100 p-2">
+                      <div class="overflow-x-auto w-full">
+                        <pre class="text-sm md:text-base break-words break-all whitespace-pre-wrap"><code class="language-php">
+// app/Http/Kernel.php
+protected $middleware = [
+    \App\Http\Middleware\TrustProxies::class,
+
+    \App\Http\Middleware\PreventRequestsDuringMaintenance::class,
+
+    \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
+    // ...
+];
+                          </code></pre>
+                      </div>
+                    </div>
+                    <div class="mt-2 text-sm text-gray-600">
+                      Runs on <strong>every request</strong> to the application. Use sparingly for essential functions like
+                      maintenance mode and request validation.
+                    </div>
+                  </div>
+
+                  <!-- Route Middleware -->
+                  <div class="p-4 bg-white rounded-lg shadow-sm">
+                    <h4 class="font-semibold text-purple-600 mb-2">Route Middleware</h4>
+                    <div class="rounded-lg bg-gray-100 p-2">
+                      <div class="overflow-x-auto w-full">
+                        <pre class="text-sm md:text-base break-words break-all whitespace-pre-wrap"><code class="language-php">
+// app/Http/Kernel.php
+protected $routeMiddleware = [
+    'auth' => \App\Http\Middleware\Authenticate::class,
+
+    'admin' => \App\Http\Middleware\EnsureUserIsAdmin::class,
+
+    'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+];
+
+// routes/web.php
+Route::get('/admin/dashboard', function () {
+    // ...
+})->middleware(['auth', 'admin']);
+                          </code></pre>
+                      </div>
+                    </div>
+                    <div class="mt-2 text-sm text-gray-600">
+                      Applied to specific routes or groups. Allows granular control over which requests get processed through which middleware.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+            <!-- Middleware Parameters -->
+            <div>
+              <h3 class="text-2xl font-semibold text-gray-800 mb-4">
+                8.4 Middleware Parameters
+              </h3>
+              <div class="bg-gray-50 rounded-lg border border-gray-200">
+                <div class="space-y-6">
+                  <div class="p-4 bg-white rounded-lg shadow-sm">
+                    <pre class="rounded-lg overflow-hidden text-sm"><code class="language-php">
+// Middleware definition
+public function handle($request, $next, $role)
+{
+    if (!auth()->user()->hasRole($role)) {
+        abort(403);
+    }
+    return $next($request);
+}
+
+// Route usage
+Route::get('/reports', function () {
+    // ...
+})->middleware('role:manager');
+                      </code></pre>
+                    <div class="mt-4 bg-yellow-50 p-4 rounded-lg">
+                      <h4 class="font-semibold text-yellow-800 mb-2">
+                        Parameter Handling Details
+                      </h4>
+                      <ul class="list-disc pl-6 text-yellow-800 space-y-2">
+                        <li>
+                          Parameters passed after middleware name separated by
+                          colons
+                        </li>
+                        <li>
+                          Multiple parameters:
+                          <code>middleware('check:owner,edit')</code>
+                        </li>
+                        <li>
+                          Parameters available in handle method after $request
+                          and $next
+                        </li>
+                        <li>
+                          Always validate/sanitize parameters before use
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Middleware Groups -->
+            <div>
+              <h3 class="text-2xl font-semibold text-gray-800 mb-4">
+                8.5 Middleware Groups
+              </h3>
+              <div class="bg-gray-50 rounded-lg border border-gray-200">
+                <div class="grid gap-4 sm:grid-cols-1 md:grid-cols-2">
+                  <!-- Predefined Groups -->
+                  <div class="p-4 bg-white rounded-lg shadow-sm">
+                    <h4 class="font-semibold text-purple-600 mb-2">Predefined Groups</h4>
+                    <div class="rounded-lg bg-gray-100 p-2">
+                      <div class="overflow-x-auto w-full">
+                        <pre class="text-sm md:text-base break-words break-all whitespace-pre-wrap"><code class="language-php">
+// app/Http/Kernel.php
+protected $middlewareGroups = [
+    'web' => [
+        \App\Http\Middleware\EncryptCookies::class,
+        \Illuminate\Session\Middleware\StartSession::class,
+        \Illuminate\View\Middleware\ShareErrorsFromSession::class,
+        \App\Http\Middleware\VerifyCsrfToken::class,
+    ],
+    
+    'api' => [
+        \Illuminate\Routing\Middleware\ThrottleRequests::class.':api',
+        \Illuminate\Routing\Middleware\SubstituteBindings::class,
+    ],
+];
+                          </code></pre>
+                      </div>
+                    </div>
+                    <div class="mt-2 text-sm text-gray-600">
+                      <strong>Web group:</strong> Session management, CSRF protection, cookie encryption<br />
+                      <strong>API group:</strong> Rate limiting, model binding
+                    </div>
+                  </div>
+
+                  <!-- Custom Groups -->
+                  <div class="p-4 bg-white rounded-lg shadow-sm">
+                    <h4 class="font-semibold text-purple-600 mb-2">Custom Groups</h4>
+                    <div class="rounded-lg bg-gray-100 p-2">
+                      <div class="overflow-x-auto w-full">
+                        <pre class="text-sm md:text-base break-words break-all whitespace-pre-wrap"><code class="language-php">
+protected $middlewareGroups = [
+    'monitoring' => [
+        \App\Http\Middleware\LogRequests::class,
+        \App\Http\Middleware\TrackPerformance::class,
+        \App\Http\Middleware\CheckSystemHealth::class,
+    ],
+];
+
+// Route usage
+Route::middleware('monitoring')->group(function () {
+    Route::get('/metrics', /* ... */);
+    Route::get('/health', /* ... */);
+});
+                          </code></pre>
+                      </div>
+                    </div>
+                    <div class="mt-2 text-sm text-gray-600">
+                      Group related middleware for better organization and reuse.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <!-- Advanced Patterns -->
+            <div>
+              <h3 class="text-2xl font-semibold text-gray-800 mb-4">
+                8.6 Advanced Middleware Patterns
+              </h3>
+              <div class="bg-gray-50 rounded-lg border border-gray-200">
+                <div class="space-y-6">
+                  <div class="grid gap-4 grid-cols-1 md:grid-cols-2">
+
+                    <!-- Terminable Middleware -->
+                    <div class="p-4 bg-white rounded-lg shadow-sm">
+                      <h4 class="font-semibold text-purple-600 mb-2">Terminable Middleware</h4>
+                      <div class="rounded-lg bg-gray-100 p-2 overflow-x-auto w-full">
+                        <pre class="text-sm whitespace-pre break-words w-full"><code class="language-php">
+class LogRequestTime
+{
+    public function handle($request, $next)
+    {
+        $start = microtime(true);
+        $response = $next($request);
+        $time = microtime(true) - $start;
+        
+        Log::info("Request took {$time} seconds");
+        return $response;
+    }
+
+    public function terminate($request, $response)
+    {
+        // Runs after response is sent to browser
+        DB::table('request_logs')->insert([
+            'duration' => microtime(true) - LARAVEL_START,
+        ]);
+    }
+}
+                          </code></pre>
+                      </div>
+                      <div class="mt-2 text-sm text-gray-600">
+                        <code>terminate()</code> method runs after response is sent - useful for logging.
+                      </div>
+                    </div>
+
+                    <!-- Middleware Priority -->
+                    <div class="p-4 bg-white rounded-lg shadow-sm">
+                      <h4 class="font-semibold text-purple-600 mb-2">Middleware Priority</h4>
+                      <div class="rounded-lg bg-gray-100 p-2 overflow-x-auto w-full">
+                        <pre class="text-sm whitespace-pre break-words w-full"><code class="language-php">
+// app/Http/Kernel.php
+protected $middlewarePriority = [
+    \Illuminate\Session\Middleware\StartSession::class,
+    \Illuminate\View\Middleware\ShareErrorsFromSession::class,
+    \App\Http\Middleware\Authenticate::class,
+    // ...
+];
+                          </code></pre>
+                      </div>
+                      <div class="mt-2 text-sm text-gray-600">
+                        Defines execution order regardless of registration order.
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Security Best Practices -->
+                  <div class="bg-red-50 p-4 rounded-lg">
+                    <h4 class="font-semibold text-red-800 mb-2">Security Best Practices</h4>
+                    <ul class="list-disc pl-6 text-red-800 space-y-2">
+                      <li>Always validate/sanitize input in middleware</li>
+                      <li>Use CSRF middleware for stateful forms</li>
+                      <li>Implement rate limiting for public APIs</li>
+                      <li>Sanitize output to prevent XSS attacks</li>
+                      <li>Use HTTPS middleware in production</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+            <!-- Middleware Testing -->
+            <div>
+              <h3 class="text-2xl font-semibold text-gray-800 mb-4">
+                8.7 Testing Middleware
+              </h3>
+              <div class="bg-gray-50 rounded-lg border border-gray-200">
+                <div class="space-y-6">
+                  <pre class="rounded-lg overflow-hidden text-sm"><code class="language-php">
+// Tests/Feature/MiddlewareTest.php
+public function test_admin_middleware_denies_regular_users()
+{
+    $user = User::factory()->create(['is_admin' => false]);
+    
+    $response = $this->actingAs($user)
+        ->get('/admin/dashboard');
+    
+    $response->assertStatus(403);
+}
+
+public function test_admin_middleware_allows_admins()
+{
+    $admin = User::factory()->create(['is_admin' => true]);
+    
+    $response = $this->actingAs($admin)
+        ->get('/admin/dashboard');
+    
+    $response->assertOk();
+}
+                    </code></pre>
+                  <div class="bg-green-50 p-4 rounded-lg">
+                    <h4 class="font-semibold text-green-800 mb-2">
+                      Testing Strategies
+                    </h4>
+                    <ul class="list-disc pl-6 text-green-800 space-y-2">
+                      <li>Test both allowed and denied scenarios</li>
+                      <li>Verify correct HTTP status codes</li>
+                      <li>Test middleware parameter handling</li>
+                      <li>Check session data when applicable</li>
+                      <li>Test across different user roles</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="authentication" class="py-8 mt-4">
+          <h2 class="text-3xl font-bold text-gray-800 mb-6">9. Authentication System</h2>
+
+          <div class="space-y-8">
+            <!-- Authentication Basics -->
+            <div>
+              <h3 class="text-2xl font-semibold text-gray-800 mb-4">9.1 Authentication Fundamentals</h3>
+              <div class="bg-gray-50 rounded-lg border border-gray-200">
+                <p class="text-gray-600 mb-4">
+                  Laravel's authentication system provides a complete implementation for user login, registration,
+                  password reset, and email verification. It utilizes guards and providers to separate authentication
+                  logic from business logic while maintaining security best practices.
+                </p>
+
+                <div class=" ">
+
+                  <h4 class="font-semibold text-purple-600 mb-3">Core Components</h4>
+                  <ul class="list-disc pl-6 text-gray-600 space-y-2">
+                    <li><strong>Guards:</strong> Define how users are authenticated (session, token)</li>
+                    <li><strong>Providers:</strong> Specify user source (database, LDAP)</li>
+                    <li><strong>Drivers:</strong> Implement authentication logic (session, sanctum)</li>
+                    <li><strong>Middleware:</strong> Protect routes (auth, verified)</li>
+                    <li><strong>Scaffolding:</strong> Pre-built UI (Breeze, Jetstream)</li>
+                  </ul>
+
+
+                  <div class="p-4 bg-white rounded-lg shadow-sm">
+                    <h4 class="font-semibold text-purple-600 mb-3">Configuration</h4>
+                    <div class="rounded-lg shadow-md bg-gray-900 text-white overflow-hidden">
+                      <div class="overflow-x-auto">
+                        <pre class="text-sm p-4 whitespace-pre max-w-full"><code class="language-php">
+// config/auth.php
+'guards' => [
+    'web' => [
+        'driver' => 'session',
+        'provider' => 'users',
+    ],
+    'api' => [
+        'driver' => 'sanctum',
+        'provider' => 'users',
+    ],
+],
+
+'providers' => [
+    'users' => [
+        'driver' => 'eloquent',
+        'model' => App\Models\User::class,
+    ],
+],
+                          </code></pre>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+
+                <div class="mt-4 bg-blue-50 p-4 rounded-lg">
+                  <h4 class="font-semibold text-blue-800 mb-2">Configuration Breakdown</h4>
+                  <ul class="list-disc pl-6 text-blue-800 space-y-2">
+                    <li><strong>Guards:</strong> Defines authentication method (session for browsers, token for APIs)</li>
+                    <li><strong>Providers:</strong> Determines user storage (Eloquent for database, Database for direct queries)</li>
+                    <li><strong>Drivers:</strong> Session (cookie-based), Sanctum (token-based), Passport (OAuth)</li>
+                    <li><strong>Multiple Guards:</strong> Allows different auth types in same application</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <!-- Manual Authentication -->
+            <div>
+              <h3 class="text-2xl font-semibold text-gray-800 mb-4">9.2 Manual Authentication</h3>
+              <div class="bg-gray-50 rounded-lg border border-gray-200">
+                <div class="">
+                  <div class="p-4 bg-white rounded-lg shadow-sm">
+                    <h4 class="font-semibold text-purple-600 mb-2">Login Implementation</h4>
+                    <div class="rounded-lg overflow-x-auto">
+                      <pre class="text-sm whitespace-pre-wrap"><code class="language-php">
+use Illuminate\Support\Facades\Auth;
+
+if (Auth::attempt([
+    'email' => $request->email,
+    'password' => $request->password,
+    'active' => 1
+], $request->remember)) {
+    $request->session()->regenerate();
+    return redirect()->intended('dashboard');
+}
+
+return back()->withErrors([
+    'email' => 'Invalid credentials',
+]);
+                        </code></pre>
+                    </div>
+                  </div>
+
+                  <div class="p-4 bg-white rounded-lg shadow-sm">
+                    <h4 class="font-semibold text-purple-600 mb-2">Logout Implementation</h4>
+                    <div class="rounded-lg overflow-x-auto">
+                      <pre class="text-sm whitespace-pre-wrap"><code class="language-php">
+Auth::logout();
+$request->session()->invalidate();
+$request->session()->regenerateToken();
+return redirect('/');
+                        </code></pre>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <!-- Middleware Protection -->
+            <div>
+              <h3 class="text-2xl font-semibold text-gray-800 mb-4">9.3 Route Protection</h3>
+              <div class="bg-gray-50 rounded-lg border border-gray-200">
+                <div class="">
+                  <div class="p-4 bg-white rounded-lg shadow-sm">
+                    <h4 class="font-semibold text-purple-600 mb-2">Basic Protection</h4>
+                    <pre class="rounded-lg overflow-hidden text-sm"><code class="language-php">
+// routes/web.php
+Route::get('/profile', function () {
+    // Only authenticated users
+})->middleware('auth');
+
+Route::get('/dashboard', function () {
+    // Verified email required
+})->middleware(['auth', 'verified']);
+                      </code></pre>
+                    <div class="mt-4 bg-blue-50 p-4 rounded-lg">
+                      <h4 class="font-semibold text-blue-800 mb-2">Middleware Stack</h4>
+                      <ul class="list-disc pl-6 text-blue-800 space-y-2">
+                        <li><code>auth</code>: Checks authentication status</li>
+                        <li><code>verified</code>: Requires verified email</li>
+                        <li><code>password.confirm</code>: Requires recent password confirmation</li>
+                        <li><code>can</code>: Authorization middleware</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div class="p-4 bg-white rounded-lg shadow-sm">
+                    <h4 class="font-semibold text-purple-600 mb-2">Advanced Guards</h4>
+                    <pre class="rounded-lg overflow-hidden text-sm"><code class="language-php">
+// Authenticate with different guard
+if (Auth::guard('admin')->attempt($credentials)) {
+    // Admin authentication
+}
+
+// Route protection with guard
+Route::get('/admin', function () {
+    // Admin dashboard
+})->middleware('auth:admin');
+                      </code></pre>
+                    <div class="mt-4 bg-red-50 p-4 rounded-lg">
+                      <h4 class="font-semibold text-red-800 mb-2">Security Considerations</h4>
+                      <ul class="list-disc pl-6 text-red-800 space-y-2">
+                        <li>Separate guards for different user types</li>
+                        <li>Different session configurations per guard</li>
+                        <li>Isolate user providers between guards</li>
+                        <li>Use separate middleware stacks</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Advanced Features -->
+            <div>
+              <h3 class="text-2xl font-semibold text-gray-800 mb-4">9.4 Advanced Features</h3>
+              <div class="bg-gray-50 rounded-lg border border-gray-200">
+                <div class="space-y-6">
+                  <div class="">
+                    <div class="p-4 bg-white rounded-lg shadow-sm">
+                      <h4 class="font-semibold text-purple-600 mb-2">Social Authentication</h4>
+                      <pre class="rounded-lg overflow-hidden text-sm"><code class="language-php">
+// Install Socialite
+composer require laravel/socialite
+
+// config/services.php
+'github' => [
+    'client_id' => env('GITHUB_CLIENT_ID'),
+    'client_secret' => env('GITHUB_CLIENT_SECRET'),
+    'redirect' => '/auth/github/callback',
+],
+
+// Controller
+return Socialite::driver('github')->redirect();
+
+$user = Socialite::driver('github')->user();
+                        </code></pre>
+                      <div class="mt-4 bg-purple-50 p-4 rounded-lg">
+                        <h4 class="font-semibold text-purple-800 mb-2">OAuth Flow</h4>
+                        <ol class="list-decimal pl-6 text-purple-800 space-y-2">
+                          <li>User clicks "Login with GitHub"</li>
+                          <li>Redirect to provider's authorization page</li>
+                          <li>User grants permission</li>
+                          <li>Provider redirects back with authorization code</li>
+                          <li>Exchange code for access token</li>
+                          <li>Retrieve user details from provider</li>
+                        </ol>
+                      </div>
+                    </div>
+
+                    <div class="p-4 bg-white rounded-lg shadow-sm">
+                      <h4 class="font-semibold text-purple-600 mb-2">API Authentication</h4>
+                      <pre class="rounded-lg overflow-hidden text-sm"><code class="language-php">
+// Install Sanctum
+composer require laravel/sanctum
+
+// User model
+use Laravel\Sanctum\HasApiTokens;
+
+class User extends Model {
+    use HasApiTokens;
+}
+
+// Create token
+$token = $user->createToken('api-access', [
+    'server:update'
+])->plainTextToken;
+
+// Protect routes
+Route::middleware('auth:sanctum')->get('/user', 
+    function (Request $request) {
+        return $request->user();
+});
+                        </code></pre>
+                      <div class="mt-4 bg-green-50 p-4 rounded-lg">
+                        <h4 class="font-semibold text-green-800 mb-2">Token Types</h4>
+                        <ul class="list-disc pl-6 text-green-800 space-y-2">
+                          <li><strong>Plain Text Tokens:</strong> Displayed once on creation</li>
+                          <li><strong>Abilities:</strong> Define token permissions</li>
+                          <li><strong>Token Expiration:</strong> Configure in sanctum config</li>
+                          <li><strong>Refresh Tokens:</strong> Implement rotation logic</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="bg-yellow-50 p-4 rounded-lg">
+                    <h4 class="font-semibold text-yellow-800 mb-2">Two-Factor Authentication</h4>
+                    <pre class="rounded-lg overflow-hidden text-sm"><code class="language-php">
+// Install 2FA package
+composer require pragmarx/google2fa-laravel
+
+// Add to user model
+use PragmaRX\Google2FA\Google2FA;
+
+public function enableTwoFactorAuth() {
+    $this->two_factor_secret = encrypt(
+        (new Google2FA)->generateSecretKey()
+    );
+    $this->save();
+}
+
+// Middleware
+public function handle($request, $next) {
+    if ($request->user()->two_factor_enabled &&
+        !$request->session()->get('2fa_validated')) {
+        return redirect()->route('2fa.validate');
+    }
+    return $next($request);
+}
+                      </code></pre>
+                    <div class="mt-4 bg-red-50 p-4 rounded-lg">
+                      <h4 class="font-semibold text-red-800 mb-2">Security Best Practices</h4>
+                      <ul class="list-disc pl-6 text-red-800 space-y-2">
+                        <li>Store secrets encrypted</li>
+                        <li>Provide backup codes</li>
+                        <li>Allow recovery email/phone</li>
+                        <li>Rate limit attempts</li>
+                        <li>Log 2FA events</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Security Practices -->
+            <div>
+              <h3 class="text-2xl font-semibold text-gray-800 mb-4">9.5 Security Hardening</h3>
+              <div class="bg-gray-50 rounded-lg border border-gray-200">
+                <div class="">
+                  <div class="p-4 bg-white rounded-lg shadow-sm">
+                    <h4 class="font-semibold text-purple-600 mb-2">Password Complexity</h4>
+                    <pre class="rounded-lg overflow-hidden text-sm"><code class="language-php">
+// App\Providers\AuthServiceProvider
+Password::defaults(function () {
+    return Password::min(12)
+        ->letters()
+        ->mixedCase()
+        ->numbers()
+        ->symbols()
+        ->uncompromised();
+});
+
+// Validation
+$request->validate([
+    'password' => ['required', 'confirmed', Password::defaults()],
+]);
+                      </code></pre>
+                    <div class="mt-4 bg-blue-50 p-4 rounded-lg">
+                      <h4 class="font-semibold text-blue-800 mb-2">Security Measures</h4>
+                      <ul class="list-disc pl-6 text-blue-800 space-y-2">
+                        <li>Minimum 12 characters</li>
+                        <li>Check against breached passwords</li>
+                        <li>Automatic complexity feedback</li>
+                        <li>Custom rule integration</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div class="p-4 bg-white rounded-lg shadow-sm">
+                    <h4 class="font-semibold text-purple-600 mb-2">Session Management</h4>
+                    <pre class="rounded-lg overflow-hidden text-sm"><code class="language-php">
+// config/session.php
+'lifetime' => 120, // Minutes
+'expire_on_close' => false,
+'encrypt' => true,
+'same_site' => 'lax',
+'http_only' => true,
+'secure' => env('SESSION_SECURE_COOKIE', true),
+
+// Invalidate other sessions
+Auth::logoutOtherDevices($currentPassword);
+                      </code></pre>
+                    <div class="mt-4 bg-purple-50 p-4 rounded-lg">
+                      <h4 class="font-semibold text-purple-800 mb-2">Session Security</h4>
+                      <ul class="list-disc pl-6 text-purple-800 space-y-2">
+                        <li>Use secure, HTTP-only cookies</li>
+                        <li>Implement SameSite cookie policy</li>
+                        <li>Regularly rotate session keys</li>
+                        <li>Store sessions in encrypted database</li>
+                        <li>Monitor active sessions</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Testing Authentication -->
+            <div>
+              <h3 class="text-2xl font-semibold text-gray-800 mb-4">9.6 Testing Auth System</h3>
+              <div class="bg-gray-50 rounded-lg border border-gray-200">
+                <pre class="rounded-lg overflow-hidden text-sm"><code class="language-php">
+// Feature test example
+public function test_login_screen_returns_success()
+{
+    $response = $this->get('/login');
+    $response->assertStatus(200);
+}
+
+public function test_users_can_authenticate()
+{
+    $user = User::factory()->create();
+
+    $response = $this->post('/login', [
+        'email' => $user->email,
+        'password' => 'password',
+    ]);
+
+    $this->assertAuthenticated();
+    $response->assertRedirect('/dashboard');
+}
+
+public function test_users_can_not_authenticate_with_invalid_password()
+{
+    $user = User::factory()->create();
+
+    $this->post('/login', [
+        'email' => $user->email,
+        'password' => 'wrong-password',
+    ]);
+
+    $this->assertGuest();
+}
+                  </code></pre>
+                <div class="mt-4 bg-green-50 p-4 rounded-lg">
+                  <h4 class="font-semibold text-green-800 mb-2">Testing Strategies</h4>
+                  <ul class="list-disc pl-6 text-green-800 space-y-2">
+                    <li>Test all authentication states (guest, user, admin)</li>
+                    <li>Verify session data after login/logout</li>
+                    <li>Test rate limiting functionality</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <h3 class="text-2xl font-semibold text-gray-800 mb-4">9.7 Advanced Authentication</h3>
+              <div class="bg-gray-50 rounded-lg border border-gray-200">
+                <div class="">
+                  <div class="p-4 bg-white rounded-lg shadow-sm">
+                    <h4 class="font-semibold text-purple-600 mb-2">Multi-Auth System</h4>
+                    <pre class="rounded-lg overflow-hidden text-sm"><code class="language-php">
+// config/auth.php
+'guards' => [
+'admin' => [
+    'driver' => 'session',
+    'provider' => 'admins',
+],
+'user' => [
+    'driver' => 'session',
+    'provider' => 'users',
+],
+],
+
+'providers' => [
+'admins' => [
+    'driver' => 'eloquent',
+    'model' => App\Models\Admin::class,
+],
+'users' => [
+    'driver' => 'eloquent',
+    'model' => App\Models\User::class,
+],
+],
+                      </code></pre>
+                    <div class="mt-2 text-sm text-gray-600">
+                      Separate authentication systems for different user types
+                    </div>
+                  </div>
+
+                  <div class="p-4 bg-white rounded-lg shadow-sm">
+                    <h4 class="font-semibold text-purple-600 mb-2">Role-Based Access</h4>
+                    <pre class="rounded-lg overflow-hidden text-sm"><code class="language-php">
+// User model
+public function isAdmin()
+{
+return $this->role === 'admin';
+}
+
+// Middleware
+public function handle($request, $next)
+{
+if (auth()->check() && auth()->user()->isAdmin()) {
+    return $next($request);
+}
+abort(403);
+}
+
+// Blade directives
+@admin
+<!-- Admin-only content -->
+@endadmin
+                      </code></pre>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </section>
+
+        <section id="validation" class="py-8 mt-4">
+          <h2 class="text-3xl font-bold text-gray-800 mb-6 px-4 sm:px-0">10. Validation System</h2>
+
+          <div class="space-y-8 px-4 sm:px-0">
+            <!-- Validation Basics -->
+            <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+              <h3 class="text-2xl font-semibold text-gray-800 mb-4">10.1 Validation Fundamentals</h3>
+              <div class="space-y-6">
+                <p class="text-gray-600">
+                  Laravel provides multiple approaches to validate incoming data. Validation ensures that data meets specific criteria
+                  before being processed by your application, protecting against malformed or malicious input.
+                </p>
+
+                <div class="">
+                  <div class="bg-white p-4 rounded-lg shadow-sm">
+                    <h4 class="font-semibold text-purple-600 mb-3">Key Concepts</h4>
+                    <ul class="list-disc pl-6 text-gray-600 space-y-2">
+                      <li><strong>Validation Rules:</strong> Predefined constraints for input data</li>
+                      <li><strong>Form Requests:</strong> Dedicated validation classes for complex scenarios</li>
+                      <li><strong>Error Messages:</strong> Customizable feedback for failed validations</li>
+                      <li><strong>Conditional Logic:</strong> Rules that apply based on other inputs</li>
+                      <li><strong>Custom Rules:</strong> Application-specific validation logic</li>
+                    </ul>
+                  </div>
+
+                  <div class="bg-white p-4 rounded-lg shadow-sm">
+                    <h4 class="font-semibold text-purple-600 mb-3">Basic Validation</h4>
+                    <pre class="rounded-lg overflow-hidden text-sm"><code class="language-php">
+$validated = $request->validate([
+    'title' => 'required|string|max:255',
+    'content' => 'required|string|min:100',
+    'publish_date' => 'nullable|date',
+    'email' => 'required|email|unique:users',
+]);
+                      </code></pre>
+                    <div class="mt-3 bg-blue-50 p-3 rounded-lg">
+                      <p class="text-blue-800 text-sm"><strong>Explanation:</strong> This validates that:
+                      <ul class="list-disc pl-6 mt-1">
+                        <li>Title is required, a string, and ≤255 chars</li>
+                        <li>Content has at least 100 characters</li>
+                        <li>Publish date is optional but must be valid date</li>
+                        <li>Email is unique in users table</li>
+                      </ul>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Form Request Validation -->
+            <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+              <h3 class="text-2xl font-semibold text-gray-800 mb-4">10.2 Form Request Validation</h3>
+              <div class="space-y-6">
+                <div class="">
+                  <div class="bg-white p-4 rounded-lg shadow-sm">
+                    <h4 class="font-semibold text-purple-600 mb-2">Creating Form Requests</h4>
+                    <pre class="rounded-lg overflow-hidden text-sm"><code class="language-bash">
+php artisan make:request StorePostRequest
+                      </code></pre>
+                    <div class="mt-3 bg-yellow-50 p-3 rounded-lg">
+                      <p class="text-yellow-800 text-sm"><strong>Best Practice:</strong> Use form requests when:
+                      <ul class="list-disc pl-6 mt-1">
+                        <li>Validation logic is complex</li>
+                        <li>Authorization checks are needed</li>
+                        <li>Reusing validation across multiple routes</li>
+                      </ul>
+                      </p>
+                    </div>
+                  </div>
+
+                  <div class="bg-white p-4 rounded-lg shadow-sm">
+                    <h4 class="font-semibold text-purple-600 mb-2">Form Request Structure</h4>
+                    <pre class="rounded-lg overflow-hidden text-sm"><code class="language-php">
+class StorePostRequest extends FormRequest
+{
+    public function authorize()
+    {
+        return $this->user()->can('create', Post::class);
+    }
+
+    public function rules()
+    {
+        return [
+            'title' => 'required|unique:posts|max:255',
+            'body' => 'required',
+            'category_id' => 'exists:categories,id'
+        ];
+    }
+}
+                      </code></pre>
+                  </div>
+                </div>
+
+                <div class="bg-green-50 p-4 rounded-lg">
+                  <h4 class="font-semibold text-green-800 mb-2">Key Methods</h4>
+                  <div class="grid gap-4 md:grid-cols-2">
+                    <div class="bg-white p-3 rounded shadow-sm">
+                      <code>authorize()</code>
+                      <p class="text-sm text-gray-600 mt-1">Determines if user is permitted to make request. Returns boolean.</p>
+                    </div>
+                    <div class="bg-white p-3 rounded shadow-sm">
+                      <code>rules()</code>
+                      <p class="text-sm text-gray-600 mt-1">Returns array of validation rules for request parameters</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Custom Validation -->
+            <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+              <h3 class="text-2xl font-semibold text-gray-800 mb-4">10.3 Custom Validation Rules</h3>
+              <div class="space-y-6">
+                <div class="">
+                  <div class="bg-white p-4 rounded-lg shadow-sm">
+                    <h4 class="font-semibold text-purple-600 mb-2">Rule Object</h4>
+                    <pre class="rounded-lg overflow-hidden text-sm"><code class="language-php">
+php artisan make:rule ValidServerLocation
+
+class ValidServerLocation implements Rule
+{
+    public function passes($attribute, $value)
+    {
+        return in_array(strtolower($value), [
+            'us-east', 'eu-west', 'asia-south'
+        ]);
+    }
+
+    public function message()
+    {
+        return 'Invalid server location selected';
+    }
+}
+                      </code></pre>
+                  </div>
+
+                  <div class="bg-white p-4 rounded-lg shadow-sm">
+                    <h4 class="font-semibold text-purple-600 mb-2">Using Custom Rules</h4>
+                    <pre class="rounded-lg overflow-hidden text-sm"><code class="language-php">
+use App\Rules\ValidServerLocation;
+
+$request->validate([
+    'location' => [
+        'required',
+        new ValidServerLocation
+    ],
+    // ...
+]);
+                      </code></pre>
+                    <div class="mt-3 bg-blue-50 p-3 rounded-lg">
+                      <p class="text-blue-800 text-sm"><strong>When to Use:</strong>
+                      <ul class="list-disc pl-6 mt-1">
+                        <li>Complex validation requiring external API calls</li>
+                        <li>Reusable validation logic across multiple forms</li>
+                        <li>Validation requiring database transactions</li>
+                      </ul>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Error Handling -->
+            <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+              <h3 class="text-2xl font-semibold text-gray-800 mb-4">10.4 Error Handling</h3>
+              <div class="space-y-6">
+                <div class="">
+                  <div class="bg-white p-4 rounded-lg shadow-sm">
+                    <h4 class="font-semibold text-purple-600 mb-2">Displaying Errors</h4>
+                    <pre class="rounded-lg overflow-hidden text-sm"><code class="language-php">
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
+<input id="title" type="text" 
+  class="@error('title') border-red-500 @enderror">
+@error('title')
+    <div class="text-red-500 text-sm">{{ $message }}</div>
+@enderror
+                      </code></pre>
+                  </div>
+
+                  <div class="bg-white p-4 rounded-lg shadow-sm">
+                    <h4 class="font-semibold text-purple-600 mb-2">Custom Messages</h4>
+                    <pre class="rounded-lg overflow-hidden text-sm"><code class="language-php">
+$messages = [
+    'email.required' => 'We need to know your email address!',
+    'password.min' => 'Your password is too short!',
+];
+
+$request->validate([
+    'email' => 'required|email',
+    'password' => 'required|min:8',
+], $messages);
+                      </code></pre>
+                    <div class="mt-3 bg-yellow-50 p-3 rounded-lg">
+                      <p class="text-yellow-800 text-sm"><strong>Best Practice:</strong>
+                      <ul class="list-disc pl-6 mt-1">
+                        <li>Keep messages user-friendly</li>
+                        <li>Avoid technical jargon</li>
+                        <li>Use consistent tone</li>
+                        <li>Consider localization</li>
+                      </ul>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Advanced Validation -->
+            <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+              <h3 class="text-2xl font-semibold text-gray-800 mb-4">10.5 Advanced Techniques</h3>
+              <div class="space-y-6">
+                <div class="">
+                  <div class="bg-white p-4 rounded-lg shadow-sm">
+                    <h4 class="font-semibold text-purple-600 mb-2">Array Validation</h4>
+                    <pre class="rounded-lg overflow-hidden text-sm"><code class="language-php">
+$request->validate([
+    'tags' => 'required|array|max:5',
+    'tags.*' => 'required|string|distinct|min:3',
+    'matrix' => [
+        'required',
+        'array',
+        'size:3',
+    ],
+    'matrix.*' => [
+        'required',
+        'array',
+        'size:3',
+    ],
+    'matrix.*.*' => 'integer|min:0|max:100',
+]);
+                      </code></pre>
+                    <div class="mt-3 bg-blue-50 p-3 rounded-lg">
+                      <p class="text-blue-800 text-sm">Validates:
+                      <ul class="list-disc pl-6 mt-1">
+                        <li>Maximum 5 tags</li>
+                        <li>Each tag is unique and ≥3 characters</li>
+                        <li>3x3 matrix of integers between 0-100</li>
+                      </ul>
+                      </p>
+                    </div>
+                  </div>
+
+                  <div class="bg-white p-4 rounded-lg shadow-sm">
+                    <h4 class="font-semibold text-purple-600 mb-2">Conditional Rules</h4>
+                    <pre class="rounded-lg overflow-hidden text-sm"><code class="language-php">
+$request->validate([
+    'discount' => [
+        'required_if:has_discount,true',
+        'numeric',
+        'min:0',
+        'max:100',
+        function ($attribute, $value, $fail) {
+            if ($value > 50 && !auth()->user()->isPremium()) {
+                $fail('Premium users only for >50% discount');
+            }
+        },
+    ],
+]);
+                      </code></pre>
+                    <div class="mt-3 bg-green-50 p-3 rounded-lg">
+                      <p class="text-green-800 text-sm">This validation:
+                      <ul class="list-disc pl-6 mt-1">
+                        <li>Requires discount when has_discount is true</li>
+                        <li>Validates discount between 0-100</li>
+                        <li>Restricts >50% discounts to premium users</li>
+                      </ul>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="cache" class="py-8 mt-4 px-4 sm:px-0">
+          <h2 class="text-3xl font-bold text-gray-800 mb-6">11. Cache System</h2>
+
+          <div class="space-y-8">
+            <!-- Cache Fundamentals -->
+            <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+              <h3 class="text-2xl font-semibold text-gray-800 mb-4">11.1 Cache Fundamentals</h3>
+              <div class="space-y-6">
+                <p class="text-gray-600">
+                  Laravel's cache system provides a unified API for various caching backends. It helps improve application performance
+                  by storing frequently accessed data in fast storage, reducing database load and computation time.
+                </p>
+
+                <div class="">
+                  <div class="bg-white p-4 rounded-lg shadow-sm">
+                    <h4 class="font-semibold text-purple-600 mb-3">Key Concepts</h4>
+                    <ul class="list-disc pl-6 text-gray-600 space-y-2">
+                      <li><strong>Drivers:</strong> Supported backends (file, redis, memcached, database)</li>
+                      <li><strong>TTL:</strong> Time-to-Live (cache expiration time)</li>
+                      <li><strong>Tags:</strong> Categorize related cache items</li>
+                      <li><strong>Atomic Locks:</strong> Prevent cache stampedes</li>
+                      <li><strong>Cache Levels:</strong> Object, query, and fragment caching</li>
+                    </ul>
+                  </div>
+
+                  <div class="bg-white p-4 rounded-lg shadow-sm">
+                    <h4 class="font-semibold text-purple-600 mb-3">Configuration</h4>
+                    <pre class="rounded-lg overflow-hidden text-sm"><code class="language-php">
+// config/cache.php
+'default' => env('CACHE_DRIVER', 'file'),
+
+'stores' => [
+    'file' => [
+        'driver' => 'file',
+        'path' => storage_path('framework/cache/data'),
+    ],
+    'redis' => [
+        'driver' => 'redis',
+        'connection' => 'cache',
+    ],
+],
+                      </code></pre>
+                    <div class="mt-3 bg-blue-50 p-3 rounded-lg">
+                      <p class="text-blue-800 text-sm"><strong>Explanation:</strong> This configuration:
+                      <ul class="list-disc pl-6 mt-1">
+                        <li>Uses file caching by default</li>
+                        <li>Stores file caches in storage/framework/cache/data</li>
+                        <li>Configures Redis with separate connection</li>
+                        <li>Allows environment-based driver selection</li>
+                      </ul>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Basic Cache Usage -->
+            <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+              <h3 class="text-2xl font-semibold text-gray-800 mb-4">11.2 Basic Cache Operations</h3>
+              <div class="">
+                <div class="bg-white p-4 rounded-lg shadow-sm">
+                  <h4 class="font-semibold text-purple-600 mb-2">Storing Items</h4>
+                  <pre class="rounded-lg overflow-hidden text-sm"><code class="language-php">
+// Store for 30 minutes
+Cache::put('user:'.$userId, $user, now()->addMinutes(30));
+
+// Store permanently
+Cache::forever('config:site_settings', $settings);
+
+// Store if not exists
+Cache::add('unique:key', $value, $seconds);
+                    </code></pre>
+                  <div class="mt-3 bg-yellow-50 p-3 rounded-lg">
+                    <p class="text-yellow-800 text-sm"><strong>Best Practices:</strong>
+                    <ul class="list-disc pl-6 mt-1">
+                      <li>Use descriptive key names</li>
+                      <li>Set reasonable TTL values</li>
+                      <li>Use versioned keys for easy invalidation</li>
+                    </ul>
+                    </p>
+                  </div>
+                </div>
+
+                <div class="bg-white p-4 rounded-lg shadow-sm">
+                  <h4 class="font-semibold text-purple-600 mb-2">Retrieving Items</h4>
+                  <pre class="rounded-lg overflow-hidden text-sm"><code class="language-php">
+// Get value or default
+$value = Cache::get('key', 'default');
+
+// Get and delete
+$value = Cache::pull('key');
+
+// Check existence
+if (Cache::has('key')) {
+    // ...
+}
+                    </code></pre>
+                  <div class="mt-3 bg-green-50 p-3 rounded-lg">
+                    <p class="text-green-800 text-sm"><strong>Performance Tips:</strong>
+                    <ul class="list-disc pl-6 mt-1">
+                      <li>Avoid unnecessary has() checks - use get() with default</li>
+                      <li>Use remember() for common cache-aside pattern</li>
+                      <li>Batch get multiple keys when possible</li>
+                    </ul>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Cache Tags -->
+            <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+              <h3 class="text-2xl font-semibold text-gray-800 mb-4">11.3 Cache Tags</h3>
+              <div class="">
+                <div class="bg-white p-4 rounded-lg shadow-sm">
+                  <h4 class="font-semibold text-purple-600 mb-2">Using Tags</h4>
+                  <pre class="rounded-lg overflow-hidden text-sm"><code class="language-php">
+// Store with tags
+Cache::tags(['posts', 'users'])
+      ->put('post:'.$id, $post, $minutes);
+
+// Retrieve tagged items
+$post = Cache::tags(['posts', 'users'])
+              ->get('post:'.$id);
+
+// Clear all posts cache
+Cache::tags('posts')->flush();
+                    </code></pre>
+                  <div class="mt-3 bg-blue-50 p-3 rounded-lg">
+                    <p class="text-blue-800 text-sm"><strong>Use Cases:</strong>
+                    <ul class="list-disc pl-6 mt-1">
+                      <li>Group related cache items (e.g., user posts)</li>
+                      <li>Batch invalidation on data updates</li>
+                      <li>Organize cache by business domains</li>
+                    </ul>
+                    </p>
+                  </div>
+                </div>
+
+                <div class="bg-white p-4 rounded-lg shadow-sm">
+                  <h4 class="font-semibold text-purple-600 mb-2">Tag Limitations</h4>
+                  <div class="space-y-4">
+                    <div class="bg-red-50 p-3 rounded-lg">
+                      <p class="text-red-800 text-sm">⚠️ Not all drivers support tags:
+                      <ul class="list-disc pl-6 mt-1">
+                        <li>Supported: Redis, Memcached</li>
+                        <li>Not Supported: File, Database</li>
+                      </ul>
+                      </p>
+                    </div>
+                    <pre class="rounded-lg overflow-hidden text-sm"><code class="language-php">
+if (Cache::getStore() instanceof TaggableStore) {
+    // Safe to use tags
+}
+                      </code></pre>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Advanced Patterns -->
+            <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+              <h3 class="text-2xl font-semibold text-gray-800 mb-4">11.4 Advanced Caching Patterns</h3>
+              <div class="">
+                <div class="bg-white p-4 rounded-lg shadow-sm">
+                  <h4 class="font-semibold text-purple-600 mb-2">Atomic Locks</h4>
+                  <pre class="rounded-lg overflow-hidden text-sm"><code class="language-php">
+$lock = Cache::lock('resource:update', 10);
+
+if ($lock->get()) {
+    try {
+        // Update shared resource
+    } finally {
+        $lock->release();
+    }
+}
+                    </code></pre>
+                  <div class="mt-3 bg-yellow-50 p-3 rounded-lg">
+                    <p class="text-yellow-800 text-sm"><strong>Prevents:</strong>
+                    <ul class="list-disc pl-6 mt-1">
+                      <li>Cache stampedes</li>
+                      <li>Race conditions</li>
+                      <li>Duplicate processing</li>
+                    </ul>
+                    </p>
+                  </div>
+                </div>
+
+                <div class="bg-white p-4 rounded-lg shadow-sm">
+                  <h4 class="font-semibold text-purple-600 mb-2">Multi-tier Caching</h4>
+                  <pre class="rounded-lg overflow-hidden text-sm"><code class="language-php">
+$value = Cache::remember('key', $ttl, function () {
+    // Check in-memory cache first
+    if ($memoryCache->has('key')) {
+        return $memoryCache->get('key');
+    }
+    
+    // Then check Redis
+    $value = Redis::get('key');
+    $memoryCache->put('key', $value);
+    
+    return $value;
+});
+                    </code></pre>
+                  <div class="mt-3 bg-green-50 p-3 rounded-lg">
+                    <p class="text-green-800 text-sm"><strong>Layers:</strong>
+                    <ol class="list-decimal pl-6 mt-1">
+                      <li>In-memory (APCu)</li>
+                      <li>Redis/Memcached</li>
+                      <li>Database</li>
+                    </ol>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Cache Invalidation -->
+            <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+              <h3 class="text-2xl font-semibold text-gray-800 mb-4">11.5 Cache Invalidation Strategies</h3>
+              <div class="">
+                <div class="bg-white p-4 rounded-lg shadow-sm">
+                  <h4 class="font-semibold text-purple-600 mb-2">Time-based</h4>
+                  <pre class="rounded-lg overflow-hidden text-sm"><code class="language-php">
+// Set TTL when storing
+Cache::put('key', $value, now()->addHours(2));
+
+// Set default TTL in config
+'ttl' => env('CACHE_TTL', 3600),
+                    </code></pre>
+                  <div class="mt-3 bg-blue-50 p-3 rounded-lg">
+                    <p class="text-blue-800 text-sm"><strong>Best For:</strong>
+                    <ul class="list-disc pl-6 mt-1">
+                      <li>Time-sensitive data (news feeds)</li>
+                      <li>Data with known update intervals</li>
+                      <li>Reduce stale data probability</li>
+                    </ul>
+                    </p>
+                  </div>
+                </div>
+
+                <div class="bg-white p-4 rounded-lg shadow-sm">
+                  <h4 class="font-semibold text-purple-600 mb-2">Event-based</h4>
+                  <pre class="rounded-lg overflow-hidden text-sm"><code class="language-php">
+// Model event listener
+Post::updated(function ($post) {
+    Cache::forget('post:'.$post->id);
+    Cache::tags('user:'.$post->user_id)->flush();
+});
+                    </code></pre>
+                  <div class="mt-3 bg-red-50 p-3 rounded-lg">
+                    <p class="text-red-800 text-sm"><strong>Warning:</strong>
+                    <ul class="list-disc pl-6 mt-1">
+                      <li>Avoid over-invalidation</li>
+                      <li>Use queued events for bulk operations</li>
+                      <li>Test invalidation logic thoroughly</li>
+                    </ul>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+
+          </div>
+        </section>
+
+        <section id="api" class="py-8 mt-4 px-4 sm:px-0">
+          <h2 class="text-3xl font-bold text-gray-800 mb-6">12. API Development</h2>
+
+          <div class="space-y-8">
+            <!-- RESTful Basics -->
+            <div class="bg-gray-50 rounded-lg border border-gray-200">
+              <h3 class="text-2xl font-semibold text-gray-800 mb-4">12.1 RESTful API Fundamentals</h3>
+              <div class="">
+                <div class="bg-white p-4 rounded-lg shadow-sm">
+                  <h4 class="font-semibold text-purple-600 mb-2">Core Principles</h4>
+                  <ul class="list-disc pl-6 text-gray-600 space-y-2">
+                    <li><strong>Stateless:</strong> Each request contains all necessary information</li>
+                    <li><strong>Resource-Based:</strong> Focus on nouns (resources) not verbs</li>
+                    <li><strong>HTTP Methods:</strong> GET, POST, PUT/PATCH, DELETE</li>
+                    <li><strong>Status Codes:</strong> Proper HTTP responses (200, 201, 404, etc.)</li>
+                    <li><strong>Versioning:</strong> Maintain multiple API versions</li>
+                  </ul>
+                </div>
+
+                <div class="bg-white p-4 rounded-lg shadow-sm">
+                  <h4 class="font-semibold text-purple-600 mb-2">Basic Endpoint</h4>
+                  <pre class="rounded-lg overflow-hidden text-sm"><code class="language-php">
+// routes/api.php
+Route::get('/posts', function() {
+return Post::paginate(15);
+});
+
+Route::post('/posts', function(Request $request) {
+return Post::create($request->validated());
+});
+                    </code></pre>
+                  <div class="mt-3 bg-blue-50 p-3 rounded-lg">
+                    <p class="text-blue-800 text-sm"><strong>Features:</strong>
+                    <ul class="list-disc pl-6 mt-1">
+                      <li>Automatic JSON responses</li>
+                      <li>Built-in pagination</li>
+                      <li>CSRF protection excluded by default</li>
+                      <li>Route prefix: /api</li>
+                    </ul>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- API Authentication -->
+            <div class="bg-gray-50 rounded-lg border border-gray-200">
+              <h3 class="text-2xl font-semibold text-gray-800 mb-4">12.2 API Authentication (Sanctum)</h3>
+              <div class="">
+                <div class="bg-white p-4 rounded-lg shadow-sm">
+                  <h4 class="font-semibold text-purple-600 mb-2">Token Creation</h4>
+                  <pre class="rounded-lg overflow-hidden text-sm"><code class="language-php">
+// LoginController
+public function login(Request $request)
+{
+$request->validate([
+    'email' => 'required|email',
+    'password' => 'required',
+    'device_name' => 'required',
+]);
+
+$user = User::where('email', $request->email)->first();
+
+if (!$user || !Hash::check($request->password, $user->password)) {
+    return response()->json([
+        'error' => 'Invalid credentials'
+    ], 401);
+}
+
+return response()->json([
+    'token' => $user->createToken($request->device_name)->plainTextToken
+]);
+}
+                    </code></pre>
+                  <div class="mt-3 bg-yellow-50 p-3 rounded-lg">
+                    <p class="text-yellow-800 text-sm"><strong>Security Best Practices:</strong>
+                    <ul class="list-disc pl-6 mt-1">
+                      <li>Use HTTPS in production</li>
+                      <li>Implement token expiration</li>
+                      <li>Store tokens securely (frontend)</li>
+                      <li>Rate limit authentication endpoints</li>
+                    </ul>
+                    </p>
+                  </div>
+                </div>
+
+                <div class="bg-white p-4 rounded-lg shadow-sm">
+                  <h4 class="font-semibold text-purple-600 mb-2">Protected Routes</h4>
+                  <pre class="rounded-lg overflow-hidden text-sm"><code class="language-php">
+Route::middleware('auth:sanctum')->group(function () {
+Route::get('/user', function (Request $request) {
+    return $request->user();
+});
+
+Route::apiResource('posts', PostController::class);
+});
+                    </code></pre>
+                  <div class="mt-3 bg-green-50 p-3 rounded-lg">
+                    <p class="text-green-800 text-sm"><strong>Headers Required:</strong>
+                    <pre class="text-sm bg-white p-2 rounded">Authorization: Bearer {token}</pre>
+                    <ul class="list-disc pl-6 mt-2">
+                      <li>Tokens stored hashed in database</li>
+                      <li>Revoke tokens with $user->tokens()->delete()</li>
+                      <li>Token abilities available for granular access</li>
+                    </ul>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- API Resources -->
+            <div class="bg-gray-50 rounded-lg border border-gray-200">
+              <h3 class="text-2xl font-semibold text-gray-800 mb-4">12.3 API Resources</h3>
+              <div class="">
+                <div class="bg-white p-4 rounded-lg shadow-sm">
+                  <h4 class="font-semibold text-purple-600 mb-2">Creating Resources</h4>
+                  <pre class="rounded-lg overflow-hidden text-sm"><code class="language-bash">
+php artisan make:resource PostResource
+                    </code></pre>
+                  <pre class="rounded-lg overflow-hidden text-sm mt-4"><code class="language-php">
+class PostResource extends JsonResource
+{
+public function toArray($request)
+{
+    return [
+        'id' => $this->id,
+        'title' => $this->title,
+        'author' => new UserResource($this->user),
+        'created_at' => $this->created_at->toIso8601String(),
+        'links' => [
+            'self' => route('posts.show', $this->id)
+        ]
+    ];
+}
+}
+                    </code></pre>
+                </div>
+
+                <div class="bg-white p-4 rounded-lg shadow-sm">
+                  <h4 class="font-semibold text-purple-600 mb-2">Using Resources</h4>
+                  <pre class="rounded-lg overflow-hidden text-sm"><code class="language-php">
+// Single resource
+return new PostResource($post);
+
+// Collection
+return PostResource::collection($posts);
+
+// Pagination
+return new PostCollection(Post::paginate(20));
+                    </code></pre>
+                  <div class="mt-3 bg-blue-50 p-3 rounded-lg">
+                    <p class="text-blue-800 text-sm"><strong>Benefits:</strong>
+                    <ul class="list-disc pl-6 mt-1">
+                      <li>Consistent response format</li>
+                      <li>Data transformation layer</li>
+                      <li>Relationship handling</li>
+                      <li>Meta data inclusion</li>
+                    </ul>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Error Handling -->
+            <div class="bg-gray-50 rounded-lg border border-gray-200">
+              <h3 class="text-2xl font-semibold text-gray-800 mb-4">12.4 Error Handling</h3>
+              <div class="">
+                <div class="bg-white p-4 rounded-lg shadow-sm">
+                  <h4 class="font-semibold text-purple-600 mb-2">Standard Responses</h4>
+                  <pre class="rounded-lg overflow-hidden text-sm"><code class="language-php">
+return response()->json([
+'error' => [
+    'code' => 404,
+    'message' => 'Resource not found',
+    'details' => 'Post with id 25 does not exist',
+    'documentation' => url('/docs/errors/404')
+]
+], 404);
+                    </code></pre>
+                </div>
+
+                <div class="bg-white p-4 rounded-lg shadow-sm">
+                  <h4 class="font-semibold text-purple-600 mb-2">Global Exception Handler</h4>
+                  <pre class="rounded-lg overflow-hidden text-sm"><code class="language-php">
+// app/Exceptions/Handler.php
+public function render($request, Exception $exception)
+{
+if ($request->expectsJson()) {
+    return response()->json([
+        'error' => [
+            'code' => $exception->getCode(),
+            'message' => $exception->getMessage()
+        ]
+    ], 500);
+}
+return parent::render($request, $exception);
+}
+                    </code></pre>
+                  <div class="mt-3 bg-red-50 p-3 rounded-lg">
+                    <p class="text-red-800 text-sm"><strong>Important:</strong>
+                    <ul class="list-disc pl-6 mt-1">
+                      <li>Never expose sensitive data</li>
+                      <li>Log all errors</li>
+                      <li>Use standardized error codes</li>
+                    </ul>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- API Documentation -->
+            <div class="bg-gray-50 rounded-lg border border-gray-200">
+              <h3 class="text-2xl font-semibold text-gray-800 mb-4">12.5 API Documentation</h3>
+              <div class="">
+                <div class="bg-white p-4 rounded-lg shadow-sm">
+                  <h4 class="font-semibold text-purple-600 mb-2">Swagger/OpenAPI</h4>
+                  <pre class="rounded-lg overflow-hidden text-sm"><code class="language-php">
+/**
+* @OA\Get(
+*     path="/api/posts",
+*     @OA\Response(
+*         response="200",
+*         description="List of blog posts",
+*         @OA\JsonContent(
+*             type="array",
+*             @OA\Items(ref="#/components/schemas/Post")
+*         )
+*     )
+* )
+*/
+public function index()
+{
+return Post::all();
+}
+                    </code></pre>
+                </div>
+
+                <div class="bg-white p-4 rounded-lg shadow-sm">
+                  <h4 class="font-semibold text-purple-600 mb-2">Generated Documentation</h4>
+                  <div class="bg-blue-50 p-3 rounded-lg">
+                    <p class="text-blue-800 text-sm">Tools:
+                    <ul class="list-disc pl-6 mt-1">
+                      <li>Swagger UI</li>
+                      <li>Postman Collections</li>
+                      <li>Redoc</li>
+                      <li>Laravel API Documentation Generator</li>
+                    </ul>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+
+          </div>
+        </section>
+
+
+        <section id="events" class="py-8 mt-4 px-4 sm:px-0">
+          <h2 class="text-3xl font-bold text-gray-800 mb-6">13. Events & Listeners</h2>
+
+          <div class="space-y-8">
+            <!-- Event Fundamentals -->
+            <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+              <h3 class="text-2xl font-semibold text-gray-800 mb-4">13.1 Event Fundamentals</h3>
+              <div class="space-y-6">
+                <p class="text-gray-600">
+                  Events provide a simple observer implementation for decoupled application components. They allow application components
+                  to communicate without direct dependencies, following the publish-subscribe pattern.
+                </p>
+
+                <div class="flex flex-col gap-4">
+                  <div class="bg-white p-4 rounded-lg shadow-sm">
+                    <h4 class="font-semibold text-purple-600 mb-2">Key Concepts</h4>
+                    <ul class="list-disc pl-6 text-gray-600 space-y-2">
+                      <li><strong>Events:</strong> Class-based representations of occurrences in your application</li>
+                      <li><strong>Listeners:</strong> Classes that handle specific events</li>
+                      <li><strong>Dispatcher:</strong> Manages event distribution to listeners</li>
+                      <li><strong>Queued Listeners:</strong> Handle events asynchronously</li>
+                      <li><strong>Subscribers:</strong> Classes that handle multiple events</li>
+                    </ul>
+                  </div>
+
+                  <div class="bg-white p-4 rounded-lg shadow-sm">
+                    <h4 class="font-semibold text-purple-600 mb-2">Event Lifecycle</h4>
+                    <div class="text-sm text-gray-600 space-y-2">
+                      <div class="flex items-center gap-2">
+                        1. Event occurs in application
+                      </div>
+                      <div class="flex items-center gap-2 ml-4">
+                        2. Event is dispatched
+                      </div>
+                      <div class="flex items-center gap-2 ml-8">
+                        3. All registered listeners receive event
+                      </div>
+                      <div class="flex items-center gap-2 ml-12">
+                        4. Listeners process event sequentially
+                      </div>
+                      <div class="flex items-center gap-2">
+                        5. Application continues execution
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Creating Events -->
+            <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+              <h3 class="text-2xl font-semibold text-gray-800 mb-4">13.2 Creating Events</h3>
+              <div class="space-y-6">
+                <pre class="rounded-lg overflow-hidden text-sm"><code class="language-bash">
+php artisan make:event OrderShipped
+                  </code></pre>
+
+                <div class="bg-white p-4 rounded-lg shadow-sm">
+                  <pre class="rounded-lg overflow-hidden text-sm"><code class="language-php">
+namespace App\Events;
+
+use App\Models\Order;
+use Illuminate\Foundation\Events\Dispatchable;
+
+class OrderShipped
+{
+use Dispatchable;
+
+public $order;
+
+public function __construct(Order $order)
+{
+$this->order = $order;
+}
+}
+                    </code></pre>
+                  <div class="mt-4 bg-blue-50 p-4 rounded-lg">
+                    <h4 class="font-semibold text-blue-800 mb-2">Event Structure Explained</h4>
+                    <ul class="list-disc pl-6 text-blue-800 space-y-2">
+                      <li><code>Dispatchable</code> trait enables event dispatching</li>
+                      <li>Public properties are accessible to listeners</li>
+                      <li>Constructor receives event-related data</li>
+                      <li>Events are typically stored in app/Events</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Creating Listeners -->
+            <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+              <h3 class="text-2xl font-semibold text-gray-800 mb-4">13.3 Creating Listeners</h3>
+              <div class="space-y-6">
+                <pre class="rounded-lg overflow-hidden text-sm"><code class="language-bash">
+php artisan make:listener SendShipmentNotification --event=OrderShipped
+                  </code></pre>
+
+                <div class="bg-white p-4 rounded-lg shadow-sm">
+                  <pre class="rounded-lg overflow-hidden text-sm"><code class="language-php">
+namespace App\Listeners;
+
+use App\Events\OrderShipped;
+
+class SendShipmentNotification
+{
+public function handle(OrderShipped $event)
+{
+$event->order->user->notify(
+    new ShipmentNotification($event->order)
+);
+}
+}
+                    </code></pre>
+                  <div class="mt-4 bg-yellow-50 p-4 rounded-lg">
+                    <h4 class="font-semibold text-yellow-800 mb-2">Listener Best Practices</h4>
+                    <ul class="list-disc pl-6 text-yellow-800 space-y-2">
+                      <li>Keep listeners focused on single responsibility</li>
+                      <li>Use dependency injection for services</li>
+                      <li>Consider queueing long-running listeners</li>
+                      <li>Handle exceptions appropriately</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Registering Events -->
+            <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+              <h3 class="text-2xl font-semibold text-gray-800 mb-4">13.4 Registering Events</h3>
+              <div class="space-y-6">
+                <div class="bg-white p-4 rounded-lg shadow-sm">
+                  <pre class="rounded-lg overflow-hidden text-sm"><code class="language-php">
+// app/Providers/EventServiceProvider.php
+protected $listen = [
+OrderShipped::class => [
+SendShipmentNotification::class,
+UpdateInventory::class,
+],
+];
+                    </code></pre>
+                  <div class="mt-4 bg-green-50 p-4 rounded-lg">
+                    <h4 class="font-semibold text-green-800 mb-2">Registration Methods</h4>
+                    <ul class="list-disc pl-6 text-green-800 space-y-2">
+                      <li><strong>Direct Registration:</strong> Via EventServiceProvider</li>
+                      <li><strong>Auto-Discovery:</strong> Using event subscribers</li>
+                      <li><strong>Closure Listeners:</strong> For simple cases</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="bg-white p-4 rounded-lg shadow-sm">
+                  <pre class="rounded-lg overflow-hidden text-sm"><code class="language-php">
+// Closure-based listener example
+Event::listen(function (OrderShipped $event) {
+// Handle event
+});
+                    </code></pre>
+                </div>
+              </div>
+            </div>
+
+            <!-- Dispatching Events -->
+            <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+              <h3 class="text-2xl font-semibold text-gray-800 mb-4">13.5 Dispatching Events</h3>
+              <div class="space-y-6">
+                <div class="bg-white p-4 rounded-lg shadow-sm">
+                  <pre class="rounded-lg overflow-hidden text-sm"><code class="language-php">
+// From controller
+event(new OrderShipped($order));
+
+// Using helper
+OrderShipped::dispatch($order);
+
+// With condition
+OrderShipped::dispatchIf($order->isValid(), $order);
+                    </code></pre>
+                  <div class="mt-4 bg-blue-50 p-4 rounded-lg">
+                    <h4 class="font-semibold text-blue-800 mb-2">Dispatching Options</h4>
+                    <ul class="list-disc pl-6 text-blue-800 space-y-2">
+                      <li><code>event()</code> helper function</li>
+                      <li>Event's <code>dispatch()</code> method</li>
+                      <li>Conditional dispatching</li>
+                      <li>Queued dispatching</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Queued Listeners -->
+            <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+              <h3 class="text-2xl font-semibold text-gray-800 mb-4">13.6 Queued Listeners</h3>
+              <div class="space-y-6">
+                <div class="bg-white p-4 rounded-lg shadow-sm">
+                  <pre class="rounded-lg overflow-hidden text-sm"><code class="language-php">
+class SendShipmentNotification implements ShouldQueue
+{
+public $queue = 'notifications';
+
+public function handle(OrderShipped $event)
+{
+// Notification logic
+}
+
+public function failed(OrderShipped $event, $exception)
+{
+// Handle failure
+}
+}
+                    </code></pre>
+                  <div class="mt-4 bg-red-50 p-4 rounded-lg">
+                    <h4 class="font-semibold text-red-800 mb-2">Queue Considerations</h4>
+                    <ul class="list-disc pl-6 text-red-800 space-y-2">
+                      <li>Always implement failure handling</li>
+                      <li>Set appropriate queue connection/driver</li>
+                      <li>Monitor queue worker processes</li>
+                      <li>Use serialization-friendly event data</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Event Subscribers -->
+            <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+              <h3 class="text-2xl font-semibold text-gray-800 mb-4">13.7 Event Subscribers</h3>
+              <div class="space-y-6">
+                <div class="bg-white p-4 rounded-lg shadow-sm">
+                  <pre class="rounded-lg overflow-hidden text-sm"><code class="language-php">
+class OrderEventSubscriber
+{
+public function handleOrderShipped($event) {}
+
+public function handleOrderFailed($event) {}
+
+public function subscribe($events)
+{
+return [
+    OrderShipped::class => 'handleOrderShipped',
+    OrderFailed::class => [
+        'handleOrderFailed',
+        'notifyAdmins'
+    ]
+];
+}
+}
+                    </code></pre>
+                  <div class="mt-4 bg-purple-50 p-4 rounded-lg">
+                    <h4 class="font-semibold text-purple-800 mb-2">When to Use Subscribers</h4>
+                    <ul class="list-disc pl-6 text-purple-800 space-y-2">
+                      <li>Group related event handlers</li>
+                      <li>Handle multiple events in one class</li>
+                      <li>Organize complex event relationships</li>
+                      <li>Reduce EventServiceProvider complexity</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="deployment" class="py-8 mt-4 px-4 sm:px-0">
+          <h2 class="text-3xl font-bold text-gray-800 mb-6">14. Deployment</h2>
+
+          <div class="space-y-8">
+            <!-- Server Requirements -->
+            <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+              <h3 class="text-2xl font-semibold text-gray-800 mb-4">14.1 Server Requirements</h3>
+              <div class="space-y-6">
+                <div class="bg-white p-4 rounded-lg shadow-sm">
+                  <h4 class="font-semibold text-purple-600 mb-2">Basic Requirements</h4>
+                  <ul class="list-disc pl-6 text-gray-600 space-y-2">
+                    <li><strong>PHP 8.1+</strong> with extensions: BCMath, Ctype, cURL, DOM, Fileinfo, JSON, Mbstring, OpenSSL, PCRE, PDO, Tokenizer, XML</li>
+                    <li><strong>Database Server:</strong> MySQL 5.7+, PostgreSQL 9.4+, SQLite 3.8.8+</li>
+                    <li><strong>Web Server:</strong> Nginx, Apache, or similar</li>
+                    <li><strong>Composer:</strong> Dependency manager</li>
+                    <li><strong>Node.js:</strong> For asset compilation (≥14.x)</li>
+                  </ul>
+                </div>
+
+                <div class="bg-white p-4 rounded-lg shadow-sm">
+                  <pre class="rounded-lg overflow-hidden text-sm"><code class="language-bash">
+# Check PHP extensions
+php -m | grep -E 'bcmath|ctype|curl|dom|fileinfo|json|mbstring|openssl|pcre|pdo|tokenizer|xml'
+
+# Verify PHP version
+php -v
+
+# Check database connection
+mysql --version
+psql --version
+                    </code></pre>
+                  <div class="mt-4 bg-blue-50 p-4 rounded-lg">
+                    <h4 class="font-semibold text-blue-800 mb-2">Server Setup Tips</h4>
+                    <ul class="list-disc pl-6 text-blue-800 space-y-2">
+                      <li>Use PHP-FPM for better performance</li>
+                      <li>Configure OPCache for PHP acceleration</li>
+                      <li>Set appropriate memory limits (≥256MB)</li>
+                      <li>Enable HTTPS with Let's Encrypt</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Deployment Process -->
+            <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+              <h3 class="text-2xl font-semibold text-gray-800 mb-4">14.2 Deployment Process</h3>
+              <div class="space-y-6">
+                <div class="bg-white p-4 rounded-lg shadow-sm">
+                  <pre class="rounded-lg overflow-hidden text-sm"><code class="language-bash">
+# Clone repository
+git clone https://github.com/your/repo.git
+
+# Install dependencies
+composer install --optimize-autoloader --no-dev
+
+# Environment setup
+cp .env.example .env
+nano .env  # Configure settings
+
+# Generate application key
+php artisan key:generate
+
+# Set permissions
+chmod -R 755 storage
+chmod -R 755 bootstrap/cache
+
+# Run migrations
+php artisan migrate --force
+
+# Build assets
+npm install && npm run prod
+                    </code></pre>
+                  <div class="mt-4 bg-yellow-50 p-4 rounded-lg">
+                    <h4 class="font-semibold text-yellow-800 mb-2">Critical Notes</h4>
+                    <ul class="list-disc pl-6 text-yellow-800 space-y-2">
+                      <li>--no-dev: Skip development dependencies</li>
+                      <li>--force: Required for production migrations</li>
+                      <li>Always test deployment on staging first</li>
+                      <li>Maintain deployment checklist</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Environment Configuration -->
+            <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+              <h3 class="text-2xl font-semibold text-gray-800 mb-4">14.3 Environment Configuration</h3>
+              <div class="space-y-6">
+                <div class="bg-white p-4 rounded-lg shadow-sm">
+                  <pre class="rounded-lg overflow-hidden text-sm"><code class="language-env">
+APP_ENV=production
+APP_DEBUG=false
+APP_URL=https://yourdomain.com
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=production_db
+DB_USERNAME=secure_user
+DB_PASSWORD=strong_password
+
+CACHE_DRIVER=redis
+QUEUE_CONNECTION=redis
+SESSION_DRIVER=redis
+
+MAIL_MAILER=smtp
+MAIL_HOST=mail.yourdomain.com
+MAIL_PORT=587
+MAIL_USERNAME=username
+MAIL_PASSWORD=password
+MAIL_ENCRYPTION=tls
+                    </code></pre>
+                  <div class="mt-4 bg-red-50 p-4 rounded-lg">
+                    <h4 class="font-semibold text-red-800 mb-2">Security Musts</h4>
+                    <ul class="list-disc pl-6 text-red-800 space-y-2">
+                      <li>Never commit .env to version control</li>
+                      <li>Use different credentials for environments</li>
+                      <li>Rotate APP_KEY when compromised</li>
+                      <li>Enable firewall (UFW/iptables)</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Optimization -->
+            <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+              <h3 class="text-2xl font-semibold text-gray-800 mb-4">14.4 Production Optimization</h3>
+              <div class="space-y-6">
+                <div class="bg-white p-4 rounded-lg shadow-sm">
+                  <pre class="rounded-lg overflow-hidden text-sm"><code class="language-bash">
+# Cache routes
+php artisan route:cache
+
+# Cache config
+php artisan config:cache
+
+# Optimize autoloader
+composer dump-autoload -o
+
+# Build production assets
+npm run prod
+
+# Enable OPCache
+sudo nano /etc/php/8.1/fpm/php.ini
+opcache.enable=1
+opcache.memory_consumption=256
+opcache.max_accelerated_files=20000
+                    </code></pre>
+                  <div class="mt-4 bg-green-50 p-4 rounded-lg">
+                    <h4 class="font-semibold text-green-800 mb-2">Performance Benefits</h4>
+                    <ul class="list-disc pl-6 text-green-800 space-y-2">
+                      <li>Route caching: 30-40% faster routing</li>
+                      <li>OPCache: 50%+ PHP performance gain</li>
+                      <li>Optimized assets: Smaller file sizes</li>
+                      <li>Config caching: Reduce file reads</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- CI/CD Pipeline -->
+            <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+              <h3 class="text-2xl font-semibold text-gray-800 mb-4">14.5 CI/CD Pipeline</h3>
+              <div class="space-y-6">
+                <div class="bg-white p-4 rounded-lg shadow-sm">
+                  <pre class="rounded-lg overflow-hidden text-sm"><code class="language-yaml">
+# .github/workflows/deploy.yml
+name: Deploy Production
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.1'
+        extensions: mbstring, ctype, fileinfo, openssl, PDO, mysql, pgsql, redis
+    
+    - name: Install dependencies
+      run: composer install --no-dev --prefer-dist --optimize-autoloader
+    
+    - name: Run tests
+      run: php artisan test
+    
+    - name: Deploy to production
+      uses: appleboy/ssh-action@v0.1.10
+      with:
+        host: ${{ secrets.SSH_HOST }}
+        username: ${{ secrets.SSH_USER }}
+        key: ${{ secrets.SSH_KEY }}
+        script: |
+          cd /var/www/project
+          git pull origin main
+          php artisan migrate --force
+          npm run prod
+                    </code></pre>
+                </div>
+              </div>
+            </div>
+
+            <!-- Monitoring -->
+            <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+              <h3 class="text-2xl font-semibold text-gray-800 mb-4">14.6 Monitoring & Maintenance</h3>
+              <div class="space-y-6">
+                <div class="bg-white p-4 rounded-lg shadow-sm">
+                  <pre class="rounded-lg overflow-hidden text-sm"><code class="language-bash">
+# Set up cron jobs
+crontab -e
+* * * * * cd /path-to-project && php artisan schedule:run >> /dev/null 2>&1
+
+# Log monitoring
+tail -f storage/logs/laravel.log
+
+# Queue worker
+php artisan queue:work --daemon --sleep=3 --tries=3
+                    </code></pre>
+                  <div class="mt-4 bg-purple-50 p-4 rounded-lg">
+                    <h4 class="font-semibold text-purple-800 mb-2">Monitoring Tools</h4>
+                    <ul class="list-disc pl-6 text-purple-800 space-y-2">
+                      <li>Laravel Horizon: Queue monitoring</li>
+                      <li>Laravel Telescope: Debugging assistant</li>
+                      <li>Prometheus + Grafana: Metrics dashboard</li>
+                      <li>Sentry: Error tracking</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Security Practices -->
+            <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+              <h3 class="text-2xl font-semibold text-gray-800 mb-4">14.7 Security Practices</h3>
+              <div class="space-y-6">
+                <div class="bg-white p-4 rounded-lg shadow-sm">
+                  <pre class="rounded-lg overflow-hidden text-sm"><code class="language-bash">
+# File permissions
+sudo chown -R www-data:www-data /var/www/project
+sudo find /var/www/project -type f -exec chmod 644 {} \;
+sudo find /var/www/project -type d -exec chmod 755 {} \;
+sudo chmod -R 775 storage bootstrap/cache
+
+# SSL Certificate
+sudo certbot --nginx -d yourdomain.com
+
+# Security headers
+add_header X-Frame-Options "SAMEORIGIN";
+add_header X-XSS-Protection "1; mode=block";
+add_header X-Content-Type-Options "nosniff";
+                    </code></pre>
+                  <div class="mt-4 bg-red-50 p-4 rounded-lg">
+                    <h4 class="font-semibold text-red-800 mb-2">Critical Security Checks</h4>
+                    <ul class="list-disc pl-6 text-red-800 space-y-2">
+                      <li>Regular dependency updates</li>
+                      <li>SQL injection prevention</li>
+                      <li>XSS protection</li>
+                      <li>CSRF token verification</li>
+                      <li>Rate limiting sensitive endpoints</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+
+
+      </div>
+    </main>
+  </div>
+
+  <!-- Same scripts as React version -->
+  <script>
+    const sidebar = document.querySelector(".sidebar");
+    const sidebarToggle = document.getElementById("sidebarToggle");
+
+    function toggleSidebar() {
+      sidebar.classList.toggle("-translate-x-full");
+    }
+
+    sidebarToggle.addEventListener("click", toggleSidebar);
+
+    document.addEventListener("click", (event) => {
+      if (
+        window.innerWidth < 768 &&
+        !sidebar.contains(event.target) &&
+        !sidebarToggle.contains(event.target)
+      ) {
+        sidebar.classList.add("-translate-x-full");
+      }
+    });
+
+    window.addEventListener("resize", () => {
+      if (window.innerWidth >= 768) {
+        sidebar.classList.remove("-translate-x-full");
+      }
+    });
+
+    hljs.highlightAll();
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,4264 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Django Docs - Coderz</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Syntax Highlighting -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <style>
+    .sidebar::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .sidebar::-webkit-scrollbar-thumb {
+      background: #4a5568;
+      border-radius: 4px;
+    }
+
+    .prose :where(code):not(:where([class~="not-prose"] *))::before {
+      content: "";
+    }
+
+    .prose :where(code):not(:where([class~="not-prose"] *))::after {
+      content: "";
+    }
+  </style>
+</head>
+
+<body class="bg-gray-50">
+  <div class="min-h-screen md:flex">
+    <!-- Sidebar -->
+    <aside class="sidebar bg-gray-800 text-gray-300 w-64 fixed h-screen overflow-y-auto z-30 -translate-x-full md:translate-x-0 transition-transform duration-300">
+      <div class="p-4">
+        <%= link_to documentationindex_path, class: "block mb-6 text-blue-400 hover:text-blue-300" do %>
+        ← Back to Tech Stack <% end %>
+        </a>
+        <h2 class="text-xl font-bold mb-4">Django Documentation</h2>
+        <nav>
+          <h3 class="text-sm font-semibold text-gray-400 mb-4">
+            CORE CONCEPTS
+          </h3>
+          <ul class="space-y-2">
+            <li>
+              <a href="#introduction" class="flex items-center px-3 py-2 rounded hover:bg-gray-700">Introduction</a>
+            </li>
+            <li>
+              <a href="#installation" class="flex items-center px-3 py-2 rounded hover:bg-gray-700">Installation</a>
+            </li>
+            <li>
+              <a href="#project-structure" class="flex items-center px-3 py-2 rounded hover:bg-gray-700">Project Structure</a>
+            </li>
+            <li>
+              <a href="#models" class="flex items-center px-3 py-2 rounded hover:bg-gray-700">Models</a>
+            </li>
+            <li>
+              <a href="#views" class="flex items-center px-3 py-2 rounded hover:bg-gray-700">Views</a>
+            </li>
+            <li>
+              <a href="#urls" class="flex items-center px-3 py-2 rounded hover:bg-gray-700">URLs</a>
+            </li>
+            <li>
+              <a href="#templates" class="flex items-center px-3 py-2 rounded hover:bg-gray-700">Templates</a>
+            </li>
+            <li>
+              <a href="#forms" class="flex items-center px-3 py-2 rounded hover:bg-gray-700">Forms</a>
+            </li>
+            <li>
+              <a href="#admin" class="flex items-center px-3 py-2 rounded hover:bg-gray-700">Admin Interface</a>
+            </li>
+            <li>
+              <a href="#migrations" class="flex items-center px-3 py-2 rounded hover:bg-gray-700">Migrations</a>
+            </li>
+            <h3 class="text-sm font-semibold text-gray-400 mt-8 mb-4">
+              ADVANCED TOPICS
+            </h3>
+            <li>
+              <a href="#authentication" class="flex items-center px-3 py-2 rounded hover:bg-gray-700">Authentication</a>
+            </li>
+            <li>
+              <a href="#rest-apis" class="flex items-center px-3 py-2 rounded hover:bg-gray-700">REST APIs</a>
+            </li>
+            <li>
+              <a href="#middleware" class="flex items-center px-3 py-2 rounded hover:bg-gray-700">Middleware</a>
+            </li>
+            <li>
+              <a href="#deployment" class="flex items-center px-3 py-2 rounded hover:bg-gray-700">Deployment</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </aside>
+
+    <!-- Mobile Menu Button -->
+    <button id="sidebarToggle" class="md:hidden fixed top-4 left-4 z-40 p-2 bg-gray-800 rounded-lg text-white ml-4 mt-4">
+      ☰
+    </button>
+
+    <!-- Main Content -->
+    <main class="flex-1 p-8 bg-gray-50 ml-0 md:ml-64">
+      <div class="max-w-4xl mx-auto prose max-w-full md:max-w-4xl">
+
+
+
+        <!-- In the main content div (replace the comment with this) -->
+
+        <!-- Introduction Section -->
+        <section id="introduction" class="scroll-mt-20">
+          <h1 class="text-4xl font-bold text-gray-800 mb-8">1. Introduction to Django</h1>
+
+          <div class="space-y-6">
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h2 class="text-2xl font-semibold text-gray-700 mb-3">What is Django?</h2>
+              <p class="text-gray-600 leading-relaxed">
+                Django is a high-level Python web framework that enables rapid development
+                of secure and maintainable websites. Following the <span class="font-semibold">"Batteries-Included"</span>
+                philosophy, it provides built-in features for common web development tasks.
+              </p>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-3">Key Features</h3>
+              <ul class="space-y-4 list-disc pl-6 text-gray-600">
+                <li>
+                  <strong class="text-gray-700">Batteries-Included Approach:</strong>
+                  <p class="mt-1">Comes with authentication, ORM, admin interface,
+                    form handling, and security features out-of-the-box</p>
+                </li>
+                <li>
+                  <strong class="text-gray-700">MVT Architecture:</strong>
+                  <p class="mt-1">Model-View-Template pattern separates data handling,
+                    business logic, and presentation layer</p>
+                  <div class="mt-3 bg-gray-50 p-4 rounded-lg">
+                    <pre class="text-sm"><code class="language-python">
+# Example of MVT components:
+Model → Database structure
+View → Business logic
+Template → HTML presentation
+                      </code></pre>
+                  </div>
+                </li>
+                <li>
+                  <strong class="text-gray-700">DRY Principle:</strong>
+                  <p class="mt-1">"Don't Repeat Yourself" philosophy encourages code
+                    reuse and reduces redundancy</p>
+                </li>
+              </ul>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-3">Why Choose Django?</h3>
+              <div class="grid md:grid-cols-2 gap-4 text-gray-600">
+                <div class="p-4 bg-blue-50 rounded-lg">
+                  <h4 class="font-semibold mb-2">Rapid Development</h4>
+                  <p class="text-sm">Built-in admin interface and ORM allow quick
+                    prototyping and iteration</p>
+                </div>
+                <div class="p-4 bg-green-50 rounded-lg">
+                  <h4 class="font-semibold mb-2">Security</h4>
+                  <p class="text-sm">Automatic protection against common vulnerabilities
+                    like SQL injection and XSS</p>
+                </div>
+                <div class="p-4 bg-purple-50 rounded-lg">
+                  <h4 class="font-semibold mb-2">Scalability</h4>
+                  <p class="text-sm">Used by high-traffic sites like Instagram and
+                    Pinterest</p>
+                </div>
+                <div class="p-4 bg-yellow-50 rounded-lg">
+                  <h4 class="font-semibold mb-2">Community</h4>
+                  <p class="text-sm">Large ecosystem with 4,000+ packages and
+                    extensive documentation</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-3">Basic Concepts</h3>
+              <div class="space-y-4">
+                <div class="p-4 bg-gray-50 rounded-lg">
+                  <h4 class="font-semibold text-gray-700">URL Dispatcher</h4>
+                  <p class="text-sm text-gray-600 mt-2">
+                    Maps URL patterns to view functions using regular expressions
+                  </p>
+                  <pre class="text-sm overflow-x-auto mt-3"><code class="language-python">
+# urls.py example
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('articles/&lt;int:year&gt;/', views.year_archive),
+]
+                    </code></pre>
+                </div>
+
+                <div class="p-4 bg-gray-50 rounded-lg">
+                  <h4 class="font-semibold text-gray-700">View Function</h4>
+                  <p class="text-sm text-gray-600 mt-2">
+                    Receives web requests and returns web responses
+                  </p>
+                  <pre class="text-sm overflow-x-auto mt-3"><code class="language-python">
+# views.py example
+from django.http import HttpResponse
+
+def hello_world(request):
+    return HttpResponse("Hello, Coderz!")
+                    </code></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+
+        <!-- Inside the main content div (after introduction section) -->
+        <section id="installation" class="scroll-mt-20 pt-8">
+          <h2 class="text-3xl font-bold text-gray-800 mb-6">2. Installing Django</h2>
+
+          <div class="space-y-8">
+            <!-- Python Installation -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">1. Python Installation</h3>
+              <p class="text-gray-600 mb-4">
+                Django is a Python framework, so we first need to ensure Python is installed.
+                Django 4.2 supports Python 3.8 to 3.11. Here's how to check your Python version:
+              </p>
+              <pre class="text-sm overflow-x-auto bg-gray-50 p-4 rounded-lg"><code class="language-bash">
+# Check Python version
+python --version
+# or
+python3 --version
+
+# Expected output (example):
+Python 3.10.6
+                </code></pre>
+              <p class="text-gray-600 mt-4">
+                If Python isn't installed, download it from
+                <a href="https://python.org" class="text-blue-600 hover:underline">python.org</a>
+                or use your system's package manager.
+              </p>
+            </div>
+
+            <!-- Virtual Environment -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">2. Virtual Environment Setup</h3>
+              <p class="text-gray-600 mb-4">
+                A virtual environment isolates project dependencies. This prevents version
+                conflicts between different Django projects. We recommend using Python's
+                built-in <code>venv</code> module:
+              </p>
+
+              <div class="grid md:grid-cols-2 gap-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <h4 class="font-semibold text-gray-700 mb-2">Create Environment</h4>
+                  <pre class="text-sm overflow-x-auto"><code class="language-bash">
+# Create project directory
+mkdir myproject
+cd myproject
+
+# Create virtual environment
+python -m venv venv
+                    </code></pre>
+                </div>
+
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <h4 class="font-semibold text-gray-700 mb-2">Activate Environment</h4>
+                  <pre class="text-sm overflow-x-auto"><code class="language-bash">
+# Linux/macOS
+source venv/bin/activate
+
+# Windows
+venv\Scripts\activate
+                    </code></pre>
+                </div>
+              </div>
+
+              <div class="mt-4 p-4 bg-yellow-50 rounded-lg">
+                <span class="font-semibold">Note:</span> Your prompt should show <code>(venv)</code>
+                when activated. To exit later, run <code>deactivate</code>.
+              </div>
+            </div>
+
+            <!-- Django Installation -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">3. Install Django</h3>
+              <p class="text-gray-600 mb-4">
+                With the virtual environment activated, install Django using pip:
+              </p>
+              <pre class="text-sm overflow-x-auto bg-gray-50 p-4 rounded-lg"><code class="language-bash">
+pip install django
+
+# Verify installation
+python -m django --version
+# Example output: 4.2.3
+                </code></pre>
+              <div class="mt-4 p-4 bg-blue-50 rounded-lg">
+                <h4 class="font-semibold mb-2">Version Specific Installation</h4>
+                <p class="text-sm text-gray-600">
+                  For specific Django versions (e.g., LTS versions):
+                <pre class="text-sm overflow-x-auto mt-2"><code class="language-bash">
+pip install django==4.2.3
+                    </code></pre>
+                </p>
+              </div>
+            </div>
+
+            <!-- Project Creation -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">4. Create Django Project</h3>
+              <p class="text-gray-600 mb-4">
+                Start a new project using Django's admin tool. This creates the basic
+                project structure:
+              </p>
+              <pre class="text-sm overflow-x-auto bg-gray-50 p-4 rounded-lg"><code class="language-bash">
+django-admin startproject coderz_project .
+# The dot (.) creates project in current directory
+                </code></pre>
+
+              <div class="mt-4 grid md:grid-cols-2 gap-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <h4 class="font-semibold text-gray-700 mb-2">Project Structure</h4>
+                  <pre class="text-sm overflow-x-auto"><code class="language-plaintext">
+coderz_project/
+├── manage.py
+└── coderz_project/
+    ├── __init__.py
+    ├── settings.py
+    ├── urls.py
+    └── wsgi.py
+                    </code></pre>
+                </div>
+
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <h4 class="font-semibold text-gray-700 mb-2">File Descriptions</h4>
+                  <ul class="list-disc pl-4 space-y-2 text-sm">
+                    <li><code>manage.py</code>: Project management script</li>
+                    <li><code>settings.py</code>: Project configuration</li>
+                    <li><code>urls.py</code>: URL declarations</li>
+                    <li><code>wsgi.py</code>: WSGI configuration</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <!-- Run Development Server -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">5. Run Development Server</h3>
+              <p class="text-gray-600 mb-4">
+                Verify your installation by starting Django's built-in development server:
+              </p>
+              <pre class="text-sm overflow-x-auto bg-gray-50 p-4 rounded-lg"><code class="language-bash">
+python manage.py runserver
+
+# Output should show:
+Starting development server at http://127.0.0.1:8000/
+                </code></pre>
+              <div class="mt-4 p-4 bg-green-50 rounded-lg">
+                <h4 class="font-semibold mb-2">Accessing the Server</h4>
+                <p class="text-sm text-gray-600">
+                  Open <a href="http://127.0.0.1:8000" class="text-blue-600 hover:underline">
+                    http://127.0.0.1:8000</a> in your browser. You should see the
+                  Django welcome rocket!
+                </p>
+                <p class="text-sm text-gray-600 mt-2">
+                  To run on different port or IP:
+                <pre class="text-sm overflow-x-auto mt-2"><code class="language-bash">
+python manage.py runserver 0.0.0.0:8000
+                    </code></pre>
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- After installation section -->
+        <section id="project-structure" class="scroll-mt-20 pt-8">
+          <h2 class="text-3xl font-bold text-gray-800 mb-6">3. Django Project Structure</h2>
+
+          <div class="space-y-8">
+            <!-- Overview -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">3.1 Understanding the Scaffolding</h3>
+              <p class="text-gray-600 mb-4">
+                When you create a new Django project, it generates a specific directory structure
+                that follows Django's conventions. This structure helps maintain organization
+                as your project grows.
+              </p>
+
+              <div class="grid md:grid-cols-2 gap-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <h4 class="font-semibold text-gray-700 mb-2">Root Directory</h4>
+                  <pre class="text-sm overflow-x-auto"><code class="language-plaintext">
+myproject/
+├── manage.py
+└── myproject/
+    ├── __init__.py
+    ├── settings.py
+    ├── urls.py
+    ├── asgi.py
+    └── wsgi.py
+                    </code></pre>
+                </div>
+
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <h4 class="font-semibold text-gray-700 mb-2">Key Files</h4>
+                  <ul class="list-disc pl-4 space-y-2 text-sm">
+                    <li><code>manage.py</code>: Project management CLI</li>
+                    <li><code>settings.py</code>: All project configurations</li>
+                    <li><code>urls.py</code>: URL routing entry point</li>
+                    <li><code>wsgi.py</code>: Production deployment setup</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <!-- Settings Deep Dive -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">3.2 Settings Configuration</h3>
+              <p class="text-gray-600 mb-4">
+                The <code>settings.py</code> file is the project's control center. Let's break
+                down its critical components:
+              </p>
+
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <h4 class="font-semibold text-gray-700 mb-2">Database Configuration</h4>
+                  <pre class="text-sm overflow-x-auto"><code class="language-python">
+# Default SQLite configuration
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
+                    </code></pre>
+                  <p class="text-sm text-gray-600 mt-2">
+                    This configuration uses SQLite for development. For production, you'd
+                    typically switch to PostgreSQL or MySQL by changing the ENGINE and
+                    providing proper credentials.
+                  </p>
+                </div>
+
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <h4 class="font-semibold text-gray-700 mb-2">Installed Apps</h4>
+                  <pre class="text-sm overflow-x-auto"><code class="language-python">
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'myapp.apps.MyappConfig',  # Custom app
+]
+                    </code></pre>
+                  <p class="text-sm text-gray-600 mt-2">
+                    This list registers all applications that make up your project. Django
+                    includes several built-in apps for common functionality like authentication
+                    and sessions.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- URL Structure -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">3.3 URL Routing Architecture</h3>
+              <p class="text-gray-600 mb-4">
+                Django uses a URL dispatcher that allows you to map URL patterns to views.
+                The project-level <code>urls.py</code> is the entry point for all URL patterns.
+              </p>
+
+              <div class="">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <h4 class="font-semibold text-gray-700 mb-2">Project URLs</h4>
+                  <pre class="text-sm overflow-x-auto"><code class="language-python">
+from django.contrib import admin
+from django.urls import include, path
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('blog/', include('blog.urls')),
+    path('store/', include('store.urls')),
+]
+                    </code></pre>
+                </div>
+
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <h4 class="font-semibold text-gray-700 mb-2">App URLs</h4>
+                  <pre class="text-sm overflow-x-auto"><code class="language-python">
+          # blog/urls.py
+          from django.urls import path
+          from . import views
+
+          urlpatterns = [
+              path('', views.post_list, name='post_list'),
+              path('&lt;int:post_id&gt;/', views.post_detail, name='post_detail'),
+          ]
+                    </code></pre>
+                </div>
+              </div>
+              <p class="text-gray-600 mt-4">
+                The <code>include()</code> function allows referencing other URLconfs, enabling
+                modular URL design across multiple apps.
+              </p>
+            </div>
+
+            <!-- Apps Structure -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">3.4 Application Architecture</h3>
+              <p class="text-gray-600 mb-4">
+                Django applications follow the "pluggable" concept - discrete components that
+                can be reused across projects. Here's a typical app structure:
+              </p>
+
+              <div class="bg-gray-50 p-4 rounded-lg">
+                <pre class="text-sm overflow-x-auto"><code class="language-plaintext">
+blog/
+├── migrations/
+│   └── 0001_initial.py
+├── __init__.py
+├── admin.py
+├── apps.py
+├── models.py
+├── tests.py
+├── urls.py
+└── views.py
+                  </code></pre>
+              </div>
+
+              <div class=" mt-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <h4 class="font-semibold text-gray-700 mb-2">Creating an App</h4>
+                  <pre class="text-sm overflow-x-auto"><code class="language-bash">
+python manage.py startapp blog
+                    </code></pre>
+                  <p class="text-sm text-gray-600 mt-2">
+                    This creates a new application directory with all necessary boilerplate
+                    files. Remember to add it to <code>INSTALLED_APPS</code> in settings.py
+                  </p>
+                </div>
+
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <h4 class="font-semibold text-gray-700 mb-2">Core Components</h4>
+                  <ul class="list-disc pl-4 space-y-2 text-sm">
+                    <li><code>models.py</code>: Database schema definitions</li>
+                    <li><code>views.py</code>: Business logic handlers</li>
+                    <li><code>admin.py</code>: Admin interface configurations</li>
+                    <li><code>migrations/</code>: Database migration history</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <!-- WSGI Explanation -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">3.5 WSGI Configuration</h3>
+              <div class="bg-gray-50 p-4 rounded-lg">
+                <pre class="text-sm overflow-x-auto"><code class="language-python">
+# wsgi.py
+import os
+from django.core.wsgi import get_wsgi_application
+
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'myproject.settings')
+application = get_wsgi_application()
+                  </code></pre>
+              </div>
+              <p class="text-gray-600 mt-4">
+                The Web Server Gateway Interface (WSGI) is the Python standard for web servers
+                and applications. This file:
+              </p>
+              <ul class="list-disc pl-6 mt-2 space-y-2 text-gray-600">
+                <li>Sets the default settings module</li>
+                <li>Creates the WSGI application object</li>
+                <li>Used by production servers like Gunicorn or uWSGI</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- After project structure section -->
+        <section id="models" class="scroll-mt-20 pt-8">
+          <h2 class="text-3xl font-bold text-gray-800 mb-6">4. Django Models</h2>
+
+          <div class="space-y-8">
+            <!-- Model Fundamentals -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">4.1 Model Fundamentals</h3>
+              <p class="text-gray-600 mb-4">
+                Models are the single source of truth about your data. They define:
+              </p>
+
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <h4 class="font-semibold text-gray-700 mb-2">Database Structure</h4>
+                  <p class="text-sm text-gray-600">
+                    Each model class represents a database table. Attributes represent fields.
+                  </p>
+                  <pre class="text-sm overflow-x-auto mt-2"><code class="language-python">
+from django.db import models
+
+class Product(models.Model):
+    name = models.CharField(max_length=100)
+    price = models.DecimalField(max_digits=6, decimal_places=2)
+    description = models.TextField()
+                    </code></pre>
+                </div>
+
+                <div class="bg-gray-50 p-4 rounded-lg mt-4">
+                  <h4 class="font-semibold text-gray-700 mb-2">Default Behaviors</h4>
+                  <p class="text-sm text-gray-600">
+                    Django automatically adds an auto-incrementing <code>id</code> primary key
+                  </p>
+                  <pre class="text-sm overflow-x-auto mt-2"><code class="language-sql">
+-- Generated SQL (simplified)
+CREATE TABLE store_product (
+    "id" serial NOT NULL PRIMARY KEY,
+    "name" varchar(100) NOT NULL,
+    "price" numeric(6, 2) NOT NULL,
+    "description" text NOT NULL
+);
+                    </code></pre>
+                </div>
+              </div>
+            </div>
+
+            <!-- Field Types -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">4.2 Field Types</h3>
+
+              <div class="space-y-6">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <h4 class="font-semibold text-gray-700 mb-2">Common Field Types</h4>
+                  <pre class="text-sm overflow-x-auto"><code class="language-python">
+class UserProfile(models.Model):
+    # String field with validation
+    username = models.CharField(max_length=30, unique=True)
+    
+    # Numeric field with choices
+    user_type = models.IntegerField(choices=[
+        (1, 'Free'),
+        (2, 'Pro'),
+        (3, 'Enterprise')
+    ])
+    
+    # Date/time fields
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    # File storage
+    avatar = models.ImageField(upload_to='avatars/')
+                    </code></pre>
+                  <div class="mt-4 p-3 bg-blue-50 rounded-lg">
+                    <p class="text-sm text-gray-600">
+                      <strong>Key Parameters:</strong><br>
+                      <code>max_length</code> - Maximum character count<br>
+                      <code>unique</code> - Enforces unique values<br>
+                      <code>auto_now_add</code> - Set on creation<br>
+                      <code>upload_to</code> - Media subdirectory
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Model Relationships -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">4.3 Database Relationships</h3>
+
+              <div class="space-y-6">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <h4 class="font-semibold text-gray-700 mb-2">Foreign Key (One-to-Many)</h4>
+                  <pre class="text-sm overflow-x-auto"><code class="language-python">
+class Author(models.Model):
+    name = models.CharField(max_length=100)
+
+class Book(models.Model):
+    title = models.CharField(max_length=200)
+    author = models.ForeignKey(
+        Author,
+        on_delete=models.CASCADE,
+        related_name='books'
+    )
+                    </code></pre>
+                  <p class="text-sm text-gray-600 mt-2">
+                    <strong>Explanation:</strong> Each book has one author, an author can have many books.<br>
+                    <code>on_delete=models.CASCADE</code> deletes books when author is deleted
+                  </p>
+                </div>
+
+                <div class="bg-gray-50 p-4 rounded-lg mt-4">
+                  <h4 class="font-semibold text-gray-700 mb-2">Many-to-Many</h4>
+                  <pre class="text-sm overflow-x-auto"><code class="language-python">
+class Tag(models.Model):
+    name = models.CharField(max_length=50)
+
+class Article(models.Model):
+    title = models.CharField(max_length=200)
+    tags = models.ManyToManyField(Tag)
+                    </code></pre>
+                  <p class="text-sm text-gray-600 mt-2">
+                    Creates a join table automatically. Articles can have multiple tags,
+                    tags can be associated with multiple articles
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Model Methods -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">4.4 Model Methods</h3>
+
+              <div class="bg-gray-50 p-4 rounded-lg">
+                <pre class="text-sm overflow-x-auto"><code class="language-python">
+class Order(models.Model):
+    total = models.DecimalField(max_digits=10, decimal_places=2)
+    is_paid = models.BooleanField(default=False)
+
+    def mark_as_paid(self):
+        self.is_paid = True
+        self.save(update_fields=['is_paid'])
+
+    @property
+    def tax_amount(self):
+        return self.total * 0.08
+
+    def __str__(self):
+        return f"Order #{self.id} - ${self.total}"
+                  </code></pre>
+                <div class="mt-4 space-y-3">
+                  <p class="text-sm text-gray-600">
+                    <strong>Custom Methods:</strong> Add business logic to models<br>
+                    <strong>@property:</strong> Calculate values without database storage<br>
+                    <strong>__str__:</strong> Human-readable representation in admin
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Meta Options -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">4.5 Model Meta Options</h3>
+
+              <div class="bg-gray-50 p-4 rounded-lg">
+                <pre class="text-sm overflow-x-auto"><code class="language-python">
+class Customer(models.Model):
+    name = models.CharField(max_length=100)
+    join_date = models.DateField()
+
+    class Meta:
+        ordering = ['-join_date']
+        verbose_name_plural = "Customers"
+        indexes = [
+            models.Index(fields=['name'], name='name_idx'),
+        ]
+                  </code></pre>
+                <div class="mt-4 space-y-2">
+                  <p class="text-sm text-gray-600">
+                    <strong>Ordering:</strong> Default sorting for queries<br>
+                    <strong>Verbose Names:</strong> Human-friendly names in admin<br>
+                    <strong>Indexes:</strong> Improve database query performance
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Migrations -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">4.6 Database Migrations</h3>
+
+              <div class="bg-gray-50 p-4 rounded-lg">
+                <pre class="text-sm overflow-x-auto"><code class="language-bash">
+# Create migration files
+python manage.py makemigrations
+
+# Apply to database
+python manage.py migrate
+
+# Check migration status
+python manage.py showmigrations
+                  </code></pre>
+                <div class="mt-4 p-3 bg-yellow-50 rounded-lg">
+                  <p class="text-sm text-gray-600">
+                    <strong>Best Practice:</strong> Always commit migration files with your code.<br>
+                    <strong>Warning:</strong> Never edit migration files manually after creation.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- After models section -->
+        <section id="views" class="scroll-mt-20 pt-8">
+          <h2 class="text-3xl font-bold text-gray-800 mb-6">5. Django Views</h2>
+
+          <div class="space-y-8">
+            <!-- View Basics -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">5.1 View Fundamentals</h3>
+              <p class="text-gray-600 mb-4">
+                Views are the core of Django's request-response cycle. They:
+              </p>
+
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <h4 class="font-semibold text-gray-700 mb-2">Basic Responsibilities</h4>
+                  <ul class="list-disc pl-4 space-y-2 text-sm text-gray-600">
+                    <li>Receive HTTP requests</li>
+                    <li>Process data through models</li>
+                    <li>Return HTTP responses (HTML, JSON, etc.)</li>
+                    <li>Handle business logic</li>
+                  </ul>
+                </div>
+
+                <div class="bg-gray-50 p-4 rounded-lg mt-4">
+                  <h4 class="font-semibold text-gray-700 mb-2">Function-Based View</h4>
+                  <pre class="text-sm overflow-x-auto"><code class="language-python">
+from django.http import HttpResponse
+from .models import Product
+
+def product_list(request):
+    # Get all products from database
+    products = Product.objects.all()
+    
+    # Return simple text response
+    return HttpResponse("Listing all products")
+                    </code></pre>
+                  <p class="text-sm text-gray-600 mt-2">
+                    This basic view retrieves products from the database using the ORM and
+                    returns a plain text response. The <code>request</code> parameter contains
+                    all incoming request data like headers and user session.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Response Types -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">5.2 Response Handling</h3>
+
+              <div class="space-y-6">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <h4 class="font-semibold text-gray-700 mb-2">Common Response Types</h4>
+                  <pre class="text-sm overflow-x-auto"><code class="language-python">
+from django.shortcuts import render, redirect
+from django.http import JsonResponse
+
+def example_responses(request):
+    # Return HTML template
+    html_response = render(request, 'template.html', {'data': 42})
+    
+    # Return JSON data
+    json_response = JsonResponse({'status': 'success'})
+    
+    # Redirect to another URL
+    redirect_response = redirect('home_page')
+    
+    return html_response  # Choose one to return
+                    </code></pre>
+                  <div class="mt-4 p-3 bg-blue-50 rounded-lg">
+                    <p class="text-sm text-gray-600">
+                      <strong>Template Responses:</strong> Use <code>render()</code> for HTML output<br>
+                      <strong>API Responses:</strong> <code>JsonResponse</code> for REST APIs<br>
+                      <strong>Redirects:</strong> Maintain proper navigation flow
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Class-Based Views -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">5.3 Class-Based Views</h3>
+
+              <div class="space-y-6">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <h4 class="font-semibold text-gray-700 mb-2">Basic Class-Based View</h4>
+                  <pre class="text-sm overflow-x-auto"><code class="language-python">
+from django.views import View
+from django.shortcuts import render
+from .models import Product
+
+class ProductListView(View):
+    template_name = 'products/list.html'
+
+    def get(self, request):
+        products = Product.objects.all()
+        return render(request, self.template_name, 
+                  {'products': products})
+
+    def post(self, request):
+        # Handle product creation
+        return redirect('product_list')
+                    </code></pre>
+                  <p class="text-sm text-gray-600 mt-2">
+                    Class-based views separate request methods (GET, POST) into individual
+                    class methods. This makes code more organized for complex views handling
+                    multiple operations.
+                  </p>
+                </div>
+
+                <div class="bg-gray-50 p-4 rounded-lg mt-4">
+                  <h4 class="font-semibold text-gray-700 mb-2">Generic Class Views</h4>
+                  <pre class="text-sm overflow-x-auto"><code class="language-python">
+from django.views.generic import ListView, DetailView
+
+class ProductListView(ListView):
+    model = Product
+    template_name = 'products/list.html'
+    context_object_name = 'products'
+
+class ProductDetailView(DetailView):
+    model = Product
+    template_name = 'products/detail.html'
+                    </code></pre>
+                  <div class="mt-4 p-3 bg-green-50 rounded-lg">
+                    <p class="text-sm text-gray-600">
+                      <strong>Built-in Generic Views:</strong><br>
+                      - ListView: Display object lists<br>
+                      - DetailView: Show single object<br>
+                      - CreateView/UpdateView: Handle forms<br>
+                      - DeleteView: Object deletion
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- View Decorators -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">5.4 View Decorators</h3>
+
+              <div class="bg-gray-50 p-4 rounded-lg">
+                <pre class="text-sm overflow-x-auto"><code class="language-python">
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_http_methods
+from django.views.decorators.cache import cache_page
+
+@login_required
+@require_http_methods(["GET"])
+@cache_page(60 * 15)  # Cache for 15 minutes
+def sensitive_data(request):
+    return render(request, 'secret.html')
+                  </code></pre>
+                <div class="mt-4 space-y-3">
+                  <p class="text-sm text-gray-600">
+                    <strong>Common Decorators:</strong><br>
+                    - <code>@login_required</code>: Restrict to logged-in users<br>
+                    - <code>@require_http_methods</code>: Limit allowed methods<br>
+                    - <code>@cache_page</code>: Add caching layer<br>
+                    - <code>@csrf_exempt</code>: Disable CSRF protection (use cautiously)
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Error Handling -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">5.5 Error Handling</h3>
+
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <pre class="text-sm overflow-x-auto"><code class="language-python">
+from django.http import Http404
+
+def product_detail(request, product_id):
+    try:
+        product = Product.objects.get(id=product_id)
+    except Product.DoesNotExist:
+        raise Http404("Product not found")
+    return render(request, 'products/detail.html', 
+              {'product': product})
+                    </code></pre>
+                  <p class="text-sm text-gray-600 mt-2">
+                    Proper error handling ensures good user experience. Django provides:
+                  </p>
+                  <ul class="list-disc pl-4 mt-2 space-y-1 text-sm text-gray-600">
+                    <li><code>Http404</code>: Standard not found error</li>
+                    <li><code>PermissionDenied</code>: Access control errors</li>
+                    <li>Custom error templates (404.html, 500.html)</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <!-- View Mixins -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">5.6 View Mixins</h3>
+
+              <div class="bg-gray-50 p-4 rounded-lg">
+                <pre class="text-sm overflow-x-auto"><code class="language-python">
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import ListView
+
+class PrivateProductList(LoginRequiredMixin, ListView):
+    model = Product
+    template_name = 'products/private_list.html'
+    login_url = '/login/'
+                  </code></pre>
+                <div class="mt-4 p-3 bg-purple-50 rounded-lg">
+                  <p class="text-sm text-gray-600">
+                    Mixins add reusable functionality to class-based views:<br>
+                    - <code>LoginRequiredMixin</code>: Authentication checks<br>
+                    - <code>UserPassesTestMixin</code>: Custom permission logic<br>
+                    - <code>SuccessMessageMixin</code>: Form submission feedback
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- View Testing -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">5.7 Testing Views</h3>
+
+              <div class="bg-gray-50 p-4 rounded-lg">
+                <pre class="text-sm overflow-x-auto"><code class="language-python">
+from django.test import TestCase, Client
+from django.urls import reverse
+
+class ViewTests(TestCase):
+    def setUp(self):
+        self.client = Client()
+        self.product = Product.objects.create(name="Test Product")
+
+    def test_product_list_view(self):
+        response = self.client.get(reverse('product_list'))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Test Product")
+                  </code></pre>
+                <p class="text-sm text-gray-600 mt-2">
+                  Django's test framework helps verify view behavior:<br>
+                  - <code>Client</code> simulates browser requests<br>
+                  - <code>reverse()</code> generates URLs from names<br>
+                  - Status codes verify response types
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- After views section -->
+        <section id="urls" class="scroll-mt-20 pt-8">
+          <h2 class="text-3xl font-bold text-gray-800 mb-6">6. Django URL Configuration</h2>
+
+          <div class="space-y-8">
+            <!-- URL Fundamentals -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">6.1 URL Pattern Basics</h3>
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <h4 class="font-semibold text-gray-700 mb-2">What are URL Patterns?</h4>
+                  <p class="text-sm text-gray-600">
+                    URL patterns are the roadmap of your Django application. They define:
+                  </p>
+                  <ul class="list-disc pl-4 mt-2 space-y-1 text-sm text-gray-600">
+                    <li>Which view handles each URL</li>
+                    <li>How to extract parameters from URLs</li>
+                    <li>URL naming for reverse resolution</li>
+                    <li>Application routing structure</li>
+                  </ul>
+                  <pre class="text-sm overflow-x-auto mt-4"><code class="language-python">
+# project/urls.py
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('articles/2023/', views.special_case_2023),
+    path('articles/&lt;int:year&gt;/', views.year_archive),
+    path('articles/&lt;int:year&gt;/&lt;slug:slug&gt;/', views.article_detail),
+]
+                    </code></pre>
+                </div>
+              </div>
+            </div>
+
+            <!-- Path Converters -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">6.2 Path Converters</h3>
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <h4 class="font-semibold text-gray-700 mb-2">Built-in Converters</h4>
+                  <pre class="text-sm overflow-x-auto"><code class="language-python">
+path('user/&lt;str:username&gt;/', views.user_profile),
+path('post/&lt;int:post_id&gt;/', views.post_detail),
+path('slug/&lt;slug:slug&gt;/', views.slug_view),
+path('uuid/&lt;uuid:uuid&gt;/', views.uuid_view),
+path('path/&lt;path:subpath&gt;/', views.path_view),
+                    </code></pre>
+                  <div class="mt-4 p-3 bg-blue-50 rounded-lg">
+                    <p class="text-sm text-gray-600">
+                      <strong>Converter Types:</strong><br>
+                      - <code>str</code>: Any non-empty string (excluding '/')<br>
+                      - <code>int</code>: Positive integers<br>
+                      - <code>slug</code>: ASCII letters, numbers, hyphens, and underscores<br>
+                      - <code>uuid</code>: Universally unique identifier format<br>
+                      - <code>path</code>: Any string including '/' characters
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Regular Expressions -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">6.3 Regular Expression URLs</h3>
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <h4 class="font-semibold text-gray-700 mb-2">Advanced Pattern Matching</h4>
+                  <pre class="text-sm overflow-x-auto"><code class="language-python">
+from django.urls import re_path
+
+urlpatterns = [
+    re_path(
+        r'^articles/(?P&lt;year&gt;[0-9]{4})/$',
+        views.year_archive
+    ),
+    re_path(
+        r'^articles/(?P&lt;year&gt;[0-9]{4})/(?P&lt;month&gt;[0-9]{2})/$',
+        views.month_archive
+    ),
+]
+                    </code></pre>
+                  <div class="mt-4 p-3 bg-green-50 rounded-lg">
+                    <p class="text-sm text-gray-600">
+                      <strong>Regex Groups:</strong><br>
+                      - <code>(?P&lt;name&gt;pattern)</code>: Named capture group<br>
+                      - <code>[0-9]{4}</code>: Exactly 4 digits<br>
+                      - <code>^</code>: Start of string anchor<br>
+                      - <code>$</code>: End of string anchor
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- URL Namespaces -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">6.4 URL Namespaces</h3>
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <h4 class="font-semibold text-gray-700 mb-2">Organizing Application URLs</h4>
+                  <pre class="text-sm overflow-x-auto"><code class="language-python">
+# project/urls.py
+urlpatterns = [
+    path('blog/', include('blog.urls', namespace='blog')),
+    path('store/', include('store.urls', namespace='store')),
+]
+
+# blog/urls.py
+app_name = 'blog'
+urlpatterns = [
+    path('', views.post_list, name='post_list'),
+    path('&lt;int:pk&gt;/', views.post_detail, name='post_detail'),
+]
+                    </code></pre>
+                  <div class="mt-4 p-3 bg-purple-50 rounded-lg">
+                    <p class="text-sm text-gray-600">
+                      <strong>Reverse URL Lookup:</strong><br>
+                      <code>{% url 'blog:post_detail' pk=post.id %}</code> in templates<br>
+                      <code>reverse('blog:post_detail', kwargs={'pk': 5})</code> in Python code<br>
+                      Helps prevent naming conflicts between apps
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Error Handling -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">6.5 Error Handling URLs</h3>
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <pre class="text-sm overflow-x-auto"><code class="language-python">
+# project/urls.py
+handler404 = 'myapp.views.custom_page_not_found'
+handler500 = 'myapp.views.custom_server_error'
+
+# myapp/views.py
+def custom_page_not_found(request, exception):
+    return render(request, '404.html', status=404)
+
+def custom_server_error(request):
+    return render(request, '500.html', status=500)
+                    </code></pre>
+                  <div class="mt-4 p-3 bg-yellow-50 rounded-lg">
+                    <p class="text-sm text-gray-600">
+                      <strong>Important:</strong><br>
+                      - Set <code>DEBUG = False</code> in production to see custom errors<br>
+                      - Create 404.html and 500.html templates<br>
+                      - Test using <code>raise Http404</code> in development
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Static Files -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">6.6 Serving Static Files</h3>
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <pre class="text-sm overflow-x-auto"><code class="language-python">
+# settings.py
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [BASE_DIR / 'static']
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+# urls.py (development only)
+from django.conf import settings
+from django.conf.urls.static import static
+
+urlpatterns += static(
+    settings.STATIC_URL, 
+    document_root=settings.STATIC_ROOT
+)
+urlpatterns += static(
+    settings.MEDIA_URL, 
+    document_root=settings.MEDIA_ROOT
+)
+                    </code></pre>
+                  <div class="mt-4 p-3 bg-red-50 rounded-lg">
+                    <p class="text-sm text-gray-600">
+                      <strong>Production Note:</strong><br>
+                      Never serve static files this way in production.<br>
+                      Use Nginx, AWS S3, or WhiteNoise middleware instead.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Advanced Patterns -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">6.7 Advanced URL Patterns</h3>
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <h4 class="font-semibold text-gray-700 mb-2">Complex Routing Examples</h4>
+                  <pre class="text-sm overflow-x-auto"><code class="language-python">
+# Nested includes
+path('api/v1/', include([
+    path('blog/', include('blog.api.urls')),
+    path('store/', include('store.api.urls')),
+])),
+
+# Multiple parameters
+path('search/&lt;category:slug&gt;/&lt;sort:str&gt;/', views.search, 
+    name='advanced_search'),
+
+# Class-based view routing
+path('contact/', views.ContactView.as_view(), name='contact'),
+
+# Redirects
+path('old-url/', RedirectView.as_view(url='/new-url/')),
+                    </code></pre>
+                  <div class="mt-4 p-3 bg-blue-50 rounded-lg">
+                    <p class="text-sm text-gray-600">
+                      <strong>Best Practices:</strong><br>
+                      - Keep app-specific URLs in their own urls.py files<br>
+                      - Use versioning in API URLs (v1/, v2/)<br>
+                      - Document URL patterns using comments<br>
+                      - Test all URL patterns with reverse()
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- URL Testing -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">6.8 Testing URLs</h3>
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <pre class="text-sm overflow-x-auto"><code class="language-python">
+from django.test import TestCase
+from django.urls import reverse, resolve
+
+class URLTests(TestCase):
+    def test_home_url_resolves(self):
+        url = reverse('home')
+        self.assertEqual(resolve(url).func, views.home)
+
+    def test_post_detail_url(self):
+        url = reverse('post_detail', kwargs={'pk': 5})
+        self.assertEqual(url, '/posts/5/')
+
+    def test_category_view_status_code(self):
+        response = self.client.get('/category/python/')
+        self.assertEqual(response.status_code, 200)
+                    </code></pre>
+                  <div class="mt-4 p-3 bg-green-50 rounded-lg">
+                    <p class="text-sm text-gray-600">
+                      <strong>Testing Strategies:</strong><br>
+                      1. Verify URL reverse resolution<br>
+                      2. Check view function mapping<br>
+                      3. Test parameter handling<br>
+                      4. Validate status codes<br>
+                      5. Test redirect chains
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- After URLs section -->
+        <section id="templates" class="scroll-mt-20 pt-8">
+          <h2 class="text-3xl font-bold text-gray-800 mb-6">7. Django Templates</h2>
+
+          <div class="space-y-8">
+            <!-- Template Basics -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">7.1 Template Fundamentals</h3>
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <h4 class="font-semibold text-gray-700 mb-2">What are Django Templates?</h4>
+                  <p class="text-sm text-gray-600">
+                    Django's template system allows separation of Python code and HTML markup.
+                    Templates are HTML files with special syntax for dynamic content:
+                  </p>
+                  <pre class="text-sm overflow-x-auto mt-4"><code class="language-python">
+{# Example template #}
+&lt;h1&gt;{{ page_title }}&lt;/h1&gt;
+
+{% if user.is_authenticated %}
+  &lt;p&gt;Welcome back, {{ user.username }}!&lt;/p&gt;
+{% else %}
+  &lt;a href="{% url 'login' %}"&gt;Log in&lt;/a&gt;
+{% endif %}
+                    </code></pre>
+                  <div class="mt-4 p-3 bg-blue-50 rounded-lg">
+                    <p class="text-sm text-gray-600">
+                      <strong>Key Components:</strong><br>
+                      - <code>{{ }}</code> for variables<br>
+                      - <code>{% %}</code> for template tags/logic<br>
+                      - <code>{# #}</code> for comments<br>
+                      - Filters to modify variable output
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Template Inheritance -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">7.2 Template Inheritance</h3>
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <h4 class="font-semibold text-gray-700 mb-2">Base Template Structure</h4>
+                  <pre class="text-sm overflow-x-auto"><code class="language-python">
+{# base.html #}
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;{% block title %}Default Title{% endblock %}&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    {% include "navbar.html" %}
+    {% block content %}{% endblock %}
+    {% include "footer.html" %}
+&lt;/body&gt;
+&lt;/html&gt;
+                    </code></pre>
+                </div>
+
+                <div class="bg-gray-50 p-4 rounded-lg mt-4">
+                  <h4 class="font-semibold text-gray-700 mb-2">Child Template Implementation</h4>
+                  <pre class="text-sm overflow-x-auto"><code class="language-python">
+{# home.html #}
+{% extends "base.html" %}
+
+{% block title %}Home Page - Coderz{% endblock %}
+
+{% block content %}
+  &lt;div class="container"&gt;
+    &lt;h2&gt;Latest Projects&lt;/h2&gt;
+    {% for project in projects %}
+      &lt;div class="project-card"&gt;
+        {{ project.name|title }}
+      &lt;/div&gt;
+    {% endfor %}
+  &lt;/div&gt;
+{% endblock %}
+                    </code></pre>
+                  <div class="mt-4 p-3 bg-green-50 rounded-lg">
+                    <p class="text-sm text-gray-600">
+                      <strong>Inheritance Benefits:</strong><br>
+                      - Reuse common layout elements<br>
+                      - Override specific sections<br>
+                      - Maintain consistent UI/UX<br>
+                      - Simplify template updates
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Template Filters -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">7.3 Template Filters</h3>
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <h4 class="font-semibold text-gray-700 mb-2">Common Built-in Filters</h4>
+                  <pre class="text-sm overflow-x-auto"><code class="language-python">
+{# String manipulation #}
+{{ user.name|lower|capfirst }}
+
+{# Date formatting #}
+{{ post.created_at|date:"F j, Y" }}
+
+{# List handling #}
+{{ items|length }} items found
+{{ items|slice:":5" }}
+
+{# Default values #}
+{{ bio|default:"No bio available" }}
+                    </code></pre>
+                  <div class="mt-4 p-3 bg-purple-50 rounded-lg">
+                    <p class="text-sm text-gray-600">
+                      <strong>Chaining Filters:</strong> Multiple filters can be applied sequentially<br>
+                      <strong>Syntax:</strong> <code>{{ value|filter:"argument" }}</code><br>
+                      <strong>Custom Filters:</strong> Can be created in <code>templatetags/</code> directory
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Template Tags -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">7.4 Template Tags</h3>
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <h4 class="font-semibold text-gray-700 mb-2">Essential Template Tags</h4>
+                  <pre class="text-sm overflow-x-auto"><code class="language-python">
+{# Looping #}
+{% for item in items %}
+  {% if forloop.first %}&lt;ul&gt;{% endif %}
+  &lt;li&gt;{{ item.name }} ({{ forloop.counter }})&lt;/li&gt;
+  {% if forloop.last %}&lt;/ul&gt;{% endif %}
+{% empty %}
+  &lt;p&gt;No items found&lt;/p&gt;
+{% endfor %}
+
+{# URL reversal #}
+&lt;a href="{% url 'product_detail' slug=product.slug %}"&gt;
+  {{ product.name }}
+&lt;/a&gt;
+
+{# CSRF protection #}
+&lt;form method="post"&gt;
+  {% csrf_token %}
+  {{ form.as_p }}
+  &lt;button type="submit"&gt;Save&lt;/button&gt;
+&lt;/form&gt;
+                    </code></pre>
+                  <div class="mt-4 p-3 bg-yellow-50 rounded-lg">
+                    <p class="text-sm text-gray-600">
+                      <strong>Important Tags:</strong><br>
+                      - <code>{% include %}</code>: Insert sub-templates<br>
+                      - <code>{% static %}</code>: Link static files<br>
+                      - <code>{% with %}</code>: Create template variables<br>
+                      - <code>{% trans %}</code>: Internationalization
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Template Context -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">7.5 Template Context</h3>
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <h4 class="font-semibold text-gray-700 mb-2">Passing Data to Templates</h4>
+                  <pre class="text-sm overflow-x-auto"><code class="language-python">
+# views.py
+def project_list(request):
+    projects = Project.objects.filter(is_published=True)
+    context = {
+        'projects': projects,
+        'page_title': 'Featured Projects',
+        'current_year': datetime.now().year
+    }
+    return render(request, 'projects/list.html', context)
+                    </code></pre>
+                  <div class="mt-4 p-3 bg-blue-50 rounded-lg">
+                    <p class="text-sm text-gray-600">
+                      <strong>Context Best Practices:</strong><br>
+                      - Keep context data minimal and focused<br>
+                      - Use context processors for global variables<br>
+                      - Avoid complex logic in templates<br>
+                      - Consider using <code>get_context_data()</code> in class-based views
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Custom Filters/Tags -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">7.6 Custom Filters & Tags</h3>
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <h4 class="font-semibold text-gray-700 mb-2">Creating Custom Filters</h4>
+                  <pre class="text-sm overflow-x-auto"><code class="language-python">
+# templatetags/custom_filters.py
+from django import template
+
+register = template.Library()
+
+@register.filter(name='currency')
+def currency_format(value):
+    return f"${value:,.2f}"
+
+# Usage in template:
+{{ product.price|currency }}
+                    </code></pre>
+                </div>
+
+                <div class="bg-gray-50 p-4 rounded-lg mt-4">
+                  <h4 class="font-semibold text-gray-700 mb-2">Creating Custom Tags</h4>
+                  <pre class="text-sm overflow-x-auto"><code class="language-python">
+# templatetags/custom_tags.py
+from django import template
+
+register = template.Library()
+
+@register.simple_tag
+def current_time(format_string):
+    return datetime.now().strftime(format_string)
+
+# Usage in template:
+{% current_time "%Y-%m-%d %H:%M" %}
+                    </code></pre>
+                  <div class="mt-4 p-3 bg-green-50 rounded-lg">
+                    <p class="text-sm text-gray-600">
+                      <strong>Requirements:</strong><br>
+                      1. Create <code>templatetags</code> directory in your app<br>
+                      2. Add <code>__init__.py</code> file<br>
+                      3. Restart development server after changes
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Template Best Practices -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">7.7 Template Best Practices</h3>
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <ul class="list-disc pl-4 space-y-3 text-sm text-gray-600">
+                    <li>
+                      <strong>Keep templates simple:</strong> Move complex logic to views/models
+                    </li>
+                    <li>
+                      <strong>Use template fragments:</strong> Break templates into reusable
+                      components with <code>{% include %}</code>
+                    </li>
+                    <li>
+                      <strong>Organize template directories:</strong>
+                      <pre class="text-sm overflow-x-auto mt-2"><code class="language-plaintext">
+templates/
+├── base.html
+├── includes/
+│   ├── header.html
+│   └── footer.html
+└── projects/
+    ├── list.html
+    └── detail.html
+                        </code></pre>
+                    </li>
+                    <li>
+                      <strong>Cache template fragments:</strong> Use
+                      <code>{% cache %}</code> tag for expensive operations
+                    </li>
+                    <li>
+                      <strong>Security:</strong> Always escape variables with
+                      <code>|escape</code> (auto-enabled by default)
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <!-- Template Testing -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">7.8 Template Testing</h3>
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <pre class="text-sm overflow-x-auto"><code class="language-python">
+from django.test import TestCase
+
+class TemplateTests(TestCase):
+    def test_template_used(self):
+        response = self.client.get('/projects/')
+        self.assertTemplateUsed(response, 'projects/list.html')
+
+    def test_template_context(self):
+        response = self.client.get('/projects/')
+        self.assertIn('projects', response.context)
+        self.assertEqual(len(response.context['projects']), 5)
+
+    def test_template_content(self):
+        response = self.client.get('/about/')
+        self.assertContains(response, "About Coderz")
+        self.assertNotContains(response, "TODO")
+                    </code></pre>
+                  <div class="mt-4 p-3 bg-red-50 rounded-lg">
+                    <p class="text-sm text-gray-600">
+                      <strong>Testing Tips:</strong><br>
+                      - Verify correct templates are rendered<br>
+                      - Check context data presence and validity<br>
+                      - Test for both presence and absence of content<br>
+                      - Use <code>SimpleTestCase</code> for template-only tests
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- After templates section -->
+        <section id="forms" class="scroll-mt-20 pt-8">
+          <h2 class="text-3xl font-bold text-gray-800 mb-6">8. Django Forms</h2>
+
+          <div class="space-y-8">
+            <!-- Form Basics -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">8.1 Form Fundamentals</h3>
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <h4 class="font-semibold text-gray-700 mb-2">What are Django Forms?</h4>
+                  <p class="text-sm text-gray-600">
+                    Django forms handle user input validation, rendering, and processing. They:
+                  </p>
+                  <ul class="list-disc pl-4 mt-2 space-y-1 text-sm text-gray-600">
+                    <li>Generate HTML form elements</li>
+                    <li>Validate submitted data</li>
+                    <li>Clean and normalize input</li>
+                    <li>Provide security against CSRF attacks</li>
+                  </ul>
+                  <pre class="text-sm overflow-x-auto mt-4"><code class="language-python">
+{# Example template #}
+&lt;h1&gt;{{ page_title }}&lt;/h1&gt;
+
+{% if user.is_authenticated %}
+  &lt;p&gt;Welcome back, {{ user.username }}!&lt;/p&gt;
+{% else %}
+  &lt;a href="{% url 'login' %}"&gt;Log in&lt;/a&gt;
+{% endif %}
+                    </code></pre>
+                </div>
+              </div>
+            </div>
+
+            <!-- Form Rendering -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">8.2 Form Rendering</h3>
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <h4 class="font-semibold text-gray-700 mb-2">Template Integration</h4>
+                  <pre class="text-sm overflow-x-auto"><code class="language-python">
+{# contact.html #}
+&lt;form method="post"&gt;
+  {% csrf_token %}
+  
+  {# Automatic rendering #}
+  {{ form.as_p }}
+  
+  {# Manual rendering #}
+  &lt;div class="field"&gt;
+    {{ form.name.label_tag }}
+    {{ form.name }}
+    {{ form.name.errors }}
+  &lt;/div&gt;
+  
+  &lt;button type="submit"&gt;Send&lt;/button&gt;
+&lt;/form&gt;
+                    </code></pre>
+                  <div class="mt-4 p-3 bg-blue-50 rounded-lg">
+                    <p class="text-sm text-gray-600">
+                      <strong>Rendering Methods:</strong><br>
+                      - <code>as_p()</code>: Wrapped in &lt;p&gt; tags<br>
+                      - <code>as_table()</code>: Table format (requires &lt;table&gt;)<br>
+                      - <code>as_ul()</code>: Unordered list format<br>
+                      - Manual rendering for full control
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Form Validation -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">8.3 Form Validation</h3>
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <h4 class="font-semibold text-gray-700 mb-2">Validation Process</h4>
+                  <pre class="text-sm overflow-x-auto"><code class="language-python">
+# views.py
+def contact_view(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            # Process valid data
+            name = form.cleaned_data['name']
+            return redirect('success')
+    else:
+        form = ContactForm()
+    
+    return render(request, 'contact.html', {'form': form})
+                    </code></pre>
+                  <div class="mt-4 p-3 bg-green-50 rounded-lg">
+                    <p class="text-sm text-gray-600">
+                      <strong>Validation Steps:</strong><br>
+                      1. Form instantiation with request data<br>
+                      2. <code>is_valid()</code> triggers validation<br>
+                      3. Errors stored in <code>form.errors</code><br>
+                      4. Cleaned data in <code>form.cleaned_data</code>
+                    </p>
+                  </div>
+                </div>
+
+                <div class="bg-gray-50 p-4 rounded-lg mt-4">
+                  <h4 class="font-semibold text-gray-700 mb-2">Custom Validation</h4>
+                  <pre class="text-sm overflow-x-auto"><code class="language-python">
+class RegistrationForm(forms.Form):
+    password = forms.CharField(widget=forms.PasswordInput)
+    confirm_password = forms.CharField(widget=forms.PasswordInput)
+
+    def clean(self):
+        cleaned_data = super().clean()
+        password = cleaned_data.get("password")
+        confirm_password = cleaned_data.get("confirm_password")
+
+        if password != confirm_password:
+            raise forms.ValidationError("Passwords don't match")
+                    </code></pre>
+                </div>
+              </div>
+            </div>
+
+            <!-- Model Forms -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">8.4 Model Forms</h3>
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <pre class="text-sm overflow-x-auto"><code class="language-python">
+# forms.py
+from django.forms import ModelForm
+from .models import Article
+
+class ArticleForm(ModelForm):
+    class Meta:
+        model = Article
+        fields = ['title', 'content', 'published_date']
+        widgets = {
+            'published_date': forms.DateInput(attrs={'type': 'date'})
+        }
+        labels = {
+            'title': 'Article Title'
+        }
+                    </code></pre>
+                  <div class="mt-4 p-3 bg-purple-50 rounded-lg">
+                    <p class="text-sm text-gray-600">
+                      <strong>ModelForm Features:</strong><br>
+                      - Automatically generates form from model<br>
+                      - Handles model validation rules<br>
+                      - Supports <code>fields</code> and <code>exclude</code><br>
+                      - Custom widgets and labels
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- File Uploads -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">8.5 File Uploads</h3>
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <pre class="text-sm overflow-x-auto"><code class="language-python">
+# forms.py
+class DocumentForm(forms.Form):
+    title = forms.CharField(max_length=100)
+    file = forms.FileField(
+        widget=forms.ClearableFileInput(attrs={'multiple': True})
+    )
+
+# views.py
+def upload_file(request):
+    if request.method == 'POST':
+        form = DocumentForm(request.POST, request.FILES)
+        if form.is_valid():
+            handle_uploaded_file(request.FILES['file'])
+                      </code></pre>
+                  <div class="mt-4 p-3 bg-yellow-50 rounded-lg">
+                    <p class="text-sm text-gray-600">
+                      <strong>Security Considerations:</strong><br>
+                      - Limit file types with <code>validators</code><br>
+                      - Use <code>FileField</code> or <code>ImageField</code><br>
+                      - Set <code>enctype="multipart/form-data"</code> in form<br>
+                      - Validate file size and content
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Form Widgets -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">8.6 Custom Widgets</h3>
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <pre class="text-sm overflow-x-auto"><code class="language-python">
+class RichTextEditor(forms.Textarea):
+    class Media:
+        css = {'all': ('css/richtext.css',)}
+        js = ('js/richtext.js',)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(attrs={
+            'class': 'richtext-editor',
+            'rows': 10
+        })
+
+# Usage
+class PostForm(forms.ModelForm):
+    content = forms.CharField(widget=RichTextEditor())
+                    </code></pre>
+                  <div class="mt-4 p-3 bg-red-50 rounded-lg">
+                    <p class="text-sm text-gray-600">
+                      <strong>Widget Best Practices:</strong><br>
+                      - Inherit from existing widgets<br>
+                      - Add custom CSS/JS via Media class<br>
+                      - Set default HTML attributes<br>
+                      - Reuse across multiple forms
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Form Handling -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">8.7 Form Handling in Views</h3>
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <pre class="text-sm overflow-x-auto"><code class="language-python">
+# Class-based view example
+from django.views.generic.edit import CreateView
+from .models import Post
+from .forms import PostForm
+
+class PostCreateView(CreateView):
+    model = Post
+    form_class = PostForm
+    template_name = 'posts/create.html'
+    success_url = '/posts/'
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+                    </code></pre>
+                  <div class="mt-4 p-3 bg-blue-50 rounded-lg">
+                    <p class="text-sm text-gray-600">
+                      <strong>Generic Form Views:</strong><br>
+                      - <code>CreateView</code>: Handle object creation<br>
+                      - <code>UpdateView</code>: Manage object updates<br>
+                      - <code>FormView</code>: For non-model forms<br>
+                      - <code>DeleteView</code>: Object deletion forms
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Form Security -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">8.8 Form Security</h3>
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <pre class="text-sm overflow-x-auto"><code class="language-python">
+# forms.py
+from django.core.validators import RegexValidator
+
+class SecureForm(forms.Form):
+    phone = forms.CharField(
+        validators=[
+            RegexValidator(
+                r'^\+?1?\d{9,15}$',
+                "Enter valid phone number"
+            )
+        ]
+    )
+    
+    def clean_sensitive_field(self):
+        data = self.cleaned_data['sensitive_field']
+        # Custom sanitization logic
+        return sanitize(data)
+                    </code></pre>
+                  <div class="mt-4 p-3 bg-green-50 rounded-lg">
+                    <p class="text-sm text-gray-600">
+                      <strong>Security Measures:</strong><br>
+                      - Always use <code>{% csrf_token %}</code><br>
+                      - Validate all inputs (client and server-side)<br>
+                      - Sanitize user-generated content<br>
+                      - Use Django's built-in security features
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Form Testing -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">8.9 Testing Forms</h3>
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <pre class="text-sm overflow-x-auto"><code class="language-python">
+from django.test import TestCase
+from .forms import ContactForm
+
+class FormTests(TestCase):
+    def test_valid_form(self):
+        form_data = {
+            'name': 'John Doe',
+            'email': 'john@example.com',
+            'message': 'Hello World'
+        }
+        form = ContactForm(data=form_data)
+        self.assertTrue(form.is_valid())
+
+    def test_invalid_email(self):
+        form_data = {'email': 'invalid-email'}
+        form = ContactForm(data=form_data)
+        self.assertFalse(form.is_valid())
+        self.assertIn('email', form.errors)
+                    </code></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- After forms section -->
+        <section id="admin" class="scroll-mt-20 pt-8">
+          <h2 class="text-3xl font-bold text-gray-800 mb-6">9. Django Admin Interface</h2>
+
+          <div class="space-y-8">
+            <!-- Admin Basics -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">9.1 Admin Fundamentals</h3>
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <h4 class="font-semibold text-gray-700 mb-2">What is Django Admin?</h4>
+                  <p class="text-sm text-gray-600">
+                    Django's admin interface is an automatic CRUD (Create, Read, Update, Delete)
+                    interface for managing your application's data. Key features include:
+                  </p>
+                  <ul class="list-disc pl-4 mt-2 space-y-1 text-sm text-gray-600">
+                    <li>Automatic model registration</li>
+                    <li>User authentication and permissions</li>
+                    <li>Search and filtering capabilities</li>
+                    <li>Batch actions</li>
+                    <li>Customizable forms and displays</li>
+                  </ul>
+                </div>
+
+                <div class="bg-gray-50 p-4 rounded-lg mt-4">
+                  <h4 class="font-semibold text-gray-700 mb-2">Basic Setup</h4>
+                  <pre class="text-sm overflow-x-auto"><code class="language-python">
+# admin.py
+from django.contrib import admin
+from .models import Product
+
+@admin.register(Product)
+class ProductAdmin(admin.ModelAdmin):
+    pass
+                    </code></pre>
+                  <div class="mt-4 p-3 bg-blue-50 rounded-lg">
+                    <p class="text-sm text-gray-600">
+                      <strong>Key Requirements:</strong><br>
+                      1. Create superuser with <code>python manage.py createsuperuser</code><br>
+                      2. Models must be registered in admin.py<br>
+                      3. Admin site available at <code>/admin/</code>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Customizing Admin -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">9.2 Customizing the Admin</h3>
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <pre class="text-sm overflow-x-auto"><code class="language-python">
+class ProductAdmin(admin.ModelAdmin):
+    list_display = ('name', 'price', 'stock_status')
+    list_filter = ('category', 'created_at')
+    search_fields = ('name', 'description')
+    ordering = ('-created_at',)
+    date_hierarchy = 'created_at'
+
+    def stock_status(self, obj):
+        return "In Stock" if obj.quantity > 0 else "Out of Stock"
+    stock_status.short_description = 'Inventory Status'
+                    </code></pre>
+                  <div class="mt-4 p-3 bg-green-50 rounded-lg">
+                    <p class="text-sm text-gray-600">
+                      <strong>Common Customizations:</strong><br>
+                      - <code>list_display</code>: Fields to display in list view<br>
+                      - <code>list_filter</code>: Right-side filtering options<br>
+                      - <code>search_fields</code>: Enable search box functionality<br>
+                      - <code>ordering</code>: Default sorting order<br>
+                      - Custom methods for calculated fields
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Inline Editing -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">9.3 Inline Editing</h3>
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <pre class="text-sm overflow-x-auto"><code class="language-python">
+class ProductImageInline(admin.TabularInline):
+    model = ProductImage
+    extra = 1
+    fields = ('image', 'caption', 'is_featured')
+
+class ProductAdmin(admin.ModelAdmin):
+    inlines = [ProductImageInline]
+                    </code></pre>
+                  <div class="mt-4 p-3 bg-purple-50 rounded-lg">
+                    <p class="text-sm text-gray-600">
+                      <strong>Inline Types:</strong><br>
+                      - <code>TabularInline</code>: Table layout for related objects<br>
+                      - <code>StackedInline</code>: Vertical form layout<br>
+                      - <code>extra</code>: Number of empty forms displayed<br>
+                      - Manage related models on parent edit page
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Admin Actions -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">9.4 Admin Actions</h3>
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <pre class="text-sm overflow-x-auto"><code class="language-python">
+@admin.action(description='Mark selected as published')
+def make_published(modeladmin, request, queryset):
+    queryset.update(status='published')
+
+class ArticleAdmin(admin.ModelAdmin):
+    actions = [make_published]
+    list_editable = ['status']
+                    </code></pre>
+                  <div class="mt-4 p-3 bg-yellow-50 rounded-lg">
+                    <p class="text-sm text-gray-600">
+                      <strong>Action Features:</strong><br>
+                      - Perform batch operations on selected items<br>
+                      - Accessible from the admin list view<br>
+                      - Can modify queryset or trigger external processes<br>
+                      - Combine with <code>list_editable</code> for quick edits
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- User Permissions -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">9.5 User Permissions</h3>
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <pre class="text-sm overflow-x-auto"><code class="language-python">
+class ProductAdmin(admin.ModelAdmin):
+    def get_queryset(self, request):
+        qs = super().get_queryset(request)
+        if not request.user.is_superuser:
+            return qs.filter(owner=request.user)
+        return qs
+
+    def has_change_permission(self, request, obj=None):
+        if obj and not request.user.is_superuser:
+            return obj.owner == request.user
+        return super().has_change_permission(request, obj)
+                    </code></pre>
+                  <div class="mt-4 p-3 bg-red-50 rounded-lg">
+                    <p class="text-sm text-gray-600">
+                      <strong>Permission Control:</strong><br>
+                      - Restrict data access with <code>get_queryset</code><br>
+                      - Override permission methods (<code>has_..._permission</code>)<br>
+                      - Use groups to manage access levels<br>
+                      - Audit logs via <code>django-simple-history</code> package
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Custom Admin Views -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">9.6 Custom Admin Views</h3>
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <pre class="text-sm overflow-x-auto"><code class="language-python">
+class CustomAdminSite(admin.AdminSite):
+    def get_urls(self):
+        urls = super().get_urls()
+        custom_urls = [
+            path('analytics/', self.admin_view(self.analytics_view))
+        ]
+        return custom_urls + urls
+
+    def analytics_view(self, request):
+        # Custom view logic
+        return render(request, 'admin/analytics.html')
+
+# Replace default admin site
+admin_site = CustomAdminSite(name='myadmin')
+                    </code></pre>
+                  <div class="mt-4 p-3 bg-blue-50 rounded-lg">
+                    <p class="text-sm text-gray-600">
+                      <strong>Advanced Customization:</strong><br>
+                      - Create custom admin site class<br>
+                      - Add new views and URLs<br>
+                      - Maintain admin styling with <code>admin/base_site.html</code><br>
+                      - Use <code>admin_view()</code> decorator for permissions
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Admin Security -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">9.7 Admin Security</h3>
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <pre class="text-sm overflow-x-auto"><code class="language-python">
+# settings.py
+ADMIN_ENABLED = env.bool('ADMIN_ENABLED', default=False)
+
+# urls.py
+if settings.ADMIN_ENABLED:
+    urlpatterns += [path('admin/', admin.site.urls)]
+
+# Deployment checklist
+- Change admin URL path
+- Enable 2FA for admin users
+- Regularly audit permissions
+- Monitor login attempts
+                    </code></pre>
+                  <div class="mt-4 p-3 bg-green-50 rounded-lg">
+                    <p class="text-sm text-gray-600">
+                      <strong>Security Best Practices:</strong><br>
+                      1. Disable admin in production if unused<br>
+                      2. Use environment variables for sensitive settings<br>
+                      3. Limit admin access to specific IPs<br>
+                      4. Regularly rotate admin credentials<br>
+                      5. Implement rate limiting
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Third-Party Packages -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">9.8 Enhancing Admin</h3>
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <pre class="text-sm overflow-x-auto"><code class="language-python">
+# Popular admin extensions
+django-jet: Modern UI theme
+django-grappelli: Elegant skin
+django-import-export: Data import/export
+django-admin-rangefilter: Date range filters
+django-object-actions: Add custom buttons
+
+# Installation example
+pip install django-jet
+INSTALLED_APPS = ['jet', ...]
+                    </code></pre>
+                  <div class="mt-4 p-3 bg-purple-50 rounded-lg">
+                    <p class="text-sm text-gray-600">
+                      <strong>Extension Benefits:</strong><br>
+                      - Modern UI/UX improvements<br>
+                      - Advanced filtering and search<br>
+                      - Bulk data operations<br>
+                      - Enhanced visualization tools<br>
+                      - Export/Import capabilities
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Admin Testing -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">9.9 Testing Admin</h3>
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <pre class="text-sm overflow-x-auto"><code class="language-python">
+from django.test import TestCase
+from django.contrib.auth.models import User
+
+class AdminTests(TestCase):
+    def setUp(self):
+        self.admin = User.objects.create_superuser(
+            'admin', 'admin@coderz.us', 'password'
+        )
+        self.client.force_login(self.admin)
+
+    def test_admin_access(self):
+        response = self.client.get('/admin/')
+        self.assertEqual(response.status_code, 200)
+
+    def test_model_admin(self):
+        response = self.client.get('/admin/shop/product/')
+        self.assertContains(response, 'Products')
+                    </code></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- After admin section -->
+        <section id="migrations" class="scroll-mt-20 pt-8">
+          <h2 class="text-3xl font-bold text-gray-800 mb-6">10. Database Migrations</h2>
+
+          <div class="space-y-8">
+            <!-- Migration Basics -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">10.1 Migration Fundamentals</h3>
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <h4 class="font-semibold text-gray-700 mb-2">What are Migrations?</h4>
+                  <p class="text-sm text-gray-600">
+                    Migrations are Django's version control system for database schema changes. They:
+                  </p>
+                  <ul class="list-disc pl-4 mt-2 space-y-1 text-sm text-gray-600">
+                    <li>Track model changes over time</li>
+                    <li>Generate database-specific SQL commands</li>
+                    <li>Maintain database schema consistency across environments</li>
+                    <li>Enable team collaboration on database structure</li>
+                  </ul>
+                  <pre class="text-sm overflow-x-auto mt-4"><code class="language-python">
+# Migration file example
+class Migration(migrations.Migration):
+    initial = True
+    dependencies = []
+    operations = [
+        migrations.CreateModel(
+            name='Product',
+            fields=[
+                ('id', models.AutoField(auto_created=True, primary_key=True)),
+                ('name', models.CharField(max_length=100)),
+                ('price', models.DecimalField(decimal_places=2, max_digits=10)),
+            ],
+        ),
+    ]
+                    </code></pre>
+                </div>
+              </div>
+            </div>
+
+            <!-- Creating Migrations -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">10.2 Creating Migrations</h3>
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <pre class="text-sm overflow-x-auto"><code class="language-bash">
+# Create new migrations
+python manage.py makemigrations
+
+# Create migration for specific app
+python manage.py makemigrations products
+
+# Detect changes without creating files
+python manage.py makemigrations --dry-run
+                    </code></pre>
+                  <div class="mt-4 p-3 bg-blue-50 rounded-lg">
+                    <p class="text-sm text-gray-600">
+                      <strong>Migration Creation Process:</strong><br>
+                      1. Django compares models to current database state<br>
+                      2. Generates operations to reach new state<br>
+                      3. Stores migration files in <code>migrations/</code> directory<br>
+                      4. Files should be committed to version control
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Applying Migrations -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">10.3 Applying Migrations</h3>
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <pre class="text-sm overflow-x-auto"><code class="language-bash">
+# Apply all migrations
+python manage.py migrate
+
+# Apply specific app migrations
+python manage.py migrate products
+
+# Fake migration (mark as applied)
+python manage.py migrate --fake
+
+# Show migration plan
+python manage.py migrate --plan
+                    </code></pre>
+                  <div class="mt-4 p-3 bg-green-50 rounded-lg">
+                    <p class="text-sm text-gray-600">
+                      <strong>Migration States:</strong><br>
+                      - Applied: Migration has been executed on database<br>
+                      - Unapplied: Migration exists but not executed<br>
+                      - Rolled Back: Migration was reversed (requires manual intervention)
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Migration Rollbacks -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">10.4 Migration Rollbacks</h3>
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <pre class="text-sm overflow-x-auto"><code class="language-bash">
+# Show migration history
+python manage.py showmigrations
+
+# Rollback specific migration
+python manage.py migrate products 0003
+
+# Rollback all app migrations
+python manage.py migrate products zero
+                    </code></pre>
+                  <div class="mt-4 p-3 bg-yellow-50 rounded-lg">
+                    <p class="text-sm text-gray-600">
+                      <strong>Rollback Considerations:</strong><br>
+                      - Not all operations are reversible<br>
+                      - Data loss may occur during rollbacks<br>
+                      - Always backup database before rollbacks<br>
+                      - Test rollbacks in staging environment first
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Data Migrations -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">10.5 Data Migrations</h3>
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <pre class="text-sm overflow-x-auto"><code class="language-python">
+# Create empty migration
+python manage.py makemigrations --empty products --name populate_data
+
+# Migration file contents
+from django.db import migrations
+
+def populate_initial_data(apps, schema_editor):
+    Product = apps.get_model('products', 'Product')
+    Product.objects.create(name="Starter Package", price=99.99)
+
+class Migration(migrations.Migration):
+    dependencies = [
+        ('products', '0001_initial'),
+    ]
+    operations = [
+        migrations.RunPython(
+            populate_initial_data,
+            reverse_code=migrations.RunPython.noop
+        ),
+    ]
+                    </code></pre>
+                  <div class="mt-4 p-3 bg-purple-50 rounded-lg">
+                    <p class="text-sm text-gray-600">
+                      <strong>Data Migration Best Practices:</strong><br>
+                      - Use apps.get_model() instead of direct imports<br>
+                      - Always provide reverse_code when possible<br>
+                      - Test with production-like data volumes<br>
+                      - Consider batch operations for large datasets
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Manual Migrations -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">10.6 Manual Migrations</h3>
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <pre class="text-sm overflow-x-auto"><code class="language-python">
+# Custom SQL migration
+from django.db import migrations
+
+SQL = """
+ALTER TABLE products_product
+ADD COLUMN discount_price NUMERIC(10,2);
+"""
+
+REVERSE_SQL = """
+ALTER TABLE products_product
+DROP COLUMN discount_price;
+"""
+
+class Migration(migrations.Migration):
+    dependencies = [
+        ('products', '0002_auto_20230101_1234'),
+    ]
+    operations = [
+        migrations.RunSQL(
+            SQL,
+            REVERSE_SQL
+        )
+    ]
+                    </code></pre>
+                  <div class="mt-4 p-3 bg-red-50 rounded-lg">
+                    <p class="text-sm text-gray-600">
+                      <strong>When to Use Manual Migrations:</strong><br>
+                      - Database-specific features not supported by ORM<br>
+                      - Complex index creation<br>
+                      - Performance optimizations<br>
+                      - Data transformation between schema changes
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Migration Conflicts -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">10.7 Resolving Conflicts</h3>
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <pre class="text-sm overflow-x-auto"><code class="language-bash">
+# Common conflict scenarios
+git merge conflict in migration files
+Multiple migration heads in database
+Missing migration files
+
+# Resolution steps
+1. Identify problem with showmigrations
+2. Backup database
+3. Delete conflicting migration files
+4. Create new migrations
+5. Fake apply if necessary
+                    </code></pre>
+                  <div class="mt-4 p-3 bg-blue-50 rounded-lg">
+                    <p class="text-sm text-gray-600">
+                      <strong>Conflict Prevention:</strong><br>
+                      - Always pull latest changes before creating migrations<br>
+                      - One migration per logical change<br>
+                      - Communicate schema changes with team<br>
+                      - Use --merge option for migration conflicts
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Migration Security -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">10.8 Migration Security</h3>
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <pre class="text-sm overflow-x-auto"><code class="language-python">
+# settings.py
+MIGRATION_MODULES = {
+    'sensitive_app': 'sensitive_app.private_migrations'
+}
+
+# Production practices
+- Review all migrations before deployment
+- Test migrations on staging database
+- Use database backups
+- Monitor migration execution
+                    </code></pre>
+                  <div class="mt-4 p-3 bg-green-50 rounded-lg">
+                    <p class="text-sm text-gray-600">
+                      <strong>Security Considerations:</strong><br>
+                      - Never edit migrations after they've been applied<br>
+                      - Keep migration directory structure intact<br>
+                      - Avoid sensitive data in migrations<br>
+                      - Use separate database users for migration execution
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Testing Migrations -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">10.9 Testing Migrations</h3>
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <pre class="text-sm overflow-x-auto"><code class="language-python">
+from django.test import TestCase
+from django.db.migrations.executor import MigrationExecutor
+from django.db import connection
+
+class MigrationTest(TestCase):
+    def test_migrations(self):
+        executor = MigrationExecutor(connection)
+        app = "products"
+        
+        # Test migration forward
+        executor.migrate([(app, "0002")])
+        self.assertTrue(
+            executor.loader.applied_migrations,
+            {(app, "0001"), (app, "0002")}
+        )
+        
+        # Test migration backward
+        executor.migrate([(app, "0001")])
+        self.assertNotIn(
+            "new_column",
+            connection.introspection.get_table_description(
+                connection.cursor(), 
+                "products_product"
+            )
+        )
+                    </code></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- After migrations section -->
+        <section id="authentication" class="scroll-mt-20 pt-8">
+          <h2 class="text-3xl font-bold text-gray-800 mb-6">11. Authentication & Authorization</h2>
+
+          <div class="space-y-8">
+            <!-- Auth Basics -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">11.1 Authentication Fundamentals</h3>
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <h4 class="font-semibold text-gray-700 mb-2">Django's Auth System</h4>
+                  <p class="text-sm text-gray-600">
+                    Django provides a full-featured authentication system handling:
+                  </p>
+                  <ul class="list-disc pl-4 mt-2 space-y-1 text-sm text-gray-600">
+                    <li>User accounts and profiles</li>
+                    <li>Permissions and authorization</li>
+                    <li>Password hashing and validation</li>
+                    <li>Session management</li>
+                    <li>Social authentication (via third-party packages)</li>
+                  </ul>
+                  <pre class="text-sm overflow-x-auto mt-4"><code class="language-python">
+# settings.py
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+]
+LOGIN_URL = '/accounts/login/'
+LOGIN_REDIRECT_URL = '/dashboard/'
+LOGOUT_REDIRECT_URL = '/'
+                    </code></pre>
+                </div>
+              </div>
+            </div>
+
+            <!-- User Models -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">11.2 Custom User Models</h3>
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <pre class="text-sm overflow-x-auto"><code class="language-python">
+# accounts/models.py
+from django.contrib.auth.models import AbstractUser
+
+class CustomUser(AbstractUser):
+    bio = models.TextField(max_length=500, blank=True)
+    birth_date = models.DateField(null=True, blank=True)
+    website = models.URLField(blank=True)
+    
+    # Remove username, use email instead
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = []
+
+# settings.py
+AUTH_USER_MODEL = 'accounts.CustomUser'
+                    </code></pre>
+                  <div class="mt-4 p-3 bg-blue-50 rounded-lg">
+                    <p class="text-sm text-gray-600">
+                      <strong>Best Practices:</strong><br>
+                      - Create custom user model at project start<br>
+                      - Inherit from AbstractUser for simple changes<br>
+                      - Use AbstractBaseUser for complete customization<br>
+                      - Update AUTH_USER_MODEL before first migration
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Login/Logout -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">11.3 Login & Logout</h3>
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <pre class="text-sm overflow-x-auto"><code class="language-python">
+# views.py
+from django.contrib.auth import login, logout
+from django.shortcuts import redirect
+
+def custom_login(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            login(request, user)
+            return redirect('dashboard')
+    else:
+        form = AuthenticationForm()
+    return render(request, 'login.html', {'form': form})
+
+def custom_logout(request):
+    logout(request)
+    return redirect('home')
+                    </code></pre>
+                  <div class="mt-4 p-3 bg-green-50 rounded-lg">
+                    <p class="text-sm text-gray-600">
+                      <strong>Security Considerations:</strong><br>
+                      - Always use Django's built-in login/logout views<br>
+                      - Use HTTPS in production<br>
+                      - Set secure session cookies<br>
+                      - Implement login attempt throttling
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Permissions -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">11.4 Permissions & Authorization</h3>
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <pre class="text-sm overflow-x-auto"><code class="language-python">
+# Model-level permissions
+class Article(models.Model):
+    class Meta:
+        permissions = [
+            ("publish_article", "Can publish article"),
+            ("edit_foreign_article", "Can edit any article"),
+        ]
+
+# View-level checks
+@permission_required('app.publish_article')
+def publish_article(request, article_id):
+    # Publish logic
+
+# Template checks
+{% if perms.app.publish_article %}
+  &lt;button&gt;Publish&lt;/button&gt;
+{% endif %}
+                    </code></pre>
+                  <div class="mt-4 p-3 bg-purple-50 rounded-lg">
+                    <p class="text-sm text-gray-600">
+                      <strong>Authorization Types:</strong><br>
+                      1. Model permissions (add/change/delete/view)<br>
+                      2. Custom permissions<br>
+                      3. Object-level permissions (need django-guardian)<br>
+                      4. Role-based access control (RBAC)
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Password Management -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">11.5 Password Management</h3>
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <pre class="text-sm overflow-x-auto"><code class="language-python">
+# Password validation
+AUTH_PASSWORD_VALIDATORS = [
+    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
+]
+
+# Password reset flow
+path('accounts/password_reset/', auth_views.PasswordResetView.as_view()),
+path('accounts/password_reset/done/', auth_views.PasswordResetDoneView.as_view()),
+path('accounts/reset/&lt;uidb64&gt;/&lt;token&gt;/', auth_views.PasswordResetConfirmView.as_view()),
+path('accounts/reset/done/', auth_views.PasswordResetCompleteView.as_view()),
+                    </code></pre>
+                  <div class="mt-4 p-3 bg-yellow-50 rounded-lg">
+                    <p class="text-sm text-gray-600">
+                      <strong>Best Practices:</strong><br>
+                      - Never store plain text passwords<br>
+                      - Use Argon2 or bcrypt hashers<br>
+                      - Implement password expiration policies<br>
+                      - Require 2FA for sensitive operations
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Social Auth -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">11.6 Social Authentication</h3>
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <pre class="text-sm overflow-x-auto"><code class="language-python">
+# Using django-allauth
+INSTALLED_APPS = [
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
+]
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
+# Google provider configuration
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': ['profile', 'email'],
+        'AUTH_PARAMS': {'access_type': 'online'},
+        'APP': {
+            'client_id': env('GOOGLE_CLIENT_ID'),
+            'secret': env('GOOGLE_SECRET'),
+            'key': ''
+        }
+    }
+}
+                    </code></pre>
+                  <div class="mt-4 p-3 bg-red-50 rounded-lg">
+                    <p class="text-sm text-gray-600">
+                      <strong>Security Tips:</strong><br>
+                      - Store credentials in environment variables<br>
+                      - Limit OAuth scopes to minimum required<br>
+                      - Handle account merging carefully<br>
+                      - Monitor social auth integrations
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- JWT Auth -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">11.7 JWT Authentication</h3>
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <pre class="text-sm overflow-x-auto"><code class="language-python">
+# Using djangorestframework-simplejwt
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ]
+}
+
+# views.py
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
+
+urlpatterns = [
+    path('api/token/', TokenObtainPairView.as_view()),
+    path('api/token/refresh/', TokenRefreshView.as_view()),
+]
+
+# settings.py
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=15),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+    'ROTATE_REFRESH_TOKENS': True,
+}
+                    </code></pre>
+                </div>
+              </div>
+            </div>
+
+            <!-- Testing Auth -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">11.8 Testing Authentication</h3>
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <pre class="text-sm overflow-x-auto"><code class="language-python">
+from django.test import TestCase
+from django.contrib.auth import get_user_model
+
+class AuthTests(TestCase):
+    def setUp(self):
+        self.user = get_user_model().objects.create_user(
+            email='test@coderz.us',
+            password='testpass123'
+        )
+
+    def test_login_success(self):
+        response = self.client.login(email='test@coderz.us', password='testpass123')
+        self.assertTrue(response)
+
+    def test_protected_view_access(self):
+        self.client.force_login(self.user)
+        response = self.client.get('/dashboard/')
+        self.assertEqual(response.status_code, 200)
+
+    def test_permission_enforcement(self):
+        response = self.client.get('/admin/')
+        self.assertRedirects(response, '/accounts/login/?next=/admin/')
+                    </code></pre>
+                </div>
+              </div>
+            </div>
+
+            <!-- Security Headers -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">11.9 Security Headers</h3>
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <pre class="text-sm overflow-x-auto"><code class="language-python">
+# settings.py
+SECURE_BROWSER_XSS_FILTER = True
+SECURE_CONTENT_TYPE_NOSNIFF = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+SECURE_HSTS_SECONDS = 31536000  # 1 year
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_HSTS_PRELOAD = True
+
+# Use django-csp
+CSP_DEFAULT_SRC = ("'self'",)
+CSP_SCRIPT_SRC = ("'self'", "https://trusted.cdn.com")
+CSP_IMG_SRC = ("'self'", "data:")
+                    </code></pre>
+                  <div class="mt-4 p-3 bg-blue-50 rounded-lg">
+                    <p class="text-sm text-gray-600">
+                      <strong>Essential Security Measures:</strong><br>
+                      - Implement Content Security Policy (CSP)<br>
+                      - Enable HTTP Strict Transport Security (HSTS)<br>
+                      - Use secure cookies<br>
+                      - Regular security audits with django-defender
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- After authentication section -->
+        <section id="rest-apis" class="scroll-mt-20 pt-8">
+          <h2 class="text-3xl font-bold text-gray-800 mb-6">12. Building REST APIs with Django</h2>
+
+          <div class="space-y-8">
+            <!-- REST Basics -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">12.1 REST API Fundamentals</h3>
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <h4 class="font-semibold text-gray-700 mb-2">What is REST?</h4>
+                  <p class="text-sm text-gray-600">
+                    REST (Representational State Transfer) is an architectural style for building web services that:
+                  </p>
+                  <ul class="list-disc pl-4 mt-2 space-y-1 text-sm text-gray-600">
+                    <li>Use standard HTTP methods (GET, POST, PUT, DELETE)</li>
+                    <li>Are stateless - each request contains all necessary information</li>
+                    <li>Support multiple formats (JSON, XML)</li>
+                    <li>Follow resource-based URL structures</li>
+                  </ul>
+                  <pre class="text-sm overflow-x-auto mt-4"><code class="language-bash">
+# Example REST endpoints
+GET    /api/products/       # List all products
+POST   /api/products/       # Create new product
+GET    /api/products/1/     # Get product details
+PUT    /api/products/1/     # Update product
+DELETE /api/products/1/     # Delete product
+                    </code></pre>
+                </div>
+              </div>
+            </div>
+
+            <!-- DRF Setup -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">12.2 Django REST Framework Setup</h3>
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <pre class="text-sm overflow-x-auto"><code class="language-bash">
+# Installation
+pip install djangorestframework
+
+# settings.py
+INSTALLED_APPS = [
+    ...
+    'rest_framework',
+    'rest_framework.authtoken',
+]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+    ]
+}
+                    </code></pre>
+                  <div class="mt-4 p-3 bg-blue-50 rounded-lg">
+                    <p class="text-sm text-gray-600">
+                      <strong>Key Components:</strong><br>
+                      - Serializers: Convert complex data to Python datatypes<br>
+                      - Viewsets: Combine logic for multiple views<br>
+                      - Routers: Automatically generate URL patterns<br>
+                      - Pagination: Manage large datasets
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Serializers -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">12.3 Serializers</h3>
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <pre class="text-sm overflow-x-auto"><code class="language-python">
+# serializers.py
+from rest_framework import serializers
+from .models import Product
+
+class ProductSerializer(serializers.ModelSerializer):
+    price_with_tax = serializers.SerializerMethodField()
+    
+    class Meta:
+        model = Product
+        fields = ['id', 'name', 'price', 'price_with_tax']
+        read_only_fields = ['id']
+        
+    def get_price_with_tax(self, obj):
+        return obj.price * 1.08
+
+# ModelSerializer Features
+- Automatic field generation
+- Built-in validation
+- Save/update instances
+- Nested relationships
+                    </code></pre>
+                </div>
+              </div>
+            </div>
+
+            <!-- Viewsets & Routers -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">12.4 Viewsets & Routers</h3>
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <pre class="text-sm overflow-x-auto"><code class="language-python">
+# views.py
+from rest_framework import viewsets
+from .models import Product
+from .serializers import ProductSerializer
+
+class ProductViewSet(viewsets.ModelViewSet):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+    filterset_fields = ['category', 'in_stock']
+
+# urls.py
+from rest_framework.routers import DefaultRouter
+router = DefaultRouter()
+router.register(r'products', ProductViewSet)
+urlpatterns = router.urls
+                    </code></pre>
+                  <div class="mt-4 p-3 bg-green-50 rounded-lg">
+                    <p class="text-sm text-gray-600">
+                      <strong>Viewset Actions:</strong><br>
+                      - list(): GET /products/<br>
+                      - create(): POST /products/<br>
+                      - retrieve(): GET /products/1/<br>
+                      - update(): PUT /products/1/<br>
+                      - partial_update(): PATCH /products/1/<br>
+                      - destroy(): DELETE /products/1/
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- API Authentication -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">12.5 API Authentication</h3>
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <pre class="text-sm overflow-x-auto"><code class="language-python">
+# Token Authentication
+from rest_framework.authtoken.views import ObtainAuthToken
+from rest_framework.authtoken.models import Token
+
+class CustomAuthToken(ObtainAuthToken):
+    def post(self, request, *args, **kwargs):
+        serializer = self.serializer_class(data=request.data,
+                                        context={'request': request})
+        serializer.is_valid(raise_exception=True)
+        user = serializer.validated_data['user']
+        token, created = Token.objects.get_or_create(user=user)
+        return Response({
+            'token': token.key,
+            'user_id': user.pk,
+            'email': user.email
+        })
+
+# Permissions
+class IsOwnerOrReadOnly(permissions.BasePermission):
+    def has_object_permission(self, request, view, obj):
+        if request.method in permissions.SAFE_METHODS:
+            return True
+        return obj.owner == request.user
+                    </code></pre>
+                </div>
+              </div>
+            </div>
+
+            <!-- Pagination -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">12.6 Pagination & Throttling</h3>
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <pre class="text-sm overflow-x-auto"><code class="language-python">
+# settings.py
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 
+        'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 20,
+    'DEFAULT_THROTTLE_CLASSES': [
+        'rest_framework.throttling.AnonRateThrottle',
+        'rest_framework.throttling.UserRateThrottle'
+    ],
+    'DEFAULT_THROTTLE_RATES': {
+        'anon': '100/hour',
+        'user': '1000/hour'
+    }
+}
+
+# Custom Pagination
+class LargeResultsSetPagination(PageNumberPagination):
+    page_size = 100
+    page_size_query_param = 'page_size'
+    max_page_size = 1000
+                    </code></pre>
+                </div>
+              </div>
+            </div>
+
+            <!-- API Documentation -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">12.7 API Documentation</h3>
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <pre class="text-sm overflow-x-auto"><code class="language-python">
+# Using drf-yasg for Swagger docs
+from drf_yasg import openapi
+from drf_yasg.views import get_schema_view
+
+schema_view = get_schema_view(
+    openapi.Info(
+        title="Coderz API",
+        default_version='v1',
+        description="API documentation for Coderz Marketplace",
+    ),
+    public=True,
+)
+
+urlpatterns = [
+    path('swagger/', schema_view.with_ui('swagger')),
+    path('redoc/', schema_view.with_ui('redoc')),
+]
+                    </code></pre>
+                  <div class="mt-4 p-3 bg-purple-50 rounded-lg">
+                    <p class="text-sm text-gray-600">
+                      <strong>Documentation Best Practices:</strong><br>
+                      - Document all endpoints and parameters<br>
+                      - Include example requests/responses<br>
+                      - Add error codes and meanings<br>
+                      - Maintain version history<br>
+                      - Use OpenAPI specification
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Testing APIs -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">12.8 Testing APIs</h3>
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <pre class="text-sm overflow-x-auto"><code class="language-python">
+from rest_framework.test import APITestCase
+from django.urls import reverse
+
+class ProductAPITests(APITestCase):
+    def setUp(self):
+        self.product = Product.objects.create(name="Test Product", price=99.99)
+        self.user = User.objects.create_user(username='testuser', password='testpass')
+        self.client.force_authenticate(user=self.user)
+
+    def test_product_list(self):
+        url = reverse('product-list')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(response.data), 1)
+
+    def test_product_creation(self):
+        url = reverse('product-list')
+        data = {'name': 'New Product', 'price': 149.99}
+        response = self.client.post(url, data)
+        self.assertEqual(response.status_code, 201)
+        self.assertEqual(Product.objects.count(), 2)
+                    </code></pre>
+                </div>
+              </div>
+            </div>
+
+            <!-- API Security -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">12.9 API Security</h3>
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <pre class="text-sm overflow-x-auto"><code class="language-python">
+# settings.py
+CORS_ALLOWED_ORIGINS = [
+    "https://coderz.us",
+    "https://api.coderz.us",
+]
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SECURE_SSL_REDIRECT = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+
+# Rate limiting
+'DEFAULT_THROTTLE_RATES': {
+    'burst': '60/min',
+    'sustained': '1000/day'
+}
+
+# Input validation
+class ProductSerializer(serializers.ModelSerializer):
+    def validate_price(self, value):
+        if value < 0:
+            raise serializers.ValidationError("Price cannot be negative")
+        return value
+                    </code></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- After REST APIs section -->
+        <section id="middleware" class="scroll-mt-20 pt-8">
+          <h2 class="text-3xl font-bold text-gray-800 mb-6">13. Django Middleware</h2>
+
+          <div class="space-y-8">
+            <!-- Middleware Basics -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">13.1 Middleware Fundamentals</h3>
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <h4 class="font-semibold text-gray-700 mb-2">What is Middleware?</h4>
+                  <p class="text-sm text-gray-600">
+                    Middleware is a series of processing hooks that sit between the web server and view layer.
+                    It processes requests and responses globally, enabling:
+                  </p>
+                  <ul class="list-disc pl-4 mt-2 space-y-1 text-sm text-gray-600">
+                    <li>Request pre-processing</li>
+                    <li>Response post-processing</li>
+                    <li>Exception handling</li>
+                    <li>Session management</li>
+                    <li>Security enhancements</li>
+                  </ul>
+                  <pre class="text-sm overflow-x-auto mt-4"><code class="language-python">
+# settings.py
+MIDDLEWARE = [
+    'django.middleware.security.SecurityMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+]
+                    </code></pre>
+                </div>
+              </div>
+            </div>
+
+            <!-- Custom Middleware -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">13.2 Creating Custom Middleware</h3>
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <pre class="text-sm overflow-x-auto"><code class="language-python">
+# middleware.py
+import time
+
+class RequestTimingMiddleware:
+    def __init__(self, get_response):
+        self.get_response = get_response
+
+    def __call__(self, request):
+        start_time = time.time()
+        response = self.get_response(request)
+        duration = time.time() - start_time
+        
+        # Add header to response
+        response['X-Request-Duration'] = f"{duration:.2f}s"
+        return response
+
+    def process_view(self, request, view_func, view_args, view_kwargs):
+        # Additional view-specific processing
+        pass
+                    </code></pre>
+                  <div class="mt-4 p-3 bg-blue-50 rounded-lg">
+                    <p class="text-sm text-gray-600">
+                      <strong>Middleware Methods:</strong><br>
+                      - <code>__init__</code>: Initialization (called once)<br>
+                      - <code>__call__</code>: Process request/response<br>
+                      - <code>process_view</code>: Run before view execution<br>
+                      - <code>process_exception</code>: Handle view exceptions<br>
+                      - <code>process_template_response</code>: Modify template responses
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Security Middleware -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">13.3 Security Middleware</h3>
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <pre class="text-sm overflow-x-auto"><code class="language-python">
+# settings.py
+SECURE_CONTENT_TYPE_NOSNIFF = True
+SECURE_BROWSER_XSS_FILTER = True
+X_FRAME_OPTIONS = 'DENY'
+CSP_DEFAULT_SRC = ("'self'",)
+
+# Custom security middleware
+class SecurityHeadersMiddleware:
+    def __init__(self, get_response):
+        self.get_response = get_response
+
+    def __call__(self, request):
+        response = self.get_response(request)
+        response['Strict-Transport-Security'] = 'max-age=31536000; includeSubDomains'
+        response['X-Content-Type-Options'] = 'nosniff'
+        return response
+                    </code></pre>
+                  <div class="mt-4 p-3 bg-green-50 rounded-lg">
+                    <p class="text-sm text-gray-600">
+                      <strong>Essential Security Headers:</strong><br>
+                      - HSTS: Enforce HTTPS connections<br>
+                      - CSP: Prevent XSS attacks<br>
+                      - X-Frame-Options: Prevent clickjacking<br>
+                      - Referrer-Policy: Control referrer information<br>
+                      - Feature-Policy: Limit browser features
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Error Handling -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">13.4 Error Handling Middleware</h3>
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <pre class="text-sm overflow-x-auto"><code class="language-python">
+class CustomErrorHandlerMiddleware:
+    def __init__(self, get_response):
+        self.get_response = get_response
+
+    def __call__(self, request):
+        response = self.get_response(request)
+        return response
+
+    def process_exception(self, request, exception):
+        # Log exception
+        logger.error(f"Exception occurred: {exception}")
+        
+        # Return custom JSON response for API errors
+        if request.path.startswith('/api/'):
+            return JsonResponse(
+                {'error': 'Internal server error'},
+                status=500
+            )
+        return None
+                    </code></pre>
+                  <div class="mt-4 p-3 bg-purple-50 rounded-lg">
+                    <p class="text-sm text-gray-600">
+                      <strong>Error Handling Strategies:</strong><br>
+                      - Log exceptions to monitoring system<br>
+                      - Custom error pages for different HTTP status codes<br>
+                      - API-friendly error responses<br>
+                      - Sentry integration for error tracking<br>
+                      - Graceful degradation for critical failures
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Request Processing -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">13.5 Request Processing</h3>
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <pre class="text-sm overflow-x-auto"><code class="language-python">
+class RequestLoggerMiddleware:
+    def __init__(self, get_response):
+        self.get_response = get_response
+
+    def __call__(self, request):
+        # Pre-process request
+        self.log_request(request)
+        
+        response = self.get_response(request)
+        
+        # Post-process response
+        self.log_response(request, response)
+        return response
+
+    def log_request(self, request):
+        logger.info(f"{request.method} {request.path}")
+
+    def log_response(self, request, response):
+        logger.info(f"Response {response.status_code}")
+                    </code></pre>
+                  <div class="mt-4 p-3 bg-yellow-50 rounded-lg">
+                    <p class="text-sm text-gray-600">
+                      <strong>Request Lifecycle:</strong><br>
+                      1. Process request before reaching view<br>
+                      2. Execute view function<br>
+                      3. Process response before sending to client<br>
+                      4. Handle exceptions during processing<br>
+                      5. Modify response headers/content
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Middleware Ordering -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">13.6 Middleware Ordering</h3>
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <pre class="text-sm overflow-x-auto"><code class="language-python">
+# Execution order matters!
+MIDDLEWARE = [
+    # Security first
+    'django.middleware.security.SecurityMiddleware',
+    
+    # Session before authentication
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    
+    # Common middleware
+    'django.middleware.common.CommonMiddleware',
+    
+    # CSRF before auth
+    'django.middleware.csrf.CsrfViewMiddleware',
+    
+    # Authentication
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    
+    # Custom middleware
+    'app.middleware.CustomMiddleware',
+]
+                    </code></pre>
+                  <div class="mt-4 p-3 bg-red-50 rounded-lg">
+                    <p class="text-sm text-gray-600">
+                      <strong>Ordering Guidelines:</strong><br>
+                      - Security middleware first<br>
+                      - Session before authentication<br>
+                      - CSRF before views<br>
+                      - Authentication before custom logic<br>
+                      - Response processors last<br>
+                      - Test order changes thoroughly
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Testing Middleware -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">13.7 Testing Middleware</h3>
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <pre class="text-sm overflow-x-auto"><code class="language-python">
+from django.test import RequestFactory, TestCase
+
+class MiddlewareTests(TestCase):
+    def setUp(self):
+        self.factory = RequestFactory()
+        self.middleware = RequestTimingMiddleware(lambda req: None)
+
+    def test_response_header_added(self):
+        request = self.factory.get('/')
+        response = self.middleware(request)
+        self.assertIn('X-Request-Duration', response)
+
+    def test_exception_handling(self):
+        def bad_view(request):
+            raise ValueError("Test error")
+        
+        middleware = CustomErrorHandlerMiddleware(bad_view)
+        response = middleware(self.factory.get('/'))
+        self.assertEqual(response.status_code, 500)
+                    </code></pre>
+                </div>
+              </div>
+            </div>
+
+            <!-- Third-Party Middleware -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">13.8 Third-Party Middleware</h3>
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <pre class="text-sm overflow-x-auto"><code class="language-python">
+# django-cors-headers
+CORS_ALLOWED_ORIGINS = [
+    "https://coderz.us",
+    "https://api.coderz.us",
+]
+
+# django-debug-toolbar
+DEBUG_TOOLBAR_CONFIG = {
+    'SHOW_TOOLBAR_CALLBACK': lambda request: DEBUG,
+}
+
+# django-htmlmin
+HTML_MINIFY = True
+KEEP_COMMENTS_ON_MINIFYING = False
+
+# django-gzip-middleware
+MIDDLEWARE.append('django.middleware.gzip.GZipMiddleware')
+                    </code></pre>
+                  <div class="mt-4 p-3 bg-blue-50 rounded-lg">
+                    <p class="text-sm text-gray-600">
+                      <strong>Popular Packages:</strong><br>
+                      - CORS: Cross-Origin Resource Sharing<br>
+                      - Debug Toolbar: Development diagnostics<br>
+                      - HTMLMin: Minify HTML output<br>
+                      - GZip: Compress responses<br>
+                      - Whitenoise: Static file serving<br>
+                      - Django-SES: Email backend middleware
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Performance Considerations -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">13.9 Performance Optimization</h3>
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <pre class="text-sm overflow-x-auto"><code class="language-python">
+class CacheMiddleware:
+    def __init__(self, get_response):
+        self.get_response = get_response
+        self.cache = {}
+
+    def __call__(self, request):
+        if request.method == 'GET':
+            cache_key = self.get_cache_key(request)
+            if cache_key in self.cache:
+                return self.cache[cache_key]
+        
+        response = self.get_response(request)
+        
+        if request.method == 'GET':
+            self.cache[cache_key] = response
+        
+        return response
+                    </code></pre>
+                  <div class="mt-4 p-3 bg-green-50 rounded-lg">
+                    <p class="text-sm text-gray-600">
+                      <strong>Optimization Tips:</strong><br>
+                      - Use middleware sparingly<br>
+                      - Profile middleware performance<br>
+                      - Implement caching layers<br>
+                      - Avoid heavy computations<br>
+                      - Use async middleware in Django 3.1+<br>
+                      - Monitor middleware execution times
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- After REST APIs section -->
+        <section id="middleware" class="scroll-mt-20 pt-8">
+          <h2 class="text-3xl font-bold text-gray-800 mb-6">13. Django Middleware</h2>
+
+          <div class="space-y-8">
+            <!-- Middleware Basics -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">13.1 Middleware Fundamentals</h3>
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <h4 class="font-semibold text-gray-700 mb-2">What is Middleware?</h4>
+                  <p class="text-sm text-gray-600">
+                    Middleware is a series of processing hooks that sit between the web server and view layer.
+                    It processes requests and responses globally, enabling:
+                  </p>
+                  <ul class="list-disc pl-4 mt-2 space-y-1 text-sm text-gray-600">
+                    <li>Request pre-processing</li>
+                    <li>Response post-processing</li>
+                    <li>Exception handling</li>
+                    <li>Session management</li>
+                    <li>Security enhancements</li>
+                  </ul>
+                  <pre class="text-sm overflow-x-auto mt-4"><code class="language-python">
+# settings.py
+MIDDLEWARE = [
+    'django.middleware.security.SecurityMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+]
+                    </code></pre>
+                </div>
+              </div>
+            </div>
+
+            <!-- Custom Middleware -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">13.2 Creating Custom Middleware</h3>
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <pre class="text-sm overflow-x-auto"><code class="language-python">
+# middleware.py
+import time
+
+class RequestTimingMiddleware:
+    def __init__(self, get_response):
+        self.get_response = get_response
+
+    def __call__(self, request):
+        start_time = time.time()
+        response = self.get_response(request)
+        duration = time.time() - start_time
+        
+        # Add header to response
+        response['X-Request-Duration'] = f"{duration:.2f}s"
+        return response
+
+    def process_view(self, request, view_func, view_args, view_kwargs):
+        # Additional view-specific processing
+        pass
+                    </code></pre>
+                  <div class="mt-4 p-3 bg-blue-50 rounded-lg">
+                    <p class="text-sm text-gray-600">
+                      <strong>Middleware Methods:</strong><br>
+                      - <code>__init__</code>: Initialization (called once)<br>
+                      - <code>__call__</code>: Process request/response<br>
+                      - <code>process_view</code>: Run before view execution<br>
+                      - <code>process_exception</code>: Handle view exceptions<br>
+                      - <code>process_template_response</code>: Modify template responses
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Security Middleware -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">13.3 Security Middleware</h3>
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <pre class="text-sm overflow-x-auto"><code class="language-python">
+# settings.py
+SECURE_CONTENT_TYPE_NOSNIFF = True
+SECURE_BROWSER_XSS_FILTER = True
+X_FRAME_OPTIONS = 'DENY'
+CSP_DEFAULT_SRC = ("'self'",)
+
+# Custom security middleware
+class SecurityHeadersMiddleware:
+    def __init__(self, get_response):
+        self.get_response = get_response
+
+    def __call__(self, request):
+        response = self.get_response(request)
+        response['Strict-Transport-Security'] = 'max-age=31536000; includeSubDomains'
+        response['X-Content-Type-Options'] = 'nosniff'
+        return response
+                    </code></pre>
+                  <div class="mt-4 p-3 bg-green-50 rounded-lg">
+                    <p class="text-sm text-gray-600">
+                      <strong>Essential Security Headers:</strong><br>
+                      - HSTS: Enforce HTTPS connections<br>
+                      - CSP: Prevent XSS attacks<br>
+                      - X-Frame-Options: Prevent clickjacking<br>
+                      - Referrer-Policy: Control referrer information<br>
+                      - Feature-Policy: Limit browser features
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Error Handling -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">13.4 Error Handling Middleware</h3>
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <pre class="text-sm overflow-x-auto"><code class="language-python">
+class CustomErrorHandlerMiddleware:
+    def __init__(self, get_response):
+        self.get_response = get_response
+
+    def __call__(self, request):
+        response = self.get_response(request)
+        return response
+
+    def process_exception(self, request, exception):
+        # Log exception
+        logger.error(f"Exception occurred: {exception}")
+        
+        # Return custom JSON response for API errors
+        if request.path.startswith('/api/'):
+            return JsonResponse(
+                {'error': 'Internal server error'},
+                status=500
+            )
+        return None
+                    </code></pre>
+                  <div class="mt-4 p-3 bg-purple-50 rounded-lg">
+                    <p class="text-sm text-gray-600">
+                      <strong>Error Handling Strategies:</strong><br>
+                      - Log exceptions to monitoring system<br>
+                      - Custom error pages for different HTTP status codes<br>
+                      - API-friendly error responses<br>
+                      - Sentry integration for error tracking<br>
+                      - Graceful degradation for critical failures
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Request Processing -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">13.5 Request Processing</h3>
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <pre class="text-sm overflow-x-auto"><code class="language-python">
+class RequestLoggerMiddleware:
+    def __init__(self, get_response):
+        self.get_response = get_response
+
+    def __call__(self, request):
+        # Pre-process request
+        self.log_request(request)
+        
+        response = self.get_response(request)
+        
+        # Post-process response
+        self.log_response(request, response)
+        return response
+
+    def log_request(self, request):
+        logger.info(f"{request.method} {request.path}")
+
+    def log_response(self, request, response):
+        logger.info(f"Response {response.status_code}")
+                    </code></pre>
+                  <div class="mt-4 p-3 bg-yellow-50 rounded-lg">
+                    <p class="text-sm text-gray-600">
+                      <strong>Request Lifecycle:</strong><br>
+                      1. Process request before reaching view<br>
+                      2. Execute view function<br>
+                      3. Process response before sending to client<br>
+                      4. Handle exceptions during processing<br>
+                      5. Modify response headers/content
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Middleware Ordering -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">13.6 Middleware Ordering</h3>
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <pre class="text-sm overflow-x-auto"><code class="language-python">
+# Execution order matters!
+MIDDLEWARE = [
+    # Security first
+    'django.middleware.security.SecurityMiddleware',
+    
+    # Session before authentication
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    
+    # Common middleware
+    'django.middleware.common.CommonMiddleware',
+    
+    # CSRF before auth
+    'django.middleware.csrf.CsrfViewMiddleware',
+    
+    # Authentication
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    
+    # Custom middleware
+    'app.middleware.CustomMiddleware',
+]
+                    </code></pre>
+                  <div class="mt-4 p-3 bg-red-50 rounded-lg">
+                    <p class="text-sm text-gray-600">
+                      <strong>Ordering Guidelines:</strong><br>
+                      - Security middleware first<br>
+                      - Session before authentication<br>
+                      - CSRF before views<br>
+                      - Authentication before custom logic<br>
+                      - Response processors last<br>
+                      - Test order changes thoroughly
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Testing Middleware -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">13.7 Testing Middleware</h3>
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <pre class="text-sm overflow-x-auto"><code class="language-python">
+from django.test import RequestFactory, TestCase
+
+class MiddlewareTests(TestCase):
+    def setUp(self):
+        self.factory = RequestFactory()
+        self.middleware = RequestTimingMiddleware(lambda req: None)
+
+    def test_response_header_added(self):
+        request = self.factory.get('/')
+        response = self.middleware(request)
+        self.assertIn('X-Request-Duration', response)
+
+    def test_exception_handling(self):
+        def bad_view(request):
+            raise ValueError("Test error")
+        
+        middleware = CustomErrorHandlerMiddleware(bad_view)
+        response = middleware(self.factory.get('/'))
+        self.assertEqual(response.status_code, 500)
+                    </code></pre>
+                </div>
+              </div>
+            </div>
+
+            <!-- Third-Party Middleware -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">13.8 Third-Party Middleware</h3>
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <pre class="text-sm overflow-x-auto"><code class="language-python">
+# django-cors-headers
+CORS_ALLOWED_ORIGINS = [
+    "https://coderz.us",
+    "https://api.coderz.us",
+]
+
+# django-debug-toolbar
+DEBUG_TOOLBAR_CONFIG = {
+    'SHOW_TOOLBAR_CALLBACK': lambda request: DEBUG,
+}
+
+# django-htmlmin
+HTML_MINIFY = True
+KEEP_COMMENTS_ON_MINIFYING = False
+
+# django-gzip-middleware
+MIDDLEWARE.append('django.middleware.gzip.GZipMiddleware')
+                    </code></pre>
+                  <div class="mt-4 p-3 bg-blue-50 rounded-lg">
+                    <p class="text-sm text-gray-600">
+                      <strong>Popular Packages:</strong><br>
+                      - CORS: Cross-Origin Resource Sharing<br>
+                      - Debug Toolbar: Development diagnostics<br>
+                      - HTMLMin: Minify HTML output<br>
+                      - GZip: Compress responses<br>
+                      - Whitenoise: Static file serving<br>
+                      - Django-SES: Email backend middleware
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Performance Considerations -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">13.9 Performance Optimization</h3>
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <pre class="text-sm overflow-x-auto"><code class="language-python">
+class CacheMiddleware:
+    def __init__(self, get_response):
+        self.get_response = get_response
+        self.cache = {}
+
+    def __call__(self, request):
+        if request.method == 'GET':
+            cache_key = self.get_cache_key(request)
+            if cache_key in self.cache:
+                return self.cache[cache_key]
+        
+        response = self.get_response(request)
+        
+        if request.method == 'GET':
+            self.cache[cache_key] = response
+        
+        return response
+                    </code></pre>
+                  <div class="mt-4 p-3 bg-green-50 rounded-lg">
+                    <p class="text-sm text-gray-600">
+                      <strong>Optimization Tips:</strong><br>
+                      - Use middleware sparingly<br>
+                      - Profile middleware performance<br>
+                      - Implement caching layers<br>
+                      - Avoid heavy computations<br>
+                      - Use async middleware in Django 3.1+<br>
+                      - Monitor middleware execution times
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- After middleware section -->
+        <section id="deployment" class="scroll-mt-20 pt-8">
+          <h2 class="text-3xl font-bold text-gray-800 mb-6">14. Production Deployment</h2>
+
+          <div class="space-y-8">
+            <!-- Hosting Environment -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">14.1 Choosing a Hosting Environment</h3>
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <h4 class="font-semibold text-gray-700 mb-2">Deployment Options</h4>
+                  <pre class="text-sm overflow-x-auto"><code class="language-python">
+# Sample Dockerfile for containerized deployment
+FROM python:3.9-slim
+
+ENV PYTHONUNBUFFERED=1
+WORKDIR /app
+
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY . .
+
+RUN python manage.py collectstatic --noinput
+
+CMD ["gunicorn", "coderz.wsgi:application", "--bind", "0.0.0.0:8000"]
+                    </code></pre>
+                  <div class="mt-4 p-3 bg-blue-50 rounded-lg">
+                    <p class="text-sm text-gray-600">
+                      <strong>Popular Platforms:</strong><br>
+                      - PaaS: Heroku, Railway, Render<br>
+                      - Containers: Docker, Kubernetes<br>
+                      - Cloud: AWS (EB), GCP (GKE), Azure<br>
+                      - VPS: DigitalOcean, Linode<br>
+                      - Serverless: Zappa (AWS Lambda)
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Database Setup -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">14.2 Production Database Configuration</h3>
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <pre class="text-sm overflow-x-auto"><code class="language-python">
+# settings.py
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.getenv('DB_NAME'),
+        'USER': os.getenv('DB_USER'),
+        'PASSWORD': os.getenv('DB_PASSWORD'),
+        'HOST': os.getenv('DB_HOST'),
+        'PORT': os.getenv('DB_PORT', '5432'),
+        'CONN_MAX_AGE': 300,
+        'OPTIONS': {
+            'sslmode': 'require',
+        }
+    }
+}
+
+# Connection pooling
+DATABASES['default']['DISABLE_SERVER_SIDE_CURSORS'] = True
+                    </code></pre>
+                  <div class="mt-4 p-3 bg-green-50 rounded-lg">
+                    <p class="text-sm text-gray-600">
+                      <strong>Best Practices:</strong><br>
+                      - Use PostgreSQL or MySQL in production<br>
+                      - Enable connection pooling (PgBouncer)<br>
+                      - Regular backups and point-in-time recovery<br>
+                      - Read replicas for scaling<br>
+                      - Enable SSL connections
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Static Files -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">14.3 Static & Media Files</h3>
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <pre class="text-sm overflow-x-auto"><code class="language-python">
+# settings.py
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# AWS S3 Configuration
+AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = 'coderz-static'
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+                    </code></pre>
+                  <div class="mt-4 p-3 bg-purple-50 rounded-lg">
+                    <p class="text-sm text-gray-600">
+                      <strong>Storage Options:</strong><br>
+                      - Whitenoise for static files<br>
+                      - AWS S3 for media storage<br>
+                      - CloudFront/CDN for global distribution<br>
+                      - Regular cache invalidation<br>
+                      - Versioned static files
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Environment Configuration -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">14.4 Environment Configuration</h3>
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <pre class="text-sm overflow-x-auto"><code class="language-python">
+# .env.production
+DEBUG=0
+SECRET_KEY=your-production-secret
+ALLOWED_HOSTS=coderz.us,www.coderz.us
+DATABASE_URL=postgres://user:pass@host:port/dbname
+SENTRY_DSN=https://example@sentry.io/123
+
+# settings.py
+from dotenv import load_dotenv
+load_dotenv(os.path.join(BASE_DIR, '.env.production'))
+                    </code></pre>
+                  <div class="mt-4 p-3 bg-yellow-50 rounded-lg">
+                    <p class="text-sm text-gray-600">
+                      <strong>Security Measures:</strong><br>
+                      - Never commit secrets to version control<br>
+                      - Use 12-factor app principles<br>
+                      - Rotate secrets regularly<br>
+                      - Use different environments (dev/staging/prod)<br>
+                      - Encrypt sensitive data
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Web Server -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">14.5 Web Server Configuration</h3>
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <pre class="text-sm overflow-x-auto"><code class="language-nginx">
+# Nginx configuration
+upstream app_server {
+    server 127.0.0.1:8000 fail_timeout=0;
+}
+
+server {
+    listen 80;
+    server_name coderz.us;
+
+    location / {
+        proxy_set_header Host $http_host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_pass http://app_server;
+    }
+
+    location /static/ {
+        alias /app/staticfiles/;
+        expires 1y;
+        access_log off;
+        add_header Cache-Control "public";
+    }
+}
+                    </code></pre>
+                  <div class="mt-4 p-3 bg-red-50 rounded-lg">
+                    <p class="text-sm text-gray-600">
+                      <strong>Server Stack Options:</strong><br>
+                      - WSGI: Gunicorn/uWSGI<br>
+                      - Web Server: Nginx/Caddy<br>
+                      - Process Manager: Systemd/Supervisord<br>
+                      - Load Balancer: HAProxy/Cloud Load Balancing<br>
+                      - Enable HTTP/2 and Brotli compression
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- SSL & Security -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">14.6 SSL & Security</h3>
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <pre class="text-sm overflow-x-auto"><code class="language-bash">
+# Let's Encrypt Certbot setup
+sudo certbot --nginx -d coderz.us -d www.coderz.us
+
+# Auto-renewal setup
+echo "0 12 * * * /usr/bin/certbot renew --quiet" | sudo crontab -
+
+# Security headers
+add_header Content-Security-Policy "default-src 'self'";
+add_header Strict-Transport-Security "max-age=31536000; includeSubDomains";
+add_header X-Content-Type-Options nosniff;
+                    </code></pre>
+                  <div class="mt-4 p-3 bg-blue-50 rounded-lg">
+                    <p class="text-sm text-gray-600">
+                      <strong>SSL Best Practices:</strong><br>
+                      - Use Let's Encrypt for free certificates<br>
+                      - Enable HSTS with preload directive<br>
+                      - Implement OCSP stapling<br>
+                      - Regular security audits<br>
+                      - Monitor SSL Labs rating (A+)
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Monitoring -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">14.7 Monitoring & Logging</h3>
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <pre class="text-sm overflow-x-auto"><code class="language-python">
+# settings.py
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': '/var/log/django/debug.log',
+        },
+        'sentry': {
+            'level': 'ERROR',
+            'class': 'sentry_sdk.integrations.logging.EventHandler',
+        },
+    },
+    'root': {
+        'handlers': ['file', 'sentry'],
+        'level': 'WARNING',
+    },
+}
+                    </code></pre>
+                  <div class="mt-4 p-3 bg-green-50 rounded-lg">
+                    <p class="text-sm text-gray-600">
+                      <strong>Monitoring Tools:</strong><br>
+                      - Application: Sentry, New Relic<br>
+                      - Infrastructure: Prometheus, Grafana<br>
+                      - Logs: ELK Stack, Papertrail<br>
+                      - Uptime: UptimeRobot, StatusCake<br>
+                      - Performance: Datadog, Blackfire
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Scaling -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">14.8 Scaling Strategies</h3>
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <pre class="text-sm overflow-x-auto"><code class="language-python">
+# Horizontal scaling with environment variables
+GUNICORN_WORKERS = os.getenv('GUNICORN_WORKERS', 3)
+GUNICORN_THREADS = os.getenv('GUNICORN_THREADS', 2)
+
+# Redis cache configuration
+CACHES = {
+    'default': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': os.getenv('REDIS_URL'),
+        'OPTIONS': {
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+            'CONNECTION_POOL_KWARGS': {'max_connections': 100}
+        }
+    }
+}
+                    </code></pre>
+                  <div class="mt-4 p-3 bg-purple-50 rounded-lg">
+                    <p class="text-sm text-gray-600">
+                      <strong>Scaling Techniques:</strong><br>
+                      - Add more workers/threads<br>
+                      - Database read replicas<br>
+                      - Redis caching layer<br>
+                      - CDN for static assets<br>
+                      - Async task queues (Celery/RQ)<br>
+                      - Auto-scaling groups
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- CI/CD -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">14.9 CI/CD Pipeline</h3>
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <pre class="text-sm overflow-x-auto"><code class="language-yaml">
+# .github/workflows/deploy.yml
+name: Deploy to Production
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+      
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.9
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Run tests
+      run: python manage.py test
+
+    - name: Deploy to AWS
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.PRODUCTION_HOST }}
+        username: ${{ secrets.PRODUCTION_USER }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        script: |
+          cd /var/www/coderz
+          git pull origin main
+          source venv/bin/activate
+          pip install -r requirements.txt
+          python manage.py migrate
+          sudo systemctl restart gunicorn
+                    </code></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+
+
+      </div>
+    </main>
+  </div>
+
+  <script>
+    const sidebar = document.querySelector(".sidebar");
+    const sidebarToggle = document.getElementById("sidebarToggle");
+
+    function toggleSidebar() {
+      sidebar.classList.toggle("-translate-x-full");
+    }
+
+    sidebarToggle.addEventListener("click", toggleSidebar);
+
+    document.addEventListener("click", (event) => {
+      if (
+        window.innerWidth < 768 &&
+        !sidebar.contains(event.target) &&
+        !sidebarToggle.contains(event.target)
+      ) {
+        sidebar.classList.add("-translate-x-full");
+      }
+    });
+
+    window.addEventListener("resize", () => {
+      if (window.innerWidth >= 768) {
+        sidebar.classList.remove("-translate-x-full");
+      }
+    });
+
+    hljs.highlightAll();
+  </script>
+</body>
+
+</html>
