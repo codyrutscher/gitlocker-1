@@ -47,6 +47,12 @@ module Marketplace
     def documentationreact
     end
 
+    def documentation_django
+    end
+
+    def documentation_laravel
+    end
+
     def recently_subscribed
       recently_followed_users = User.joins(:following_users).order('follows.created_at DESC').limit(20)
       followed_user_ids = recently_followed_users.pluck(:id)
