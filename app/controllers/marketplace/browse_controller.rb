@@ -21,7 +21,7 @@ module Marketplace
       
       # Apply pagination
 
-      @products = @products.page(params[:page]).per(3)
+      @products = @products.page(params[:page]).per(80)
 
       respond_to do |format|
         format.html
