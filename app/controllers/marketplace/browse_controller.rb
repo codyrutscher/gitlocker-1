@@ -2,18 +2,15 @@ module Marketplace
   class BrowseController < ApplicationController
     def index
       params[:sort_by] ||= "most_recent" unless params[:sort_by].present?
-
-      # Apply filters and sorting
       @products = apply_filters_and_sort(Product.exclude_purchased(current_user))
-
+      
       # Search functionality for index page
       if params[:query].present?
         @products = @products.where("name LIKE ?", "%#{params[:query]}%")
       end
-
-      if params[:filters].present?
+      
+      if filter_params.present? && (filter_params[:categories].present? || filter_params[:languages].present?)
         prod_ids = []
-
         # Apply category and language filters
         prod_ids.push(ProductCategory.where(category_id: filter_params[:categories]).pluck(:product_id)) if filter_params[:categories].present?
         prod_ids.push(ProductLanguage.where(language_id: filter_params[:languages]).pluck(:product_id)) if filter_params[:languages].present?
@@ -21,9 +18,10 @@ module Marketplace
         prod_ids = prod_ids.flatten
         @products = @products.where(id: prod_ids)
       end
-
+      
       # Apply pagination
-      @products = @products.page(filter_params[:page]).per(80)
+
+      @products = @products.page(params[:page]).per(3)
 
       respond_to do |format|
         format.html
@@ -74,20 +72,20 @@ module Marketplace
           params[:filters] = {}
         end
       end
-      permitted_params = params.permit(:category, :language, :sort_by, :page, :query, filters: {})
-
-      filters = permitted_params[:filters]&.permit(category: [], language: [], min_price: [], max_price: [], upload_date: [], alphabetical: []) || {}
-
+      
+      permitted_params = params[:filters].present? ? params[:filters].permit(:sort_by, :page, :query, :upload_date, :alphabetical, price: [], category: [], language: []) : {}
+      
       {
-        categories: ([permitted_params[:category]].compact + (filters[:category] || [])).uniq,
-        languages: ([permitted_params[:language]].compact + (filters[:language] || [])).uniq,
+        categories: [permitted_params[:category]].compact,
+        languages: [permitted_params[:language]].compact,
         sort_by: permitted_params[:sort_by],
         page: permitted_params[:page],
         query: permitted_params[:query],
-        min_price: filters[:min_price],
-        max_price: filters[:max_price],
-        upload_date: filters[:upload_date],
-        alphabetical: filters[:alphabetical]
+        min_price: permitted_params[:min_price],
+        max_price: permitted_params[:max_price],
+        upload_date: permitted_params[:upload_date],
+        alphabetical: permitted_params[:alphabetical],
+        price: permitted_params[:price]
       }
     end
 
@@ -103,12 +101,8 @@ module Marketplace
       # resource = resource.where(language_id: filter_params[:languages]) if filter_params[:languages].present?
 
       # Price filter
-      if filter_params[:min_price].present?
-        resource = resource.where('price_cents >= ?', filter_params[:min_price].to_i * 100)
-      end
-
-      if filter_params[:max_price].present?
-        resource = resource.where('price_cents <= ?', filter_params[:max_price].to_i * 100)
+      if filter_params[:price].present? && filter_params[:price][0].present? && filter_params[:price][1]
+        resource = resource.where('price_cents >= ? AND price_cents <= ?', filter_params[:price][0].to_f * 100, filter_params[:price][1].to_f * 100)
       end
 
       # Apply Upload Date filter (Newest or Oldest)
@@ -120,7 +114,7 @@ module Marketplace
           resource = resource.order(created_at: :asc)
         end
       end
-
+      
       # Apply Alphabetical filter (A-Z or Z-A)
       if filter_params[:alphabetical].present?
         case filter_params[:alphabetical]
