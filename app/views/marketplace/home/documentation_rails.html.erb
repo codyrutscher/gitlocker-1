@@ -1,14 +1,27 @@
-<style>
-  /* Custom scrollbar for sidebar */
-  .sidebar::-webkit-scrollbar {
-    width: 8px;
-  }
+<!DOCTYPE html>
+<html lang="en">
 
-  .sidebar::-webkit-scrollbar-thumb {
-    background: #4a5568;
-    border-radius: 4px;
-  }
-</style>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ruby on Rails Docs - Coderz</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="styles.css" />
+  <!-- Syntax Highlighting -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <style>
+    /* Custom scrollbar for sidebar */
+    .sidebar::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .sidebar::-webkit-scrollbar-thumb {
+      background: #4a5568;
+      border-radius: 4px;
+    }
+  </style>
+</head>
 
 <body class="bg-gray-50">
   <!-- Reuse sidebar from index.html -->
@@ -17,9 +30,9 @@
     <aside class="sidebar bg-gray-800 text-gray-300 w-64 fixed h-screen overflow-y-auto z-30">
       <!-- Sidebar Content -->
       <div class="p-4">
-        <%= link_to documentationindex_path, class: "block mb-6 text-blue-400 hover:text-blue-300" do %>
-        ← Back to Tech Stack
-        <% end %>
+        <a href="index.html" class="block mb-6 text-blue-400 hover:text-blue-300">
+          ← Back to Tech Stack
+        </a>
         <h2 class="text-xl font-bold mb-4">Ruby on Rails</h2>
         <!-- Nested Navigation -->
         <nav>
@@ -222,8 +235,7 @@
             <!-- macOS Instructions -->
             <div class="mb-6">
               <h4 class="font-semibold mb-2">🍎 For macOS Users</h4>
-              <pre class="bg-gray-800 p-4 rounded-lg">
-                <code class="language-bash">
+              <pre class="bg-gray-800 p-4 rounded-lg"><code class="language-bash">
 # Install Homebrew (if not installed)
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
@@ -233,15 +245,13 @@ rbenv init
 rbenv install 3.2.2
 rbenv global 3.2.2
 gem install rails
-                </code>
-              </pre>
+                            </code></pre>
             </div>
 
             <!-- Ubuntu Instructions -->
             <div>
               <h4 class="font-semibold mb-2">🐧 For Ubuntu Users</h4>
-              <pre class="bg-gray-800 p-4 rounded-lg">
-                <code class="language-bash">
+              <pre class="bg-gray-800 p-4 rounded-lg"><code class="language-bash">
 # Install dependencies
 sudo apt-get install curl gnupg2
 
@@ -253,8 +263,7 @@ rvm use 3.2.2 --default
 
 # Install Rails
 gem install rails
-                </code>
-              </pre>
+                            </code></pre>
             </div>
 
             <!-- Verification -->
@@ -342,6 +351,7 @@ gem install rails
                 <div class="bg-gray-50 p-4 rounded-lg">
                   <h4 class="font-semibold mb-2">💾 Model</h4>
                   <p class="text-sm">Manages data and business logic</p>
+
                   <pre class="mt-2"><code class="language-ruby">
 class User < ApplicationRecord
   validates :email, presence: true
@@ -354,11 +364,14 @@ end
                 <div class="bg-gray-50 p-4 rounded-lg">
                   <h4 class="font-semibold mb-2">🖼️ View</h4>
                   <p class="text-sm">Handles presentation layer</p>
-                  <pre class="mt-2"><code class="language-ruby">
-<%# app/views/users/show.html.erb %>
-<h1><%= @user.name %></h1>
-<p>Member since: <%= @user.created_at %></p>
-                                                  </code></pre>
+
+                  <pre class="mt-2">
+                      <code class="language-ruby">
+<-- app/views/users/show.html.erb -->
+<h1>Name: &lt;%= @user.name %&gt;</h1>
+<p>Member since: &lt;%= @user.created_at %&gt;</p>
+                      </code>
+                      </pre>
                 </div>
 
                 <!-- Controller Card -->
@@ -848,7 +861,8 @@ end
                       &lt;%= form.text_field :title, class: "input" %>
                       &lt;/div>
                       &lt;% end %>
-                      </code></pre>
+                      </code>
+                      </pre>
               </div>
               <div>
                 <pre class="bg-gray-800 p-4 rounded-lg"><code class="language-ruby">
@@ -2983,3 +2997,5 @@ heroku run rails db:setup
     hljs.highlightAll();
   </script>
 </body>
+
+</html>
