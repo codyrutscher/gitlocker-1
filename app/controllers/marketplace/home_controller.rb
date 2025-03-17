@@ -41,7 +41,7 @@ module Marketplace
     def documentationindex
     end
 
-    def documentationrails
+    def documentation_rails
     end
 
     def documentationreact
