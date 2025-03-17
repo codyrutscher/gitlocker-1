@@ -1,27 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
+<style>
+  /* Custom scrollbar for sidebar */
+  .sidebar::-webkit-scrollbar {
+    width: 8px;
+  }
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ruby on Rails Docs - Coderz</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="styles.css" />
-  <!-- Syntax Highlighting -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-  <style>
-    /* Custom scrollbar for sidebar */
-    .sidebar::-webkit-scrollbar {
-      width: 8px;
-    }
-
-    .sidebar::-webkit-scrollbar-thumb {
-      background: #4a5568;
-      border-radius: 4px;
-    }
-  </style>
-</head>
+  .sidebar::-webkit-scrollbar-thumb {
+    background: #4a5568;
+    border-radius: 4px;
+  }
+</style>
 
 <body class="bg-gray-50">
   <!-- Reuse sidebar from index.html -->
@@ -31,7 +18,7 @@
       <!-- Sidebar Content -->
       <div class="p-4">
         <%= link_to documentationindex_path, class: "block mb-6 text-blue-400 hover:text-blue-300" do %>
-        ← Back to Tech Stack 
+        ← Back to Tech Stack
         <% end %>
         <h2 class="text-xl font-bold mb-4">Ruby on Rails</h2>
         <!-- Nested Navigation -->
@@ -235,7 +222,8 @@
             <!-- macOS Instructions -->
             <div class="mb-6">
               <h4 class="font-semibold mb-2">🍎 For macOS Users</h4>
-              <pre class="bg-gray-800 p-4 rounded-lg"><code class="language-bash">
+              <pre class="bg-gray-800 p-4 rounded-lg">
+                <code class="language-bash">
 # Install Homebrew (if not installed)
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
@@ -245,13 +233,15 @@ rbenv init
 rbenv install 3.2.2
 rbenv global 3.2.2
 gem install rails
-                            </code></pre>
+                </code>
+              </pre>
             </div>
 
             <!-- Ubuntu Instructions -->
             <div>
               <h4 class="font-semibold mb-2">🐧 For Ubuntu Users</h4>
-              <pre class="bg-gray-800 p-4 rounded-lg"><code class="language-bash">
+              <pre class="bg-gray-800 p-4 rounded-lg">
+                <code class="language-bash">
 # Install dependencies
 sudo apt-get install curl gnupg2
 
@@ -263,7 +253,8 @@ rvm use 3.2.2 --default
 
 # Install Rails
 gem install rails
-                            </code></pre>
+                </code>
+              </pre>
             </div>
 
             <!-- Verification -->
@@ -2992,5 +2983,3 @@ heroku run rails db:setup
     hljs.highlightAll();
   </script>
 </body>
-
-</html>
