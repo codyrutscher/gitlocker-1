@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Coderz Docs</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Custom scrollbar for sidebar */
+    .sidebar::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .sidebar::-webkit-scrollbar-thumb {
+      background: #4a5568;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+
+<body class="bg-gray-50">
+  <!-- Container for entire page -->
+  <div class="min-h-screen flex flex-col">
+    <!-- Navigation will go here -->
+    <!-- After the opening <body> tag -->
+    <div class="min-h-screen md:flex">
+      <!-- Sidebar Container -->
+      <aside class="sidebar bg-gray-800 text-gray-300 w-64 fixed h-screen overflow-y-auto z-30">
+        <!-- Sidebar Content -->
+        <div class="p-4">
+          <h2 class="text-2xl font-bold mb-6">Coderz Docs</h2>
+          <nav>
+            <h3 class="text-sm font-semibold text-gray-400 mb-2">
+              TECH STACK
+            </h3>
+            <ul class="space-y-2">
+              <li>
+                <%= link_to documentation_rails_path, class: "flex items-center px-3 py-2 rounded hover:bg-gray-700" do %>
+                <span class="mr-2">
+                  <%= image_tag("https://img.icons8.com/color/48/ruby-programming-language.png", width: 20, height: 20, alt: "ruby-programming-language") %>
+                </span>
+                <span>Ruby on Rails</span>
+                <% end %>
+              </li>
+              <li>
+                <%= link_to documentationreact_path, class: "flex items-center px-3 py-2 rounded hover:bg-gray-700" do %>
+                <span class="mr-2">
+                  <%= image_tag("https://img.icons8.com/plasticine/100/react.png", width: 20, height: 20, alt: "react") %>
+                </span>
+                React
+                <% end %>
+              </li>
+              <li>
+                <%= link_to documentation_laravel_path, class: "flex items-center px-3 py-2 rounded hover:bg-gray-700" do %>
+                <span class="mr-2">
+                  <%= image_tag("https://img.icons8.com/fluency/48/laravel.png", width: 20, height: 20, alt: "laravel") %>
+                </span>
+                Laravel
+                <% end %>
+              </li>
+              <li>
+                <%= link_to documentation_django_path, class: "flex items-center px-3 py-2 rounded hover:bg-gray-700" do %>
+                <span class="mr-2">🐍</span> Django
+                <% end %>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </aside>
+
+      <!-- Mobile Menu Button -->
+      <button id="sidebarToggle" class="md:hidden fixed top-4 left-4 z-40 p-2 bg-gray-800 rounded-lg text-white">
+        ☰
+      </button>
+
+      <main class="flex-1 p-8 bg-gray-50 md:ml-64">
+        <div class="max-w-4xl mx-auto">
+          <h1 class="text-4xl font-bold mb-8">
+            Welcome to Coderz Documentation
+          </h1>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    // Toggle sidebar on mobile
+    const sidebar = document.querySelector(".sidebar");
+    const sidebarToggle = document.getElementById("sidebarToggle");
+
+    function toggleSidebar() {
+      sidebar.classList.toggle("-translate-x-full");
+    }
+
+    // Toggle button click
+    sidebarToggle.addEventListener("click", toggleSidebar);
+
+    // Close sidebar when clicking outside on mobile
+    document.addEventListener("click", (event) => {
+      if (
+        window.innerWidth < 768 &&
+        !sidebar.contains(event.target) &&
+        !sidebarToggle.contains(event.target)
+      ) {
+        sidebar.classList.add("-translate-x-full");
+      }
+    });
+
+    // Close sidebar when resizing to desktop
+    window.addEventListener("resize", () => {
+      if (window.innerWidth >= 768) {
+        sidebar.classList.remove("-translate-x-full");
+      }
+    });
+  </script>
+
+  <style>
+    .sidebar {
+      scrollbar-width: thin;
+      scrollbar-color: #4a5568 #2d3748;
+    }
+
+    .sidebar::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .sidebar::-webkit-scrollbar-thumb {
+      background-color: #4a5568;
+      border-radius: 4px;
+    }
+
+    @media (max-width: 767px) {
+      .sidebar {
+        width: 75%;
+        box-shadow: 4px 0 6px -1px rgba(0, 0, 0, 0.1);
+      }
+
+      main {
+        margin-left: 0 !important;
+      }
+    }
+  </style>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>
+    hljs.highlightAll();
+  </script>
+</body>
+
+</html>

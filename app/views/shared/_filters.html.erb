@@ -19,19 +19,22 @@
       <div class="mt-4 <%= params.dig(:filters, :category).present? ? '' : 'hidden' %> px-2" data-collapsible-target="content">
         <input type="text" id="category-search" placeholder="Search categories..." class="w-full p-2 mb-2 border rounded">
         <div class="space-y-4" id="categories-container">
-          <% Category.first(5).each do |category| %>
-            <div class="flex items-center category-item">
-              <input type="checkbox" 
-                     name="filters[category][]" 
-                     value="<%= category.id %>" 
-                     id="category-<%= category.id %>"
-                     <%= 'checked' if params.dig(:filters, :category)&.include?(category.id.to_s) %>
-                     class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 filter-checkbox">
-              <label for="category-<%= category.id %>" class="ml-3 text-sm text-gray-600">
-                <%= category.name %>
-              </label>
-            </div>
-          <% end %>
+          <% categories_data = Category.all.load %>
+          <div id="categories_data" class="flex flex-col space-y-4" data-categories="<%= categories_data.to_json %>">
+            <% categories_data.first(5).each do |category| %>
+              <div class="category-item flex items-center" data-category-id="<%= category.id %>">
+                <input type="checkbox" 
+                      name="filters[category][]" 
+                      value="<%= category.id %>" 
+                      id="category-<%= category.id %>"
+                      <%= 'checked' if params.dig(:filters, :category)&.include?(category.id.to_s) %>
+                      class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 filter-checkbox">
+                <label for="category-<%= category.id %>" class="ml-3 text-sm text-gray-600">
+                  <%= category.name %>
+                </label>
+              </div>
+            <% end %>
+          </div>
         </div>
         <button id="load-more-categories" 
                 class="mt-4 w-full text-sm text-indigo-600 hover:text-indigo-500">
@@ -55,7 +58,7 @@
       </div>
       <div class="mt-4 <%= params.dig(:filters, :price).present? ? '' : 'hidden' %> px-2" data-collapsible-target="content">
         <div class="space-y-4">
-          <div class="flex flex-col space-y-2">
+          <div id="min_price" class="flex flex-col space-y-2">
             <label class="text-sm text-gray-600">Min Price ($)</label>
             <input type="number" 
                    name="filters[min_price]"
@@ -63,7 +66,7 @@
                    placeholder="Min" 
                    class="rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
           </div>
-          <div class="flex flex-col space-y-2">
+          <div id="max_price" class="flex flex-col space-y-2">
             <label class="text-sm text-gray-600">Max Price ($)</label>
             <input type="number" 
                    name="filters[max_price]"
@@ -71,6 +74,9 @@
                    placeholder="Max" 
                    class="rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
           </div>
+          <button id="price_filter" class="w-full bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+            Apply Price Filter
+          </button>
         </div>
       </div>
     </div>
@@ -90,20 +96,26 @@
       </div>
       <div class="mt-4 <%= params.dig(:filters, :language).present? ? '' : 'hidden' %> px-2" data-collapsible-target="content">
         <input type="text" id="language-search" placeholder="Search languages..." class="w-full p-2 mb-2 border rounded">
+
+
+
         <div class="space-y-4" id="languages-container">
-          <% Language.first(5).each do |language| %>
-            <div class="flex items-center language-item">
-              <input type="checkbox" 
-                     name="filters[language][]" 
-                     value="<%= language.id %>" 
-                     id="language-<%= language.id %>"
-                     <%= 'checked' if params.dig(:filters, :language)&.include?(language.id.to_s) %>
-                     class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 filter-checkbox">
-              <label for="language-<%= language.id %>" class="ml-3 text-sm text-gray-600">
-                <%= language.name %>
-              </label>
-            </div>
-          <% end %>
+          <% languages_data = Language.all.load %>
+          <div id="languages_data" class="flex flex-col space-y-4" data-languages="<%= languages_data.to_json %>">
+            <% languages_data.first(5).each do |language| %>
+              <div class="language-item flex items-center" data-language-id="<%= language.id %>">
+                <input type="checkbox" 
+                      name="filters[language][]" 
+                      value="<%= language.id %>" 
+                      id="language-<%= language.id %>"
+                      <%= 'checked' if params.dig(:filters, :language)&.include?(language.id.to_s) %>
+                      class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 filter-checkbox">
+                <label for="language-<%= language.id %>" class="ml-3 text-sm text-gray-600">
+                  <%= language.name %>
+                </label>
+              </div>
+            <% end %>
+          </div>
         </div>
         <button id="load-more-languages" 
                 class="mt-4 w-full text-sm text-indigo-600 hover:text-indigo-500">
@@ -128,12 +140,12 @@
       <div class="mt-4 <%= params.dig(:filters, :upload_date).present? ? '' : 'hidden' %> px-2" data-collapsible-target="content">
         <div class="space-y-4">
           <div class="flex items-center">
-            <input type="radio" name="filters[upload_date]" value="newest" 
+            <input id="newest_first" type="radio" name="filters[upload_date]" value="newest" 
                    <%= 'checked' if params.dig(:filters, :upload_date) == 'newest' %> class="text-indigo-600">
             <label for="newest" class="ml-3 text-sm text-gray-600">Newest First</label>
           </div>
           <div class="flex items-center">
-            <input type="radio" name="filters[upload_date]" value="oldest" 
+            <input id="oldest_first" type="radio" name="filters[upload_date]" value="oldest" 
                    <%= 'checked' if params.dig(:filters, :upload_date) == 'oldest' %> class="text-indigo-600">
             <label for="oldest" class="ml-3 text-sm text-gray-600">Oldest First</label>
           </div>
@@ -157,12 +169,12 @@
       <div class="mt-4 <%= params.dig(:filters, :alphabetical).present? ? '' : 'hidden' %> px-2" data-collapsible-target="content">
         <div class="space-y-4">
           <div class="flex items-center">
-            <input type="radio" name="filters[alphabetical]" value="asc" 
+            <input id="alpha_a_z" type="radio" name="filters[alphabetical]" value="asc" 
                    <%= 'checked' if params.dig(:filters, :alphabetical) == 'asc' %> class="text-indigo-600">
             <label for="asc" class="ml-3 text-sm text-gray-600">A-Z</label>
           </div>
           <div class="flex items-center">
-            <input type="radio" name="filters[alphabetical]" value="desc" 
+            <input id="alpha_z_a" type="radio" name="filters[alphabetical]" value="desc" 
                    <%= 'checked' if params.dig(:filters, :alphabetical) == 'desc' %> class="text-indigo-600">
             <label for="desc" class="ml-3 text-sm text-gray-600">Z-A</label>
           </div>
@@ -178,33 +190,7 @@
 <!-- Add JavaScript directly within the _filters.html.erb -->
 <script>
   $(document).ready(function () {
-    // Function to filter categories based on the search input
-    $('#category-search').on('input', function () {
-      const searchQuery = $(this).val().toLowerCase();
-      $('.category-item').each(function () {
-        const categoryName = $(this).find('label').text().toLowerCase();
-        if (categoryName.includes(searchQuery)) {
-          $(this).show();
-        } else {
-          $(this).hide();
-        }
-      });
-    });
-
-    // Function to filter languages based on the search input
-    $('#language-search').on('input', function () {
-      const searchQuery = $(this).val().toLowerCase();
-      $('.language-item').each(function () {
-        const languageName = $(this).find('label').text().toLowerCase();
-        if (languageName.includes(searchQuery)) {
-          $(this).show();
-        } else {
-          $(this).hide();
-        }
-      });
-    });
-
-    // Handle "Load More" buttons for Categories and Languages
+     // Handle "Load More" buttons for Categories and Languages
     document.body.addEventListener('click', function (event) {
       if (event.target.id === 'load-more-languages') {
         const container = document.getElementById('languages-container');
@@ -221,7 +207,7 @@
 
             data.languages.forEach(function (language) {
               const languageDiv = document.createElement('div');
-              languageDiv.classList.add('flex', 'items-center');
+              languageDiv.classList.add('flex', 'items-center', 'load-more-language-data');
 
               const checkbox = document.createElement('input');
               checkbox.type = 'checkbox';
@@ -255,7 +241,7 @@
 
             data.categories.forEach(function (category) {
               const categoryDiv = document.createElement('div');
-              categoryDiv.classList.add('flex', 'items-center');
+              categoryDiv.classList.add('flex', 'items-center', 'load-more-category-data');
 
               const checkbox = document.createElement('input');
               checkbox.type = 'checkbox';
@@ -276,5 +262,388 @@
           });
       }
     });
+
+    $('#category-search').on('input', function () {
+      const searchQuery = $(this).val().toLowerCase();
+      if(searchQuery.length > 0){ 
+        $("#load-more-categories").hide();
+        $(".load-more-category-data").hide();
+      }else{
+        $(".load-more-category-data").show();
+        $("#load-more-categories").show();
+      } 
+      // Get all categories from the data-categories attribute
+      const allCategories = $('#categories_data').data('categories');
+
+      // Filter the categories based on the search query
+      const filteredCategories = allCategories.filter(function(category) {
+          return category.name.toLowerCase().includes(searchQuery);
+      });
+
+      // Clear the current displayed categories
+      $('#categories_data').empty();
+      if(filteredCategories.length == 0){
+        $('#categories_data').append(
+          `<div class="category-item flex items-center">
+              <label class="ml-3 text-sm text-gray-600">
+                No categories found
+              </label>
+          </div>`
+        );
+      }
+      // Append the filtered categories to the container
+      filteredCategories.slice(0, 5).forEach(function(category) {
+          $('#categories_data').append(
+              `<div class="category-item flex items-center" data-category-id="${category.id}">
+                  <input type="checkbox" 
+                        name="filters[category][]" 
+                        value="${category.id}" 
+                        id="category-${category.id}"
+                        class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 filter-checkbox">
+                  <label for="category-${category.id}" class="ml-3 text-sm text-gray-600">
+                    ${category.name}
+                  </label>
+              </div>`
+          );
+      });
+    });
+
+    // Function to filter languages based on the search input
+    $('#language-search').on('input', function () {
+      const searchQuery = $(this).val().toLowerCase();
+      if(searchQuery.length > 0){ 
+        $("#load-more-languages").hide();
+        $(".load-more-language-data").hide();
+      }else{
+        $(".load-more-language-data").show();
+        $("#load-more-languages").show();
+      } 
+
+      // Get all categories from the data-categories attribute
+      const allLanguages = $('#languages_data').data('languages');
+
+      // Filter the categories based on the search query
+      const filteredLanguages = allLanguages.filter(function(language) {
+          return language.name.toLowerCase().includes(searchQuery);
+      });
+
+      // Clear the current displayed categories
+      $('#languages_data').empty();
+      if(filteredLanguages.length == 0){
+        $('#languages_data').append(
+          `<div class="language-item flex items-center">
+              <label class="ml-3 text-sm text-gray-600">
+                No languages found
+              </label>
+          </div>`
+        );
+      }
+
+      // Append the filtered categories to the container
+      filteredLanguages.slice(0, 5).forEach(function(language) {
+          $('#languages_data').append(
+              `<div class="language-item flex items-center" data-language-id="${language.id}">
+                  <input type="checkbox" 
+                        name="filters[language][]" 
+                        value="${language.id}" 
+                        id="language-${language.id}"
+                        class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 filter-checkbox">
+                  <label for="language-${language.id}" class="ml-3 text-sm text-gray-600">
+                    ${language.name}
+                  </label>
+              </div>`
+          );
+      });
+    });
+
+    const page = $('#filter-container').data('page');
+    let url;
+    if (page === 'browse') {
+      url = '/marketplace/browse';
+    } else if (page === 'featured') {
+      url = '/marketplace/browse/featured';
+    } else {
+      url = window.location.pathname;
+    }
+
+    $('#categories-container, #languages-container, #newest_first, #oldest_first').on("change", ".filter-checkbox", function () {
+      const filterType = $(this).attr('name').replace('[]', '');
+      debugger;
+      const value = $(this).val();
+      
+      // Collect all checked checkboxes
+      const selectedFilters = {};
+      
+      // Get all checked categories
+      const checkedCategories = $('input[name="filters[category][]"]:checked').map(function() {
+        return $(this).val();
+      }).get();
+      
+      if (checkedCategories.length > 0) {
+        selectedFilters.category = checkedCategories;
+      }
+      
+      // Get all checked languages
+      const checkedLanguages = $('input[name="filters[language][]"]:checked').map(function() {
+        return $(this).val();
+      }).get();
+      
+      if (checkedLanguages.length > 0) {
+        selectedFilters.language = checkedLanguages;
+      }
+
+      // Update URL and fetch results
+      const searchParams = new URLSearchParams(window.location.search);
+      
+      if (Object.keys(selectedFilters).length > 0) {
+        searchParams.set('filters', JSON.stringify(selectedFilters));
+      } else {
+        searchParams.delete('filters');
+      }
+      searchParams.delete('page');
+
+      // Update URL without refresh
+      const newUrl = `${url}?${searchParams.toString()}`;
+      window.history.pushState({}, '', newUrl);
+
+      // Fetch updated results via AJAX
+      $.ajax({
+        url: url,
+        method: 'GET',
+        data: searchParams.toString(),
+        dataType: 'script',
+        headers: {
+          'X-Requested-With': 'XMLHttpRequest',
+          'Accept': 'text/javascript'
+        },
+        success: function(response) {
+          // DOM updates are handled in the `index.js.erb` file
+        }
+      });
+    });
+
+    $('#newest_first').on('click', function () {
+      const searchParams = new URLSearchParams(window.location.search);
+      
+      // Check if 'filters' exists in the search parameters
+      let filters = searchParams.get('filters');
+      
+      // If 'filters' exists, parse it as JSON
+      if (filters) {
+        filters = JSON.parse(filters);
+      } else {
+        // If 'filters' doesn't exist, initialize it as an empty object
+        filters = {};
+      }
+      
+      // Add or update the 'upload_date' filter
+      filters.upload_date = 'newest';
+
+      // Set or update the 'filters' parameter in the searchParams
+      searchParams.set('filters', JSON.stringify(filters));
+
+      // Remove the 'page' parameter if it exists
+      searchParams.delete('page');
+
+      // Update the URL with the modified search parameters
+      const newUrl = `${window.location.pathname}?${searchParams.toString()}`;
+      window.history.pushState({}, '', newUrl);
+
+      // Perform AJAX request to update the content
+      $.ajax({
+        url: window.location.pathname,
+        method: 'GET',
+        data: searchParams.toString(),
+        dataType: 'script',
+        headers: {
+          'X-Requested-With': 'XMLHttpRequest',
+          'Accept': 'text/javascript'
+        },
+        success: function(response) {
+          // DOM updates handled by the server
+        }
+      });
+    });
+
+    $("#oldest_first").on('click', function () {
+      const searchParams = new URLSearchParams(window.location.search);
+
+      // Check if 'filters' exists in the search parameters
+      let filters = searchParams.get('filters');
+      
+      // If 'filters' exists, parse it as JSON
+      if (filters) {
+        filters = JSON.parse(filters);
+      } else {
+        // If 'filters' doesn't exist, initialize it as an empty object
+        filters = {};
+      }
+
+      // Add or update the 'upload_date' filter
+      filters.upload_date = 'oldest';
+
+      // Set or update the 'filters' parameter in the searchParams
+      searchParams.set('filters', JSON.stringify(filters));
+
+      // Remove the 'page' parameter if it exists
+      searchParams.delete('page');
+
+      // Update the URL with the modified search parameters
+      const newUrl = `${window.location.pathname}?${searchParams.toString()}`;
+      window.history.pushState({}, '', newUrl);
+
+      // Perform AJAX request to update the content
+      $.ajax({
+        url: window.location.pathname,
+        method: 'GET',
+        data: searchParams.toString(),
+        dataType: 'script',
+        headers: {
+          'X-Requested-With': 'XMLHttpRequest',
+          'Accept': 'text/javascript'
+        },
+        success: function(response) {
+          // DOM updates handled by the server
+        }
+      });
+    });
+
+    $("#alpha_a_z").on('click', function () {
+      const searchParams = new URLSearchParams(window.location.search);
+
+      // Check if 'filters' exists in the search parameters
+      let filters = searchParams.get('filters');
+      
+      // If 'filters' exists, parse it as JSON
+      if (filters) {
+        filters = JSON.parse(filters);
+      } else {
+        // If 'filters' doesn't exist, initialize it as an empty object
+        filters = {};
+      }
+
+      // Add or update the 'alphabetical' filter
+      filters.alphabetical = 'asc';
+
+      // Set or update the 'filters' parameter in the searchParams
+      searchParams.set('filters', JSON.stringify(filters));
+
+      // Remove the 'page' parameter if it exists
+      searchParams.delete('page');
+
+      // Update the URL with the modified search parameters
+      const newUrl = `${window.location.pathname}?${searchParams.toString()}`;
+      window.history.pushState({}, '', newUrl);
+
+      // Perform AJAX request to update the content
+      $.ajax({
+        url: window.location.pathname,
+        method: 'GET',
+        data: searchParams.toString(),
+        dataType: 'script',
+        headers: {
+          'X-Requested-With': 'XMLHttpRequest',
+          'Accept': 'text/javascript'
+        },
+        success: function(response) {
+          // DOM updates handled by the server
+        }
+      });
+    });
+
+    $("#alpha_z_a").on('click', function () {
+      const searchParams = new URLSearchParams(window.location.search);
+
+      // Check if 'filters' exists in the search parameters
+      let filters = searchParams.get('filters');
+      
+      // If 'filters' exists, parse it as JSON
+      if (filters) {
+        filters = JSON.parse(filters);
+      } else {
+        // If 'filters' doesn't exist, initialize it as an empty object
+        filters = {};
+      }
+
+      // Add or update the 'alphabetical' filter
+      filters.alphabetical = 'desc';
+
+      // Set or update the 'filters' parameter in the searchParams
+      searchParams.set('filters', JSON.stringify(filters));
+
+      // Remove the 'page' parameter if it exists
+      searchParams.delete('page');
+
+      // Update the URL with the modified search parameters
+      const newUrl = `${window.location.pathname}?${searchParams.toString()}`;
+      window.history.pushState({}, '', newUrl);
+
+      // Perform AJAX request to update the content
+      $.ajax({
+        url: window.location.pathname,
+        method: 'GET',
+        data: searchParams.toString(),
+        dataType: 'script',
+        headers: {
+          'X-Requested-With': 'XMLHttpRequest',
+          'Accept': 'text/javascript'
+        },
+        success: function(response) {
+          // DOM updates handled by the server
+        }
+      });
+    });
+
+    $("#price_filter").on('click', function () {
+      const searchParams = new URLSearchParams(window.location.search);
+
+      // Check if 'filters' exists in the search parameters
+      let filters = searchParams.get('filters');
+      
+      // If 'filters' exists, parse it as JSON
+      if (filters) {
+        filters = JSON.parse(filters);
+      } else {
+        // If 'filters' doesn't exist, initialize it as an empty object
+        filters = {};
+      }
+
+      // Get the min and max price values
+      const minPrice = $('#min_price input').val();
+      const maxPrice = $('#max_price input').val();
+
+      if (minPrice === '' || maxPrice === '') {
+        alert('Please enter both a minimum and maximum price');
+        return;
+      }
+      // Add or update the 'price' filter
+      filters.price = [minPrice, maxPrice];
+
+      // Set or update the 'filters' parameter in the searchParams
+      searchParams.set('filters', JSON.stringify(filters));
+
+      // Remove the 'page' parameter if it exists
+      searchParams.delete('page');
+
+      // Update the URL with the modified search parameters
+      const newUrl = `${window.location.pathname}?${searchParams.toString()}`;
+      window.history.pushState({}, '', newUrl);
+
+      // Perform AJAX request to update the content
+      $.ajax({
+        url: window.location.pathname,
+        method: 'GET',
+        data: searchParams.toString(),
+        dataType: 'script',
+        headers: {
+          'X-Requested-With': 'XMLHttpRequest',
+          'Accept': 'text/javascript'
+        },
+        success: function(response) {
+          // DOM updates handled by the server
+        }
+      });
+    });
+
   });
 </script>

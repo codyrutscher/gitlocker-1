@@ -141,6 +141,11 @@ Rails.application.routes.draw do
   get "youtube", to: "marketplace/home#youtube"
   get "careers", to: "marketplace/home#careers"
   get "manage", to: "marketplace/home#manage"
+  get "documentationindex", to: "marketplace/home#documentationindex"
+  get "documentationreact", to: "marketplace/home#documentationreact"
+  get "documentation_rails", to: "marketplace/home#documentation_rails"
+  get "documentation_django", to: "marketplace/home#documentation_django"
+  get "documentation_laravel", to: "marketplace/home#documentation_laravel"
   
   namespace :marketplace do
     root "home#index"
