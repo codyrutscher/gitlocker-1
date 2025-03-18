@@ -1,15 +1,24 @@
 require 'faker'
 
-10_000.times do |i|
-  User.create!(
-    name: Faker::Name.unique.name,
-    email: Faker::Internet.unique.email,
-    password: Faker::Internet.password(min_length: 8, max_length: 12),
-    username: Faker::Internet.unique.username,
-    registration_status: "registration_completed",
-    synced: true
-  )
-  puts "\r Created a #{i} user"
+9832.times do |i|
+  # Handle the case when username is already taken by another user
+  begin
+    User.create!(
+      name: Faker::Name.unique.name,
+      email: Faker::Internet.unique.email,
+      password: Faker::Internet.password(min_length: 8, max_length: 12),
+      username: Faker::Internet.unique.username,
+      registration_status: "registration_completed",
+      synced: true
+    )
+    puts "\r Created a #{i} user"
+  rescue Faker::UniqueGenerator::RetryLimitExceeded
+    puts "Faker uniqueness limit reached, clearing cache..."
+    Faker::UniqueGenerator.clear
+    retry
+  rescue ActiveRecord::RecordInvalid => e
+    puts "Skipping user due to error: #{e.message}"
+  end
 end
 
 chris = User.find_or_create_by(
