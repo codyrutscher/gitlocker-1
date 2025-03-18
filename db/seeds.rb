@@ -1,3 +1,17 @@
+require 'faker'
+
+10_000.times do |i|
+  User.create!(
+    name: Faker::Name.unique.name,
+    email: Faker::Internet.unique.email,
+    password: Faker::Internet.password(min_length: 8, max_length: 12),
+    username: Faker::Internet.unique.username,
+    registration_status: "registration_completed",
+    synced: true
+  )
+  puts "\r Created a #{i} user"
+end
+
 chris = User.find_or_create_by(
   email: "chris@typefast.co",
   username: "chrisjeon",

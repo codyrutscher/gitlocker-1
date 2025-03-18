@@ -62,13 +62,13 @@ gem 'canonical-rails', '~> 0.2.16'
 
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 # gem "bcrypt", "~> 3.1.7"
+gem "faker"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ]
   gem "dotenv-rails"
   gem "factory_bot_rails"
-  gem "faker"
   gem "pry-rails"
   gem "rspec-rails", "~> 6.1"
   gem "letter_opener"
