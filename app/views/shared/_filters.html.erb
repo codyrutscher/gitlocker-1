@@ -368,7 +368,6 @@
 
     $('#categories-container, #languages-container, #newest_first, #oldest_first').on("change", ".filter-checkbox", function () {
       const filterType = $(this).attr('name').replace('[]', '');
-      debugger;
       const value = $(this).val();
       
       // Collect all checked checkboxes

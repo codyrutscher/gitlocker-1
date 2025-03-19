@@ -6,7 +6,7 @@
   ])
 %>
 
-<div class="bg-white text-white min-h-screen font-sans p-6">
+<div class="bg-white text-white font-sans px-6 pt-6 pb-0">
     <!-- Top Search Bar -->
     <div class="flex justify-between items-center bg-gray-900 px-4 py-3 rounded-lg shadow-lg max-w-2xl mx-auto">
         <input type="text" placeholder="Ask v0 to build something..." class="bg-transparent flex-1 text-white placeholder-gray-500 focus:outline-none px-3">
@@ -23,7 +23,7 @@
     </div>
     
     <!-- Main Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8 max-w-5xl mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 py-2 max-w-5xl mx-auto">
         <!-- Import Git Repository -->
         <div class="bg-gray-900 p-6 rounded-lg shadow-lg">
             <h4 class="text-xl font-bold">Import Git Repositories</h4>
@@ -44,7 +44,7 @@
                 <% end %>
 
                 <a href="#" class="block w-full bg-blue-700 hover:bg-blue-400 text-white font-semibold py-2 mt-3 text-center rounded">Continue with Bitbucket</a>
-                <a href="<%= new_product_path %>" class="block mt-4 text-gray-300 hover:text-white text-sm">Manually Upload Zip File →</a>
+                <a href="<%= new_product_path %>" class="block mt-4 text-gray-300 hover:text-white text-sm js-manual-upload-file">Manually Upload Zip File →</a>
             </div>
         </div>
         
@@ -67,86 +67,97 @@
         </div>
     </div>
     <!-- Display GitHub Repositories -->
-    <div id="repos-section" class="hidden mt-8">
-    <% if @user_repos.present? %>
-        <h1 class="text-2xl font-bold mb-4">Select GitHub Repositories to Add as Products</h1>
-        <%= form_with url: create_from_github_products_path, method: :post, data: { turbo: false } do %>
-            <div id="github_repos" class="grid grid-cols-2 md:grid-cols-4 gap-6">
-                <% @user_repos.each do |repo| %>
-                    <div class="bg-gray-900 p-6 rounded-lg shadow-lg">
-                        <h4 class="text-xl font-bold"><%= repo[:name] %></h4>
-                        <p class="text-gray-400 text-sm"><%= repo[:description] %></p>
-                        <label class="block mt-4">
-                            <%= check_box_tag 'repo_ids[]', repo[:id], false, class: 'mr-2' %>
-                            Select this repository
-                        </label>
-                    </div>
-                <% end %>
-            </div>
-            
-            <!-- Pagination Controls -->
-            <div class="mt-6 flex justify-between items-center">
-                <%= submit_tag 'Add Selected Repositories as Products', class: 'bg-blue-500 hover:bg-blue-400 text-white font-semibold py-2 px-4 rounded' %>
-                
-                <% if @display_next_page_link %>
-                    <div class="flex items-center gap-4" id="load_more_repos_button">
-                        <%= link_to 'See More Repos', load_more_github_repos_products_path, data: { page: (@github_page + 1) }, id: 'load-more-repos', class: 'bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded disabled:opacity-50' %>
-                    </div>
-                <% end %>
-            </div>
+    <div id="repos-section" class="hidden py-0">
+        <% if @user_repos.present? %>
+            <h1 class="text-2xl font-bold mb-4">Select GitHub Repositories to Add as Products</h1>
+                <div id="github_repos" class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                    <% @user_repos.each do |repo| %>
+                        <div class="bg-gray-900 p-6 rounded-lg shadow-lg">
+                            <h4 class="text-xl font-bold"><%= repo[:name] %></h4>
+                            <p class="text-gray-400 text-sm"><%= repo[:description] %></p>
+                            <label class="block mt-4">
+                                <%= check_box_tag 'repo_ids[]', repo[:id], false, class: 'mr-2 js-github-repo-ids' %>
+                                Select this repository
+                            </label>
+                        </div>
+                    <% end %>
+                </div>
+                <!-- Pagination Controls -->
+                <div class="mt-6 flex justify-between items-center">
+                    <% if @display_next_page_link %>
+                        <div class="flex items-center gap-4" id="load_more_repos_button">
+                            <%= link_to 'See More Repos', load_more_github_repos_products_path, data: { page: (@github_page + 1) }, id: 'load-more-repos', class: 'bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded disabled:opacity-50' %>
+                        </div>
+                    <% end %>
+                </div>
         <% end %>
-    <% end %>
-</div>
-    
+    </div>
     <!-- Display GitLab Repositories -->
-    <div id="gitlab-repos-section" class="hidden mt-8">
+    <div id="gitlab-repos-section" class="hidden py-0">
         <% if @gitlab_repos.present? %>
             <h1 class="text-2xl font-bold mb-4">Select GitLab Repositories to Add as Products</h1>
-            <%= form_with url: create_from_gitlab_products_path, method: :post, data: { turbo: false } do %>
                 <div id="gitlab_repos" class="grid grid-cols-2 md:grid-cols-4 gap-6">
                     <% @gitlab_repos.each do |repo| %>
                         <div class="bg-gray-900 p-6 rounded-lg shadow-lg">
                             <h4 class="text-xl font-bold"><%= repo['name'] %></h4>
                             <p class="text-gray-400 text-sm"><%= repo['description'] %></p>
                             <label class="block mt-4">
-                                <%= check_box_tag 'repo_ids[]', repo['id'], false, class: 'mr-2' %>
+                                <%= check_box_tag 'repo_ids[]', repo['id'], false, class: 'mr-2 js-gitlab-repo-ids' %>
                                 Select this repository
                             </label>
                         </div>
                     <% end %>
                 </div>
                 <div class="mt-6 flex justify-between items-center">
-                    <%= submit_tag 'Add Selected Repositories as Products', class: 'bg-blue-500 hover:bg-blue-400 text-white font-semibold py-2 px-4 rounded' %>
                     <% if @display_next_page_link_gitlab %>
                         <div class="flex items-center gap-4" id="load_more_gitlab_repos_button">
                             <%= link_to 'See More Repos', load_more_gitlab_repos_products_path, data: { page: (@gitlab_page + 1) }, id: 'load-more-gitlab-repos', class: 'bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded disabled:opacity-50' %>
                         </div>
                     <% end %>
                 </div>
-            <% end %>
         <% end %>
     </div>
-
+    <div class="hidden js-new-product py-0">
+        <%= render partial: 'products/new_product_form', locals: { import_product: false } %>
+    </div>
+    <div class="hidden js-import-product py-0">
+        <%= render partial: 'products/import_product_form', locals: { import_product: true } %>
+    </div>
 </div>
 
 <script>
-    document.getElementById('github-button').addEventListener('click', function(event) {
+    $('#github-button').on('click', function() {
         event.preventDefault();
         <% if current_user.token.present? %>
-            document.getElementById('repos-section').classList.remove('hidden');
-            document.getElementById('gitlab-repos-section').classList.add('hidden');
+            $('#repos-section').show();
+            $('#gitlab-repos-section').css('display', 'none');
+            $('.js-new-product').css('display', 'none');
+            $('.js-import-product').show();
+            $('#source_value').val('github');
         <% else %>
             document.getElementById('github-auth-form').querySelector('button').click();
         <% end %>
     });
-    document.getElementById('gitlab-button').addEventListener('click', function(event) {
+
+    $('#gitlab-button').on('click', function() {
         event.preventDefault();
         <% if current_user.gitlab_token.present? %>
-            document.getElementById('repos-section').classList.add('hidden');
-            document.getElementById('gitlab-repos-section').classList.remove('hidden');
+            $('#repos-section').css('display', 'none');
+            $('#gitlab-repos-section').show();
+            $('.js-new-product').css('display', 'none');
+            $('.js-import-product').show();
+            $('#source_value').val('gitlab');
         <% else %>
             document.getElementById('gitlab-auth-form').querySelector('button').click();
         <% end %>
+    });
+    $('.js-manual-upload-file').on('click', function(event) {
+        event.preventDefault();
+        $('.js-new-product').show();
+        $('.js-import-product').css('display', 'none');
+        $('#repos-section').css('display', 'none');
+        $('#gitlab-repos-section').css('display', 'none');
+        $('#source_value').val('manual');
     });
     $('#load-more-repos').on('click', function(event) {
         event.preventDefault();
@@ -157,6 +168,7 @@
             data: { page: $(this).data('page') }
         });
     });
+    
     $('#load-more-gitlab-repos').on('click', function(event) {
         event.preventDefault();
         $.ajax({

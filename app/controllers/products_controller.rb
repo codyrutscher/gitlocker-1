@@ -121,6 +121,7 @@ class ProductsController < ApplicationController
 
   def new_product
     @templates = Template.first(4)
+    @product = Product.unscoped.new
   end
 
   def code
@@ -223,6 +224,87 @@ class ProductsController < ApplicationController
     respond_to do |format|
       format.js
     end
+  end
+
+  def import_products
+    repo_ids = params[:repo_ids].first&.split(",")
+    failed_repos = []
+    skipped_repos = []
+    successful_repos = []
+  
+    repo_ids&.each do |repo_id|
+      ActiveRecord::Base.transaction do
+        begin
+          if params[:source] == 'github'
+            repo = octokit_client.repository(repo_id.to_i)
+            owner, repo_name = extract_owner_and_repo_name(repo[:html_url])
+            repo_url = repo[:html_url]
+            source = 'github'
+          elsif params[:source] == 'gitlab'
+            repo = gitlab_client.project(repo_id)
+            owner_name = repo.namespace.full_path
+            repo_name = repo.name
+            repo_url = repo.web_url
+            source = 'gitlab'
+          end
+
+          if Product.exists?(url: repo_url)
+            Rails.logger.info "Repository #{repo_name} already exists. Skipping..."
+            skipped_repos << repo_name
+            next
+          end
+          product = Product.new(
+            name: params[:name] || repo[:name],
+            description: params[:description] || repo[:description],
+            url: repo_url,
+            repo_id: repo_id,
+            user_id: current_user.id,
+            active: true,
+            published: true,
+            featured: params[:featured],
+            price: params[:price] || 0,
+            preview_video_url: params[:preview_video_url],
+            video_file: params[:video_file],
+            features: params[:features],
+            instructions: params[:instructions],
+            requirements: params[:requirements],
+            category_ids: params[:category_ids],
+            covers: params[:covers],
+            language_ids: params[:language_ids]
+          )
+          featured = product.featured
+          product.featured = false
+          if product.save
+            result = load_repo_and_link_tree(owner, repo_name, 'master', current_user.token, product, source)
+            if result
+              if featured
+                session = featured_stripe_session(product)
+              end
+              successful_repos << repo_name
+            else
+              Rails.logger.error "Failed to process repository #{repo_name}, skipping..."
+              failed_repos << repo_name
+              product.destroy
+            end
+          else
+            Rails.logger.error "Failed to save product for repo #{repo_name}, skipping..."
+            failed_repos << repo_name
+            raise ActiveRecord::Rollback
+          end
+        rescue => e
+          Rails.logger.error "Error processing repo #{repo_id}: #{e.message}"
+          product.destroy if product.persisted?
+          failed_repos << repo_name
+        end
+      end
+    end
+
+    message = []
+    message << "✅ Successfully added: #{successful_repos.join(', ')}" unless successful_repos.empty?
+    message << "⚠️ Skipped existing repositories: #{skipped_repos.join(', ')}" unless skipped_repos.empty?
+    message << "❌ Failed to process: #{failed_repos.join(', ')}" unless failed_repos.empty?
+  
+    redirect_to products_path, alert: message.join(' ')
   end
 
   def create_from_github
@@ -353,10 +435,10 @@ class ProductsController < ApplicationController
       if @template.present?
         @template.update(cloned_count: @product.template.cloned_count + 1)
         uploaded_file = @template.folder.blob
-        filename = uploaded_file.filename.to_s
+        filename = uploaded_file.filename.to_s if uploaded_file
       else
         uploaded_file = product_params[:upload_file]
-        filename = uploaded_file.original_filename
+        filename = uploaded_file.original_filename if uploaded_file
       end
       if uploaded_file
 

@@ -1,0 +1,377 @@
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+<script src="https://cdn.tailwindcss.com"></script>
+<div class="px-6">
+  <div class="add_product_form bg-indigo-100 min-h-screen min-w-full md:p-8 py-0 px-6">
+        <%= form_with url: import_products_products_path, method: :post, data: { turbo: false } do |f| %>
+            <%= f.hidden_field :source, value: '', id: 'source_value' %>
+
+            <div class="">
+                <!-- New Upload ZIP File Field -->
+                <%= f.hidden_field 'repo_ids[]', value: '', id: 'repo_ids' %>
+            </div>
+
+          <div class="sm:col-span-4 shadow-2xl">
+            <%= f.label :name, class: "block text-xl font-medium leading-6 text-gray-900 " %>
+            <div class="mt-2">
+              <%= f.text_field :name, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", maxlength: "70" %>
+            </div>
+          </div>
+
+          <div class="sm:col-span-4 border-t-4 border-black shadow-2xl">
+            <%= f.label :description, "Description", class: "block text-xl font-medium leading-6 text-gray-900 " %>
+            <div class="mt-2">
+              <%= f.text_area :description, id: "descriptionTextArea", class: "ckEditor block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", required: true %>
+              <span class="d-block question_modal_input_subtext" id="descriptionTextAreaCount">
+                1000 words left
+              </span>
+            </div>
+          </div>
+
+          <div class="sm:col-span-4 border-t-4 border-black shadow-2xl">
+            <%= f.label :features, "Features", class: "block text-xl font-medium leading-6 text-gray-900 " %>
+            <div class="mt-2">
+              <%= f.text_area :features, id: "featuresTextArea", class: "ckEditor block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"%>
+              <span class="d-block question_modal_input_subtext" id="featuresTextAreaCount">
+                1000 words left
+              </span>
+            </div>
+          </div>
+
+          <div class="sm:col-span-4 border-t-4 border-black shadow-2xl">
+            <%= f.label :requirements, "Requirements", class: "block text-xl font-medium leading-6 text-gray-900 " %>
+            <div class="mt-2">
+              <%= f.text_area :requirements, id: "requirementsTextArea", class: "ckEditor block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"%>
+              <span class="d-block question_modal_input_subtext" id="requirementsTextAreaCount">
+                1000 words left
+              </span>
+            </div>
+          </div>
+
+          <div class="sm:col-span-4 border-t-4 border-black shadow-2xl">
+            <%= f.label :instructions, "Instructions", class: "block text-xl font-medium leading-6 text-gray-900 " %>
+            <div class="mt-2">
+              <%= f.text_area :instructions, id: "instructionsTextArea", class: "ckEditor block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"%>
+              <span class="d-block question_modal_input_subtext" id="instructionsTextAreaCount">
+                1000 words left
+              </span>
+            </div>
+          </div>
+
+          <div class="sm:col-span-4 border-t-4 border-black">
+            <%= f.label :price, class: "block text-xl font-medium leading-6 text-gray-900 " %>
+            <div class="mt-2">
+              <%= f.number_field :price, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" %>
+            </div>
+          </div>
+
+          <div class="sm:col-span-4 border-t-4 border-black">
+            <%= f.label :covers, class: "block text-xl font-medium leading-6 text-gray-900 " do %>
+              Cover Images or GIFs (Limit of 10 and max file size of 100mb each). We recommend including a GIF of the frontend of the product.
+          
+            <% end %>
+            <div class="mt-2">
+              <%= f.file_field :covers, multiple: true, class: "form-control w-full", id: "covers" %>
+            </div>
+            <br/>
+            <h1 class="">(To select multiple images please use CTRL on Windows or command on Mac)</h1>
+          </div>
+
+          <div class="sm:col-span-4 border-t-4 border-black">
+            <label for="product_video_source" class="block text-xl font-medium leading-6 text-gray-900 ">Video Source</label>
+            <div class="mt-2">
+              <select id="video_source" class="form-control" onchange="toggleVideoFields()">
+                <option value="">Select Video Source</option>
+                <option value="Preview Video URL">Preview Video URL</option>
+                <option value="Preview Video File">Preview Video File</option>
+              </select>
+            </div>
+            <br/>
+            <h1 class="font-bold ">It is highly recommended to include a video preview to show users how your product works. Doing this will increase the chances of selling your product.</h1>
+          </div>
+
+          <div class="sm:col-span-4 border-t-4 border-black" id="video_url_field" style="display: none;">
+            <%= f.label :preview_video_url, class: "block text-xl font-medium leading-6 text-gray-900 " %>
+            <div class="mt-2">
+              <%= f.text_field :preview_video_url, class: "form-control", id: "product_preview_video_url" %>
+            </div>
+          </div>
+
+          <div class="sm:col-span-4 border-t-4 border-black" id="video_file" style="display: none;">
+            <%= f.label :video_file, class: "block text-xl font-medium leading-6 text-gray-900 " do %>
+              Preview Video Source (file size limit of 1 GB)
+            <% end %>
+            <div class="mt-2">
+              <%= f.file_field :video_file, class: "form-control", id: "product_video_file" %>
+            </div>
+          </div>
+
+          <div class="sm:col-span-4 border-t-4 border-black">
+            <%= f.label :categories, class: "block text-xl font-medium leading-6 text-gray-900 " %>
+            <div class="mt-2">
+              <%= f.select :category_ids, options_for_select(Category.pluck(:name, :id)), {}, 
+              class: "js-example-basic-multiple w-40 sm:w-50 mt-1 block rounded-md shadow-sm border-gray-300 focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50", 
+              multiple: true, 
+              id: "categoriesSelect" %>
+            </div>
+          </div>
+
+          <div class="sm:col-span-4 border-t-4 border-black">
+            <%= f.label :language_ids, "Languages", class: "block text-xl font-medium leading-6 text-gray-900 " %>
+            <div class="mt-2">
+              <%= f.select :language_ids, options_for_select(Language.pluck(:name, :id)), {}, 
+                class: "js-example-basic-multiple w-40 sm:w-50 mt-1 block rounded-md shadow-sm border-gray-300 focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50", 
+                multiple: true, 
+                id: "languagesSelect" %>
+            </div>
+          </div>
+
+          <div class="sm:col-span-4 border-t-4 border-black">
+            <%= f.label :featured, "Feature This Product", class: "block text-xl font-medium leading-6 text-gray-900 " %>
+            <h2 class=" text-lg font-bold">(For $10 you can permanently feature your repository so that it becomes searchable in the featured section.)</h2>
+            <div class="mt-2">
+              <%= f.check_box :featured, id:"featured", :style => "width: 20px; height: 20px;" %>
+            </div>
+          </div>
+
+          <div class="sm:col-span-4 border-t-4 border-black">
+            <%= f.label :demo_url, class: "block text-xl font-medium leading-6 text-gray-900 " %>
+            <div class="mt-2">
+              <%= f.text_field :demo_url, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", maxlength: "70", required: false, placeholder: "https://demo_url.com" %>
+            </div>
+          </div>
+
+          <div class="sm:col-span-4 border-t-4 border-black">
+            <div id="upload-status" class="mt-2"></div>
+          </div>
+          <div class="font-bold sm:col-span-4">
+            <h1 class="">All products are subject to review and removal if they appear to be fraudulent or don't provide real value to the customer. Additionally, customers will be able to review and report products so be aware of this when posting a product.</h1>
+          </div>
+        </div>
+      </div>
+      <div class="save_buttons mt-6 flex items-center ml-4 mb-4 gap-x-6">
+        <%= submit_tag 'Import Products', class: 'js-import-button bg-blue-500 hover:bg-blue-400 text-white font-semibold py-2 px-4 rounded' %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<script type="text/javascript">
+  function toggleVideoFields() {
+    var selectedOption = $("#video_source").val();
+    if (selectedOption === "Preview Video URL") {
+      $("#video_url_field").show();
+      $("#video_file").hide();
+    } else if (selectedOption === "Preview Video File") {
+      $("#video_url_field").hide();
+      $("#video_file").show();
+    } else {
+      $("#video_url_field").hide();
+      $("#video_file").hide();
+    }
+  }
+  
+  $(document).ready(function() {
+    $('.js-import-button').on('click', function() {
+      var source = $('#source_value').val();
+      if(source == 'github') {
+        var $checkboxField = $('.js-github-repo-ids');
+      } else if(source == 'gitlab') {
+        var $checkboxField = $('.js-gitlab-repo-ids');
+      }
+      var repoIdValue = [];
+      $checkboxField.each(function() {
+        if ($(this).is(':checked')) {
+          repoIdValue.push($(this).val());
+        }
+      });
+      $('#repo_ids').val(repoIdValue);
+    });
+
+    $('#url-field input').on('input', function() {
+        var url = $(this).val();
+        if (url.trim() !== '') {
+        $('#upload_file').prop('disabled', true);
+        $('#clear-icon-container').addClass('hidden'); 
+
+        } else {
+        $('#upload_file').prop('disabled', false);
+
+        }
+    });
+
+    toggleVideoFields();
+    $("#video_source").change(function() {
+      toggleVideoFields();
+    });
+    $('.js-example-basic-multiple').select2();
+    var selectedCategories;
+    var selectedLanguages;
+    $('#categoriesSelect').on('change', function() {
+      selectedCategories = $(this).val();
+      console.log(selectedCategories);
+    });
+
+    $('#languagesSelect').on('change', function() {
+      selectedLanguages = $(this).val();
+      console.log(selectedLanguages);
+    });
+
+    var titleInput = document.getElementById('product_name');
+    titleInput.addEventListener('input', function() {
+      var currentValue = this.value;
+      if (currentValue.length > 70) {
+        this.value = currentValue.slice(0, 70);
+      }
+    });
+
+    var ckEditorInstances;
+    var interval = setInterval(() => {
+      if (typeof CKEDITOR !== 'undefined') {
+        try {
+          const $formContainer = $(".js-import-product"); // Parent container of the form
+          ckEditorInstances = $formContainer.find(".ckEditor"); // Select CKEditor instances only in this form
+
+          //ckEditorInstances = document.getElementsByClassName('ckEditor');
+          for (let i = 0; i < ckEditorInstances.length; i++) {
+            let ckEditorInstance = CKEDITOR.replace(ckEditorInstances[i]);
+            ckEditorInstance.on('change', function(event) {
+              let content = event.editor.getData();
+              let plainTextContent = content.replace(/<[^>]*>/g, '').replace(/&nbsp;/g, ' ');
+              let wordCount = plainTextContent.trim().split(/\s+/).length;
+              let wordsLeft = 1000 - wordCount;
+              $(`#${ckEditorInstances[i].id}Count`).text(`${wordsLeft} words left`);
+              $(`#${ckEditorInstances[i].id}Count`).css('color', wordsLeft < 0 ? 'red' : '');
+              if (wordsLeft < 0) {
+                  ckEditorInstance.setData(stripHtmlTags(plainTextContent.split(/\s+/).slice(0, 999).join(' ')));
+                
+                alert('Error: Word limit exceeded (maximum 1000 words)');
+              }
+            });
+          }
+          clearInterval(interval);
+        } catch (e) {
+          console.error(e);
+        }
+      }
+    }, 100);
+
+    function stripHtmlTags(html) {
+      var div = document.createElement("div");
+      div.innerHTML = html;
+      var textContent = div.textContent || div.innerText || "";
+      return textContent.trim().replace(/&/g, '').replace(/\s+/g, ' ').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+
+    $('#covers').on('change', function() {
+      var coverImages = this.files;
+      if (coverImages.length > 10) {
+          alert("You can select up to 10 cover images.");
+          this.value = '';
+      }
+
+      let totalSizeInMB = 0;
+
+      for (let i = 0; i < coverImages.length; i++) {
+        const file = coverImages[i];
+        const fileSizeInMB = file.size / (1024 * 1024); 
+
+        if (fileSizeInMB > 100) {
+          alert('One or more cover images exceed the 100 MB size limit. Please select smaller images.');
+          this.value = null;
+          return; 
+        }
+
+        totalSizeInMB += fileSizeInMB;
+      }
+
+      if (totalSizeInMB > 300) {
+        alert('The total size of cover images exceeds the 100 MB limit. Please select fewer images or smaller ones.');
+        this.value = null;
+        return;
+      }
+    });
+
+    const fileInput = document.getElementById('product_video_file');
+
+    fileInput.addEventListener('change', function(event) {
+      const product_file = fileInput.files[0];
+
+      if (product_file) {
+        const fileSizeInGB = product_file.size / (1024 * 1024 * 1024);
+        const fileSizeLimitGB = 1;
+
+        if (fileSizeInGB > fileSizeLimitGB) {
+          alert('File size exceeds the limit of 1 GB. Please select a smaller file.');
+          fileInput.value = null;
+        }
+      }
+    });
+  });
+
+document.querySelectorAll('.import-repo-btn').forEach(button => {
+  button.addEventListener('click', function(event) {
+    event.preventDefault();
+    const repoName = this.getAttribute('data-repo-name');
+    const repoUrl = this.getAttribute('data-repo-url');
+    const repoDescription = this.getAttribute('data-repo-description');
+
+    const nameField = document.getElementById('product_name');
+    const urlField = document.getElementById('product_url');
+    const ckEditorInstances = document.getElementsByClassName('ckEditor');
+
+    if (nameField && urlField) {
+      nameField.value = repoName;
+      urlField.value = repoUrl;
+
+      for (let i = 0; i < ckEditorInstances.length; i++) {
+        const ckEditorInstance = CKEDITOR.instances[ckEditorInstances[i].name];
+        if (ckEditorInstance) {
+          ckEditorInstance.setData(repoDescription);
+        } else {
+          ckEditorInstances[i].value = repoDescription;
+        }
+      }
+    } else {
+      console.error('Form fields not found. Check the IDs.');
+    }
+  });
+});
+$(document).ready(function() {
+
+  function enforceSelectionLimit(selectElement) {
+    selectElement.on('select2:select', function(e) {
+      var selectedItems = $(this).val();
+
+      if (selectedItems.length > 5) {
+        
+        var lastSelected = e.params.data.id; 
+        var options = $(this).find('option:selected');
+        options.each(function() {
+          if ($(this).val() == lastSelected) {
+            $(this).prop('selected', false); 
+            selectElement.trigger('change');
+          }
+        });
+      }
+    });
+  }
+  var categoriesSelect = $(".js-import-product").find('#categoriesSelect').select2({
+    tags: true,
+    placeholder: 'Select or enter categories',
+    tokenSeparators: [',', ' '],
+    allowClear: true
+  })
+
+  var languagesSelect = $(".js-import-product").find('#languagesSelect').select2({
+    tags: true,
+    placeholder: 'Select or enter language',
+    tokenSeparators: [',', ' '],
+    allowClear: true
+  })
+
+  enforceSelectionLimit(categoriesSelect);
+  enforceSelectionLimit(languagesSelect);
+
+});
+
+</script>

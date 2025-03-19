@@ -1,0 +1,485 @@
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+<script src="https://cdn.tailwindcss.com"></script>
+<div class="text-black">
+  <div class="add_product_form bg-indigo-100 min-h-screen min-w-full md:p-8 py-8 px-4">
+    <h1 class="font-semibold leading-7 text-gray-900 text-3xl underline ">Add a Product</h1>
+    <h2 class="mt-1 text-lg leading-6 text-black ">Below is your basic product information.</h2>
+    <%= form_for @product, url: products_path, class: "bg-gradient-to-l from-gray-200 via-fuchsia-200 to-stone-100", data: { turbo: false, remote: true }, html: { id: "product-form",multipart: true } do |f| %>
+      <div class="space-y-12">
+       
+            <!-- New Upload ZIP File Field -->
+            <% if @product.template_id.present? %>
+              <%= f.hidden_field :template_id, value: params[:template_id], id: 'template_id' %>
+              <%= f.hidden_field :upload_file, value: @product.folder.blob.signed_id %>
+            <% else %>
+              <div class="sm:col-span-4 border-t-4 border-black" id="zip-upload-field">
+                <%= f.label :upload_file, "Upload ZIP File:", class: "block text-xl font-medium leading-6 text-gray-900 " %>
+                <div class="mt-0">
+                  <%= f.file_field :upload_file, class: "form-control w-full", id: "upload_file", accept: ".zip" %>
+                  <h6 class="text-sm ">(Only .zip files are allowed and please keep zip below 500mb)</h6>
+                  <button id="clear_file" type="button" class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+                    Clear
+                  </button>
+                </div>
+              </div>
+            <% end %>
+          </div>
+
+          <div class="sm:col-span-4 border-t-4 border-black shadow-2xl">
+            <%= f.label :name, class: "block text-xl font-medium leading-6 text-gray-900 " %>
+            <div class="mt-2">
+              <%= f.text_field :name, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", maxlength: "70", required: true %>
+            </div>
+          </div>
+
+          <div class="sm:col-span-4 border-t-4 border-black shadow-2xl">
+            <%= f.label :description, "Description", class: "block text-xl font-medium leading-6 text-gray-900 " %>
+            <div class="mt-2">
+              <%= f.text_area :description, id: "descriptionTextArea", class: "ckEditor block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", required: true %>
+              <span class="d-block question_modal_input_subtext" id="descriptionTextAreaCount">
+                1000 words left
+              </span>
+            </div>
+          </div>
+
+          <div class="sm:col-span-4 border-t-4 border-black shadow-2xl">
+            <%= f.label :features, "Features", class: "block text-xl font-medium leading-6 text-gray-900 " %>
+            <div class="mt-2">
+              <%= f.text_area :features, id: "featuresTextArea", class: "ckEditor block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"%>
+              <span class="d-block question_modal_input_subtext" id="featuresTextAreaCount">
+                1000 words left
+              </span>
+            </div>
+          </div>
+
+          <div class="sm:col-span-4 border-t-4 border-black shadow-2xl">
+            <%= f.label :requirements, "Requirements", class: "block text-xl font-medium leading-6 text-gray-900 " %>
+            <div class="mt-2">
+              <%= f.text_area :requirements, id: "requirementsTextArea", class: "ckEditor block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"%>
+              <span class="d-block question_modal_input_subtext" id="requirementsTextAreaCount">
+                1000 words left
+              </span>
+            </div>
+          </div>
+
+          <div class="sm:col-span-4 border-t-4 border-black shadow-2xl">
+            <%= f.label :instructions, "Instructions", class: "block text-xl font-medium leading-6 text-gray-900 " %>
+            <div class="mt-2">
+              <%= f.text_area :instructions, id: "instructionsTextArea", class: "ckEditor block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"%>
+              <span class="d-block question_modal_input_subtext" id="instructionsTextAreaCount">
+                1000 words left
+              </span>
+            </div>
+          </div>
+
+          <div class="sm:col-span-4 border-t-4 border-black">
+            <%= f.label :price, class: "block text-xl font-medium leading-6 text-gray-900 " %>
+            <div class="mt-2">
+              <%= f.number_field :price, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", required: true %>
+            </div>
+          </div>
+
+          <div class="sm:col-span-4 border-t-4 border-black">
+            <%= f.label :covers, class: "block text-xl font-medium leading-6 text-gray-900 " do %>
+              Cover Images or GIFs (Limit of 10 and max file size of 100mb each). We recommend including a GIF of the frontend of the product.
+          
+            <% end %>
+            <div class="mt-2">
+              <%= f.file_field :covers, multiple: true, class: "form-control w-full", id: "covers" %>
+            </div>
+            <br/>
+            <h1 class="">(To select multiple images please use CTRL on Windows or command on Mac)</h1>
+          </div>
+
+          <div class="sm:col-span-4 border-t-4 border-black">
+            <label for="product_video_source" class="block text-xl font-medium leading-6 text-gray-900 ">Video Source</label>
+            <div class="mt-2">
+              <select id="product_video_source" class="form-control" onchange="toggleVideoFields()">
+                <option value="">Select Video Source</option>
+                <option value="Preview Video URL">Preview Video URL</option>
+                <option value="Preview Video File">Preview Video File</option>
+              </select>
+            </div>
+            <br/>
+            <h1 class="font-bold ">It is highly recommended to include a video preview to show users how your product works. Doing this will increase the chances of selling your product.</h1>
+          </div>
+
+          <div class="sm:col-span-4 border-t-4 border-black" id="preview_video_url_field" style="display: none;">
+            <%= f.label :preview_video_url, class: "block text-xl font-medium leading-6 text-gray-900 " %>
+            <div class="mt-2">
+              <%= f.text_field :preview_video_url, class: "form-control", id: "product_preview_video_url" %>
+            </div>
+          </div>
+
+          <div class="sm:col-span-4 border-t-4 border-black" id="video_file_field" style="display: none;">
+            <%= f.label :video_file, class: "block text-xl font-medium leading-6 text-gray-900 " do %>
+              Preview Video Source (file size limit of 1 GB)
+            <% end %>
+            <div class="mt-2">
+              <%= f.file_field :video_file, class: "form-control", id: "product_video_file" %>
+            </div>
+          </div>
+
+          <div class="sm:col-span-4 border-t-4 border-black">
+            <%= f.label :categories, class: "block text-xl font-medium leading-6 text-gray-900 " %>
+            <div class="mt-2">
+              <%= f.select :category_ids, options_for_select(Category.pluck(:name, :id)), {}, 
+              class: "js-example-basic-multiple w-40 sm:w-50 mt-1 block rounded-md shadow-sm border-gray-300 focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50", 
+              multiple: true, 
+              id: "categoriesSelected" %>
+            </div>
+          </div>
+
+          <div class="sm:col-span-4 border-t-4 border-black">
+            <%= f.label :language_ids, "Languages", class: "block text-xl font-medium leading-6 text-gray-900 " %>
+            <div class="mt-2">
+              <%= f.select :language_ids, options_for_select(Language.pluck(:name, :id)), {}, 
+                class: "js-example-basic-multiple w-40 sm:w-50 mt-1 block rounded-md shadow-sm border-gray-300 focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50", 
+                multiple: true, 
+                id: "languagesSelected" %>
+            </div>
+          </div>
+
+          <div class="sm:col-span-4 border-t-4 border-black">
+            <%= f.label :featured, "Feature This Product", class: "block text-xl font-medium leading-6 text-gray-900 " %>
+            <h2 class=" text-lg font-bold">(For $10 you can permanently feature your repository so that it becomes searchable in the featured section.)</h2>
+            <div class="mt-2">
+              <%= f.check_box :featured, id:"featured", :style => "width: 20px; height: 20px;" %>
+            </div>
+          </div>
+
+          <div class="sm:col-span-4 border-t-4 border-black">
+            <%= f.label :demo_url, class: "block text-xl font-medium leading-6 text-gray-900 " %>
+            <div class="mt-2">
+              <%= f.text_field :demo_url, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", maxlength: "70", required: false, placeholder: "https://demo_url.com" %>
+            </div>
+          </div>
+
+          <div class="sm:col-span-4 border-t-4 border-black">
+            <div id="upload-status" class="mt-2"></div>
+          </div>
+          <div class="font-bold sm:col-span-4">
+            <h1 class="">All products are subject to review and removal if they appear to be fraudulent or don't provide real value to the customer. Additionally, customers will be able to review and report products so be aware of this when posting a product.</h1>
+          </div>
+        </div>
+      </div>
+      <div class="text-black save_buttons mt-6 items-center ml-4 mb-4 gap-x-6">
+        <%= f.submit "Create Product", class: "rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" %>
+        <%= link_to "Cancel", :back, class: "text-sm font-semibold leading-6 text-gray-900" %>
+      </div>
+    <% end %>
+  </div>
+</div>
+<div class="mssg_saved_successfully flex gap-10 flex-col justify-center items-center" style="display: none">
+  <div class="loader_icon">
+    <i class="fa fa-spinner fa-spin" style="font-size: 90px; color: rgba(22,101,52,.8)"></i>
+  </div>
+  <p>We are processing your files in the background. You can close this tab now. You will be notified when it is on the market.</p>
+</div>
+<script type="text/javascript">
+  function toggleVideoFields() {
+    var selectedOption = $("#product_video_source").val();
+    if (selectedOption === "Preview Video URL") {
+      $("#preview_video_url_field").show();
+      $("#video_file_field").hide();
+    } else if (selectedOption === "Preview Video File") {
+      $("#preview_video_url_field").hide();
+      $("#video_file_field").show();
+    } else {
+      $("#preview_video_url_field").hide();
+      $("#video_file_field").hide();
+    }
+  }
+  $(document).ready(function() {
+     $('#upload_file').on('change', function() {
+    var file = $(this).prop('files')[0];
+    if (file && file.type === 'application/zip') {
+      $('#url-field input').prop('disabled', true);
+       $('#clear-icon-container').removeClass('hidden'); 
+    } else {
+      $('#url-field input').prop('disabled', false);
+    }
+  });
+
+  $('#url-field input').on('input', function() {
+    var url = $(this).val();
+    if (url.trim() !== '') {
+      $('#upload_file').prop('disabled', true);
+      $('#clear-icon-container').addClass('hidden'); 
+
+    } else {
+      $('#upload_file').prop('disabled', false);
+
+    }
+  });
+
+  $('#clear_file').on('click', function() {
+    $('#upload_file').val('');
+    $('#url-field input').prop('disabled', false);
+    $('#upload_file').prop('disabled', false);
+  });
+
+
+    toggleVideoFields();
+    $("#product_video_source").change(function() {
+      toggleVideoFields();
+    });
+    $('.js-example-basic-multiple').select2();
+    var selectedCategories;
+    var selectedLanguages;
+    $('#categoriesSelected').on('change', function() {
+      selectedCategories = $(this).val();
+      console.log(selectedCategories);
+    });
+
+    $('#languagesSelected').on('change', function() {
+      selectedLanguages = $(this).val();
+      console.log(selectedLanguages);
+    });
+   
+    $('#product-form').submit(function(event) {
+        event.preventDefault();
+
+        var formData = new FormData();
+        formData.append('authenticity_token', $('meta[name=csrf-token]').attr('content'));
+        formData.append('product[name]', $('#product_name').val());
+        // Append CKEditor data to FormData
+        for (var i = 0; i < ckEditorInstances.length; i++) {
+            let ckEditorInstance = CKEDITOR.instances[ckEditorInstances[i].id]; // Get the CKEditor instance
+            if (ckEditorInstance) {
+                formData.append(ckEditorInstances[i].name, ckEditorInstance.getData()); // Append data
+            }
+        }
+        formData.append('product[price]', $('#product_price').val());
+
+        const upload_file = document.getElementById('upload_file');
+        if(upload_file) {
+          const product_upload_file_file = upload_file.files[0];
+          if (product_upload_file_file) {
+              formData.append('product[upload_file]', product_upload_file_file);
+              $('#product_url').val('')
+          }
+        } else {
+          formData.append('product[upload_file]', $('#product_upload_file').val());
+          formData.append('product[template_id]', $('#template_id').val());
+        }
+        formData.append('product[url]', $('#product_url').val());
+        formData.append('product[demo_url]', $('#product_demo_url').val());
+        var coverImages = $('#covers')[0].files;
+        $.each(coverImages, function(index, image) {
+            formData.append('product[covers][]', image);
+        });
+        const fileInput = document.getElementById('product_video_file');
+        const product_file = fileInput.files[0];
+
+        if (product_file) {
+            formData.append('product[video_file]', product_file);
+        }
+
+        
+        formData.append('product[featured]', $('#featured:checked').val() || 0);
+        formData.append('product[preview_video_url]', $('#product_preview_video_url').val());
+
+        if (selectedCategories && selectedCategories.length > 0) {
+            formData.set('product[category_ids][]', selectedCategories);
+        }
+        if (selectedLanguages && selectedLanguages.length > 0) {
+            formData.set('product[language_ids][]', selectedLanguages);
+        }
+        $('#upload-status').html('<img class="w-10 h-10" src="<%= asset_path('loading.gif') %>" alt="Loading"> Uploading');
+
+        $.ajax({
+            type: 'POST',
+            url: '/products',
+            data: formData,
+            processData: false,
+            contentType: false,
+            xhr: function() {
+                var xhr = new window.XMLHttpRequest();
+                xhr.upload.addEventListener('progress', function(evt) {
+                }, false);
+                return xhr;
+            },
+            success: function(data) {      
+              if (data.url) {
+                window.location.href = data.url;
+              } else {
+                $(".save_buttons").remove();
+                $(".add_product_form").hide();
+                $(".mssg_saved_successfully").show();
+              }          
+            },
+            error: function(xhr, status, error) {
+                if (xhr.status === 422) {
+                    var errors = xhr.responseJSON.message;
+                    if (errors) {
+                        $('#upload-status').text('Error: ' + errors);
+                    } else {
+                        $('#upload-status').text('Error: ' + error);
+                    }
+                } else {
+                    $('#upload-status').text('Error: ' + error);
+                }
+            }
+        });
+    });
+
+    var titleInput = document.getElementById('product_name');
+    titleInput.addEventListener('input', function() {
+      var currentValue = this.value;
+      if (currentValue.length > 70) {
+        this.value = currentValue.slice(0, 70);
+      }
+    });
+
+    var ckEditorInstances;
+    var interval = setInterval(() => {
+      if (typeof CKEDITOR !== 'undefined') {
+        try {
+          //ckEditorInstances = document.getElementsByClassName('ckEditor');
+          const $formContainer = $(".js-new-product"); // Parent container of the form
+          ckEditorInstances = $formContainer.find(".ckEditor"); // Select CKEditor instances only in this form
+
+          for (let i = 0; i < ckEditorInstances.length; i++) {
+            let ckEditorInstance = CKEDITOR.replace(ckEditorInstances[i]);
+            ckEditorInstance.on('change', function(event) {
+              let content = event.editor.getData();
+              let plainTextContent = content.replace(/<[^>]*>/g, '').replace(/&nbsp;/g, ' ');
+              let wordCount = plainTextContent.trim().split(/\s+/).length;
+              let wordsLeft = 1000 - wordCount;
+              $(`#${ckEditorInstances[i].id}Count`).text(`${wordsLeft} words left`);
+              $(`#${ckEditorInstances[i].id}Count`).css('color', wordsLeft < 0 ? 'red' : '');
+              if (wordsLeft < 0) {
+                  ckEditorInstance.setData(stripHtmlTags(plainTextContent.split(/\s+/).slice(0, 999).join(' ')));
+                
+                alert('Error: Word limit exceeded (maximum 1000 words)');
+              }
+            });
+          }
+          clearInterval(interval);
+        } catch (e) {
+          console.error(e);
+        }
+      }
+    }, 100);
+
+    function stripHtmlTags(html) {
+      var div = document.createElement("div");
+      div.innerHTML = html;
+      var textContent = div.textContent || div.innerText || "";
+      return textContent.trim().replace(/&/g, '').replace(/\s+/g, ' ').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+
+    $('#covers').on('change', function() {
+      var coverImages = this.files;
+      if (coverImages.length > 10) {
+          alert("You can select up to 10 cover images.");
+          this.value = '';
+      }
+
+      let totalSizeInMB = 0;
+
+      for (let i = 0; i < coverImages.length; i++) {
+        const file = coverImages[i];
+        const fileSizeInMB = file.size / (1024 * 1024); 
+
+        if (fileSizeInMB > 100) {
+          alert('One or more cover images exceed the 100 MB size limit. Please select smaller images.');
+          this.value = null;
+          return; 
+        }
+
+        totalSizeInMB += fileSizeInMB;
+      }
+
+      if (totalSizeInMB > 300) {
+        alert('The total size of cover images exceeds the 100 MB limit. Please select fewer images or smaller ones.');
+        this.value = null;
+        return;
+      }
+    });
+
+    const fileInput = document.getElementById('product_video_file');
+
+    fileInput.addEventListener('change', function(event) {
+      const product_file = fileInput.files[0];
+
+      if (product_file) {
+        const fileSizeInGB = product_file.size / (1024 * 1024 * 1024);
+        const fileSizeLimitGB = 1;
+
+        if (fileSizeInGB > fileSizeLimitGB) {
+          alert('File size exceeds the limit of 1 GB. Please select a smaller file.');
+          fileInput.value = null;
+        }
+      }
+    });
+  });
+
+document.querySelectorAll('.import-repo-btn').forEach(button => {
+  button.addEventListener('click', function(event) {
+    event.preventDefault();
+    const repoName = this.getAttribute('data-repo-name');
+    const repoUrl = this.getAttribute('data-repo-url');
+    const repoDescription = this.getAttribute('data-repo-description');
+
+    const nameField = document.getElementById('product_name');
+    const urlField = document.getElementById('product_url');
+    const ckEditorInstances = document.getElementsByClassName('ckEditor');
+
+    if (nameField && urlField) {
+      nameField.value = repoName;
+      urlField.value = repoUrl;
+
+      for (let i = 0; i < ckEditorInstances.length; i++) {
+        const ckEditorInstance = CKEDITOR.instances[ckEditorInstances[i].name];
+        if (ckEditorInstance) {
+          ckEditorInstance.setData(repoDescription);
+        } else {
+          ckEditorInstances[i].value = repoDescription;
+        }
+      }
+    } else {
+      console.error('Form fields not found. Check the IDs.');
+    }
+  });
+});
+$(document).ready(function() {
+
+  function enforceSelectionLimit(selectElement) {
+    selectElement.on('select2:select', function(e) {
+      var selectedItems = $(this).val();
+
+      if (selectedItems.length > 5) {
+        
+        var lastSelected = e.params.data.id; 
+        var options = $(this).find('option:selected');
+        options.each(function() {
+          if ($(this).val() == lastSelected) {
+            $(this).prop('selected', false); 
+            selectElement.trigger('change');
+          }
+        });
+      }
+    });
+  }
+  var categoriesSelect = $(".js-new-product").find('#categoriesSelected').select2({
+    tags: true,
+    placeholder: 'Select or enter categories',
+    tokenSeparators: [',', ' '],
+    allowClear: true
+  })
+
+  var languagesSelect = $(".js-new-product").find('#languagesSelected').select2({
+    tags: true,
+    placeholder: 'Select or enter language',
+    tokenSeparators: [',', ' '],
+    allowClear: true
+  })
+
+  enforceSelectionLimit(categoriesSelect);
+  enforceSelectionLimit(languagesSelect);
+
+});
+
+</script>
