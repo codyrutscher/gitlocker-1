@@ -99,6 +99,7 @@ Rails.application.routes.draw do
     get 'new_product', on: :collection
     post 'create_from_github', on: :collection
     post 'create_from_gitlab', on: :collection
+    post 'import_products', on: :collection
     post 'like', on: :member
     post 'unlike', on: :member
     get 'search', on: :collection
