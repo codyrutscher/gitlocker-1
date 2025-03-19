@@ -1,0 +1,2876 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HTML & CSS Docs - Coderz</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Syntax Highlighting -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <style>
+    .sidebar::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .sidebar::-webkit-scrollbar-thumb {
+      background: #4a5568;
+      border-radius: 4px;
+    }
+
+    .prose :where(code):not(:where([class~="not-prose"] *))::before {
+      content: "";
+    }
+
+    .prose :where(code):not(:where([class~="not-prose"] *))::after {
+      content: "";
+    }
+  </style>
+</head>
+
+<body class="bg-gray-50">
+  <div class="min-h-screen md:flex">
+    <!-- Sidebar -->
+    <aside class="sidebar bg-gray-800 text-gray-300 w-64 fixed h-screen overflow-y-auto z-30 -translate-x-full md:translate-x-0 transition-transform duration-300">
+      <div class="p-4">
+        <%= link_to documentationindex_path, class: "block mb-6 text-blue-400 hover:text-blue-300" do %>
+        ← Back to Tech Stack <% end %>
+        <h2 class="text-xl font-bold mb-4">HTML & CSS Documentation</h2>
+        <nav>
+          <h3 class="text-sm font-semibold text-gray-400 mb-4">
+            CORE CONCEPTS
+          </h3>
+          <ul class="space-y-2">
+            <li>
+              <a href="#introduction" class="flex items-center px-3 py-2 rounded hover:bg-gray-700">Introduction</a>
+            </li>
+            <li>
+              <a href="#basic-html" class="flex items-center px-3 py-2 rounded hover:bg-gray-700">Basic HTML</a>
+            </li>
+            <li>
+              <a href="#basic-css" class="flex items-center px-3 py-2 rounded hover:bg-gray-700">Basic CSS</a>
+            </li>
+            <li>
+              <a href="#advanced-css" class="flex items-center px-3 py-2 rounded hover:bg-gray-700">Advanced CSS</a>
+            </li>
+            <li>
+              <a href="#html-elements" class="flex items-center px-3 py-2 rounded hover:bg-gray-700">HTML Elements</a>
+            </li>
+            <li>
+              <a href="#html-forms" class="flex items-center px-3 py-2 rounded hover:bg-gray-700">HTML Forms</a>
+            </li>
+            <li>
+              <a href="#css-selectors" class="flex items-center px-3 py-2 rounded hover:bg-gray-700">CSS Selectors</a>
+            </li>
+            <li>
+              <a href="#box-model" class="flex items-center px-3 py-2 rounded hover:bg-gray-700">Box Model</a>
+            </li>
+            <li>
+              <a href="#flexbox" class="flex items-center px-3 py-2 rounded hover:bg-gray-700">Flexbox</a>
+            </li>
+            <li>
+              <a href="#grid" class="flex items-center px-3 py-2 rounded hover:bg-gray-700">Grid</a>
+            </li>
+            <li>
+              <a href="#responsive-design" class="flex items-center px-3 py-2 rounded hover:bg-gray-700">Responsive Design</a>
+            </li>
+            <h3 class="text-sm font-semibold text-gray-400 mt-8 mb-4">
+              ADVANCED TOPICS
+            </h3>
+            <li>
+              <a href="#animations" class="flex items-center px-3 py-2 rounded hover:bg-gray-700">Animations</a>
+            </li>
+            <li>
+              <a href="#transitions" class="flex items-center px-3 py-2 rounded hover:bg-gray-700">Transitions</a>
+            </li>
+            <li>
+              <a href="#accessibility" class="flex items-center px-3 py-2 rounded hover:bg-gray-700">Accessibility</a>
+            </li>
+            <li>
+              <a href="#frameworks" class="flex items-center px-3 py-2 rounded hover:bg-gray-700">Frameworks</a>
+            </li>
+            <li>
+          </ul>
+        </nav>
+      </div>
+    </aside>
+
+    <!-- Mobile Menu Button -->
+    <button id="sidebarToggle" class="md:hidden fixed top-4 left-4 z-40 p-2 bg-gray-800 rounded-lg text-white ml-4 mt-4">
+      ☰
+    </button>
+
+    <!-- Main Content -->
+    <main class="flex-1 p-8 bg-gray-50 ml-0 md:ml-64">
+      <div class="max-w-4xl mx-auto prose max-w-full md:max-w-4xl">
+
+
+        <section id="introduction" class="mb-12">
+          <h2 class="text-2xl font-bold mb-4">1. Introduction to HTML & CSS</h2>
+          <p class="mb-4">
+            HTML (HyperText Markup Language) and CSS (Cascading Style Sheets) are the foundational technologies for building web pages. HTML is used to structure content, while CSS is used to style and layout that content. Together, they enable you to create visually appealing and functional websites.
+          </p>
+
+          <!-- Sub-topic: What is HTML? -->
+          <div class="mb-8">
+            <h3 class="text-xl font-semibold mb-2">1.1 What is HTML?</h3>
+            <p class="mb-4">
+              HTML stands for <strong>HyperText Markup Language</strong>. It is the standard language used to create and structure content on the web. HTML uses a system of tags and attributes to define elements such as headings, paragraphs, links, images, and more. These elements form the building blocks of a web page.
+            </p>
+            <p class="mb-4">
+              For example, the following code creates a simple HTML document:
+            </p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-sm text-white overflow-x-auto">
+                <code class="language-html">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8" /&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;
+    &lt;title&gt;My First Web Page&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Welcome to My Website&lt;/h1&gt;
+    &lt;p&gt;This is a paragraph of text.&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+                </code>
+              </pre>
+            <p class="mt-4">
+              In this example:
+            </p>
+            <ul class="list-disc list-inside mb-4">
+              <li><code>&lt;!DOCTYPE html&gt;</code> declares the document type and version of HTML.</li>
+              <li><code>&lt;html&gt;</code> is the root element of the HTML document.</li>
+              <li><code>&lt;head&gt;</code> contains meta-information about the document, such as the title and character encoding.</li>
+              <li><code>&lt;body&gt;</code> contains the visible content of the web page.</li>
+            </ul>
+          </div>
+
+          <!-- Sub-topic: What is CSS? -->
+          <div class="mb-8">
+            <h3 class="text-xl font-semibold mb-2">1.2 What is CSS?</h3>
+            <p class="mb-4">
+              CSS stands for <strong>Cascading Style Sheets</strong>. It is a stylesheet language used to describe the presentation of a document written in HTML. CSS allows you to control the layout, colors, fonts, and overall visual appearance of your web pages.
+            </p>
+            <p class="mb-4">
+              For example, the following CSS code styles the HTML elements from the previous example:
+            </p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-sm text-white overflow-x-auto">
+                <code class="language-css">
+h1 {
+  color: #2d3748;
+  font-size: 2rem;
+  text-align: center;
+}
+
+p {
+  color: #4a5568;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+                </code>
+              </pre>
+            <p class="mt-4">
+              In this example:
+            </p>
+            <ul class="list-disc list-inside mb-4">
+              <li><code>h1</code> selects the heading element and applies styles like color, font size, and text alignment.</li>
+              <li><code>p</code> selects the paragraph element and applies styles like color, font size, and line height.</li>
+            </ul>
+          </div>
+
+          <!-- Sub-topic: How HTML and CSS Work Together -->
+          <div class="mb-8">
+            <h3 class="text-xl font-semibold mb-2">1.3 How HTML and CSS Work Together</h3>
+            <p class="mb-4">
+              HTML and CSS work together to create a complete web page. HTML provides the structure, while CSS enhances the presentation. Here’s how they interact:
+            </p>
+            <ol class="list-decimal list-inside mb-4">
+              <li><strong>HTML Defines the Structure:</strong> HTML elements like headings, paragraphs, and images define the content and its hierarchy.</li>
+              <li><strong>CSS Styles the Structure:</strong> CSS rules are applied to HTML elements to control their appearance, such as colors, spacing, and layout.</li>
+              <li><strong>Separation of Concerns:</strong> Keeping HTML and CSS separate makes your code easier to maintain and update.</li>
+            </ol>
+            <p class="mb-4">
+              Here’s an example of how HTML and CSS work together:
+            </p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-sm text-white overflow-x-auto">
+                <code class="language-html">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8" /&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;
+    &lt;title&gt;Styled Web Page&lt;/title&gt;
+    &lt;style&gt;
+      h1 {
+        color: #2d3748;
+        font-size: 2rem;
+        text-align: center;
+      }
+      p {
+        color: #4a5568;
+        font-size: 1rem;
+        line-height: 1.5;
+      }
+    &lt;/style&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Welcome to My Website&lt;/h1&gt;
+    &lt;p&gt;This is a paragraph of text.&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+                </code>
+              </pre>
+            <p class="mt-4">
+              In this example, the CSS is embedded within the <code>&lt;style&gt;</code> tag in the <code>&lt;head&gt;</code> section. This is a simple way to include CSS in an HTML document.
+            </p>
+          </div>
+        </section>
+
+
+        <section id="basic-html" class="mb-12">
+          <h2 class="text-2xl font-bold mb-4">2. Basic HTML Elements</h2>
+          <p class="mb-4">
+            HTML elements are the building blocks of a web page. They define the structure and content of the page. In this section, we’ll explore some of the most commonly used HTML elements, their purpose, and how to use them effectively.
+          </p>
+
+          <!-- Sub-topic: Headings -->
+          <div class="mb-8">
+            <h3 class="text-xl font-semibold mb-2">2.1 Headings</h3>
+            <p class="mb-4">
+              Headings are used to define the hierarchy and structure of your content. HTML provides six levels of headings, from <code>&lt;h1&gt;</code> (the most important) to <code>&lt;h6&gt;</code> (the least important). Headings help users and search engines understand the organization of your content.
+            </p>
+            <p class="mb-4">
+              Here’s an example of how to use headings:
+            </p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-sm text-white overflow-x-auto">
+                <code class="language-html">
+&lt;h1&gt;Main Heading (h1)&lt;/h1&gt;
+&lt;h2&gt;Subheading (h2)&lt;/h2&gt;
+&lt;h3&gt;Sub-subheading (h3)&lt;/h3&gt;
+&lt;h4&gt;Sub-sub-subheading (h4)&lt;/h4&gt;
+&lt;h5&gt;Sub-sub-sub-subheading (h5)&lt;/h5&gt;
+&lt;h6&gt;Sub-sub-sub-sub-subheading (h6)&lt;/h6&gt;
+                </code>
+              </pre>
+            <p class="mt-4">
+              Key points about headings:
+            </p>
+            <ul class="list-disc list-inside mb-4">
+              <li><code>&lt;h1&gt;</code> should be used for the main title of the page and should only appear once per page.</li>
+              <li>Use headings in order (e.g., <code>&lt;h1&gt;</code> followed by <code>&lt;h2&gt;</code>, then <code>&lt;h3&gt;</code>, etc.) to maintain a logical structure.</li>
+              <li>Headings improve accessibility by helping screen readers navigate the page.</li>
+            </ul>
+          </div>
+
+          <!-- Sub-topic: Paragraphs -->
+          <div class="mb-8">
+            <h3 class="text-xl font-semibold mb-2">2.2 Paragraphs</h3>
+            <p class="mb-4">
+              The <code>&lt;p&gt;</code> element is used to define paragraphs of text. Paragraphs are block-level elements, meaning they start on a new line and take up the full width of their container. They are essential for organizing and presenting textual content.
+            </p>
+            <p class="mb-4">
+              Example of using paragraphs:
+            </p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-sm text-white overflow-x-auto">
+                <code class="language-html">
+&lt;p&gt;This is the first paragraph. It contains some text to demonstrate how paragraphs work.&lt;/p&gt;
+&lt;p&gt;This is the second paragraph. It is separated from the first paragraph by a blank line.&lt;/p&gt;
+                </code>
+              </pre>
+            <p class="mt-4">
+              Key points about paragraphs:
+            </p>
+            <ul class="list-disc list-inside mb-4">
+              <li>Use paragraphs to break up large blocks of text into manageable sections.</li>
+              <li>Paragraphs automatically add spacing above and below the text, making content easier to read.</li>
+              <li>You can style paragraphs using CSS to control font size, line height, and more.</li>
+            </ul>
+          </div>
+
+          <!-- Sub-topic: Links -->
+          <div class="mb-8">
+            <h3 class="text-xl font-semibold mb-2">2.3 Links</h3>
+            <p class="mb-4">
+              Links are created using the <code>&lt;a&gt;</code> (anchor) element. They allow users to navigate between pages or sections of a page. The <code>href</code> attribute specifies the destination of the link, which can be a URL, an email address, or a section within the same page.
+            </p>
+            <p class="mb-4">
+              Example of using links:
+            </p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-sm text-white overflow-x-auto">
+                <code class="language-html">
+&lt;a href="https://coderz.us"&gt;Visit Coderz&lt;/a&gt;
+&lt;a href="mailto:support@coderz.us"&gt;Email Us&lt;/a&gt;
+&lt;a href="#introduction"&gt;Go to Introduction&lt;/a&gt;
+                </code>
+              </pre>
+            <p class="mt-4">
+              Key points about links:
+            </p>
+            <ul class="list-disc list-inside mb-4">
+              <li>The <code>href</code> attribute is required for the link to work.</li>
+              <li>Use the <code>target="_blank"</code> attribute to open links in a new tab.</li>
+              <li>Links can point to external websites, internal pages, or specific sections (using IDs).</li>
+            </ul>
+          </div>
+
+          <!-- Sub-topic: Images -->
+          <div class="mb-8">
+            <h3 class="text-xl font-semibold mb-2">2.4 Images</h3>
+            <p class="mb-4">
+              The <code>&lt;img&gt;</code> element is used to embed images in a web page. It is a self-closing tag, meaning it does not have a closing tag. The <code>src</code> attribute specifies the path to the image file, and the <code>alt</code> attribute provides alternative text for accessibility.
+            </p>
+            <p class="mb-4">
+              Example of using images:
+            </p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-sm text-white overflow-x-auto">
+                <code class="language-html">
+          &lt;img src="https://coderz.us/logo.png" alt="Coderz Logo" /&gt;
+                </code>
+              </pre>
+            <p class="mt-4">
+              Key points about images:
+            </p>
+            <ul class="list-disc list-inside mb-4">
+              <li>Always include the <code>alt</code> attribute to describe the image for screen readers and SEO.</li>
+              <li>Use the <code>width</code> and <code>height</code> attributes to control the size of the image.</li>
+              <li>Optimize images for the web to ensure fast loading times.</li>
+            </ul>
+          </div>
+
+          <!-- Sub-topic: Lists -->
+          <div class="mb-8">
+            <h3 class="text-xl font-semibold mb-2">2.5 Lists</h3>
+            <p class="mb-4">
+              HTML provides two types of lists: <strong>ordered lists</strong> (<code>&lt;ol&gt;</code>) and <strong>unordered lists</strong> (<code>&lt;ul&gt;</code>). Ordered lists display items with numbers, while unordered lists use bullet points. List items are defined using the <code>&lt;li&gt;</code> element.
+            </p>
+            <p class="mb-4">
+              Example of using lists:
+            </p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-sm text-white overflow-x-auto">
+                <code class="language-html">
+&lt;ul&gt;
+  &lt;li&gt;Unordered List Item 1&lt;/li&gt;
+  &lt;li&gt;Unordered List Item 2&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Ordered List Item 1&lt;/li&gt;
+  &lt;li&gt;Ordered List Item 2&lt;/li&gt;
+&lt;/ol&gt;
+                </code>
+              </pre>
+            <p class="mt-4">
+              Key points about lists:
+            </p>
+            <ul class="list-disc list-inside mb-4">
+              <li>Use unordered lists for items that do not require a specific order.</li>
+              <li>Use ordered lists for items that need to be displayed in a sequence.</li>
+              <li>Lists can be nested to create sub-lists.</li>
+            </ul>
+          </div>
+        </section>
+
+        <section id="basic-css" class="mb-12">
+          <h2 class="text-2xl font-bold mb-4">3. Basic CSS Concepts</h2>
+          <p class="mb-4">
+            CSS (Cascading Style Sheets) gives your HTML content visual structure and style. Let’s explore core CSS concepts that will help you control layout, colors, and responsiveness.
+          </p>
+
+          <!-- Sub-topic: CSS Selectors -->
+          <div class="mb-8">
+            <h3 class="text-xl font-semibold mb-2">3.1 CSS Selectors</h3>
+            <p class="mb-4">
+              Selectors are patterns used to select HTML elements for styling. They are the bridge between your HTML structure and CSS styling rules. Understanding selectors is crucial for applying styles precisely.
+            </p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-sm text-white overflow-x-auto">
+                <code class="language-css">
+/* Element Selector */
+p {
+  color: #4a5568;
+}
+
+/* Class Selector */
+.text-blue {
+  color: #4299e1;
+}
+
+/* ID Selector */
+#main-header {
+  font-size: 2.5rem;
+}
+
+/* Combined Selector */
+article.featured-post {
+  border: 2px solid #48bb78;
+}
+                </code>
+              </pre>
+            <div class="mt-4">
+              <p class="font-semibold mb-2">Selector Types Explained:</p>
+              <ul class="list-disc list-inside mb-4">
+                <li><strong>Element Selector:</strong> Targets all instances of an HTML tag (e.g., <code>p</code> selects all paragraphs)</li>
+                <li><strong>Class Selector:</strong> Targets elements with a specific class (e.g., <code>.text-blue</code> selects elements with <code>class="text-blue"</code>)</li>
+                <li><strong>ID Selector:</strong> Targets a single unique element (e.g., <code>#main-header</code> selects <code>id="main-header"</code>)</li>
+                <li><strong>Combined Selector:</strong> Targets elements with multiple conditions (e.g., <code>article.featured-post</code> selects <code>&lt;article&gt;</code> elements with <code>class="featured-post"</code>)</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Sub-topic: Box Model -->
+          <div class="mb-8">
+            <h3 class="text-xl font-semibold mb-2">3.2 The Box Model</h3>
+            <p class="mb-4">
+              Every HTML element is a rectangular box consisting of four layers: content, padding, border, and margin. Understanding this model is essential for precise layout control.
+            </p>
+            <div class="bg-gray-100 p-4 rounded-lg mb-4">
+              <div class="max-w-xs mx-auto">
+                <div class="bg-white p-4 border-4 border-blue-200 m-4">
+                  <div class="bg-blue-100 p-4">
+                    Content Area
+                  </div>
+                </div>
+              </div>
+            </div>
+            <pre class="bg-gray-800 p-4 rounded-lg text-sm text-white overflow-x-auto">
+                <code class="language-css">
+.box-example {
+  width: 300px;          /* Content width */
+  padding: 20px;         /* Inner spacing */
+  border: 4px solid #63b3ed;  /* Border around padding */
+  margin: 30px;          /* Outer spacing */
+  background-color: #ebf8ff;
+}
+                </code>
+              </pre>
+            <div class="mt-4">
+              <p class="font-semibold mb-2">Box Model Components:</p>
+              <ul class="list-disc list-inside mb-4">
+                <li><strong>Content:</strong> The actual text/images (controlled by <code>width/height</code>)</li>
+                <li><strong>Padding:</strong> Space between content and border (<code>padding</code>)</li>
+                <li><strong>Border:</strong> Line around padding (<code>border</code>)</li>
+                <li><strong>Margin:</strong> Space outside the border (<code>margin</code>)</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Sub-topic: Flexbox -->
+          <div class="mb-8">
+            <h3 class="text-xl font-semibold mb-2">3.3 Flex Layout (Flexbox)</h3>
+            <p class="mb-4">
+              Flexbox is a layout model that helps arrange items in containers, solving common alignment challenges. It works best for one-dimensional layouts (either rows or columns).
+            </p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-sm text-white overflow-x-auto">
+                <code class="language-html">
+&lt;div class="flex flex-wrap gap-4 p-4 bg-gray-100"&gt;
+  &lt;div class="p-4 bg-blue-500 text-white"&gt;Item 1&lt;/div&gt;
+  &lt;div class="p-4 bg-blue-500 text-white"&gt;Item 2&lt;/div&gt;
+  &lt;div class="p-4 bg-blue-500 text-white"&gt;Item 3&lt;/div&gt;
+&lt;/div&gt;
+                </code>
+              </pre>
+            <div class="mt-4">
+              <p class="font-semibold mb-2">Key Flexbox Properties:</p>
+              <ul class="list-disc list-inside mb-4">
+                <li><code>display: flex</code>: Enables flex layout</li>
+                <li><code>justify-content</code>: Controls horizontal alignment</li>
+                <li><code>align-items</code>: Controls vertical alignment</li>
+                <li><code>flex-direction</code>: Sets direction (row/column)</li>
+                <li><code>flex-wrap</code>: Allows items to wrap to new lines</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Sub-topic: CSS Grid -->
+          <div class="mb-8">
+            <h3 class="text-xl font-semibold mb-2">3.4 Grid Layout</h3>
+            <p class="mb-4">
+              CSS Grid is a two-dimensional layout system that handles both rows and columns. It's perfect for complex layouts that need precise control over both dimensions.
+            </p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-sm text-white overflow-x-auto">
+                <code class="language-css">
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.grid-item {
+  padding: 1rem;
+  background-color: #c6f6d5;
+}
+                </code>
+              </pre>
+            <div class="mt-4">
+              <p class="font-semibold mb-2">Grid Essentials:</p>
+              <ul class="list-disc list-inside mb-4">
+                <li><code>grid-template-columns</code>: Defines column structure</li>
+                <li><code>grid-template-rows</code>: Defines row structure</li>
+                <li><code>gap</code>: Spacing between grid items</li>
+                <li><code>fr unit</code>: Fractional unit for responsive sizing</li>
+                <li><code>grid-area</code>: Positions items in specific grid areas</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Sub-topic: Responsive Design -->
+          <div class="mb-8">
+            <h3 class="text-xl font-semibold mb-2">3.5 Responsive Design Basics</h3>
+            <p class="mb-4">
+              Creating websites that adapt to different screen sizes using media queries and relative units. Essential for mobile-friendly experiences.
+            </p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-sm text-white overflow-x-auto">
+                <code class="language-css">
+/* Mobile-first approach */
+.container {
+  width: 100%;
+  padding: 1rem;
+}
+
+/* Tablet screens */
+@media (min-width: 768px) {
+  .container {
+    width: 750px;
+    margin: 0 auto;
+  }
+}
+
+/* Desktop screens */
+@media (min-width: 1024px) {
+  .container {
+    width: 980px;
+  }
+}
+                </code>
+              </pre>
+            <div class="mt-4">
+              <p class="font-semibold mb-2">Responsive Techniques:</p>
+              <ul class="list-disc list-inside mb-4">
+                <li><strong>Media Queries:</strong> Apply styles based on screen size</li>
+                <li><strong>Relative Units:</strong> Use % or rem instead of px</li>
+                <li><strong>Mobile-First:</strong> Design for mobile then enhance for larger screens</li>
+                <li><strong>Fluid Layouts:</strong> Use max-width instead of fixed widths</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section id="advanced-css" class="mb-12">
+          <h2 class="text-2xl font-bold mb-4">4. Advanced CSS Concepts</h2>
+          <p class="mb-4">
+            Now that you’ve mastered the basics, let’s dive into more advanced CSS concepts. These techniques will help you create modern, responsive, and visually stunning websites.
+          </p>
+
+          <!-- Sub-topic: CSS Variables -->
+          <div class="mb-8">
+            <h3 class="text-xl font-semibold mb-2">4.1 CSS Variables</h3>
+            <p class="mb-4">
+              CSS Variables (also known as Custom Properties) allow you to store reusable values (like colors, fonts, or spacing) in one place. This makes your CSS more maintainable and easier to update.
+            </p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-sm text-white overflow-x-auto">
+                <code class="language-css">
+:root {
+  --primary-color: #4299e1;
+  --secondary-color: #48bb78;
+  --spacing-unit: 1rem;
+}
+
+.button {
+  background-color: var(--primary-color);
+  padding: var(--spacing-unit);
+  color: white;
+}
+
+.alert {
+  background-color: var(--secondary-color);
+  padding: var(--spacing-unit);
+  color: white;
+}
+                </code>
+              </pre>
+            <div class="mt-4">
+              <p class="font-semibold mb-2">Key Points About CSS Variables:</p>
+              <ul class="list-disc list-inside mb-4">
+                <li><strong>Declare Variables:</strong> Use <code>:root</code> to define global variables.</li>
+                <li><strong>Access Variables:</strong> Use <code>var(--variable-name)</code> to apply the value.</li>
+                <li><strong>Dynamic Updates:</strong> Variables can be updated with JavaScript for dynamic theming.</li>
+                <li><strong>Fallback Values:</strong> Provide fallbacks like <code>var(--primary-color, blue)</code>.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Sub-topic: Transitions and Animations -->
+          <div class="mb-8">
+            <h3 class="text-xl font-semibold mb-2">4.2 Transitions and Animations</h3>
+            <p class="mb-4">
+              Transitions and animations bring your website to life by adding smooth, interactive effects. Transitions handle simple state changes, while animations allow for more complex, multi-step effects.
+            </p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-sm text-white overflow-x-auto">
+                <code class="language-css">
+/* Transition Example */
+.button {
+  background-color: #4299e1;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: #3182ce;
+}
+
+/* Animation Example */
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.slide-in {
+  animation: slideIn 0.5s ease-out;
+}
+                </code>
+              </pre>
+            <div class="mt-4">
+              <p class="font-semibold mb-2">Key Points About Transitions and Animations:</p>
+              <ul class="list-disc list-inside mb-4">
+                <li><strong>Transitions:</strong> Use <code>transition: property duration timing-function</code> for smooth changes.</li>
+                <li><strong>Animations:</strong> Define keyframes with <code>@keyframes</code> and apply them with <code>animation</code>.</li>
+                <li><strong>Timing Functions:</strong> Control speed curves (e.g., <code>ease</code>, <code>linear</code>).</li>
+                <li><strong>Performance:</strong> Use <code>transform</code> and <code>opacity</code> for performant animations.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Sub-topic: Pseudo-Elements and Pseudo-Classes -->
+          <div class="mb-8">
+            <h3 class="text-xl font-semibold mb-2">4.3 Pseudo-Elements and Pseudo-Classes</h3>
+            <p class="mb-4">
+              Pseudo-elements and pseudo-classes allow you to style specific parts of an element or apply styles based on user interaction. They are powerful tools for creating dynamic and interactive designs.
+            </p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-sm text-white overflow-x-auto">
+                <code class="language-css">
+/* Pseudo-Class Example */
+a:hover {
+  color: #4299e1;
+}
+
+input:focus {
+  border-color: #48bb78;
+}
+
+/* Pseudo-Element Example */
+p::first-line {
+  font-weight: bold;
+}
+
+p::before {
+  content: "→ ";
+  color: #4299e1;
+}
+                </code>
+              </pre>
+            <div class="mt-4">
+              <p class="font-semibold mb-2">Key Points About Pseudo-Elements and Pseudo-Classes:</p>
+              <ul class="list-disc list-inside mb-4">
+                <li><strong>Pseudo-Classes:</strong> Target elements based on state (e.g., <code>:hover</code>, <code>:focus</code>).</li>
+                <li><strong>Pseudo-Elements:</strong> Style specific parts of an element (e.g., <code>::before</code>, <code>::after</code>).</li>
+                <li><strong>Content Property:</strong> Use <code>content</code> to insert text or icons with pseudo-elements.</li>
+                <li><strong>Common Use Cases:</strong> Tooltips, custom bullets, and decorative elements.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Sub-topic: Responsive Typography -->
+          <div class="mb-8">
+            <h3 class="text-xl font-semibold mb-2">4.4 Responsive Typography</h3>
+            <p class="mb-4">
+              Responsive typography ensures that your text looks great on all devices. Use relative units and media queries to create scalable and readable text.
+            </p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-sm text-white overflow-x-auto">
+                <code class="language-css">
+:root {
+  --base-font-size: 16px;
+}
+
+body {
+  font-size: var(--base-font-size);
+}
+
+h1 {
+  font-size: 2rem; /* 32px */
+}
+
+@media (min-width: 768px) {
+  :root {
+    --base-font-size: 18px;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --base-font-size: 20px;
+  }
+}
+                </code>
+              </pre>
+            <div class="mt-4">
+              <p class="font-semibold mb-2">Key Points About Responsive Typography:</p>
+              <ul class="list-disc list-inside mb-4">
+                <li><strong>Relative Units:</strong> Use <code>rem</code> and <code>em</code> for scalable text.</li>
+                <li><strong>Media Queries:</strong> Adjust font sizes for different screen sizes.</li>
+                <li><strong>Line Height:</strong> Use <code>line-height</code> to improve readability.</li>
+                <li><strong>Viewport Units:</strong> Use <code>vw</code> and <code>vh</code> for dynamic scaling.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Sub-topic: CSS Architecture (BEM) -->
+          <div class="mb-8">
+            <h3 class="text-xl font-semibold mb-2">4.5 CSS Architecture (BEM)</h3>
+            <p class="mb-4">
+              BEM (Block, Element, Modifier) is a naming convention for writing scalable and maintainable CSS. It helps you avoid conflicts and makes your code easier to understand.
+            </p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-sm text-white overflow-x-auto">
+                <code class="language-html">
+&lt;div class="card card--featured"&gt;
+  &lt;div class="card__header"&gt;Header&lt;/div&gt;
+  &lt;div class="card__body"&gt;Body&lt;/div&gt;
+&lt;/div&gt;
+                </code>
+              </pre>
+            <div class="mt-4">
+              <p class="font-semibold mb-2">Key Points About BEM:</p>
+              <ul class="list-disc list-inside mb-4">
+                <li><strong>Block:</strong> A standalone component (e.g., <code>.card</code>).</li>
+                <li><strong>Element:</strong> A part of the block (e.g., <code>.card__header</code>).</li>
+                <li><strong>Modifier:</strong> A variation of the block or element (e.g., <code>.card--featured</code>).</li>
+                <li><strong>Benefits:</strong> Improves readability, reduces specificity, and avoids conflicts.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section id="html-elements" class="mb-12">
+          <h2 class="text-2xl font-bold mb-4">5. HTML Elements</h2>
+          <p class="mb-4">
+            While basic HTML elements form the foundation, advanced elements help create rich, semantic, and interactive experiences. Let's explore these powerful elements in detail.
+          </p>
+
+          <!-- Sub-topic: Semantic Elements -->
+          <div class="mb-8">
+            <h3 class="text-xl font-semibold mb-2">5.1 Semantic HTML Elements</h3>
+            <p class="mb-4">
+              Semantic elements clearly describe their meaning to browsers and developers. They improve accessibility, SEO, and code maintainability compared to generic <code>&lt;div&gt;</code> elements.
+            </p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-sm text-white overflow-x-auto">
+                <code class="language-html">
+&lt;article class="blog-post"&gt;
+  &lt;header&gt;
+    &lt;h1&gt;Understanding Semantic HTML&lt;/h1&gt;
+    &lt;time datetime="2024-03-15"&gt;March 15, 2024&lt;/time&gt;
+  &lt;/header&gt;
+  
+  &lt;section&gt;
+    &lt;p&gt;Semantic elements provide meaning to web content...&lt;/p&gt;
+    &lt;figure&gt;
+      &lt;img src="semantic-html.jpg" alt="Semantic HTML structure" class="w-full max-w-sm"&gt;
+      &lt;figcaption&gt;Visual representation of semantic markup&lt;/figcaption&gt;
+    &lt;/figure&gt;
+  &lt;/section&gt;
+  
+  &lt;footer&gt;
+    &lt;p&gt;Posted in: Web Development&lt;/p&gt;
+  &lt;/footer&gt;
+&lt;/article&gt;
+                </code>
+              </pre>
+            <div class="mt-4">
+              <p class="font-semibold mb-2">Key Semantic Elements:</p>
+              <ul class="list-disc list-inside mb-4">
+                <li><code>&lt;article&gt;</code>: Independent, self-contained content</li>
+                <li><code>&lt;section&gt;</code>: Thematic grouping of content</li>
+                <li><code>&lt;header&gt;</code>/<code>&lt;footer&gt;</code>: Introductory/closing content</li>
+                <li><code>&lt;nav&gt;</code>: Navigation links</li>
+                <li><code>&lt;figure&gt;</code>/<code>&lt;figcaption&gt;</code>: Media with caption</li>
+                <li><code>&lt;time&gt;</code>: Machine-readable datetime</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Sub-topic: Forms and Inputs -->
+          <div class="mb-8">
+            <h3 class="text-xl font-semibold mb-2">5.2 Advanced Form Elements</h3>
+            <p class="mb-4">
+              Modern HTML provides specialized input types and attributes for better user experiences and data validation.
+            </p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-sm text-white overflow-x-auto">
+                <code class="language-html">
+&lt;form class="space-y-4"&gt;
+  &lt;div class="flex flex-col gap-2"&gt;
+    &lt;label for="email"&gt;Email:&lt;/label&gt;
+    &lt;input 
+      type="email" 
+      id="email" 
+      required
+      placeholder="user@coderz.us"
+      class="p-2 border rounded"
+    &gt;
+  &lt;/div&gt;
+
+  &lt;div class="flex flex-col gap-2"&gt;
+    &lt;label for="range"&gt;Price Range:&lt;/label&gt;
+    &lt;input 
+      type="range" 
+      id="range" 
+      min="0" 
+      max="1000"
+      class="w-full"
+    &gt;
+  &lt;/div&gt;
+
+  &lt;div class="flex flex-col gap-2"&gt;
+    &lt;label for="search"&gt;Search Projects:&lt;/label&gt;
+    &lt;input 
+      type="search" 
+      id="search"
+      list="projects"
+      class="p-2 border rounded"
+    &gt;
+    &lt;datalist id="projects"&gt;
+      &lt;option value="E-commerce Platform"&gt;
+      &lt;option value="Social Network"&gt;
+      &lt;option value="Task Manager"&gt;
+    &lt;/datalist&gt;
+  &lt;/div&gt;
+&lt;/form&gt;
+                </code>
+              </pre>
+            <div class="mt-4">
+              <p class="font-semibold mb-2">Advanced Form Features:</p>
+              <ul class="list-disc list-inside mb-4">
+                <li><code>type="email"</code>: Enforces email format validation</li>
+                <li><code>datalist</code>: Provides auto-complete suggestions</li>
+                <li><code>required</code>: Forces mandatory field completion</li>
+                <li><code>pattern</code>: Custom regex validation</li>
+                <li><code>inputmode</code>: Optimizes virtual keyboards</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Sub-topic: Multimedia Elements -->
+          <div class="mb-8">
+            <h3 class="text-xl font-semibold mb-2">5.3 Multimedia Elements</h3>
+            <p class="mb-4">
+              HTML5 introduced native support for audio and video content without plugins.
+            </p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-sm text-white overflow-x-auto">
+                <code class="language-html">
+&lt;div class="space-y-4"&gt;
+  &lt;video 
+    controls 
+    class="w-full rounded-lg"
+    poster="video-preview.jpg"
+  &gt;
+    &lt;source src="tutorial.mp4" type="video/mp4"&gt;
+    Your browser does not support the video tag.
+  &lt;/video&gt;
+
+  &lt;audio controls class="w-full"&gt;
+    &lt;source src="audio-track.mp3" type="audio/mpeg"&gt;
+    Your browser does not support the audio element.
+  &lt;/audio&gt;
+&lt;/div&gt;
+                </code>
+              </pre>
+            <div class="mt-4">
+              <p class="font-semibold mb-2">Multimedia Features:</p>
+              <ul class="list-disc list-inside mb-4">
+                <li><code>controls</code>: Shows default play/pause controls</li>
+                <li><code>poster</code>: Video thumbnail image</li>
+                <li><code>&lt;source&gt;</code>: Multiple format support</li>
+                <li><code>track</code>: For subtitles/captions</li>
+                <li>Built-in responsive behavior</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Sub-topic: Interactive Elements -->
+          <div class="mb-8">
+            <h3 class="text-xl font-semibold mb-2">5.4 Interactive Elements</h3>
+            <p class="mb-4">
+              Create dynamic interfaces with native HTML interactive elements.
+            </p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-sm text-white overflow-x-auto">
+                <code class="language-html">
+&lt;details class="mb-4 border rounded"&gt;
+  &lt;summary class="p-2 bg-gray-100 cursor-pointer"&gt;
+    Click to view project details
+  &lt;/summary&gt;
+  &lt;div class="p-4"&gt;
+    &lt;p&gt;This project demonstrates advanced HTML features...&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/details&gt;
+
+&lt;dialog id="projectModal" class="p-4 rounded-lg"&gt;
+  &lt;h2 class="text-xl font-bold mb-2"&gt;Project Submission&lt;/h2&gt;
+  &lt;form method="dialog"&gt;
+    &lt;!-- Form content --&gt;
+    &lt;button class="mt-4 p-2 bg-blue-500 text-white rounded"&gt;
+      Close
+    &lt;/button&gt;
+  &lt;/form&gt;
+&lt;/dialog&gt;
+                </code>
+              </pre>
+            <div class="mt-4">
+              <p class="font-semibold mb-2">Interactive Features:</p>
+              <ul class="list-disc list-inside mb-4">
+                <li><code>&lt;details&gt;</code>/<code>&lt;summary&gt;</code>: Collapsible sections</li>
+                <li><code>&lt;dialog&gt;</code>: Native modal dialog support</li>
+                <li><code>contenteditable</code>: User-editable content</li>
+                <li><code>draggable</code>: Native drag-and-drop API</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section id="html-forms" class="mb-12">
+          <h2 class="text-2xl font-bold mb-4">6. HTML Forms and Input Types</h2>
+          <p class="mb-4">
+            Forms are essential for user interaction on websites. They allow users to submit data, such as login credentials, search queries, or feedback. HTML provides a variety of input types and attributes to create functional and user-friendly forms.
+          </p>
+
+          <!-- Sub-topic: Basic Form Structure -->
+          <div class="mb-8">
+            <h3 class="text-xl font-semibold mb-2">6.1 Basic Form Structure</h3>
+            <p class="mb-4">
+              A form is created using the <code>&lt;form&gt;</code> element. Inside the form, you can add various input elements like text fields, checkboxes, radio buttons, and more. The <code>action</code> attribute specifies where the form data is sent, and the <code>method</code> attribute defines how the data is sent (GET or POST).
+            </p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-sm text-white overflow-x-auto">
+                <code class="language-html">
+&lt;form action="/submit" method="POST" class="space-y-4"&gt;
+  &lt;div class="flex flex-col gap-2"&gt;
+    &lt;label for="name"&gt;Full Name:&lt;/label&gt;
+    &lt;input 
+      type="text" 
+      id="name" 
+      name="name" 
+      placeholder="Enter your name"
+      class="p-2 border rounded"
+    &gt;
+  &lt;/div&gt;
+
+  &lt;div class="flex flex-col gap-2"&gt;
+    &lt;label for="email"&gt;Email:&lt;/label&gt;
+    &lt;input 
+      type="email" 
+      id="email" 
+      name="email" 
+      placeholder="Enter your email"
+      required
+      class="p-2 border rounded"
+    &gt;
+  &lt;/div&gt;
+
+  &lt;button type="submit" class="p-2 bg-blue-500 text-white rounded"&gt;
+    Submit
+  &lt;/button&gt;
+&lt;/form&gt;
+                </code>
+              </pre>
+            <div class="mt-4">
+              <p class="font-semibold mb-2">Key Points About Basic Forms:</p>
+              <ul class="list-disc list-inside mb-4">
+                <li><code>&lt;form&gt;</code>: Wraps all form elements.</li>
+                <li><code>&lt;label&gt;</code>: Describes the purpose of an input field.</li>
+                <li><code>&lt;input&gt;</code>: Collects user input (e.g., text, email).</li>
+                <li><code>required</code>: Ensures the field is filled before submission.</li>
+                <li><code>&lt;button&gt;</code>: Submits the form.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Sub-topic: Input Types -->
+          <div class="mb-8">
+            <h3 class="text-xl font-semibold mb-2">6.2 Input Types</h3>
+            <p class="mb-4">
+              HTML provides various input types to collect different kinds of data. Each input type has a specific purpose and can include built-in validation.
+            </p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-sm text-white overflow-x-auto">
+                <code class="language-html">
+&lt;form class="space-y-4"&gt;
+  &lt;div class="flex flex-col gap-2"&gt;
+    &lt;label for="date"&gt;Date:&lt;/label&gt;
+    &lt;input 
+      type="date" 
+      id="date" 
+      name="date"
+      class="p-2 border rounded"
+    &gt;
+  &lt;/div&gt;
+
+  &lt;div class="flex flex-col gap-2"&gt;
+    &lt;label for="color"&gt;Favorite Color:&lt;/label&gt;
+    &lt;input 
+      type="color" 
+      id="color" 
+      name="color"
+      class="w-16 h-10"
+    &gt;
+  &lt;/div&gt;
+
+  &lt;div class="flex flex-col gap-2"&gt;
+    &lt;label for="file"&gt;Upload File:&lt;/label&gt;
+    &lt;input 
+      type="file" 
+      id="file" 
+      name="file"
+      class="p-2 border rounded"
+    &gt;
+  &lt;/div&gt;
+&lt;/form&gt;
+                </code>
+              </pre>
+            <div class="mt-4">
+              <p class="font-semibold mb-2">Common Input Types:</p>
+              <ul class="list-disc list-inside mb-4">
+                <li><code>type="text"</code>: Single-line text input.</li>
+                <li><code>type="email"</code>: Validates email format.</li>
+                <li><code>type="date"</code>: Date picker.</li>
+                <li><code>type="color"</code>: Color picker.</li>
+                <li><code>type="file"</code>: File upload.</li>
+                <li><code>type="password"</code>: Masks input for passwords.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Sub-topic: Form Validation -->
+          <div class="mb-8">
+            <h3 class="text-xl font-semibold mb-2">6.3 Form Validation</h3>
+            <p class="mb-4">
+              HTML5 introduced built-in form validation to ensure users enter data correctly. You can use attributes like <code>required</code>, <code>min</code>, <code>max</code>, and <code>pattern</code> to enforce rules.
+            </p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-sm text-white overflow-x-auto">
+                <code class="language-html">
+&lt;form class="space-y-4"&gt;
+  &lt;div class="flex flex-col gap-2"&gt;
+    &lt;label for="age"&gt;Age:&lt;/label&gt;
+    &lt;input 
+      type="number" 
+      id="age" 
+      name="age" 
+      min="18" 
+      max="100"
+      class="p-2 border rounded"
+    &gt;
+  &lt;/div&gt;
+
+  &lt;div class="flex flex-col gap-2"&gt;
+    &lt;label for="password"&gt;Password:&lt;/label&gt;
+    &lt;input 
+      type="password" 
+      id="password" 
+      name="password" 
+      minlength="8"
+      class="p-2 border rounded"
+    &gt;
+  &lt;/div&gt;
+
+  &lt;div class="flex flex-col gap-2"&gt;
+    &lt;label for="phone"&gt;Phone Number:&lt;/label&gt;
+    &lt;input 
+      type="tel" 
+      id="phone" 
+      name="phone" 
+      pattern="[0-9]{10}"
+      class="p-2 border rounded"
+    &gt;
+  &lt;/div&gt;
+&lt;/form&gt;
+                </code>
+              </pre>
+            <div class="mt-4">
+              <p class="font-semibold mb-2">Key Validation Attributes:</p>
+              <ul class="list-disc list-inside mb-4">
+                <li><code>required</code>: Ensures the field is not empty.</li>
+                <li><code>min</code>/<code>max</code>: Sets minimum/maximum values for numbers or dates.</li>
+                <li><code>minlength</code>/<code>maxlength</code>: Sets minimum/maximum character length.</li>
+                <li><code>pattern</code>: Validates input against a regex pattern.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Sub-topic: Form Accessibility -->
+          <div class="mb-8">
+            <h3 class="text-xl font-semibold mb-2">6.4 Form Accessibility</h3>
+            <p class="mb-4">
+              Accessible forms ensure that all users, including those with disabilities, can interact with your forms. Use proper labels, ARIA attributes, and semantic HTML to improve accessibility.
+            </p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-sm text-white overflow-x-auto">
+                <code class="language-html">
+&lt;form class="space-y-4"&gt;
+  &lt;div class="flex flex-col gap-2"&gt;
+    &lt;label for="username"&gt;Username:&lt;/label&gt;
+    &lt;input 
+      type="text" 
+      id="username" 
+      name="username" 
+      aria-describedby="username-help"
+      class="p-2 border rounded"
+    &gt;
+    &lt;small id="username-help" class="text-gray-600"&gt;
+      Enter your username (minimum 4 characters).
+    &lt;/small&gt;
+  &lt;/div&gt;
+
+  &lt;div class="flex flex-col gap-2"&gt;
+    &lt;label for="newsletter"&gt;
+      &lt;input 
+        type="checkbox" 
+        id="newsletter" 
+        name="newsletter"
+        class="mr-2"
+      &gt;
+      Subscribe to newsletter
+    &lt;/label&gt;
+  &lt;/div&gt;
+&lt;/form&gt;
+                </code>
+              </pre>
+            <div class="mt-4">
+              <p class="font-semibold mb-2">Accessibility Best Practices:</p>
+              <ul class="list-disc list-inside mb-4">
+                <li>Always use <code>&lt;label&gt;</code> for form inputs.</li>
+                <li>Use <code>aria-describedby</code> to link inputs with help text.</li>
+                <li>Group related inputs with <code>&lt;fieldset&gt;</code> and <code>&lt;legend&gt;</code>.</li>
+                <li>Ensure keyboard navigation works for all form elements.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section id="css-selectors" class="mb-12">
+          <h2 class="text-2xl font-bold mb-4">7. CSS Selectors</h2>
+          <p class="mb-4">
+            CSS selectors are patterns used to select and style HTML elements. They allow you to target specific elements or groups of elements on a web page. Understanding selectors is crucial for applying styles effectively.
+          </p>
+
+          <!-- Sub-topic: Basic Selectors -->
+          <div class="mb-8">
+            <h3 class="text-xl font-semibold mb-2">7.1 Basic Selectors</h3>
+            <p class="mb-4">
+              Basic selectors are the simplest and most commonly used selectors. They include element selectors, class selectors, and ID selectors.
+            </p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-sm text-white overflow-x-auto">
+                <code class="language-css">
+/* Element Selector */
+p {
+  color: #4a5568;
+}
+
+/* Class Selector */
+.text-blue {
+  color: #4299e1;
+}
+
+/* ID Selector */
+#main-header {
+  font-size: 2.5rem;
+}
+                </code>
+              </pre>
+            <div class="mt-4">
+              <p class="font-semibold mb-2">Key Points About Basic Selectors:</p>
+              <ul class="list-disc list-inside mb-4">
+                <li><strong>Element Selector:</strong> Targets all instances of an HTML tag (e.g., <code>p</code> selects all paragraphs).</li>
+                <li><strong>Class Selector:</strong> Targets elements with a specific class (e.g., <code>.text-blue</code> selects elements with <code>class="text-blue"</code>).</li>
+                <li><strong>ID Selector:</strong> Targets a single unique element (e.g., <code>#main-header</code> selects <code>id="main-header"</code>).</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Sub-topic: Combinators -->
+          <div class="mb-8">
+            <h3 class="text-xl font-semibold mb-2">7.2 Combinators</h3>
+            <p class="mb-4">
+              Combinators allow you to combine multiple selectors to target elements based on their relationship to other elements. The four types of combinators are descendant, child, adjacent sibling, and general sibling.
+            </p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-sm text-white overflow-x-auto">
+                <code class="language-css">
+/* Descendant Combinator */
+article p {
+  color: #4a5568;
+}
+
+/* Child Combinator */
+ul > li {
+  list-style-type: square;
+}
+
+/* Adjacent Sibling Combinator */
+h2 + p {
+  margin-top: 0;
+}
+
+/* General Sibling Combinator */
+h2 ~ p {
+  color: #718096;
+}
+                </code>
+              </pre>
+            <div class="mt-4">
+              <p class="font-semibold mb-2">Key Points About Combinators:</p>
+              <ul class="list-disc list-inside mb-4">
+                <li><strong>Descendant Combinator (<code> </code>):</strong> Targets elements that are descendants of a specified element (e.g., <code>article p</code> selects all <code>&lt;p&gt;</code> elements inside <code>&lt;article&gt;</code>).</li>
+                <li><strong>Child Combinator (<code>&gt;</code>):</strong> Targets direct children of a specified element (e.g., <code>ul &gt; li</code> selects all <code>&lt;li&gt;</code> elements that are direct children of <code>&lt;ul&gt;</code>).</li>
+                <li><strong>Adjacent Sibling Combinator (<code>+</code>):</strong> Targets the first sibling element immediately following another element (e.g., <code>h2 + p</code> selects the first <code>&lt;p&gt;</code> element immediately following an <code>&lt;h2&gt;</code>).</li>
+                <li><strong>General Sibling Combinator (<code>~</code>):</strong> Targets all sibling elements following another element (e.g., <code>h2 ~ p</code> selects all <code>&lt;p&gt;</code> elements that follow an <code>&lt;h2&gt;</code>).</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Sub-topic: Attribute Selectors -->
+          <div class="mb-8">
+            <h3 class="text-xl font-semibold mb-2">7.3 Attribute Selectors</h3>
+            <p class="mb-4">
+              Attribute selectors allow you to target elements based on their attributes or attribute values. This is useful for styling elements with specific attributes.
+            </p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-sm text-white overflow-x-auto">
+                <code class="language-css">
+/* Attribute Presence Selector */
+a[target] {
+  color: #4299e1;
+}
+
+/* Attribute Value Selector */
+input[type="text"] {
+  border: 1px solid #cbd5e0;
+}
+
+/* Attribute Contains Selector */
+a[href*="coderz"] {
+  font-weight: bold;
+}
+
+/* Attribute Starts With Selector */
+a[href^="https"] {
+  color: green;
+}
+
+/* Attribute Ends With Selector */
+a[href$=".pdf"] {
+  color: red;
+}
+                </code>
+              </pre>
+            <div class="mt-4">
+              <p class="font-semibold mb-2">Key Points About Attribute Selectors:</p>
+              <ul class="list-disc list-inside mb-4">
+                <li><strong>Attribute Presence Selector:</strong> Targets elements with a specific attribute (e.g., <code>a[target]</code> selects all <code>&lt;a&gt;</code> elements with a <code>target</code> attribute).</li>
+                <li><strong>Attribute Value Selector:</strong> Targets elements with a specific attribute value (e.g., <code>input[type="text"]</code> selects all <code>&lt;input&gt;</code> elements with <code>type="text"</code>).</li>
+                <li><strong>Attribute Contains Selector:</strong> Targets elements whose attribute value contains a specific substring (e.g., <code>a[href*="coderz"]</code> selects all <code>&lt;a&gt;</code> elements with <code>href</code> containing "coderz").</li>
+                <li><strong>Attribute Starts With Selector:</strong> Targets elements whose attribute value starts with a specific substring (e.g., <code>a[href^="https"]</code> selects all <code>&lt;a&gt;</code> elements with <code>href</code> starting with "https").</li>
+                <li><strong>Attribute Ends With Selector:</strong> Targets elements whose attribute value ends with a specific substring (e.g., <code>a[href$=".pdf"]</code> selects all <code>&lt;a&gt;</code> elements with <code>href</code> ending with ".pdf").</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Sub-topic: Pseudo-Classes and Pseudo-Elements -->
+          <div class="mb-8">
+            <h3 class="text-xl font-semibold mb-2">7.4 Pseudo-Classes and Pseudo-Elements</h3>
+            <p class="mb-4">
+              Pseudo-classes and pseudo-elements allow you to style elements based on their state or specific parts of an element. Pseudo-classes target elements in a specific state, while pseudo-elements target specific parts of an element.
+            </p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-sm text-white overflow-x-auto">
+                <code class="language-css">
+/* Pseudo-Class Example */
+a:hover {
+  color: #4299e1;
+}
+
+input:focus {
+  border-color: #48bb78;
+}
+
+/* Pseudo-Element Example */
+p::first-line {
+  font-weight: bold;
+}
+
+p::before {
+  content: "→ ";
+  color: #4299e1;
+}
+                </code>
+              </pre>
+            <div class="mt-4">
+              <p class="font-semibold mb-2">Key Points About Pseudo-Classes and Pseudo-Elements:</p>
+              <ul class="list-disc list-inside mb-4">
+                <li><strong>Pseudo-Classes:</strong> Target elements based on their state (e.g., <code>:hover</code>, <code>:focus</code>, <code>:nth-child</code>).</li>
+                <li><strong>Pseudo-Elements:</strong> Target specific parts of an element (e.g., <code>::before</code>, <code>::after</code>, <code>::first-line</code>).</li>
+                <li><strong>Content Property:</strong> Use <code>content</code> to insert text or icons with pseudo-elements.</li>
+                <li><strong>Common Use Cases:</strong> Tooltips, custom bullets, and decorative elements.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section id="box-model" class="mb-12">
+          <h2 class="text-2xl font-bold mb-4">8. The CSS Box Model</h2>
+          <p class="mb-4">
+            The CSS Box Model is a fundamental concept that describes how every HTML element is structured as a rectangular box. This model determines how elements are sized, spaced, and positioned on a web page. It consists of four layers: content, padding, border, and margin.
+          </p>
+
+          <!-- Sub-topic: Content Area -->
+          <div class="mb-8">
+            <h3 class="text-xl font-semibold mb-2">8.1 Content Area</h3>
+            <p class="mb-4">
+              The content area is the innermost part of the box where text, images, or other media appear. Its dimensions are controlled by <code>width</code> and <code>height</code> properties.
+            </p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-sm text-white overflow-x-auto">
+                <code class="language-css">
+.content-box {
+  width: 300px;
+  height: 200px;
+  background-color: #ebf8ff;
+}
+                </code>
+              </pre>
+            <div class="mt-4">
+              <p class="font-semibold mb-2">Key Characteristics:</p>
+              <ul class="list-disc list-inside mb-4">
+                <li>Determined by <code>width</code> and <code>height</code> properties</li>
+                <li>Background color/images are visible here</li>
+                <li>Can be constrained using <code>min-width</code>/<code>max-width</code></li>
+                <li>Default size depends on content if not specified</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Sub-topic: Padding -->
+          <div class="mb-8">
+            <h3 class="text-xl font-semibold mb-2">8.2 Padding</h3>
+            <p class="mb-4">
+              Padding is the space between the content and the border. It creates internal spacing within an element, pushing content away from the edges.
+            </p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-sm text-white overflow-x-auto">
+                <code class="language-css">
+.padded-box {
+  padding: 20px;
+  padding-top: 10px;
+  padding-right: 30px;
+  background-color: #f7fafc;
+  border: 2px solid #cbd5e0;
+}
+                </code>
+              </pre>
+            <div class="mt-4">
+              <p class="font-semibold mb-2">Padding Properties:</p>
+              <ul class="list-disc list-inside mb-4">
+                <li>Shorthand: <code>padding: top right bottom left</code></li>
+                <li>Individual sides: <code>padding-top</code>, <code>padding-right</code>, etc.</li>
+                <li>Accepts values in px, em, rem, or percentages</li>
+                <li>Affects clickable areas and background coverage</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Sub-topic: Borders -->
+          <div class="mb-8">
+            <h3 class="text-xl font-semibold mb-2">8.3 Borders</h3>
+            <p class="mb-4">
+              Borders surround the padding and content, creating visible boundaries. They can be styled with different colors, widths, and styles.
+            </p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-sm text-white overflow-x-auto">
+                <code class="language-css">
+.bordered-element {
+  border: 3px solid #4299e1;
+  border-radius: 8px;
+  border-top-style: dashed;
+  border-bottom-color: #3182ce;
+}
+                </code>
+              </pre>
+            <div class="mt-4">
+              <p class="font-semibold mb-2">Border Properties:</p>
+              <ul class="list-disc list-inside mb-4">
+                <li>Shorthand: <code>border: width style color</code></li>
+                <li>Individual properties: <code>border-width</code>, <code>border-style</code>, <code>border-color</code></li>
+                <li>Rounded corners with <code>border-radius</code></li>
+                <li>Different styles: solid, dashed, dotted, double</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Sub-topic: Margins -->
+          <div class="mb-8">
+            <h3 class="text-xl font-semibold mb-2">8.4 Margins</h3>
+            <p class="mb-4">
+              Margins create space outside the border, separating the element from neighboring elements. They don't have background color and are transparent.
+            </p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-sm text-white overflow-x-auto">
+                <code class="language-css">
+.spaced-element {
+  margin: 20px auto;
+  margin-top: 10px;
+  margin-bottom: 30px;
+  background-color: #fff5f7;
+}
+                </code>
+              </pre>
+            <div class="mt-4">
+              <p class="font-semibold mb-2">Margin Behavior:</p>
+              <ul class="list-disc list-inside mb-4">
+                <li>Collapsing margins: Vertical margins between elements collapse to the larger value</li>
+                <li>Negative margins: Can pull elements closer together</li>
+                <li><code>auto</code> values: Used for horizontal centering</li>
+                <li>Doesn't work with inline elements like <code>&lt;span&gt;</code></li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Sub-topic: Box Sizing -->
+          <div class="mb-8">
+            <h3 class="text-xl font-semibold mb-2">8.5 Box Sizing</h3>
+            <p class="mb-4">
+              The <code>box-sizing</code> property controls how an element's total width and height are calculated. This is crucial for responsive design.
+            </p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-sm text-white overflow-x-auto">
+                <code class="language-css">
+/* Default behavior */
+.default-box {
+  box-sizing: content-box; /* Width/height exclude padding/border */
+  width: 300px;
+  padding: 20px; /* Total width becomes 300 + 40 = 340px */
+}
+
+/* Modern approach */
+.border-box-example {
+  box-sizing: border-box; /* Width/height include padding/border */
+  width: 300px;
+  padding: 20px; /* Total width remains 300px */
+}
+                </code>
+              </pre>
+            <div class="mt-4">
+              <p class="font-semibold mb-2">Key Considerations:</p>
+              <ul class="list-disc list-inside mb-4">
+                <li>Default: <code>content-box</code> (width + padding + border = total width)</li>
+                <li>Recommended: <code>border-box</code> (width includes padding and border)</li>
+                <li>Set globally using: <code>* { box-sizing: border-box; }</code></li>
+                <li>Essential for creating predictable layouts</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Visual Example -->
+          <div class="mb-8 p-4 bg-gray-100 rounded-lg">
+            <h3 class="text-lg font-semibold mb-4">Box Model Visualization</h3>
+            <div class="max-w-xs mx-auto">
+              <div class="bg-white p-4 border-4 border-blue-200 m-4">
+                <div class="bg-blue-100 p-4 text-center">
+                  Content Area<br>
+                  (300px × 200px)
+                </div>
+              </div>
+            </div>
+            <p class="mt-4 text-sm text-gray-600">
+              Visual breakdown: Content (blue) → Padding (white) → Border (blue) → Margin (transparent space outside)
+            </p>
+          </div>
+        </section>
+
+        <section id="flexbox" class="mb-12">
+          <h2 class="text-2xl font-bold mb-4">9. CSS Flexbox</h2>
+          <p class="mb-4">
+            Flexbox (Flexible Box Layout) is a powerful CSS layout module designed to create flexible and responsive layouts. It allows you to align and distribute space among items in a container, even when their sizes are unknown or dynamic.
+          </p>
+
+          <!-- Sub-topic: Flex Container -->
+          <div class="mb-8">
+            <h3 class="text-xl font-semibold mb-2">9.1 Flex Container</h3>
+            <p class="mb-4">
+              A flex container is created by setting the <code>display</code> property to <code>flex</code> or <code>inline-flex</code>. This enables flexbox behavior for all direct children of the container.
+            </p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-sm text-white overflow-x-auto">
+                <code class="language-css">
+.flex-container {
+  display: flex;
+  flex-direction: row; /* Default: horizontal layout */
+  justify-content: space-between; /* Distributes space */
+  align-items: center; /* Vertical alignment */
+  gap: 1rem; /* Space between items */
+}
+                </code>
+              </pre>
+            <div class="mt-4">
+              <p class="font-semibold mb-2">Key Properties for Flex Containers:</p>
+              <ul class="list-disc list-inside mb-4">
+                <li><code>display: flex</code>: Enables flexbox layout</li>
+                <li><code>flex-direction</code>: Defines the main axis (row, column, row-reverse, column-reverse)</li>
+                <li><code>justify-content</code>: Aligns items along the main axis (start, end, center, space-between, space-around)</li>
+                <li><code>align-items</code>: Aligns items along the cross axis (start, end, center, stretch, baseline)</li>
+                <li><code>gap</code>: Adds consistent spacing between items</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Sub-topic: Flex Items -->
+          <div class="mb-8">
+            <h3 class="text-xl font-semibold mb-2">9.2 Flex Items</h3>
+            <p class="mb-4">
+              Flex items are the direct children of a flex container. They can be individually controlled using properties like <code>flex-grow</code>, <code>flex-shrink</code>, and <code>align-self</code>.
+            </p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-sm text-white overflow-x-auto">
+                <code class="language-css">
+.flex-item {
+  flex: 1 1 auto; /* Shorthand for flex-grow, flex-shrink, flex-basis */
+  align-self: flex-start; /* Overrides container's align-items */
+  order: 2; /* Changes display order */
+}
+                </code>
+              </pre>
+            <div class="mt-4">
+              <p class="font-semibold mb-2">Key Properties for Flex Items:</p>
+              <ul class="list-disc list-inside mb-4">
+                <li><code>flex-grow</code>: Defines how much an item can grow relative to others</li>
+                <li><code>flex-shrink</code>: Defines how much an item can shrink relative to others</li>
+                <li><code>flex-basis</code>: Sets the initial size of an item</li>
+                <li><code>align-self</code>: Overrides the container's <code>align-items</code> for individual items</li>
+                <li><code>order</code>: Controls the display order of items</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Sub-topic: Common Flexbox Patterns -->
+          <div class="mb-8">
+            <h3 class="text-xl font-semibold mb-2">9.3 Common Flexbox Patterns</h3>
+            <p class="mb-4">
+              Flexbox is widely used for creating responsive layouts. Here are some common patterns:
+            </p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-sm text-white overflow-x-auto">
+                <code class="language-css">
+/* Centering Content */
+.center-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Full viewport height */
+}
+
+/* Equal-Width Columns */
+.equal-columns {
+  display: flex;
+}
+
+.equal-columns > * {
+  flex: 1; /* Equal distribution */
+}
+
+/* Sticky Footer */
+.page-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1; /* Takes remaining space */
+}
+                </code>
+              </pre>
+            <div class="mt-4">
+              <p class="font-semibold mb-2">Common Use Cases:</p>
+              <ul class="list-disc list-inside mb-4">
+                <li><strong>Centering Content:</strong> Perfect for modals, hero sections, and login forms</li>
+                <li><strong>Equal-Width Columns:</strong> Great for card layouts and grids</li>
+                <li><strong>Sticky Footer:</strong> Keeps footer at the bottom of the viewport</li>
+                <li><strong>Responsive Navigation:</strong> Flexbox makes navbar layouts easy</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Sub-topic: Flexbox and Responsiveness -->
+          <div class="mb-8">
+            <h3 class="text-xl font-semibold mb-2">9.4 Flexbox and Responsiveness</h3>
+            <p class="mb-4">
+              Flexbox is ideal for creating responsive layouts. By combining flex properties with media queries, you can create layouts that adapt to different screen sizes.
+            </p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-sm text-white overflow-x-auto">
+                <code class="language-css">
+.responsive-flex {
+  display: flex;
+  flex-direction: column; /* Stack items vertically on small screens */
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .responsive-flex {
+    flex-direction: row; /* Switch to horizontal layout on larger screens */
+  }
+}
+                </code>
+              </pre>
+            <div class="mt-4">
+              <p class="font-semibold mb-2">Responsive Flexbox Techniques:</p>
+              <ul class="list-disc list-inside mb-4">
+                <li>Use <code>flex-direction: column</code> for mobile layouts</li>
+                <li>Switch to <code>flex-direction: row</code> for desktop layouts</li>
+                <li>Use <code>flex-wrap: wrap</code> for multi-line flex containers</li>
+                <li>Adjust <code>flex-grow</code> and <code>flex-basis</code> for fluid layouts</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Visual Example -->
+          <div class="mb-8 p-4 bg-gray-100 rounded-lg">
+            <h3 class="text-lg font-semibold mb-4">Flexbox Visualization</h3>
+            <div class="flex gap-4 p-4 bg-white rounded-lg">
+              <div class="flex-1 p-4 bg-blue-100 text-center">Item 1</div>
+              <div class="flex-1 p-4 bg-blue-200 text-center">Item 2</div>
+              <div class="flex-1 p-4 bg-blue-300 text-center">Item 3</div>
+            </div>
+            <p class="mt-4 text-sm text-gray-600">
+              Example: A simple flex container with equal-width items and consistent spacing.
+            </p>
+          </div>
+        </section>
+
+        <section id="grid" class="mb-12">
+          <h2 class="text-2xl font-bold mb-4">10. CSS Grid</h2>
+          <p class="mb-4">
+            CSS Grid is a two-dimensional layout system that allows you to create complex, responsive layouts with ease. It provides precise control over rows, columns, and the placement of items within a grid container.
+          </p>
+
+          <!-- Sub-topic: Grid Container -->
+          <div class="mb-8">
+            <h3 class="text-xl font-semibold mb-2">10.1 Grid Container</h3>
+            <p class="mb-4">
+              A grid container is created by setting the <code>display</code> property to <code>grid</code> or <code>inline-grid</code>. This enables grid behavior for all direct children of the container.
+            </p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-sm text-white overflow-x-auto">
+                <code class="language-css">
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Three equal columns */
+  grid-template-rows: 100px auto; /* Two rows */
+  gap: 1rem; /* Space between items */
+  align-items: center; /* Vertical alignment */
+  justify-content: center; /* Horizontal alignment */
+}
+                </code>
+              </pre>
+            <div class="mt-4">
+              <p class="font-semibold mb-2">Key Properties for Grid Containers:</p>
+              <ul class="list-disc list-inside mb-4">
+                <li><code>display: grid</code>: Enables grid layout</li>
+                <li><code>grid-template-columns</code>: Defines the columns in the grid</li>
+                <li><code>grid-template-rows</code>: Defines the rows in the grid</li>
+                <li><code>gap</code>: Adds consistent spacing between grid items</li>
+                <li><code>align-items</code>: Aligns items vertically within their grid area</li>
+                <li><code>justify-content</code>: Aligns the entire grid horizontally within the container</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Sub-topic: Grid Items -->
+          <div class="mb-8">
+            <h3 class="text-xl font-semibold mb-2">10.2 Grid Items</h3>
+            <p class="mb-4">
+              Grid items are the direct children of a grid container. They can be placed in specific grid areas using properties like <code>grid-column</code>, <code>grid-row</code>, and <code>grid-area</code>.
+            </p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-sm text-white overflow-x-auto">
+                <code class="language-css">
+.grid-item {
+  grid-column: 1 / 3; /* Spans from column 1 to 3 */
+  grid-row: 1; /* Occupies the first row */
+  align-self: start; /* Overrides container's align-items */
+  justify-self: end; /* Overrides container's justify-items */
+}
+                </code>
+              </pre>
+            <div class="mt-4">
+              <p class="font-semibold mb-2">Key Properties for Grid Items:</p>
+              <ul class="list-disc list-inside mb-4">
+                <li><code>grid-column</code>: Defines the column start and end positions</li>
+                <li><code>grid-row</code>: Defines the row start and end positions</li>
+                <li><code>grid-area</code>: Shorthand for <code>grid-row</code> and <code>grid-column</code></li>
+                <li><code>align-self</code>: Overrides the container's <code>align-items</code> for individual items</li>
+                <li><code>justify-self</code>: Overrides the container's <code>justify-items</code> for individual items</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Sub-topic: Common Grid Patterns -->
+          <div class="mb-8">
+            <h3 class="text-xl font-semibold mb-2">10.3 Common Grid Patterns</h3>
+            <p class="mb-4">
+              Grid is widely used for creating responsive layouts. Here are some common patterns:
+            </p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-sm text-white overflow-x-auto">
+                <code class="language-css">
+/* Equal-Width Columns */
+.equal-columns {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+/* Masonry Layout */
+.masonry-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  grid-auto-rows: 100px;
+  gap: 1rem;
+}
+
+/* Full-Page Layout */
+.page-layout {
+  display: grid;
+  grid-template-areas:
+    "header header"
+    "sidebar main"
+    "footer footer";
+  grid-template-rows: auto 1fr auto;
+  grid-template-columns: 200px 1fr;
+  min-height: 100vh;
+}
+                </code>
+              </pre>
+            <div class="mt-4">
+              <p class="font-semibold mb-2">Common Use Cases:</p>
+              <ul class="list-disc list-inside mb-4">
+                <li><strong>Equal-Width Columns:</strong> Great for card layouts and grids</li>
+                <li><strong>Masonry Layout:</strong> Perfect for image galleries and portfolios</li>
+                <li><strong>Full-Page Layout:</strong> Ideal for complex page structures</li>
+                <li><strong>Responsive Navigation:</strong> Grid makes navbar layouts easy</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Sub-topic: Grid and Responsiveness -->
+          <div class="mb-8">
+            <h3 class="text-xl font-semibold mb-2">10.4 Grid and Responsiveness</h3>
+            <p class="mb-4">
+              Grid is ideal for creating responsive layouts. By combining grid properties with media queries, you can create layouts that adapt to different screen sizes.
+            </p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-sm text-white overflow-x-auto">
+                <code class="language-css">
+.responsive-grid {
+  display: grid;
+  grid-template-columns: 1fr; /* Single column on small screens */
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .responsive-grid {
+    grid-template-columns: repeat(2, 1fr); /* Two columns on medium screens */
+  }
+}
+
+@media (min-width: 1024px) {
+  .responsive-grid {
+    grid-template-columns: repeat(3, 1fr); /* Three columns on large screens */
+  }
+}
+                </code>
+              </pre>
+            <div class="mt-4">
+              <p class="font-semibold mb-2">Responsive Grid Techniques:</p>
+              <ul class="list-disc list-inside mb-4">
+                <li>Use <code>repeat(auto-fit, minmax())</code> for flexible columns</li>
+                <li>Adjust <code>grid-template-columns</code> with media queries</li>
+                <li>Use <code>grid-template-areas</code> for complex layouts</li>
+                <li>Combine with <code>flexbox</code> for hybrid layouts</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Visual Example -->
+          <div class="mb-8 p-4 bg-gray-100 rounded-lg">
+            <h3 class="text-lg font-semibold mb-4">Grid Visualization</h3>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-4 p-4 bg-white rounded-lg">
+              <div class="p-4 bg-blue-100 text-center">Item 1</div>
+              <div class="p-4 bg-blue-200 text-center">Item 2</div>
+              <div class="p-4 bg-blue-300 text-center">Item 3</div>
+              <div class="p-4 bg-blue-400 text-center">Item 4</div>
+              <div class="p-4 bg-blue-500 text-center">Item 5</div>
+              <div class="p-4 bg-blue-600 text-center">Item 6</div>
+            </div>
+            <p class="mt-4 text-sm text-gray-600">
+              Example: A simple grid layout with responsive columns and consistent spacing.
+            </p>
+          </div>
+        </section>
+
+        <section id="responsive-design" class="mb-12">
+          <h2 class="text-2xl font-bold mb-4">11. Responsive Web Design</h2>
+          <p class="mb-4">
+            Responsive Web Design (RWD) ensures websites adapt to different screen sizes and devices. It combines flexible grids, media queries, and responsive images to create optimal viewing experiences across devices.
+          </p>
+
+          <!-- Sub-topic: Media Queries -->
+          <div class="mb-8">
+            <h3 class="text-xl font-semibold mb-2">11.1 Media Queries</h3>
+            <p class="mb-4">
+              Media queries are CSS techniques that apply styles based on device characteristics. They enable conditional styling for different viewport sizes, orientations, and device capabilities.
+            </p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-sm text-white overflow-x-auto">
+                <code class="language-css">
+/* Mobile-first approach */
+.container {
+  width: 100%;
+  padding: 1rem;
+}
+
+/* Tablet screens (768px and up) */
+@media (min-width: 768px) {
+  .container {
+    width: 750px;
+    margin: 0 auto;
+  }
+}
+
+/* Desktop screens (1024px and up) */
+@media (min-width: 1024px) {
+  .container {
+    width: 980px;
+    padding: 2rem;
+  }
+}
+
+/* Landscape orientation */
+@media (orientation: landscape) {
+  .header {
+    height: 80vh;
+  }
+}
+                </code>
+              </pre>
+            <div class="mt-4">
+              <p class="font-semibold mb-2">Key Features:</p>
+              <ul class="list-disc list-inside mb-4">
+                <li><code>min-width</code>: Applies styles when viewport is <strong>wider than</strong> specified value</li>
+                <li><code>max-width</code>: Applies styles when viewport is <strong>narrower than</strong> specified value</li>
+                <li><code>orientation</code>: Targets portrait/landscape modes</li>
+                <li>Use <code>em</code> units for media queries (1em = 16px)</li>
+                <li>Always test on actual devices for accuracy</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Sub-topic: Fluid Layouts -->
+          <div class="mb-8">
+            <h3 class="text-xl font-semibold mb-2">11.2 Fluid Layouts</h3>
+            <p class="mb-4">
+              Fluid layouts use relative units (%) instead of fixed pixels, allowing elements to resize proportionally. Combined with <code>max-width</code>, they prevent content from becoming too wide on large screens.
+            </p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-sm text-white overflow-x-auto">
+                <code class="language-css">
+.fluid-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.responsive-image {
+  width: 100%;
+  height: auto;
+  max-width: 800px;
+}
+                </code>
+              </pre>
+            <div class="mt-4">
+              <p class="font-semibold mb-2">Fluid Design Principles:</p>
+              <ul class="list-disc list-inside mb-4">
+                <li>Use <code>%</code> or <code>fr</code> units for widths</li>
+                <li>Set <code>max-width</code> to prevent over-stretching</li>
+                <li>Combine with <code>calc()</code> for complex calculations</li>
+                <li>Use <code>minmax()</code> in CSS Grid for flexible columns</li>
+                <li>Employ <code>vw</code>/<code>vh</code> units for viewport-relative sizing</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Sub-topic: Responsive Images -->
+          <div class="mb-8">
+            <h3 class="text-xl font-semibold mb-2">11.3 Responsive Images</h3>
+            <p class="mb-4">
+              Proper image handling ensures fast loading and appropriate sizing across devices. Use HTML's <code>srcset</code> and <code>sizes</code> attributes to serve optimized images.
+            </p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-sm text-white overflow-x-auto">
+                <code class="language-html">
+&lt;img 
+  src="image-800.jpg" 
+  srcset="image-400.jpg 400w,
+          image-800.jpg 800w,
+          image-1200.jpg 1200w"
+  sizes="(max-width: 600px) 100vw,
+          (max-width: 1200px) 50vw,
+          800px"
+  alt="Responsive image example"
+  class="w-full h-auto"
+&gt;
+                </code>
+              </pre>
+            <div class="mt-4">
+              <p class="font-semibold mb-2">Image Optimization Strategies:</p>
+              <ul class="list-disc list-inside mb-4">
+                <li><code>srcset</code>: Provides multiple image sources</li>
+                <li><code>sizes</code>: Defines display dimensions at different breakpoints</li>
+                <li>Use <code>picture</code> element for art direction</li>
+                <li>Compress images to WebP format</li>
+                <li>Implement lazy loading with <code>loading="lazy"</code></li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Sub-topic: Mobile-First Approach -->
+          <div class="mb-8">
+            <h3 class="text-xl font-semibold mb-2">11.4 Mobile-First Development</h3>
+            <p class="mb-4">
+              Start styling for mobile devices first, then enhance layouts for larger screens. This approach improves performance and ensures core content is accessible on all devices.
+            </p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-sm text-white overflow-x-auto">
+                <code class="language-css">
+/* Base styles (mobile) */
+.navigation {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* Tablet+ styles */
+@media (min-width: 768px) {
+  .navigation {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+/* Desktop enhancements */
+@media (min-width: 1024px) {
+  .navigation {
+    padding: 2rem;
+    font-size: 1.1rem;
+  }
+}
+                </code>
+              </pre>
+            <div class="mt-4">
+              <p class="font-semibold mb-2">Mobile-First Benefits:</p>
+              <ul class="list-disc list-inside mb-4">
+                <li>Faster mobile page loads</li>
+                <li>Progressive enhancement strategy</li>
+                <li>Simpler maintenance</li>
+                <li>Better SEO performance</li>
+                <li>Improved accessibility baseline</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Sub-topic: Responsive Typography -->
+          <div class="mb-8">
+            <h3 class="text-xl font-semibold mb-2">11.5 Responsive Typography</h3>
+            <p class="mb-4">
+              Text should be legible across devices. Use relative units and fluid typography techniques to maintain readability.
+            </p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-sm text-white overflow-x-auto">
+                <code class="language-css">
+:root {
+  --base-font-size: 16px;
+}
+
+html {
+  font-size: var(--base-font-size);
+}
+
+h1 {
+  font-size: clamp(2rem, 5vw, 3rem);
+}
+
+@media (min-width: 768px) {
+  :root {
+    --base-font-size: 18px;
+  }
+}
+
+p {
+  line-height: 1.6;
+  max-width: 65ch;
+  margin: 0 auto;
+}
+                </code>
+              </pre>
+            <div class="mt-4">
+              <p class="font-semibold mb-2">Typography Best Practices:</p>
+              <ul class="list-disc list-inside mb-4">
+                <li>Use <code>rem</code> units for font sizes</li>
+                <li><code>clamp()</code> for fluid typography</li>
+                <li>Limit line length to 45-75 characters</li>
+                <li>Adjust line height for readability</li>
+                <li>Use system fonts for performance</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Visual Example -->
+          <div class="mb-8 p-4 bg-gray-100 rounded-lg">
+            <h3 class="text-lg font-semibold mb-4">Responsive Layout Demo</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              <div class="p-4 bg-white border rounded-lg">
+                <h4 class="font-bold mb-2">Mobile View</h4>
+                <p class="text-sm">Single column layout</p>
+              </div>
+              <div class="p-4 bg-white border rounded-lg">
+                <h4 class="font-bold mb-2">Tablet View</h4>
+                <p class="text-sm">Two column layout</p>
+              </div>
+              <div class="p-4 bg-white border rounded-lg">
+                <h4 class="font-bold mb-2">Desktop View</h4>
+                <p class="text-sm">Three column layout</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="animations" class="mb-12">
+          <h2 class="text-2xl font-bold mb-4">12. CSS Animations</h2>
+          <p class="mb-4">
+            CSS animations bring life to web pages by creating smooth transitions and effects. They allow you to animate changes in CSS properties over time, providing engaging user experiences without JavaScript.
+          </p>
+
+          <!-- Sub-topic: Keyframes -->
+          <div class="mb-8">
+            <h3 class="text-xl font-semibold mb-2">12.1 Keyframes</h3>
+            <p class="mb-4">
+              Keyframes define the stages of an animation. They specify what styles the element should have at various points during the animation sequence.
+            </p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-sm text-white overflow-x-auto">
+                <code class="language-css">
+@keyframes slideIn {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.slide-in {
+  animation: slideIn 1s ease-out;
+}
+                </code>
+              </pre>
+            <div class="mt-4">
+              <p class="font-semibold mb-2">Key Points About Keyframes:</p>
+              <ul class="list-disc list-inside mb-4">
+                <li><code>@keyframes</code>: Defines the animation sequence</li>
+                <li>Percentage values: Specify intermediate steps (e.g., 0%, 50%, 100%)</li>
+                <li>Multiple properties: Can animate transforms, opacity, colors, etc.</li>
+                <li>Reusable: Apply the same animation to multiple elements</li>
+                <li>Performance: Use <code>transform</code> and <code>opacity</code> for smooth animations</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Sub-topic: Animation Properties -->
+          <div class="mb-8">
+            <h3 class="text-xl font-semibold mb-2">12.2 Animation Properties</h3>
+            <p class="mb-4">
+              CSS provides several properties to control animations, including duration, timing function, delay, and iteration count.
+            </p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-sm text-white overflow-x-auto">
+                <code class="language-css">
+.animated-box {
+  animation-name: bounce;
+  animation-duration: 2s;
+  animation-timing-function: ease-in-out;
+  animation-delay: 0.5s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-fill-mode: forwards;
+}
+                </code>
+              </pre>
+            <div class="mt-4">
+              <p class="font-semibold mb-2">Key Animation Properties:</p>
+              <ul class="list-disc list-inside mb-4">
+                <li><code>animation-name</code>: Specifies the keyframes to use</li>
+                <li><code>animation-duration</code>: Sets the length of the animation</li>
+                <li><code>animation-timing-function</code>: Controls the speed curve (e.g., ease, linear)</li>
+                <li><code>animation-delay</code>: Delays the start of the animation</li>
+                <li><code>animation-iteration-count</code>: Sets how many times the animation repeats</li>
+                <li><code>animation-direction</code>: Controls the direction (normal, reverse, alternate)</li>
+                <li><code>animation-fill-mode</code>: Determines styles before/after animation</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Sub-topic: Transitions -->
+          <div class="mb-8">
+            <h3 class="text-xl font-semibold mb-2">12.3 Transitions</h3>
+            <p class="mb-4">
+              Transitions allow you to smoothly change property values over a specified duration. They are simpler than animations and are ideal for hover effects and state changes.
+            </p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-sm text-white overflow-x-auto">
+                <code class="language-css">
+.button {
+  background-color: #4299e1;
+  transition: background-color 0.3s ease, transform 0.2s ease-out;
+}
+
+.button:hover {
+  background-color: #3182ce;
+  transform: scale(1.05);
+}
+                </code>
+              </pre>
+            <div class="mt-4">
+              <p class="font-semibold mb-2">Key Transition Properties:</p>
+              <ul class="list-disc list-inside mb-4">
+                <li><code>transition-property</code>: Specifies which properties to animate</li>
+                <li><code>transition-duration</code>: Sets the length of the transition</li>
+                <li><code>transition-timing-function</code>: Controls the speed curve</li>
+                <li><code>transition-delay</code>: Delays the start of the transition</li>
+                <li>Shorthand: <code>transition: property duration timing-function delay</code></li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Sub-topic: Performance Considerations -->
+          <div class="mb-8">
+            <h3 class="text-xl font-semibold mb-2">12.4 Performance Considerations</h3>
+            <p class="mb-4">
+              Smooth animations require careful attention to performance. Use hardware-accelerated properties and optimize animations for mobile devices.
+            </p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-sm text-white overflow-x-auto">
+                <code class="language-css">
+/* Hardware-accelerated properties */
+.optimized-animation {
+  transform: translate3d(0, 0, 0);
+  will-change: transform, opacity;
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .animated-element {
+    animation: none;
+    transition: none;
+  }
+}
+                </code>
+              </pre>
+            <div class="mt-4">
+              <p class="font-semibold mb-2">Performance Tips:</p>
+              <ul class="list-disc list-inside mb-4">
+                <li>Use <code>transform</code> and <code>opacity</code> for smooth animations</li>
+                <li>Avoid animating properties like <code>height</code> or <code>margin</code></li>
+                <li>Use <code>will-change</code> to hint browser optimizations</li>
+                <li>Respect <code>prefers-reduced-motion</code> for accessibility</li>
+                <li>Test animations on actual devices</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Sub-topic: Practical Examples -->
+          <div class="mb-8">
+            <h3 class="text-xl font-semibold mb-2">12.5 Practical Examples</h3>
+            <p class="mb-4">
+              Here are some common animation patterns used in modern web design:
+            </p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-sm text-white overflow-x-auto">
+                <code class="language-css">
+/* Fade-in effect */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-in;
+}
+
+/* Loading spinner */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.spinner {
+  animation: spin 1s linear infinite;
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-top-color: #4299e1;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+}
+                </code>
+              </pre>
+            <div class="mt-4">
+              <p class="font-semibold mb-2">Common Animation Patterns:</p>
+              <ul class="list-disc list-inside mb-4">
+                <li>Fade effects for modals and alerts</li>
+                <li>Loading spinners and progress indicators</li>
+                <li>Hover effects for buttons and cards</li>
+                <li>Page transition animations</li>
+                <li>Scroll-triggered animations</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Visual Example -->
+          <div class="mb-8 p-4 bg-gray-100 rounded-lg">
+            <h3 class="text-lg font-semibold mb-4">Animation Demo</h3>
+            <div class="flex justify-center">
+              <div class="w-16 h-16 bg-blue-500 rounded-lg animate-bounce"></div>
+            </div>
+            <p class="mt-4 text-sm text-gray-600">
+              Example: A bouncing box animation using Tailwind's <code>animate-bounce</code> utility.
+            </p>
+          </div>
+        </section>
+
+        <section id="transitions" class="mb-12">
+          <h2 class="text-2xl font-bold mb-4">13. CSS Transitions</h2>
+          <p class="mb-4">
+            CSS transitions allow you to smoothly change property values over a specified duration. They are ideal for creating subtle animations and enhancing user interactions, such as hover effects, focus states, and state changes.
+          </p>
+
+          <!-- Sub-topic: Transition Basics -->
+          <div class="mb-8">
+            <h3 class="text-xl font-semibold mb-2">13.1 Transition Basics</h3>
+            <p class="mb-4">
+              Transitions are applied to elements to animate changes in CSS properties. They require a starting state, an ending state, and a duration for the transition to occur.
+            </p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-sm text-white overflow-x-auto">
+                <code class="language-css">
+.button {
+  background-color: #4299e1;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: #3182ce;
+}
+                </code>
+              </pre>
+            <div class="mt-4">
+              <p class="font-semibold mb-2">Key Points About Transitions:</p>
+              <ul class="list-disc list-inside mb-4">
+                <li><strong>Trigger:</strong> Transitions are triggered by changes in state (e.g., hover, focus, class changes).</li>
+                <li><strong>Duration:</strong> Specifies how long the transition lasts (e.g., <code>0.3s</code>).</li>
+                <li><strong>Timing Function:</strong> Controls the speed curve (e.g., <code>ease</code>, <code>linear</code>, <code>ease-in-out</code>).</li>
+                <li><strong>Properties:</strong> Only animatable properties can be transitioned (e.g., <code>color</code>, <code>opacity</code>, <code>transform</code>).</li>
+                <li><strong>Performance:</strong> Use <code>transform</code> and <code>opacity</code> for smooth, performant transitions.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Sub-topic: Transition Properties -->
+          <div class="mb-8">
+            <h3 class="text-xl font-semibold mb-2">13.2 Transition Properties</h3>
+            <p class="mb-4">
+              CSS provides several properties to control transitions, including <code>transition-property</code>, <code>transition-duration</code>, <code>transition-timing-function</code>, and <code>transition-delay</code>.
+            </p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-sm text-white overflow-x-auto">
+                <code class="language-css">
+.card {
+  transition-property: transform, box-shadow;
+  transition-duration: 0.3s;
+  transition-timing-function: ease-in-out;
+  transition-delay: 0.1s;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+                </code>
+              </pre>
+            <div class="mt-4">
+              <p class="font-semibold mb-2">Key Transition Properties:</p>
+              <ul class="list-disc list-inside mb-4">
+                <li><code>transition-property</code>: Specifies which properties to animate (e.g., <code>transform</code>, <code>opacity</code>).</li>
+                <li><code>transition-duration</code>: Sets the length of the transition (e.g., <code>0.3s</code>).</li>
+                <li><code>transition-timing-function</code>: Controls the speed curve (e.g., <code>ease</code>, <code>linear</code>).</li>
+                <li><code>transition-delay</code>: Delays the start of the transition (e.g., <code>0.1s</code>).</li>
+                <li><strong>Shorthand:</strong> <code>transition: property duration timing-function delay</code>.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Sub-topic: Timing Functions -->
+          <div class="mb-8">
+            <h3 class="text-xl font-semibold mb-2">13.3 Timing Functions</h3>
+            <p class="mb-4">
+              Timing functions define the speed curve of a transition, controlling how the intermediate values are calculated. They can create effects like easing in, easing out, or bouncing.
+            </p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-sm text-white overflow-x-auto">
+                <code class="language-css">
+/* Built-in timing functions */
+.ease { transition-timing-function: ease; }
+.linear { transition-timing-function: linear; }
+.ease-in { transition-timing-function: ease-in; }
+.ease-out { transition-timing-function: ease-out; }
+.ease-in-out { transition-timing-function: ease-in-out; }
+
+/* Custom cubic-bezier function */
+.custom-timing {
+  transition-timing-function: cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+                </code>
+              </pre>
+            <div class="mt-4">
+              <p class="font-semibold mb-2">Key Timing Functions:</p>
+              <ul class="list-disc list-inside mb-4">
+                <li><code>ease</code>: Starts slow, speeds up, then ends slowly (default).</li>
+                <li><code>linear</code>: Constant speed throughout the transition.</li>
+                <li><code>ease-in</code>: Starts slow and speeds up.</li>
+                <li><code>ease-out</code>: Starts fast and slows down.</li>
+                <li><code>ease-in-out</code>: Starts slow, speeds up, then slows down.</li>
+                <li><code>cubic-bezier()</code>: Allows custom speed curves.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Sub-topic: Transition Examples -->
+          <div class="mb-8">
+            <h3 class="text-xl font-semibold mb-2">13.4 Transition Examples</h3>
+            <p class="mb-4">
+              Here are some practical examples of transitions in action:
+            </p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-sm text-white overflow-x-auto">
+                <code class="language-css">
+/* Button hover effect */
+.button {
+  background-color: #4299e1;
+  transition: background-color 0.3s ease, transform 0.2s ease-out;
+}
+
+.button:hover {
+  background-color: #3182ce;
+  transform: scale(1.05);
+}
+
+/* Fade-in effect */
+.fade-in {
+  opacity: 0;
+  transition: opacity 0.5s ease-in;
+}
+
+.fade-in.active {
+  opacity: 1;
+}
+
+/* Slide-in effect */
+.slide-in {
+  transform: translateX(-100%);
+  transition: transform 0.4s ease-out;
+}
+
+.slide-in.active {
+  transform: translateX(0);
+}
+                </code>
+              </pre>
+            <div class="mt-4">
+              <p class="font-semibold mb-2">Common Transition Patterns:</p>
+              <ul class="list-disc list-inside mb-4">
+                <li><strong>Hover Effects:</strong> Change color, scale, or shadow on hover.</li>
+                <li><strong>Fade Effects:</strong> Animate opacity for smooth appearance/disappearance.</li>
+                <li><strong>Slide Effects:</strong> Use <code>translateX</code> or <code>translateY</code> for sliding animations.</li>
+                <li><strong>State Changes:</strong> Animate changes triggered by class toggles (e.g., <code>.active</code>).</li>
+                <li><strong>Interactive Elements:</strong> Enhance buttons, cards, and menus with transitions.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Sub-topic: Performance and Best Practices -->
+          <div class="mb-8">
+            <h3 class="text-xl font-semibold mb-2">13.5 Performance and Best Practices</h3>
+            <p class="mb-4">
+              Smooth transitions require careful attention to performance and accessibility. Follow these best practices to ensure optimal results.
+            </p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-sm text-white overflow-x-auto">
+                <code class="language-css">
+/* Hardware-accelerated properties */
+.optimized-transition {
+  transform: translate3d(0, 0, 0);
+  will-change: transform, opacity;
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .transition-element {
+    transition: none;
+  }
+}
+                </code>
+              </pre>
+            <div class="mt-4">
+              <p class="font-semibold mb-2">Best Practices:</p>
+              <ul class="list-disc list-inside mb-4">
+                <li>Use <code>transform</code> and <code>opacity</code> for smooth, performant transitions.</li>
+                <li>Avoid animating properties like <code>height</code> or <code>margin</code>.</li>
+                <li>Use <code>will-change</code> to hint browser optimizations.</li>
+                <li>Respect <code>prefers-reduced-motion</code> for accessibility.</li>
+                <li>Test transitions on actual devices for performance.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Visual Example -->
+          <div class="mb-8 p-4 bg-gray-100 rounded-lg">
+            <h3 class="text-lg font-semibold mb-4">Transition Demo</h3>
+            <div class="flex justify-center">
+              <button class="px-6 py-2 bg-blue-500 text-white rounded-lg transition-all duration-300 hover:bg-blue-600 hover:scale-105">
+                Hover Me
+              </button>
+            </div>
+            <p class="mt-4 text-sm text-gray-600">
+              Example: A button with a background color and scale transition on hover.
+            </p>
+          </div>
+        </section>
+
+        <section id="accessibility" class="mb-12">
+          <h2 class="text-2xl font-bold mb-4">14. Web Accessibility</h2>
+          <p class="mb-4">
+            Web accessibility ensures that websites are usable by people with disabilities. It includes proper semantic markup, keyboard navigation, screen reader compatibility, and visual accessibility considerations.
+          </p>
+
+          <!-- Sub-topic: Semantic HTML -->
+          <div class="mb-8">
+            <h3 class="text-xl font-semibold mb-2">14.1 Semantic HTML</h3>
+            <p class="mb-4">
+              Semantic HTML provides meaning to web content, helping assistive technologies understand page structure. Use appropriate elements rather than generic <code>&lt;div&gt;</code> tags.
+            </p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-sm text-white overflow-x-auto">
+                <code class="language-html">
+&lt;header class="bg-gray-800 text-white p-4"&gt;
+  &lt;nav aria-label="Main navigation"&gt;
+    &lt;ul class="flex space-x-4"&gt;
+      &lt;li&gt;&lt;a href="/" class="hover:text-blue-300" aria-current="page"&gt;Home&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href="/about" class="hover:text-blue-300"&gt;About&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/nav&gt;
+&lt;/header&gt;
+
+&lt;main class="p-4"&gt;
+  &lt;article&gt;
+    &lt;h1 class="text-2xl font-bold"&gt;Accessibility Guide&lt;/h1&gt;
+    &lt;p&gt;...&lt;/p&gt;
+  &lt;/article&gt;
+&lt;/main&gt;
+                </code>
+              </pre>
+            <div class="mt-4">
+              <p class="font-semibold mb-2">Key Semantic Elements:</p>
+              <ul class="list-disc list-inside mb-4">
+                <li><code>&lt;header&gt;</code>/<code>&lt;footer&gt;</code>: Document header/footer</li>
+                <li><code>&lt;nav&gt;</code>: Navigation section</li>
+                <li><code>&lt;main&gt;</code>: Primary content area</li>
+                <li><code>&lt;article&gt;</code>: Self-contained composition</li>
+                <li><code>&lt;aria-label&gt;</code>: Provides invisible labels for screen readers</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Sub-topic: ARIA Roles -->
+          <div class="mb-8">
+            <h3 class="text-xl font-semibold mb-2">14.2 ARIA Roles</h3>
+            <p class="mb-4">
+              Accessible Rich Internet Applications (ARIA) roles provide additional context for assistive technologies when native HTML semantics are insufficient.
+            </p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-sm text-white overflow-x-auto">
+                <code class="language-html">
+&lt;div role="navigation" aria-label="Breadcrumbs"&gt;
+  &lt;ol class="flex space-x-2"&gt;
+    &lt;li&gt;&lt;a href="/"&gt;Home&lt;/a&gt;&lt;/li&gt;
+    &lt;li aria-hidden="true"&gt;&gt;&lt;/li&gt;
+    &lt;li&gt;Current Page&lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;
+
+&lt;div role="alert" aria-live="assertive" class="p-2 bg-red-100 text-red-800"&gt;
+  Error: Invalid email format
+&lt;/div&gt;
+                </code>
+              </pre>
+            <div class="mt-4">
+              <p class="font-semibold mb-2">Common ARIA Roles:</p>
+              <ul class="list-disc list-inside mb-4">
+                <li><code>role="navigation"</code>: Identifies navigation sections</li>
+                <li><code>role="alert"</code>: Important dynamic information</li>
+                <li><code>aria-label"</code>: Provides invisible labels</li>
+                <li><code>aria-live"</code>: Announces dynamic content changes</li>
+                <li><code>aria-hidden"</code>: Hides decorative elements from screen readers</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Sub-topic: Keyboard Navigation -->
+          <div class="mb-8">
+            <h3 class="text-xl font-semibold mb-2">14.3 Keyboard Navigation</h3>
+            <p class="mb-4">
+              Ensure all interactive elements are accessible via keyboard. Manage focus states and provide visual indicators for keyboard users.
+            </p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-sm text-white overflow-x-auto">
+                <code class="language-html">
+&lt;a href="#main" class="sr-only focus:not-sr-only"&gt;Skip to content&lt;/a&gt;
+
+&lt;button class="px-4 py-2 bg-blue-500 text-white rounded focus:ring-2 focus:ring-blue-700"&gt;
+  Click Me
+&lt;/button&gt;
+
+&lt;div tabindex="0" class="p-4 border focus:bg-gray-100"&gt;
+  Focusable div
+&lt;/div&gt;
+                </code>
+              </pre>
+            <div class="mt-4">
+              <p class="font-semibold mb-2">Keyboard Accessibility Requirements:</p>
+              <ul class="list-disc list-inside mb-4">
+                <li>Visible focus states with <code>:focus</code> styling</li>
+                <li>Logical tab order using <code>tabindex</code></li>
+                <li>Skip links for bypassing navigation</li>
+                <li>Semantic button roles for custom controls</li>
+                <li>Keyboard trap prevention</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Sub-topic: Color Contrast -->
+          <div class="mb-8">
+            <h3 class="text-xl font-semibold mb-2">14.4 Color Contrast</h3>
+            <p class="mb-4">
+              Maintain sufficient contrast between text and background colors. WCAG recommends at least 4.5:1 contrast for normal text.
+            </p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-sm text-white overflow-x-auto">
+                <code class="language-html">
+&lt;div class="bg-white p-4"&gt;
+  &lt;p class="text-gray-900"&gt;Good contrast (15:1)&lt;/p&gt;
+  &lt;p class="text-gray-500"&gt;Poor contrast (4:1)&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;button class="bg-blue-600 text-white px-4 py-2 rounded"&gt;
+  Accessible Button
+&lt;/button&gt;
+                </code>
+              </pre>
+            <div class="mt-4">
+              <p class="font-semibold mb-2">Contrast Best Practices:</p>
+              <ul class="list-disc list-inside mb-4">
+                <li>Use tools like Chrome DevTools Contrast Checker</li>
+                <li>Avoid pure black text on pure white backgrounds</li>
+                <li>Test color combinations for color blindness</li>
+                <li>Provide text alternatives for color-coded information</li>
+                <li>Use <code>prefers-contrast</code> media query</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Sub-topic: Accessible Forms -->
+          <div class="mb-8">
+            <h3 class="text-xl font-semibold mb-2">14.5 Accessible Forms</h3>
+            <p class="mb-4">
+              Forms should be properly labeled, provide clear error messages, and be navigable via keyboard.
+            </p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-sm text-white overflow-x-auto">
+                <code class="language-html">
+&lt;form class="space-y-4"&gt;
+  &lt;div class="flex flex-col"&gt;
+    &lt;label for="email" class="mb-1"&gt;Email Address&lt;/label&gt;
+    &lt;input 
+      type="email" 
+      id="email" 
+      name="email" 
+      required
+      aria-describedby="email-help"
+      class="p-2 border rounded"
+    &gt;
+    &lt;small id="email-help" class="text-gray-600 mt-1"&gt;
+      Enter your email address
+    &lt;/small&gt;
+  &lt;/div&gt;
+
+  &lt;fieldset class="p-4 border"&gt;
+    &lt;legend class="font-semibold"&gt;Newsletter Preferences&lt;/legend&gt;
+    &lt;div class="space-y-2"&gt;
+      &lt;label&gt;
+        &lt;input type="checkbox" name="newsletter"&gt;
+        Receive weekly updates
+      &lt;/label&gt;
+    &lt;/div&gt;
+  &lt;/fieldset&gt;
+&lt;/form&gt;
+                </code>
+              </pre>
+            <div class="mt-4">
+              <p class="font-semibold mb-2">Form Accessibility Essentials:</p>
+              <ul class="list-disc list-inside mb-4">
+                <li>Always use <code>&lt;label&gt;</code> elements</li>
+                <li>Associate errors with <code>aria-describedby</code></li>
+                <li>Group related fields with <code>&lt;fieldset&gt;</code></li>
+                <li>Use <code>required</code> and <code>aria-required</code></li>
+                <li>Provide clear error messages</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Visual Example -->
+          <div class="mb-8 p-4 bg-gray-100 rounded-lg">
+            <h3 class="text-lg font-semibold mb-4">Accessibility Demo</h3>
+            <div class="grid gap-4 md:grid-cols-2">
+              <div class="p-4 bg-white border rounded">
+                <p class="text-green-700 bg-green-100 p-2 rounded">Good Contrast</p>
+                <p class="text-red-400 bg-red-100 p-2 rounded mt-2">Poor Contrast</p>
+              </div>
+              <div class="p-4 bg-white border rounded">
+                <button class="w-full p-2 bg-blue-600 text-white rounded focus:ring-2 focus:ring-blue-700">
+                  Accessible Button
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="frameworks" class="mb-12">
+          <h2 class="text-2xl font-bold mb-4">15. CSS Frameworks</h2>
+          <p class="mb-4">
+            CSS frameworks provide pre-designed components and utilities to speed up development. They offer consistent styling, responsive layouts, and cross-browser compatibility out of the box.
+          </p>
+
+          <!-- Sub-topic: Tailwind CSS -->
+          <div class="mb-8">
+            <h3 class="text-xl font-semibold mb-2">15.1 Tailwind CSS</h3>
+            <p class="mb-4">
+              Tailwind CSS is a utility-first CSS framework that provides low-level utility classes for building custom designs without writing CSS. It emphasizes flexibility and customization.
+            </p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-sm text-white overflow-x-auto">
+                <code class="language-html">
+&lt;div class="max-w-md mx-auto bg-white shadow-lg rounded-lg overflow-hidden"&gt;
+  &lt;img class="w-full h-48 object-cover" src="image.jpg" alt="Card image"&gt;
+  &lt;div class="p-6"&gt;
+    &lt;h2 class="text-xl font-bold mb-2"&gt;Card Title&lt;/h2&gt;
+    &lt;p class="text-gray-700"&gt;This is a card component built with Tailwind CSS.&lt;/p&gt;
+    &lt;button class="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"&gt;
+      Click Me
+    &lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+                </code>
+              </pre>
+            <div class="mt-4">
+              <p class="font-semibold mb-2">Key Features of Tailwind CSS:</p>
+              <ul class="list-disc list-inside mb-4">
+                <li><strong>Utility-First:</strong> Small, single-purpose classes for styling</li>
+                <li><strong>Responsive Design:</strong> Built-in breakpoints (e.g., <code>md:</code>, <code>lg:</code>)</li>
+                <li><strong>Customization:</strong> Configure via <code>tailwind.config.js</code></li>
+                <li><strong>PurgeCSS:</strong> Removes unused CSS in production</li>
+                <li><strong>Dark Mode:</strong> Easy dark theme support</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Sub-topic: Bootstrap -->
+          <div class="mb-8">
+            <h3 class="text-xl font-semibold mb-2">15.2 Bootstrap</h3>
+            <p class="mb-4">
+              Bootstrap is a popular CSS framework that provides pre-designed components and a responsive grid system. It’s ideal for rapid prototyping and consistent designs.
+            </p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-sm text-white overflow-x-auto">
+                <code class="language-html">
+&lt;div class="card" style="width: 18rem;"&gt;
+  &lt;img src="image.jpg" class="card-img-top" alt="Card image"&gt;
+  &lt;div class="card-body"&gt;
+    &lt;h5 class="card-title"&gt;Card Title&lt;/h5&gt;
+    &lt;p class="card-text"&gt;This is a card component built with Bootstrap.&lt;/p&gt;
+    &lt;a href="#" class="btn btn-primary"&gt;Click Me&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+                </code>
+              </pre>
+            <div class="mt-4">
+              <p class="font-semibold mb-2">Key Features of Bootstrap:</p>
+              <ul class="list-disc list-inside mb-4">
+                <li><strong>Pre-Built Components:</strong> Buttons, cards, modals, etc.</li>
+                <li><strong>Grid System:</strong> 12-column responsive layout</li>
+                <li><strong>Theming:</strong> Customizable via Sass variables</li>
+                <li><strong>JavaScript Plugins:</strong> Dropdowns, modals, carousels</li>
+                <li><strong>Community Support:</strong> Extensive documentation and resources</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Sub-topic: Foundation -->
+          <div class="mb-8">
+            <h3 class="text-xl font-semibold mb-2">15.3 Foundation</h3>
+            <p class="mb-4">
+              Foundation is a responsive front-end framework with a focus on flexibility and accessibility. It’s suitable for building complex, enterprise-level applications.
+            </p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-sm text-white overflow-x-auto">
+                <code class="language-html">
+&lt;div class="card" style="width: 300px;"&gt;
+  &lt;img src="image.jpg" alt="Card image"&gt;
+  &lt;div class="card-section"&gt;
+    &lt;h4&gt;Card Title&lt;/h4&gt;
+    &lt;p&gt;This is a card component built with Foundation.&lt;/p&gt;
+    &lt;a href="#" class="button"&gt;Click Me&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+                </code>
+              </pre>
+            <div class="mt-4">
+              <p class="font-semibold mb-2">Key Features of Foundation:</p>
+              <ul class="list-disc list-inside mb-4">
+                <li><strong>Responsive Grid:</strong> Flexible and customizable</li>
+                <li><strong>Accessibility:</strong> Built with WCAG standards</li>
+                <li><strong>Modular:</strong> Use only what you need</li>
+                <li><strong>Email Framework:</strong> Includes tools for responsive emails</li>
+                <li><strong>Customization:</strong> Extensive Sass mixins and functions</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Sub-topic: Bulma -->
+          <div class="mb-8">
+            <h3 class="text-xl font-semibold mb-2">15.4 Bulma</h3>
+            <p class="mb-4">
+              Bulma is a modern CSS framework based on Flexbox. It’s lightweight, easy to use, and provides a clean, minimalist design.
+            </p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-sm text-white overflow-x-auto">
+                <code class="language-html">
+&lt;div class="card"&gt;
+  &lt;div class="card-image"&gt;
+    &lt;img src="image.jpg" alt="Card image"&gt;
+  &lt;/div&gt;
+  &lt;div class="card-content"&gt;
+    &lt;div class="media"&gt;
+      &lt;div class="media-content"&gt;
+        &lt;p class="title is-4"&gt;Card Title&lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="content"&gt;
+      This is a card component built with Bulma.
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+                </code>
+              </pre>
+            <div class="mt-4">
+              <p class="font-semibold mb-2">Key Features of Bulma:</p>
+              <ul class="list-disc list-inside mb-4">
+                <li><strong>Flexbox-Based:</strong> Simplifies layout creation</li>
+                <li><strong>No JavaScript:</strong> Pure CSS framework</li>
+                <li><strong>Modular:</strong> Import only what you need</li>
+                <li><strong>Customization:</strong> Easy theming with Sass</li>
+                <li><strong>Community:</strong> Growing ecosystem of extensions</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Sub-topic: Choosing a Framework -->
+          <div class="mb-8">
+            <h3 class="text-xl font-semibold mb-2">15.5 Choosing a Framework</h3>
+            <p class="mb-4">
+              Selecting the right CSS framework depends on your project requirements, team expertise, and design goals. Consider the following factors:
+            </p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-sm text-white overflow-x-auto">
+                <code class="language-markdown">
+1. **Project Size**: 
+    - Small projects: Tailwind, Bulma
+    - Large projects: Bootstrap, Foundation
+
+2. **Customization Needs**:
+    - High: Tailwind, Foundation
+    - Low: Bootstrap, Bulma
+
+3. **Learning Curve**:
+    - Easy: Bootstrap, Bulma
+    - Steeper: Tailwind, Foundation
+
+4. **Performance**:
+    - Lightweight: Bulma, Tailwind (with PurgeCSS)
+    - Heavier: Bootstrap, Foundation
+
+5. **Community Support**:
+    - Large: Bootstrap, Tailwind
+    - Smaller: Bulma, Foundation
+                </code>
+              </pre>
+            <div class="mt-4">
+              <p class="font-semibold mb-2">Factors to Consider:</p>
+              <ul class="list-disc list-inside mb-4">
+                <li><strong>Project Requirements:</strong> Complexity, scalability, and deadlines</li>
+                <li><strong>Team Expertise:</strong> Familiarity with the framework</li>
+                <li><strong>Design Flexibility:</strong> Customization vs. pre-built components</li>
+                <li><strong>Performance:</strong> File size and optimization options</li>
+                <li><strong>Community and Documentation:</strong> Availability of resources</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Visual Example -->
+          <div class="mb-8 p-4 bg-gray-100 rounded-lg">
+            <h3 class="text-lg font-semibold mb-4">Framework Comparison</h3>
+            <div class="grid gap-4 md:grid-cols-2">
+              <div class="p-4 bg-white border rounded">
+                <h4 class="font-bold mb-2">Tailwind CSS</h4>
+                <p class="text-sm">Utility-first, highly customizable</p>
+              </div>
+              <div class="p-4 bg-white border rounded">
+                <h4 class="font-bold mb-2">Bootstrap</h4>
+                <p class="text-sm">Pre-built components, rapid development</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+
+      </div>
+    </main>
+  </div>
+
+  <script>
+    const sidebar = document.querySelector(".sidebar");
+    const sidebarToggle = document.getElementById("sidebarToggle");
+
+    function toggleSidebar() {
+      sidebar.classList.toggle("-translate-x-full");
+    }
+
+    sidebarToggle.addEventListener("click", toggleSidebar);
+
+    document.addEventListener("click", (event) => {
+      if (
+        window.innerWidth < 768 &&
+        !sidebar.contains(event.target) &&
+        !sidebarToggle.contains(event.target)
+      ) {
+        sidebar.classList.add("-translate-x-full");
+      }
+    });
+
+    window.addEventListener("resize", () => {
+      if (window.innerWidth >= 768) {
+        sidebar.classList.remove("-translate-x-full");
+      }
+    });
+
+    hljs.highlightAll();
+  </script>
+</body>
+
+</html>

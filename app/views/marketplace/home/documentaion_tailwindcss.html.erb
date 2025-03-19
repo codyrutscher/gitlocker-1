@@ -1,0 +1,1894 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TailwindCSS Docs - Coderz</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Syntax Highlighting -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <style>
+    .sidebar::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .sidebar::-webkit-scrollbar-thumb {
+      background: #4a5568;
+      border-radius: 4px;
+    }
+
+    .prose :where(code):not(:where([class~="not-prose"] *))::before {
+      content: "";
+    }
+
+    .prose :where(code):not(:where([class~="not-prose"] *))::after {
+      content: "";
+    }
+  </style>
+</head>
+
+<body class="bg-gray-50">
+  <div class="min-h-screen md:flex">
+    <!-- Sidebar -->
+    <aside class="sidebar bg-gray-800 text-gray-300 w-64 fixed h-screen overflow-y-auto z-30 -translate-x-full md:translate-x-0 transition-transform duration-300">
+      <div class="p-4">
+        <%= link_to documentationindex_path, class: "block mb-6 text-blue-400 hover:text-blue-300" do %>
+        ← Back to Tech Stack <% end %>
+        <h2 class="text-xl font-bold mb-4">TailwindCSS Documentation</h2>
+        <nav>
+          <h3 class="text-sm font-semibold text-gray-400 mb-4">
+            CORE CONCEPTS
+          </h3>
+          <ul class="space-y-2">
+            <li>
+              <a href="#introduction" class="flex items-center px-3 py-2 rounded hover:bg-gray-700">Introduction</a>
+            </li>
+            <li>
+              <a href="#installation" class="flex items-center px-3 py-2 rounded hover:bg-gray-700">Installation</a>
+            </li>
+            <li>
+              <a href="#utility-first" class="flex items-center px-3 py-2 rounded hover:bg-gray-700">Utility-First Concept</a>
+            </li>
+            <li>
+              <a href="#responsive-design" class="flex items-center px-3 py-2 rounded hover:bg-gray-700">Responsive Design</a>
+            </li>
+            <li>
+              <a href="#dark-mode" class="flex items-center px-3 py-2 rounded hover:bg-gray-700">Dark Mode</a>
+            </li>
+            <li>
+              <a href="#tailwind-classes" class="flex items-center px-3 py-2 rounded hover:bg-gray-700">Classes</a>
+            </li>
+          </ul>
+          <ul class="space-y-2">
+            <li>
+              <a href="#custom-utilities" class="flex items-center px-3 py-2 rounded hover:bg-gray-700">Custom Utilities</a>
+            </li>
+            <li>
+              <a href="#best-practices" class="flex items-center px-3 py-2 rounded hover:bg-gray-700">Best Practices</a>
+            </li>
+            <li>
+              <a href="#using-classes" class="flex items-center px-3 py-2 rounded hover:bg-gray-700">Using Tailwind Classes</a>
+            </li>
+            <li>
+              <a href="#examples" class="flex items-center px-3 py-2 rounded hover:bg-gray-700">Examples</a>
+            </li>
+            <li>
+              <a href="#transitions" class="flex items-center px-3 py-2 rounded hover:bg-gray-700">Transitions</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </aside>
+
+    <!-- Mobile Menu Button -->
+    <button id="sidebarToggle" class="md:hidden fixed top-4 left-4 z-40 p-2 bg-gray-800 rounded-lg text-white ml-4 mt-4">
+      ☰
+    </button>
+
+    <!-- Main Content -->
+    <main class="flex-1 p-8 bg-gray-50 ml-0 md:ml-64">
+      <div class="max-w-4xl mx-auto prose max-w-full md:max-w-4xl">
+        <!-- Content sections will be added here -->
+
+
+        <section id="introduction" class="mb-12">
+          <h1 class="text-3xl font-bold mb-4">1. Introduction to TailwindCSS</h1>
+          <p class="mb-4">
+            TailwindCSS is a <strong>utility-first CSS framework</strong> that provides low-level utility classes to build designs directly in your markup. Unlike traditional CSS frameworks like Bootstrap, TailwindCSS does not come with pre-designed components. Instead, it gives you the building blocks to create custom designs quickly and efficiently.
+          </p>
+
+          <!-- Definition: What is TailwindCSS? -->
+          <div class="mb-8">
+            <h2 class="text-2xl font-semibold mb-2">What is TailwindCSS?</h2>
+            <p class="mb-4">
+              TailwindCSS is a highly customizable, low-level CSS framework that provides utility classes for almost every CSS property. These utility classes can be combined to create unique designs without writing custom CSS. For example, instead of writing a custom class for padding, you can use Tailwind's utility classes like <code class="text-sm bg-gray-100 p-1 rounded">p-4</code> (padding: 1rem).
+            </p>
+            <p class="mb-4">
+              The framework is designed to be <strong>responsive</strong> and <strong>scalable</strong>, making it ideal for projects of any size. It also supports features like dark mode, custom configurations, and plugins.
+            </p>
+          </div>
+
+          <!-- Definition: Utility-First Concept -->
+          <div class="mb-8">
+            <h2 class="text-2xl font-semibold mb-2">Utility-First Concept</h2>
+            <p class="mb-4">
+              The <strong>utility-first</strong> approach is the core philosophy of TailwindCSS. Instead of using pre-designed components, you apply small, single-purpose utility classes directly in your HTML. This approach offers several benefits:
+            </p>
+            <ul class="list-disc list-inside mb-4">
+              <li><strong>Faster Development:</strong> You can build UIs quickly without switching between HTML and CSS files.</li>
+              <li><strong>Consistency:</strong> Utility classes enforce a consistent design system.</li>
+              <li><strong>Customizability:</strong> You have full control over the design without being constrained by pre-built components.</li>
+            </ul>
+            <p class="mb-4">
+              For example, instead of writing custom CSS for a button, you can use Tailwind's utility classes:
+            </p>
+            <pre class="bg-gray-100 p-4 rounded-lg mb-4 overflow-x-auto">
+                <code class="text-sm language-html">
+&lt;button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"&gt;
+  Click Me
+&lt;/button&gt;
+                </code>
+              </pre>
+            <p class="mb-4">
+              In this example:
+            </p>
+            <ul class="list-disc list-inside mb-4">
+              <li><code class="text-sm bg-gray-100 p-1 rounded">bg-blue-500</code>: Sets the background color to blue.</li>
+              <li><code class="text-sm bg-gray-100 p-1 rounded">text-white</code>: Sets the text color to white.</li>
+              <li><code class="text-sm bg-gray-100 p-1 rounded">px-4</code>: Adds horizontal padding of 1rem.</li>
+              <li><code class="text-sm bg-gray-100 p-1 rounded">py-2</code>: Adds vertical padding of 0.5rem.</li>
+              <li><code class="text-sm bg-gray-100 p-1 rounded">rounded</code>: Adds rounded corners.</li>
+              <li><code class="text-sm bg-gray-100 p-1 rounded">hover:bg-blue-600</code>: Changes the background color on hover.</li>
+            </ul>
+          </div>
+
+          <!-- Definition: Responsive Design -->
+          <div class="mb-8">
+            <h2 class="text-2xl font-semibold mb-2">Responsive Design</h2>
+            <p class="mb-4">
+              TailwindCSS makes it easy to create responsive designs using its <strong>breakpoint prefixes</strong>. You can apply different styles for different screen sizes by prefixing utility classes with breakpoints like <code class="text-sm bg-gray-100 p-1 rounded">sm:</code>, <code class="text-sm bg-gray-100 p-1 rounded">md:</code>, <code class="text-sm bg-gray-100 p-1 rounded">lg:</code>, and <code class="text-sm bg-gray-100 p-1 rounded">xl:</code>.
+            </p>
+            <p class="mb-4">
+              For example, to create a responsive grid layout:
+            </p>
+            <pre class="bg-gray-100 p-4 rounded-lg mb-4 overflow-x-auto">
+                <code class="text-sm language-html">
+&lt;div class="flex flex-col space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4"&gt;
+  &lt;div class="bg-blue-500 p-4 rounded-lg"&gt;Item 1&lt;/div&gt;
+  &lt;div class="bg-green-500 p-4 rounded-lg"&gt;Item 2&lt;/div&gt;
+  &lt;div class="bg-red-500 p-4 rounded-lg"&gt;Item 3&lt;/div&gt;
+&lt;/div&gt;
+                </code>
+              </pre>
+            <p class="mb-4">
+              In this example:
+            </p>
+            <ul class="list-disc list-inside mb-4">
+              <li><code class="text-sm bg-gray-100 p-1 rounded">flex flex-col</code>: Stacks items vertically by default.</li>
+              <li><code class="text-sm bg-gray-100 p-1 rounded">sm:flex-row</code>: Aligns items horizontally on screens larger than 640px.</li>
+              <li><code class="text-sm bg-gray-100 p-1 rounded">space-y-4</code>: Adds vertical spacing between items.</li>
+              <li><code class="text-sm bg-gray-100 p-1 rounded">sm:space-y-0 sm:space-x-4</code>: Removes vertical spacing and adds horizontal spacing on larger screens.</li>
+            </ul>
+          </div>
+
+          <!-- Definition: Customizing Configuration -->
+          <div class="mb-8">
+            <h2 class="text-2xl font-semibold mb-2">Customizing Configuration</h2>
+            <p class="mb-4">
+              TailwindCSS is highly customizable. You can modify the default configuration by editing the <code class="text-sm bg-gray-100 p-1 rounded">tailwind.config.js</code> file. This allows you to define custom colors, fonts, breakpoints, and more.
+            </p>
+            <p class="mb-4">
+              For example, to add a custom color:
+            </p>
+            <pre class="bg-gray-100 p-4 rounded-lg mb-4 overflow-x-auto">
+                <code class="text-sm language-javascript">
+module.exports = {
+  theme: {
+    extend: {
+      colors: {
+        'custom-blue': '#1e3a8a',
+      },
+    },
+  },
+};
+                </code>
+              </pre>
+            <p class="mb-4">
+              After adding the custom color, you can use it in your HTML:
+            </p>
+            <pre class="bg-gray-100 p-4 rounded-lg mb-4 overflow-x-auto">
+                <code class="text-sm language-html">
+&lt;div class="bg-custom-blue text-white p-4 rounded-lg"&gt;
+  Custom Blue Background
+&lt;/div&gt;
+                </code>
+              </pre>
+          </div>
+        </section>
+
+        <section id="installation" class="mb-12">
+          <h1 class="text-3xl font-bold mb-6">2. Installation</h1>
+
+          <!-- Why Installation Methods Matter -->
+          <div class="mb-8">
+            <h2 class="text-2xl font-semibold mb-4">Why Installation Methods Matter</h2>
+            <p class="mb-4">
+              TailwindCSS can be installed in different ways depending on your project requirements. The installation method determines:
+            </p>
+            <ul class="list-disc list-inside mb-4">
+              <li class="mb-2">Customization capabilities (colors, fonts, etc.)</li>
+              <li class="mb-2">Build process optimization</li>
+              <li class="mb-2">Framework integration possibilities</li>
+              <li>Production readiness</li>
+            </ul>
+          </div>
+
+          <!-- CDN Method -->
+          <div class="mb-8">
+            <h2 class="text-2xl font-semibold mb-4">2.1 Using CDN (Quick Start)</h2>
+            <p class="mb-4">
+              <strong>Definition:</strong> The CDN method is the fastest way to start using TailwindCSS without any build process. It's ideal for prototypes or small projects where customization isn't required.
+            </p>
+            <p class="mb-4">
+              <strong>Limitations:</strong> You can't customize the default theme, add plugins, or purge unused styles.
+            </p>
+            <pre class="bg-gray-100 p-4 rounded-lg mb-4 overflow-x-auto">
+                <code class="text-sm language-html">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;script src="https://cdn.tailwindcss.com"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;!-- Your Tailwind-powered HTML --&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+                </code>
+              </pre>
+            <div class="bg-blue-100 p-4 rounded-lg mb-4">
+              <p class="text-sm"><strong>Pro Tip:</strong> Add the following meta tag for proper responsive behavior:</p>
+              <code class="text-sm bg-white p-1 rounded">&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</code>
+            </div>
+          </div>
+
+          <!-- npm Installation -->
+          <div class="mb-8">
+            <h2 class="text-2xl font-semibold mb-4">2.2 npm Installation (Recommended)</h2>
+            <p class="mb-4">
+              <strong>Definition:</strong> The npm method is the production-ready installation approach. It enables full customization and integration with build tools like Webpack or Vite.
+            </p>
+
+            <div class="mb-6">
+              <h3 class="text-xl font-semibold mb-2">Step 1: Initialize Project</h3>
+              <pre class="bg-gray-100 p-4 rounded-lg mb-4 overflow-x-auto">
+                  <code class="text-sm language-bash">
+npm init -y
+                  </code>
+                </pre>
+            </div>
+
+            <div class="mb-6">
+              <h3 class="text-xl font-semibold mb-2">Step 2: Install TailwindCSS</h3>
+              <pre class="bg-gray-100 p-4 rounded-lg mb-4 overflow-x-auto">
+                  <code class="text-sm language-bash">
+npm install -D tailwindcss postcss autoprefixer
+npx tailwindcss init -p
+                  </code>
+                </pre>
+              <p class="mb-4 text-sm text-gray-600">
+                This creates two files:<br>
+                - <code class="bg-gray-100 p-1 rounded">tailwind.config.js</code> (configuration)<br>
+                - <code class="bg-gray-100 p-1 rounded">postcss.config.js</code> (PostCSS setup)
+              </p>
+            </div>
+
+            <div class="mb-6">
+              <h3 class="text-xl font-semibold mb-2">Step 3: Configure Template Paths</h3>
+              <pre class="bg-gray-100 p-4 rounded-lg mb-4 overflow-x-auto">
+                  <code class="text-sm language-javascript">
+// tailwind.config.js
+module.exports = {
+  content: ["./src/**/*.{html,js}"],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}
+                  </code>
+                </pre>
+              <p class="mb-4 text-sm text-gray-600">
+                This tells Tailwind where to look for your HTML/JS files to optimize the final CSS build.
+              </p>
+            </div>
+          </div>
+
+          <!-- Framework Integration -->
+          <div class="mb-8">
+            <h2 class="text-2xl font-semibold mb-4">2.3 Framework Integration</h2>
+            <p class="mb-4">
+              <strong>Definition:</strong> TailwindCSS integrates seamlessly with modern frameworks. Here's how to set it up with popular tools:
+            </p>
+
+            <div class="mb-6">
+              <h3 class="text-xl font-semibold mb-2">React/Next.js</h3>
+              <pre class="bg-gray-100 p-4 rounded-lg mb-4 overflow-x-auto">
+                  <code class="text-sm language-bash">
+npm install -D tailwindcss postcss autoprefixer
+npx tailwindcss init -p
+                  </code>
+                </pre>
+              <p class="mb-4 text-sm text-gray-600">
+                Add to your globals.css:
+                <code class="bg-gray-100 p-1 rounded">@tailwind base; @tailwind components; @tailwind utilities;</code>
+              </p>
+            </div>
+
+            <div class="mb-6">
+              <h3 class="text-xl font-semibold mb-2">Laravel</h3>
+              <pre class="bg-gray-100 p-4 rounded-lg mb-4 overflow-x-auto">
+                  <code class="text-sm language-bash">
+npm install -D tailwindcss postcss autoprefixer
+npx tailwindcss init -p
+                  </code>
+                </pre>
+              <p class="mb-4 text-sm text-gray-600">
+                Add Tailwind directives to your resources/css/app.css file
+              </p>
+            </div>
+          </div>
+
+          <!-- PostCSS Configuration -->
+          <div class="mb-8">
+            <h2 class="text-2xl font-semibold mb-4">2.4 PostCSS Configuration</h2>
+            <p class="mb-4">
+              <strong>Definition:</strong> PostCSS is a tool for transforming CSS with JavaScript. Tailwind uses it to process your CSS files.
+            </p>
+            <pre class="bg-gray-100 p-4 rounded-lg mb-4 overflow-x-auto">
+                <code class="text-sm language-javascript">
+// postcss.config.js
+module.exports = {
+  plugins: {
+    tailwindcss: {},
+    autoprefixer: {},
+  },
+}
+                </code>
+              </pre>
+            <p class="mb-4 text-sm text-gray-600">
+              This configuration enables two essential features:<br>
+              1. <strong>tailwindcss:</strong> Processes Tailwind directives<br>
+              2. <strong>autoprefixer:</strong> Adds vendor prefixes automatically
+            </p>
+          </div>
+        </section>
+
+        <section id="utility-first" class="mb-12">
+          <h1 class="text-3xl font-bold mb-6">3. Utility-First Concept</h1>
+
+          <!-- Core Philosophy -->
+          <div class="mb-8">
+            <h2 class="text-2xl font-semibold mb-4">3.1 What is Utility-First?</h2>
+            <p class="mb-4">
+              <strong>Definition:</strong> Utility-First is a CSS methodology where you style elements using small, single-purpose classes that each handle one specific CSS property. Instead of creating semantic class names like <code class="text-sm bg-gray-100 p-1 rounded">.card</code> or <code class="text-sm bg-gray-100 p-1 rounded">.navbar</code>, you combine multiple utility classes to achieve your desired design.
+            </p>
+
+            <div class="bg-blue-100 p-4 rounded-lg mb-4">
+              <p class="text-sm"><strong>Key Principle:</strong> "Composable, immutable styles that work within a constrained system"</p>
+            </div>
+          </div>
+
+          <!-- Traditional CSS vs Utility-First -->
+          <div class="mb-8">
+            <h2 class="text-2xl font-semibold mb-4">3.2 Traditional CSS vs Utility-First</h2>
+
+            <div class="mb-6">
+              <h3 class="text-xl font-semibold mb-2">Traditional Approach</h3>
+              <pre class="bg-gray-100 p-4 rounded-lg mb-4 overflow-x-auto">
+                  <code class="text-sm language-css">
+/* styles.css */
+.card {
+  padding: 1.5rem;
+  background: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+                  </code>
+                </pre>
+              <p class="mb-4 text-sm text-gray-600">
+                Requires context switching between HTML and CSS files. Changes might cause unintended side effects.
+              </p>
+            </div>
+
+            <div class="mb-6">
+              <h3 class="text-xl font-semibold mb-2">Utility-First Approach</h3>
+              <pre class="bg-gray-100 p-4 rounded-lg mb-4 overflow-x-auto">
+                  <code class="text-sm language-html">
+&lt;div class="p-6 bg-white rounded-lg shadow-sm"&gt;
+  &lt;!-- Card content --&gt;
+&lt;/div&gt;
+                  </code>
+                </pre>
+              <p class="mb-4 text-sm text-gray-600">
+                All styles are visible in HTML. Each class maps to one CSS property:
+              </p>
+              <ul class="list-disc list-inside mb-4">
+                <li><code class="text-sm bg-gray-100 p-1 rounded">p-6</code> = padding: 1.5rem</li>
+                <li><code class="text-sm bg-gray-100 p-1 rounded">bg-white</code> = background-color: white</li>
+                <li><code class="text-sm bg-gray-100 p-1 rounded">rounded-lg</code> = border-radius: 0.5rem</li>
+                <li><code class="text-sm bg-gray-100 p-1 rounded">shadow-sm</code> = box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05)</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Benefits Section -->
+          <div class="mb-8">
+            <h2 class="text-2xl font-semibold mb-4">3.3 Key Benefits</h2>
+
+            <div class="mb-6">
+              <h3 class="text-xl font-semibold mb-2">1. Design Consistency</h3>
+              <p class="mb-4">
+                Utility classes enforce a <strong>constrained design system</strong>. Instead of arbitrary values, you use predefined scales:
+              </p>
+              <pre class="bg-gray-100 p-4 rounded-lg mb-4 overflow-x-auto">
+                  <code class="text-sm language-html">
+&lt;!-- Spacing Scale --&gt;
+&lt;div class="m-1"&gt;&lt;/div&gt;  /* 0.25rem */
+&lt;div class="m-2"&gt;&lt;/div&gt;  /* 0.5rem */
+&lt;div class="m-4"&gt;&lt;/div&gt;  /* 1rem */
+
+&lt;!-- Color System --&gt;
+&lt;div class="bg-blue-500"&gt;&lt;/div&gt;
+&lt;div class="bg-blue-600"&gt;&lt;/div&gt;
+                  </code>
+                </pre>
+            </div>
+
+            <div class="mb-6">
+              <h3 class="text-xl font-semibold mb-2">2. Responsive Design</h3>
+              <p class="mb-4">
+                Apply responsive variants using breakpoint prefixes:
+              </p>
+              <pre class="bg-gray-100 p-4 rounded-lg mb-4 overflow-x-auto">
+                  <code class="text-sm language-html">
+&lt;!-- Mobile-first responsive stack --&gt;
+&lt;div class="flex flex-col space-y-4 md:flex-row md:space-y-0 md:space-x-4"&gt;
+  &lt;div class="w-full md:w-1/2"&gt;Left Column&lt;/div&gt;
+  &lt;div class="w-full md:w-1/2"&gt;Right Column&lt;/div&gt;
+&lt;/div&gt;
+                  </code>
+                </pre>
+            </div>
+          </div>
+
+          <!-- Common Utility Patterns -->
+          <div class="mb-8">
+            <h2 class="text-2xl font-semibold mb-4">3.4 Common Utility Patterns</h2>
+
+            <div class="mb-6">
+              <h3 class="text-xl font-semibold mb-2">Typography System</h3>
+              <pre class="bg-gray-100 p-4 rounded-lg mb-4 overflow-x-auto">
+                  <code class="text-sm language-html">
+&lt;h1 class="text-4xl font-bold tracking-tight text-gray-900"&gt;
+  Heading 1
+&lt;/h1&gt;
+&lt;p class="text-lg text-gray-600 leading-relaxed"&gt;
+  Paragraph text with comfortable line height
+&lt;/p&gt;
+                  </code>
+                </pre>
+              <ul class="list-disc list-inside mb-4">
+                <li><code class="text-sm bg-gray-100 p-1 rounded">tracking-tight</code> = letter-spacing: -0.025em</li>
+                <li><code class="text-sm bg-gray-100 p-1 rounded">leading-relaxed</code> = line-height: 1.625</li>
+              </ul>
+            </div>
+
+            <div class="mb-6">
+              <h3 class="text-xl font-semibold mb-2">Interactive Components</h3>
+              <pre class="bg-gray-100 p-4 rounded-lg mb-4 overflow-x-auto">
+                  <code class="text-sm language-html">
+&lt;button class="
+  px-4 py-2 
+  bg-blue-600 text-white 
+  rounded-lg 
+  hover:bg-blue-700 
+  focus:outline-none focus:ring-2 focus:ring-blue-500 
+  transition-colors duration-200
+"&gt;
+  Click Me
+&lt;/button&gt;
+                  </code>
+                </pre>
+              <p class="mb-4 text-sm text-gray-600">
+                Combines 8 utility classes for complex interactions:
+              </p>
+              <ul class="list-disc list-inside">
+                <li>Spacing (px/py)</li>
+                <li>Color states (hover/focus)</li>
+                <li>Visual feedback (focus ring)</li>
+                <li>Animations (transition)</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Best Practices -->
+          <div class="mb-8">
+            <h2 class="text-2xl font-semibold mb-4">3.5 Best Practices for Scalability</h2>
+
+            <div class="mb-6">
+              <h3 class="text-xl font-semibold mb-2">When to Use @apply</h3>
+              <pre class="bg-gray-100 p-4 rounded-lg mb-4 overflow-x-auto">
+                  <code class="text-sm language-css">
+/* components.css */
+.btn-primary {
+  @apply px-4 py-2 bg-blue-600 text-white rounded-lg 
+          hover:bg-blue-700 transition-colors;
+}
+                  </code>
+                </pre>
+              <p class="mb-4 text-sm text-gray-600">
+                Extract repeated utility patterns into CSS classes using <code class="bg-gray-100 p-1 rounded">@apply</code> when:
+              </p>
+              <ul class="list-disc list-inside">
+                <li>Same combination appears 3+ times</li>
+                <li>Needs theming support</li>
+                <li>Requires complex responsive behavior</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section id="responsive-design" class="mb-12">
+          <h1 class="text-3xl font-bold mb-6">4. Responsive Design</h1>
+
+          <!-- What is Responsive Design? -->
+          <div class="mb-8">
+            <h2 class="text-2xl font-semibold mb-4">4.1 What is Responsive Design?</h2>
+            <p class="mb-4">
+              <strong>Definition:</strong> Responsive design is an approach to web development that ensures a website looks and functions well on all devices, from mobile phones to desktops. It uses flexible layouts, images, and CSS media queries to adapt the UI to different screen sizes.
+            </p>
+            <p class="mb-4">
+              TailwindCSS makes responsive design easy by providing <strong>breakpoint prefixes</strong> that allow you to apply styles conditionally based on screen size.
+            </p>
+            <div class="bg-blue-100 p-4 rounded-lg mb-4">
+              <p class="text-sm"><strong>Key Principle:</strong> "Mobile-first design" - Start with styles for small screens and layer on styles for larger screens.</p>
+            </div>
+          </div>
+
+          <!-- Breakpoints in TailwindCSS -->
+          <div class="mb-8">
+            <h2 class="text-2xl font-semibold mb-4">4.2 Breakpoints in TailwindCSS</h2>
+            <p class="mb-4">
+              TailwindCSS uses the following default breakpoints:
+            </p>
+            <pre class="bg-gray-100 p-4 rounded-lg mb-4 overflow-x-auto">
+                <code class="text-sm language-html">
+&lt;!-- Default Breakpoints --&gt;
+sm: 640px    /* Small devices (phones) */
+md: 768px    /* Medium devices (tablets) */
+lg: 1024px   /* Large devices (laptops) */
+xl: 1280px   /* Extra large devices (desktops) */
+2xl: 1536px  /* 2x large devices (large desktops) */
+                </code>
+              </pre>
+            <p class="mb-4">
+              You can customize these breakpoints in your <code class="text-sm bg-gray-100 p-1 rounded">tailwind.config.js</code> file:
+            </p>
+            <pre class="bg-gray-100 p-4 rounded-lg mb-4 overflow-x-auto">
+                <code class="text-sm language-javascript">
+// tailwind.config.js
+module.exports = {
+  theme: {
+    screens: {
+      'tablet': '640px',
+      'laptop': '1024px',
+      'desktop': '1280px',
+    },
+  },
+}
+                </code>
+              </pre>
+          </div>
+
+          <!-- Mobile-First Approach -->
+          <div class="mb-8">
+            <h2 class="text-2xl font-semibold mb-4">4.3 Mobile-First Approach</h2>
+            <p class="mb-4">
+              <strong>Definition:</strong> Mobile-first design means styling for mobile devices first, then adding styles for larger screens using breakpoint prefixes. This ensures a clean, optimized experience for mobile users.
+            </p>
+            <p class="mb-4">
+              Example: Stack content vertically on mobile, then switch to a horizontal layout on larger screens:
+            </p>
+            <pre class="bg-gray-100 p-4 rounded-lg mb-4 overflow-x-auto">
+                <code class="text-sm language-html">
+&lt;div class="flex flex-col space-y-4 md:flex-row md:space-y-0 md:space-x-4"&gt;
+  &lt;div class="w-full md:w-1/2"&gt;Left Column&lt;/div&gt;
+  &lt;div class="w-full md:w-1/2"&gt;Right Column&lt;/div&gt;
+&lt;/div&gt;
+                </code>
+              </pre>
+            <p class="mb-4">
+              <strong>Explanation:</strong>
+            </p>
+            <ul class="list-disc list-inside mb-4">
+              <li><code class="text-sm bg-gray-100 p-1 rounded">flex flex-col</code>: Stacks items vertically by default (mobile).</li>
+              <li><code class="text-sm bg-gray-100 p-1 rounded">space-y-4</code>: Adds vertical spacing between items.</li>
+              <li><code class="text-sm bg-gray-100 p-1 rounded">md:flex-row</code>: Switches to horizontal layout on medium screens.</li>
+              <li><code class="text-sm bg-gray-100 p-1 rounded">md:space-y-0 md:space-x-4</code>: Removes vertical spacing and adds horizontal spacing on medium screens.</li>
+            </ul>
+          </div>
+
+          <!-- Responsive Typography -->
+          <div class="mb-8">
+            <h2 class="text-2xl font-semibold mb-4">4.4 Responsive Typography</h2>
+            <p class="mb-4">
+              TailwindCSS makes it easy to adjust font sizes, line heights, and spacing for different screen sizes.
+            </p>
+            <pre class="bg-gray-100 p-4 rounded-lg mb-4 overflow-x-auto">
+                <code class="text-sm language-html">
+&lt;h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl"&gt;
+  Responsive Heading
+&lt;/h1&gt;
+&lt;p class="text-sm sm:text-base md:text-lg"&gt;
+  This text scales beautifully across devices.
+&lt;/p&gt;
+                </code>
+              </pre>
+            <p class="mb-4">
+              <strong>Explanation:</strong>
+            </p>
+            <ul class="list-disc list-inside mb-4">
+              <li><code class="text-sm bg-gray-100 p-1 rounded">text-2xl</code>: Default font size for mobile.</li>
+              <li><code class="text-sm bg-gray-100 p-1 rounded">sm:text-3xl</code>: Increases font size on small screens.</li>
+              <li><code class="text-sm bg-gray-100 p-1 rounded">md:text-4xl</code>: Further increases font size on medium screens.</li>
+              <li><code class="text-sm bg-gray-100 p-1 rounded">lg:text-5xl</code>: Largest font size on large screens.</li>
+            </ul>
+          </div>
+
+          <!-- Responsive Grids -->
+          <div class="mb-8">
+            <h2 class="text-2xl font-semibold mb-4">4.5 Responsive Grids</h2>
+            <p class="mb-4">
+              TailwindCSS's grid system is fully responsive. You can create layouts that adapt to different screen sizes.
+            </p>
+            <pre class="bg-gray-100 p-4 rounded-lg mb-4 overflow-x-auto">
+                <code class="text-sm language-html">
+&lt;div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"&gt;
+  &lt;div class="bg-blue-500 p-4"&gt;Item 1&lt;/div&gt;
+  &lt;div class="bg-green-500 p-4"&gt;Item 2&lt;/div&gt;
+  &lt;div class="bg-red-500 p-4"&gt;Item 3&lt;/div&gt;
+  &lt;div class="bg-yellow-500 p-4"&gt;Item 4&lt;/div&gt;
+&lt;/div&gt;
+                </code>
+              </pre>
+            <p class="mb-4">
+              <strong>Explanation:</strong>
+            </p>
+            <ul class="list-disc list-inside mb-4">
+              <li><code class="text-sm bg-gray-100 p-1 rounded">grid-cols-1</code>: 1 column on mobile.</li>
+              <li><code class="text-sm bg-gray-100 p-1 rounded">sm:grid-cols-2</code>: 2 columns on small screens.</li>
+              <li><code class="text-sm bg-gray-100 p-1 rounded">lg:grid-cols-4</code>: 4 columns on large screens.</li>
+              <li><code class="text-sm bg-gray-100 p-1 rounded">gap-4</code>: Adds consistent spacing between grid items.</li>
+            </ul>
+          </div>
+
+          <!-- Hiding and Showing Elements -->
+          <div class="mb-8">
+            <h2 class="text-2xl font-semibold mb-4">4.6 Hiding and Showing Elements</h2>
+            <p class="mb-4">
+              Use responsive variants to show or hide elements based on screen size.
+            </p>
+            <pre class="bg-gray-100 p-4 rounded-lg mb-4 overflow-x-auto">
+                <code class="text-sm language-html">
+&lt;div class="block sm:hidden"&gt;Visible only on mobile&lt;/div&gt;
+&lt;div class="hidden sm:block"&gt;Visible on small screens and up&lt;/div&gt;
+&lt;div class="hidden md:block"&gt;Visible on medium screens and up&lt;/div&gt;
+                </code>
+              </pre>
+            <p class="mb-4">
+              <strong>Explanation:</strong>
+            </p>
+            <ul class="list-disc list-inside mb-4">
+              <li><code class="text-sm bg-gray-100 p-1 rounded">block sm:hidden</code>: Shows element on mobile, hides it on small screens and up.</li>
+              <li><code class="text-sm bg-gray-100 p-1 rounded">hidden sm:block</code>: Hides element on mobile, shows it on small screens and up.</li>
+              <li><code class="text-sm bg-gray-100 p-1 rounded">hidden md:block</code>: Hides element on mobile and small screens, shows it on medium screens and up.</li>
+            </ul>
+          </div>
+        </section>
+
+        <section id="dark-mode" class="mb-12">
+          <h1 class="text-3xl font-bold mb-6">5. Dark Mode</h1>
+
+          <!-- What is Dark Mode? -->
+          <div class="mb-8">
+            <h2 class="text-2xl font-semibold mb-4">5.1 What is Dark Mode?</h2>
+            <p class="mb-4">
+              <strong>Definition:</strong> Dark mode is a user interface (UI) theme that uses a dark color scheme (e.g., dark backgrounds with light text) to reduce eye strain, save battery life on OLED screens, and provide a visually appealing alternative to light mode.
+            </p>
+            <p class="mb-4">
+              TailwindCSS makes it easy to implement dark mode by providing <strong>dark:</strong> variants that apply styles when dark mode is active.
+            </p>
+            <div class="bg-blue-100 p-4 rounded-lg mb-4">
+              <p class="text-sm"><strong>Key Principle:</strong> "Respect user preferences while providing a seamless design experience."</p>
+            </div>
+          </div>
+
+          <!-- Enabling Dark Mode -->
+          <div class="mb-8">
+            <h2 class="text-2xl font-semibold mb-4">5.2 Enabling Dark Mode</h2>
+            <p class="mb-4">
+              To enable dark mode in TailwindCSS, configure it in your <code class="text-sm bg-gray-100 p-1 rounded">tailwind.config.js</code> file:
+            </p>
+            <pre class="bg-gray-100 p-4 rounded-lg mb-4 overflow-x-auto">
+                <code class="text-sm language-javascript">
+// tailwind.config.js
+module.exports = {
+  darkMode: 'class', // or 'media' for system preference
+  // Other configurations...
+}
+                </code>
+              </pre>
+            <p class="mb-4">
+              <strong>Explanation:</strong>
+            </p>
+            <ul class="list-disc list-inside mb-4">
+              <li><code class="text-sm bg-gray-100 p-1 rounded">'media'</code>: Uses the user's system preference (e.g., dark mode enabled in OS settings).</li>
+              <li><code class="text-sm bg-gray-100 p-1 rounded">'class'</code>: Manually toggles dark mode by adding a <code class="text-sm bg-gray-100 p-1 rounded">dark</code> class to the <code class="text-sm bg-gray-100 p-1 rounded">&lt;html&gt;</code> or <code class="text-sm bg-gray-100 p-1 rounded">&lt;body&gt;</code> element.</li>
+            </ul>
+          </div>
+
+          <!-- Using Dark Mode Variants -->
+          <div class="mb-8">
+            <h2 class="text-2xl font-semibold mb-4">5.3 Using Dark Mode Variants</h2>
+            <p class="mb-4">
+              TailwindCSS provides <code class="text-sm bg-gray-100 p-1 rounded">dark:</code> variants to apply styles when dark mode is active.
+            </p>
+            <pre class="bg-gray-100 p-4 rounded-lg mb-4 overflow-x-auto">
+                <code class="text-sm language-html">
+&lt;div class="bg-white text-gray-900 dark:bg-gray-800 dark:text-gray-100"&gt;
+  This box changes colors in dark mode.
+&lt;/div&gt;
+                </code>
+              </pre>
+            <p class="mb-4">
+              <strong>Explanation:</strong>
+            </p>
+            <ul class="list-disc list-inside mb-4">
+              <li><code class="text-sm bg-gray-100 p-1 rounded">bg-white</code>: Light background by default.</li>
+              <li><code class="text-sm bg-gray-100 p-1 rounded">text-gray-900</code>: Dark text by default.</li>
+              <li><code class="text-sm bg-gray-100 p-1 rounded">dark:bg-gray-800</code>: Dark background in dark mode.</li>
+              <li><code class="text-sm bg-gray-100 p-1 rounded">dark:text-gray-100</code>: Light text in dark mode.</li>
+            </ul>
+          </div>
+
+          <!-- Toggling Dark Mode Manually -->
+          <div class="mb-8">
+            <h2 class="text-2xl font-semibold mb-4">5.4 Toggling Dark Mode Manually</h2>
+            <p class="mb-4">
+              If you set <code class="text-sm bg-gray-100 p-1 rounded">darkMode: 'class'</code>, you can toggle dark mode by adding or removing the <code class="text-sm bg-gray-100 p-1 rounded">dark</code> class on the <code class="text-sm bg-gray-100 p-1 rounded">&lt;html&gt;</code> or <code class="text-sm bg-gray-100 p-1 rounded">&lt;body&gt;</code> element.
+            </p>
+            <pre class="bg-gray-100 p-4 rounded-lg mb-4 overflow-x-auto">
+                <code class="text-sm language-html">
+&lt;!-- Toggle Button --&gt;
+&lt;button id="toggleDarkMode" class="px-4 py-2 bg-blue-500 text-white rounded-lg"&gt;
+  Toggle Dark Mode
+&lt;/button&gt;
+
+&lt;script&gt;
+  const toggleButton = document.getElementById('toggleDarkMode');
+  toggleButton.addEventListener('click', () => {
+    document.documentElement.classList.toggle('dark');
+  });
+&lt;/script&gt;
+                </code>
+              </pre>
+            <p class="mb-4">
+              <strong>Explanation:</strong>
+            </p>
+            <ul class="list-disc list-inside mb-4">
+              <li><code class="text-sm bg-gray-100 p-1 rounded">document.documentElement</code>: Refers to the <code class="text-sm bg-gray-100 p-1 rounded">&lt;html&gt;</code> element.</li>
+              <li><code class="text-sm bg-gray-100 p-1 rounded">classList.toggle('dark')</code>: Adds or removes the <code class="text-sm bg-gray-100 p-1 rounded">dark</code> class.</li>
+            </ul>
+          </div>
+
+          <!-- Dark Mode with Custom Colors -->
+          <div class="mb-8">
+            <h2 class="text-2xl font-semibold mb-4">5.5 Dark Mode with Custom Colors</h2>
+            <p class="mb-4">
+              You can define custom colors for dark mode in your <code class="text-sm bg-gray-100 p-1 rounded">tailwind.config.js</code> file:
+            </p>
+            <pre class="bg-gray-100 p-4 rounded-lg mb-4 overflow-x-auto">
+                <code class="text-sm language-javascript">
+// tailwind.config.js
+module.exports = {
+  theme: {
+    extend: {
+      colors: {
+        primary: {
+          DEFAULT: '#3B82F6',
+          dark: '#1D4ED8',
+        },
+      },
+    },
+  },
+}
+                </code>
+              </pre>
+            <p class="mb-4">
+              Use these colors in your HTML:
+            </p>
+            <pre class="bg-gray-100 p-4 rounded-lg mb-4 overflow-x-auto">
+                <code class="text-sm language-html">
+&lt;div class="bg-primary text-white dark:bg-primary-dark"&gt;
+  Custom Dark Mode Colors
+&lt;/div&gt;
+                </code>
+              </pre>
+          </div>
+
+          <!-- Dark Mode Best Practices -->
+          <div class="mb-8">
+            <h2 class="text-2xl font-semibold mb-4">5.6 Dark Mode Best Practices</h2>
+            <p class="mb-4">
+              Follow these tips for a better dark mode experience:
+            </p>
+            <ul class="list-disc list-inside mb-4">
+              <li><strong>Use Semantic Colors:</strong> Define colors in your config file for consistency.</li>
+              <li><strong>Test Contrast:</strong> Ensure text is readable in both light and dark modes.</li>
+              <li><strong>Respect System Preferences:</strong> Use <code class="text-sm bg-gray-100 p-1 rounded">darkMode: 'media'</code> if you want to match the user's OS settings.</li>
+              <li><strong>Provide a Toggle:</strong> Allow users to switch between modes manually.</li>
+            </ul>
+          </div>
+        </section>
+
+        <section id="tailwind-classes" class="mb-12">
+          <h1 class="text-3xl font-bold mb-6">6. Tailwind Classes</h1>
+
+          <!-- Core Concepts -->
+          <div class="mb-8">
+            <h2 class="text-2xl font-semibold mb-4">6.1 Core Class Concepts</h2>
+            <p class="mb-4">
+              <strong>Definition:</strong> Tailwind classes are utility-based CSS classes that map 1:1 with CSS properties. They follow a consistent naming convention and are designed to be combined for complex designs.
+            </p>
+
+            <div class="mb-6">
+              <h3 class="text-xl font-semibold mb-2">Atomic Design Principle</h3>
+              <pre class="bg-gray-100 p-4 rounded-lg mb-4 overflow-x-auto">
+                  <code class="text-sm language-html">
+&lt;div class="p-4 bg-blue-500 text-white rounded-lg"&gt;
+  Atomic Utility Classes
+&lt;/div&gt;
+                  </code>
+                </pre>
+              <ul class="list-disc list-inside mb-4">
+                <li><code class="text-sm bg-gray-100 p-1 rounded">p-4</code> = padding: 1rem</li>
+                <li><code class="text-sm bg-gray-100 p-1 rounded">bg-blue-500</code> = background-color: #3b82f6</li>
+                <li><code class="text-sm bg-gray-100 p-1 rounded">text-white</code> = color: #fff</li>
+                <li><code class="text-sm bg-gray-100 p-1 rounded">rounded-lg</code> = border-radius: 0.5rem</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Composite Classes -->
+          <div class="mb-8">
+            <h2 class="text-2xl font-semibold mb-4">6.2 Composite Classes</h2>
+            <p class="mb-4">
+              <strong>Definition:</strong> Combining multiple utility classes to create complex components while maintaining readability.
+            </p>
+            <pre class="bg-gray-100 p-4 rounded-lg mb-4 overflow-x-auto">
+                <code class="text-sm language-html">
+&lt;button class="
+  px-6 py-3 
+  bg-gradient-to-r from-blue-500 to-purple-500 
+  text-white font-semibold 
+  rounded-full 
+  shadow-lg 
+  hover:scale-105 
+  transition-all 
+  duration-300
+"&gt;
+  Fancy Button
+&lt;/button&gt;
+                </code>
+              </pre>
+            <ul class="list-disc list-inside mb-4">
+              <li><code class="text-sm bg-gray-100 p-1 rounded">bg-gradient-to-r</code>: Linear gradient from right</li>
+              <li><code class="text-sm bg-gray-100 p-1 rounded">hover:scale-105</code>: 5% scale increase on hover</li>
+              <li><code class="text-sm bg-gray-100 p-1 rounded">transition-all</code>: Smooth transition for all properties</li>
+            </ul>
+          </div>
+
+          <!-- State Variants -->
+          <div class="mb-8">
+            <h2 class="text-2xl font-semibold mb-4">6.3 State Variants</h2>
+            <p class="mb-4">
+              <strong>Definition:</strong> Classes that apply styles based on element state or parent state.
+            </p>
+            <pre class="bg-gray-100 p-4 rounded-lg mb-4 overflow-x-auto">
+                <code class="text-sm language-html">
+&lt;div class="group relative">
+  &lt;div class="
+    bg-gray-100 
+    group-hover:bg-blue-100 
+    transition-colors
+    p-4
+    rounded-lg
+  "&gt;
+    &lt;button class="
+      text-gray-600 
+      hover:text-blue-600 
+      focus:ring-2 focus:ring-blue-500
+    "&gt;
+      Interactive Element
+    &lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+                </code>
+              </pre>
+            <ul class="list-disc list-inside mb-4">
+              <li><code class="text-sm bg-gray-100 p-1 rounded">group-hover:</code> Parent hover state</li>
+              <li><code class="text-sm bg-gray-100 p-1 rounded">focus:ring-2</code>: Focus state indicator</li>
+              <li><code class="text-sm bg-gray-100 p-1 rounded">transition-colors</code>: Smooth color transitions</li>
+            </ul>
+          </div>
+
+          <!-- Responsive & Breakpoints -->
+          <div class="mb-8">
+            <h2 class="text-2xl font-semibold mb-4">6.4 Responsive Classes</h2>
+            <pre class="bg-gray-100 p-4 rounded-lg mb-4 overflow-x-auto">
+                <code class="text-sm language-html">
+&lt;div class="
+  text-sm 
+  sm:text-base 
+  md:text-lg 
+  lg:text-xl 
+  xl:text-2xl
+"&gt;
+  Responsive Typography
+&lt;/div&gt;
+
+&lt;div class="
+  grid 
+  grid-cols-1 
+  sm:grid-cols-2 
+  lg:grid-cols-4 
+  gap-4
+"&gt;
+  &lt;div&gt;Item 1&lt;/div&gt;
+  &lt;div&gt;Item 2&lt;/div&gt;
+  &lt;div&gt;Item 3&lt;/div&gt;
+  &lt;div&gt;Item 4&lt;/div&gt;
+&lt;/div&gt;
+                </code>
+              </pre>
+            <ul class="list-disc list-inside mb-4">
+              <li><code class="text-sm bg-gray-100 p-1 rounded">sm:text-base</code>: Applies at 640px+</li>
+              <li><code class="text-sm bg-gray-100 p-1 rounded">lg:grid-cols-4</code>: 4 columns at 1024px+</li>
+              <li><code class="text-sm bg-gray-100 p-1 rounded">xl:text-2xl</code>: Extra large font at 1280px+</li>
+            </ul>
+          </div>
+
+          <!-- Customizing Classes -->
+          <div class="mb-8">
+            <h2 class="text-2xl font-semibold mb-4">6.5 Custom Class Creation</h2>
+            <p class="mb-4">
+              <strong>Definition:</strong> Extending Tailwind's default classes or creating new ones using <code class="text-sm bg-gray-100 p-1 rounded">@apply</code> and configuration.
+            </p>
+
+            <div class="mb-6">
+              <h3 class="text-xl font-semibold mb-2">Using @apply</h3>
+              <pre class="bg-gray-100 p-4 rounded-lg mb-4 overflow-x-auto">
+                  <code class="text-sm language-css">
+/* CSS */
+.btn-primary {
+  @apply px-6 py-3 rounded-lg font-bold;
+  @apply bg-blue-500 text-white;
+  @apply hover:bg-blue-600 transition-colors;
+}
+                  </code>
+                </pre>
+            </div>
+
+            <div class="mb-6">
+              <h3 class="text-xl font-semibold mb-2">Custom Configuration</h3>
+              <pre class="bg-gray-100 p-4 rounded-lg mb-4 overflow-x-auto">
+                  <code class="text-sm language-javascript">
+// tailwind.config.js
+module.exports = {
+  theme: {
+    extend: {
+      spacing: {
+        '128': '32rem',
+      },
+      colors: {
+        'brand-purple': '#6D28D9',
+      }
+    }
+  }
+}
+                  </code>
+                </pre>
+            </div>
+          </div>
+
+          <!-- Best Practices -->
+          <div class="mb-8">
+            <h2 class="text-2xl font-semibold mb-4">6.6 Class Best Practices</h2>
+            <ul class="list-disc list-inside mb-4">
+              <li class="mb-2"><strong>Reusability:</strong> Create component classes for frequently used patterns</li>
+              <li class="mb-2"><strong>Ordering:</strong> Follow <a href="#" class="text-blue-500">Tailwind's recommended class order</a></li>
+              <li class="mb-2"><strong>Responsiveness:</strong> Always test mobile-first implementations</li>
+              <li><strong>Performance:</strong> Use PurgeCSS to remove unused classes</li>
+            </ul>
+          </div>
+        </section>
+
+        <section id="custom-utilities" class="mb-12">
+          <h1 class="text-3xl font-bold mb-6">7. Custom Utilities</h1>
+
+          <!-- What are Custom Utilities? -->
+          <div class="mb-8">
+            <h2 class="text-2xl font-semibold mb-4">7.1 What are Custom Utilities?</h2>
+            <p class="mb-4">
+              <strong>Definition:</strong> Custom utilities are user-defined utility classes that extend Tailwind's default set. They allow you to add new styles or override existing ones to fit your project's unique design requirements.
+            </p>
+            <p class="mb-4">
+              TailwindCSS provides multiple ways to create custom utilities, including:
+            </p>
+            <ul class="list-disc list-inside mb-4">
+              <li>Extending the default configuration</li>
+              <li>Using the <code class="text-sm bg-gray-100 p-1 rounded">@layer</code> directive</li>
+              <li>Creating arbitrary values with square bracket notation</li>
+            </ul>
+          </div>
+
+          <!-- Extending Default Configuration -->
+          <div class="mb-8">
+            <h2 class="text-2xl font-semibold mb-4">7.2 Extending Default Configuration</h2>
+            <p class="mb-4">
+              You can add custom utilities by extending Tailwind's configuration in the <code class="text-sm bg-gray-100 p-1 rounded">tailwind.config.js</code> file.
+            </p>
+            <pre class="bg-gray-100 p-4 rounded-lg mb-4 overflow-x-auto">
+                <code class="text-sm language-javascript">
+// tailwind.config.js
+module.exports = {
+  theme: {
+    extend: {
+      // Add custom utilities
+      spacing: {
+        '128': '32rem',
+      },
+      colors: {
+        'brand-purple': '#6D28D9',
+      },
+      borderRadius: {
+        'xl': '1rem',
+      },
+    },
+  },
+}
+                </code>
+              </pre>
+            <p class="mb-4">
+              <strong>Explanation:</strong>
+            </p>
+            <ul class="list-disc list-inside mb-4">
+              <li><code class="text-sm bg-gray-100 p-1 rounded">spacing</code>: Adds a new spacing utility (e.g., <code class="text-sm bg-gray-100 p-1 rounded">p-128</code>).</li>
+              <li><code class="text-sm bg-gray-100 p-1 rounded">colors</code>: Adds a custom color (e.g., <code class="text-sm bg-gray-100 p-1 rounded">bg-brand-purple</code>).</li>
+              <li><code class="text-sm bg-gray-100 p-1 rounded">borderRadius</code>: Adds a new border radius utility (e.g., <code class="text-sm bg-gray-100 p-1 rounded">rounded-xl</code>).</li>
+            </ul>
+          </div>
+
+          <!-- Using @layer Directive -->
+          <div class="mb-8">
+            <h2 class="text-2xl font-semibold mb-4">7.3 Using @layer Directive</h2>
+            <p class="mb-4">
+              The <code class="text-sm bg-gray-100 p-1 rounded">@layer</code> directive allows you to add custom utilities to Tailwind's base, components, or utilities layers.
+            </p>
+            <pre class="bg-gray-100 p-4 rounded-lg mb-4 overflow-x-auto">
+                <code class="text-sm language-css">
+/* CSS */
+@layer utilities {
+  .custom-shadow {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
+  .text-gradient {
+    background: linear-gradient(90deg, #3B82F6, #8B5CF6);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+}
+                </code>
+              </pre>
+            <p class="mb-4">
+              <strong>Explanation:</strong>
+            </p>
+            <ul class="list-disc list-inside mb-4">
+              <li><code class="text-sm bg-gray-100 p-1 rounded">@layer utilities</code>: Adds custom utilities to Tailwind's utilities layer.</li>
+              <li><code class="text-sm bg-gray-100 p-1 rounded">.custom-shadow</code>: A custom box-shadow utility.</li>
+              <li><code class="text-sm bg-gray-100 p-1 rounded">.text-gradient</code>: A utility for gradient text.</li>
+            </ul>
+          </div>
+
+          <!-- Arbitrary Values -->
+          <div class="mb-8">
+            <h2 class="text-2xl font-semibold mb-4">7.4 Arbitrary Values</h2>
+            <p class="mb-4">
+              TailwindCSS allows you to use arbitrary values for utilities by wrapping them in square brackets. This is useful for one-off styles that don't need to be added to the configuration.
+            </p>
+            <pre class="bg-gray-100 p-4 rounded-lg mb-4 overflow-x-auto">
+                <code class="text-sm language-html">
+&lt;div class="w-[300px] h-[200px] bg-[#1E3A8A] text-[24px]"&gt;
+  Arbitrary Values
+&lt;/div&gt;
+                </code>
+              </pre>
+            <p class="mb-4">
+              <strong>Explanation:</strong>
+            </p>
+            <ul class="list-disc list-inside mb-4">
+              <li><code class="text-sm bg-gray-100 p-1 rounded">w-[300px]</code>: Sets a fixed width of 300px.</li>
+              <li><code class="text-sm bg-gray-100 p-1 rounded">h-[200px]</code>: Sets a fixed height of 200px.</li>
+              <li><code class="text-sm bg-gray-100 p-1 rounded">bg-[#1E3A8A]</code>: Sets a custom background color.</li>
+              <li><code class="text-sm bg-gray-100 p-1 rounded">text-[24px]</code>: Sets a custom font size of 24px.</li>
+            </ul>
+          </div>
+
+          <!-- Custom Variants -->
+          <div class="mb-8">
+            <h2 class="text-2xl font-semibold mb-4">7.5 Custom Variants</h2>
+            <p class="mb-4">
+              You can create custom variants for utilities using the <code class="text-sm bg-gray-100 p-1 rounded">@variants</code> directive.
+            </p>
+            <pre class="bg-gray-100 p-4 rounded-lg mb-4 overflow-x-auto">
+                <code class="text-sm language-css">
+/* CSS */
+@variants hover, focus {
+  .custom-scale {
+    transform: scale(1.05);
+  }
+  .custom-rotate {
+    transform: rotate(45deg);
+  }
+}
+                </code>
+              </pre>
+            <p class="mb-4">
+              <strong>Explanation:</strong>
+            </p>
+            <ul class="list-disc list-inside mb-4">
+              <li><code class="text-sm bg-gray-100 p-1 rounded">@variants</code>: Generates hover and focus variants for the utilities.</li>
+              <li><code class="text-sm bg-gray-100 p-1 rounded">.custom-scale</code>: Scales an element on hover or focus.</li>
+              <li><code class="text-sm bg-gray-100 p-1 rounded">.custom-rotate</code>: Rotates an element on hover or focus.</li>
+            </ul>
+          </div>
+
+          <!-- Best Practices -->
+          <div class="mb-8">
+            <h2 class="text-2xl font-semibold mb-4">7.6 Best Practices</h2>
+            <ul class="list-disc list-inside mb-4">
+              <li class="mb-2"><strong>Use Configuration for Reusability:</strong> Add frequently used utilities to <code class="text-sm bg-gray-100 p-1 rounded">tailwind.config.js</code>.</li>
+              <li class="mb-2"><strong>Limit Arbitrary Values:</strong> Use them sparingly to maintain consistency.</li>
+              <li class="mb-2"><strong>Organize Custom Utilities:</strong> Group related utilities in a single file.</li>
+              <li><strong>Test Responsiveness:</strong> Ensure custom utilities work across all screen sizes.</li>
+            </ul>
+          </div>
+        </section>
+
+        <section id="best-practices" class="mb-12">
+          <h1 class="text-3xl font-bold mb-6">8. Best Practices</h1>
+
+          <!-- Core Principles -->
+          <div class="mb-8">
+            <h2 class="text-2xl font-semibold mb-4">8.1 Core Principles</h2>
+            <p class="mb-4">
+              <strong>Definition:</strong> Fundamental guidelines for working effectively with TailwindCSS while maintaining code quality, performance, and scalability.
+            </p>
+
+            <div class="bg-blue-100 p-4 rounded-lg mb-4">
+              <p class="text-sm"><strong>Golden Rule:</strong> "Prefer composition over abstraction - build designs by combining utilities rather than creating premature abstractions."</p>
+            </div>
+          </div>
+
+          <!-- Utility-First Philosophy -->
+          <div class="mb-8">
+            <h2 class="text-2xl font-semibold mb-4">8.2 Utility-First Philosophy</h2>
+            <p class="mb-4">
+              <strong>Definition:</strong> The practice of building interfaces by combining small, single-purpose utility classes rather than writing custom CSS.
+            </p>
+            <pre class="bg-gray-100 p-4 rounded-lg mb-4 overflow-x-auto">
+                <code class="text-sm language-html">
+&lt;!-- Good Practice --&gt;
+&lt;div class="p-4 bg-white shadow-md rounded-lg"&gt;...&lt;/div&gt;
+
+&lt;!-- Avoid --&gt;
+&lt;style&gt;
+  .card {
+    padding: 1rem;
+    background: white;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    border-radius: 0.5rem;
+  }
+&lt;/style&gt;
+&lt;div class="card"&gt;...&lt;/div&gt;
+                </code>
+              </pre>
+            <p class="mb-4">
+              <strong>Explanation:</strong>
+            </p>
+            <ul class="list-disc list-inside mb-4">
+              <li>Maintains visibility of styles in HTML</li>
+              <li>Reduces CSS bundle size</li>
+              <li>Encourages design system consistency</li>
+            </ul>
+          </div>
+
+          <!-- Responsive Design Practices -->
+          <div class="mb-8">
+            <h2 class="text-2xl font-semibold mb-4">8.3 Responsive Design Practices</h2>
+            <pre class="bg-gray-100 p-4 rounded-lg mb-4 overflow-x-auto">
+                <code class="text-sm language-html">
+&lt;!-- Mobile-first Approach --&gt;
+&lt;div class="p-4 md:p-6 lg:p-8"&gt;
+  &lt;!-- Content --&gt;
+&lt;/div&gt;
+
+&lt;!-- Breakpoint Management --&gt;
+&lt;div class="
+  grid 
+  grid-cols-1 
+  sm:grid-cols-2 
+  md:grid-cols-3 
+  lg:grid-cols-4 
+  gap-4
+"&gt;
+  &lt;!-- Grid Items --&gt;
+&lt;/div&gt;
+                </code>
+              </pre>
+            <p class="mb-4">
+              <strong>Key Guidelines:</strong>
+            </p>
+            <ul class="list-disc list-inside mb-4">
+              <li>Always start with mobile styles</li>
+              <li>Use breakpoint prefixes strategically</li>
+              <li>Test on real devices</li>
+              <li>Use container queries for component-level responsiveness</li>
+            </ul>
+          </div>
+
+          <!-- Customization Best Practices -->
+          <div class="mb-8">
+            <h2 class="text-2xl font-semibold mb-4">8.4 Customization Guidelines</h2>
+            <pre class="bg-gray-100 p-4 rounded-lg mb-4 overflow-x-auto">
+                <code class="text-sm language-javascript">
+// tailwind.config.js
+module.exports = {
+  theme: {
+    extend: {
+      colors: {
+        brand: {
+          DEFAULT: '#3B82F6',
+          dark: '#1E40AF'
+        }
+      }
+    }
+  }
+}
+                </code>
+              </pre>
+            <ul class="list-disc list-inside mb-4">
+              <li><strong>Extend, Don't Override:</strong> Use <code class="text-sm bg-gray-100 p-1 rounded">extend</code> to preserve default values</li>
+              <li><strong>Semantic Naming:</strong> Use meaningful names for custom values</li>
+              <li><strong>CSS Variables:</strong> Combine with CSS variables for dynamic theming</li>
+            </ul>
+          </div>
+
+          <!-- Performance Optimization -->
+          <div class="mb-8">
+            <h2 class="text-2xl font-semibold mb-4">8.5 Performance Optimization</h2>
+            <pre class="bg-gray-100 p-4 rounded-lg mb-4 overflow-x-auto">
+                <code class="text-sm language-javascript">
+// tailwind.config.js
+module.exports = {
+  purge: {
+    content: ['./src/**/*.{html,js,jsx,ts,tsx}'],
+    options: {
+      safelist: ['bg-red-500', 'text-white'] // Critical classes
+    }
+  }
+}
+                </code>
+              </pre>
+            <ul class="list-disc list-inside mb-4">
+              <li><strong>PurgeCSS:</strong> Remove unused styles in production</li>
+              <li><strong>Minify CSS:</strong> Use PostCSS plugins like cssnano</li>
+              <li><strong>Critical CSS:</strong> Extract above-the-fold styles</li>
+              <li><strong>Avoid:</strong> Excessive arbitrary values</li>
+            </ul>
+          </div>
+
+          <!-- Accessibility Practices -->
+          <div class="mb-8">
+            <h2 class="text-2xl font-semibold mb-4">8.6 Accessibility Practices</h2>
+            <pre class="bg-gray-100 p-4 rounded-lg mb-4 overflow-x-auto">
+                <code class="text-sm language-html">
+&lt;button class="
+  px-4 py-2 
+  bg-blue-600 text-white 
+  focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 
+  aria-disabled:opacity-50
+"&gt;
+  Accessible Button
+&lt;/button&gt;
+
+&lt;div class="sr-only"&gt;Screen Reader Only Content&lt;/div&gt;
+                </code>
+              </pre>
+            <ul class="list-disc list-inside mb-4">
+              <li>Use semantic HTML elements</li>
+              <li>Implement proper focus states</li>
+              <li>Include ARIA attributes</li>
+              <li>Test with screen readers</li>
+              <li>Use <code class="text-sm bg-gray-100 p-1 rounded">sr-only</code> for hidden content</li>
+            </ul>
+          </div>
+
+          <!-- Maintenance & Scalability -->
+          <div class="mb-8">
+            <h2 class="text-2xl font-semibold mb-4">8.7 Maintenance & Scalability</h2>
+            <pre class="bg-gray-100 p-4 rounded-lg mb-4 overflow-x-auto">
+                <code class="text-sm language-html">
+&lt;!-- Component Extraction --&gt;
+&lt;div class="card"&gt;
+  &lt;!-- Use @apply for repeated patterns --&gt;
+&lt;/div&gt;
+
+&lt;style&gt;
+  .card {
+    @apply p-6 bg-white rounded-lg shadow-md;
+  }
+          &lt;/style&gt;
+                </code>
+              </pre>
+            <ul class="list-disc list-inside mb-4">
+              <li>Create design tokens in config</li>
+              <li>Document custom utilities</li>
+              <li>Use IDE extensions for class sorting</li>
+              <li>Enforce consistent class ordering</li>
+            </ul>
+          </div>
+        </section>
+
+        <section id="using-classes" class="mb-12">
+          <h1 class="text-3xl font-bold mb-6">9. Using Tailwind Classes for Different Purposes</h1>
+
+          <!-- Layout Classes -->
+          <div class="mb-8">
+            <h2 class="text-2xl font-semibold mb-4">9.1 Layout Classes</h2>
+            <p class="mb-4">
+              <strong>Definition:</strong> Layout classes control the structure and positioning of elements on the page. They include utilities for containers, grids, flexbox, and spacing.
+            </p>
+            <pre class="bg-gray-100 p-4 rounded-lg mb-4 overflow-x-auto">
+                <code class="text-sm language-html">
+&lt;!-- Container --&gt;
+&lt;div class="container mx-auto px-4"&gt;
+  &lt;!-- Grid Layout --&gt;
+  &lt;div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"&gt;
+    &lt;div class="bg-blue-100 p-4"&gt;Item 1&lt;/div&gt;
+    &lt;div class="bg-green-100 p-4"&gt;Item 2&lt;/div&gt;
+    &lt;div class="bg-red-100 p-4"&gt;Item 3&lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Flexbox Layout --&gt;
+  &lt;div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4"&gt;
+    &lt;div class="flex-1 bg-yellow-100 p-4"&gt;Left&lt;/div&gt;
+    &lt;div class="flex-2 bg-purple-100 p-4"&gt;Right&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+                </code>
+              </pre>
+            <p class="mb-4">
+              <strong>Explanation:</strong>
+            </p>
+            <ul class="list-disc list-inside mb-4">
+              <li><code class="text-sm bg-gray-100 p-1 rounded">container</code>: Centers content with max-width</li>
+              <li><code class="text-sm bg-gray-100 p-1 rounded">grid</code>: Creates a grid layout</li>
+              <li><code class="text-sm bg-gray-100 p-1 rounded">flex</code>: Creates a flexbox layout</li>
+              <li><code class="text-sm bg-gray-100 p-1 rounded">gap-6</code>: Adds spacing between grid/flex items</li>
+            </ul>
+          </div>
+
+          <!-- Typography Classes -->
+          <div class="mb-8">
+            <h2 class="text-2xl font-semibold mb-4">9.2 Typography Classes</h2>
+            <p class="mb-4">
+              <strong>Definition:</strong> Typography classes control text styling, including font size, weight, color, alignment, and spacing.
+            </p>
+            <pre class="bg-gray-100 p-4 rounded-lg mb-4 overflow-x-auto">
+                <code class="text-sm language-html">
+&lt;h1 class="text-4xl font-bold text-gray-900 mb-4"&gt;Heading&lt;/h1&gt;
+&lt;p class="text-lg text-gray-600 leading-relaxed"&gt;
+  This is a paragraph with relaxed line height.
+&lt;/p&gt;
+&lt;blockquote class="italic text-gray-700 border-l-4 border-blue-500 pl-4"&gt;
+  This is a blockquote.
+&lt;/blockquote&gt;
+                </code>
+              </pre>
+            <p class="mb-4">
+              <strong>Explanation:</strong>
+            </p>
+            <ul class="list-disc list-inside mb-4">
+              <li><code class="text-sm bg-gray-100 p-1 rounded">text-4xl</code>: Large font size</li>
+              <li><code class="text-sm bg-gray-100 p-1 rounded">font-bold</code>: Bold font weight</li>
+              <li><code class="text-sm bg-gray-100 p-1 rounded">leading-relaxed</code>: Increased line height</li>
+              <li><code class="text-sm bg-gray-100 p-1 rounded">border-l-4</code>: Left border with 4px width</li>
+            </ul>
+          </div>
+
+          <!-- Color & Background Classes -->
+          <div class="mb-8">
+            <h2 class="text-2xl font-semibold mb-4">9.3 Color & Background Classes</h2>
+            <p class="mb-4">
+              <strong>Definition:</strong> These classes control element colors, including text, background, border, and gradient colors.
+            </p>
+            <pre class="bg-gray-100 p-4 rounded-lg mb-4 overflow-x-auto">
+                <code class="text-sm language-html">
+&lt;div class="bg-gradient-to-r from-blue-500 to-purple-600"&gt;
+  &lt;h2 class="text-white text-2xl font-bold p-4"&gt;
+    Gradient Background
+  &lt;/h2&gt;
+&lt;/div&gt;
+
+&lt;button class="bg-blue-500 text-white px-4 py-2 hover:bg-blue-600"&gt;
+  Colored Button
+&lt;/button&gt;
+
+&lt;div class="border-2 border-red-500 p-4"&gt;
+  Colored Border
+&lt;/div&gt;
+                </code>
+              </pre>
+            <p class="mb-4">
+              <strong>Explanation:</strong>
+            </p>
+            <ul class="list-disc list-inside mb-4">
+              <li><code class="text-sm bg-gray-100 p-1 rounded">bg-gradient-to-r</code>: Right-to-left gradient</li>
+              <li><code class="text-sm bg-gray-100 p-1 rounded">text-white</code>: White text color</li>
+              <li><code class="text-sm bg-gray-100 p-1 rounded">hover:bg-blue-600</code>: Hover state background color</li>
+              <li><code class="text-sm bg-gray-100 p-1 rounded">border-red-500</code>: Red border color</li>
+            </ul>
+          </div>
+
+          <!-- Spacing Classes -->
+          <div class="mb-8">
+            <h2 class="text-2xl font-semibold mb-4">9.4 Spacing Classes</h2>
+            <p class="mb-4">
+              <strong>Definition:</strong> Spacing classes control padding, margin, and gap between elements.
+            </p>
+            <pre class="bg-gray-100 p-4 rounded-lg mb-4 overflow-x-auto">
+                <code class="text-sm language-html">
+&lt;div class="p-6"&gt;
+  &lt;div class="mb-4"&gt;Item 1&lt;/div&gt;
+  &lt;div class="mb-4"&gt;Item 2&lt;/div&gt;
+  &lt;div class="mt-8"&gt;Item 3&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="space-y-4"&gt;
+  &lt;div&gt;Spaced Item 1&lt;/div&gt;
+  &lt;div&gt;Spaced Item 2&lt;/div&gt;
+&lt;/div&gt;
+                </code>
+              </pre>
+            <p class="mb-4">
+              <strong>Explanation:</strong>
+            </p>
+            <ul class="list-disc list-inside mb-4">
+              <li><code class="text-sm bg-gray-100 p-1 rounded">p-6</code>: Padding of 1.5rem</li>
+              <li><code class="text-sm bg-gray-100 p-1 rounded">mb-4</code>: Margin bottom of 1rem</li>
+              <li><code class="text-sm bg-gray-100 p-1 rounded">mt-8</code>: Margin top of 2rem</li>
+              <li><code class="text-sm bg-gray-100 p-1 rounded">space-y-4</code>: Vertical spacing between child elements</li>
+            </ul>
+          </div>
+
+          <!-- Border & Shadow Classes -->
+          <div class="mb-8">
+            <h2 class="text-2xl font-semibold mb-4">9.5 Border & Shadow Classes</h2>
+            <p class="mb-4">
+              <strong>Definition:</strong> These classes control borders, rounded corners, and shadows.
+            </p>
+            <pre class="bg-gray-100 p-4 rounded-lg mb-4 overflow-x-auto">
+                <code class="text-sm language-html">
+&lt;div class="border border-gray-300 rounded-lg shadow-md p-4"&gt;
+  &lt;h3 class="text-xl font-semibold"&gt;Card Title&lt;/h3&gt;
+  &lt;p class="text-gray-600"&gt;Card content goes here.&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;button class="
+  border-2 border-blue-500 
+  rounded-full 
+  px-6 py-2 
+  hover:shadow-lg
+"&gt;
+  Rounded Button
+&lt;/button&gt;
+                </code>
+              </pre>
+            <p class="mb-4">
+              <strong>Explanation:</strong>
+            </p>
+            <ul class="list-disc list-inside mb-4">
+              <li><code class="text-sm bg-gray-100 p-1 rounded">border</code>: Adds a 1px border</li>
+              <li><code class="text-sm bg-gray-100 p-1 rounded">rounded-lg</code>: Large border radius</li>
+              <li><code class="text-sm bg-gray-100 p-1 rounded">shadow-md</code>: Medium shadow</li>
+              <li><code class="text-sm bg-gray-100 p-1 rounded">hover:shadow-lg</code>: Large shadow on hover</li>
+            </ul>
+          </div>
+
+          <!-- Interaction Classes -->
+          <div class="mb-8">
+            <h2 class="text-2xl font-semibold mb-4">9.6 Interaction Classes</h2>
+            <p class="mb-4">
+              <strong>Definition:</strong> These classes control hover, focus, and active states for interactive elements.
+            </p>
+            <pre class="bg-gray-100 p-4 rounded-lg mb-4 overflow-x-auto">
+                <code class="text-sm language-html">
+&lt;button class="
+  bg-blue-500 text-white 
+  px-4 py-2 
+  rounded-lg 
+  hover:bg-blue-600 
+  focus:ring-2 focus:ring-blue-500 focus:ring-offset-2
+  active:bg-blue-700
+"&gt;
+  Interactive Button
+&lt;/button&gt;
+
+&lt;a href="#" class="text-blue-500 hover:text-blue-700 underline"&gt;
+  Hoverable Link
+&lt;/a&gt;
+                </code>
+              </pre>
+            <p class="mb-4">
+              <strong>Explanation:</strong>
+            </p>
+            <ul class="list-disc list-inside mb-4">
+              <li><code class="text-sm bg-gray-100 p-1 rounded">hover:bg-blue-600</code>: Background color on hover</li>
+              <li><code class="text-sm bg-gray-100 p-1 rounded">focus:ring-2</code>: Focus ring for accessibility</li>
+              <li><code class="text-sm bg-gray-100 p-1 rounded">active:bg-blue-700</code>: Background color when clicked</li>
+              <li><code class="text-sm bg-gray-100 p-1 rounded">hover:text-blue-700</code>: Text color on hover</li>
+            </ul>
+          </div>
+        </section>
+
+        <section id="examples" class="mb-12">
+          <h1 class="text-3xl font-bold mb-6">10. Code and Design Side-by-Side</h1>
+
+          <!-- Split Layout Container -->
+          <div class="">
+            <!-- Code Section -->
+            <div class="bg-gray-100 p-6 rounded-lg overflow-x-auto">
+              <h2 class="text-2xl font-semibold mb-4">Code</h2>
+              <pre class="text-sm">
+                  <code class="language-html">
+&lt;div class="bg-gradient-to-r from-purple-600 to-blue-500 p-8 rounded-lg shadow-lg"&gt;
+  &lt;h2 class="text-3xl font-bold text-white mb-4"&gt;Welcome to Coderz&lt;/h2&gt;
+  &lt;p class="text-white/90 mb-6"&gt;
+    Build, share, and sell your projects with ease.
+  &lt;/p&gt;
+  &lt;button class="
+    px-6 py-3 
+    bg-white 
+    text-purple-600 
+    rounded-lg 
+    hover:bg-gray-100 
+    transition-all 
+    duration-300
+  "&gt;
+    Get Started
+  &lt;/button&gt;
+&lt;/div&gt;
+                  </code>
+                </pre>
+            </div>
+
+            <!-- Design Output Section -->
+            <div class="bg-white p-8 rounded-lg shadow-lg flex items-center justify-center">
+              <div class="bg-gradient-to-r from-purple-600 to-blue-500 p-8 rounded-lg shadow-lg">
+                <h2 class="text-3xl font-bold text-white mb-4">Welcome to Coderz</h2>
+                <p class="text-white/90 mb-6">
+                  Build, share, and sell your projects with ease.
+                </p>
+                <button class="
+                    px-6 py-3 
+                    bg-white 
+                    text-purple-600 
+                    rounded-lg 
+                    hover:bg-gray-100 
+                    transition-all 
+                    duration-300
+                  ">
+                  Get Started
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <h1 class="text-3xl font-bold mb-6 mt-4">10.2 Responsive Card Layout</h1>
+
+          <!-- Split Layout Container -->
+          <div class="">
+            <!-- Code Section -->
+            <div class="bg-gray-100 p-6 rounded-lg overflow-x-auto">
+              <h2 class="text-2xl font-semibold mb-4">Code</h2>
+              <pre class="text-sm">
+                  <code class="language-html">
+&lt;div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow"&gt;
+  &lt;img 
+    src="https://via.placeholder.com/400x200" 
+    alt="Placeholder" 
+    class="w-full h-48 object-cover rounded-lg mb-4"
+  &gt;
+  &lt;h3 class="text-xl font-bold mb-2"&gt;Project Title&lt;/h3&gt;
+  &lt;p class="text-gray-600 mb-4"&gt;
+    A brief description of the project goes here.
+  &lt;/p&gt;
+  &lt;button class="
+    px-4 py-2 
+    bg-blue-500 
+    text-white 
+    rounded-lg 
+    hover:bg-blue-600 
+    transition-colors
+  "&gt;
+    View Project
+  &lt;/button&gt;
+&lt;/div&gt;
+                  </code>
+                </pre>
+            </div>
+
+            <!-- Design Output Section -->
+            <div class="bg-white p-8 rounded-lg shadow-lg flex items-center justify-center">
+              <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                <img width="48" height="48" src="https://img.icons8.com/color/48/tailwindcss.png" alt="tailwindcss" />
+                <h3 class="text-xl font-bold mb-2">Project Title</h3>
+                <p class="text-gray-600 mb-4">
+                  A brief description of the project goes here.
+                </p>
+                <button class="
+                    px-4 py-2 
+                    bg-blue-500 
+                    text-white 
+                    rounded-lg 
+                    hover:bg-blue-600 
+                    transition-colors
+                  ">
+                  View Project
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <h1 class="text-3xl font-bold mb-6 mt-4">10.3 Gradient Button</h1>
+
+          <!-- Split Layout Container -->
+          <div class="">
+            <!-- Code Section -->
+            <div class="bg-gray-100 p-6 rounded-lg overflow-x-auto">
+              <h2 class="text-2xl font-semibold mb-4">Code</h2>
+              <pre class="text-sm">
+                  <code class="language-html">
+&lt;button class="
+  px-8 py-3 
+  bg-gradient-to-r from-purple-600 to-blue-500 
+  text-white 
+  rounded-full 
+  hover:from-purple-700 hover:to-blue-600 
+  transition-all 
+  duration-300
+  shadow-lg 
+  hover:shadow-xl
+"&gt;
+  Click Me
+&lt;/button&gt;
+                  </code>
+                </pre>
+            </div>
+
+            <!-- Design Output Section -->
+            <div class="bg-white p-8 rounded-lg shadow-lg flex items-center justify-center">
+              <button class="
+                  px-8 py-3 
+                  bg-gradient-to-r from-purple-600 to-blue-500 
+                  text-white 
+                  rounded-full 
+                  hover:from-purple-700 hover:to-blue-600 
+                  transition-all 
+                  duration-300
+                  shadow-lg 
+                  hover:shadow-xl
+                ">
+                Click Me
+              </button>
+            </div>
+          </div>
+
+        </section>
+
+        <section id="transitions" class="mb-12">
+          <h1 class="text-3xl font-bold mb-6">12. Cool Transitions and Animations</h1>
+
+          <!-- Example 1: Hover Scale with Shadow -->
+          <div class="">
+            <!-- Code -->
+            <div class="bg-gray-100 p-6 rounded-lg overflow-x-auto">
+              <h2 class="text-2xl font-semibold mb-4">Code</h2>
+              <pre class="text-sm">
+                  <code class="language-html">
+&lt;div class="
+  bg-white 
+  p-8 
+  rounded-lg 
+  shadow-md 
+  hover:shadow-xl 
+  hover:scale-105 
+  transition-all 
+  duration-300
+"&gt;
+  Hover Me
+&lt;/div&gt;
+                  </code>
+                </pre>
+            </div>
+
+            <!-- Design Output -->
+            <div class="bg-white p-8 rounded-lg shadow-lg flex items-center justify-center">
+              <div class="
+                  bg-white 
+                  p-8 
+                  rounded-lg 
+                  shadow-md 
+                  hover:shadow-xl 
+                  hover:scale-105 
+                  transition-all 
+                  duration-300
+                ">
+                Hover Me
+              </div>
+            </div>
+          </div>
+
+          <!-- Example 2: Gradient Button with Pulse -->
+          <div class="">
+            <!-- Code -->
+            <div class="bg-gray-100 p-6 rounded-lg overflow-x-auto">
+              <h2 class="text-2xl font-semibold mb-4">Code</h2>
+              <pre class="text-sm">
+                  <code class="language-html">
+&lt;button class="
+  px-8 py-3 
+  bg-gradient-to-r from-purple-600 to-blue-500 
+  text-white 
+  rounded-full 
+  hover:from-purple-700 hover:to-blue-600 
+  transition-all 
+  duration-300
+  shadow-lg 
+  hover:shadow-xl
+  animate-pulse
+"&gt;
+  Click Me
+&lt;/button&gt;
+                  </code>
+                </pre>
+            </div>
+
+            <!-- Design Output -->
+            <div class="bg-white p-8 rounded-lg shadow-lg flex items-center justify-center">
+              <button class="
+                  px-8 py-3 
+                  bg-gradient-to-r from-purple-600 to-blue-500 
+                  text-white 
+                  rounded-full 
+                  hover:from-purple-700 hover:to-blue-600 
+                  transition-all 
+                  duration-300
+                  shadow-lg 
+                  hover:shadow-xl
+                  animate-pulse
+                ">
+                Click Me
+              </button>
+            </div>
+          </div>
+
+          <!-- Example 4: Animated Gradient Background -->
+          <div class="">
+            <!-- Code -->
+            <div class="bg-gray-100 p-6 rounded-lg overflow-x-auto">
+              <h2 class="text-2xl font-semibold mb-4">Code</h2>
+              <pre class="text-sm">
+                  <code class="language-html">
+&lt;div class="
+  p-8 
+  rounded-lg 
+  bg-gradient-to-r 
+  from-purple-500 
+  to-pink-500 
+  animate-gradient-x
+"&gt;
+  Animated Gradient
+&lt;/div&gt;
+
+&lt;style&gt;
+  @keyframes gradient-x {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  .animate-gradient-x {
+    background-size: 200% 200%;
+    animation: gradient-x 5s ease infinite;
+  }
+&lt;/style&gt;
+                  </code>
+                </pre>
+            </div>
+
+            <!-- Design Output -->
+            <div class="bg-white p-8 rounded-lg shadow-lg flex items-center justify-center">
+              <div class="
+                  p-8 
+                  rounded-lg 
+                  bg-gradient-to-r 
+                  from-purple-500 
+                  to-pink-500 
+                  animate-gradient-x
+                  text-white font-bold
+                ">
+                Animated Gradient
+              </div>
+            </div>
+          </div>
+        </section>
+
+
+      </div>
+    </main>
+  </div>
+
+  <script>
+    const sidebar = document.querySelector(".sidebar");
+    const sidebarToggle = document.getElementById("sidebarToggle");
+
+    function toggleSidebar() {
+      sidebar.classList.toggle("-translate-x-full");
+    }
+
+    sidebarToggle.addEventListener("click", toggleSidebar);
+
+    document.addEventListener("click", (event) => {
+      if (
+        window.innerWidth < 768 &&
+        !sidebar.contains(event.target) &&
+        !sidebarToggle.contains(event.target)
+      ) {
+        sidebar.classList.add("-translate-x-full");
+      }
+    });
+
+    window.addEventListener("resize", () => {
+      if (window.innerWidth >= 768) {
+        sidebar.classList.remove("-translate-x-full");
+      }
+    });
+
+    hljs.highlightAll();
+  </script>
+</body>
+
+</html>
