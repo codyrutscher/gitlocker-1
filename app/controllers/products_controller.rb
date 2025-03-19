@@ -242,7 +242,7 @@ class ProductsController < ApplicationController
             source = 'github'
           elsif params[:source] == 'gitlab'
             repo = gitlab_client.project(repo_id)
-            owner_name = repo.namespace.full_path
+            owner = repo.namespace.full_path
             repo_name = repo.name
             repo_url = repo.web_url
             source = 'gitlab'
@@ -262,7 +262,7 @@ class ProductsController < ApplicationController
             active: true,
             published: true,
             featured: params[:featured],
-            price: params[:price] || 0,
+            price: params[:price].presence || 0,
             preview_video_url: params[:preview_video_url],
             video_file: params[:video_file],
             features: params[:features],
