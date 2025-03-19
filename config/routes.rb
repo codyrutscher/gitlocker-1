@@ -146,6 +146,9 @@ Rails.application.routes.draw do
   get "documentation_rails", to: "marketplace/home#documentation_rails"
   get "documentation_django", to: "marketplace/home#documentation_django"
   get "documentation_laravel", to: "marketplace/home#documentation_laravel"
+  get "documentation_html_css", to: "marketplace/home#documentation_html_css"
+  get "documentation_tailwindcss", to: "marketplace/home#documentation_tailwindcss"
+
   
   namespace :marketplace do
     root "home#index"
