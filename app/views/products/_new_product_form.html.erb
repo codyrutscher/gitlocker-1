@@ -246,7 +246,7 @@
             let ckEditorInstance = CKEDITOR.instances[ckEditorInstances[i].id];
             if (ckEditorInstance) {
               if(ckEditorInstance.name == 'descriptionTextArea' && ckEditorInstance.getData() == '') {
-                alert('Description is required');
+                alert('Description is mandatory');
                 return;
               }
               formData.append(ckEditorInstances[i].name, ckEditorInstance.getData());
