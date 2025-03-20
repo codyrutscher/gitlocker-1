@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_03_12_012649) do
+ActiveRecord::Schema[7.1].define(version: 2025_03_20_144251) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -313,7 +313,6 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_12_012649) do
     t.string "more_categories_from_createor", default: [], array: true
     t.string "more_languages_from_createor", default: [], array: true
     t.integer "template_id"
-    t.index ["repo_id"], name: "index_products_on_repo_id", unique: true
     t.index ["slug"], name: "index_products_on_slug", unique: true
     t.index ["user_id"], name: "index_products_on_user_id"
   end
