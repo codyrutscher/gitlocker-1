@@ -174,8 +174,9 @@
     $('.js-import-button').on('click', function() {
       for (var i = 0; i < ckEditorInstances.length; i++) {
           let ckEditorInstance = CKEDITOR.instances[ckEditorInstances[i].id];
-          if (ckEditorInstance && ckEditorInstance.name == 'descriptionTextArea') {
-            if(ckEditorInstance.getData() == '') {
+          if (ckEditorInstance && ckEditorInstance.name == 'descriptionTextArea') {            
+            ckEditorInstance.updateElement();
+            if(ckEditorInstance.getData().trim() == '') {
               event.preventDefault();
               alert('Description is required');
               return;
