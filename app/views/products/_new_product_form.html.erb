@@ -239,15 +239,17 @@
    
     $('#product-form').submit(function(event) {
         event.preventDefault();
-
         var formData = new FormData();
         formData.append('authenticity_token', $('meta[name=csrf-token]').attr('content'));
         formData.append('product[name]', $('#product_name').val());
-        // Append CKEditor data to FormData
         for (var i = 0; i < ckEditorInstances.length; i++) {
-            let ckEditorInstance = CKEDITOR.instances[ckEditorInstances[i].id]; // Get the CKEditor instance
+            let ckEditorInstance = CKEDITOR.instances[ckEditorInstances[i].id];
             if (ckEditorInstance) {
-                formData.append(ckEditorInstances[i].name, ckEditorInstance.getData()); // Append data
+              if(ckEditorInstance.name == 'descriptionTextArea' && ckEditorInstance.getData() == '') {
+                alert('Description is required');
+                return;
+              }
+              formData.append(ckEditorInstances[i].name, ckEditorInstance.getData());
             }
         }
         formData.append('product[price]', $('#product_price').val());

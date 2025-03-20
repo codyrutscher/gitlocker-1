@@ -248,11 +248,6 @@ class ProductsController < ApplicationController
             source = 'gitlab'
           end
 
-          if Product.exists?(url: repo_url)
-            Rails.logger.info "Repository #{repo_name} already exists. Skipping..."
-            skipped_repos << repo_name
-            next
-          end
           product = Product.new(
             name: params[:name] || repo[:name],
             description: params[:description] || repo[:description],
