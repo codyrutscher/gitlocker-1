@@ -1,56 +1,56 @@
 <header>
-  <div class="bg-gray-500 w-full h-fit grid grid-cols-1 md:grid-cols-5 lg:grid-cols-9 py-6 border-b-4 border-black">
+  <div class="bg-gray-200 w-full h-fit grid grid-cols-1 md:grid-cols-5 lg:grid-cols-9 py-6 border-b-4 border-black">
 
 	<%= link_to marketplace_library_path(@product) do %>
 	<div>
-	<h2 class="text-center hover:underline hover:text-white">Product</h2>
+	<h2 class="text-center hover:underline">Product</h2>
 	</div>
 	<% end %>
 	<%= link_to code_product_path(@product) do %>
 	<div>
-	<h2 class="text-center hover:underline hover:text-white">Code</h2>
+	<h2 class="text-center hover:underline ">Code</h2>
 	</div>
 	<% end %>
 
 	<%= link_to commits_product_path(@product) do %>
 	<div>
-	<h2 class="text-center hover:underline hover:text-white">Commits</h2>
+	<h2 class="text-center hover:underline ">Commits</h2>
 	</div>
 	<% end %>
 
 	<%= link_to issues_product_path(@product) do %>
 	<div>
-	<h2 class="text-center hover:underline hover:text-white">Issues</h2>
+	<h2 class="text-center hover:underline ">Issues</h2>
 	</div>
 	<% end %>
 
 	<%= link_to branches_product_path(@product) do %>
 	<div>
-	<h2 class="text-center hover:underline hover:text-white">Branches</h2>
+	<h2 class="text-center hover:underline ">Branches</h2>
 	</div>
 	<% end %>
 
 	<%= link_to pullrequests_product_path(@product) do %>
 	<div>
-	<h2 class="text-center hover:underline hover:text-white">Pull Requests</h2>
+	<h2 class="text-center hover:underline ">Pull Requests</h2>
 	</div>
 	<% end %>
 
 	<%= link_to configurations_product_path(@product) do %>
 	<div>
-	<h2 class="text-center hover:underline hover:text-white">Configurations</h2>
+	<h2 class="text-center hover:underline ">Configurations</h2>
 	</div>
 	<% end %>
 
 	<%= link_to deployments_product_path(@product) do %>
 	<div class="pl-6">
-	<h2 class="text-center hover:underline hover:text-white">Deployments</h2>
+	<h2 class="text-center hover:underline ">Deployments</h2>
 	</div>
 	<% end %>
 
 	<%= link_to team_product_path(@product) do %>
 	<div>
-	<h2 class="text-center hover:underline hover:text-white">Team</h2>
+	<h2 class="text-center hover:underline ">Team</h2>
 	</div>
 	<% end %>
   </div>
