@@ -141,8 +141,6 @@ module ProductConcern
       end
   
       Rails.logger.info "Successfully downloaded #{temp_file.path}"
-  
-      # Ensure file exists before attaching
       if File.exist?(temp_file.path) && File.size(temp_file.path) > 0
         product.folder.attach(
           io: File.open(temp_file.path),

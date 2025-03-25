@@ -138,13 +138,6 @@
                         </div>
                     <% end %>
                 </div>
-                <div class="mt-6 flex justify-between items-center">
-                    <% if @display_next_page_link_bitbucket %>
-                        <div class="flex items-center gap-4" id="load_more_bitbucket_repos_button">
-                            <%= link_to 'See More Repos', load_more_bitbucket_repos_products_path, data: { page: (@bitbucket_page + 1) }, id: 'load-more-bitbucket-repos', class: 'bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded disabled:opacity-50' %>
-                        </div>
-                    <% end %>
-                </div>
         <% end %>
     </div>
 
