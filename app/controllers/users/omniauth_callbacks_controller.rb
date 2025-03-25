@@ -8,6 +8,10 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     process_oauth
   end
 
+  def bitbucket
+    process_oauth
+  end
+
   private
 
   def process_oauth
@@ -21,6 +25,9 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       elsif provider == 'gitlab'
         store_gitlab_email_in_cookie(@user.email)
         flash[:notice] = I18n.t "devise.omniauth_callbacks.success", kind: "Gitlab"
+      elsif provider == 'bitbucket'
+        store_bitbucket_email_in_cookie(@user.email)
+        flash[:notice] = I18n.t "devise.omniauth_callbacks.success", kind: "Bitbucket"
       end
       if @user.registration_pending?
         sign_in @user, event: :authentication
@@ -36,6 +43,10 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       session["devise.github_data"] = request.env["omniauth.auth"].except("extra") # Removing extra cause it can overflow some session stores
       redirect_to new_user_registration_url, alert: @user.errors.full_messages.join("\n")
     end
+  end
+
+  def store_bitbucket_email_in_cookie(email)
+    cookies.permanent[:bitbucket_email] = email
   end
 
   def store_github_email_in_cookie(email)

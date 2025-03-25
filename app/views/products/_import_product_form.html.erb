@@ -169,7 +169,7 @@
       $("#video_file").hide();
     }
   }
-  
+
   $(document).ready(function() {
     $('.js-import-button').on('click', function() {
       for (var i = 0; i < ckEditorInstances.length; i++) {
@@ -189,6 +189,8 @@
         var $checkboxField = $('.js-github-repo-ids');
       } else if(source == 'gitlab') {
         var $checkboxField = $('.js-gitlab-repo-ids');
+      } else if(source == 'bitbucket') {
+        var $checkboxField = $('.js-bitbucket-repo-ids');
       }
       var repoIdValue = [];
       $checkboxField.each(function() {
@@ -379,10 +381,8 @@ $(document).ready(function() {
     tokenSeparators: [',', ' '],
     allowClear: true
   })
-
   enforceSelectionLimit(categoriesSelect);
   enforceSelectionLimit(languagesSelect);
-
 });
 
 </script>

@@ -275,7 +275,7 @@ Devise.setup do |config|
   ## INSERT HERE THE ENV APP_ID AND APP_SECRET
   config.omniauth :github, ENV["GITHUB_CLIENT_ID"], ENV["GITHUB_CLIENT_SECRET"], scope: "user,repo,gist"
   config.omniauth :gitlab, ENV["GITLAB_CLIENT_ID"], ENV["GITLAB_CLIENT_SECRET"], scope: "read_user read_api read_repository"
-
+  config.omniauth :bitbucket, ENV['BITBUCKET_CLIENT_ID'], ENV['BITBUCKET_CLIENT_SECRET'], scope: 'email repository account'
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.

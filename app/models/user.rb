@@ -3,7 +3,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
-         :confirmable, :omniauthable, omniauth_providers: [:github, :gitlab]
+         :confirmable, :omniauthable, omniauth_providers: [:github, :gitlab, :bitbucket]
 
   enum :registration_status, {
     registration_pending: 0,
@@ -103,17 +103,19 @@ class User < ApplicationRecord
     name     = access_token.info.name
     username = access_token.info.nickname || access_token.info.username
     user     = User.find_by(email: email)
-    
     if user && provider == 'github'
       user.update(token: token, name: name, username: username)
     elsif user && provider == 'gitlab'
       user.update(gitlab_token: token, name: name, username: username)
+    elsif user && provider == 'bitbucket'
+      user.update(bitbucket_token: token, name: name, username: username)
     else
       user = User.create(
         email: email,
         password: Devise.friendly_token[0, 20],
         token: provider == 'github' ? token : nil,
         gitlab_token: provider == 'gitlab' ? token : nil,
+        gitlab_token: provider == 'bitbucket' ? token : nil,
         name: name,
         username: username
       )

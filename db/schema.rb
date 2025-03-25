@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_03_20_144251) do
+ActiveRecord::Schema[7.1].define(version: 2025_03_23_195601) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -432,6 +432,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_20_144251) do
     t.string "stripe_subscription"
     t.boolean "is_new", default: true, null: false
     t.string "gitlab_token"
+    t.string "bitbucket_token"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

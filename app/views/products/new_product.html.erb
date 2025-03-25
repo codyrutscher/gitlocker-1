@@ -43,7 +43,12 @@
                     <button type="submit"></button>
                 <% end %>
 
-                <a href="#" class="block w-full bg-blue-700 hover:bg-blue-400 text-white font-semibold py-2 mt-3 text-center rounded">Continue with Bitbucket</a>
+                <button id="bitbucket-button" class="block w-full bg-blue-700 hover:bg-blue-400 text-white font-semibold py-2 mt-3 text-center rounded">
+                    <%= current_user.bitbucket_token.present? ? 'Continue' : 'Login' %> with BitBucket
+                </button>
+                <%= form_with url: omniauth_authorize_path(User, :bitbucket, state: 'import_products'), method: :post, data: { turbo: "false" }, id: "bitbucket-auth-form", class: "hidden" do %>
+                    <button type="submit"></button>
+                <% end %>
                 <a href="<%= new_product_path %>" class="block mt-4 text-gray-300 hover:text-white text-sm js-manual-upload-file">Manually Upload Zip File →</a>
             </div>
         </div>
@@ -52,7 +57,6 @@
         <div class="bg-gray-900 p-6 rounded-lg shadow-lg">
             <div class="flex justify-between items-center">
                 <h4 class="text-xl font-bold">Clone Template</h4>
-                <span class="text-gray-400">Framework ▼</span>
             </div>
             <div class="grid grid-cols-2 gap-4 mt-4">
                 <% @templates.each do |template| %>
@@ -117,6 +121,33 @@
                 </div>
         <% end %>
     </div>
+
+    <!-- Display Bitbucket Repositories -->
+    <div id="bitbucket-repos-section" class="hidden py-0">
+        <% if @bitbucket_repos.present? %>
+            <h1 class="text-2xl font-bold mb-4">Select BitBucket Repositories to Add as Products</h1>
+                <div id="bitbucket_repos" class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                    <% @bitbucket_repos.each do |repo| %>
+                        <div class="bg-gray-900 p-6 rounded-lg shadow-lg">
+                            <h4 class="text-xl font-bold"><%= repo['name'] %></h4>
+                            <p class="text-gray-400 text-sm"><%= repo['description'] %></p>
+                            <label class="block mt-4">
+                                <%= radio_button_tag 'repo_ids[]', "#{repo['id']}|#{repo['slug']}|#{repo['uuid']}", false, class: 'mr-2 js-bitbucket-repo-ids' %>
+                                Select this repository
+                            </label>
+                        </div>
+                    <% end %>
+                </div>
+                <div class="mt-6 flex justify-between items-center">
+                    <% if @display_next_page_link_bitbucket %>
+                        <div class="flex items-center gap-4" id="load_more_bitbucket_repos_button">
+                            <%= link_to 'See More Repos', load_more_bitbucket_repos_products_path, data: { page: (@bitbucket_page + 1) }, id: 'load-more-bitbucket-repos', class: 'bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded disabled:opacity-50' %>
+                        </div>
+                    <% end %>
+                </div>
+        <% end %>
+    </div>
+
     <div class="hidden js-new-product py-0">
         <%= render partial: 'products/new_product_form', locals: { import_product: false } %>
     </div>
@@ -131,6 +162,7 @@
         <% if current_user.token.present? %>
             $('#repos-section').show();
             $('#gitlab-repos-section').css('display', 'none');
+            $('#bitbucket-repos-section').css('display', 'none');
             $('.js-new-product').css('display', 'none');
             $('.js-import-product').show();
             $('#source_value').val('github');
@@ -144,6 +176,7 @@
         <% if current_user.gitlab_token.present? %>
             $('#repos-section').css('display', 'none');
             $('#gitlab-repos-section').show();
+            $('#bitbucket-repos-section').css('display', 'none');
             $('.js-new-product').css('display', 'none');
             $('.js-import-product').show();
             $('#source_value').val('gitlab');
@@ -151,6 +184,22 @@
             document.getElementById('gitlab-auth-form').querySelector('button').click();
         <% end %>
     });
+
+    $('#bitbucket-button').on('click', function() {
+        event.preventDefault();
+        <% if current_user.bitbucket_token.present? %>
+            $('#repos-section').css('display', 'none');
+            $('#gitlab-repos-section').css('display', 'none');
+            $('#bitbucket-repos-section').show();
+            $('.js-new-product').css('display', 'none');
+            $('.js-import-product').show();
+            $('#source_value').val('bitbucket');
+            
+        <% else %>
+            document.getElementById('bitbucket-auth-form').querySelector('button').click();
+        <% end %>
+    });
+
     $('.js-manual-upload-file').on('click', function(event) {
         event.preventDefault();
         $('.js-new-product').show();

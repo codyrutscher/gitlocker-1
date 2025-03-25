@@ -10,6 +10,7 @@ class ProductsController < ApplicationController
   before_action :update_state
   before_action :set_user_repos, if: -> { current_user.token.present? }
   before_action :set_gitlab_repos, if: -> { current_user.gitlab_token.present? }
+  before_action :set_bitbucket_repos, if: -> { current_user.bitbucket_token.present? }
   include ProductConcern
 
   def index
@@ -231,7 +232,6 @@ class ProductsController < ApplicationController
     failed_repos = []
     skipped_repos = []
     successful_repos = []
-  
     repo_ids&.each do |repo_id|
       ActiveRecord::Base.transaction do
         begin
@@ -239,13 +239,29 @@ class ProductsController < ApplicationController
             repo = octokit_client.repository(repo_id.to_i)
             owner, repo_name = extract_owner_and_repo_name(repo[:html_url])
             repo_url = repo[:html_url]
+            token = current_user.token
             source = 'github'
           elsif params[:source] == 'gitlab'
             repo = gitlab_client.project(repo_id)
             owner = repo.namespace.full_path
             repo_name = repo.name
             repo_url = repo.web_url
+            token = current_user.gitlab_token
             source = 'gitlab'
+          elsif params[:source] == 'bitbucket'
+            workspace_name, repo_slug, repo_id = repo_id.split('|')
+            repo = bitbucket_client.get("repositories/#{workspace_name}/#{repo_slug}")
+            unless repo.success?
+              puts "❌ Failed to fetch Bitbucket repository details: #{repo.status} - #{repo.body}"
+              failed_repos << repo_slug
+              next
+            end
+            repo_data = JSON.parse(repo.body)
+            owner = repo_data["owner"]["username"] || repo_data["workspace"]["slug"]
+            repo_name = repo_data["name"]
+            repo_url = repo_data["links"]["html"]["href"]
+            source = 'bitbucket'
+            token = current_user.bitbucket_token
           end
 
           product = Product.new(
@@ -270,7 +286,7 @@ class ProductsController < ApplicationController
           featured = product.featured
           product.featured = false
           if product.save
-            result = load_repo_and_link_tree(owner, repo_name, 'master', current_user.token, product, source)
+            result = load_repo_and_link_tree(owner, repo_name, 'master', token, product, source)
             if result
               if featured
                 session = featured_stripe_session(product)
@@ -286,7 +302,7 @@ class ProductsController < ApplicationController
             failed_repos << repo_name
             raise ActiveRecord::Rollback
           end
-        rescue => e
+        rescue Exception => e
           Rails.logger.error "Error processing repo #{repo_id}: #{e.message}"
           product.destroy if product.persisted?
           failed_repos << repo_name
@@ -568,6 +584,16 @@ class ProductsController < ApplicationController
     @octokit_client ||= Octokit::Client.new(access_token: current_user.token)
   end
 
+  def bitbucket_client
+    @bitbucket_client ||= Faraday.new(
+      url: 'https://api.bitbucket.org/2.0',
+      headers: {
+        'Authorization' => "Bearer #{current_user.bitbucket_token}",
+        'Content-Type' => 'application/json'
+      }
+    )
+  end
+
   def repositories
     return @repositories if defined?(@repositories)
 
@@ -619,6 +645,50 @@ class ProductsController < ApplicationController
     end
   end
 
+  def set_bitbucket_repos
+    begin
+      @bitbucket_page = params[:page]&.to_i || 1
+      workspace_response = bitbucket_client.get('workspaces')
+      if workspace_response.status == 401
+        raise StandardError, "Bitbucket token expired"
+      end  
+      unless workspace_response.success?
+        puts "❌ Failed to fetch workspaces: #{workspace_response.status} - #{workspace_response.body}"
+        return
+      end
+      workspaces = JSON.parse(workspace_response.body)
+      @bitbucket_repos = []
+      workspaces["values"].each do |workspace|
+        workspace_slug = workspace["slug"]
+        repos_response = @bitbucket_client.get("repositories/#{workspace_slug}")  
+        if repos_response.status == 401
+          raise StandardError, "Bitbucket token expired"
+        end
+        unless repos_response.success?
+          puts "❌ Failed to fetch repositories for workspace '#{workspace_slug}': #{repos_response.status} - #{repos_response.body}"
+          next
+        end
+        repos = JSON.parse(repos_response.body)
+        if repos["values"]
+          repos["values"].each do |repo|
+            repo["uuid"] = repo["uuid"].gsub(/[{}]/, '') # Remove curly braces from UUID
+            repo["id"] = repo.dig('workspace', 'slug')
+          end
+          @bitbucket_repos.concat(repos["values"])
+        end
+      end
+      @bitbucket_total_repos_count = @bitbucket_repos.size
+      @display_next_page_link_bitbucket = @bitbucket_total_repos_count > (Product::PER_PAGE_REPOS * @bitbucket_page)
+    rescue StandardError => e
+      if e.message == "Bitbucket token expired"
+        current_user.update(bitbucket_token: nil)
+        redirect_to new_product_products_path, alert: 'Your Bitbucket token has expired. Please re-authorize.' and return
+      else
+        puts "❌ Unexpected error: #{e.message}"
+      end
+    end
+  end
+  
   def download_gitlab_repo(project_id, token)
     zip_link = "https://gitlab.com/api/v4/projects/#{project_id}/repository/archive.zip"
     system("curl -H 'Private-Token: #{token}' -o repo.zip #{zip_link}")

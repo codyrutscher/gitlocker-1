@@ -16,6 +16,7 @@ gem "money-rails", "~> 1.12"
 gem "octokit"
 gem "omniauth-github", "~> 2.0.0" #Install omniauth-github
 gem 'omniauth-gitlab', '~> 4.1'
+gem 'omniauth-atlassian-bitbucket'
 gem 'gitlab', '~> 5.1'
 gem "omniauth-rails_csrf_protection"
 gem "pg", "~> 1.5"

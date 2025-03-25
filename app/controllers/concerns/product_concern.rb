@@ -19,6 +19,7 @@ module ProductConcern
 
   def zip_structure_for_js_tree(file_path)
     structure = {}
+    # return nil unless File.exist?(file_path) && `file --mime-type -b #{file_path}`.strip == "application/zip"
     begin
       Zip::File.open(file_path) do |zip_file|
         sorted_entries = zip_file.sort_by { |entry| [entry.directory? ? 0 : 1, entry.name] }
@@ -123,9 +124,11 @@ module ProductConcern
         zip_link = "https://github.com/#{owner}/#{repo}/archive/refs/heads/#{ref}.zip"
       elsif source == 'gitlab'
         zip_link = "https://gitlab.com/#{owner}/#{repo}/-/archive/#{ref}/#{repo}-#{ref}.zip"
+      elsif source == 'bitbucket'
+        header = " -H 'Authorization: Bearer #{token}' "
+        zip_link = "https://bitbucket.org/#{owner}/#{repo}/get/#{ref}.zip"
       else
-        owner, repo, ref = parse_github_url(source)
-        zip_link = "https://github.com/#{owner}/#{repo}/archive/refs/heads/#{ref}.zip"
+        return nil
       end
       temp_file = Tempfile.new([repo, '.zip'])
   
@@ -146,7 +149,6 @@ module ProductConcern
           filename: "#{repo}-#{ref}.zip",
           content_type: 'application/zip'
         )
-  
         directory_tree_str = zip_structure_for_js_tree(temp_file.path).to_s
         if directory_tree_str.present? && product.update(directory_tree: directory_tree_str)
           Rails.logger.info "Successfully attached #{repo}-#{ref}.zip to the product"
