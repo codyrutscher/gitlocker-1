@@ -31,17 +31,17 @@ module Marketplace
 
     def featured
       params[:sort_by] ||= "most_recent" unless params[:sort_by].present?
+      @products = apply_filters_and_sort(Product.exclude_purchased(current_user))
 
       # Filter featured products
-      @products = Product.where(featured: true)
+      @products = @products.where(featured: true)
 
       # Search functionality for featured page
       if params[:query].present?
         @products = @products.where("name LIKE ?", "%#{params[:query]}%")
       end
-
       # Apply filters
-      if params[:filters].present?
+      if filter_params.present? && (filter_params[:categories].present? || filter_params[:languages].present?)
         prod_ids = []
 
         # Apply category and language filters
@@ -101,7 +101,7 @@ module Marketplace
       # resource = resource.where(language_id: filter_params[:languages]) if filter_params[:languages].present?
 
       # Price filter
-      if filter_params[:price].present? && filter_params[:price][0].present? && filter_params[:price][1]
+      if filter_params[:price].present? && filter_params[:price][0].present? && filter_params[:price][1].present?
         resource = resource.where('price_cents >= ? AND price_cents <= ?', filter_params[:price][0].to_f * 100, filter_params[:price][1].to_f * 100)
       end
 
