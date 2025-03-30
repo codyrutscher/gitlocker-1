@@ -1,4 +1,3 @@
-<% binding.pry %>
 <% if @response.blank? %>
     $('#ai_response_section').html('Something went wrong. Please try again later.');
 <% elsif @response['error'].present? %>
