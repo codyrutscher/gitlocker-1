@@ -51,7 +51,7 @@ module AiResponseConcern
         parsed_response = JSON.parse(response.body)
         if parsed_response.present? && parsed_response["error"]
             Rails.logger.error "Request failed with response: #{parsed_response['error']}"
-            return parsed_responses
+            return parsed_response
         end
         ai_text = parsed_response.dig("choices", 0, "message", "content") || nil
         return { error: "No response received from AI model" } if ai_text.blank?
@@ -60,14 +60,14 @@ module AiResponseConcern
         cleaned_text = JSON.parse(cleaned_text)
         cleaned_text
     rescue RestClient::ExceptionWithResponse => e
-        Rails.logger.error "Request failed with response: #{e.response}"
-        { error: "Request failed with response: #{e.response}" }
+      Rails.logger.error "Request failed with response: #{e.response}"
+      { error: "Request failed with response: #{e.response}" }
     rescue JSON::ParserError => e
-        Rails.logger.error "Failed to parse JSON response: #{e.message}"
-        { error: "Failed to parse JSON response: #{e.message}" }
+      Rails.logger.error "Failed to parse JSON response: #{e.message}"
+      { error: "Failed to parse JSON response: #{e.message}" }
     rescue StandardError => e
-        Rails.logger.error "An unexpected error occurred: #{e.message}"
-        { error: "An unexpected error occurred: #{e.message}" }
+      Rails.logger.error "An unexpected error occurred: #{e.message}"
+      { error: "An unexpected error occurred: #{e.message}" }
     end
   end
 end
