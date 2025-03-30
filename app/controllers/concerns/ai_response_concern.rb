@@ -64,7 +64,7 @@ module AiResponseConcern
       { error: "Request failed with response: #{e.response}" }
     rescue JSON::ParserError => e
       Rails.logger.error "Failed to parse JSON response: #{e.message}"
-      { error: "Failed to parse JSON response: #{e.message}" }
+      { error: "Failed to parse JSON response: #{e.message} and #{e.backtrace}" }
     rescue StandardError => e
       Rails.logger.error "An unexpected error occurred: #{e.message}"
       { error: "An unexpected error occurred: #{e.message}" }

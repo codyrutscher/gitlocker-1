@@ -197,7 +197,15 @@
         <% end %>
     });
 
+    $('#prompt_field').on('keypress', function (e) {
+        if (e.which === 13) {
+            e.preventDefault();
+            $('#ai-button').click();
+        }
+    });
+
     $('#ai-button').on('click', function() {
+        $('#ai_response_section').html('<div class="text-black-400">Building...</div>');
         $.ajax({
             url: '<%= build_product_from_ai_products_path %>',
             type: 'POST',
