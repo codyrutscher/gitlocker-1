@@ -536,10 +536,13 @@ class ProductsController < ApplicationController
   end
 
   def build_product_from_ai
-    user_input = params[:prompt]
-    @response = send_request(user_input)
-    @response = @response.with_indifferent_access if @response.present? && @response.is_a?(Hash)
-    
+    begin
+      user_input = params[:prompt]
+      @response = send_request(user_input)
+      @response = @response.with_indifferent_access if @response.present? && @response.is_a?(Hash)
+    rescue Exception => e
+      @response = { error: e.message }
+    end
     respond_to do |format|
       format.js
     end
