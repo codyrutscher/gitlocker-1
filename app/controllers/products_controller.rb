@@ -12,6 +12,7 @@ class ProductsController < ApplicationController
   before_action :set_gitlab_repos, if: -> { current_user.gitlab_token.present? }
   before_action :set_bitbucket_repos, if: -> { current_user.bitbucket_token.present? }
   include ProductConcern
+  include AiResponseConcern
 
   def index
     @products = current_user.products.page(params[:page]).per(50)
@@ -534,6 +535,16 @@ class ProductsController < ApplicationController
     end
   end
 
+  def build_product_from_ai
+    user_input = params[:prompt]
+    @response = send_request(user_input)
+    @response = @response.with_indifferent_access if @response.present? && @response.is_a?(Hash)
+    
+    respond_to do |format|
+      format.js
+    end
+  end
+
   private
 
   def import_table
@@ -688,7 +699,7 @@ class ProductsController < ApplicationController
       end
     end
   end
-  
+
   def download_gitlab_repo(project_id, token)
     zip_link = "https://gitlab.com/api/v4/projects/#{project_id}/repository/archive.zip"
     system("curl -H 'Private-Token: #{token}' -o repo.zip #{zip_link}")

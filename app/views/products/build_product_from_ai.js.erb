@@ -1,0 +1,9 @@
+<% if @response.blank? %>
+    $('#ai_response_section').html('Something went wrong. Please try again later.');
+<% elsif @response['error'].present? %>
+    $('#ai_response_section').html('<%= @response['error']['message'] %>');
+<% elsif !@response['create_product'] && @response['response'].present? %>
+    $('#ai_response_section').html('<%= @response['response'] %>');
+<% elsif @response['create_product'] %>
+    $('#ai_response_section').html('Successfully added product');
+<% end %>

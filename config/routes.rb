@@ -100,6 +100,7 @@ Rails.application.routes.draw do
     post 'create_from_github', on: :collection
     post 'create_from_gitlab', on: :collection
     post 'import_products', on: :collection
+    post 'build_product_from_ai', on: :collection
     post 'like', on: :member
     post 'unlike', on: :member
     get 'search', on: :collection

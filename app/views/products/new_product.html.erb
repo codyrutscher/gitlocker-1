@@ -9,19 +9,23 @@
 <div class="bg-white text-white font-sans px-6 pt-6 pb-0">
     <!-- Top Search Bar -->
     <div class="flex justify-between items-center bg-gray-900 px-4 py-3 rounded-lg shadow-lg max-w-2xl mx-auto">
-        <input type="text" placeholder="Ask v0 to build something..." class="bg-transparent flex-1 text-white placeholder-gray-500 focus:outline-none px-3">
+        <input type="text" id='prompt_field' placeholder="Ask v0 to build something..." class="bg-transparent flex-1 text-white placeholder-gray-500 focus:outline-none px-3">
         <!-- File Attachment Icon -->
+        <!--
         <button class="p-2 rounded hover:bg-gray-800">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M21.44 11.05L12 20.49a5.5 5.5 0 0 1-7.78-7.78l7.78-7.78a3.5 3.5 0 0 1 4.95 4.95L9.88 16.95a1.5 1.5 0 1 1-2.12-2.12l6.36-6.36"></path>
             </svg>
         </button>
-
-        <button class="bg-gray-700 hover:bg-gray-600 text-white px-4 py-1 rounded-lg flex items-center">
+        -->
+        <button id="ai-button" class="bg-gray-700 hover:bg-gray-600 text-white px-4 py-1 rounded-lg flex items-center">
             Build It →
         </button>
     </div>
-    
+
+    <div id='ai_response_section' class="flex justify-between items-center text-black pt-4 max-w-2xl mx-auto">
+    </div>
+
     <!-- Main Grid -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 py-2 max-w-5xl mx-auto">
         <!-- Import Git Repository -->
@@ -191,6 +195,18 @@
         <% else %>
             document.getElementById('bitbucket-auth-form').querySelector('button').click();
         <% end %>
+    });
+
+    $('#ai-button').on('click', function() {
+        $.ajax({
+            url: '<%= build_product_from_ai_products_path %>',
+            type: 'POST',
+            dataType: 'script',
+            data: { prompt: $('#prompt_field').val() },
+            headers: {
+                'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content') // Read CSRF token dynamically
+            }
+        });
     });
 
     $('.js-manual-upload-file').on('click', function(event) {
