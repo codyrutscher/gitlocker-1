@@ -205,7 +205,8 @@ class Product < ApplicationRecord
     user_limit = service.get_product_limit
   
     if user.products.count >= user_limit
-      errors.add(:base, "Limit exceeded. Please upgrade the plan to add more products.",  code: 402)
+#      errors.add(:base, "Limit exceeded. Please upgrade the plan to add more products.",  code: 402)
     end
   end
 end
+
