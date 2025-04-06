@@ -119,6 +119,7 @@ GEM
       msgpack (~> 1.2)
     brotli (0.6.0)
     builder (3.3.0)
+    byebug (12.0.0)
     canonical-rails (0.2.16)
       actionview (>= 4.1, < 7.3)
     cgi (0.4.1)
@@ -579,6 +580,7 @@ DEPENDENCIES
   activerecord-import
   aws-sdk-s3
   bootsnap
+  byebug
   canonical-rails (~> 0.2.16)
   ckeditor (~> 5.1)
   debug

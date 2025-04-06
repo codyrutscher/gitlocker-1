@@ -1,1 +1,50 @@
-<pre><%= @file_content %></pre>
+<script src="https://cdn.tailwindcss.com"></script>
+<%=
+  render BreadcrumbComponent.new(current_user,[
+    { text: "Product Market Place", url: marketplace_library_path(@product) }
+  ])
+%>
+
+<div style="padding: 20px;">
+  <div id="file-content-display">
+    <pre><%= @file_content %></pre> 
+    <% unless policy(@product).viewable? %>
+      <button id="edit-button" class="rounded-md bg-blue-500 px-4 py-2 text-sm font-semibold text-white shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2" onclick="toggleEdit()" style="margin-top: 1em;">
+        Edit
+      </button>
+    <% end  %>
+  </div>
+
+  <div id="file-content-form" style="display: none;">
+    <%= form_with url: update_file_content_path(@product, file_name: params[:file_name]), method: :post, local: true do %>
+      <div>
+        <%= text_area_tag :content, @file_content, rows: 20, style: "width: 100%; border: 1px solid #ccc; padding: 1em;" %>
+      </div>
+      <input type="hidden" name="id" value="<%= @product.id %>">
+      <div style="margin-top: 1em; display: flex; gap: 10px;">
+        <%= submit_tag "Save Changes", class: "rounded-md bg-green-500 px-4 py-2 text-sm font-semibold text-white shadow-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-2", style: "width: 150px;" %>
+        <button type="button" onclick="cancelEdit()" class="rounded-md bg-gray-500 px-4 py-2 text-sm font-semibold text-white shadow-md hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2" style="width: 150px;">
+          Cancel
+        </button>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<script>
+  function toggleEdit() {
+    const displayDiv = document.getElementById('file-content-display');
+    const formDiv = document.getElementById('file-content-form');
+
+    displayDiv.style.display = 'none';
+    formDiv.style.display = 'block';
+  }
+
+  function cancelEdit() {
+    const displayDiv = document.getElementById('file-content-display');
+    const formDiv = document.getElementById('file-content-form');
+
+    formDiv.style.display = 'none';
+    displayDiv.style.display = 'block';
+  }
+</script>

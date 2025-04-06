@@ -376,14 +376,27 @@ class ProductsController < ApplicationController
   end
 
   def show_file_content
-    product = Product.friendly.find(params[:id])
+    @product = Product.friendly.find(params[:id])
     file_name = params[:file_name]
     file_extension = file_name.split('.').last
-    @file_content = extract_file_content(product, file_name)
+    @file_content = extract_file_content(@product, file_name)
     if %w[jpg jpeg png gif].include?(file_extension)
       send_data @file_content, type: "image/#{file_extension}", disposition: "inline", filename: "#{file_name}"
     else
-      render "show_file_content", layout: false, locals: { file_content: @file_content || 'File not found' }
+      render "show_file_content", locals: { file_content: @file_content || 'File not found' }
+    end
+  end
+  
+  def update_file_content
+    product = Product.friendly.find(params[:id])
+    file_name = params[:file_name]
+    new_content = params[:content]
+
+    if file_name.present? && new_content.present?
+      replace_file_content(product, file_name, new_content)
+      redirect_to marketplace_library_path(product), notice: 'File content updated successfully.'
+    else
+      redirect_to marketplace_library_path(product), notice: "Something went wrong in updating file content." 
     end
   end
 

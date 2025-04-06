@@ -73,6 +73,7 @@ group :development, :test do
   gem "pry-rails"
   gem "rspec-rails", "~> 6.1"
   gem "letter_opener"
+  gem 'byebug'
 end
 
 group :development do

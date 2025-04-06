@@ -151,7 +151,8 @@ Rails.application.routes.draw do
   get "documentation_html_css", to: "marketplace/home#documentation_html_css"
   get "documentation_tailwindcss", to: "marketplace/home#documentation_tailwindcss"
 
-  
+  post 'update_file_content', to: 'products#update_file_content'
+
   namespace :marketplace do
     root "home#index"
     get "browse", to: "browse#index"
