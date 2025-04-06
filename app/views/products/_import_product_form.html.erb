@@ -21,7 +21,7 @@
             <%= f.label :description, "Description", class: "block text-xl font-medium leading-6 text-gray-900 " %>
             <div class="mt-2">
               <%= f.text_area :description, id: "import_description_text_area", class: "ckEditor block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" %>
-              <span class="d-block question_modal_input_subtext" id="descriptionTextAreaCount">
+              <span class="d-block question_modal_input_subtext" id="descriptionTextAreaCountImport">
                 1000 words left
               </span>
             </div>
@@ -31,7 +31,7 @@
             <%= f.label :features, "Features", class: "block text-xl font-medium leading-6 text-gray-900 " %>
             <div class="mt-2">
               <%= f.text_area :features, id: "featuresTextArea", class: "ckEditor block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"%>
-              <span class="d-block question_modal_input_subtext" id="featuresTextAreaCount">
+              <span class="d-block question_modal_input_subtext" id="featuresTextAreaCountImport">
                 1000 words left
               </span>
             </div>
@@ -41,7 +41,7 @@
             <%= f.label :requirements, "Requirements", class: "block text-xl font-medium leading-6 text-gray-900 " %>
             <div class="mt-2">
               <%= f.text_area :requirements, id: "requirementsTextArea", class: "ckEditor block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"%>
-              <span class="d-block question_modal_input_subtext" id="requirementsTextAreaCount">
+              <span class="d-block question_modal_input_subtext" id="requirementsTextAreaCountImport">
                 1000 words left
               </span>
             </div>
@@ -51,7 +51,7 @@
             <%= f.label :instructions, "Instructions", class: "block text-xl font-medium leading-6 text-gray-900 " %>
             <div class="mt-2">
               <%= f.text_area :instructions, id: "instructionsTextArea", class: "ckEditor block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"%>
-              <span class="d-block question_modal_input_subtext" id="instructionsTextAreaCount">
+              <span class="d-block question_modal_input_subtext" id="instructionsTextAreaCountImport">
                 1000 words left
               </span>
             </div>
@@ -172,8 +172,8 @@
 
   $(document).ready(function() {
     $('.js-import-button').on('click', function() {
-      for (var i = 0; i < ckEditorInstances.length; i++) {
-          let ckEditorInstance = CKEDITOR.instances[ckEditorInstances[i].id];
+      for (var i = 0; i < ckEditorInstancesImport.length; i++) {
+          let ckEditorInstance = CKEDITOR.instances[ckEditorInstancesImport[i].id];
           if (ckEditorInstance && ckEditorInstance.name == 'import_description_text_area') {            
             ckEditorInstance.updateElement();
             if(ckEditorInstance.getData().trim() == '') {
@@ -238,23 +238,28 @@
       }
     });
 
-    var ckEditorInstances;
+    var ckEditorInstancesImport;
     var interval = setInterval(() => {
       if (typeof CKEDITOR !== 'undefined') {
         try {
           const $formContainer = $(".js-import-product"); // Parent container of the form
-          ckEditorInstances = $formContainer.find(".ckEditor"); // Select CKEditor instances only in this form
+          ckEditorInstancesImport = $formContainer.find(".ckEditor"); // Select CKEditor instances only in this form
 
-          //ckEditorInstances = document.getElementsByClassName('ckEditor');
-          for (let i = 0; i < ckEditorInstances.length; i++) {
-            let ckEditorInstance = CKEDITOR.replace(ckEditorInstances[i]);
+          //ckEditorInstancesImport = document.getElementsByClassName('ckEditor');
+          for (let i = 0; i < ckEditorInstancesImport.length; i++) {
+            let ckEditorInstance = CKEDITOR.replace(ckEditorInstancesImport[i]);
             ckEditorInstance.on('change', function(event) {
               let content = event.editor.getData();
               let plainTextContent = content.replace(/<[^>]*>/g, '').replace(/&nbsp;/g, ' ');
               let wordCount = plainTextContent.trim().split(/\s+/).length;
               let wordsLeft = 1000 - wordCount;
-              $(`#${ckEditorInstances[i].id}Count`).text(`${wordsLeft} words left`);
-              $(`#${ckEditorInstances[i].id}Count`).css('color', wordsLeft < 0 ? 'red' : '');
+              if('import_description_text_area' == ckEditorInstancesImport[i].id) {
+                $('#descriptionTextAreaCountImport').text(`${wordsLeft} words left`);
+                $('#descriptionTextAreaCountImport').css('color', wordsLeft < 0 ? 'red' : '');
+              } else  {
+                $(`#${ckEditorInstancesImport[i].id}CountImport`).text(`${wordsLeft} words left`);
+                $(`#${ckEditorInstancesImport[i].id}CountImport`).css('color', wordsLeft < 0 ? 'red' : '');
+              }
               if (wordsLeft < 0) {
                   ckEditorInstance.setData(stripHtmlTags(plainTextContent.split(/\s+/).slice(0, 999).join(' ')));                
                 alert('Error: Word limit exceeded (maximum 1000 words)');
@@ -321,34 +326,6 @@
     });
   });
 
-document.querySelectorAll('.import-repo-btn').forEach(button => {
-  button.addEventListener('click', function(event) {
-    event.preventDefault();
-    const repoName = this.getAttribute('data-repo-name');
-    const repoUrl = this.getAttribute('data-repo-url');
-    const repoDescription = this.getAttribute('data-repo-description');
-
-    const nameField = document.getElementById('product_name');
-    const urlField = document.getElementById('product_url');
-    const ckEditorInstances = document.getElementsByClassName('ckEditor');
-
-    if (nameField && urlField) {
-      nameField.value = repoName;
-      urlField.value = repoUrl;
-
-      for (let i = 0; i < ckEditorInstances.length; i++) {
-        const ckEditorInstance = CKEDITOR.instances[ckEditorInstances[i].name];
-        if (ckEditorInstance) {
-          ckEditorInstance.setData(repoDescription);
-        } else {
-          ckEditorInstances[i].value = repoDescription;
-        }
-      }
-    } else {
-      console.error('Form fields not found. Check the IDs.');
-    }
-  });
-});
 $(document).ready(function() {
 
   function enforceSelectionLimit(selectElement) {
