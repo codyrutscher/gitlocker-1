@@ -540,8 +540,9 @@ class ProductsController < ApplicationController
       user_input = params[:prompt]
       @response = send_request(user_input)
       @response = @response.with_indifferent_access if @response.present? && @response.is_a?(Hash)
+      @product = create_zip_file_structure(@response) if @response.present? && @response[:create_product]
     rescue Exception => e
-      @response = { error: e.message }
+      @response = { error: e.message, backtrace: e.backtrace }.with_indifferent_access
     end
     respond_to do |format|
       format.js
