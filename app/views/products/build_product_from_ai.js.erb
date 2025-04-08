@@ -4,6 +4,10 @@
     $('#ai_response_section').html('<%= @response['error']['message'] || @response['error'] %>');
 <% elsif !@response['create_product'] && @response['response'].present? %>
     $('#ai_response_section').html('<%= @response['response'] %>');
-<% elsif @response['create_product'] %>
-    $('#ai_response_section').html('Successfully added product');
+<% elsif @response['create_product'] && @product.present? %>
+    <% product_link = link_to @product.name, marketplace_library_path(@product), class: "text-blue-600 underline hover:text-blue-800" %>
+    <% message = "<span>#{product_link} added successfully</span>" %>
+    $('#ai_response_section').html("<%= j message.html_safe %>");
+<% else %>
+    $('#ai_response_section').html('Something is wrong. Please try again with different prompt.');
 <% end %>
