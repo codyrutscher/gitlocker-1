@@ -497,7 +497,6 @@
   $('#directory-tree-data').on('select_node.jstree', function(e, data) {
     var node = data.node;
     if (node && node.original && node.original.type === 'file') {
-        var fileName = node.text;
         var url = '<%= show_file_content_product_path(@product) %>';
 
         var form = document.createElement('form');
@@ -515,7 +514,12 @@
         var input = document.createElement('input');
         input.type = 'hidden';
         input.name = 'file_name';
-        input.value = fileName;
+        var fullPath = data.instance.get_path(node, '/');
+        var pathParts = fullPath.split('/');
+        pathParts.shift();
+        var trimmedPath = pathParts.join('/');
+
+        input.value = trimmedPath;
         form.appendChild(input);
 
         document.body.appendChild(form);

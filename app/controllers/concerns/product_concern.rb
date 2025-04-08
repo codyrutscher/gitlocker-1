@@ -90,36 +90,31 @@ module ProductConcern
     temp_zip_path = Rails.root.join("tmp", "temp_zip_#{SecureRandom.hex}.zip")
     updated_zip_path = Rails.root.join("tmp", "updated_zip_#{SecureRandom.hex}.zip")
   
-    # Download the attached zip file
     File.open(temp_zip_path, 'wb') { |file| file.write(product.folder.download) }
   
     begin
-      # Create a new zip file with updated content
+
       Zip::File.open(temp_zip_path) do |zip_file|
         Zip::File.open(updated_zip_path, Zip::File::CREATE) do |new_zip|
           zip_file.each do |entry|
+            entry_relative_path = entry.name.split('/', 2).last # Remove top-level project folder
             if entry.directory?
-              # Add directory entries as is
               new_zip.mkdir(entry.name)
-            elsif entry.name.include?(file_name)
-              # Replace the content of the specified file
+            elsif entry_relative_path == file_name
               new_zip.get_output_stream(entry.name) { |f| f.write(new_content) }
             else
-              # Copy other files as is
               new_zip.get_output_stream(entry.name) { |f| f.write(entry.get_input_stream.read) }
             end
           end
         end
       end
   
-      # Attach the updated zip file back to the product
       product.folder.attach(
         io: File.open(updated_zip_path),
         filename: "#{product.id}-updated.zip",
         content_type: 'application/zip'
       )
     ensure
-      # Clean up temporary files
       File.delete(temp_zip_path) if File.exist?(temp_zip_path)
       File.delete(updated_zip_path) if File.exist?(updated_zip_path)
     end
