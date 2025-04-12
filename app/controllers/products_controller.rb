@@ -57,6 +57,44 @@ class ProductsController < ApplicationController
     end
   end
 
+  def add_collaborator
+    
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def add_collaborator
+    
+    product = Product.find(params[:id])
+    user = User.find(params[:user_id])
+  
+    if product.users.exists?(user.id)
+      render json: { error: 'User already added' }, status: :unprocessable_entity
+    else
+      product.users << user
+      render json: { success: true }
+    end
+  end
+
+   # DELETE /products/:id/remove_collaborator
+   def remove_collaborator
+    product = Product.find(params[:id])
+    user = User.find(params[:user_id])
+
+    if product.users.exists?(user.id)
+      # Find the join record and destroy it.
+      product_user = product.product_users.find_by(user_id: user.id)
+      if product_user&.destroy
+        render json: { success: true }
+      else
+        render json: { error: 'Unable to remove collaborator' }, status: :unprocessable_entity
+      end
+    else
+      render json: { error: 'Collaborator not found' }, status: :not_found
+    end
+  end
+
   def update
 
     uploaded_file = product_params[:upload_file]

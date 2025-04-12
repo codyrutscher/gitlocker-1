@@ -1,7 +1,7 @@
 module Marketplace
   class UsersController < ApplicationController
     before_action :authenticate_user!, except: :show
-    before_action :set_user
+    before_action :set_user, except: :search
 
     def show
       @user = User.friendly.find(params[:id])
@@ -13,6 +13,17 @@ module Marketplace
     def edit
       @user = User.friendly.find(params[:id])
       authorize(@user)
+    end
+
+    def search
+      query = params[:q].to_s.strip.downcase
+    
+      users = User.where("id != :current_user_id AND (username ILIKE :q OR email ILIKE :q)",
+                         current_user_id: current_user.id, q: "%#{query}%")
+                  .select(:id, :username)
+                  .limit(10)
+    
+      render json: users.map { |user| { id: user.id, text: user.username } }
     end
 
     def update

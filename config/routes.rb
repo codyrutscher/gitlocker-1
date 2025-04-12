@@ -96,6 +96,8 @@ Rails.application.routes.draw do
 
   resources :products, only: [:index, :show, :edit, :update,:new, :create, :destroy] do
     resources :covers, only: [:create, :destroy], controller: "product_covers"
+    post :add_collaborator, on: :member
+    delete :remove_collaborator, on: :member
     get 'new_product', on: :collection
     post 'create_from_github', on: :collection
     post 'create_from_gitlab', on: :collection
@@ -116,6 +118,7 @@ Rails.application.routes.draw do
     get 'load_more_github_repos', on: :collection
     get 'load_more_gitlab_repos', on: :collection
     get :export_data, on: :collection
+    get 'add_collaborator', on: :member
   end
   get 'search_repositories/(:query)', to: "products#search_repositories"
   get 'teamrepositories', to: "products#teamrepositories"
@@ -187,6 +190,9 @@ Rails.application.routes.draw do
     get '/cancel_payment', to: 'checkout#cancel_payment', as: 'cancel_payment'
     resources :refunds, only: [:new, :create]
     resources :users, only: [:show, :edit, :update, :destroy] do
+      collection do
+        get :search # this maps to Marketplace::UsersController#search
+      end
       resources :products, only: :index, controller: "users/products"
       get :synchronizations, to: "users/synchronizations#show", on: :member
       put :product_activations, to: "users/product_activations#update", on: :member
