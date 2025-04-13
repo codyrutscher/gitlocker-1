@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_03_23_195601) do
+ActiveRecord::Schema[7.1].define(version: 2025_04_13_082617) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -107,6 +107,20 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_23_195601) do
     t.string "image_name"
     t.string "slug"
     t.index ["name"], name: "index_categories_on_name", unique: true
+  end
+
+  create_table "commits", force: :cascade do |t|
+    t.bigint "product_id", null: false
+    t.bigint "user_id", null: false
+    t.string "file_path"
+    t.string "uuid"
+    t.text "new_content"
+    t.text "old_content"
+    t.text "commit_message"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_commits_on_product_id"
+    t.index ["user_id"], name: "index_commits_on_user_id"
   end
 
   create_table "featured_payment_intents", force: :cascade do |t|
@@ -444,6 +458,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_23_195601) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "cart_items", "products"
   add_foreign_key "cart_items", "users"
+  add_foreign_key "commits", "products"
+  add_foreign_key "commits", "users"
   add_foreign_key "featured_payment_intents", "products"
   add_foreign_key "likes", "products"
   add_foreign_key "notifications", "products"

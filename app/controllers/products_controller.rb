@@ -130,6 +130,8 @@ class ProductsController < ApplicationController
   end
 
   def commits
+    @product = Product.friendly.find(params[:id])
+    @commits = @product.commits.includes(:user)
   end
 
   def team
@@ -392,9 +394,17 @@ class ProductsController < ApplicationController
     @file_name = params[:file_name]
     @new_content = params[:file_content]
     old_content = params[:old_content]
-
+    commit_message = params[:commit_message]
     begin
       replace_file_content(@product, @file_name, @new_content)
+      Commit.create!(
+        product: @product,
+        user: current_user,
+        file_path: @file_name,
+        old_content: old_content,
+        new_content: @new_content,
+        commit_message: commit_message
+      )
       render json: { success: true, message: 'File content replaced successfully' }
     rescue => e
       render json: { success: false, error: e.message }, status: :unprocessable_entity

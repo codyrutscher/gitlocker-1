@@ -6,7 +6,8 @@
   $('#ai_response_section').html(`
     <div style="padding: 10px; border: 1px solid #ccc; border-radius: 8px; background: #f9f9f9;">
       <p style="margin-bottom: 16px;"><%= j simple_format(sanitize(@response['fileContent'])) %></p>
-      <button id="commit-btn" style="padding: 6px 12px; margin-right: 8px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer;">Commit</button>
+      <input type="text" id="commit-message" placeholder="Enter commit message" style="width: 100%; padding: 6px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 4px;" />
+      <button id="commit-btn" disabled style="padding: 6px 12px; margin-right: 8px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; cursor: not-allowed; opacity: 0.6;">Commit</button>
       <button id="cancel-btn" style="padding: 6px 12px; background-color: #f44336; color: white; border: none; border-radius: 4px; cursor: pointer;">Cancel</button>
     </div>
   `);
@@ -21,7 +22,25 @@
 <% else %>
   $('#ai_response_section').html('<div style="color: red;">Something is wrong. Please try again with a different prompt.</div>');
 <% end %>
+$('#commit-message').on('input', function () {
+  const message = $(this).val().trim();
+  if (message.length > 0) {
+    $('#commit-btn')
+      .prop('disabled', false)
+      .css({ cursor: 'pointer', opacity: 1 });
+  } else {
+    $('#commit-btn')
+      .prop('disabled', true)
+      .css({ cursor: 'not-allowed', opacity: 0.6 });
+  }
+});
+
 $('#commit-btn').on('click', function() {
+ const commitMessage = $('#commit-message').val().trim();
+  if (commitMessage.length === 0) {
+    alert('Please enter a commit message before committing.');
+    return;
+  }
   $('#commit-btn')
     .prop('disabled', true)
     .text('Committing...')
@@ -36,7 +55,8 @@ $('#commit-btn').on('click', function() {
     data: {
       file_name: '<%= @file_name %>',
       old_content: <%= @old_content.to_json.html_safe %>,
-      file_content: <%= @response["fileContent"].to_json.html_safe %>
+      file_content: <%= @response["fileContent"].to_json.html_safe %>,
+      commit_message: $('#commit-message').val().trim()
     },
     success: function(data) {
       var url = '<%= show_file_content_product_path(@product) %>';
