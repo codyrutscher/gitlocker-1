@@ -386,6 +386,20 @@ class ProductsController < ApplicationController
       render "show_file_content", locals: { file_content: @file_content || 'File not found' }
     end
   end
+
+  def replace_file
+    @product = Product.friendly.find(params[:id])
+    @file_name = params[:file_name]
+    @new_content = params[:file_content]
+    old_content = params[:old_content]
+
+    begin
+      replace_file_content(@product, @file_name, @new_content)
+      render json: { success: true, message: 'File content replaced successfully' }
+    rescue => e
+      render json: { success: false, error: e.message }, status: :unprocessable_entity
+    end
+  end
   
   def update_file_content
     product = Product.friendly.find(params[:id])
@@ -554,6 +568,23 @@ class ProductsController < ApplicationController
       @response = send_request(user_input)
       @response = @response.with_indifferent_access if @response.present? && @response.is_a?(Hash)
       @product = create_zip_file_structure(@response) if @response.present? && @response[:create_product]
+    rescue Exception => e
+      @response = { error: e.message, backtrace: e.backtrace }.with_indifferent_access
+    end
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def build_product_file_from_ai
+    begin
+      user_input = params[:prompt]
+      @old_content = params[:file_content]
+      @file_name = params[:file_name]
+      @response = send_request_data(user_input, @old_content)
+      puts "@response = #{@response}"
+      @response = @response.with_indifferent_access if @response.present? && @response.is_a?(Hash)
+      @product = Product.friendly.find(params[:product_id]) 
     rescue Exception => e
       @response = { error: e.message, backtrace: e.backtrace }.with_indifferent_access
     end

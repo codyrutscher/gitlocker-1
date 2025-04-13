@@ -1,0 +1,76 @@
+<% if @response.blank? %>
+  $('#ai_response_section').html('<div style="color: red;">Something went wrong. Please try again later.</div>');
+<% elsif @response['error'].present? %>
+  $('#ai_response_section').html('<div style="color: red;"><%= j(@response["error"]["message"] || @response["error"]) %></div>');
+<% elsif @response["update_file_content"] == true %>
+  $('#ai_response_section').html(`
+    <div style="padding: 10px; border: 1px solid #ccc; border-radius: 8px; background: #f9f9f9;">
+      <p style="margin-bottom: 16px;"><%= j simple_format(sanitize(@response['fileContent'])) %></p>
+      <button id="commit-btn" style="padding: 6px 12px; margin-right: 8px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer;">Commit</button>
+      <button id="cancel-btn" style="padding: 6px 12px; background-color: #f44336; color: white; border: none; border-radius: 4px; cursor: pointer;">Cancel</button>
+    </div>
+  `);
+
+<% elsif @response["update_file_content"] == false %>
+  $('#ai_response_section').html(`
+    <div style="padding: 10px; border: 1px solid #ccc; border-radius: 8px; background: #f1f1f1;">
+      <p><%= j @response['response'] %></p>
+    </div>
+  `);
+
+<% else %>
+  $('#ai_response_section').html('<div style="color: red;">Something is wrong. Please try again with a different prompt.</div>');
+<% end %>
+$('#commit-btn').on('click', function() {
+  $('#commit-btn')
+    .prop('disabled', true)
+    .text('Committing...')
+    .css({ opacity: 0.6, cursor: 'not-allowed' });
+
+  $.ajax({
+    url: '<%= replace_file_product_path(@product) %>',
+    method: 'POST',
+    headers: {
+      'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+    },
+    data: {
+      file_name: '<%= @file_name %>',
+      old_content: <%= @old_content.to_json.html_safe %>,
+      file_content: <%= @response["fileContent"].to_json.html_safe %>
+    },
+    success: function(data) {
+      var url = '<%= show_file_content_product_path(@product) %>';
+      var form = document.createElement('form');
+      form.method = 'POST';
+      form.action = url;
+
+      var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+      var csrfInput = document.createElement('input');
+      csrfInput.type = 'hidden';
+      csrfInput.name = 'authenticity_token';
+      csrfInput.value = csrfToken;
+      form.appendChild(csrfInput);
+
+      var input = document.createElement('input');
+      input.type = 'hidden';
+      input.name = 'file_name';
+      input.value = '<%= @file_name %>';
+      form.appendChild(input);
+
+      document.body.appendChild(form);
+      form.submit();
+      document.body.removeChild(form);
+    },
+    error: function(xhr) {
+      $('#ai_response_section').html('❌ Error updating file content.');
+      $('#commit-btn')
+        .prop('disabled', false)
+        .text('Commit')
+        .css({ opacity: 1, cursor: 'pointer' });
+    }
+  });
+});
+
+$('#cancel-btn').on('click', function() {
+  $('#ai_response_section').html('<div style="color: gray;">Update canceled.</div>');
+});

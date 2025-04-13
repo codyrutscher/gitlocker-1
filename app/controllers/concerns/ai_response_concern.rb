@@ -18,6 +18,33 @@ module AiResponseConcern
     And here is the query of user: #{user_query}"
   end
 
+  def context_of_product_file_prompt(user_query, file_content)
+    "Hi
+    I will forward you the query of a user and you will return response according to that.
+    If the query is general then return response in general string format and make update_file_content false.
+    If the query is to update a file then return response in json format and make update_file_content to true and use file_content variable for content.
+    The sample json response will indicate the file_content and update_file_content
+    JSON Format is here #{sample_json_file}
+    The file_content variable will contain the content of the file which you will use to update the file.
+    Since file_content will be attached everytime so be careful if user query is general and not related to file you can ignore file_content which will be provided at last.
+    And here is the query of user: #{user_query} and here is the file_content: #{file_content}"
+  end
+  
+
+  def sample_json_file
+    "{
+      # true if user ask to change file content.
+      # false if user prompt is simple and not related to file
+      update_file_content: 'boolean',
+      #It will contain response when user prompt is simple and not related to file
+      # It will be empty string if user's query is general and not asked you to create the product
+      response: \"string\",
+      # It will be empty string if user's prompt is general and not related to file
+      # It will contain the updated file content of the product if user prompt is related to file
+      fileContent: \"string\"
+    }"
+  end
+
   def sample_json_structure
     "{
       # If true then zipfile structure, name and description will be attached by you as User have asked you to create a product.
@@ -37,6 +64,44 @@ module AiResponseConcern
   def send_request(user_query)
     begin
         prompt = context_of_product_prompt(user_query)
+        response = HTTParty.post(
+            API_URL,
+            headers: {
+                "Content-Type" => "application/json",
+                "Authorization" => "Bearer #{ENV['MINI_SECRET_KEY']}"
+            },
+            body: {
+                model: "gpt-4o-mini", # gpt-4o-mini
+                messages: [{ role: "user", content: prompt }],
+                temperature: 0.7
+            }.to_json
+        )
+        parsed_response = JSON.parse(response.body)
+        if parsed_response.present? && parsed_response["error"]
+            Rails.logger.error "Request failed with response: #{parsed_response['error']}"
+            return parsed_response
+        end
+        ai_text = parsed_response.dig("choices", 0, "message", "content") || nil
+        return { error: "No response received from AI model" } if ai_text.blank?
+
+        cleaned_text = ai_text.gsub(/\A```json\n|\n```\z/, '')
+        cleaned_text = JSON.parse(cleaned_text) if cleaned_text.is_a?(String) && cleaned_text.start_with?('{')
+        cleaned_text
+    rescue RestClient::ExceptionWithResponse => e
+      Rails.logger.error "Request failed with response: #{e.response}"
+      { error: "Request failed with response: #{e.response}" }
+    rescue JSON::ParserError => e
+      Rails.logger.error "Failed to parse JSON response: #{e.message}"
+      { error: "Failed to parse JSON response: #{e.message} and #{e.backtrace}" }
+    rescue StandardError => e
+      Rails.logger.error "An unexpected error occurred: #{e.message}"
+      { error: "An unexpected error occurred: #{e.message}" }
+    end
+  end
+
+  def send_request_data(user_query, file_content)
+    begin
+        prompt = context_of_product_file_prompt(user_query, file_content)
         response = HTTParty.post(
             API_URL,
             headers: {
