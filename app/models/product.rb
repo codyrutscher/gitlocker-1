@@ -9,6 +9,8 @@ class Product < ApplicationRecord
   has_many :notifications, dependent: :destroy
   has_many :reviews, dependent: :destroy
   has_many :purchases, dependent: :destroy
+  has_many :product_users
+  has_many :users, through: :product_users
   has_one_attached :folder, dependent: :destroy
   has_one_attached :video_file, dependent: :destroy
   has_one :refund, dependent: :destroy
