@@ -453,10 +453,24 @@ class ProductsController < ApplicationController
     product = Product.friendly.find(params[:id])
     file_name = params[:file_name]
     new_content = params[:content]
+    commit_message = params[:commit_message]
+    old_file_content = params[:old_file_content]
 
-    if file_name.present? && new_content.present?
-      replace_file_content(product, file_name, new_content)
-      redirect_to marketplace_library_path(product), notice: 'File content updated successfully.'
+    if file_name.present? && new_content.present? && commit_message.present?
+      begin
+        replace_file_content(product, file_name, new_content)
+        Commit.create!(
+          product: product,
+          user: current_user,
+          file_path: file_name,
+          old_content: old_file_content,
+          new_content: new_content,
+          commit_message: commit_message
+        )  
+        redirect_to marketplace_library_path(product), notice: 'File content updated successfully.'
+      rescue => e
+        redirect_to marketplace_library_path(product), error: e.message
+      end
     else
       redirect_to marketplace_library_path(product), notice: "Something went wrong in updating file content." 
     end

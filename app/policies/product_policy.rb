@@ -51,22 +51,19 @@ class ProductPolicy < ApplicationPolicy
 
     return false if user.blank?
 
-    return true if record.purchases.pluck(:user_id).include?(user.id)
-
-    record.user_id != user.id
+    user_ids = record.purchases.pluck(:user_id) + record.product_users.pluck(:user_id) + record.reviews.pluck(:user_id) + [record.user_id]
+    user_ids.include?(user.id)
   end
 
   def editable?
-    
     return false unless record.active?
 
     return false unless record.published?
 
     return false if user.blank?
 
-    return true if record.purchases.pluck(:user_id).include?(user.id)
-
-    record.user_id == user.id
+    user_ids = record.product_users.pluck(:user_id) + record.reviews.pluck(:user_id) + [record.user_id]
+    user_ids.include?(user.id)
   end
 
   def can_access_vcs_functionality?
@@ -76,7 +73,7 @@ class ProductPolicy < ApplicationPolicy
 
     return false if user.blank?
 
-    user_ids = record.purchases.pluck(:user_id) + record.reviews.pluck(:user_id) + [record.user_id]
+    user_ids = record.product_users.pluck(:user_id) + record.reviews.pluck(:user_id) + [record.user_id]
     user_ids.include?(user.id)
   end
 end

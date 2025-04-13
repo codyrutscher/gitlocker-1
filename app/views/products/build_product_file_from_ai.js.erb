@@ -61,15 +61,15 @@ $('#commit-btn').on('click', function() {
     success: function(data) {
       var url = '<%= show_file_content_product_path(@product) %>';
       var form = document.createElement('form');
-      form.method = 'POST';
+      form.method = 'GET';
       form.action = url;
 
-      var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-      var csrfInput = document.createElement('input');
-      csrfInput.type = 'hidden';
-      csrfInput.name = 'authenticity_token';
-      csrfInput.value = csrfToken;
-      form.appendChild(csrfInput);
+//      var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+//      var csrfInput = document.createElement('input');
+//      csrfInput.type = 'hidden';
+//      csrfInput.name = 'authenticity_token';
+//      csrfInput.value = csrfToken;
+//      form.appendChild(csrfInput);
 
       var input = document.createElement('input');
       input.type = 'hidden';

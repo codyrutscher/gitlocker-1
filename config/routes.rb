@@ -108,7 +108,7 @@ Rails.application.routes.draw do
     post 'unlike', on: :member
     get 'search', on: :collection
     post 'replace_file', on: :member
-    post 'show_file_content', on: :member
+    get 'show_file_content', on: :member
     get 'deployments', on: :member
     get 'issues', on: :member
     get 'configurations', on: :member

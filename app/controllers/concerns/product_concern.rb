@@ -123,7 +123,7 @@ module ProductConcern
   def extract_file_content(product, file_name, lines = nil, char_limit = nil)
     return nil unless product.folder.attached?
 
-    if policy(product).viewable?
+    unless policy(product).viewable?
       lines = 10
       char_limit = 1000
     end

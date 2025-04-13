@@ -297,6 +297,16 @@ ActiveRecord::Schema[7.1].define(version: 2025_04_13_082617) do
     t.index ["product_id"], name: "index_product_languages_on_product_id"
   end
 
+  create_table "product_users", force: :cascade do |t|
+    t.bigint "product_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id", "user_id"], name: "index_product_users_on_product_id_and_user_id", unique: true
+    t.index ["product_id"], name: "index_product_users_on_product_id"
+    t.index ["user_id"], name: "index_product_users_on_user_id"
+  end
+
   create_table "products", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "name"
@@ -468,6 +478,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_04_13_082617) do
   add_foreign_key "product_categories", "products"
   add_foreign_key "product_languages", "languages"
   add_foreign_key "product_languages", "products"
+  add_foreign_key "product_users", "products"
+  add_foreign_key "product_users", "users"
   add_foreign_key "products", "users"
   add_foreign_key "purchases", "payments"
   add_foreign_key "purchases", "products"

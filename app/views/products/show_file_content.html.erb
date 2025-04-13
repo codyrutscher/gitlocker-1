@@ -29,13 +29,16 @@
   </div>
 
   <div id="file-content-form" style="display: none;">
-    <%= form_with url: update_file_content_path(@product, file_name: params[:file_name]), method: :post, local: true do %>
+    <%= form_with url: update_file_content_path(@product, file_name: params[:file_name]), method: :post, local: true do |f| %>
       <div>
         <%= text_area_tag :content, @file_content, rows: 20, style: "width: 100%; border: 1px solid #ccc; padding: 1em;" %>
       </div>
       <input type="hidden" name="id" value="<%= @product.id %>">
+      <input type="hidden" name="old_file_content" value="<%= @file_content %>">
+      <%= f.label :commit_message %><br />
+      <input type="text" name="commit_message" class="w-full" required>
       <div style="margin-top: 1em; display: flex; gap: 10px;">
-        <%= submit_tag "Save Changes", class: "rounded-md bg-green-500 px-4 py-2 text-sm font-semibold text-white shadow-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-2", style: "width: 150px;" %>
+        <%= submit_tag "Make Commit", class: "rounded-md bg-green-500 px-4 py-2 text-sm font-semibold text-white shadow-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-2", style: "width: 150px;" %>
         <button type="button" onclick="cancelEdit()" class="rounded-md bg-gray-500 px-4 py-2 text-sm font-semibold text-white shadow-md hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2" style="width: 150px;">
           Cancel
         </button>
