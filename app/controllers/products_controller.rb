@@ -7,6 +7,7 @@ require 'fileutils'
 class ProductsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_product, only: [:like, :unlike, :code, :commits, :team, :configurations, :deployments, :issues, :branches, :pullrequests]
+  before_action :can_access_vcs_functionality?, only: [:code, :commits, :team, :configurations, :deployments, :issues, :branches, :pullrequests]
   before_action :update_state
   before_action :set_user_repos, if: -> { current_user.token.present? }
   before_action :set_gitlab_repos, if: -> { current_user.gitlab_token.present? }
@@ -745,6 +746,12 @@ class ProductsController < ApplicationController
 
   def set_product
     @product = Product.friendly.find(params[:id])
+  end
+
+  def can_access_vcs_functionality?
+    unless policy(@product).can_access_vcs_functionality?
+      redirect_to marketplace_library_url(@product)
+    end
   end
 
   def set_user_repos
