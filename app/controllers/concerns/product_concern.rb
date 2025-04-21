@@ -119,7 +119,74 @@ module ProductConcern
       File.delete(updated_zip_path) if File.exist?(updated_zip_path)
     end
   end
+  
+  def add_file_to_zip(product, file_path, new_file_name, new_file_content = "")
+    return nil unless product.folder.attached?
+  
+    temp_zip_path = Rails.root.join("tmp", "temp_zip_#{SecureRandom.hex}.zip")
+    updated_zip_path = Rails.root.join("tmp", "updated_zip_#{SecureRandom.hex}.zip")
+  
+    Rails.logger.info "Params - File Path: #{file_path}, File Name: #{new_file_name}, Content: #{new_file_content.inspect}"
+  
+    # Step 1: Download the existing zip file
+    File.open(temp_zip_path, 'wb') { |file| file.write(product.folder.download) }
+    Rails.logger.info "Temporary Zip Path: #{temp_zip_path}"
+  
+    begin
+      # Step 2: Open the existing zip file and create a modified version
+      Zip::File.open(temp_zip_path) do |zip_file|
+        Zip::File.open(updated_zip_path, Zip::File::CREATE) do |new_zip|
+          # Extract the top-level folder name (e.g., "CrudMaster/")
+          top_level_folder = zip_file.first.name.split('/').first
+          Rails.logger.info "Top-level folder: #{top_level_folder}"
+  
+          # Copy all existing entries from the original zip to the new zip
+          zip_file.each do |entry|
+            if entry.directory?
+              new_zip.mkdir(entry.name) unless new_zip.find_entry(entry.name)
+            else
+              new_zip.get_output_stream(entry.name) { |f| f.write(entry.get_input_stream.read) }
+            end
+          end
+  
+          # Step 3: Determine the path for the new file inside the product folder
+          relative_path = file_path.blank? ? new_file_name : File.join(file_path, new_file_name)
+          zip_entry_path = File.join(top_level_folder, relative_path)
+          Rails.logger.info "Calculated zip entry path: #{zip_entry_path}"
+  
+          # Step 4: Add the new file to the zip
+          Rails.logger.info "Adding new file to zip at #{zip_entry_path}"
+          new_zip.get_output_stream(zip_entry_path) { |f| f.write(new_file_content) }
+          Rails.logger.info "File added successfully to zip at #{zip_entry_path}"
+        end
+      end
+  
+      # Step 5: Attach the modified zip file back to the product
+      product.folder.purge
+      product.folder.attach(
+        io: File.open(updated_zip_path),
+        filename: "#{product.id}-updated.zip",
+        content_type: 'application/zip'
+      )
 
+      directory_tree_str = zip_structure_for_js_tree(updated_zip_path).to_s
+      if directory_tree_str.present? && product.update(directory_tree: directory_tree_str)
+        Rails.logger.info "Successfully updated directory tree for product #{product.id}"
+      else
+        Rails.logger.error "Failed to update directory tree for product #{product.id}"
+      end
+
+      Rails.logger.info "Successfully added file to zip and updated product folder."
+    rescue => e
+      Rails.logger.error "Exception occurred: #{e.message}"
+      raise
+    ensure
+      # Step 6: Clean up temporary files
+      File.delete(temp_zip_path) if File.exist?(temp_zip_path)
+      File.delete(updated_zip_path) if File.exist?(updated_zip_path)
+    end
+  end
+  
   def extract_file_content(product, file_name, lines = nil, char_limit = nil)
     return nil unless product.folder.attached?
 

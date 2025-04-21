@@ -121,6 +121,7 @@ Rails.application.routes.draw do
     get 'load_more_gitlab_repos', on: :collection
     get :export_data, on: :collection
     get 'add_collaborator', on: :member
+    get 'add_file_or_folder', on: :member
   end
   get 'search_repositories/(:query)', to: "products#search_repositories"
   get 'teamrepositories', to: "products#teamrepositories"

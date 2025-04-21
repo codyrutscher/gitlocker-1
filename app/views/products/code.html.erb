@@ -1,62 +1,235 @@
-<%= render partial: 'products/sub_header' %>
+<div class="bg-indigo-100">
+  <%=
+    render BreadcrumbComponent.new(current_user,[
+      { text: "Products", url: current_user&.buyer? ? marketplace_browse_path : marketplace_browse_path },
+      { text: @product.name, url: request.original_url.include?("/l/") ? marketplace_library_path(@product) : product_path(@product) }
+    ])
+  %>
+    <% if policy(@product).can_access_vcs_functionality? %>
+        <%= render partial: 'products/sub_header' %>
+    <% end %> 
 
+<body>
     <div class="flex bg-gray-100">
         <main class="flex-1 p-6">
-            <h1 class="text-2xl font-bold">Repo Name</h1>
-	   <section class="w-full max-w-4xl bg-white shadow p-4 mt-6 rounded-lg">
-      		<h2 class="text-lg font-semibold">Search Repository</h2>
-        	<input type="text" placeholder="Search files..." class="w-full p-2 border rounded mt-2">
-	    </section>
-		<div class="flex justify-between items-center bg-gray-900 px-4 py-3 rounded-lg shadow-lg max-w-2xl mx-auto">
-        		<input type="text" placeholder="Ask AI to build something..." class="bg-transparent flex-1 text-white placeholder-gray-500 focus:outline-none px-3">
-        		<!-- File Attachment Icon -->
-        		<button class="p-2 rounded hover:bg-gray-800">
-            		<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                	<path d="M21.44 11.05L12 20.49a5.5 5.5 0 0 1-7.78-7.78l7.78-7.78a3.5 3.5 0 0 1 4.95 4.95L9.88 16.95a1.5 1.5 0 1 1-2.12-2.12l6.36-6.36"></path>
-            		</svg>
-        		</button>
-
-        		<button class="bg-gray-700 hover:bg-gray-600 text-white px-4 py-1 rounded-lg flex items-center">
-           			 Build It →
-       			 </button>
-    		</div>
+            <h1 class="text-2xl font-bold"><%= @product&.name&.titleize&.first(65) %></h1>
+            <section class="w-full max-w-4xl bg-white shadow p-4 mt-6 rounded-lg">
+                <h2 class="text-lg font-semibold">Search Repository</h2>
+                <input type="text" placeholder="Search files..." class="w-full p-2 border rounded mt-2">
+            </section>
+		
             <div class="bg-white p-4 rounded shadow mt-4">
                 <div class="flex items-center space-x-4 border-b pb-2">
-                    <span class="font-semibold">Files</span>
-                    <button class="bg-blue-500 text-white px-4 py-1 rounded text-sm">Add File</button>
-                    <button class="bg-blue-500 text-white px-4 py-1 rounded text-sm">Add Folder</button>
+                    <button id="add-file-button" class="bg-blue-500 text-white px-4 py-1 rounded text-sm">Add File/Folder</button>
                 </div>
-                
-                <ul class="mt-4 space-y-2">
-                    <li class="flex items-center space-x-2">
-                        <span>📁</span>
-                        <a href="#" class="text-blue-600 hover:underline">src/</a>
-                    </li>
-                    <li class="flex items-center space-x-2">
-                        <span>📁</span>
-                        <a href="#" class="text-blue-600 hover:underline">public/</a>
-                    </li>
-                    <li class="flex items-center space-x-2">
-                        <span>📄</span>
-                        <a href="#" class="text-blue-600 hover:underline">index.html</a>
-                    </li>
-                    <li class="flex items-center space-x-2">
-                        <span>📄</span>
-                        <a href="#" class="text-blue-600 hover:underline">style.css</a>
-                    </li>
-                    <li class="flex items-center space-x-2">
-                        <span>📄</span>
-                        <a href="#" class="text-blue-600 hover:underline">app.js</a>
-                    </li>
-                </ul>
+
+                  <div id="create-file-folder-form" style="display: none; margin-top: 1em;">
+                    <textarea id="file-folder-name" placeholder="Enter name" class="w-full p-2 border rounded"></textarea>
+                    <button id="create-button" class="bg-green-500 text-white px-4 py-1 rounded text-sm mt-2">Create</button>
+                    <button id="cancel-button" class="bg-gray-500 text-white px-4 py-1 rounded text-sm mt-2">Cancel</button>
+                </div>
+
             </div>
         </main>
     </div>
-    <div class="p-6 max-w-3xl mx-auto bg-black text-white rounded-lg shadow-lg p-4 font-mono">
-        <div id="terminalOutput" class="h-64 overflow-auto text-green-400 text-sm"></div>
-        <div class="flex">
-            <span class="text-green-400">$</span>
-            <input id="terminalInput" type="text" class="bg-transparent text-white outline-none flex-1 ml-2" autofocus placeholder="Type a command..." onkeydown="handleCommand(event)">
-        </div>
+
+    <div class="mx-auto mt-16 w-full max-w-2xl lg:col-span-4 lg:mt-0 lg:max-w-none">
+        <% if @directory_tree_json != "[]"  %>
+            <div id="directory-tree-data" class="js-directory-tree bg mb-4 bg-gray-400"></div>
+        <% end %>
     </div>
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.preview-button').click(function() {
+            var videoId = '';
+
+            var videoFileAttached = <%= @product.video_file.attached? %>;
+
+            if (videoFileAttached) {
+                var videoFileUrl = '<%= url_for(@product.video_file)  if @product.video_file.attached? %>';
+                var videoElement = $('<video controls style="height: auto;"><source src="' + videoFileUrl + '" type="video/mp4"></video>');
+
+                $('#video-container').html(videoElement);
+            } else {
+                var previewVideoUrl = '<%= @product.preview_video_url %>';
+                if (previewVideoUrl.includes('youtube.com')) {
+                videoId = getYouTubeVideoId(previewVideoUrl);
+                createYouTubePlayer(videoId);
+                } else {
+                $('#video-container').html('<p>No preview available</p>');
+                }
+            }
+            });
+            const likeButton = document.getElementById('like-button');
+            const totalLikes = document.getElementById('total-likes');
+            let liked = false;
+
+            likeButton.addEventListener('click', function() {
+            liked = !liked;
+
+            if (liked) {
+                fetch('/products/<%= @product.id %>/like', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-Token': '<%= form_authenticity_token %>'
+                }
+                })
+                .then(response => response.json())
+                .then(data => {
+                totalLikes.textContent = data.likes_count;
+                })
+                .catch(error => {
+                console.error('Error:', error);
+                });
+            } else {
+                fetch('/products/<%= @product.id %>/unlike', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-Token': '<%= form_authenticity_token %>'
+                }
+                })
+                .then(response => response.json())
+                .then(data => {
+                totalLikes.textContent = data.likes_count;
+                })
+                .catch(error => {
+                console.error('Error:', error);
+                });
+            }
+            });
+        });
+
+        function getYouTubeVideoId(url) {
+            var match = url.match(/(?:youtu\.be\/|youtube\.com(?:\/embed\/|\/v\/|\/watch\?v=))([\w\-]{11})/);
+            return match ? match[1] : null;
+        }
+
+        function createYouTubePlayer(videoId) {
+            var player = new YT.Player('video-container', {
+            height: '315',
+            width: '560',
+            videoId: videoId,
+            events: {
+                'onReady': onPlayerReady,
+                'onStateChange': onPlayerStateChange
+            }
+            });
+        }
+
+        function onPlayerReady(event) {
+            event.target.playVideo();
+        }
+
+        function onPlayerStateChange(event) {
+        }
+
+        function changeImage(imageUrl) {
+            document.getElementById("main-image").src = imageUrl;
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const addFileButton = document.getElementById('add-file-button');
+            const createForm = document.getElementById('create-file-folder-form');
+            const createButton = document.getElementById('create-button');
+            const cancelButton = document.getElementById('cancel-button');
+            const fileFolderName = document.getElementById('file-folder-name');
+            const messageContainer = document.createElement('div'); // Create a container for messages
+            messageContainer.id = 'message-container';
+            messageContainer.style.marginTop = '1em';
+            createForm.parentNode.insertBefore(messageContainer, createForm.nextSibling); // Add it below the form
+
+            let createType = ''; 
+
+            addFileButton.addEventListener('click', function () {
+                createType = 'file';
+                createForm.style.display = 'block';
+            });
+
+           createButton.addEventListener('click', function () {
+                const name = fileFolderName.value.trim();
+                if (!name) {
+                    messageContainer.innerHTML = '<p style="color: red;">Please enter a name.</p>';
+                    return;
+                }
+
+                // Disable the Create button and show "Saving..."
+                createButton.disabled = true;
+                createButton.textContent = 'Saving...';
+
+                $.ajax({
+                    url: '<%= add_file_or_folder_product_path(@product) %>',
+                    type: 'GET',
+                    dataType: 'json',
+                    data: {
+                        product_id: '<%= @product.id %>',
+                        type: createType, 
+                        path: name
+                    },
+                    headers: {
+                        'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content') // CSRF token
+                    },
+                    success: function (response) {
+                        messageContainer.innerHTML = `<p style="color: green;">${response.message || 'Created successfully!'}</p>`;
+                        location.reload(); // Reload the page to reflect changes
+                    },
+                    error: function (error) {
+                        messageContainer.innerHTML = '<p style="color: red;">Error creating file or folder.</p>';
+                        console.error(error);
+
+                        // Re-enable the Create button if an error occurs
+                        createButton.disabled = false;
+                        createButton.textContent = 'Create';
+                    }
+                });
+            });
+
+            cancelButton.addEventListener('click', function () {
+                createForm.style.display = 'none';
+                fileFolderName.value = ''; // Clear the input
+                messageContainer.innerHTML = ''; // Clear any existing messages
+            });
+        });
+    </script>
+    <script type="load">
+        $('#directory-tree-data').jstree({
+            'core' : { 'data' : <%= @directory_tree_json %>}
+        });
+
+        $('#directory-tree-data').on('select_node.jstree', function(e, data) {
+            var node = data.node;
+            if (node && node.original && node.original.type === 'file') {
+                var url = '<%= show_file_content_product_path(@product) %>';
+
+                var form = document.createElement('form');
+                form.method = 'GET';
+                form.action = url;
+                form.target = '_blank'; // Open in a new tab
+
+
+
+                var input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = 'file_name';
+                var fullPath = data.instance.get_path(node, '/');
+                var pathParts = fullPath.split('/');
+                pathParts.shift();
+                var trimmedPath = pathParts.join('/');
+
+                input.value = trimmedPath;
+                form.appendChild(input);
+
+                document.body.appendChild(form);
+                form.submit();
+                document.body.removeChild(form);
+            }
+        });
+
+
+    </script>
+
+
 </body>
+</html>
