@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
-  require 'sidekiq/web'
-  mount Sidekiq::Web => '/sidekiq'
+  # Secure Sidekiq web UI with authentication
+  authenticate :admin_user do
+    require 'sidekiq/web'
+    mount Sidekiq::Web => '/sidekiq'
+  end
+  
   resources :follows
   get '/workflows/:id', to: 'workflows#index', as: "workflows"
   post '/workflows/:id', to: 'workflows#index'
@@ -21,8 +25,10 @@ Rails.application.routes.draw do
   get '/workflows/:id/save_project', to: 'workflows#save_project', as: "save_project"
   get '/workflows/:id/project_from_s3', to: 'workflows#project_from_s3', as: "project_from_s3"
   delete '/workflows/:id/remove_existing_project', to: 'workflows#remove_existing_project', as: "remove_existing_project"
+  
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
+  
   if Rails.env.production?
     constraints(host: /^(?!www\.)/i) do
       match '(*any)', to: redirect { |params, request|
@@ -30,6 +36,7 @@ Rails.application.routes.draw do
       }, via: :all
     end
   end
+  
   root "marketplace/home#index"
 
   devise_for :users, controllers: {
@@ -43,8 +50,7 @@ Rails.application.routes.draw do
     get '/password_instructions', to: 'passwords#show_instructions'
     get '/signup_success', to: 'users/registrations#signup_success', as: 'signup_success'
   end
-  # config/routes.rb
-
+  
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -126,10 +132,7 @@ Rails.application.routes.draw do
   get 'search_repositories/(:query)', to: "products#search_repositories"
   get 'teamrepositories', to: "products#teamrepositories"
 
-  
-
   resources :subscribed_users, only: :create
-
 
   resources :sales, only: [:index, :show]
   resources :funds, only: [:index, :create]
@@ -163,8 +166,8 @@ Rails.application.routes.draw do
     root "home#index"
     get "browse", to: "browse#index"
     get "browse/popular", to: "browse#popular"
-     get "browse/free", to: "browse#free"
-      get "browse/premium", to: "browse#premium"
+    get "browse/free", to: "browse#free"
+    get "browse/premium", to: "browse#premium"
     get "browse/featured", to: "browse#featured"
     get "browse/recent", to: "browse#recent"
     get "browse/languages", to: "browse#languages"
@@ -177,10 +180,10 @@ Rails.application.routes.draw do
       end
     end
     resources :categories, only: [:show, :create], param: :slug do
-    collection do
-      get :load_more
+      collection do
+        get :load_more
+      end
     end
-  end
     resources :library, only: :show, path: "l" do
       resources :reviews, only: [:new, :create]
     end
