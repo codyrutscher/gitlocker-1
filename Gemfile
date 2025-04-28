@@ -89,7 +89,7 @@ group :test do
   gem "shoulda-matchers", "~> 6.2"
 end
 
-group :production do
-  gem 'scout_apm'
-end
+# group :production do
+#   gem 'scout_apm'
+# end
 gem "ckeditor", "~> 5.1"

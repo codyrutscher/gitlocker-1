@@ -117,7 +117,7 @@ class User < ApplicationRecord
         password: Devise.friendly_token[0, 20],
         token: provider == 'github' ? token : nil,
         gitlab_token: provider == 'gitlab' ? token : nil,
-        gitlab_token: provider == 'bitbucket' ? token : nil,
+        bitbucket_token: provider == 'bitbucket' ? token : nil,
         name: name,
         username: username
       )

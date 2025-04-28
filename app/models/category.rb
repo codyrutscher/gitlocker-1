@@ -157,7 +157,6 @@ class Category < ApplicationRecord
       "Shell": "Shell.png",
       "Sketch": "Sketch.png",
       "SpaceVim": "SpaceVim.jpg",
-      "Spring Boot": "Spring-Boot.jpg",
       "SQL": "SQL.jpg",
       "Storybook": "Storybook.png",
       "Support": "Support.png",
