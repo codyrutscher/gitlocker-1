@@ -72,7 +72,7 @@ Rails.application.configure do
   # config.assume_ssl = true
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
-  config.force_ssl = false
+  config.force_ssl = true
   # config.ssl_options = { hsts: false } # Disable HSTS
   # Log to STDOUT by default
   config.logger = ActiveSupport::Logger.new(STDOUT)
@@ -119,8 +119,8 @@ Rails.application.configure do
     "www.coderz-08a5eabb1bcd.herokuapp.com", # www subdomain
     /.*\.herokuapp\.com/           
   ]
-  config.hosts << "localhost"
-  config.hosts << "www.localhost"
+  # config.hosts << "localhost"
+  # config.hosts << "www.localhost"
    #   "example.com",     # Allow requests from example.com
   #   /.*\.example\.com/ # Allow requests from subdomains like `www.example.com`
   # ]

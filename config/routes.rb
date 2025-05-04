@@ -30,11 +30,11 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
   
   if Rails.env.production?
-    constraints(host: /^(?!www\.)/i) do
-      match '(*any)', to: redirect { |params, request|
-        URI.parse(request.url).tap { |uri| uri.host = "www.#{uri.host}" }.to_s
-      }, via: :all
-    end
+    # constraints(host: /^(?!www\.)/i) do
+    #   match '(*any)', to: redirect { |params, request|
+    #     URI.parse(request.url).tap { |uri| uri.host = "www.#{uri.host}" }.to_s
+    #   }, via: :all
+    # end
   end
   
   root "marketplace/home#index"
