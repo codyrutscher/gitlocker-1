@@ -111,7 +111,12 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   # Enable DNS rebinding protection and other `Host` header attacks.
-   config.hosts = [/.*coderz\.*/]
+  config.hosts = [
+    /.*coderz\.us/,               # Allow all subdomains of coderz.us
+    "coderz.us",                  # Allow the root domain (coderz.us)
+    "www.coderz.us",              # Allow www subdomain of coderz.us
+    /.*\.herokuapp\.com/          # Allow all herokuapp.com subdomains
+  ]
    #   "example.com",     # Allow requests from example.com
   #   /.*\.example\.com/ # Allow requests from subdomains like `www.example.com`
   # ]
