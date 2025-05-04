@@ -115,7 +115,9 @@ Rails.application.configure do
     /.*coderz\.us/,               # Allow all subdomains of coderz.us
     "coderz.us",                  # Allow the root domain (coderz.us)
     "www.coderz.us",              # Allow www subdomain of coderz.us
-    /.*\.herokuapp\.com/          # Allow all herokuapp.com subdomains
+    "coderz-08a5eabb1bcd.herokuapp.com", # Heroku subdomain
+    "www.coderz-08a5eabb1bcd.herokuapp.com", # www subdomain
+    /.*\.herokuapp\.com/           
   ]
    #   "example.com",     # Allow requests from example.com
   #   /.*\.example\.com/ # Allow requests from subdomains like `www.example.com`
