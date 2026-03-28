@@ -151,7 +151,7 @@ GEM
     erubi (1.13.0)
     et-orbi (1.2.11)
       tzinfo
-    excon (0.110.0)
+    excon (0.111.0)
     factory_bot (6.4.6)
       activesupport (>= 5.0.0)
     factory_bot_rails (6.4.3)
@@ -174,10 +174,9 @@ GEM
     ffi (1.17.0-arm64-darwin)
     ffi (1.17.0-x86-linux-gnu)
     ffi (1.17.0-x86-linux-musl)
-    ffi (1.17.0-x86_64-darwin)
     ffi (1.17.0-x86_64-linux-gnu)
     ffi (1.17.0-x86_64-linux-musl)
-    fog-aws (3.23.0)
+    fog-aws (3.24.0)
       fog-core (~> 2.1)
       fog-json (~> 1.1)
       fog-xml (~> 0.1)
@@ -329,8 +328,6 @@ GEM
     nokogiri (1.16.6-arm64-darwin)
       racc (~> 1.4)
     nokogiri (1.16.6-x86-linux)
-      racc (~> 1.4)
-    nokogiri (1.16.6-x86_64-darwin)
       racc (~> 1.4)
     nokogiri (1.16.6-x86_64-linux)
       racc (~> 1.4)
@@ -517,8 +514,6 @@ GEM
       railties (>= 7.0.0)
     tailwindcss-rails (2.6.1-arm64-darwin)
       railties (>= 7.0.0)
-    tailwindcss-rails (2.6.1-x86_64-darwin)
-      railties (>= 7.0.0)
     tailwindcss-rails (2.6.1-x86_64-linux)
       railties (>= 7.0.0)
     terminal-table (4.0.0)
@@ -564,7 +559,7 @@ PLATFORMS
   x86-linux
   x86-linux-gnu
   x86-linux-musl
-  x86_64-darwin
+  x86_64-linux
   x86_64-linux-gnu
   x86_64-linux-musl
 
